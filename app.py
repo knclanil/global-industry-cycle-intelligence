@@ -109,37 +109,76 @@ for col, quadrant in zip(cards, QUADRANTS):
 status_filter = st.pills('QUADRANT FILTER', ['All', *QUADRANTS], default='All', selection_mode='single')
 visible = rows if status_filter in ('All', None) else rows[rows['Quadrant'] == status_filter]
 
+# Show one smooth movement path at a time. Multiple historical paths overlap
+# geometrically, so avoid plotting them simultaneously.
+st.markdown('#### Relative rotation map')
+control1, control2, control3 = st.columns([1.2, 1.3, 2])
+with control1:
+    show_trails = st.toggle('Show smooth movement path', value=True,
+                            help='Shows one continuous curve without intermediate dots.')
+with control2:
+    trail_points = st.select_slider('Path length (sessions)', options=[5, 10, 20, 40, 60], value=20,
+                                     disabled=not show_trails)
+with control3:
+    focus_ticker = st.selectbox('Movement path for', visible['ETF'].tolist(),
+                                format_func=lambda t: f'{SECTORS[t]} ({t})',
+                                disabled=not show_trails)
+
 fig = go.Figure()
+# Plot a single smooth spline beneath all current sector positions. This is
+# visual interpolation only; observed daily values are never modified.
+if show_trails and focus_ticker:
+    selected_row = visible.loc[visible['ETF'] == focus_ticker].iloc[0]
+    path_color = COLORS[selected_row['Quadrant']]
+    trail = pd.DataFrame({'rs': strength[focus_ticker], 'mom': momentum[focus_ticker]}).loc[first:last].dropna().tail(trail_points)
+    if len(trail) > 1:
+        fig.add_trace(go.Scatter(
+            x=trail.rs, y=trail.mom, mode='lines',
+            line=dict(color=path_color, width=5, shape='spline', smoothing=0.65),
+            opacity=0.94, name=f'{focus_ticker} movement', showlegend=False,
+            text=[d.strftime('%b %d, %Y') for d in trail.index],
+            hovertemplate=f'{focus_ticker} · %{{text}}<br>Strength: %{{x:.2f}}%<br>Momentum: %{{y:.2f}} pp<extra></extra>'))
+        # Start marker and latest endpoint are the only path markers.
+        fig.add_trace(go.Scatter(
+            x=[trail.rs.iloc[0]], y=[trail.mom.iloc[0]], mode='markers',
+            marker=dict(size=10, color=path_color, symbol='circle-open', line=dict(width=2, color=path_color)),
+            name='Path start', showlegend=False,
+            hovertemplate=f'{focus_ticker} · Path start<extra></extra>'))
+        # Direction arrow from the penultimate observation to the latest.
+        fig.add_annotation(x=trail.rs.iloc[-1], y=trail.mom.iloc[-1],
+                           ax=trail.rs.iloc[-2], ay=trail.mom.iloc[-2],
+                           xref='x', yref='y', axref='x', ayref='y',
+                           showarrow=True, arrowhead=2, arrowsize=1.3,
+                           arrowwidth=2.5, arrowcolor=path_color)
+
 for quadrant in QUADRANTS:
     subset = visible[visible['Quadrant'] == quadrant]
-    if subset.empty:
-        continue
     for _, row in subset.iterrows():
         ticker = row['ETF']
-        trail = pd.DataFrame({'rs': strength[ticker], 'mom': momentum[ticker]}).loc[first:last].dropna()
-        if len(trail) > 1:
-            # Keep endpoints and sample intermediate points to avoid excessively heavy charts.
-            step = max(1, (len(trail) - 1) // 55)
-            trail = trail.iloc[::step]
-            if trail.index[-1] != last:
-                trail = pd.concat([trail, pd.DataFrame({'rs': [strength.at[last, ticker]], 'mom': [momentum.at[last, ticker]]}, index=[last])])
-            fig.add_trace(go.Scatter(x=trail.rs, y=trail.mom, mode='lines',
-                                     line=dict(color=COLORS[quadrant], width=1.6),
-                                     opacity=0.48, hoverinfo='skip', showlegend=False))
-    fig.add_trace(go.Scatter(x=subset['Relative strength (%)'], y=subset['RS momentum (pp)'],
-                             mode='markers+text', text=subset['ETF'], textposition='top center',
-                             name=quadrant, marker=dict(color=COLORS[quadrant], size=12,
-                                                         line=dict(color='#ffffff', width=1)),
-                             customdata=subset[['Sector', 'Return (%)', 'Excess vs SPY (pp)']].to_numpy(),
-                             hovertemplate='%{customdata[0]}<br>Relative strength: %{x:.2f}%<br>RS momentum: %{y:.2f} pp<br>Return: %{customdata[1]:.2f}%<br>Excess: %{customdata[2]:.2f} pp<extra></extra>'))
-fig.add_hline(y=0, line_color='#8ea0b8', line_width=1)
-fig.add_vline(x=0, line_color='#8ea0b8', line_width=1)
+        focused = not show_trails or ticker == focus_ticker
+        fig.add_trace(go.Scatter(
+            x=[row['Relative strength (%)']], y=[row['RS momentum (pp)']],
+            mode='markers+text', text=[ticker], textposition='top center',
+            textfont=dict(size=15, color='#ffffff' if focused else '#b0bfd1'),
+            name=quadrant, legendgroup=quadrant,
+            showlegend=not any(t.legendgroup == quadrant and t.showlegend for t in fig.data),
+            marker=dict(color=COLORS[quadrant], size=20 if focused else 13,
+                        opacity=1 if focused else 0.55,
+                        line=dict(color='#ffffff', width=2 if focused else 1)),
+            customdata=[[row['Sector'], row['Return (%)'], row['Excess vs SPY (pp)']]],
+            hovertemplate='%{customdata[0]}<br>Relative strength: %{x:.2f}%<br>RS momentum: %{y:.2f} pp<br>Return: %{customdata[1]:.2f}%<br>Excess: %{customdata[2]:.2f} pp<extra></extra>'))
+fig.add_hline(y=0, line_color='#a7b9d1', line_width=2)
+fig.add_vline(x=0, line_color='#a7b9d1', line_width=2)
 for x, y, q in [(0.97,0.97,'Leading'),(0.03,0.97,'Improving'),(0.97,0.03,'Weakening'),(0.03,0.03,'Lagging')]:
     fig.add_annotation(x=x, y=y, xref='paper', yref='paper', text=q.upper(),
-                       showarrow=False, font=dict(color=COLORS[q], size=11))
+                       showarrow=False, font=dict(color=COLORS[q], size=14))
 fig.update_xaxes(title='Relative strength vs SPY (%)')
 fig.update_yaxes(title='Relative strength momentum (pp)')
-style(fig)
+style(fig, height=680)
+fig.update_layout(margin=dict(l=35, r=35, t=55, b=45),
+                  legend=dict(orientation='h', y=1.08, x=0))
+st.plotly_chart(fig, use_container_width=True)
+st.caption('Only one sector movement path is shown at a time to prevent overlapping lines. The smooth curve is a visual guide between actual daily observations; it is not additional market data. All sector endpoints remain visible.')
 
 ranked = visible.sort_values('Excess vs SPY (pp)')
 bar = go.Figure(go.Bar(y=ranked['ETF'], x=ranked['Excess vs SPY (pp)'], orientation='h',
@@ -150,13 +189,8 @@ bar.add_vline(x=0, line_color='#8ea0b8')
 bar.update_xaxes(title='Excess return vs SPY (percentage points)')
 style(bar)
 
-col1, col2 = st.columns(2)
-with col1:
-    st.subheader('Relative rotation map')
-    st.plotly_chart(fig, use_container_width=True)
-with col2:
-    st.subheader('Sector performance · selected date range')
-    st.plotly_chart(bar, use_container_width=True)
+st.subheader('Sector performance · selected date range')
+st.plotly_chart(bar, use_container_width=True)
 
 st.subheader('Sector classification')
 st.dataframe(visible.sort_values('Relative strength (%)', ascending=False), hide_index=True,
