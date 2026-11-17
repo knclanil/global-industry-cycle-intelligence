@@ -1,0 +1,11 @@
+{
+  "attempted": 35,
+  "succeeded": 34,
+  "failed": [
+    {
+      "ticker": "^NIFTYFIN",
+      "error": "no history returned"
+    }
+  ],
+  "run_utc": "2026-11-17T16:46:50.109981+00:00"
+}
