@@ -42,3 +42,8 @@ A **standalone** Streamlit application for India–USA–Global sector compariso
 **Market cycle is not the same as an industry fundamental cycle.** The stage classifier only uses benchmark-relative sector prices. No earnings, production, economic indicators, fund flows, automatic report summarization, verified investment opportunities, USD FX conversion, or formal lead–lag statistical tests are implemented yet. These require separate validated sources and should not be inferred from the current market signals. Historical coverage is limited by each instrument's availability.
 
 This package is a functional, database-free foundation, **not a claim that every discussed advanced data source or fundamental research feature is operational**. The wiki includes editable pages and a source registry; only the explicitly configured RSS feeds are automatically monitored.
+
+
+## NSE India sector tracking
+
+The **NSE India Sectors** page displays the official NSE index snapshot when the NSE permits automated access. Run `python scripts/collect_nse_indices.py` or the GitHub Actions refresh workflow. A configurable list is in `config/nse_indices.csv`. `data/nse_collection_status.json` reports any access errors. The snapshot is **not** a historical index series and the list is **not** a verified complete export of the live page. Do not interpret missing rows as zero returns. NSE usage restrictions and anti-bot measures may prevent unattended access.

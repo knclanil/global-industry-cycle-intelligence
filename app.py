@@ -19,7 +19,7 @@ def publications():
 @st.cache_data(ttl=600)
 def instruments():return pd.read_csv(ROOT/'config/instruments.csv').fillna('')
 S=load('sector_snapshot.parquet');H=load('sector_history.parquet');P=load('prices.parquet');I=instruments()
-nav=st.sidebar.radio('NAVIGATION',['Cycle Overview','Cycle Explorer','Cross-Market Comparison','Leadership & Rotation','Opportunity Scanner','Knowledge Center'],label_visibility='visible')
+nav=st.sidebar.radio('NAVIGATION',['Cycle Overview','Cycle Explorer','Cross-Market Comparison','Leadership & Rotation','Opportunity Scanner','NSE India Sectors','Knowledge Center'],label_visibility='visible')
 st.sidebar.caption('INDIA  •  USA  •  GLOBAL')
 st.sidebar.markdown('---')
 st.sidebar.caption('Market cycle = price-based relative performance; not a forecast of industry earnings or economic conditions.')
@@ -131,6 +131,32 @@ elif nav=='Opportunity Scanner':
   elif strategy=='Deep laggard':x=x[(x.rs_6m<0)&(x.momentum_change<0)]
   st.metric('Matches',len(x));fmt_table(x[['market','sector','ticker','stage','rs_1m','rs_3m','rs_6m','rsi','asof']].round(2)) if not x.empty else st.info('No sectors match the selected rules.')
   st.download_button('Download results (CSV)',x.to_csv(index=False).encode(),'cycle_screen.csv','text/csv')
+elif nav=='NSE India Sectors':
+ st.title('NSE India — Sector & Industry Tracker')
+ st.caption('Official NSE index performance snapshot, when accessible. Watchlist is configurable and not a verified complete export of the live NSE page.')
+ st.markdown('[Original NSE Index Performances page](https://www.nseindia.com/market-data/index-performances)')
+ import json
+ watch=pd.read_csv(ROOT/'config/nse_indices.csv')
+ status_path=ROOT/'data/nse_collection_status.json'
+ snap_path=ROOT/'data/nse_index_snapshot.json'
+ if status_path.exists():
+  status=json.loads(status_path.read_text())
+  st.caption('Last checked (UTC): '+str(status.get('checked_utc','unknown'))+' | Status: '+str(status.get('status','unknown')))
+  if status.get('status')!='ok':st.warning('NSE feed unavailable: '+str(status.get('error','no successful snapshot')))
+ if snap_path.exists():
+  payload=json.loads(snap_path.read_text())
+  st.caption('Last successful snapshot: '+str(payload.get('retrieved_utc','unknown')))
+  frame=pd.DataFrame(payload.get('rows',[]))
+  if not frame.empty:
+   st.subheader('Latest official NSE snapshot')
+   st.dataframe(frame,use_container_width=True,hide_index=True)
+   frame['percent_change']=pd.to_numeric(frame['percent_change'],errors='coerce')
+   frame=frame.dropna(subset=['percent_change']).sort_values('percent_change')
+   if not frame.empty:st.plotly_chart(px.bar(frame,x='percent_change',y='index',orientation='h',template='plotly_dark'),use_container_width=True)
+ else:st.info('No NSE snapshot collected yet. Run GitHub Actions; NSE may restrict automated access.')
+ st.subheader('Configured sector and thematic watchlist')
+ st.dataframe(watch,use_container_width=True,hide_index=True)
+ st.info('Daily snapshots do not establish 1M–20Y cycles. Long-term index history needs a permitted historical data source. Missing data is never treated as zero.')
 else:
  st.title('Economic & Industry Intelligence — Knowledge Center')
  tabs=st.tabs(['Intelligence Feed','Country Wiki','Industry Wiki','Opportunity Radar','Publisher Library','Research Archive','Data & Methodology'])

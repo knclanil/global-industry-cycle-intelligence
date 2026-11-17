@@ -18,10 +18,10 @@ jobs:
       - run: pip install -r requirements.txt
       - name: Collect prices
         run: python scripts/collect_prices.py
-        continue-on-error: true
       - name: Analyze available prices
         run: python scripts/analyze.py
-        continue-on-error: true
+      - name: Collect NSE India sector snapshot
+        run: python scripts/collect_nse_indices.py
       - name: Collect publication metadata
         run: python scripts/monitor_publishers.py
         continue-on-error: true
