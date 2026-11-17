@@ -54,3 +54,7 @@ The dashboard includes a line chart for the selected sectors over the **From Dat
 ## Dashboard Wiki
 
 Open the **Wiki** page using the app sidebar to read the complete calculation methodology, sector coverage, filter semantics, data-validation rules, refresh behavior, and limitations. The documentation is maintained in [`WIKI.md`](WIKI.md) and is available even when market-data retrieval fails.
+
+### Wiki deployment troubleshooting
+
+The Wiki normally reads `WIKI.md` from the same folder as `app.py`. Commit **both files** to the root of the deployed GitHub branch (not inside an extra nested folder). The application also includes a built-in documentation fallback, so the Wiki continues working if `WIKI.md` is missing. To edit documentation, update `WIKI.md` and commit it.
