@@ -23,7 +23,8 @@ nav=st.sidebar.radio('NAVIGATION',['Cycle Overview','Cycle Explorer','Cross-Mark
 st.sidebar.caption('INDIA  •  USA  •  GLOBAL')
 st.sidebar.markdown('---')
 st.sidebar.caption('Market cycle = price-based relative performance; not a forecast of industry earnings or economic conditions.')
-if not S.empty: st.sidebar.caption('Latest available market observation: '+str(S.asof.max()))
+if not S.empty and 'asof' in S.columns:
+ st.sidebar.caption('Latest available market observation: '+str(S['asof'].max()))
 else: st.sidebar.warning('No market observations yet. Run the GitHub workflow or scripts/collect_prices.py and scripts/analyze.py.')
 def clean(df):return df.replace([np.inf,-np.inf],np.nan)
 def fmt_table(df,columns=None):
