@@ -1,236 +1,203 @@
-from pathlib import Path
-import json
+"""Global Industry Cycle Intelligence — Streamlit Community Cloud app."""
+from datetime import date, timedelta
 import pandas as pd
 import numpy as np
-import streamlit as st
-import plotly.express as px
 import plotly.graph_objects as go
-ROOT=Path(__file__).parent
-st.set_page_config(page_title='Global Industry Cycle Intelligence',page_icon='🌐',layout='wide')
-st.markdown('''<style>.block-container{padding-top:1.5rem;max-width:1500px}h1,h2,h3{letter-spacing:-.03em}div[data-testid="stMetric"]{background:#142438;border:1px solid #29415a;border-radius:12px;padding:14px}</style>''',unsafe_allow_html=True)
-@st.cache_data(ttl=600)
-def load(name):
- p=ROOT/'data'/name
- return pd.read_parquet(p) if p.exists() else pd.DataFrame()
-@st.cache_data(ttl=600)
-def publications():
- p=ROOT/'data/publications.json'
- return pd.DataFrame(json.loads(p.read_text())) if p.exists() else pd.DataFrame()
-@st.cache_data(ttl=600)
-def instruments():return pd.read_csv(ROOT/'config/instruments.csv').fillna('')
-S=load('sector_snapshot.parquet');H=load('sector_history.parquet');P=load('prices.parquet');I=instruments()
-nav=st.sidebar.radio('NAVIGATION',['Cycle Overview','Cycle Explorer','Cross-Market Comparison','Leadership & Rotation','Opportunity Scanner','NSE India Sectors','Knowledge Center'],label_visibility='visible')
-st.sidebar.caption('INDIA  •  USA  •  GLOBAL')
-st.sidebar.markdown('---')
-st.sidebar.caption('Market cycle = price-based relative performance; not a forecast of industry earnings or economic conditions.')
-if not S.empty and 'asof' in S.columns:
- st.sidebar.caption('Latest available market observation: '+str(S['asof'].max()))
-else: st.sidebar.warning('No market observations yet. Run the GitHub workflow or scripts/collect_prices.py and scripts/analyze.py.')
-def clean(df):return df.replace([np.inf,-np.inf],np.nan)
-def fmt_table(df,columns=None):
- d=clean(df.copy());d=d[columns] if columns else d
- st.dataframe(d,use_container_width=True,hide_index=True)
-def stage_colors(stage):return {'Leading':'#21bd9b','Improving':'#48a7e7','Weakening':'#f3b450','Lagging':'#ee6b72'}.get(stage,'#8996a9')
-def stage_matrix(df):
- if df.empty:return
- pivot=df.pivot_table(index='sector',columns='market',values='stage',aggfunc='first').reindex(columns=['India','USA','Global'])
- def style(v):return f'background-color:{stage_colors(v)};color:#071321;font-weight:650' if isinstance(v,str) else ''
- st.dataframe(pivot.style.map(style),use_container_width=True)
-def series_chart(market,sector,benchmark=True):
- if P.empty:return
- row=I[(I.market==market)&(I.sector==sector)]
- if row.empty:return
- t=row.iloc[0].ticker;b=row.iloc[0].benchmark
- df=P[P.ticker.isin([t,b])].copy()
- if df.empty:return
- df['date']=pd.to_datetime(df.date)
- w=df.pivot_table(index='date',columns='ticker',values='close').sort_index()
- if t not in w:return
- cols=[t]+([b] if benchmark and b in w and b!=t else [])
- w=w[cols].dropna()
- if w.empty:return
- w=w/w.iloc[0]*100
- fig=go.Figure()
- for col in w:fig.add_trace(go.Scatter(x=w.index,y=w[col],name=('Sector' if col==t else 'Benchmark'),mode='lines'))
- fig.update_layout(template='plotly_dark',height=400,yaxis_title='Indexed to 100',xaxis_title='',margin=dict(t=25,b=15))
- st.plotly_chart(fig,use_container_width=True)
-if nav=='Cycle Overview':
- st.title('Global Industry Cycle Intelligence')
- st.caption('Market leadership across India, the USA and global sector proxies. Stage labels are market-relative, not fundamental economic-cycle diagnoses.')
- if S.empty:st.info('The dashboard is ready. No live data has been collected yet. See README for setup.')
- else:
-  a,b,c,d=st.columns(4)
-  a.metric('Sectors tracked',len(S));b.metric('Leading',int((S.stage=='Leading').sum()));c.metric('Improving',int((S.stage=='Improving').sum()));d.metric('Markets',S.market.nunique())
-  st.subheader('Industry cycle matrix');stage_matrix(S)
-  st.subheader('Market-cycle transitions')
-  if not H.empty:
-   h=H.sort_values('date');latest=h.groupby(['market','sector']).tail(2)
-   change=latest.groupby(['market','sector']).filter(lambda x:len(x)==2 and x.stage.iloc[0]!=x.stage.iloc[-1]);last=change.groupby(['market','sector']).tail(1)
-   fmt_table(last[['market','sector','date','stage','rs_6m','momentum_change']].round(2)) if not last.empty else st.caption('No recent monthly transitions detected.')
-  st.subheader('Six-month relative performance (%)')
-  fig=px.imshow(S.pivot(index='sector',columns='market',values='rs_6m').reindex(columns=['India','USA','Global']),color_continuous_scale='RdYlGn',color_continuous_midpoint=0,aspect='auto',text_auto='.1f')
-  fig.update_layout(template='plotly_dark',height=470);st.plotly_chart(fig,use_container_width=True)
-elif nav=='Cycle Explorer':
- st.title('Industry Cycle Explorer')
- market=st.selectbox('Market',['India','USA','Global'])
- sectors=sorted(I[I.market==market].sector.unique());sector=st.selectbox('Industry',sectors)
- st.caption('Historical market-relative cycle stages are estimated using 6-month excess return and 3-month momentum change.')
- row=S[(S.market==market)&(S.sector==sector)] if not S.empty else pd.DataFrame()
- if not row.empty:
-  r=row.iloc[0];a,b,c,d=st.columns(4);a.metric('Stage',r.stage);b.metric('6M relative strength',f'{r.rs_6m:.1f}%' if pd.notna(r.rs_6m) else 'N/A');c.metric('3M return',f'{r.return_3m:.1f}%' if pd.notna(r.return_3m) else 'N/A');d.metric('RSI',f'{r.rsi:.0f}' if pd.notna(r.rsi) else 'N/A')
- st.subheader('Sector vs domestic / global benchmark');series_chart(market,sector)
- if not H.empty:
-  h=H[(H.market==market)&(H.sector==sector)].copy();h['date']=pd.to_datetime(h.date)
-  if not h.empty:
-   st.subheader('Relative strength history');fig=px.line(h,x='date',y=['rs_3m','rs_6m'],labels={'value':'Excess return (percentage points)','date':'','variable':'Metric'},template='plotly_dark');st.plotly_chart(fig,use_container_width=True)
-   st.subheader('Monthly cycle timeline');fmt_table(h[['date','stage','rs_6m','momentum_change']].tail(36).iloc[::-1].round(2))
- st.info('Fundamental industry cycle cannot be established from price data alone. See Knowledge Center for source-linked economic and industry evidence.')
-elif nav=='Cross-Market Comparison':
- st.title('India vs USA vs Global')
- sector=st.selectbox('Comparable sector',sorted(I.sector.unique()))
- subset=S[S.sector==sector] if not S.empty else pd.DataFrame()
- if not subset.empty:
-  st.subheader('Market leadership');fmt_table(subset[['market','ticker','source_type','stage','return_3m','return_6m','rs_3m','rs_6m','note']].round(2))
- if not P.empty:
-  traces=[]
-  for row in I[I.sector==sector].itertuples(index=False):
-   x=P[P.ticker==row.ticker].copy();x['date']=pd.to_datetime(x.date);x=x.sort_values('date').set_index('date')['close']
-   if len(x)<2:continue
-   traces.append((row.market,x))
-  if traces:
-   st.subheader('Local-currency indexed performance (not FX adjusted)')
-   common=max(x.index.min() for _,x in traces)
-   fig=go.Figure()
-   for name,x in traces:
-    x=x[x.index>=common]
-    if len(x)>1:fig.add_trace(go.Scatter(x=x.index,y=x/x.iloc[0]*100,name=name))
-   fig.update_layout(template='plotly_dark',height=460,yaxis_title='Indexed to 100');st.plotly_chart(fig,use_container_width=True)
- st.warning('Cross-market index/ETF sector definitions and currencies differ. These charts show directional comparisons, not perfectly matched industry baskets. India has several approximate proxies; inspect the mapping table in Knowledge Center.')
- if not H.empty:
-  st.subheader('Monthly market-cycle comparison');h=H[H.sector==sector].copy();fmt_table(h.sort_values('date',ascending=False)[['date','market','stage','rs_6m']].head(45).round(2))
-elif nav=='Leadership & Rotation':
- st.title('Industry Leadership & Rotation')
- market=st.selectbox('Market',['India','USA','Global'])
- if not S.empty:
-  x=S[S.market==market].sort_values('rs_6m',ascending=False)
-  st.subheader('Relative-strength rankings');fmt_table(x[['sector','ticker','stage','return_1m','return_3m','return_6m','rs_1m','rs_3m','rs_6m','momentum_change','rsi']].round(2))
-  fig=px.bar(x,x='rs_6m',y='sector',orientation='h',color='stage',color_discrete_map={k:stage_colors(k) for k in ['Leading','Improving','Weakening','Lagging']},template='plotly_dark');fig.update_layout(height=540,yaxis={'categoryorder':'total ascending'});st.plotly_chart(fig,use_container_width=True)
-  st.subheader('Rotation quadrants')
-  fig=px.scatter(x,x='rs_6m',y='momentum_change',color='stage',text='sector',color_discrete_map={k:stage_colors(k) for k in ['Leading','Improving','Weakening','Lagging']},template='plotly_dark')
-  fig.add_vline(x=0,line_dash='dash');fig.add_hline(y=0,line_dash='dash');fig.update_traces(textposition='top center');fig.update_layout(height=580,xaxis_title='6M relative return (percentage points)',yaxis_title='Change in 3M relative return (percentage points)');st.plotly_chart(fig,use_container_width=True)
-elif nav=='Opportunity Scanner':
- st.title('Cycle Opportunity Scanner')
- st.caption('Rule-based research candidates, not buy/sell signals. Signals use price data only.')
- strategy=st.selectbox('Screen',['Early recovery','Confirmed leadership','Weakening leader','Deep laggard','All industries'])
- market=st.multiselect('Markets',['India','USA','Global'],default=['India','USA','Global'])
- if not S.empty:
-  x=S[S.market.isin(market)].copy()
-  if strategy=='Early recovery':x=x[(x.rs_6m<0)&(x.rs_1m>0)&(x.rsi>50)]
-  elif strategy=='Confirmed leadership':x=x[(x.rs_3m>0)&(x.rs_6m>0)&(x.rsi>50)]
-  elif strategy=='Weakening leader':x=x[(x.rs_6m>0)&(x.momentum_change<0)]
-  elif strategy=='Deep laggard':x=x[(x.rs_6m<0)&(x.momentum_change<0)]
-  st.metric('Matches',len(x));fmt_table(x[['market','sector','ticker','stage','rs_1m','rs_3m','rs_6m','rsi','asof']].round(2)) if not x.empty else st.info('No sectors match the selected rules.')
-  st.download_button('Download results (CSV)',x.to_csv(index=False).encode(),'cycle_screen.csv','text/csv')
-elif nav=='NSE India Sectors':
- st.title('NSE India — Sector & Industry Tracker')
- st.caption('Official NSE index performance snapshot, when accessible. Watchlist is configurable and not a verified complete export of the live NSE page.')
- st.markdown('[Original NSE Index Performances page](https://www.nseindia.com/market-data/index-performances)')
- import json
- watch=pd.read_csv(ROOT/'config/nse_indices.csv')
- status_path=ROOT/'data/nse_collection_status.json'
- snap_path=ROOT/'data/nse_index_snapshot.json'
- if status_path.exists():
-  status=json.loads(status_path.read_text())
-  st.caption('Last checked (UTC): '+str(status.get('checked_utc','unknown'))+' | Status: '+str(status.get('status','unknown')))
-  if status.get('status')!='ok':st.warning('NSE feed unavailable: '+str(status.get('error','no successful snapshot')))
- if snap_path.exists():
-  payload=json.loads(snap_path.read_text())
-  st.caption('Last successful snapshot: '+str(payload.get('retrieved_utc','unknown')))
-  frame=pd.DataFrame(payload.get('rows',[]))
-  if not frame.empty:
-   st.subheader('Latest official NSE snapshot')
-   st.dataframe(frame,use_container_width=True,hide_index=True)
-   frame['percent_change']=pd.to_numeric(frame['percent_change'],errors='coerce')
-   frame=frame.dropna(subset=['percent_change']).sort_values('percent_change')
-   if not frame.empty:st.plotly_chart(px.bar(frame,x='percent_change',y='index',orientation='h',template='plotly_dark'),use_container_width=True)
- else:st.info('No NSE snapshot collected yet. Run GitHub Actions; NSE may restrict automated access.')
- st.subheader('Configured sector and thematic watchlist')
- st.dataframe(watch,use_container_width=True,hide_index=True)
- st.subheader('Official NSE historical index prices')
- hist=load('nse_index_history.parquet')
- coverage_file=ROOT/'data/nse_history_coverage.json'
- if coverage_file.exists():
-  coverage=json.loads(coverage_file.read_text())
-  with st.expander('Historical data coverage and collection errors'):
-   st.dataframe(pd.DataFrame(coverage.get('coverage',[])),use_container_width=True,hide_index=True)
-   if coverage.get('errors'):st.warning(f"{len(coverage['errors'])} collection errors. See data/nse_history_coverage.json")
- if hist.empty:
-  st.info('No verified historical data yet. Run the NSE historical backfill workflow or import official NSE CSV exports. No synthetic values are displayed.')
- else:
-  hist['date']=pd.to_datetime(hist['date'])
-  selected=st.selectbox('Historical index',sorted(hist['index'].unique()))
-  sample=hist[hist['index']==selected].sort_values('date').copy()
-  st.caption(f"{len(sample):,} observations | {sample.date.min().date()} to {sample.date.max().date()} | Source: NSE official index history")
-  st.plotly_chart(px.line(sample,x='date',y='close',title=selected+' — historical close',template='plotly_dark'),use_container_width=True)
-  if len(sample)>1:
-   for label,days in [('1M',21),('3M',63),('6M',126),('1Y',252),('3Y',756),('5Y',1260)]:
-    if len(sample)>days:
-     sample.loc[sample.index[-1], 'return_'+label]=100*(sample.close.iloc[-1]/sample.close.iloc[-days-1]-1)
-   vals={label:sample.iloc[-1].get('return_'+label) for label in ['1M','3M','6M','1Y','3Y','5Y']}
-   st.dataframe(pd.DataFrame([{'period':k,'return_pct':round(v,2)} for k,v in vals.items() if pd.notna(v)]),use_container_width=True,hide_index=True)
-  bench=hist[hist['index']=='NIFTY 50'][['date','close']].rename(columns={'close':'benchmark'})
-  if selected!='NIFTY 50' and not bench.empty:
-   merged=sample.merge(bench,on='date').sort_values('date')
-   if len(merged)>1:
-    merged['relative_strength']=100*(merged.close/merged.close.iloc[0])/(merged.benchmark/merged.benchmark.iloc[0])
-    st.plotly_chart(px.line(merged,x='date',y='relative_strength',title='Relative strength vs NIFTY 50 (start = 100)',template='plotly_dark'),use_container_width=True)
-  st.download_button('Download selected history CSV',sample.to_csv(index=False).encode(),selected.lower().replace(' ','_')+'_history.csv','text/csv')
- st.caption('Historical coverage differs by index; data is not guaranteed to extend 20 years. Price index is not total return index.')
+import streamlit as st
+import yfinance as yf
+
+st.set_page_config(page_title="Global Industry Cycle Intelligence", page_icon="🌐", layout="wide")
+SECTORS = {
+    'XLC': 'Communication Services', 'XLY': 'Consumer Discretionary',
+    'XLP': 'Consumer Staples', 'XLE': 'Energy', 'XLF': 'Financials',
+    'XLV': 'Healthcare', 'XLI': 'Industrials', 'XLB': 'Materials',
+    'XLRE': 'Real Estate', 'XLK': 'Technology', 'XLU': 'Utilities'
+}
+TICKERS = list(SECTORS) + ['SPY']
+LOOKBACKS = {'1W': 5, '2W': 10, '4W': 20, '1M': 21, '3M': 63, '6M': 126, '12M': 252}
+COLORS = {'Leading': '#19c58a', 'Improving': '#4da3ff', 'Weakening': '#f4aa4b', 'Lagging': '#fb7185'}
+BG = '#0b1220'; PANEL = '#121e30'; TEXT = '#e8effa'; MUTED = '#95a8c1'
+
+def fetch_prices(start, end):
+    """Return raw multi-ticker OHLCV in memory; no filesystem or DB writes."""
+    result = yf.download(TICKERS, start=start.strftime('%Y-%m-%d'), end=(end + timedelta(days=1)).strftime('%Y-%m-%d'), auto_adjust=False, actions=False, group_by='ticker', progress=False, threads=True)
+    if result.empty:
+        raise RuntimeError('Provider returned no market data. Check internet access or retry.')
+    frames = {}
+    for t in TICKERS:
+        if isinstance(result.columns, pd.MultiIndex):
+            if t in result.columns.get_level_values(0):
+                df = result[t].copy()
+            elif t in result.columns.get_level_values(1):
+                df = result.xs(t, axis=1, level=1).copy()
+            else:
+                continue
+        else:
+            df = result.copy() if len(TICKERS) == 1 else pd.DataFrame()
+        if not df.empty:
+            df.index = pd.to_datetime(df.index).tz_localize(None).normalize()
+            frames[t] = df.sort_index()
+    return frames
+
+def validate(frames, selected_end):
+    errors, warnings = [], []
+    if 'SPY' not in frames or frames['SPY'].empty:
+        return 'FAIL', ['Missing SPY benchmark'], []
+    ref = frames['SPY'].dropna(subset=['Close']).index
+    if len(ref) < 2:
+        return 'FAIL', ['Insufficient benchmark observations'], []
+    last = ref.max()
+    for ticker in TICKERS:
+        if ticker not in frames or frames[ticker].empty:
+            errors.append(f'{ticker}: missing data')
+            continue
+        df = frames[ticker]
+        needed = ['Open','High','Low','Close','Adj Close','Volume']
+        if any(c not in df.columns for c in needed):
+            errors.append(f'{ticker}: missing required OHLCV columns')
+            continue
+        if df.index.has_duplicates:
+            errors.append(f'{ticker}: duplicate trading dates')
+        if df[needed].isna().any().any():
+            errors.append(f'{ticker}: missing OHLCV values')
+        if (df[['Open','High','Low','Close','Adj Close']] <= 0).any().any() or (df['Volume'] < 0).any():
+            errors.append(f'{ticker}: nonpositive price or negative volume')
+        bad = (df['High'] < df[['Open','Close','Low']].max(axis=1)) | (df['Low'] > df[['Open','Close','High']].min(axis=1))
+        if bad.any():
+            errors.append(f'{ticker}: invalid OHLC ordering')
+        missing = ref[(ref >= df.index.min()) & (ref <= df.index.max())].difference(df.index)
+        if len(missing):
+            errors.append(f'{ticker}: {len(missing)} missing SPY trading sessions')
+        if df.index.max() < last:
+            warnings.append(f'{ticker}: last observation precedes benchmark')
+        outliers = (df['Adj Close'].pct_change().abs() > .15).sum()
+        if outliers:
+            warnings.append(f'{ticker}: {outliers} daily return outlier(s) >15%')
+    if (pd.Timestamp(selected_end) - last).days > 5 and pd.Timestamp(selected_end).date() >= date.today() - timedelta(days=5):
+        warnings.append(f'Latest session {last.date()} is more than five calendar days before selected end date')
+    return ('FAIL' if errors else 'WARNING' if warnings else 'PASS'), errors, warnings
+
+def compute(frames, chosen, from_date, to_date, lookback):
+    adj = pd.concat({t: f['Adj Close'] for t, f in frames.items()}, axis=1).sort_index()
+    adj = adj.loc[:pd.Timestamp(to_date)]
+    if adj.empty or 'SPY' not in adj:
+        raise ValueError('No benchmark data in selected range')
+    ref = adj['SPY']; ratio = adj.div(ref, axis=0)
+    L = LOOKBACKS[lookback]; M = max(2, L // 2)
+    strength = (ratio / ratio.shift(L) - 1) * 100
+    momentum = (ratio / ratio.shift(M) - 1) * 100
+    # Use sessions at or before requested bounds; first session at or after from date for returns.
+    window = adj.loc[pd.Timestamp(from_date):pd.Timestamp(to_date)]
+    if len(window) < 2:
+        raise ValueError('Select a date range with at least two trading sessions')
+    end = window.index[-1]
+    first = window.index[0]
+    rows = []
+    for t in chosen:
+        if t not in adj or pd.isna(strength.at[end,t]) or pd.isna(momentum.at[end,t]):
+            continue
+        rs, mom = float(strength.at[end,t]), float(momentum.at[end,t])
+        quadrant = 'Leading' if rs >= 0 and mom >= 0 else 'Improving' if rs < 0 and mom >= 0 else 'Weakening' if rs >= 0 else 'Lagging'
+        if pd.isna(adj.at[first,t]) or pd.isna(adj.at[end,t]):
+            continue
+        ret = (adj.at[end,t] / adj.at[first,t] - 1) * 100
+        spyret = (adj.at[end,'SPY'] / adj.at[first,'SPY'] - 1) * 100
+        rows.append({'ticker': t, 'sector': SECTORS[t], 'status': quadrant, 'relative_strength': round(rs,2), 'momentum': round(mom,2), 'return': round(ret,2), 'excess': round(ret-spyret,2)})
+    return pd.DataFrame(rows), strength, momentum, first, end
+
+
+@st.cache_data(ttl=3600, show_spinner=False)
+def cached_prices(start, end):
+    return fetch_prices(start, end)
+
+st.markdown("""<style>
+.stApp {background:#0b1220;color:#e8effa}
+[data-testid="stMetric"] {background:#121e30;border:1px solid #29384e;border-radius:12px;padding:14px}
+[data-testid="stMetricLabel"] {color:#a7b9d1}
+</style>""", unsafe_allow_html=True)
+
+h1,h2=st.columns([5,1])
+with h1:
+    st.title('Global Industry Cycle Intelligence')
+    st.caption('USA sector rotation · Relative strength and momentum versus SPY · No database')
+with h2:
+    if st.button('↻ Refresh data', use_container_width=True):
+        cached_prices.clear()
+        st.rerun()
+
+with st.container(border=True):
+    a,b,c=st.columns([2,2,2])
+    with a:
+        select_all=st.checkbox('Select all sectors',value=True,key='all_sectors')
+        chosen=st.multiselect('SECTORS',options=list(SECTORS),default=list(SECTORS) if select_all else [],format_func=lambda t:f'{SECTORS[t]} ({t})',key='chosen_sectors')
+    with b:
+        lookback=st.segmented_control('RELATIVE TIME',options=list(LOOKBACKS),default='3M',selection_mode='single')
+    with c:
+        dr=st.date_input('FROM DATE → TO DATE',value=(date.today()-timedelta(days=365),date.today()),min_value=date(2019,1,1),max_value=date.today(),format='MM/DD/YYYY')
+
+if not chosen:
+    st.info('Select one or more sectors to begin.'); st.stop()
+if not lookback or len(dr)!=2:
+    st.info('Choose a relative time and both dates.'); st.stop()
+start,end=dr
+if start>=end:
+    st.warning('From Date must be earlier than To Date.'); st.stop()
+
+# Allow a full 12-month indicator warm-up before From Date.
+with st.spinner('Downloading and validating USA sector data…'):
+    try:
+        frames=cached_prices(start-timedelta(days=420),end)
+        quality,errors,warnings=validate(frames,end)
+        if quality=='FAIL':
+            st.error('Data validation failed; no sector classifications published.')
+            for error in errors: st.write('• '+error)
+            st.stop()
+        rows,strength,momentum,first,last=compute(frames,chosen,start,end,lookback)
+    except Exception as e:
+        st.error(f'Market data unavailable or insufficient: {e}')
+        st.stop()
+if rows.empty:
+    st.warning('Not enough valid observations for the selected dates.'); st.stop()
+
+if quality=='PASS':
+    st.success(f'Primary-source checks passed · Effective trading dates: {first.date()} – {last.date()} · Yahoo Finance · Independent verification not yet implemented')
 else:
- st.title('Economic & Industry Intelligence — Knowledge Center')
- tabs=st.tabs(['Intelligence Feed','Country Wiki','Industry Wiki','Opportunity Radar','Publisher Library','Research Archive','Data & Methodology'])
- with tabs[0]:
-  st.subheader('Newly discovered publisher items');q=publications()
-  if q.empty:st.info('No RSS items collected yet. Run scripts/monitor_publishers.py or the scheduled workflow. Publisher entries without a feed are listed for manual monitoring.')
-  else:
-   market=st.selectbox('Region',['All','India','USA','Global'],key='feedmarket')
-   if market!='All':q=q[q.market==market]
-   search=st.text_input('Search titles and publishers')
-   if search:q=q[q.title.str.contains(search,case=False,na=False)|q.publisher.str.contains(search,case=False,na=False)]
-   for _,r in q.head(60).iterrows():
-    st.markdown(f"**[{r['title']}]({r['url']})**  \n{r['publisher']} · {r['market']} · {r.get('published','') or 'Publication date not supplied'}")
-   st.caption('These are source-discovered links, not AI-reviewed summaries or verified opportunity assessments.')
- with tabs[1]:
-  country=st.selectbox('Country',['India','USA','Global'])
-  file=ROOT/'knowledge/countries'/f'{country.lower()}.md'
-  st.markdown(file.read_text() if file.exists() else 'No country article yet.')
- with tabs[2]:
-  sector=st.selectbox('Sector',sorted(I.sector.unique()),key='wikiindustry')
-  file=ROOT/'knowledge/industries'/f"{sector.lower().replace(' ','_')}.md"
-  st.markdown(file.read_text() if file.exists() else 'Industry page awaiting sourced research. No claims have been generated.')
-  st.subheader('Related market data');fmt_table(S[S.sector==sector][['market','ticker','stage','rs_6m','asof']].round(2)) if not S.empty else st.caption('No price data available.')
- with tabs[3]:
-  st.subheader('Evidence-based opportunity watchlist')
-  st.info('Price-based early recovery candidates appear below. Fundamental opportunity cards require manually reviewed, source-linked reports and are not fabricated.')
-  if not S.empty:
-   x=S[(S.rs_6m<0)&(S.rs_1m>0)&(S.rsi>50)]
-   fmt_table(x[['market','sector','ticker','stage','rs_1m','rs_6m']].round(2)) if not x.empty else st.caption('No current matches.')
-  p=ROOT/'knowledge/opportunities.json'
-  if p.exists():
-   for item in json.loads(p.read_text()):
-    with st.expander(item.get('title','Opportunity')):
-     st.write(item.get('hypothesis',''));st.write('Evidence:',item.get('evidence',[]));st.write('Risks:',item.get('risks',[]))
- with tabs[4]:
-  pubs=json.loads((ROOT/'config/publishers.json').read_text())
-  fmt_table(pd.DataFrame(pubs)[['name','market','industry','homepage','feed']]);st.caption('Only configured RSS/Atom feeds are automatically monitored. Homepage-only publishers are not automatically scraped.')
- with tabs[5]:
-  q=publications()
-  if q.empty:st.info('Archive will populate after successful feed monitoring.')
-  else:
-   fmt_table(q[['publisher','market','industry','title','published','discovered_utc','url','assessment']]);st.download_button('Export archive',q.to_csv(index=False),'research_archive.csv','text/csv')
- with tabs[6]:
-  for name in ['methodology/market_cycle.md','methodology/limitations.md','methodology/architecture.md']:
-   st.markdown((ROOT/'knowledge'/name).read_text())
-  st.subheader('Instrument mappings');fmt_table(I)
-  status=ROOT/'data/collection_status.json'
-  if status.exists():st.json(json.loads(status.read_text()))
+    st.warning('Primary-source validation warnings: '+'; '.join(warnings[:5]))
+
+counts=rows.status.value_counts()
+metrics=st.columns(4)
+for col,q in zip(metrics,COLORS):
+    col.metric(q, int(counts.get(q,0)))
+
+filter_status=st.pills('QUADRANT FILTER',options=['All',*COLORS],default='All',selection_mode='single')
+visible=rows if filter_status in (None,'All') else rows.loc[rows.status==filter_status]
+
+fig=go.Figure()
+for q,color in COLORS.items():
+    subset=visible[visible.status==q]
+    if subset.empty: continue
+    for _,row in subset.iterrows():
+        hist=pd.DataFrame({'x':strength[row.ticker],'y':momentum[row.ticker]}).loc[first:last].dropna()
+        if len(hist)>1:
+            hist=hist.iloc[::max(1,len(hist)//40)]
+            fig.add_trace(go.Scatter(x=hist.x,y=hist.y,mode='lines',line=dict(color=color,width=1),opacity=.4,showlegend=False,hoverinfo='skip'))
+    fig.add_trace(go.Scatter(x=subset.relative_strength,y=subset.momentum,mode='markers+text',text=subset.ticker,textposition='top center',name=q,marker=dict(size=13,color=color,line=dict(width=1,color='white')),customdata=subset[['sector','return','excess']].values,hovertemplate='%{customdata[0]}<br>RS: %{x:.2f}%<br>Momentum: %{y:.2f}%<br>Return: %{customdata[1]:.2f}%<br>Excess: %{customdata[2]:.2f} pp<extra></extra>'))
+fig.add_hline(y=0,line_color='#8293aa');fig.add_vline(x=0,line_color='#8293aa')
+for x,y,q in [(0.98,0.98,'Leading'),(.02,.98,'Improving'),(.98,.02,'Weakening'),(.02,.02,'Lagging')]:
+    fig.add_annotation(x=x,y=y,xref='paper',yref='paper',text=q.upper(),showarrow=False,font=dict(color=COLORS[q],size=11))
+fig.update_xaxes(title='Relative strength vs SPY (%)');fig.update_yaxes(title='Relative momentum (%)')
+style_fig(fig).update_layout(height=510)
+ranked=visible.sort_values('excess')
+bar=go.Figure(go.Bar(y=ranked.ticker,x=ranked.excess,orientation='h',marker_color=[COLORS[q] for q in ranked.status],customdata=ranked.sector,hovertemplate='%{customdata}<br>Excess: %{x:.2f} pp<extra></extra>'))
+bar.add_vline(x=0,line_color='#8293aa');bar.update_xaxes(title='Excess return vs SPY (percentage points)')
+style_fig(bar).update_layout(height=510)
+left,right=st.columns(2)
+with left:
+    st.subheader('Relative Rotation Map')
+    st.plotly_chart(fig,use_container_width=True)
+with right:
+    st.subheader('Sector performance · selected date range')
+    st.plotly_chart(bar,use_container_width=True)
+st.subheader('Sector classification')
+st.dataframe(visible.rename(columns={'sector':'Sector','ticker':'ETF','status':'Quadrant','relative_strength':'Relative strength (%)','momentum':'Momentum (%)','return':'Return (%)','excess':'Excess vs SPY (pp)'}),hide_index=True,use_container_width=True)
+st.caption('Method: sector/SPY adjusted-close ratio; relative strength uses selected lookback, momentum half that lookback. Original transparent quadrant model, not proprietary RRG. Adjusted-price returns are not independently verified total returns. Not investment advice.')
