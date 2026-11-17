@@ -9,7 +9,8 @@ SECTORS = {
     'XLV': 'Healthcare', 'XLI': 'Industrials', 'XLB': 'Materials',
     'XLRE': 'Real Estate', 'XLK': 'Technology', 'XLU': 'Utilities',
 }
-TICKERS = list(SECTORS) + ['SPY']
+BENCHMARK = 'SPY'
+TICKERS = list(SECTORS) + [BENCHMARK]
 LOOKBACKS = {'1W': 5, '2W': 10, '4W': 20, '1M': 21, '3M': 63, '6M': 126, '12M': 252}
 QUADRANTS = ('Leading', 'Improving', 'Weakening', 'Lagging')
 

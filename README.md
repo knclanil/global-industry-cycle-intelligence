@@ -1,5 +1,18 @@
 # Global Industry Cycle Intelligence
 
+## Pages
+- **USA Sector** — 11 US sector ETFs versus SPY.
+- **India Sector** — 12 Indian sector index symbols versus Nifty 50 (`^NSEI`).
+- **Wiki** — methodology for each market, with a market selector.
+
+Both sector pages use the same controls, KPIs, relative rotation map, sector performance bars, zero-based relative trend chart, and classification table. The India series use Yahoo Finance NSE index tickers. Availability varies by symbol and provider; missing indices are warned about and omitted, not fabricated. No database.
+
+Run: `pip install -r requirements.txt` then `streamlit run app.py`.
+
+The scheduled GitHub Action checks **USA** data only; India data is downloaded when its page loads or Refresh now is pressed.
+
+# Global Industry Cycle Intelligence
+
 A **USA sector rotation** dashboard designed for **GitHub + Streamlit Community Cloud**. No database, no API keys required for the initial Yahoo Finance feed.
 
 ## Features
