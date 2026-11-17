@@ -22,6 +22,9 @@ jobs:
         run: python scripts/analyze.py
       - name: Collect NSE India sector snapshot
         run: python scripts/collect_nse_indices.py
+      - name: Update NSE historical index prices
+        run: python scripts/collect_nse_history.py --mode daily
+        continue-on-error: true
       - name: Collect publication metadata
         run: python scripts/monitor_publishers.py
         continue-on-error: true

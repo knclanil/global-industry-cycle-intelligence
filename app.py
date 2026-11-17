@@ -156,7 +156,36 @@ elif nav=='NSE India Sectors':
  else:st.info('No NSE snapshot collected yet. Run GitHub Actions; NSE may restrict automated access.')
  st.subheader('Configured sector and thematic watchlist')
  st.dataframe(watch,use_container_width=True,hide_index=True)
- st.info('Daily snapshots do not establish 1M–20Y cycles. Long-term index history needs a permitted historical data source. Missing data is never treated as zero.')
+ st.subheader('Official NSE historical index prices')
+ hist=load('nse_index_history.parquet')
+ coverage_file=ROOT/'data/nse_history_coverage.json'
+ if coverage_file.exists():
+  coverage=json.loads(coverage_file.read_text())
+  with st.expander('Historical data coverage and collection errors'):
+   st.dataframe(pd.DataFrame(coverage.get('coverage',[])),use_container_width=True,hide_index=True)
+   if coverage.get('errors'):st.warning(f"{len(coverage['errors'])} collection errors. See data/nse_history_coverage.json")
+ if hist.empty:
+  st.info('No verified historical data yet. Run the NSE historical backfill workflow or import official NSE CSV exports. No synthetic values are displayed.')
+ else:
+  hist['date']=pd.to_datetime(hist['date'])
+  selected=st.selectbox('Historical index',sorted(hist['index'].unique()))
+  sample=hist[hist['index']==selected].sort_values('date').copy()
+  st.caption(f"{len(sample):,} observations | {sample.date.min().date()} to {sample.date.max().date()} | Source: NSE official index history")
+  st.plotly_chart(px.line(sample,x='date',y='close',title=selected+' — historical close',template='plotly_dark'),use_container_width=True)
+  if len(sample)>1:
+   for label,days in [('1M',21),('3M',63),('6M',126),('1Y',252),('3Y',756),('5Y',1260)]:
+    if len(sample)>days:
+     sample.loc[sample.index[-1], 'return_'+label]=100*(sample.close.iloc[-1]/sample.close.iloc[-days-1]-1)
+   vals={label:sample.iloc[-1].get('return_'+label) for label in ['1M','3M','6M','1Y','3Y','5Y']}
+   st.dataframe(pd.DataFrame([{'period':k,'return_pct':round(v,2)} for k,v in vals.items() if pd.notna(v)]),use_container_width=True,hide_index=True)
+  bench=hist[hist['index']=='NIFTY 50'][['date','close']].rename(columns={'close':'benchmark'})
+  if selected!='NIFTY 50' and not bench.empty:
+   merged=sample.merge(bench,on='date').sort_values('date')
+   if len(merged)>1:
+    merged['relative_strength']=100*(merged.close/merged.close.iloc[0])/(merged.benchmark/merged.benchmark.iloc[0])
+    st.plotly_chart(px.line(merged,x='date',y='relative_strength',title='Relative strength vs NIFTY 50 (start = 100)',template='plotly_dark'),use_container_width=True)
+  st.download_button('Download selected history CSV',sample.to_csv(index=False).encode(),selected.lower().replace(' ','_')+'_history.csv','text/csv')
+ st.caption('Historical coverage differs by index; data is not guaranteed to extend 20 years. Price index is not total return index.')
 else:
  st.title('Economic & Industry Intelligence — Knowledge Center')
  tabs=st.tabs(['Intelligence Feed','Country Wiki','Industry Wiki','Opportunity Radar','Publisher Library','Research Archive','Data & Methodology'])

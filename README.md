@@ -47,3 +47,11 @@ This package is a functional, database-free foundation, **not a claim that every
 ## NSE India sector tracking
 
 The **NSE India Sectors** page displays the official NSE index snapshot when the NSE permits automated access. Run `python scripts/collect_nse_indices.py` or the GitHub Actions refresh workflow. A configurable list is in `config/nse_indices.csv`. `data/nse_collection_status.json` reports any access errors. The snapshot is **not** a historical index series and the list is **not** a verified complete export of the live page. Do not interpret missing rows as zero returns. NSE usage restrictions and anti-bot measures may prevent unattended access.
+
+## NSE historical data (official source)
+
+Use **Actions → Backfill NSE historical index prices → Run workflow** to request up to 20 years of index history. This is a one-time backfill; the standard refresh updates recent observations. Historical data appears in **NSE India Sectors** with charts, returns, relative strength versus NIFTY 50, coverage diagnostics and CSV download.
+
+NSE may reject automated requests (401/403/429). The collector does not bypass access controls, and it never invents prices. If blocked, use the official NSE historical index download interface and put its CSV files in `imports/nse/`, named after the index (e.g. `NIFTY IT.csv`). Commit these files and run `python scripts/collect_nse_history.py --mode import`. Data is stored in `data/nse_index_history.parquet` and `data/nse_history_coverage.json`. Verify applicable NSE data use and redistribution terms.
+
+Index history may be shorter than 20 years, especially for newer indices. These are price-index closes, not TRI. The historical page is separate from the global proxy-based market-cycle classifier.
