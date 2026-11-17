@@ -1,32 +1,48 @@
-# global-industry-cycle-intelligence
+# Global Industry Cycle Intelligence
 
-Streamlit Community Cloud-ready USA sector rotation dashboard. **No database.** Data is downloaded from Yahoo Finance on demand and cached in memory for one hour.
+A **USA sector rotation** dashboard designed for **GitHub + Streamlit Community Cloud**. No database, no API keys required for the initial Yahoo Finance feed.
 
-## Deploy from GitHub
+## Features
 
-1. Create a GitHub repository named `global-industry-cycle-intelligence`.
-2. Upload `app.py` and `requirements.txt` to the repository root.
-3. In Streamlit Community Cloud, create an app from your repository, set the main file path to `app.py`, and deploy.
-4. If the market-data provider rate-limits requests, wait and refresh. No API secrets are required for this prototype.
+- 11 US sector ETFs, SPY benchmark
+- Select All / single / multi-sector slicer
+- Relative Time: 1W, 2W, 4W, 1M, 3M, 6M, 12M
+- From Date / To Date historical slicer
+- Four KPI cards: Leading, Improving, Weakening, Lagging
+- Interactive relative rotation map with historical trails
+- Sector excess-performance bar chart and sortable classification table
+- Data integrity checks and explicit primary-source verification status
+- Refresh Now button, one-hour data cache, scheduled GitHub Actions data-quality checks
 
-## Run locally
+## Deploy to Streamlit
+
+1. Push **the contents of this directory** to the `global-industry-cycle-intelligence` GitHub repository's `main` branch.
+2. On Streamlit Community Cloud, select that repository and set the main file to `app.py`.
+3. Deploy. No secrets or database are required.
+
+Run locally:
 
 ```bash
-python -m pip install -r requirements.txt
+pip install -r requirements.txt
 streamlit run app.py
 ```
 
-## Dashboard controls
+Run offline unit tests (synthetic price data):
 
-- Sector multiselect with Select All checkbox (uncheck to choose individual sectors).
-- Relative time: 1W, 2W, 4W, 1M, 3M, 6M, 12M.
-- From Date and To Date controls.
-- Four quadrant KPI cards, quadrant filter, rotation map with trails, excess-return bar chart, classification table.
+```bash
+python -m unittest discover -s tests -v
+```
 
-## Calculation
+## Data refresh and schedule
 
-Relative ratio = adjusted sector close / adjusted SPY close. Relative strength = percent change in ratio over selected relative-time lookback. Momentum = percent change in ratio over half the lookback. Quadrants: Leading (+,+), Improving (-,+), Weakening (+,-), Lagging (-,-). This is a custom transparent model, **not** a proprietary RRG formula.
+Streamlit fetches data when opened, after its one-hour cache expires, or when **Refresh now** is pressed. GitHub Actions (`.github/workflows/daily-data-check.yml`) separately runs a market-data integrity check at **23:30 UTC, weekdays** and uploads `data_quality_report.json` as a workflow artifact. This does **not** push historical prices into GitHub, update an open browser automatically, or guarantee that Yahoo Finance has posted final end-of-day prices. Scheduled GitHub Actions may run late or be skipped; monitor Actions for failures. If a holiday falls on a weekday, the check evaluates the most recent available session. The workflow uses UTC, so its US Eastern time changes with daylight saving time.
 
-## Data integrity and limitations
+## Classification definitions
 
-Primary-source checks cover OHLC consistency, missing records, duplicate dates, price positivity and large-return warnings. A FAIL blocks classification. **Cross-provider verification is not yet implemented**; passing primary checks is not independent validation. Yahoo Finance can be delayed or rate-limited. Adjusted close is provider-dependent and not guaranteed to equal a verified total-return series. No data is saved to disk.
+For sector ETF adjusted-close price `S` and SPY adjusted-close `B`, define relative ratio `Q = S / B`. For chosen relative window `L` trading sessions, `RS = 100 × (Q / Q.shift(L) − 1)`. Let `M = max(2, floor(L/2))`; momentum `= RS − RS.shift(M)`. Positive RS and positive momentum = Leading; negative RS and positive momentum = Improving; positive RS and negative momentum = Weakening; negative RS and negative momentum = Lagging. Zero counts as positive. This is an original, transparent model, **not** the proprietary RRG calculation. Short lookbacks can be noisy.
+
+Date Range controls the historical trail, absolute/excess returns, and as-of classification date. Relative Time controls the indicator window. Additional pre-range prices are fetched for warm-up. Sector excess return is sector adjusted-price return minus SPY adjusted-price return in percentage points.
+
+## Data quality limitations
+
+The current dashboard validates completeness against SPY, duplicates, OHLC relationships, nonpositive values, and flags unusually large adjusted-price moves. **Independent cross-provider verification and full corporate-action reconciliation are not implemented.** The status `PASS` therefore refers only to primary-source structural checks, not investment-grade verification. Yahoo Finance is an unofficial feed; it may throttle requests or revise historical data. The app does not persist market data or require a database. This is research software, not investment advice.
