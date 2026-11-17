@@ -112,3 +112,23 @@ def calculate(frames: dict, chosen: list[str], start: date, end: date, lookback:
                         'Relative strength (%)': round(r, 2), 'RS momentum (pp)': round(m, 2),
                         'Return (%)': round(absolute, 2), 'Excess vs SPY (pp)': round(absolute - spy_return, 2)})
     return pd.DataFrame(records), rs, mom, first, last
+
+
+def relative_trend_from_zero(frames: dict, chosen: list[str], first, last) -> pd.DataFrame:
+    """Cumulative adjusted-price return minus SPY return (percentage points).
+
+    Each series begins at 0 on the first common trading session of the
+    selected range. No filling or interpolation of missing prices.
+    """
+    prices = pd.concat({t: df['Adj Close'] for t, df in frames.items()}, axis=1).sort_index()
+    window = prices.loc[pd.Timestamp(first):pd.Timestamp(last), ['SPY', *chosen]]
+    window = window.dropna(subset=['SPY'])
+    if window.empty or len(window) < 2:
+        raise ValueError('At least two SPY sessions are required for trend comparison.')
+    base = window.iloc[0]
+    if base.isna().any() or (base <= 0).any():
+        raise ValueError('A selected sector has no valid price on the starting session.')
+    cumulative = (window.div(base) - 1) * 100
+    trend = cumulative[chosen].sub(cumulative['SPY'], axis=0)
+    trend.iloc[0] = 0.0
+    return trend

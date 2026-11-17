@@ -46,3 +46,11 @@ Date Range controls the historical trail, absolute/excess returns, and as-of cla
 ## Data quality limitations
 
 The current dashboard validates completeness against SPY, duplicates, OHLC relationships, nonpositive values, and flags unusually large adjusted-price moves. **Independent cross-provider verification and full corporate-action reconciliation are not implemented.** The status `PASS` therefore refers only to primary-source structural checks, not investment-grade verification. Yahoo Finance is an unofficial feed; it may throttle requests or revise historical data. The app does not persist market data or require a database. This is research software, not investment advice.
+
+## Sector trends vs SPY
+
+The dashboard includes a line chart for the selected sectors over the **From Date → To Date** range. Each line is normalized to **0 percentage points on the first trading session**. For each subsequent date, the plotted value is `100 × (sector_adjusted_close / sector_start_adjusted_close − SPY_adjusted_close / SPY_start_adjusted_close)`. Positive means cumulative outperformance versus SPY; negative means underperformance. This chart uses the date range slicer, not the Relative Time indicator window. It uses the same validated adjusted-price feed as the other visuals and does not interpolate missing values.
+
+## Dashboard Wiki
+
+Open the **Wiki** page using the app sidebar to read the complete calculation methodology, sector coverage, filter semantics, data-validation rules, refresh behavior, and limitations. The documentation is maintained in [`WIKI.md`](WIKI.md) and is available even when market-data retrieval fails.

@@ -4,7 +4,7 @@ from zoneinfo import ZoneInfo
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
-from market_data import SECTORS, LOOKBACKS, QUADRANTS, download, validate, calculate
+from market_data import SECTORS, LOOKBACKS, QUADRANTS, download, validate, calculate, relative_trend_from_zero
 
 st.set_page_config(page_title='Global Industry Cycle Intelligence', page_icon='🌐', layout='wide')
 COLORS = {'Leading': '#22c58b', 'Improving': '#4b9cff', 'Weakening': '#f4aa4b', 'Lagging': '#fa7185'}
@@ -15,6 +15,15 @@ st.markdown('''<style>
 [data-testid="stMetricLabel"]{color:#b6c7de}
 div[data-testid="stVerticalBlockBorderWrapper"]{border-color:#2a3c55}
 </style>''', unsafe_allow_html=True)
+
+# Keep documentation accessible even when market data is unavailable.
+page = st.sidebar.radio('NAVIGATION', ['Dashboard', 'Wiki'], index=0)
+if page == 'Wiki':
+    from pathlib import Path
+    st.title('Dashboard Wiki')
+    st.caption('Definitions, calculation formulas, controls, data quality and operational details.')
+    st.markdown((Path(__file__).resolve().parent / 'WIKI.md').read_text(encoding='utf-8'))
+    st.stop()
 
 @st.cache_data(ttl=3600, show_spinner=False)
 def prices_cached(start: date, end: date):
@@ -111,7 +120,7 @@ visible = rows if status_filter in ('All', None) else rows[rows['Quadrant'] == s
 
 # Show one smooth movement path at a time. Multiple historical paths overlap
 # geometrically, so avoid plotting them simultaneously.
-st.markdown('#### Relative rotation map')
+st.markdown('#### Sector rotation overview')
 control1, control2, control3 = st.columns([1.2, 1.3, 2])
 with control1:
     show_trails = st.toggle('Show smooth movement path', value=True,
@@ -174,11 +183,15 @@ for x, y, q in [(0.97,0.97,'Leading'),(0.03,0.97,'Improving'),(0.97,0.03,'Weaken
                        showarrow=False, font=dict(color=COLORS[q], size=14))
 fig.update_xaxes(title='Relative strength vs SPY (%)')
 fig.update_yaxes(title='Relative strength momentum (pp)')
-style(fig, height=680)
+style(fig, height=460)
 fig.update_layout(margin=dict(l=35, r=35, t=55, b=45),
                   legend=dict(orientation='h', y=1.08, x=0))
-st.plotly_chart(fig, use_container_width=True)
-st.caption('Only one sector movement path is shown at a time to prevent overlapping lines. The smooth curve is a visual guide between actual daily observations; it is not additional market data. All sector endpoints remain visible.')
+# Keep both primary visuals side by side instead of spanning the entire page.
+rotation_col, performance_col = st.columns([1.15, 1], gap='medium')
+with rotation_col:
+    st.markdown('**Relative rotation map**')
+    st.plotly_chart(fig, use_container_width=True, key='sector_rotation_map')
+    st.caption('One smooth sector trail at a time; all sector endpoints remain visible.')
 
 ranked = visible.sort_values('Excess vs SPY (pp)')
 bar = go.Figure(go.Bar(y=ranked['ETF'], x=ranked['Excess vs SPY (pp)'], orientation='h',
@@ -187,10 +200,38 @@ bar = go.Figure(go.Bar(y=ranked['ETF'], x=ranked['Excess vs SPY (pp)'], orientat
                        hovertemplate='%{customdata}<br>Excess vs SPY: %{x:.2f} pp<extra></extra>'))
 bar.add_vline(x=0, line_color='#8ea0b8')
 bar.update_xaxes(title='Excess return vs SPY (percentage points)')
-style(bar)
+style(bar, height=460)
+with performance_col:
+    st.markdown('**Sector performance · selected date range**')
+    st.plotly_chart(bar, use_container_width=True, key='sector_performance')
+    st.caption('Excess return versus SPY, in percentage points.')
 
-st.subheader('Sector performance · selected date range')
-st.plotly_chart(bar, use_container_width=True)
+# Date-range cumulative performance relative to SPY: each series starts at 0 pp.
+st.markdown('#### Sector trends vs SPY')
+st.caption('Cumulative sector return minus cumulative SPY return, in percentage points. Every selected sector starts at 0 on the first trading session of the From/To range. Above zero = outperforming SPY; below zero = underperforming.')
+try:
+    trend_data = relative_trend_from_zero(frames, visible['ETF'].tolist(), first, last)
+    trend_fig = go.Figure()
+    palette = ['#52b788', '#60a5fa', '#f59e0b', '#f472b6', '#a78bfa', '#2dd4bf',
+               '#facc15', '#fb7185', '#38bdf8', '#c084fc', '#94a3b8']
+    for idx, ticker in enumerate(trend_data.columns):
+        series = trend_data[ticker].dropna()
+        if series.empty:
+            continue
+        trend_fig.add_trace(go.Scatter(
+            x=series.index, y=series.values, mode='lines', name=ticker,
+            line=dict(width=2.5, color=palette[list(SECTORS).index(ticker) % len(palette)]),
+            customdata=[SECTORS[ticker]] * len(series),
+            hovertemplate='%{customdata} (%{fullData.name})<br>%{x|%b %d, %Y}<br>Vs SPY: %{y:+.2f} pp<extra></extra>'))
+    trend_fig.add_hline(y=0, line_color='#d2dce9', line_width=1.5, line_dash='dash')
+    style(trend_fig, height=390)
+    trend_fig.update_layout(hovermode='x unified', legend=dict(orientation='h', y=-0.25, x=0),
+                            margin=dict(l=35, r=25, t=15, b=55))
+    trend_fig.update_xaxes(title='Trading date')
+    trend_fig.update_yaxes(title='Cumulative excess return (pp)', ticksuffix=' pp')
+    st.plotly_chart(trend_fig, use_container_width=True, key='sector_spy_relative_trend')
+except ValueError as exc:
+    st.warning(f'Trend unavailable: {exc}')
 
 st.subheader('Sector classification')
 st.dataframe(visible.sort_values('Relative strength (%)', ascending=False), hide_index=True,
@@ -208,6 +249,6 @@ with st.expander('How classifications and dates work'):
 
 **Relative Time** selects the number of trading sessions used to measure the change in the sector/SPY adjusted-price ratio. Momentum is the change in that relative-strength measure over half as many sessions. This is a transparent, custom four-quadrant model, **not** the proprietary RRG calculation.
 
-**From / To** sets the historical trail, period return comparison, and classification's as-of date. The app fetches earlier observations for indicator warm-up. Non-trading dates are mapped to available sessions inside the range. The latest market session may lag today's date.
+**Sector trends vs SPY:** For each date, cumulative adjusted-price sector return since the selected start minus cumulative adjusted-price SPY return since that same start. All lines begin at 0 percentage points on the first available trading session; this is not a sector/SPY ratio or a daily return series.\n\n**From / To** sets the historical trail, period return comparison, and classification's as-of date. The app fetches earlier observations for indicator warm-up. Non-trading dates are mapped to available sessions inside the range. The latest market session may lag today's date.
 
 **Data quality:** critical missing/invalid records block publication; outliers trigger warnings. Corporate-action and total-return equivalence are not independently certified. No database is used. Daily background verification is available via the included GitHub Actions workflow, while the dashboard downloads fresh data when its one-hour cache expires or you press Refresh now.''')
