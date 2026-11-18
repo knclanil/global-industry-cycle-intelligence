@@ -6,7 +6,59 @@ st.set_page_config(page_title='Global Industry Cycle Intelligence', page_icon='�
 st.markdown("""<style>.stApp{background:#0b1220;color:#e7eef9}
 [data-testid="stMetric"]{background:#142137;border:1px solid #2a3c55;border-radius:12px;padding:16px}
 [data-testid="stMetricLabel"]{color:#b6c7de}</style>""", unsafe_allow_html=True)
-page=st.sidebar.radio('NAVIGATION', ['Global Sectors', 'Global Countries', 'Global Factors', 'Global Asset Flow', 'USA Sector', 'USA Factors', 'USA Asset Flow', 'India Sector', 'India Factors', 'India Asset Flow', 'Factor Holdings Comparison', 'Data Table', 'Wiki'], key='main_navigation')
+# Grouped sidebar navigation. The selected page is stored in session state so
+# changing groups does not reset the current dashboard's other widgets.
+NAV_GROUPS = {
+    '🌎 COUNTRY ANALYSIS': ['Global Countries'],
+    '💰 ASSET CLASS ANALYSIS': ['Global Asset Flow', 'USA Asset Flow', 'India Asset Flow'],
+    '📊 SECTOR ANALYSIS': ['Global Sectors', 'USA Sector', 'India Sector'],
+    '🧩 FACTOR ANALYSIS': ['Global Factors', 'USA Factors', 'India Factors', 'Factor Holdings Comparison'],
+    '📚 DATA & RESEARCH': ['Data Table', 'Wiki'],
+}
+PAGE_ICONS = {
+    'Global Countries': '🌎',
+    'Global Asset Flow': '🌍', 'USA Asset Flow': '🇺🇸', 'India Asset Flow': '🇮🇳',
+    'Global Sectors': '🌍', 'USA Sector': '🇺🇸', 'India Sector': '🇮🇳',
+    'Global Factors': '🌍', 'USA Factors': '🇺🇸', 'India Factors': '🇮🇳',
+    'Factor Holdings Comparison': '📋', 'Data Table': '🗂️', 'Wiki': '📖',
+}
+ALL_PAGES = [item for items in NAV_GROUPS.values() for item in items]
+if st.session_state.get('selected_page') not in ALL_PAGES:
+    st.session_state.selected_page = 'Global Countries'
+
+st.markdown("""<style>
+[data-testid="stSidebar"] {background: #101a2d;}
+[data-testid="stSidebar"] [data-testid="stButton"] button {
+  width:100%; text-align:left; justify-content:flex-start;
+  border-radius:7px; border:1px solid transparent;
+  background:transparent; color:#c9d8eb; padding:0.32rem 0.65rem;
+  min-height:2.15rem; font-size:0.87rem;
+}
+[data-testid="stSidebar"] [data-testid="stButton"] button:hover {
+  background:#213550; border-color:#385170; color:white;
+}
+[data-testid="stSidebar"] details {border:0;}
+[data-testid="stSidebar"] details summary {font-size:0.81rem; font-weight:700; letter-spacing:0.025em;}
+[data-testid="stSidebar"] hr {margin:0.7rem 0; border-color:#30405b;}
+</style>""", unsafe_allow_html=True)
+with st.sidebar:
+    st.markdown('### ◈ GLOBAL INDUSTRY\nCYCLE INTELLIGENCE')
+    st.caption('Market Rotation & Intelligence')
+    st.divider()
+    for group, items in NAV_GROUPS.items():
+        expanded = st.session_state.selected_page in items
+        with st.expander(group, expanded=expanded):
+            for item in items:
+                active = item == st.session_state.selected_page
+                label = f"{'▌ ' if active else '   '}{PAGE_ICONS[item]}  {item}"
+                if st.button(label, key=f'nav_{item}', use_container_width=True,
+                             type='primary' if active else 'secondary'):
+                    if not active:
+                        st.session_state.selected_page = item
+                        st.rerun()
+    st.divider()
+page = st.session_state.selected_page
+
 if page == 'Factor Holdings Comparison':
     from factor_holdings import render_factor_holdings
     render_factor_holdings()
