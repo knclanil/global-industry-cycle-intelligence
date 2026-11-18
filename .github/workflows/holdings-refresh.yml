@@ -21,6 +21,13 @@ jobs:
       - run: pip install -r requirements.txt
       - name: Fetch, validate, compare and rank holdings
         run: python scripts/refresh_holdings.py
+      - name: Upload holdings diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: holdings-source-diagnostics
+          path: data/holdings/diagnostics/*.json
+          if-no-files-found: ignore
       - name: Commit verified holdings snapshots
         run: |
           git config user.name 'github-actions[bot]'
