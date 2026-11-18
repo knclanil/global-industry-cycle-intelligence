@@ -27,13 +27,16 @@ def normalize(frame,pid,asof,fund_title=None):
         return next((x for x in names if x in df),None)
     name=col('name','company','security_name','issuer_name'); weight=col('weight_(pct)','weight_pct','weight','portfolio_weight','weightage')
     ticker=col('ticker','symbol'); isin=col('isin'); asset=col('asset_class','assetclass')
+    country=col('location','country','country_of_risk','domicile'); sector=col('sector','gics_sector')
     if not name or not weight:raise ValueError('Unrecognized holdings columns (issuer name/weight required)')
     if not ticker and not isin:raise ValueError('Ticker or ISIN required to identify issuers safely')
     out=pd.DataFrame({'company':df[name].astype(str).str.strip(),'ticker':df[ticker].astype(str).str.strip().str.upper() if ticker else '',
         'isin':df[isin].astype(str).str.strip().str.upper() if isin else '',
         'weight':pd.to_numeric(df[weight].astype(str).str.replace('%','',regex=False).str.replace(',','',regex=False),errors='coerce'),
         'portfolio_id':pid,'category':ALL_SOURCES[pid],'group':GROUPS[pid],
-        'fund_title':str(fund_title or '').strip(),'as_of':asof})
+        'fund_title':str(fund_title or '').strip(),'as_of':asof,
+        'country':df[country].astype(str).str.strip() if country else 'Not provided',
+        'sector':df[sector].astype(str).str.strip() if sector else 'Not provided'})
     if asset:
         valid=df[asset].astype(str).str.lower().str.contains('equity|stock',regex=True)
         out=out.loc[valid]
@@ -77,7 +80,15 @@ def rank_companies(current,previous=None, factor_ids=None, factor_category="fact
                 scored.append(((n-rank)/(n-1) if n>1 else 1.,rank,rank<=max(1,int(np.ceil(n*.1))),str(h.portfolio_id)))
             sector_score,sector_rank,leader,sector_etf=max(scored,key=lambda v:v[0])
         base=100*(.45*breadth+.40*conviction+.15*sector_score)
-        rows.append(dict(issuer_id=issuer,company=grp.company.iloc[0],ticker=grp.ticker.iloc[0],factor_count=int(fg.portfolio_id.nunique()),
+        # Use the issuer's largest verified ETF exposure as the source for
+        # descriptive attributes. Do not infer country from ETF domicile.
+        representative=grp.sort_values('weight',ascending=False).iloc[0]
+        country_name=str(representative.get('country','Not provided')).strip()
+        sector_name=str(representative.get('sector','Not provided')).strip()
+        rows.append(dict(issuer_id=issuer,company=grp.company.iloc[0],ticker=grp.ticker.iloc[0],
+            country=country_name if country_name and country_name.lower()!='nan' else 'Not provided',
+            sector=sector_name if sector_name and sector_name.lower()!='nan' else 'Not provided',
+            factor_count=int(fg.portfolio_id.nunique()),
             factor_etfs=', '.join(sorted(fg.portfolio_id.unique())),factor_conviction=round(conviction*100,2),
             sector_etfs=', '.join(sorted(sg.portfolio_id.unique())),sector_rank=sector_rank,sector_leader=bool(leader),base_score=round(base,2)))
     ranking=pd.DataFrame(rows)
@@ -149,10 +160,10 @@ def holdings_display_table(frame):
     if 'group' not in data: data['group'] = data.get('category', 'Other')
     if 'fund_title' not in data: data['fund_title'] = ''
     data['Type / Sector'] = [display_strategy(title, group) for title, group in zip(data.fund_title, data.group)]
-    columns = ['group', 'Type / Sector', 'fund_title', 'ticker', 'company', 'weight', 'as_of']
+    columns = ['group', 'Type / Sector', 'fund_title', 'ticker', 'company', 'country', 'sector', 'weight', 'as_of']
     data = data[[c for c in columns if c in data.columns]]
     return data.rename(columns={'group':'Group', 'fund_title':'iShares Fund',
-                                'ticker':'Ticker', 'company':'Company',
+                                'ticker':'Ticker', 'company':'Company', 'country':'Country', 'sector':'Sector',
                                 'weight':'Weight (%)', 'as_of':'Holdings as of'})
 
 
@@ -168,6 +179,7 @@ def ranking_display_table(ranking, holdings, region='USA'):
                                         for x in str(value).split(',') if x.strip()))
             data = data.drop(columns=[column])
     return data.drop(columns=['issuer_id'], errors='ignore').rename(columns={
+        'country':'Country', 'sector':'Sector',
         'factor_count':'Factor Fund Coverage', 'factor_conviction':'Relative Factor Weight',
         'sector_rank':'Sector Position', 'sector_leader':'Sector Leader',
         'base_score':'Base Score', 'change_score':'Holdings Change Score',
@@ -200,6 +212,18 @@ def render_leadership_tab(st, region, ranking, holdings):
                             filtered.ticker.astype(str).str.contains(query,case=False,regex=False)]
     if state != 'All': filtered = filtered[filtered['Leadership state'] == state]
     display = ranking_display_table(filtered, region_holdings, region=region)
+    # Older ranking snapshots predate the country/sector fields. Enrich from
+    # verified holdings without mixing USA and Global exposure universes.
+    if 'Country' not in display.columns or 'Sector' not in display.columns:
+        lookup = region_holdings.sort_values('weight',ascending=False).drop_duplicates('issuer_id').set_index('issuer_id')
+        for source, label in [('country','Country'),('sector','Sector')]:
+            if label not in display.columns:
+                if source in lookup.columns:
+                    display[label] = filtered.issuer_id.map(lookup[source]).fillna('Not provided').values
+                else:
+                    display[label] = 'Not provided'
+    ordered = ['Rank','Company','Ticker','Country','Sector']
+    display = display[[c for c in ordered if c in display.columns] + [c for c in display.columns if c not in ordered]]
     st.dataframe(display.head(top), hide_index=True, use_container_width=True)
     st.download_button(f'Download {region} rankings CSV', display.to_csv(index=False).encode(),
                        file_name=f'{prefix}_company_leadership.csv', mime='text/csv', key=f'{prefix}_leader_download')

@@ -246,7 +246,13 @@ def refresh():
         keys = ['portfolio_id', 'issuer_id']
         a = current.sort_values(keys).reset_index(drop=True)
         b = previous.sort_values(keys).reset_index(drop=True)
-        if a.equals(b) and (STORE/'global_company_rankings.parquet').exists() and (STORE/'coverage.json').exists():
+        if (a.equals(b) and {'country','sector'}.issubset(a.columns)
+                and (STORE/'global_company_rankings.parquet').exists()
+                and (STORE/'coverage.json').exists()
+                and all({'country','sector'}.issubset(pd.read_parquet(path).columns)
+                        for path in [STORE/'company_rankings.parquet', STORE/'global_company_rankings.parquet']
+                        if path.exists())
+                and (STORE/'company_rankings.parquet').exists()):
             print('No new verified holdings changes')
             return 0
     ranking_previous=previous[previous.category.isin(['factor','sector'])].copy() if previous is not None else None
