@@ -1,0 +1,11 @@
+{
+  "portfolio_id": "239728",
+  "timestamp_utc": "2026-11-18T18:42:11.007990+00:00",
+  "error": "No recognized iShares CSV holdings header",
+  "status_code": 200,
+  "content_type": "text/csv",
+  "content_disposition": "attachment; filename=IVE_holdings.csv",
+  "content_length": 4592,
+  "body_sha256": "7db9fd60f44f735bfc92f54d446cf2d1650de449c374030da51a4558b33052d6",
+  "detected_magic": "6953686172657320"
+}

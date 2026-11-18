@@ -1,0 +1,11 @@
+{
+  "portfolio_id": "239505",
+  "timestamp_utc": "2026-11-18T18:42:13.917898+00:00",
+  "error": "Holdings table recognized, but document holdings-as-of date missing",
+  "status_code": 200,
+  "content_type": "text/csv",
+  "content_disposition": "attachment; filename=IYK_holdings.csv",
+  "content_length": 4576,
+  "body_sha256": "7062ea2df4969278c162dfbe4ed654d60af49fcfacf95d4768b34b4178bd42c0",
+  "detected_magic": "6953686172657320"
+}

@@ -1,0 +1,11 @@
+{
+  "portfolio_id": "256101",
+  "timestamp_utc": "2026-11-18T18:42:11.351844+00:00",
+  "error": "Holdings table recognized, but document holdings-as-of date missing",
+  "status_code": 200,
+  "content_type": "text/csv",
+  "content_disposition": "attachment; filename=QUAL_holdings.csv",
+  "content_length": 4578,
+  "body_sha256": "4ca3bc2408a7aa65c06a3e3b685a20a0f997d28653634e204d97b95e2fd48da3",
+  "detected_magic": "6953686172657320"
+}

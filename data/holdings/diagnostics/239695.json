@@ -1,0 +1,11 @@
+{
+  "portfolio_id": "239695",
+  "timestamp_utc": "2026-11-18T18:42:10.628511+00:00",
+  "error": "Holdings table recognized, but document holdings-as-of date missing",
+  "status_code": 200,
+  "content_type": "text/csv",
+  "content_disposition": "attachment; filename=USMV_holdings.csv",
+  "content_length": 4578,
+  "body_sha256": "6b3509a0e26536ba199735f31693a4dadd42f1700d64a37b9e5ea83efa6b807b",
+  "detected_magic": "6953686172657320"
+}
