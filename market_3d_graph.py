@@ -1,117 +1,105 @@
-"""Responsive 2D market knowledge graph; excludes companies and constituent holdings."""
+"""Responsive hierarchical 2D market knowledge graph, no constituent companies."""
 import json
 from datetime import date, timedelta
 import streamlit as st
 import streamlit.components.v1 as components
 
-GROUPS = {
-    'Countries': ['Countries'],
-    'Asset Classes': ['Global Assets', 'USA Assets', 'India Assets'],
-    'Factors': ['Global Factors', 'USA Factors', 'India Factors'],
-    'Sectors': ['Global Sectors', 'USA Sectors', 'India Sectors'],
-}
-KIND_COLORS = {'Countries':'#36c5a0','Asset Classes':'#e3ac58','Factors':'#a99af7','Sectors':'#62a9e8'}
-STATUS_COLORS = {'Leading':'#39cf91','Improving':'#65a9ff','Weakening':'#eab45e','Lagging':'#ed7280','Unavailable':'#8794a6'}
+SOURCE_GROUPS = ['Countries','USA Assets','India Assets','Global Assets','USA Sectors','India Sectors','Global Sectors','USA Factors','India Factors','Global Factors']
 
-def graph_payload(layers, limit=8):
-    """Only link observed market instruments to their own source group; never infer cross-market relationships."""
-    nodes, links = [], []
-    for kind, sources in GROUPS.items():
-        available = [(s, layers[s]) for s in sources if s in layers and not layers[s].empty]
-        if not available:
+def graph_payload(layers):
+    nodes=[dict(id='global',label='GLOBAL',kind='root',parent=None,score=None)]
+    seen={'global'}
+    def add(id,label,kind,parent,score=None,ticker=None):
+        if id in seen:return
+        seen.add(id);nodes.append(dict(id=id,label=str(label),kind=kind,parent=parent,score=score,ticker=ticker))
+    add('countries','Countries','group','global')
+    add('global-sectors','Global Sectors','group','global')
+    add('global-factors','Global Factors','group','global')
+    def entries(source):
+        frame=layers.get(source)
+        if frame is None or frame.empty:return []
+        return frame.to_dict('records')
+    def score(r):
+        try:return max(0,min(100,float(r['Network Score'])))
+        except (TypeError,ValueError,KeyError):return None
+    def label(r):return str(r.get('Sector') or r.get('ETF') or 'Unknown')
+    def leaf(r,parent,source):
+        ticker=str(r.get('ETF','')).strip()
+        if ticker:add('etf:'+source+':'+ticker, ticker+' · '+label(r),'etf',parent,score(r),ticker)
+    for typ,source in [('sector','Global Sectors'),('factor','Global Factors')]:
+        parent='global-sectors' if typ=='sector' else 'global-factors'
+        for r in entries(source):
+            ticker=str(r.get('ETF','')).strip()
+            ident=typ+':global:'+ticker
+            add(ident,label(r),typ,parent,score(r))
+            leaf(r,ident,source)
+    country_records=entries('Countries')
+    for r in country_records:
+        ticker=str(r.get('ETF','')).strip()
+        name=label(r)
+        cid='country:'+ticker
+        add(cid,name,'country','countries',score(r),ticker)
+    # Only countries with dedicated country asset feeds receive further branches.
+    for country,terms,asset_source,sector_source,factor_source in [
+        ('USA',('united states','usa','u.s.'),'USA Assets','USA Sectors','USA Factors'),
+        ('India',('india',),'India Assets','India Sectors','India Factors')]:
+        matches=[n for n in nodes if n['kind']=='country' and any(t in n['label'].lower() for t in terms)]
+        if not matches:
+            # A country cannot be inferred from an arbitrary country proxy.
             continue
-        nodes.append({'id':'group:'+kind,'label':kind,'kind':'group','category':kind,'color':KIND_COLORS[kind], 'size':9})
-        for source, frame in available:
-            parent='group:'+kind
-            if len(available)>1:
-                parent='source:'+source
-                nodes.append({'id':parent,'label':source,'kind':'source','category':kind,'color':KIND_COLORS[kind],'size':5})
-                links.append({'source':'group:'+kind,'target':parent,'type':'contains'})
-            for _, row in frame.nlargest(limit,'Network Score').iterrows():
-                ticker=str(row.get('ETF','')).strip()
-                label=str(row.get('Sector',ticker)).strip() or ticker
-                quadrant=str(row.get('Quadrant','Unavailable'))
-                score=round(float(row['Network Score']),1)
-                ident=f'item:{source}:{ticker}'
-                nodes.append({'id':ident,'label':label,'ticker':ticker,'source':source,'kind':'market',
-                              'category':kind,'status':quadrant,'score':score,
-                              'color':KIND_COLORS[kind], 'statusColor':STATUS_COLORS.get(quadrant,STATUS_COLORS['Unavailable']),
-                              'size':3.0+score/45})
-                links.append({'source':parent,'target':ident,'type':'observed in'})
-    return {'nodes':nodes,'links':links}
+        cid=matches[0]['id'];assets='assets:'+country
+        add(assets,'Asset Classes','group',cid)
+        records=entries(asset_source)
+        equity=[];bond=[];cash=[];other=[]
+        for r in records:
+            text=label(r).lower()
+            if any(x in text for x in ('equit','stock','nifty','s&p 500','large cap','small cap')):equity.append(r)
+            elif any(x in text for x in ('bond','treasury','fixed income','government debt','corporate debt')):bond.append(r)
+            elif any(x in text for x in ('cash','t-bill','bill','money market','ultra-short','ultrashort')):cash.append(r)
+            else:other.append(r)
+        for name,group in [('Equity',equity),('Bonds',bond),('Cash',cash),('Other Assets',other)]:
+            if not group and name=='Other Assets':continue
+            scores=[score(r) for r in group if score(r) is not None]
+            aid='asset:'+country+':'+name
+            add(aid,name,'asset',assets,round(sum(scores)/len(scores),1) if scores else None)
+            if name=='Equity':
+                for typ,source in [('Sectors',sector_source),('Factors',factor_source)]:
+                    pid='branch:'+country+':'+typ
+                    add(pid,typ,'group',aid)
+                    for r in entries(source):
+                        ticker=str(r.get('ETF','')).strip()
+                        sid='strategy:'+country+':'+typ+':'+ticker
+                        add(sid,label(r),'sector' if typ=='Sectors' else 'factor',pid,score(r))
+                        leaf(r,sid,source)
+            else:
+                for r in group:leaf(r,aid,asset_source)
+    return {'nodes':nodes}
 
-HTML = r'''<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>
-*{box-sizing:border-box}html,body{margin:0;background:#06090e;color:#e8eef7;font:14px system-ui,Segoe UI,sans-serif}#shell{height:720px;min-height:520px;position:relative;overflow:hidden;background:#06090e;border:1px solid #263141;border-radius:12px}#canvas{width:100%;height:100%;display:block;touch-action:none;cursor:grab}#canvas.dragging{cursor:grabbing}#tools{position:absolute;top:12px;left:12px;right:12px;display:flex;gap:7px;flex-wrap:wrap;z-index:2;pointer-events:none}button,input{pointer-events:auto;background:#111b28;border:1px solid #334357;color:#e6edf6;border-radius:7px;padding:9px 11px;font:inherit}button{cursor:pointer}button:hover{background:#20334a}input{width:min(235px,45vw)}#details{position:absolute;right:12px;top:64px;width:260px;max-width:38%;max-height:62%;overflow:auto;padding:15px;background:#101923f2;border:1px solid #314154;border-radius:10px;z-index:2;box-shadow:0 12px 35px #0007}#details h3{margin:6px 0;font-size:18px;overflow-wrap:anywhere}#details p{color:#b2c0d0;line-height:1.5}#details small{color:#8ca1b6}#legend{position:absolute;bottom:12px;left:12px;right:12px;max-width:max-content;background:#101923ec;border:1px solid #304052;border-radius:7px;padding:8px 10px;font-size:12px;z-index:2;line-height:2}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin:0 4px 0 10px}#notice{position:absolute;bottom:60px;left:16px;color:#91a2b5;font-size:12px;pointer-events:none}svg text{font-family:system-ui,Segoe UI,sans-serif;paint-order:stroke;stroke:#06090e;stroke-width:3px;stroke-linejoin:round;fill:#e2eaf4;font-size:13px;pointer-events:none}svg .edge{stroke:#506070;stroke-width:1;stroke-opacity:.36;pointer-events:none}svg .item{cursor:pointer}svg .item:focus{outline:none}svg .item:focus circle{stroke:white;stroke-width:3}svg .node{stroke:#09121c;stroke-width:2}svg .status{stroke:#06090e;stroke-width:1}#close{float:right;padding:1px 7px}@media(max-width:700px){#shell{height:640px}#details{top:auto;bottom:70px;right:8px;max-width:none;width:min(300px,75%);max-height:36%;padding:10px}#legend{font-size:10px;max-width:96%}#notice{display:none}button,input{padding:7px;font-size:12px}}
-</style></head><body><div id="shell"><div id="tools"><input id="search" placeholder="Search country, factor, ETF…" aria-label="Search nodes"><button id="fit">Fit</button><button id="expand">Expand all</button><button id="collapse">Collapse</button><button id="reset">Reset</button><button id="zoomIn">＋</button><button id="zoomOut">−</button></div><svg id="canvas" role="img" aria-label="Interactive market relationship knowledge graph" tabindex="0"><g id="viewport"><g id="edges"></g><g id="nodes"></g></g></svg><aside id="details"><button id="close" aria-label="Close details">×</button><small>MARKET KNOWLEDGE GRAPH</small><h3 id="title">Explore market relationships</h3><p id="info">Select a node to highlight its verified connections. Click a category to expand or collapse it.</p></aside><div id="notice">Drag to pan · Scroll to zoom · Select a node to focus</div><div id="legend">NODE TYPE <span class="dot" style="background:#36c5a0"></span>Countries <span class="dot" style="background:#e3ac58"></span>Assets <span class="dot" style="background:#a99af7"></span>Factors <span class="dot" style="background:#62a9e8"></span>Sectors &nbsp; | &nbsp; STATUS <span class="dot" style="background:#39cf91"></span>Leading <span class="dot" style="background:#65a9ff"></span>Improving <span class="dot" style="background:#eab45e"></span>Weakening <span class="dot" style="background:#ed7280"></span>Lagging</div></div><script>
-(()=>{'use strict';const data=__PAYLOAD__,svg=document.getElementById('canvas'),vp=document.getElementById('viewport'),edges=document.getElementById('edges'),nodes=document.getElementById('nodes');const byId=new Map(data.nodes.map(n=>[n.id,n]));const children=new Map(),parents=new Map();for(const l of data.links){if(!children.has(l.source))children.set(l.source,[]);children.get(l.source).push(l.target);parents.set(l.target,l.source)}const groups=data.nodes.filter(n=>n.kind==='group');const expanded=new Set(groups.map(n=>n.id));let selected=null,scale=1,tx=0,ty=0,drag=false,moved=false,lastX=0,lastY=0;const NS='http://www.w3.org/2000/svg';const elem=(tag,attrs)=>{let el=document.createElementNS(NS,tag);for(const [k,v] of Object.entries(attrs||{}))el.setAttribute(k,v);return el};function visible(){const ids=new Set(groups.map(n=>n.id));for(let i=0;i<4;i++)for(const l of data.links)if(ids.has(l.source)&&expanded.has(l.source))ids.add(l.target);return ids}function layout(ids){
-  const w=svg.clientWidth||1000,h=svg.clientHeight||720;
-  const positions=new Map();
-  // Four balanced category regions; each source and market leaf gets its own orbit.
-  const centers=[[w*.26,h*.32],[w*.69,h*.32],[w*.26,h*.69],[w*.69,h*.69]];
-  const cats=groups.filter(n=>ids.has(n.id));
-  cats.forEach((g,i)=>{
-    const [gx,gy]=centers[i%4];positions.set(g.id,[gx,gy]);
-    const kids=(children.get(g.id)||[]).filter(id=>ids.has(id));
-    const angle0=-Math.PI/2;
-    kids.forEach((id,j)=>{
-      const a=angle0+2*Math.PI*j/Math.max(kids.length,1);
-      const r=kids.length>5?Math.min(w*.16,145):Math.min(w*.13,110);
-      const sx=gx+Math.cos(a)*r,sy=gy+Math.sin(a)*r;
-      positions.set(id,[sx,sy]);
-      const grand=(children.get(id)||[]).filter(x=>ids.has(x));
-      grand.forEach((cid,k)=>{
-        const aa=a+(k-(grand.length-1)/2)*Math.min(.32,2.8/Math.max(grand.length,1));
-        const rr=120+Math.floor(k/8)*48;
-        positions.set(cid,[sx+Math.cos(aa)*rr,sy+Math.sin(aa)*rr]);
-      });
-    });
-  });
-  // Repel overlapping label boxes, not merely overlapping circles.
-  const entries=[...positions.entries()];
-  const sizes=new Map(entries.map(([id])=>{const n=byId.get(id);return [id,[Math.min(220,32+(n.label||'').length*6.7),n.kind==='group'?39:27]]}));
-  for(let pass=0;pass<125;pass++){
-    for(let i=0;i<entries.length;i++)for(let j=i+1;j<entries.length;j++){
-      const [idA,pa]=entries[i],[idB,pb]=entries[j];
-      const [wa,ha]=sizes.get(idA),[wb,hb]=sizes.get(idB);
-      const dx=pb[0]-pa[0],dy=pb[1]-pa[1];
-      const ox=(wa+wb)*.5+14-Math.abs(dx),oy=(ha+hb)*.5+9-Math.abs(dy);
-      if(ox>0&&oy>0){
-        const signX=dx===0?(i%2?1:-1):Math.sign(dx),signY=dy===0?(j%2?1:-1):Math.sign(dy);
-        const weightA=byId.get(idA).kind==='group'?.10:.48;
-        const weightB=byId.get(idB).kind==='group'?.10:.48;
-        if(ox<oy*2){pa[0]-=signX*ox*weightA;pb[0]+=signX*ox*weightB}
-        else{pa[1]-=signY*oy*weightA;pb[1]+=signY*oy*weightB}
-      }
-    }
-  }
-  return positions;
-}function transform(){vp.setAttribute('transform',`translate(${tx} ${ty}) scale(${scale})`)}function focus(id){selected=id;const n=byId.get(id);document.getElementById('title').textContent=n.label;document.getElementById('info').textContent=[n.category,n.status?`Status: ${n.status}`:null,Number.isFinite(n.score)?`Leadership score: ${n.score}`:null,n.source?`Source: ${n.source}`:null,n.ticker?`Ticker: ${n.ticker}`:null,'Connections show source-category membership, not capital flows or holdings.'].filter(Boolean).join(' · ');draw()}function draw(){edges.replaceChildren();nodes.replaceChildren();const ids=visible(),pos=layout(ids),neighbors=new Set([selected]);if(selected){for(const l of data.links)if(l.source===selected)neighbors.add(l.target);else if(l.target===selected)neighbors.add(l.source)}for(const l of data.links){if(!ids.has(l.source)||!ids.has(l.target)||!pos.has(l.source)||!pos.has(l.target))continue;const [x1,y1]=pos.get(l.source),[x2,y2]=pos.get(l.target),line=elem('line',{x1,y1,x2,y2,class:'edge'});if(selected){line.style.strokeOpacity=(l.source===selected||l.target===selected)?'.95':'.08';line.style.strokeWidth=(l.source===selected||l.target===selected)?'2':'1'}edges.append(line)}for(const n of data.nodes){if(!ids.has(n.id)||!pos.has(n.id))continue;const [x,y]=pos.get(n.id),group=elem('g',{class:'item',tabindex:'0',role:'button','aria-label':n.label,transform:`translate(${x} ${y})`}),r=n.kind==='group'?15:n.kind==='source'?10:6;group.style.opacity=selected&&!neighbors.has(n.id)?'.24':'1';group.append(elem('circle',{r:r+4,fill:'none',stroke:n.statusColor||n.color,'stroke-width':n.kind==='market'?2:1,'stroke-opacity':'.85'}));group.append(elem('circle',{r,class:'node',fill:n.color}));const showLabel=true; if(showLabel){const label=elem('text',{x:r+9,y:4});label.textContent=n.label;group.append(label)}group.addEventListener('click',e=>{e.stopPropagation();if(moved)return;if(n.kind==='group'||n.kind==='source'){expanded.has(n.id)?expanded.delete(n.id):expanded.add(n.id)}focus(n.id)});group.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();group.dispatchEvent(new Event('click'))}});const title=elem('title');title.textContent=n.label+(n.status?' — '+n.status:'');group.append(title);nodes.append(group)}}function fit(){const ids=visible(),p=layout(ids),coords=[...p.values()];if(!coords.length)return;const xs=coords.map(x=>x[0]),ys=coords.map(x=>x[1]);const minx=Math.min(...xs)-70,maxx=Math.max(...xs)+260,miny=Math.min(...ys)-85,maxy=Math.max(...ys)+90;const w=svg.clientWidth,h=svg.clientHeight;scale=Math.min(1.4,Math.max(.35,Math.min((w-35)/(maxx-minx),(h-155)/(maxy-miny))));tx=w/2-scale*(minx+maxx)/2;ty=h/2-scale*(miny+maxy)/2;transform()}function zoom(mult){scale=Math.min(4,Math.max(.3,scale*mult));transform()}svg.addEventListener('pointerdown',e=>{if(e.target.closest('.item'))return;drag=true;moved=false;lastX=e.clientX;lastY=e.clientY;svg.setPointerCapture(e.pointerId);svg.classList.add('dragging')});svg.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-lastX,dy=e.clientY-lastY;if(Math.abs(dx)+Math.abs(dy)>2)moved=true;tx+=dx;ty+=dy;lastX=e.clientX;lastY=e.clientY;transform()});svg.addEventListener('pointerup',()=>{drag=false;svg.classList.remove('dragging');setTimeout(()=>moved=false,50)});svg.addEventListener('wheel',e=>{e.preventDefault();zoom(e.deltaY<0?1.12:1/1.12)},{passive:false});document.getElementById('zoomIn').onclick=()=>zoom(1.25);document.getElementById('zoomOut').onclick=()=>zoom(.8);document.getElementById('fit').onclick=fit;document.getElementById('expand').onclick=()=>{data.nodes.filter(n=>n.kind==='group'||n.kind==='source').forEach(n=>expanded.add(n.id));draw();fit()};document.getElementById('collapse').onclick=()=>{expanded.clear();selected=null;draw();fit()};document.getElementById('reset').onclick=()=>{selected=null;expanded.clear();groups.forEach(n=>expanded.add(n.id));draw();fit()};document.getElementById('close').onclick=()=>{selected=null;document.getElementById('title').textContent='Explore market relationships';document.getElementById('info').textContent='Select a node to highlight its verified connections.';draw()};document.getElementById('search').addEventListener('input',e=>{const q=e.target.value.toLowerCase().trim();if(!q){selected=null;draw();return}const match=data.nodes.find(n=>n.label.toLowerCase().includes(q)||(n.ticker||'').toLowerCase().includes(q));if(match){let p=parents.get(match.id);while(p){expanded.add(p);p=parents.get(p)}focus(match.id)}});let resizeTimer;new ResizeObserver(()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{draw();fit()},100)}).observe(svg);draw();fit();})();
+HTML=r'''<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>
+*{box-sizing:border-box}html,body{margin:0;background:#050608;color:#f0f0f0;font-family:system-ui,Arial,sans-serif}#app{position:relative;height:740px;width:100%;background:#050608;border:1px solid #25282d;border-radius:12px;overflow:hidden}svg{width:100%;height:100%;touch-action:none;cursor:grab}svg:active{cursor:grabbing}line{stroke:#6a6c73;stroke-opacity:.48;stroke-width:1.25}circle{fill:#a6a8ac;stroke:#f1f1f1;stroke-opacity:.85;stroke-width:1.2;cursor:pointer}circle:hover{fill:#fff}#bar{position:absolute;top:12px;left:12px;right:12px;display:flex;flex-wrap:wrap;gap:8px;z-index:2;pointer-events:none}button,input{pointer-events:auto;border:1px solid #444952;background:#14171c;color:white;border-radius:7px;padding:9px;font:13px system-ui}button{cursor:pointer}input{min-width:160px;max-width:240px;flex:1}#tip{display:none;position:absolute;pointer-events:none;background:#1b1e24;border:1px solid #62666d;border-radius:8px;padding:10px 13px;font-size:13px;z-index:4;max-width:290px;box-shadow:0 6px 30px #0009}#tip strong{display:block;font-size:15px;margin-bottom:5px}#note{position:absolute;bottom:10px;left:12px;color:#9b9ea6;font-size:12px;pointer-events:none}#empty{position:absolute;top:65px;left:15px;color:#b7bbc2;font-size:12px} @media(max-width:600px){#app{height:610px}button,input{font-size:12px;padding:7px}#note{font-size:10px}}
+</style></head><body><div id="app"><div id="bar"><input id="search" placeholder="Find a country, asset, sector, factor, ETF" aria-label="Find node"><button id="fit">Auto fit</button><button id="open">Expand all</button><button id="close">Collapse</button><button id="plus">+</button><button id="minus">−</button></div><svg id="svg" aria-label="Expandable hierarchical market knowledge graph"><g id="view"><g id="lines"></g><g id="dots"></g></g></svg><div id="tip"></div><div id="note">Click circles to expand · Hover for name, performance and size · Drag to pan · Scroll to zoom</div></div><script>
+(()=>{'use strict';const data=__PAYLOAD__,items=new Map(data.nodes.map(n=>[n.id,n])),children=new Map(),parent=new Map();for(const n of data.nodes){if(n.parent){if(!children.has(n.parent))children.set(n.parent,[]);children.get(n.parent).push(n.id);parent.set(n.id,n.parent)}}const svg=document.getElementById('svg'),view=document.getElementById('view'),dots=document.getElementById('dots'),lines=document.getElementById('lines'),tip=document.getElementById('tip'),app=document.getElementById('app');const NS='http://www.w3.org/2000/svg';let expanded=new Set(['global']),scale=1,tx=0,ty=0,positions=new Map(),drag=false,oldX=0,oldY=0;function el(tag,attrs){const e=document.createElementNS(NS,tag);for(const [k,v] of Object.entries(attrs||{}))e.setAttribute(k,v);return e}function visible(){const result=[];function walk(id,depth){result.push({id,depth});if(expanded.has(id))for(const c of children.get(id)||[])walk(c,depth+1)}walk('global',0);return result}function radius(n){const w=svg.clientWidth||900,h=svg.clientHeight||700;const responsive=Math.max(.72,Math.min(1.3,Math.sqrt(w*h/(1100*740))));const density=Math.max(.7,Math.min(1,Math.sqrt(35/Math.max(visible().length,1))));return (n.score===null||n.score===undefined?9:6+Math.sqrt(Math.max(0,n.score)/100)*17)*responsive*density}function layout(rows){const byDepth=new Map();for(const row of rows){if(!byDepth.has(row.depth))byDepth.set(row.depth,[]);byDepth.get(row.depth).push(row.id)}const maxDepth=Math.max(...byDepth.keys()),w=svg.clientWidth||900,h=svg.clientHeight||740;const dx=Math.max(150,Math.min(230,w/Math.max(2,maxDepth+1)));const coords=new Map();let nextY=0;function assign(id,depth){const kids=(expanded.has(id)?children.get(id)||[]:[]).filter(k=>rows.some(x=>x.id===k));if(!kids.length){coords.set(id,[depth*dx,nextY*65]);nextY++;return}for(const k of kids)assign(k,depth+1);const ys=kids.map(k=>coords.get(k)[1]);coords.set(id,[depth*dx,(Math.min(...ys)+Math.max(...ys))/2])}assign('global',0);return coords}function transform(){view.setAttribute('transform',`translate(${tx} ${ty}) scale(${scale})`)}function fit(){const rows=visible();positions=layout(rows);const xs=[...positions.values()].map(p=>p[0]),ys=[...positions.values()].map(p=>p[1]);const minX=Math.min(...xs)-40,maxX=Math.max(...xs)+60,minY=Math.min(...ys)-40,maxY=Math.max(...ys)+40;const w=svg.clientWidth,h=svg.clientHeight;scale=Math.min(1.7,Math.max(.12,Math.min((w-55)/(maxX-minX||1),(h-125)/(maxY-minY||1))));tx=w/2-scale*(minX+maxX)/2;ty=h/2-scale*(minY+maxY)/2;transform()}function showTip(e,n){tip.style.display='block';tip.innerHTML='';const title=document.createElement('strong');title.textContent=n.label;tip.append(title);const text=document.createElement('div');text.textContent=(n.score===null||n.score===undefined?'Performance: unavailable':'Performance: '+n.score.toFixed(1)+'/100')+' · Circle diameter: '+Math.round(radius(n)*2)+' px'+(n.ticker?' · ETF: '+n.ticker:'');tip.append(text);const r=app.getBoundingClientRect();tip.style.left=Math.max(8,Math.min(e.clientX-r.left+15,r.width-305))+'px';tip.style.top=Math.max(58,Math.min(e.clientY-r.top+12,r.height-95))+'px'}function draw(refit=true){tip.style.display='none';dots.replaceChildren();lines.replaceChildren();const rows=visible(),ids=new Set(rows.map(r=>r.id));positions=layout(rows);for(const n of data.nodes){if(!ids.has(n.id)||!n.parent||!ids.has(n.parent))continue;const [x1,y1]=positions.get(n.parent),[x2,y2]=positions.get(n.id);lines.append(el('line',{x1,y1,x2,y2}))}for(const row of rows){const n=items.get(row.id),[x,y]=positions.get(n.id),g=el('g',{transform:`translate(${x} ${y})`,tabindex:'0',role:'button','aria-label':n.label}),circle=el('circle',{r:radius(n)});g.append(circle);g.addEventListener('mouseenter',e=>showTip(e,n));g.addEventListener('mousemove',e=>showTip(e,n));g.addEventListener('mouseleave',()=>tip.style.display='none');const click=()=>{if(!children.has(n.id))return;expanded.has(n.id)?expanded.delete(n.id):expanded.add(n.id);draw(true)};g.addEventListener('click',click);g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();click()}});dots.append(g)}if(refit)fit()}document.getElementById('fit').onclick=fit;document.getElementById('open').onclick=()=>{expanded=new Set(data.nodes.map(n=>n.id));draw()};document.getElementById('close').onclick=()=>{expanded=new Set(['global']);draw()};function zoom(f){scale=Math.max(.1,Math.min(5,scale*f));transform()}document.getElementById('plus').onclick=()=>zoom(1.25);document.getElementById('minus').onclick=()=>zoom(.8);document.getElementById('search').oninput=e=>{const q=e.target.value.toLowerCase().trim();if(!q)return;const n=data.nodes.find(n=>n.label.toLowerCase().includes(q)||(n.ticker||'').toLowerCase().includes(q));if(!n)return;let p=n.parent;while(p){expanded.add(p);p=parent.get(p)}draw();const xy=positions.get(n.id);if(xy){tx=svg.clientWidth/2-xy[0]*scale;ty=svg.clientHeight/2-xy[1]*scale;transform()}};svg.addEventListener('pointerdown',e=>{if(e.target.closest('g[role="button"]'))return;drag=true;oldX=e.clientX;oldY=e.clientY;svg.setPointerCapture(e.pointerId)});svg.addEventListener('pointermove',e=>{if(!drag)return;tx+=e.clientX-oldX;ty+=e.clientY-oldY;oldX=e.clientX;oldY=e.clientY;transform()});svg.addEventListener('pointerup',()=>drag=false);svg.addEventListener('wheel',e=>{e.preventDefault();zoom(e.deltaY<0?1.12:.89)},{passive:false});let timer;new ResizeObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>draw(true),140)}).observe(svg);draw()})();
 </script></body></html>'''
 
 def render():
     from capital_network import fetch_layer
     import country_market_data
     st.title('Global Market Intelligence · Knowledge Graph')
-    st.caption('Auto-scaling 2D market relationships · no company nodes or constituent holdings · peer-relative scores, not capital flows')
-    a,b,c=st.columns([2,2,1])
-    with a: groups=st.multiselect('Node categories',list(GROUPS),default=list(GROUPS))
-    with b: lookback=st.select_slider('Relative strength period',options=list(country_market_data.LOOKBACKS),value='3M')
-    with c: top=st.selectbox('Markets per source',[5,8,12,20],index=1)
-    period=st.date_input('Observation dates',value=(date.today()-timedelta(days=365),date.today()),max_value=date.today())
+    st.caption('Global → Countries → Assets → Equity / Bonds / Cash; plus independent Global Sectors and Global Factors. Circle area indicates relative performance; no companies or holdings.')
+    a,b=st.columns(2)
+    with a: lookback=st.select_slider('Relative strength period',options=list(country_market_data.LOOKBACKS),value='3M')
+    with b: period=st.date_input('Observation dates',value=(date.today()-timedelta(days=365),date.today()),max_value=date.today())
     if not isinstance(period,(tuple,list)) or len(period)!=2 or period[0]>=period[1]:
         st.info('Select a valid start and end date.');return
     layers,errors={},{}
-    with st.spinner('Loading verified market observations…'):
-        for group in groups:
-            for source in GROUPS[group]:
-                try:layers[source],_=fetch_layer(source,period[0],period[1],lookback)
-                except Exception as exc:errors[source]=str(exc)
-    payload=graph_payload(layers,top)
-    if not payload['nodes']:
-        st.warning('No verified market data is available for the selected filters.');return
-    st.caption(f"{len(payload['nodes'])} nodes · {len(payload['links'])} verified category relationships · click categories to expand/collapse")
-    components.html(HTML.replace('__PAYLOAD__',json.dumps(payload).replace('</','<\\/')),height=750,scrolling=False)
+    with st.spinner('Loading market observations…'):
+        for source in SOURCE_GROUPS:
+            try:layers[source],_=fetch_layer(source,period[0],period[1],lookback)
+            except Exception as exc:errors[source]=str(exc)
+    payload=graph_payload(layers)
+    st.caption(f"{len(payload['nodes'])} available graph nodes · Click to expand branches · Hover to inspect scores")
+    components.html(HTML.replace('__PAYLOAD__',json.dumps(payload).replace('</','<\\/')),height=760,scrolling=False)
     if errors:
-        with st.expander(f'Unavailable market sources ({len(errors)})'):
-            for source,error in errors.items():st.caption(f'{source}: {error}')
-    st.caption('Connections indicate verified market-series membership in a source category. ETF price proxies do not establish fund holdings or company relationships. Rendered with native SVG; no external JavaScript libraries or 3D renderer.')
+        with st.expander(f'Unavailable data sources ({len(errors)})'):
+            for name,error in errors.items():st.caption(f'{name}: {error}')
+    st.caption('Country branches are shown only where country-specific sources exist. ETF labels represent source instruments, not holdings. Global factor and sector scores remain independent of USA scores.')
