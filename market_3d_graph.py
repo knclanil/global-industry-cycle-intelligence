@@ -50,36 +50,46 @@ button{cursor:pointer}button:hover{background:#223043}button.active{border-color
 #detail h3{margin:0 0 7px;font-size:18px;overflow-wrap:anywhere}#detail small{color:#a6b5c5}#detail .stat{font-size:24px;font-weight:700;margin:8px 0}#detail .tag{display:inline-block;border-radius:5px;padding:2px 7px;background:#263243;margin:3px 3px 3px 0}
 #legend{position:absolute;bottom:14px;left:16px;z-index:2;background:#0b111ad9;border:1px solid #293645;border-radius:8px;padding:10px;color:#c5d0dc;font-size:12px}
 .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin:0 5px 0 10px}#hint{position:absolute;bottom:60px;left:18px;color:#94a6ba;font-size:12px;pointer-events:none}
-#fallback{position:absolute;inset:25% 15%;text-align:center;color:#c5d0dc;display:none}
+#fallback{position:absolute;inset:65px 10px 70px;display:none;background:#05070b;color:#c5d0dc;overflow:auto;z-index:1}#fallback svg{width:100%;height:100%;min-height:450px}#fallback .node{cursor:pointer}#fallback text{fill:#dce6f0;font-size:13px;paint-order:stroke;stroke:#05070b;stroke-width:3px}
 @media(max-width:900px){#bar{max-width:calc(100% - 20px);right:10px}#detail{top:auto;bottom:65px;width:260px;max-height:45%;overflow:auto}#legend{max-width:65%;line-height:2}#hint{display:none}}
 </style></head><body><div id="wrap"><div id="graph"></div>
 <div id="bar"><input id="search" placeholder="Find a market node..." aria-label="Search market nodes"><button id="reset">Reset view</button><button id="expand">Expand all</button><button id="fit">Fit graph</button></div>
 <aside id="detail"><small>MARKET KNOWLEDGE GRAPH</small><h3 id="name">Select a node</h3><div id="description">Click a circle to focus on its verified relationships. Drag to rotate; scroll to zoom.</div></aside>
 <div id="hint">Drag to rotate · Scroll to zoom · Click to focus · Double-click a group to expand/collapse</div>
 <div id="legend">NODE TYPES <span class="dot" style="background:#36c5a0"></span>Countries <span class="dot" style="background:#e3ac58"></span>Assets <span class="dot" style="background:#a99af7"></span>Factors <span class="dot" style="background:#62a9e8"></span>Sectors<br>MARKET STATUS <span class="dot" style="background:#39cf91"></span>Leading <span class="dot" style="background:#65a9ff"></span>Improving <span class="dot" style="background:#eab45e"></span>Weakening <span class="dot" style="background:#ed7280"></span>Lagging</div>
-<div id="fallback">The interactive 3D renderer could not load. Check whether your browser or network blocks the external JavaScript library.</div></div>
+<div id="fallback"></div></div>
 <script>const PAYLOAD=__PAYLOAD__;</script>
-<script src="https://unpkg.com/three@0.149.0/build/three.min.js"></script>
-<script src="https://unpkg.com/three-spritetext@1.9.3/dist/three-spritetext.min.js"></script>
-<script src="https://unpkg.com/3d-force-graph@1.73.4/dist/3d-force-graph.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/3d-force-graph@1.73.4/dist/3d-force-graph.min.js"></script>
 <script>
 (function(){
-if(typeof THREE==='undefined'||typeof ForceGraph3D==='undefined'||typeof SpriteText==='undefined'){document.getElementById('fallback').style.display='block';return;}
+function showFallback(message){
+ const box=document.getElementById('fallback');box.style.display='block';
+ const nodes=PAYLOAD.nodes,links=PAYLOAD.links;
+ const width=1100,height=620,categories=[...new Set(nodes.map(n=>n.category))];
+ const positions=new Map();let circles='',labels='',edges='';
+ categories.forEach((cat,i)=>{const group=nodes.filter(n=>n.category===cat);const x=120+(i+.5)*860/Math.max(categories.length,1);
+ group.forEach((n,j)=>{const y=70+(j+.5)*490/Math.max(group.length,1);positions.set(n.id,[x+(n.kind==='group'?-60:0),y]);});});
+ links.forEach(l=>{const a=positions.get(l.source),b=positions.get(l.target);if(a&&b)edges+=`<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="#344252" stroke-width="1"/>`;});
+ nodes.forEach(n=>{const p=positions.get(n.id);if(!p)return;circles+=`<circle class="node" data-id="${n.id}" cx="${p[0]}" cy="${p[1]}" r="${n.kind==='group'?10:5}" fill="${n.color}"/>`;labels+=`<text x="${p[0]+14}" y="${p[1]+4}">${n.label.replace(/&/g,'&amp;').replace(/</g,'&lt;')}</text>`;});
+ box.innerHTML=`<div style="padding:8px 16px;color:#f0bf7d">${message}</div><svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Market relationship map">${edges}${circles}${labels}</svg>`;
+ box.querySelectorAll('.node').forEach(el=>el.addEventListener('click',()=>{const n=nodes.find(n=>n.id===el.dataset.id);document.getElementById('name').textContent=n.label;document.getElementById('description').textContent=n.status?`${n.status} · score ${n.score}`:n.category;}));
+}
+window.addEventListener('error',e=>{if(!document.querySelector('#graph canvas'))showFallback('3D rendering error: '+e.message);});
+if(typeof ForceGraph3D==='undefined'){showFallback('3D library unavailable. Showing an interactive 2D relationship map instead.');return;}
 const allNodes=PAYLOAD.nodes,allLinks=PAYLOAD.links, byId=new Map(allNodes.map(n=>[n.id,n]));
 const expanded=new Set(allNodes.filter(n=>n.kind==='group').map(n=>n.id));let selected=null;
 const endpoint=x=>typeof x==='object'?x.id:x;
 function visible(){let ids=new Set(allNodes.filter(n=>n.kind==='group').map(n=>n.id));
 for(let pass=0;pass<3;pass++){for(const l of allLinks){const p=endpoint(l.source),c=endpoint(l.target);if(ids.has(p)&&expanded.has(p))ids.add(c)}}
 return {nodes:allNodes.filter(n=>ids.has(n.id)).map(n=>({...n})),links:allLinks.filter(l=>ids.has(endpoint(l.source))&&ids.has(endpoint(l.target))).map(l=>({source:endpoint(l.source),target:endpoint(l.target)}))};}
-const el=document.getElementById('graph');let graph;try{graph=ForceGraph3D()(el)}catch(err){document.getElementById('fallback').style.display='block';document.getElementById('fallback').textContent='3D initialization failed: '+err.message;return;}graph.backgroundColor('#05070b').showNavInfo(false)
+const el=document.getElementById('graph');let graph;try{graph=ForceGraph3D()(el)}catch(err){showFallback('3D initialization failed: '+err.message);return;}graph.backgroundColor('#05070b').showNavInfo(false)
  .nodeRelSize(3).nodeVal(n=>n.size||4).nodeColor(n=>n.color).nodeOpacity(.92)
  .linkColor(l=>selected&&(endpoint(l.source)===selected||endpoint(l.target)===selected)?'#9eafc6':'#38414d')
  .linkOpacity(.36).linkWidth(l=>selected&&(endpoint(l.source)===selected||endpoint(l.target)===selected)?1.7:.55)
- .nodeThreeObjectExtend(true).nodeThreeObject(n=>{if(n.kind==='market'&&!selected)return false;
- const s=new SpriteText(n.label);s.color=n.id===selected?'#ffffff':'#c6d2de';s.textHeight=n.kind==='group'?5.6:n.kind==='source'?3.5:2.5;s.backgroundColor='#05070bc9';s.padding=2;s.position.set(0,(n.size||4)+5,0);return s;})
+ .nodeLabel(n=>n.label+(n.status?' · '+n.status:''))
  .onNodeClick(n=>{selected=n.id;document.getElementById('name').textContent=n.label;
  document.getElementById('description').innerHTML='<div class="tag">'+n.category+'</div>'+(n.status?'<div class="stat" style="color:'+n.statusColor+'">'+n.score+' / 100</div><div>Status: '+n.status+'</div>':'')+(n.source?'<div>Data source: '+n.source+'</div>':'')+(n.ticker?'<div>Market ticker: '+n.ticker+'</div>':'')+'<p style="color:#9faebd">Connections represent source membership, not fund flows or holdings.</p>';
- graph.linkColor(graph.linkColor()).nodeThreeObject(graph.nodeThreeObject());const d=1+95/Math.hypot(n.x||1,n.y||1,n.z||1);graph.cameraPosition({x:n.x*d,y:n.y*d,z:n.z*d},n,900);})
+ graph.linkColor(graph.linkColor());const d=1+95/Math.hypot(n.x||1,n.y||1,n.z||1);graph.cameraPosition({x:n.x*d,y:n.y*d,z:n.z*d},n,900);})
  .onNodeDblClick(n=>{if(n.kind==='group'||n.kind==='source'){expanded.has(n.id)?expanded.delete(n.id):expanded.add(n.id);refresh();}});
 function refresh(){graph.graphData(visible());graph.d3Force('charge').strength(-125);graph.d3Force('link').distance(l=>byId.get(endpoint(l.source))?.kind==='group'?85:44);}
 refresh();setTimeout(()=>graph.zoomToFit(650,65),1300);
