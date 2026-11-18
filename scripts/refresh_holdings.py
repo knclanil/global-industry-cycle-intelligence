@@ -47,19 +47,37 @@ DATE_PATTERNS = [
 ]
 
 def _metadata_date(rows):
-    for row in rows:
-        cells = [str(v).strip() for v in row]
+    """Read issuer-declared dates from CSV cells, including split metadata rows."""
+    labels = {'fundholdingsasof', 'holdingsasof', 'asofdate',
+              'holdingsdate', 'dataasof', 'effectivedate', 'portfoliodate'}
+    for row_idx, row in enumerate(rows):
+        cells = [str(v).replace('\ufeff', '').strip() for v in row]
         for i, cell in enumerate(cells):
-            if _norm(cell) in {'fundholdingsasof','holdingsasof','asofdate','holdingsdate','dataasof','effectivedate','portfoliodate'}:
-                for next_cell in cells[i+1:i+3]:
-                    result = _date(next_cell)
-                    if result: return result
+            normalized = _norm(cell)
+            if normalized in labels:
+                candidates = cells[i+1:]
+                # Some exported files put the value in the next physical row.
+                if not any(v.strip() for v in candidates) and row_idx + 1 < len(rows):
+                    candidates += [str(v).strip() for v in rows[row_idx + 1]]
+                for candidate in candidates:
+                    result = _date(candidate)
+                    if result:
+                        return result
+            # A metadata label and date can share a single CSV cell.
+            if any(normalized.startswith(label) for label in labels):
+                for pattern in DATE_PATTERNS:
+                    match = pattern.search(cell)
+                    if match:
+                        result = _date(match.group(1))
+                        if result:
+                            return result
         joined = ' '.join(c for c in cells if c)
         for pattern in DATE_PATTERNS:
             match = pattern.search(joined)
             if match:
                 result = _date(match.group(1))
-                if result: return result
+                if result:
+                    return result
     return None
 
 def _header_index(rows):
@@ -138,6 +156,11 @@ def _safe_diagnostic(pid, response=None, error=None):
             decoded=body.decode('utf-16' if body.startswith((b'\xff\xfe',b'\xfe\xff')) else 'utf-8-sig',errors='replace')
             lines=decoded.splitlines()[:12]
             details['metadata_labels']=[re.sub(r'[^a-zA-Z ]','',line.split(',')[0])[:65] for line in lines if line.strip()][:10]
+            for row in csv.reader(io.StringIO(decoded, newline='')):
+                if row and _norm(row[0]) == 'fundholdingsasof':
+                    details['holdings_date_raw'] = [str(v)[:60] for v in row[1:3]]
+                    details['holdings_date_parsed'] = _metadata_date([row])
+                    break
         except Exception: pass
     # Never upload raw HTML response, URL query strings or response cookies.
     (path / f'{pid}.json').write_text(json.dumps(details, indent=2), encoding='utf-8')
