@@ -101,3 +101,7 @@ The **Data Table** sidebar page shows source-returned daily OHLCV and adjusted-c
 
 ### India government-bond fallback and Data Table provenance
 India Asset Flow uses logical key `NIFTY_GSEC_10Y` for government bonds. It attempts an NSE 10-year benchmark G-Sec index via NSEPythonServer, then direct NSE history; if unavailable, it uses `SETF10GILT.NS` only when Yahoo returns valid history. No index/ETF stitching or forward-fill occurs. Check Data Table → India Asset Flow for source, instrument type, return basis, fallback flag, and underlying symbol. NSE index **price returns** and ETF **adjusted-close returns** are not identical methodologies. Live NSE availability is not guaranteed.
+
+## Worked calculation examples in the Wiki
+
+Open **Wiki** in the application and select any dashboard. Every dashboard's Wiki now includes a step-by-step numerical walkthrough of relative price ratio, relative strength, momentum, quadrant classification, selected-period excess return, and zero-based trends. Asset Flow pages additionally explain the Market Regime heuristic and the difference between price rotation and verified fund flows. These are illustrative calculations, not live data.
