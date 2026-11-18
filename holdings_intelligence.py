@@ -212,6 +212,22 @@ def render_leadership_tab(st, region, ranking, holdings):
                             filtered.ticker.astype(str).str.contains(query,case=False,regex=False)]
     if state != 'All': filtered = filtered[filtered['Leadership state'] == state]
     display = ranking_display_table(filtered, region_holdings, region=region)
+    # Factor types are derived only from the current region's verified factor ETF titles.
+    # Do not mix Global Factor exposures with USA Factor exposures.
+    factor_category = 'factor' if region == 'USA' else 'global_factor'
+    factor_positions = region_holdings[region_holdings.category == factor_category].copy()
+    if not factor_positions.empty and {'issuer_id', 'fund_title', 'group'}.issubset(factor_positions.columns):
+        factor_positions['factor_type'] = [
+            display_strategy(title, group)
+            for title, group in zip(factor_positions.fund_title, factor_positions.group)
+        ]
+        factor_types = factor_positions.groupby('issuer_id')['factor_type'].agg(
+            lambda values: ', '.join(sorted({str(v) for v in values if v and v != 'Other / Unclassified'}))
+            or 'Other / Unclassified'
+        )
+        display['Factor'] = filtered.issuer_id.map(factor_types).fillna('Not held in factor funds').values
+    else:
+        display['Factor'] = 'Not provided'
     # Older ranking snapshots predate the country/sector fields. Enrich from
     # verified holdings without mixing USA and Global exposure universes.
     if 'Country' not in display.columns or 'Sector' not in display.columns:
@@ -222,7 +238,7 @@ def render_leadership_tab(st, region, ranking, holdings):
                     display[label] = filtered.issuer_id.map(lookup[source]).fillna('Not provided').values
                 else:
                     display[label] = 'Not provided'
-    ordered = ['Rank','Company','Ticker','Country','Sector']
+    ordered = ['Rank','Company','Ticker','Country','Sector','Factor']
     display = display[[c for c in ordered if c in display.columns] + [c for c in display.columns if c not in ordered]]
     st.dataframe(display.head(top), hide_index=True, use_container_width=True)
     st.download_button(f'Download {region} rankings CSV', display.to_csv(index=False).encode(),
