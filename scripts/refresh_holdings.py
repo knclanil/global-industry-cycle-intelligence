@@ -10,7 +10,7 @@ import json
 import os
 import re
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 import pandas as pd
@@ -47,37 +47,19 @@ DATE_PATTERNS = [
 ]
 
 def _metadata_date(rows):
-    """Read issuer-declared dates from CSV cells, including split metadata rows."""
-    labels = {'fundholdingsasof', 'holdingsasof', 'asofdate',
-              'holdingsdate', 'dataasof', 'effectivedate', 'portfoliodate'}
-    for row_idx, row in enumerate(rows):
-        cells = [str(v).replace('\ufeff', '').strip() for v in row]
+    for row in rows:
+        cells = [str(v).strip() for v in row]
         for i, cell in enumerate(cells):
-            normalized = _norm(cell)
-            if normalized in labels:
-                candidates = cells[i+1:]
-                # Some exported files put the value in the next physical row.
-                if not any(v.strip() for v in candidates) and row_idx + 1 < len(rows):
-                    candidates += [str(v).strip() for v in rows[row_idx + 1]]
-                for candidate in candidates:
-                    result = _date(candidate)
-                    if result:
-                        return result
-            # A metadata label and date can share a single CSV cell.
-            if any(normalized.startswith(label) for label in labels):
-                for pattern in DATE_PATTERNS:
-                    match = pattern.search(cell)
-                    if match:
-                        result = _date(match.group(1))
-                        if result:
-                            return result
+            if _norm(cell) in {'fundholdingsasof','holdingsasof','asofdate','holdingsdate','dataasof','effectivedate','portfoliodate'}:
+                for next_cell in cells[i+1:i+3]:
+                    result = _date(next_cell)
+                    if result: return result
         joined = ' '.join(c for c in cells if c)
         for pattern in DATE_PATTERNS:
             match = pattern.search(joined)
             if match:
                 result = _date(match.group(1))
-                if result:
-                    return result
+                if result: return result
     return None
 
 def _header_index(rows):
@@ -156,47 +138,94 @@ def _safe_diagnostic(pid, response=None, error=None):
             decoded=body.decode('utf-16' if body.startswith((b'\xff\xfe',b'\xfe\xff')) else 'utf-8-sig',errors='replace')
             lines=decoded.splitlines()[:12]
             details['metadata_labels']=[re.sub(r'[^a-zA-Z ]','',line.split(',')[0])[:65] for line in lines if line.strip()][:10]
-            for row in csv.reader(io.StringIO(decoded, newline='')):
-                if row and _norm(row[0]) == 'fundholdingsasof':
-                    details['holdings_date_raw'] = [str(v)[:60] for v in row[1:3]]
-                    details['holdings_date_parsed'] = _metadata_date([row])
-                    break
         except Exception: pass
     # Never upload raw HTML response, URL query strings or response cookies.
     (path / f'{pid}.json').write_text(json.dumps(details, indent=2), encoding='utf-8')
+
+def _candidate_dates(now=None):
+    """Try an explicit date first, then previous weekdays (no fabricated as-of dates)."""
+    now = now or datetime.now(timezone.utc)
+    override = os.environ.get('HOLDINGS_ASOF_DATE', '').strip()
+    if override:
+        try:
+            start = datetime.strptime(override, '%Y%m%d').date()
+        except ValueError as exc:
+            raise ValueError('HOLDINGS_ASOF_DATE must be YYYYMMDD') from exc
+        if start > now.date():
+            raise ValueError('HOLDINGS_ASOF_DATE cannot be in the future')
+    else:
+        # Holdings are typically published after the trading day closes.
+        start = now.date() - timedelta(days=1)
+    lookback = int(os.environ.get('HOLDINGS_LOOKBACK_DAYS', '10'))
+    if not 1 <= lookback <= 30:
+        raise ValueError('HOLDINGS_LOOKBACK_DAYS must be between 1 and 30')
+    return [(start - timedelta(days=i)).strftime('%Y%m%d')
+            for i in range(lookback) if (start - timedelta(days=i)).weekday() < 5]
+
+
+def _fetch_verified(session, pid, dates):
+    """Accept only source-dated, parseable, nontrivial holdings."""
+    attempts = []
+    last_response = None
+    for requested in dates:
+        try:
+            response = session.get(url_for(pid, requested), timeout=45)
+            last_response = response
+            response.raise_for_status()
+            if len(response.content) < 100:
+                raise ValueError('Empty or suspiciously short response')
+            frame, asof = parse_document(response.content)
+            if asof > requested[:4] + '-' + requested[4:6] + '-' + requested[6:]:
+                raise ValueError('Issuer date is later than requested date')
+            if asof > datetime.now(timezone.utc).date().isoformat():
+                raise ValueError('Issuer date is in the future')
+            # A valid date alone is not enough: prevent a 2-row partial document.
+            if len(frame) < 10:
+                raise ValueError(f'Only {len(frame)} holding rows; incomplete document')
+            return frame, asof, requested, attempts
+        except (requests.RequestException, ValueError, UnicodeError, KeyError) as exc:
+            attempts.append({'requested_date': requested, 'error': str(exc)[:180],
+                             'status_code': last_response.status_code if last_response is not None else None})
+    message = '; '.join(f"{a['requested_date']}: {a['error']}" for a in attempts)
+    err = ValueError('No verified holdings document across requested dates: ' + message[:700])
+    err.attempts = attempts
+    err.last_response = last_response
+    raise err
+
 
 def refresh():
     STORE.mkdir(parents=True, exist_ok=True)
     session = requests.Session()
     session.headers.update({'User-Agent': 'Mozilla/5.0', 'Accept': 'text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/octet-stream,*/*'})
     successes, failures = [], []
-    today = datetime.now(timezone.utc).strftime('%Y%m%d')
+    dates = _candidate_dates()
     pending_path = STORE / 'pending_sources.json'
     pending = json.loads(pending_path.read_text()).get('portfolio_ids', []) if pending_path.exists() else []
     all_sources = list(dict.fromkeys([*SOURCES, *pending]))
     for pid in all_sources:
-        response = None
         try:
-            response = session.get(url_for(pid, today), timeout=45)
-            response.raise_for_status()
-            if len(response.content) < 100: raise ValueError('Empty or suspiciously short response')
-            frame, asof = parse_document(response.content)
+            frame, asof, requested, attempts = _fetch_verified(session, pid, dates)
             if pid in SOURCES:
                 df = normalize(frame, pid, asof)
+                if len(df) < 10 or not 80 <= float(df.weight.sum()) <= 105:
+                    raise ValueError(f'Equity holdings validation failed: {len(df)} equities, {df.weight.sum():.2f}% total weight')
                 successes.append(df)
-                print(f'{pid}: verified {len(df)} equity holdings as of {asof}', flush=True)
+                print(f'{pid}: verified {len(df)} equity holdings as of {asof} (requested {requested})', flush=True)
             else:
-                print(f'{pid}: document parsed as of {asof}; category pending, excluded from rankings', flush=True)
+                print(f'{pid}: parsed {len(frame)} rows as of {asof}; category pending, excluded from rankings', flush=True)
             (STORE / 'diagnostics' / f'{pid}.json').unlink(missing_ok=True)
         except Exception as exc:
             failures.append(f'{pid}: {exc}')
+            response = getattr(exc, 'last_response', None)
             _safe_diagnostic(pid, response, exc)
+            diagnostic = STORE / 'diagnostics' / f'{pid}.json'
+            details = json.loads(diagnostic.read_text())
+            details['attempts'] = getattr(exc, 'attempts', [])
+            diagnostic.write_text(json.dumps(details, indent=2), encoding='utf-8')
     for msg in failures: print('WARNING', msg, file=sys.stderr)
     if failures:
         print(f'SKIPPED ranking update: {len(failures)} of {len(all_sources)} sources unavailable or unverified. '
               'Prior verified rankings are preserved; no removals inferred. See data/holdings/diagnostics.', file=sys.stderr)
-        # A scheduled fetch should not be marked failed for upstream data issues.
-        # CI can opt into strict mode for debugging.
         return 1 if os.environ.get('HOLDINGS_STRICT') == '1' else 0
     current = pd.concat(successes, ignore_index=True)
     prior_file = STORE / 'latest_holdings.parquet'
