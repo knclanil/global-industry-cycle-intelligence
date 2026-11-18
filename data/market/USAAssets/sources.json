@@ -1,0 +1,12 @@
+{
+  "DBC": "Provider via usa_asset_market_data",
+  "GLD": "Provider via usa_asset_market_data",
+  "HYG": "Provider via usa_asset_market_data",
+  "IEF": "Provider via usa_asset_market_data",
+  "LQD": "Provider via usa_asset_market_data",
+  "SGOV": "Provider via usa_asset_market_data",
+  "SPY": "Provider via usa_asset_market_data",
+  "TLT": "Provider via usa_asset_market_data",
+  "VNQ": "Provider via usa_asset_market_data",
+  "VTI": "Provider via usa_asset_market_data"
+}

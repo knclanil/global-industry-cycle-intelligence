@@ -1,0 +1,92 @@
+{
+  "region": "india",
+  "refreshed_utc": "2026-11-18T17:40:30.438199+00:00",
+  "markets": {
+    "India": {
+      "status": "OK",
+      "changed": [
+        "^NIFTYBANK",
+        "^CNXIT",
+        "^CNXAUTO",
+        "^CNXFMCG",
+        "^CNXPHARMA",
+        "^CNXMETAL",
+        "^CNXREALTY",
+        "^CNXENERGY",
+        "^CNXINFRA",
+        "^NIFTYFIN_SERVICE",
+        "^CNXMEDIA",
+        "^CNXPSUBANK",
+        "^NSEI"
+      ],
+      "unchanged": [],
+      "unavailable_this_run": [],
+      "request_start": "2021-11-14",
+      "latest_dates": {
+        "^NIFTYBANK": "2026-11-18",
+        "^CNXIT": "2026-11-18",
+        "^CNXAUTO": "2026-11-18",
+        "^CNXFMCG": "2026-11-18",
+        "^CNXPHARMA": "2026-11-18",
+        "^CNXMETAL": "2026-11-18",
+        "^CNXREALTY": "2026-11-18",
+        "^CNXENERGY": "2026-11-18",
+        "^CNXINFRA": "2026-11-18",
+        "^NIFTYFIN_SERVICE": "2026-11-18",
+        "^CNXMEDIA": "2026-11-18",
+        "^CNXPSUBANK": "2026-11-18",
+        "^NSEI": "2026-11-18"
+      }
+    },
+    "IndiaFactors": {
+      "status": "OK",
+      "changed": [
+        "NIFTY50_VALUE20",
+        "NIFTY200_MOMENTUM30",
+        "NIFTY200_QUALITY30",
+        "NIFTY100_LOWVOL30",
+        "NIFTY_ALPHA50",
+        "NIFTY50_EQUALWEIGHT",
+        "^NSEI"
+      ],
+      "unchanged": [],
+      "unavailable_this_run": [],
+      "request_start": "2021-11-14",
+      "latest_dates": {
+        "NIFTY50_VALUE20": "2026-11-18",
+        "NIFTY200_MOMENTUM30": "2026-11-18",
+        "NIFTY200_QUALITY30": "2026-11-18",
+        "NIFTY100_LOWVOL30": "2026-11-18",
+        "NIFTY_ALPHA50": "2026-11-18",
+        "NIFTY50_EQUALWEIGHT": "2026-11-18",
+        "^NSEI": "2026-11-18"
+      }
+    },
+    "IndiaAssets": {
+      "status": "PARTIAL",
+      "changed": [
+        "NIFTYBEES.NS",
+        "GOLDBEES.NS",
+        "SILVERBEES.NS",
+        "LIQUIDBEES.NS",
+        "^NSEI"
+      ],
+      "unchanged": [],
+      "unavailable_this_run": [
+        "SETF10GILT.NS"
+      ],
+      "request_start": "2021-11-14",
+      "latest_dates": {
+        "NIFTYBEES.NS": "2026-11-18",
+        "GOLDBEES.NS": "2026-11-18",
+        "SILVERBEES.NS": "2026-11-18",
+        "LIQUIDBEES.NS": "2026-11-18",
+        "SETF10GILT.NS": null,
+        "^NSEI": "2026-11-18"
+      }
+    }
+  },
+  "errors": [
+    "IndiaAssets: unavailable this run: SETF10GILT.NS"
+  ]
+}
