@@ -81,85 +81,118 @@ def build_graph(path,market,layers,top_n,holdings=None):
                             edges.append((fid,hid))
     return nodes,edges
 
-def build_unified_graph(layers, top_n, holdings=None, factor_markets=('Global','USA','India')):
-    """Show both country and asset networks simultaneously; reuse shared company IDs."""
+def build_unified_graph(layers, top_n, holdings=None, factor_markets=('USA', 'India')):
+    """One rooted hierarchy: Global → Country → Assets → Equity → Sectors | Factors.
+
+    Only USA and India currently have country-specific asset, sector and factor feeds.
+    All other countries terminate at the country node; no invented proxy branches.
+    """
     nodes={'root':node('root','GLOBAL','root')}; edges=[]
-    def add(n,parent):
-        if n['id'] not in nodes:nodes[n['id']]=n
-        if parent in nodes and (parent,n['id']) not in edges:edges.append((parent,n['id']))
+    def add(item,parent):
+        if item['id'] not in nodes: nodes[item['id']]=item
+        if parent in nodes and (parent,item['id']) not in edges:edges.append((parent,item['id']))
     countries=layers.get('Countries',pd.DataFrame())
-    if not countries.empty:
-        preferred=countries[countries['ETF'].isin(['SPY','INDA','EUSA'])]
-        selection=pd.concat([preferred,countries.nlargest(top_n,'Network Score')]).drop_duplicates('ETF').head(top_n+2)
-        for _,r in selection.iterrows():
-            add(node('country:'+str(r['ETF']),r['Sector'],'country','Countries',r),'root')
-    for country_name,terms,asset_layer,sector_layer in [
-        ('USA',('united states','usa','u.s.'),'USA Assets','USA Sectors'),
-        ('India',('india',),'India Assets','India Sectors')]:
-        matches=[n for n in nodes.values() if n['kind']=='country' and
-                 (any(t in n['label'].lower() for t in terms) or
-                  (country_name=='USA' and n['ticker'] in ('SPY','EUSA','IVV')))]
-        if not matches:continue
-        cid=matches[0]['id'];assets=layers.get(asset_layer,pd.DataFrame())
+    if countries.empty:return nodes,edges
+    # Always retain USA and India if their country observations exist.
+    preferred=countries[countries['ETF'].isin(['SPY','INDA'])]
+    chosen=pd.concat([preferred,countries.nlargest(top_n,'Network Score')]).drop_duplicates('ETF').head(top_n+2)
+    specs={'SPY':('USA','USA Assets','USA Sectors','USA Factors'),
+           'INDA':('India','India Assets','India Sectors','India Factors')}
+    for _,country in chosen.iterrows():
+        ticker=str(country['ETF']); cid='country:'+ticker
+        add(node(cid,country['Sector'],'country','Countries',country),'root')
+        if ticker not in specs:continue
+        market,asset_layer,sector_layer,factor_layer=specs[ticker]
+        assets=layers.get(asset_layer,pd.DataFrame())
         if assets.empty:continue
+        group=market+':assets';add(node(group,'ASSETS','asset_group'),cid)
+        # Include equity first even when its rotation score is low; then other assets.
         eq=assets[assets['Sector'].str.contains('Equit|Stock|Nifty',case=False,na=False)]
-        for _,r in pd.concat([eq,assets.nlargest(top_n,'Network Score')]).drop_duplicates('ETF').head(top_n).iterrows():
-            aid=f'{country_name}:asset:{r["ETF"]}'
-            add(node(aid,r['Sector'],'asset',asset_layer,r),cid)
-            if any(t in str(r['Sector']).lower() for t in ('equit','stock','nifty','s&p 500')):
-                sector=layers.get(sector_layer,pd.DataFrame())
-                if not sector.empty:
-                    for _,sr in sector.nlargest(top_n,'Network Score').iterrows():
-                        add(node(f'{country_name}:sector:{sr["ETF"]}',sr['Sector'],'sector',sector_layer,sr),aid)
-    assets=layers.get('Global Assets',pd.DataFrame())
-    if not assets.empty:
-        eq=assets[assets['Sector'].str.contains('Equit|Stock',case=False,na=False)]
-        for _,r in pd.concat([eq,assets.nlargest(top_n,'Network Score')]).drop_duplicates('ETF').head(top_n).iterrows():
-            aid='global:asset:'+str(r['ETF'])
-            add(node(aid,r['Sector'],'asset','Global Assets',r),'root')
-            if not any(t in str(r['Sector']).lower() for t in ('equit','stock')):continue
-            for market in factor_markets:
-                factors=layers.get(market+' Factors',pd.DataFrame())
-                if factors.empty:continue
-                for _,f in factors.nlargest(top_n,'Network Score').iterrows():
-                    fid=f'factor:{market}:{f["ETF"]}'
-                    add(node(fid,f'{market} · {f["Sector"]}','factor',market+' Factors',f),aid)
+        other=assets[~assets['ETF'].isin(eq['ETF'])]
+        chosen_assets=pd.concat([eq,other.nlargest(max(top_n-1,0),'Network Score')]).drop_duplicates('ETF')
+        for _,asset in chosen_assets.iterrows():
+            equity=str(asset['ETF']) in set(eq['ETF'])
+            aid=f'{market}:asset:{asset["ETF"]}'
+            add(node(aid,'Equity' if equity else asset['Sector'],'equity' if equity else 'asset',asset_layer,asset),group)
+            if not equity:continue
+            # Both vertical groups are children of THIS country's equity, never GLOBAL.
+            sg=f'{market}:sectors';fg=f'{market}:factors'
+            add(node(sg,'SECTORS','sector_group'),aid)
+            add(node(fg,'FACTORS','factor_group'),aid)
+            sector_rows=layers.get(sector_layer,pd.DataFrame())
+            if not sector_rows.empty:
+                for _,row in sector_rows.nlargest(top_n,'Network Score').iterrows():
+                    add(node(f'{market}:sector:{row["ETF"]}',row['Sector'],'sector',sector_layer,row),sg)
+            factor_rows=layers.get(factor_layer,pd.DataFrame()) if market in factor_markets else pd.DataFrame()
+            if not factor_rows.empty:
+                for _,row in factor_rows.nlargest(top_n,'Network Score').iterrows():
+                    fid=f'factor:{market}:{row["ETF"]}'
+                    add(node(fid,row['Sector'],'factor',factor_layer,row),fg)
                     if holdings is None or holdings.empty:continue
-                    subset=holdings[holdings['factor'].astype(str).str.upper()==str(f['ETF']).upper()].nlargest(top_n,'weight')
-                    for _,h in subset.iterrows():
-                        identity=str(h.get('isin','')).strip() or str(h.get('ticker','')).strip() or str(h['company']).strip()
-                        hid='company:'+market+':'+identity.upper()
-                        add(node(hid,h['company'],'company'),fid)
+                    matches=holdings[holdings['factor'].astype(str).str.upper()==str(row['ETF']).upper()]
+                    for _,h in matches.nlargest(top_n,'weight').iterrows():
+                        isin=str(h.get('isin','')).strip().upper()
+                        tick=str(h.get('ticker','')).strip().upper()
+                        identity=('isin:'+isin if isin and isin not in ('NAN','NONE') else
+                                  'ticker:'+market+':'+tick if tick and tick not in ('NAN','NONE') else
+                                  'name:'+market+':'+str(h['company']).strip().upper())
+                        add(node('company:'+identity,h['company'],'company'),fid)
     return nodes,edges
 
 
 def layout(nodes,edges):
-    """Stable, organic radial layout: countries left, asset classes right, shared companies outside."""
-    import numpy as np
+    """Country lanes with visibly distinct left SECTORS and right FACTORS columns.
+
+    Asset siblings sit above the equity branches; company nodes share IDs and
+    remain connected to all their parent factors without duplicating entities.
+    """
     from collections import defaultdict
     children=defaultdict(list)
     for a,b in edges:children[a].append(b)
-    pos={'root':(0.,0.)}
-    country_roots=sorted((x for x in children['root'] if nodes[x]['kind']=='country'))
-    asset_roots=sorted((x for x in children['root'] if nodes[x]['kind']=='asset'))
-    # Sector and factor descendants form radial clusters around their parent.
-    def place_branch(nid,angle,radius,spread,depth=1):
-        if nid in pos:return
-        pos[nid]=(radius*math.cos(angle),radius*math.sin(angle))
-        kids=[k for k in children[nid] if k not in pos]
-        if not kids:return
-        if len(kids)==1:angles=[angle]
-        else:angles=np.linspace(angle-spread/2,angle+spread/2,len(kids))
-        for k,a in zip(kids,angles):place_branch(k,float(a),radius+2.3,max(.26,spread*.70),depth+1)
-    for i,nid in enumerate(country_roots):
-        angle=math.pi-(i-(len(country_roots)-1)/2)*min(.45,2.1/max(1,len(country_roots)-1))
-        place_branch(nid,angle,3.2,.42)
-    for i,nid in enumerate(asset_roots):
-        angle=(i-(len(asset_roots)-1)/2)*min(.40,2.3/max(1,len(asset_roots)-1))
-        place_branch(nid,angle,3.2,.48)
-    # Shared company nodes were already positioned at first factor; all edges remain visible.
+    pos={'root':(0.,3.)}
+    countries=children['root']
+    detailed=[c for c in countries if children[c]]
+    leaves=[c for c in countries if not children[c]]
+    # Give USA/India large independent lanes, rather than overlapping clusters.
+    lane_width=23.0
+    for i,cid in enumerate(detailed):
+        cx=(i-(len(detailed)-1)/2)*lane_width
+        pos[cid]=(cx,0.)
+        for group in children[cid]:
+            pos[group]=(cx,-2.4)
+            assets=children[group]
+            equity=[a for a in assets if nodes[a]['kind']=='equity']
+            others=[a for a in assets if nodes[a]['kind']!='equity']
+            for j,aid in enumerate(others):
+                pos[aid]=(cx+(j-(len(others)-1)/2)*3.1,-4.7)
+            for aid in equity:
+                pos[aid]=(cx,-7.0)
+                for branch in children[aid]:
+                    sector=nodes[branch]['kind']=='sector_group'
+                    bx=cx+(-5.6 if sector else 5.6)
+                    pos[branch]=(bx,-9.7)
+                    kids=children[branch]
+                    for k,kid in enumerate(kids):
+                        pos[kid]=(bx,-12.2-2.25*k)
+    # Countries without validated asset layers remain clearly visible, as leaves.
+    for j,cid in enumerate(leaves):
+        x=(j-(len(leaves)-1)/2)*4.2
+        pos[cid]=(x, -3.0)
+    # Shared company IDs: one node per company, multiple factor edges.
+    parents=defaultdict(list)
+    for a,b in edges:parents[b].append(a)
+    company_ids=[nid for nid,n in nodes.items() if n['kind']=='company']
+    company_groups=defaultdict(list)
+    for cid in company_ids:
+        ps=[pos[p] for p in parents[cid] if p in pos]
+        market='USA' if any(p.startswith('factor:USA:') for p in parents[cid]) else 'India'
+        company_groups[market].append((cid,ps))
+    for market,items in company_groups.items():
+        for j,(cid,ps) in enumerate(items):
+            x=sum(p[0] for p in ps)/len(ps)+3.6 if ps else 0.
+            pos[cid]=(x,-13.5-2.0*j)
     for nid in nodes:
-        if nid not in pos:pos[nid]=(0.,0.)
+        pos.setdefault(nid,(0.,-1.))
     return pos
 
 
@@ -185,7 +218,7 @@ def make_figure(nodes,edges,selected=None):
     for group in ('normal','selected'):
         xs,ys=segments[group]
         if xs:fig.add_trace(go.Scattergl(x=xs,y=ys,mode='lines',line=dict(color='rgba(113,151,202,0.24)' if group=='normal' else 'rgba(180,225,255,0.85)',width=1 if group=='normal' else 2.5),hoverinfo='skip',showlegend=False))
-    for kind in ('root','country','asset','sector','factor','company'):
+    for kind in ('root','country','asset_group','asset','equity','sector_group','factor_group','sector','factor','company'):
         items=[n for n in nodes.values() if n['kind']==kind]
         if not items:continue
         fig.add_trace(go.Scattergl(
@@ -199,20 +232,20 @@ def make_figure(nodes,edges,selected=None):
             customdata=[[n['id']] for n in items],
             hovertemplate='%{text}<extra>'+kind.title()+'</extra>',name=kind.title(),showlegend=False))
     fig.update_layout(template='plotly_dark',paper_bgcolor='#0b1220',plot_bgcolor='#0b1220',
-        height=780,margin=dict(l=12,r=12,t=12,b=12),dragmode='pan',clickmode='event+select',
+        height=850,margin=dict(l=12,r=12,t=12,b=12),dragmode='pan',clickmode='event+select',
         xaxis=dict(visible=False,scaleanchor='y',scaleratio=1),yaxis=dict(visible=False),
-        uirevision='capital_organic_network',hovermode='closest')
+        uirevision='capital_country_equity_parallel_v3',hovermode='closest')
     return fig
 
 def render_capital_network():
     st.title('🌐 Global Capital Intelligence Network')
-    st.caption('Organic market relationship network · **Not measured capital flows** · Click any node to inspect it')
+    st.caption('Global → Country → Assets → Equity → **Sectors | Factors** → Companies · Not measured capital flows')
     c1,c2,c3=st.columns([1.5,2.6,1.2])
     with c1:lookback=st.select_slider('RELATIVE TIME',options=list(country_market_data.LOOKBACKS),value='3M')
     with c2:period=st.date_input('FROM DATE → TO DATE',value=(date.today()-timedelta(days=365),date.today()),max_value=date.today())
     with c3:top_n=st.selectbox('TOP N PER CLUSTER',[3,5,10,20],index=1)
     with st.expander('Network filters & company holdings',expanded=False):
-        factor_markets=st.multiselect('FACTOR MARKETS',['Global','USA','India'],default=['Global','USA','India'])
+        factor_markets=st.multiselect('COUNTRY FACTOR DATA',['USA','India'],default=['USA','India'])
         st.caption('Company nodes require actual factor constituent weights. Upload CSV/XLSX containing factor, company, weight (%), and preferably ISIN/ticker. No synthetic company connections are generated.')
         uploaded=st.file_uploader('Factor holdings files',type=['csv','xlsx'],accept_multiple_files=True,key='network_holdings')
     if not isinstance(period,(tuple,list)) or len(period)!=2 or period[0]>=period[1]:
@@ -225,7 +258,7 @@ def render_capital_network():
             try:pieces.append(parse_holdings(file,source=file.name))
             except Exception as exc:st.warning(f'{file.name}: {exc}')
         if pieces:holdings=pd.concat(pieces,ignore_index=True)
-    requested=['Countries','USA Assets','India Assets','USA Sectors','India Sectors','Global Assets']+[m+' Factors' for m in factor_markets]
+    requested=['Countries','USA Assets','India Assets','USA Sectors','India Sectors']+[m+' Factors' for m in factor_markets if m in ('USA','India')]
     layers={};reports={};errors={}
     with st.spinner('Loading market data and constructing the network…'):
         for layer in requested:
@@ -260,4 +293,4 @@ def render_capital_network():
             if neighbors:st.dataframe(pd.DataFrame([{'Connected node':x['label'],'Type':x['kind'],'Rotation score':x['score']} for x in neighbors]),hide_index=True,use_container_width=True)
             if n['layer']:st.caption(f"Source: {n['layer']} · Symbol: {n['ticker']} · Relative strength: {n['relative']:+.2f}%")
     st.caption(f'{len(nodes)} nodes · {len(edges)} relationships · Green: Leading · Blue: Improving · Amber: Weakening · Red: Lagging. Scores are peer-relative and do not measure capital inflows.')
-    if holdings is None:st.caption('Company connections are hidden until verified holdings are uploaded. Sector → company links also require sector constituent files.')
+    if holdings is None:st.caption('Factor → company connections require uploaded constituent weights. Sector → company connections require separate verified sector constituents. Other countries show country scores only until country asset data is available.')

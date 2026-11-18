@@ -120,3 +120,13 @@ A full-width, interactive Plotly relationship network with Country → Assets �
 ## Organic capital network (reference-inspired)
 
 The first page now displays country and asset-class branches **together** in a radial, curved-edge network. There is no exploration-path selector. Retained slicers: Relative Time, From/To dates, and Top N. Factor-market filters and optional verified constituent uploads are under Network filters. Node selection opens a detail drawer below the graph. Node connections denote market relationships, **not actual measured fund flows**.
+
+### Global Capital Intelligence Network: country-first parallel equity branches
+
+The network now uses one hierarchy, without an exploration-path selector:
+**GLOBAL → Country → ASSETS → Equity → SECTORS and FACTORS (parallel) → Companies**.
+Sectors are positioned to the left of Equity and factors to the right. Non-equity assets appear as sibling asset nodes and do not incorrectly connect to equity factors. Country-specific asset, sector, and factor coverage is currently available for USA and India; other country nodes stop at the country level rather than inventing unsupported asset breakdowns. Factor-company connections appear only from uploaded constituent weights; sector-company links require independently verified sector constituents and are not fabricated. Network scores represent price-relative leadership, not measured fund flows.
+
+### Network hierarchy (country-first, parallel sectors/factors)
+
+The top intelligence page uses **GLOBAL → Country → ASSETS → Equity → SECTORS | FACTORS → Companies**. The sector and factor columns are separate, parallel children of each country's equity node. USA and India have supported country-specific datasets; other countries stop at their country node rather than being assigned unsupported asset/factor proxies. Global factor ETFs are not incorrectly placed beneath a country. Factor-to-company links require uploaded verified constituent holdings, and sector-to-company links are not shown without sector constituents. The graph depicts price-based market rotation and holdings relationships, **not measured money flows**.
