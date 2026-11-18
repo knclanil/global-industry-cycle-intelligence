@@ -1,5 +1,6 @@
 {
   "verified_active_etfs": [
+    "239499",
     "239503",
     "239505",
     "239506",
@@ -14,7 +15,6 @@
     "239563",
     "239605",
     "239695",
-    "239710",
     "239725",
     "239728",
     "239739",
@@ -23,13 +23,17 @@
     "239742",
     "239744",
     "239745",
+    "239748",
     "239750",
     "239751",
     "239753",
     "251614",
-    "256101"
+    "256101",
+    "271538",
+    "271540",
+    "275382"
   ],
-  "verified_count": 28,
+  "verified_count": 32,
   "expected_active_count": 33,
   "groups": {
     "USA Factor": [
@@ -37,7 +41,6 @@
       "iShares MSCI USA Min Vol Factor ETF",
       "iShares MSCI USA Momentum Factor ETF",
       "iShares MSCI USA Quality Factor ETF",
-      "iShares Russell 2000 ETF",
       "iShares S&P 500 Growth ETF",
       "iShares S&P 500 Value ETF"
     ],
@@ -55,7 +58,11 @@
       "iShares U.S. Utilities ETF"
     ],
     "Global Factor": [
-      "iShares MSCI Global Min Vol Factor ETF"
+      "iShares International Select Dividend ETF",
+      "iShares MSCI Global Min Vol Factor ETF",
+      "iShares MSCI Intl Momentum Factor ETF",
+      "iShares MSCI Intl Quality Factor ETF",
+      "iShares MSCI Intl Value Factor ETF"
     ],
     "Global Sector": [
       "iShares Global Comm Services ETF",
@@ -65,6 +72,7 @@
       "iShares Global Financials ETF",
       "iShares Global Healthcare ETF",
       "iShares Global Industrials ETF",
+      "iShares Global Materials ETF",
       "iShares Global Tech ETF",
       "iShares Global Utilities ETF"
     ]
