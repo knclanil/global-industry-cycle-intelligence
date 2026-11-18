@@ -171,67 +171,114 @@ def build_unified_graph(layers, top_n, holdings=None, factor_markets=('USA', 'In
     return nodes,edges
 
 
-def galaxy_layout(nodes,edges):
-    """Deterministic bilateral orbital layout: global assets left, countries right.
+def galaxy_layout(nodes, edges):
+    """Seeded force-directed galaxy with country and global-asset hemispheres.
 
-    A tree layout per hemisphere ensures the root and each cluster retain their
-    hierarchy. Company nodes are placed on an outer ring, shared where possible.
+    Springs keep verified relationships connected; anchored hubs preserve the
+    global-left/countries-right structure. Deterministic collision relaxation
+    prevents the label pileups of a purely random spring layout.
     """
-    from collections import defaultdict
-    children=defaultdict(list)
-    parents=defaultdict(list)
-    for a,b in edges:
-        children[a].append(b);parents[b].append(a)
-    pos={'root':(0.0,0.0)}
-    global_group='global:assets'
-    if global_group in nodes:
-        pos[global_group]=(-10.0,0.0)
-        assets=children[global_group]
-        for i,aid in enumerate(assets):
-            theta=math.pi/2+(i-(len(assets)-1)/2)*0.39
-            pos[aid]=(-14.0-2.8*math.sin(theta), (i-(len(assets)-1)/2)*3.0)
-            for branch in children[aid]:
-                pos[branch]=(-20.0,pos[aid][1])
-                for j,fid in enumerate(children[branch]):
-                    pos[fid]=(-25.0,pos[branch][1]+(j-(len(children[branch])-1)/2)*2.45)
-    countries=children['root']
-    country_ids=[cid for cid in countries if cid!=global_group]
-    detailed=[cid for cid in country_ids if children[cid]]
-    leaves=[cid for cid in country_ids if not children[cid]]
-    # Detailed countries receive independent vertical systems.
-    for i,cid in enumerate(detailed):
-        cy=(i-(len(detailed)-1)/2)*27.0
-        pos[cid]=(9.0,cy)
-        for group in children[cid]:
-            pos[group]=(13.0,cy)
-            assets=children[group]
-            equity=[a for a in assets if nodes[a]['kind']=='equity']
-            other=[a for a in assets if nodes[a]['kind']!='equity']
-            for j,aid in enumerate(other):
-                pos[aid]=(16.5,cy+5.0+(j-(len(other)-1)/2)*2.7)
-            for aid in equity:
-                pos[aid]=(18.0,cy-3.0)
-                for branch in children[aid]:
-                    sector=nodes[branch]['kind']=='sector_group'
-                    by=cy-11.0 if sector else cy+1.0
-                    pos[branch]=(23.0,by)
-                    kids=children[branch]
-                    for k,kid in enumerate(kids):
-                        pos[kid]=(28.0,by+(k-(len(kids)-1)/2)*2.4)
-    # Country-only observations orbit closer to the root to avoid a long tail.
-    for j,cid in enumerate(leaves):
-        a=(j+0.5)*2*math.pi/max(len(leaves),1)
-        pos[cid]=(7.5+2.0*math.cos(a), 12.0*math.sin(a))
-    # Companies are outer satellites; multi-factor edges converge on one node.
-    companies=[nid for nid,n in nodes.items() if n['kind']=='company']
-    for market in ('Global','USA','India'):
-        subset=[cid for cid in companies if any(p.startswith('factor:'+market+':') for p in parents[cid])]
-        for j,cid in enumerate(subset):
-            ps=[pos[p] for p in parents[cid] if p in pos]
-            mean_y=sum(p[1] for p in ps)/len(ps) if ps else 0.0
-            pos[cid]=(-30.0 if market=='Global' else 34.0,mean_y+(j-(len(subset)-1)/2)*1.6)
-    for nid in nodes:pos.setdefault(nid,(0.,0.))
-    return pos
+    import networkx as nx
+    import numpy as np
+    from collections import defaultdict, deque
+
+    if not nodes:
+        return {}
+    graph = nx.Graph()
+    graph.add_nodes_from(nodes)
+    graph.add_edges_from((a, b) for a, b in edges if a in nodes and b in nodes)
+    children = defaultdict(list)
+    parents = defaultdict(list)
+    for a, b in edges:
+        children[a].append(b)
+        parents[b].append(a)
+
+    # First place each branch in its own constellation. These positions are
+    # starting points, not the final diagram: spring forces subsequently relax.
+    seed = {'root': (0.0, 0.0)}
+    fixed = ['root']
+    if 'global:assets' in nodes:
+        seed['global:assets'] = (-13.0, 0.0)
+        fixed.append('global:assets')
+    country_ids = [c for c in children['root'] if c != 'global:assets']
+    detailed = [c for c in country_ids if children[c]]
+    leaf = [c for c in country_ids if not children[c]]
+    for i, cid in enumerate(detailed):
+        y = (i - (len(detailed)-1)/2) * 24.0
+        seed[cid] = (13.0, y)
+        fixed.append(cid)
+    for i, cid in enumerate(leaf):
+        angle = 2 * math.pi * (i+.5) / max(1,len(leaf))
+        seed[cid] = (8.0 + 5.0 * math.cos(angle), 14.0 * math.sin(angle))
+    # Breadth-first placement keeps sector and factor constellations distinct.
+    queue = deque(['root'])
+    seen = {'root'}
+    while queue:
+        parent = queue.popleft()
+        kids = children[parent]
+        for j, kid in enumerate(kids):
+            if kid not in seen:
+                seen.add(kid)
+                queue.append(kid)
+            if kid in seed:
+                continue
+            px, py = seed.get(parent, (0.0, 0.0))
+            market_global = parent.startswith('global:') or parent == 'global:assets'
+            direction = -1 if market_global else 1
+            offset = (j - (len(kids)-1)/2) * 3.5
+            kind = nodes[kid]['kind']
+            if kind == 'sector_group':
+                offset -= 6.0
+            elif kind == 'factor_group' and not market_global:
+                offset += 6.0
+            seed[kid] = (px + direction * 5.5, py + offset)
+    # Shared companies start at the barycenter of all parent factors.
+    for nid, item in nodes.items():
+        if item['kind'] == 'company':
+            coords = [seed[p] for p in parents[nid] if p in seed]
+            if coords:
+                seed[nid] = (sum(v[0] for v in coords)/len(coords) +
+                             (-5 if any(p.startswith('factor:Global:') for p in parents[nid]) else 5),
+                             sum(v[1] for v in coords)/len(coords))
+    for nid in nodes:
+        seed.setdefault(nid, (0.0, 0.0))
+    if len(nodes) == 1:
+        return seed
+
+    # Spring physics create the organic web shown in the reference screenshot.
+    positions = nx.spring_layout(
+        graph, pos=seed, fixed=fixed, seed=29, iterations=130,
+        k=3.7, scale=None, weight=None, threshold=1e-4,
+    )
+    coords = {nid: np.array(positions[nid], dtype=float) for nid in nodes}
+    # Keep the global asset system to the left, countries to the right.
+    for _ in range(75):
+        moved = False
+        for i, a in enumerate(nodes):
+            if a in fixed:
+                continue
+            for b in list(nodes)[i+1:]:
+                if b in fixed:
+                    continue
+                delta = coords[b]-coords[a]
+                dist = float(np.linalg.norm(delta))
+                # Include a modest text-label allowance as well as planet radius.
+                ra = 1.0 + min(len(nodes[a]['label']), 20)*.055
+                rb = 1.0 + min(len(nodes[b]['label']), 20)*.055
+                gap = ra + rb + .55
+                if dist >= gap:
+                    continue
+                if dist < 1e-7:
+                    angle = ((i * 37 + len(b) * 19) % 360) * math.pi/180
+                    delta = np.array([math.cos(angle),math.sin(angle)])
+                    dist = 1.0
+                shift = (gap-dist) * .53 * delta/dist
+                coords[a] -= shift
+                coords[b] += shift
+                moved = True
+        if not moved:
+            break
+    return {nid: tuple(map(float, xy)) for nid, xy in coords.items()}
 
 
 def layout(nodes,edges):
@@ -326,14 +373,14 @@ def make_figure(nodes,edges,selected=None):
             customdata=[[n['id']] for n in items],
             hovertemplate='%{text}<extra>'+kind.title()+'</extra>',name=kind.title(),showlegend=False))
     fig.update_layout(template='plotly_dark',paper_bgcolor='#0b1220',plot_bgcolor='#0b1220',
-        height=850,margin=dict(l=12,r=12,t=12,b=12),dragmode='pan',clickmode='event+select',
+        height=920,margin=dict(l=18,r=18,t=25,b=25),dragmode='pan',clickmode='event+select',
         xaxis=dict(visible=False,scaleanchor='y',scaleratio=1),yaxis=dict(visible=False),
-        uirevision='capital_galaxy_v1',hovermode='closest')
+        uirevision='capital_force_galaxy_v2',hovermode='closest')
     return fig
 
 def render_capital_network():
     st.title('🌌 Global Capital Intelligence Galaxy')
-    st.caption('Left: Global → Assets → Equity → Factors · Right: Global → Countries → Assets → Equity → Sectors | Factors · Planet size = score (not measured capital flows)')
+    st.caption('Organic force-directed galaxy · Global assets to the left, countries to the right · Planet size = score · Relationships are not measured money flows')
     c1,c2,c3=st.columns([1.5,2.6,1.2])
     with c1:lookback=st.select_slider('RELATIVE TIME',options=list(country_market_data.LOOKBACKS),value='3M')
     with c2:period=st.date_input('FROM DATE → TO DATE',value=(date.today()-timedelta(days=365),date.today()),max_value=date.today())
