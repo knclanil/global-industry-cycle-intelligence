@@ -152,3 +152,7 @@ Missing values are **not forward-filled** in the trend series. An invalid or una
 8. **Date and data availability:** index inception dates, holidays, incomplete sessions and missing provider records can restrict historical comparisons.
 
 **Glossary:** **Adjusted close** = provider-adjusted closing price; **RS** = relative strength over the chosen lookback; **MOM** = change in RS over a shorter lag; **pp** = percentage points; **as-of date** = last observed trading session inside the chosen date range; **excess return** = sector cumulative return minus Nifty 50 cumulative return.
+
+### Sector-specific data quality handling
+
+Unavailable or invalid Indian sector index series are excluded and reported as warnings rather than preventing all other sectors from being displayed. Incomplete Yahoo Finance placeholder rows are discarded, never forward-filled or interpolated. Invalid or unavailable Nifty 50 benchmark data still blocks all calculations. This is primary-source validation, not independent exchange verification.

@@ -65,29 +65,46 @@ def validate(frames: dict, requested_end: date) -> dict:
     latest = reference.max()
     for ticker in TICKERS:
         df = frames.get(ticker)
+        is_benchmark = ticker == BENCHMARK
         if df is None or df.empty:
-            (errors if ticker == BENCHMARK else warnings).append(f'{ticker}: no data from provider; excluded')
+            (errors if is_benchmark else warnings).append(f'{ticker}: no data from provider; excluded')
             continue
         if not set(required).issubset(df.columns):
-            (errors if ticker == BENCHMARK else warnings).append(f'{ticker}: missing price columns; excluded')
+            (errors if is_benchmark else warnings).append(f'{ticker}: missing price columns; excluded')
+            if not is_benchmark:
+                frames.pop(ticker, None)
             continue
+        issues = []
         if df.index.has_duplicates:
-            errors.append(f'{ticker}: duplicate sessions')
-        if df[required[:-1]].isna().any().any():
-            errors.append(f'{ticker}: null OHLCV observations')
-        if (df[required[:-1]] <= 0).any().any() or (df['Volume'] < 0).any():
-            errors.append(f'{ticker}: invalid prices or volume')
-        bad = (df['High'] < df[['Open', 'Close', 'Low']].max(axis=1)) | (df['Low'] > df[['Open', 'Close', 'High']].min(axis=1))
-        if bad.any():
-            errors.append(f'{ticker}: invalid OHLC relationship')
-        missing = reference[(reference >= df.index.min()) & (reference <= df.index.max())].difference(df.index)
+            issues.append('duplicate sessions')
+        # Yahoo frequently returns all-NaN placeholder rows for unavailable index sessions.
+        # Discard these; never invent or forward-fill market observations.
+        cleaned = df.dropna(subset=['Open', 'High', 'Low', 'Close', 'Adj Close'])
+        dropped = len(df) - len(cleaned)
+        if dropped:
+            warnings.append(f'{ticker}: discarded {dropped} incomplete provider rows')
+        if cleaned.empty:
+            issues.append('no complete price observations')
+        else:
+            if (cleaned[required[:-1]] <= 0).any().any() or (cleaned['Volume'] < 0).any():
+                issues.append('invalid prices or volume')
+            bad = (cleaned['High'] < cleaned[['Open', 'Close', 'Low']].max(axis=1)) | (cleaned['Low'] > cleaned[['Open', 'Close', 'High']].min(axis=1))
+            if bad.any():
+                issues.append('invalid OHLC relationship')
+        if issues:
+            (errors if is_benchmark else warnings).append(f'{ticker}: {", ".join(issues)}; ' + ('benchmark invalid' if is_benchmark else 'excluded'))
+            if not is_benchmark:
+                frames.pop(ticker, None)
+            continue
+        frames[ticker] = cleaned
+        missing = reference[(reference >= cleaned.index.min()) & (reference <= cleaned.index.max())].difference(cleaned.index)
         if len(missing):
             warnings.append(f'{ticker}: {len(missing)} missing benchmark sessions; only matching sessions analyzed')
-        if df.index.max() < latest:
-            warnings.append(f'{ticker}: missing most recent benchmark session; excluded if latest price unavailable')
-        outliers = int((df['Adj Close'].pct_change(fill_method=None).abs() > 0.15).sum())
+        if cleaned.index.max() < latest:
+            warnings.append(f'{ticker}: missing most recent benchmark session')
+        outliers = int((cleaned['Adj Close'].pct_change(fill_method=None).abs() > 0.15).sum())
         if outliers:
-            warnings.append(f'{ticker}: {outliers} adjusted-return move(s) > 15%; review corporate actions')
+            warnings.append(f'{ticker}: {outliers} adjusted-return move(s) > 15%; review provider data')
     # Historical queries should not be treated as stale.
     if requested_end >= date.today() - timedelta(days=5) and (pd.Timestamp(requested_end) - latest).days > 5:
         warnings.append(f'Latest observed session is {latest.date()}')
