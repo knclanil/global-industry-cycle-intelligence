@@ -435,9 +435,18 @@ def make_figure(nodes, edges, selected=None):
                 color='rgba(245,250,255,0.38)',opacity=opacity),
             hoverinfo='skip',showlegend=False))
         labels=[n['label'] if len(n['label'])<=21 else n['label'][:19]+'…' for n in items]
-        fig.add_trace(go.Scattergl(x=xs,y=ys,mode='text',text=labels,
-            textposition='top center',textfont=dict(size=11 if kind in ('root','country','equity') else 9,
-                color='#dce8fa'),opacity=opacity,hoverinfo='skip',showlegend=False))
+        # Scattergl trace opacity must be a scalar; only marker.opacity supports arrays.
+        # Split labels into highlighted and dimmed traces for per-node fading.
+        for label_opacity in (1.0, 0.28):
+            indices=[i for i,o in enumerate(opacity) if o == label_opacity]
+            if not indices: continue
+            fig.add_trace(go.Scattergl(
+                x=[xs[i] for i in indices], y=[ys[i] for i in indices],
+                mode='text', text=[labels[i] for i in indices],
+                textposition='top center',
+                textfont=dict(size=11 if kind in ('root','country','equity') else 9,
+                              color='#dce8fa'),
+                opacity=label_opacity, hoverinfo='skip', showlegend=False))
 
     fig.update_layout(template='plotly_dark',paper_bgcolor='#070d1b',
         plot_bgcolor='#070d1b',height=890,
