@@ -130,3 +130,16 @@ Sectors are positioned to the left of Equity and factors to the right. Non-equit
 ### Network hierarchy (country-first, parallel sectors/factors)
 
 The top intelligence page uses **GLOBAL → Country → ASSETS → Equity → SECTORS | FACTORS → Companies**. The sector and factor columns are separate, parallel children of each country's equity node. USA and India have supported country-specific datasets; other countries stop at their country node rather than being assigned unsupported asset/factor proxies. Global factor ETFs are not incorrectly placed beneath a country. Factor-to-company links require uploaded verified constituent holdings, and sector-to-company links are not shown without sector constituents. The graph depicts price-based market rotation and holdings relationships, **not measured money flows**.
+
+## Galaxy network update (November 2026)
+
+The first dashboard page now displays a bilateral **Global Capital Intelligence Galaxy**:
+
+- **Left:** Global → Global Assets → Equity → Global Factors → constituent companies (when verified holdings are uploaded). Other global asset classes are separate satellites.
+- **Right:** Global → Countries → country Assets → Equity → **Sectors and Factors in parallel** → companies (only when validated holdings are supplied).
+- Country-specific equity/sector/factor branches currently rely on USA and India data. Other countries are displayed only to the depth supported by available feeds.
+- Planet diameters are based on a square-root scaling of the peer-relative **Network Score** (0–100). Structural nodes without a score use a fixed neutral size; the Global root has a fixed size. Quadrant colors are unchanged.
+- Curved connections represent hierarchy or verified holdings relationships, **not measured money flows**. Company connections require uploaded holdings. Missing holdings are not fabricated.
+- Existing Relative Time, date-range, Top N and holdings upload controls remain available. The layout supports Plotly pan and zoom, with a selected-node detail view.
+
+This is a deterministic orbital/galaxy layout, not a physical gravity simulation. It does not include continuous animation or guaranteed collision-free labeling at very large Top N values.

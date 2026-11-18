@@ -92,7 +92,8 @@ def build_unified_graph(layers, top_n, holdings=None, factor_markets=('USA', 'In
         if item['id'] not in nodes: nodes[item['id']]=item
         if parent in nodes and (parent,item['id']) not in edges:edges.append((parent,item['id']))
     countries=layers.get('Countries',pd.DataFrame())
-    if countries.empty:return nodes,edges
+    if countries.empty:
+        countries=pd.DataFrame(columns=['ETF','Sector','Network Score'])
     # Always retain USA and India if their country observations exist.
     preferred=countries[countries['ETF'].isin(['SPY','INDA'])]
     chosen=pd.concat([preferred,countries.nlargest(top_n,'Network Score')]).drop_duplicates('ETF').head(top_n+2)
@@ -137,7 +138,100 @@ def build_unified_graph(layers, top_n, holdings=None, factor_markets=('USA', 'In
                                   'ticker:'+market+':'+tick if tick and tick not in ('NAN','NONE') else
                                   'name:'+market+':'+str(h['company']).strip().upper())
                         add(node('company:'+identity,h['company'],'company'),fid)
+    # Independent global asset system, opposite the country system.
+    # Only validated global asset/factor observations create scored nodes.
+    global_assets=layers.get('Global Assets',pd.DataFrame())
+    if not global_assets.empty:
+        group='global:assets'
+        add(node(group,'GLOBAL ASSETS','asset_group'),'root')
+        eq=global_assets[global_assets['Sector'].astype(str).str.contains('Equit|Stock',case=False,na=False)]
+        other=global_assets[~global_assets['ETF'].isin(eq['ETF'])]
+        chosen_global=pd.concat([eq,other.nlargest(max(top_n-1,0),'Network Score')]).drop_duplicates('ETF')
+        for _,asset in chosen_global.iterrows():
+            equity=str(asset['ETF']) in set(eq['ETF'])
+            aid='global:asset:'+str(asset['ETF'])
+            add(node(aid,'Equity' if equity else asset['Sector'],'equity' if equity else 'asset','Global Assets',asset),group)
+            if not equity:continue
+            fg='global:factors'
+            add(node(fg,'FACTORS','factor_group'),aid)
+            factors=layers.get('Global Factors',pd.DataFrame())
+            if factors.empty:continue
+            for _,f in factors.nlargest(top_n,'Network Score').iterrows():
+                fid='factor:Global:'+str(f['ETF'])
+                add(node(fid,f['Sector'],'factor','Global Factors',f),fg)
+                if holdings is None or holdings.empty:continue
+                matches=holdings[holdings['factor'].astype(str).str.upper()==str(f['ETF']).upper()]
+                for _,h in matches.nlargest(top_n,'weight').iterrows():
+                    isin=str(h.get('isin','')).strip().upper()
+                    tick=str(h.get('ticker','')).strip().upper()
+                    identity=('isin:'+isin if isin and isin not in ('NAN','NONE') else
+                              'ticker:Global:'+tick if tick and tick not in ('NAN','NONE') else
+                              'name:Global:'+str(h['company']).strip().upper())
+                    add(node('company:'+identity,h['company'],'company'),fid)
     return nodes,edges
+
+
+def galaxy_layout(nodes,edges):
+    """Deterministic bilateral orbital layout: global assets left, countries right.
+
+    A tree layout per hemisphere ensures the root and each cluster retain their
+    hierarchy. Company nodes are placed on an outer ring, shared where possible.
+    """
+    from collections import defaultdict
+    children=defaultdict(list)
+    parents=defaultdict(list)
+    for a,b in edges:
+        children[a].append(b);parents[b].append(a)
+    pos={'root':(0.0,0.0)}
+    global_group='global:assets'
+    if global_group in nodes:
+        pos[global_group]=(-10.0,0.0)
+        assets=children[global_group]
+        for i,aid in enumerate(assets):
+            theta=math.pi/2+(i-(len(assets)-1)/2)*0.39
+            pos[aid]=(-14.0-2.8*math.sin(theta), (i-(len(assets)-1)/2)*3.0)
+            for branch in children[aid]:
+                pos[branch]=(-20.0,pos[aid][1])
+                for j,fid in enumerate(children[branch]):
+                    pos[fid]=(-25.0,pos[branch][1]+(j-(len(children[branch])-1)/2)*2.45)
+    countries=children['root']
+    country_ids=[cid for cid in countries if cid!=global_group]
+    detailed=[cid for cid in country_ids if children[cid]]
+    leaves=[cid for cid in country_ids if not children[cid]]
+    # Detailed countries receive independent vertical systems.
+    for i,cid in enumerate(detailed):
+        cy=(i-(len(detailed)-1)/2)*27.0
+        pos[cid]=(9.0,cy)
+        for group in children[cid]:
+            pos[group]=(13.0,cy)
+            assets=children[group]
+            equity=[a for a in assets if nodes[a]['kind']=='equity']
+            other=[a for a in assets if nodes[a]['kind']!='equity']
+            for j,aid in enumerate(other):
+                pos[aid]=(16.5,cy+5.0+(j-(len(other)-1)/2)*2.7)
+            for aid in equity:
+                pos[aid]=(18.0,cy-3.0)
+                for branch in children[aid]:
+                    sector=nodes[branch]['kind']=='sector_group'
+                    by=cy-11.0 if sector else cy+1.0
+                    pos[branch]=(23.0,by)
+                    kids=children[branch]
+                    for k,kid in enumerate(kids):
+                        pos[kid]=(28.0,by+(k-(len(kids)-1)/2)*2.4)
+    # Country-only observations orbit closer to the root to avoid a long tail.
+    for j,cid in enumerate(leaves):
+        a=(j+0.5)*2*math.pi/max(len(leaves),1)
+        pos[cid]=(7.5+2.0*math.cos(a), 12.0*math.sin(a))
+    # Companies are outer satellites; multi-factor edges converge on one node.
+    companies=[nid for nid,n in nodes.items() if n['kind']=='company']
+    for market in ('Global','USA','India'):
+        subset=[cid for cid in companies if any(p.startswith('factor:'+market+':') for p in parents[cid])]
+        for j,cid in enumerate(subset):
+            ps=[pos[p] for p in parents[cid] if p in pos]
+            mean_y=sum(p[1] for p in ps)/len(ps) if ps else 0.0
+            pos[cid]=(-30.0 if market=='Global' else 34.0,mean_y+(j-(len(subset)-1)/2)*1.6)
+    for nid in nodes:pos.setdefault(nid,(0.,0.))
+    return pos
 
 
 def layout(nodes,edges):
@@ -198,7 +292,7 @@ def layout(nodes,edges):
 
 def make_figure(nodes,edges,selected=None):
     """Curved, translucent network edges and colored floating nodes, inspired by the supplied reference."""
-    pos=layout(nodes,edges);fig=go.Figure()
+    pos=galaxy_layout(nodes,edges);fig=go.Figure()
     from collections import defaultdict
     segments=defaultdict(lambda: ([],[]))
     for a,b in edges:
@@ -226,7 +320,7 @@ def make_figure(nodes,edges,selected=None):
             mode='markers+text',
             text=[n['label'][:17]+'…' if len(n['label'])>18 else n['label'] for n in items],
             textposition='top center',textfont=dict(size=10,color='#d8e5f7'),
-            marker=dict(size=[33 if n['id']==selected else (30 if kind=='root' else 12+min((n['score'] or 40)/8,13)) for n in items],
+            marker=dict(size=[42 if kind=='root' else (12+31*math.sqrt(max(0.,min(100.,n['score']))/100.) if n['score'] is not None else 16) + (5 if n['id']==selected else 0) for n in items],
                         color=[COLORS.get(n['quadrant'],'#a1b3ce') if kind!='root' else '#a77cff' for n in items],
                         line=dict(color='#dbe9ff',width=1.1),opacity=.92),
             customdata=[[n['id']] for n in items],
@@ -234,12 +328,12 @@ def make_figure(nodes,edges,selected=None):
     fig.update_layout(template='plotly_dark',paper_bgcolor='#0b1220',plot_bgcolor='#0b1220',
         height=850,margin=dict(l=12,r=12,t=12,b=12),dragmode='pan',clickmode='event+select',
         xaxis=dict(visible=False,scaleanchor='y',scaleratio=1),yaxis=dict(visible=False),
-        uirevision='capital_country_equity_parallel_v3',hovermode='closest')
+        uirevision='capital_galaxy_v1',hovermode='closest')
     return fig
 
 def render_capital_network():
-    st.title('🌐 Global Capital Intelligence Network')
-    st.caption('Global → Country → Assets → Equity → **Sectors | Factors** → Companies · Not measured capital flows')
+    st.title('🌌 Global Capital Intelligence Galaxy')
+    st.caption('Left: Global → Assets → Equity → Factors · Right: Global → Countries → Assets → Equity → Sectors | Factors · Planet size = score (not measured capital flows)')
     c1,c2,c3=st.columns([1.5,2.6,1.2])
     with c1:lookback=st.select_slider('RELATIVE TIME',options=list(country_market_data.LOOKBACKS),value='3M')
     with c2:period=st.date_input('FROM DATE → TO DATE',value=(date.today()-timedelta(days=365),date.today()),max_value=date.today())
@@ -258,7 +352,7 @@ def render_capital_network():
             try:pieces.append(parse_holdings(file,source=file.name))
             except Exception as exc:st.warning(f'{file.name}: {exc}')
         if pieces:holdings=pd.concat(pieces,ignore_index=True)
-    requested=['Countries','USA Assets','India Assets','USA Sectors','India Sectors']+[m+' Factors' for m in factor_markets if m in ('USA','India')]
+    requested=['Countries','Global Assets','Global Factors','USA Assets','India Assets','USA Sectors','India Sectors']+[m+' Factors' for m in factor_markets if m in ('USA','India')]
     layers={};reports={};errors={}
     with st.spinner('Loading market data and constructing the network…'):
         for layer in requested:
@@ -292,5 +386,5 @@ def render_capital_network():
             neighbors=[nodes[t] for x,y in edges for t in ([y] if x==selected else [x] if y==selected else []) if t in nodes]
             if neighbors:st.dataframe(pd.DataFrame([{'Connected node':x['label'],'Type':x['kind'],'Rotation score':x['score']} for x in neighbors]),hide_index=True,use_container_width=True)
             if n['layer']:st.caption(f"Source: {n['layer']} · Symbol: {n['ticker']} · Relative strength: {n['relative']:+.2f}%")
-    st.caption(f'{len(nodes)} nodes · {len(edges)} relationships · Green: Leading · Blue: Improving · Amber: Weakening · Red: Lagging. Scores are peer-relative and do not measure capital inflows.')
+    st.caption(f'{len(nodes)} planets · {len(edges)} relationships · Green: Leading · Blue: Improving · Amber: Weakening · Red: Lagging. Scores are peer-relative and do not measure capital inflows.')
     if holdings is None:st.caption('Factor → company connections require uploaded constituent weights. Sector → company connections require separate verified sector constituents. Other countries show country scores only until country asset data is available.')
