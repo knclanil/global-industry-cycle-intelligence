@@ -42,19 +42,46 @@ def normalize(frame,pid,asof,fund_title=None):
         out=out.loc[valid]
     out=out.dropna(subset=['weight'])
     out=out[(out.weight>=0)&(out.weight<=100)&(out.company!='')]
-    out['issuer_id']=np.where(out['isin'].isin(['','NAN','NONE']), 'TICKER:'+out.ticker,'ISIN:'+out['isin'])
-    out=out[~out.issuer_id.isin(['TICKER:','TICKER:NAN','TICKER:NONE'])]
-    if out.empty:raise ValueError('No valid equity issuer holdings')
+    # A ticker is not globally unique. Normalize country for stable identifiers.
+    import re
+    country_codes = {'United States':'US','United Kingdom':'GB','Australia':'AU',
+                     'Spain':'ES','France':'FR','Switzerland':'CH','Germany':'DE',
+                     'Japan':'JP','Canada':'CA','Italy':'IT','Netherlands':'NL',
+                     'Sweden':'SE','Denmark':'DK','Norway':'NO','Finland':'FI',
+                     'Hong Kong':'HK','China':'CN','Taiwan':'TW','South Korea':'KR',
+                     'Singapore':'SG','India':'IN','Belgium':'BE','Ireland':'IE',
+                     'Israel':'IL','Brazil':'BR','Mexico':'MX','New Zealand':'NZ',
+                     'South Africa':'ZA','Portugal':'PT','Austria':'AT'}
+    out['country_code'] = out.country.map(country_codes).fillna('')
+    # Unknown countries retain their normalized full label, preventing collisions.
+    out['country_key'] = out.country_code.where(out.country_code.ne(''),
+        out.country.astype(str).str.strip().str.upper())
+    out = out[~out.ticker.isin(['','NAN','NONE','-'])].copy()
+    out = out[~out.country_key.isin(['','NAN','NONE','NOT PROVIDED','-'])].copy()
+    if out.empty: raise ValueError('No equity holdings with verified ticker and country')
+    # A ticker occurring in multiple countries gets an explicit country suffix.
+    multi_country = out.groupby('ticker').country_key.transform('nunique').gt(1)
+    out['display_ticker'] = out.ticker.where(~multi_country,
+        out.ticker + '-' + out.country_code.where(out.country_code.ne(''),
+            out.country_key.str.replace(r'[^A-Z0-9]', '', regex=True)))
+    # Do not silently combine different named companies in the same country.
+    conflicts = out.groupby(['ticker','country_key']).company.nunique()
+    if (conflicts > 1).any():
+        bad = conflicts[conflicts > 1].index.tolist()[:5]
+        raise ValueError(f'Conflicting companies for identical ticker and country: {bad}')
+    # Aggregate duplicate ticker/country positions *within the same ETF* only.
+    # Keep the source record count for auditing and sum weights (not averages).
+    keys=['portfolio_id','ticker','country_key']
+    out['source_rows'] = 1
+    fields={c:'first' for c in out.columns if c not in keys+['weight','source_rows']}
+    fields.update({'weight':'sum','source_rows':'sum'})
+    out=out.groupby(keys,as_index=False,sort=False).agg(fields)
+    # Country-qualified issuer IDs are stable across ETFs; never use ticker alone.
+    out['issuer_id']='TICKER_COUNTRY:'+out.ticker+'|'+out.country_key
+    out['ticker']=out.display_ticker
+    out=out.drop(columns=['display_ticker','country_key','country_code'])
     if out.duplicated(['portfolio_id','issuer_id']).any():
-        # A ticker collision is not proof of a shared issuer. Keep distinct
-        # names separate and ETF-local until their identities are verified.
-        import hashlib
-        duplicates = out.duplicated(['portfolio_id','issuer_id'], keep=False)
-        out.loc[duplicates, 'issuer_id'] = out.loc[duplicates].apply(
-            lambda r: 'UNRESOLVED:'+str(pid)+':'+hashlib.sha256(
-                (str(r['ticker'])+'|'+str(r['company'])).encode()).hexdigest()[:20], axis=1)
-        if out.duplicated(['portfolio_id','issuer_id']).any():
-            raise ValueError('Repeated identical issuer/security identifiers require review')
+        raise ValueError('Ticker-country consolidation did not yield unique ETF holdings')
     return out.reset_index(drop=True)
 
 def rank_companies(current,previous=None, factor_ids=None, factor_category="factor", sector_category="sector"):
