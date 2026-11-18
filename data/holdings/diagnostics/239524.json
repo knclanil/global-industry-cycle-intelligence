@@ -1,6 +1,6 @@
 {
   "portfolio_id": "239524",
-  "timestamp_utc": "2026-11-18T19:27:48.629453+00:00",
+  "timestamp_utc": "2026-11-18T19:46:46.176141+00:00",
   "error": "Holdings table recognized, but issuer-declared holdings-as-of date missing",
   "status_code": 200,
   "content_type": "text/csv",
@@ -19,5 +19,9 @@
     "Other",
     "Ticker",
     "The content contained herein is owned or licensed by BlackRock an"
-  ]
+  ],
+  "holdings_date_raw": [
+    "-"
+  ],
+  "holdings_date_parsed": null
 }
