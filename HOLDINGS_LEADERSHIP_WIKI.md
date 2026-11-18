@@ -35,3 +35,9 @@ Ten further BlackRock iShares portfolio IDs have been received: **239740, 239744
 ## Refresh failure diagnosis and parser update
 
 The first GitHub Actions run rejected all 18 sources because the previous parser could not verify holdings-as-of dates. The updated parser checks common iShares CSV metadata preambles (including quoted dates with month names), CSV table offsets, and Excel workbook metadata; it never treats the requested URL date as the published holdings date. Live BlackRock responses were not accessible in the build environment, so this adapter is **not yet validated against the actual endpoint response**. If the API returns JSON or a different schema, capture a sanitized response content-type and the first metadata lines for a source-specific adapter. No source failure should be interpreted as a removed holding.
+
+## BlackRock reference-collector adapter (November 2026)
+
+The holdings refresh parser now supports variable preambles, UTF-8/UTF-16 CSV, Excel, alternate ticker/name/weight headers, and issuer-declared dates including `Fund Holdings as of` and `17-Nov-2026`. These adaptations follow the supplied Factor Holdings Intelligence collectors (`collect_provided_sources_v1_8_1.py`, `collect_blackrock_v1_8_5.py`). The URL's `asOfDate` parameter is **not** accepted as evidence of the actual published holdings date.
+
+The 10 additional portfolio IDs are fetched for format/date diagnostics but remain excluded from company ranking until their factor/sector classification is verified. An incomplete refresh never overwrites the prior ranking or treats unavailable holdings as removals. Green GitHub Actions status means the job ran; check for `Saved ... company rankings` to confirm successful ingestion.

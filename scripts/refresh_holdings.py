@@ -19,88 +19,106 @@ import requests
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from holdings_intelligence import STORE, SOURCES, url_for, normalize, rank_companies
 
-HEADER_FIELDS = {'ticker', 'name', 'sector', 'asset class', 'weight (%)'}
-DATE_LABEL = re.compile(r'^(?:fund\s+)?holdings\s+as\s+of$|^as\s+of\s+date$|^holdings\s+date$|^data\s+as\s+of$', re.I)
+# Adapted from the supplied Factor Holdings Intelligence collectors v1.8.1/v1.8.5.
+# Their key insight: metadata may be embedded in one cell or spread across rows;
+# headers vary, and issuer-declared effective date must be parsed independently.
+HEADER_ALIASES = {
+    'ticker': {'ticker','tickersymbol','symbol','securityticker','stockticker','holdingsticker'},
+    'weight': {'weight','weightpct','weightpercent','weightpercentage','portfolioweight','weighting','weightofnetassets','percentofnetassets','netassetspercent','ofnetassets'},
+    'name': {'name','securityname','description','securitydescription','companyname'},
+}
+
+def _norm(value):
+    return re.sub(r'[^a-z0-9]', '', str(value).lower())
 
 def _date(value):
-    value = str(value).strip().strip('"\'').strip()
+    value = str(value).strip().strip('\"\'').strip()
+    if not value: return None
     try:
         dt = pd.to_datetime(value, errors='raise')
-        if pd.isna(dt): return None
-        return dt.date().isoformat()
+        return dt.date().isoformat() if pd.notna(dt) else None
     except (ValueError, TypeError, OverflowError):
         return None
 
+DATE_PATTERNS = [
+    re.compile(r'(?:fund\s+)?holdings\s+as\s+of\s*[,;:\t\" ]+\s*([0-9]{1,2}[-/][A-Za-z]{3,9}[-/][0-9]{2,4}|[A-Za-z]{3,9}\s+[0-9]{1,2},?\s+[0-9]{2,4}|[0-9]{1,2}/[0-9]{1,2}/[0-9]{2,4}|[0-9]{4}-[0-9]{2}-[0-9]{2})', re.I),
+    re.compile(r'(?:fund\s+)?holdings\s*[,;:\t\" ]+\s*([0-9]{1,2}[-/][A-Za-z]{3,9}[-/][0-9]{2,4}|[A-Za-z]{3,9}\s+[0-9]{1,2},?\s+[0-9]{2,4}|[0-9]{4}-[0-9]{2}-[0-9]{2})', re.I),
+    re.compile(r'(?:effective\s+date|portfolio\s+date|holdings\s+date|data\s+as\s+of|as\s+of\s+date)\s*[,;:\t\" ]+\s*([0-9]{1,2}[-/][A-Za-z]{3,9}[-/][0-9]{2,4}|[A-Za-z]{3,9}\s+[0-9]{1,2},?\s+[0-9]{2,4}|[0-9]{4}-[0-9]{2}-[0-9]{2})', re.I),
+]
+
 def _metadata_date(rows):
     for row in rows:
-        cells = [str(c).strip().strip('"') for c in row]
-        if len(cells) >= 2 and DATE_LABEL.fullmatch(cells[0]):
-            result = _date(cells[1])
-            if result: return result
-        # Some exports combine the label and date into one cell.
-        if cells:
-            match = re.match(r'^(?:Fund\s+)?Holdings\s+as\s+of\s*[:\-]\s*(.+)$', cells[0], re.I)
+        cells = [str(v).strip() for v in row]
+        for i, cell in enumerate(cells):
+            if _norm(cell) in {'fundholdingsasof','holdingsasof','asofdate','holdingsdate','dataasof','effectivedate','portfoliodate'}:
+                for next_cell in cells[i+1:i+3]:
+                    result = _date(next_cell)
+                    if result: return result
+        joined = ' '.join(c for c in cells if c)
+        for pattern in DATE_PATTERNS:
+            match = pattern.search(joined)
             if match:
                 result = _date(match.group(1))
                 if result: return result
     return None
 
 def _header_index(rows):
-    for i, row in enumerate(rows):
-        fields = {str(c).strip().lower().replace('\ufeff', '') for c in row}
-        if {'name', 'weight (%)'}.issubset(fields) and ('ticker' in fields or 'isin' in fields):
+    for i, row in enumerate(rows[:160]):
+        fields = {_norm(c) for c in row}
+        if fields & HEADER_ALIASES['ticker'] and fields & HEADER_ALIASES['weight'] and fields & HEADER_ALIASES['name']:
             return i
     return None
 
-def _parse_csv(blob):
-    text = blob.decode('utf-8-sig')
-    if text.lstrip().startswith(('{', '<', '<!')):
-        raise ValueError('Source returned JSON or HTML, not holdings CSV')
-    # csv.reader respects quoted commas in the metadata, securities and disclaimer.
-    for delimiter in (',', '\t', ';'):
-        try:
-            rows = list(csv.reader(io.StringIO(text, newline=''), delimiter=delimiter))
-        except csv.Error:
+def _rows_to_frame(rows):
+    idx = _header_index(rows)
+    if idx is None: raise ValueError('No recognized holdings table (ticker/name/weight)')
+    asof = _metadata_date(rows[:idx])
+    if not asof: raise ValueError('Holdings table recognized, but issuer-declared holdings-as-of date missing')
+    raw_header = [str(c).strip() for c in rows[idx]]
+    header = []
+    for c in raw_header:
+        key = _norm(c)
+        if key in HEADER_ALIASES['ticker']: c = 'Ticker'
+        elif key in HEADER_ALIASES['name']: c = 'Name'
+        elif key in HEADER_ALIASES['weight']: c = 'Weight (%)'
+        header.append(c)
+    if len(header) != len(set(header)):
+        raise ValueError('Ambiguous duplicate normalized header columns')
+    records = []
+    for row in rows[idx+1:]:
+        if len(row) != len(header):
+            if records: break
             continue
-        idx = _header_index(rows[:100])
-        if idx is None: continue
-        asof = _metadata_date(rows[:idx])
-        if not asof:
-            raise ValueError('Holdings table recognized, but document holdings-as-of date missing')
-        header = [c.strip() for c in rows[idx]]
-        records = []
-        for row in rows[idx + 1:]:
-            # BlackRock's long copyright disclaimer is often a quoted multiline CSV cell.
-            if len(row) != len(header):
-                if records: break
-                continue
-            item = dict(zip(header, row))
-            if not item.get('Name', '').strip() or not item.get('Weight (%)', '').strip():
-                if records: break
-                continue
-            records.append(item)
-        if not records: raise ValueError('Recognized CSV header but no holdings records')
-        return pd.DataFrame.from_records(records), asof
+        item = dict(zip(header,row))
+        if not str(item.get('Name','')).strip() or not str(item.get('Weight (%)','')).strip():
+            if records: break
+            continue
+        records.append(item)
+    if not records: raise ValueError('No holdings records after recognized header')
+    return pd.DataFrame.from_records(records), asof
+
+def _parse_csv(blob):
+    if blob.startswith((b'\xff\xfe',b'\xfe\xff')): text=blob.decode('utf-16')
+    else:
+        try: text=blob.decode('utf-8-sig')
+        except UnicodeDecodeError: text=blob.decode('cp1252')
+    if text.lstrip().lower().startswith(('{','<','<!')):
+        raise ValueError('Source returned JSON or HTML, not holdings CSV')
+    for delimiter in (',','\t',';'):
+        rows = list(csv.reader(io.StringIO(text,newline=''),delimiter=delimiter))
+        if _header_index(rows) is not None: return _rows_to_frame(rows)
     raise ValueError('No recognized iShares CSV holdings header')
 
 def _parse_excel(blob):
-    book = pd.ExcelFile(io.BytesIO(blob))
+    book=pd.ExcelFile(io.BytesIO(blob))
     for sheet in book.sheet_names:
-        raw = pd.read_excel(book, sheet_name=sheet, header=None, dtype=str)
-        rows = raw.fillna('').values.tolist()
-        idx = _header_index(rows[:100])
-        if idx is None: continue
-        asof = _metadata_date(rows[:idx])
-        if not asof: raise ValueError('Excel holdings table recognized, but as-of date missing')
-        header = [str(c).strip() for c in rows[idx]]
-        frame = pd.DataFrame(rows[idx + 1:], columns=header)
-        frame = frame[frame.get('Name', pd.Series(dtype=str)).astype(str).str.strip().ne('')]
-        return frame, asof
+        raw=pd.read_excel(book,sheet_name=sheet,header=None,dtype=str,keep_default_na=False)
+        rows=raw.fillna('').values.tolist()
+        if _header_index(rows) is not None: return _rows_to_frame(rows)
     raise ValueError('No recognized holdings header in Excel workbook')
 
 def parse_document(blob):
-    if blob[:2] == b'PK' or blob[:4] == b'\xd0\xcf\x11\xe0':
-        return _parse_excel(blob)
+    if blob[:2]==b'PK' or blob[:4]==b'\xd0\xcf\x11\xe0': return _parse_excel(blob)
     return _parse_csv(blob)
 
 def _safe_diagnostic(pid, response=None, error=None):
@@ -114,6 +132,13 @@ def _safe_diagnostic(pid, response=None, error=None):
                        content_length=len(response.content),
                        body_sha256=hashlib.sha256(response.content).hexdigest(),
                        detected_magic=response.content[:8].hex())
+        # Diagnostic metadata only: never publish constituent rows or raw documents.
+        try:
+            body=response.content
+            decoded=body.decode('utf-16' if body.startswith((b'\xff\xfe',b'\xfe\xff')) else 'utf-8-sig',errors='replace')
+            lines=decoded.splitlines()[:12]
+            details['metadata_labels']=[re.sub(r'[^a-zA-Z ]','',line.split(',')[0])[:65] for line in lines if line.strip()][:10]
+        except Exception: pass
     # Never upload raw HTML response, URL query strings or response cookies.
     (path / f'{pid}.json').write_text(json.dumps(details, indent=2), encoding='utf-8')
 
@@ -123,23 +148,29 @@ def refresh():
     session.headers.update({'User-Agent': 'Mozilla/5.0', 'Accept': 'text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/octet-stream,*/*'})
     successes, failures = [], []
     today = datetime.now(timezone.utc).strftime('%Y%m%d')
-    for pid in SOURCES:
+    pending_path = STORE / 'pending_sources.json'
+    pending = json.loads(pending_path.read_text()).get('portfolio_ids', []) if pending_path.exists() else []
+    all_sources = list(dict.fromkeys([*SOURCES, *pending]))
+    for pid in all_sources:
         response = None
         try:
             response = session.get(url_for(pid, today), timeout=45)
             response.raise_for_status()
             if len(response.content) < 100: raise ValueError('Empty or suspiciously short response')
             frame, asof = parse_document(response.content)
-            df = normalize(frame, pid, asof)
-            successes.append(df)
-            print(f'{pid}: verified {len(df)} equity holdings as of {asof}', flush=True)
+            if pid in SOURCES:
+                df = normalize(frame, pid, asof)
+                successes.append(df)
+                print(f'{pid}: verified {len(df)} equity holdings as of {asof}', flush=True)
+            else:
+                print(f'{pid}: document parsed as of {asof}; category pending, excluded from rankings', flush=True)
             (STORE / 'diagnostics' / f'{pid}.json').unlink(missing_ok=True)
         except Exception as exc:
             failures.append(f'{pid}: {exc}')
             _safe_diagnostic(pid, response, exc)
     for msg in failures: print('WARNING', msg, file=sys.stderr)
     if failures:
-        print(f'SKIPPED ranking update: {len(failures)} of {len(SOURCES)} sources unavailable or unverified. '
+        print(f'SKIPPED ranking update: {len(failures)} of {len(all_sources)} sources unavailable or unverified. '
               'Prior verified rankings are preserved; no removals inferred. See data/holdings/diagnostics.', file=sys.stderr)
         # A scheduled fetch should not be marked failed for upstream data issues.
         # CI can opt into strict mode for debugging.
