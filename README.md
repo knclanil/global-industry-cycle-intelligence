@@ -154,3 +154,7 @@ The workflow `.github/workflows/nightly-market-refresh.yml` runs after NSE and U
 **Initial setup:** enable GitHub Actions with read/write workflow permissions (`Settings → Actions → General → Workflow permissions → Read and write permissions`), then open `Actions → Incremental market data refresh → Run workflow → all`. The workflow's default branch must be the deployment branch. The initial historical bootstrap downloads five years; subsequent refreshes request a 10-calendar-day overlap and replace revised dates. On provider failure existing snapshots remain untouched; see `data/market/refresh_*.json` and workflow logs.
 
 The dashboard loads committed snapshots rather than fetching live prices on normal interactions; until the first bootstrap it falls back to existing live downloads for continuity. `st.cache_data` still caches loaded frames for one hour; a redeploy or cache expiry loads new commits. Price-provider redistribution terms should be checked before using a public repository. This workflow stores prices, **not precomputed RS/momentum scores**, which remain date-range-dependent.
+
+
+## USA Company Holdings Leadership
+The **USA Company Holdings Leadership** page and [methodology wiki](HOLDINGS_LEADERSHIP_WIKI.md) rank verified issuer holdings across 7 factor and 11 sector iShares portfolios. A separate [GitHub Actions workflow](.github/workflows/holdings-refresh.yml) attempts automatic verified refresh. Upstream files must expose verifiable as-of dates; failed sources never trigger false removals.

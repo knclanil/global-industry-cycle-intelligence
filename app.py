@@ -14,7 +14,7 @@ NAV_GROUPS = {
     '💰 ASSET CLASS ANALYSIS': ['Global Asset Flow', 'USA Asset Flow', 'India Asset Flow'],
     '📊 SECTOR ANALYSIS': ['Global Sectors', 'USA Sector', 'India Sector'],
     '🧩 FACTOR ANALYSIS': ['Global Factors', 'USA Factors', 'India Factors', 'Factor Holdings Comparison'],
-    '📚 DATA & RESEARCH': ['Data Table', 'Wiki'],
+    '📚 DATA & RESEARCH': ['USA Company Holdings Leadership', 'Data Table', 'Wiki'],
 }
 PAGE_ICONS = {
     'Global Capital Intelligence Network': '🕸️',
@@ -22,7 +22,7 @@ PAGE_ICONS = {
     'Global Asset Flow': '🌍', 'USA Asset Flow': '🇺🇸', 'India Asset Flow': '🇮🇳',
     'Global Sectors': '🌍', 'USA Sector': '🇺🇸', 'India Sector': '🇮🇳',
     'Global Factors': '🌍', 'USA Factors': '🇺🇸', 'India Factors': '🇮🇳',
-    'Factor Holdings Comparison': '📋', 'Data Table': '🗂️', 'Wiki': '📖',
+    'USA Company Holdings Leadership': '🏆', 'Factor Holdings Comparison': '📋', 'Data Table': '🗂️', 'Wiki': '📖',
 }
 ALL_PAGES = [item for items in NAV_GROUPS.values() for item in items]
 if st.session_state.get('selected_page') not in ALL_PAGES:
@@ -64,6 +64,9 @@ page = st.session_state.selected_page
 if page == 'Global Capital Intelligence Network':
     from capital_network import render_capital_network
     render_capital_network()
+elif page == 'USA Company Holdings Leadership':
+    from holdings_intelligence import render_holdings_intelligence
+    render_holdings_intelligence()
 elif page == 'Factor Holdings Comparison':
     from factor_holdings import render_factor_holdings
     render_factor_holdings()
@@ -71,9 +74,9 @@ elif page == 'Data Table':
     from data_table import render_data_table
     render_data_table()
 elif page == 'Wiki':
-    region=st.radio('Documentation for', ['Global Sectors', 'Global Countries', 'Global Factors', 'Global Asset Flow', 'USA Sector', 'USA Factors', 'USA Asset Flow', 'India Sector', 'India Factors', 'India Asset Flow', 'Factor Holdings Comparison'], horizontal=True)
+    region=st.radio('Documentation for', ['Global Sectors', 'Global Countries', 'Global Factors', 'Global Asset Flow', 'USA Sector', 'USA Factors', 'USA Asset Flow', 'India Sector', 'India Factors', 'India Asset Flow', 'Factor Holdings Comparison', 'USA Company Holdings Leadership'], horizontal=True)
     st.title(f'{region} Wiki')
-    filename = {'India Sector': 'INDIA_WIKI.md', 'Global Sectors': 'GLOBAL_WIKI.md', 'Global Countries': 'COUNTRIES_WIKI.md', 'Global Factors': 'GLOBAL_FACTORS_WIKI.md', 'USA Factors': 'USA_FACTORS_WIKI.md', 'India Factors': 'INDIA_FACTORS_WIKI.md', 'Global Asset Flow': 'GLOBAL_ASSET_WIKI.md', 'USA Asset Flow': 'USA_ASSET_WIKI.md', 'India Asset Flow': 'INDIA_ASSET_WIKI.md', 'Factor Holdings Comparison': 'FACTOR_HOLDINGS_WIKI.md'}.get(region, 'WIKI.md')
+    filename = {'India Sector': 'INDIA_WIKI.md', 'Global Sectors': 'GLOBAL_WIKI.md', 'Global Countries': 'COUNTRIES_WIKI.md', 'Global Factors': 'GLOBAL_FACTORS_WIKI.md', 'USA Factors': 'USA_FACTORS_WIKI.md', 'India Factors': 'INDIA_FACTORS_WIKI.md', 'Global Asset Flow': 'GLOBAL_ASSET_WIKI.md', 'USA Asset Flow': 'USA_ASSET_WIKI.md', 'India Asset Flow': 'INDIA_ASSET_WIKI.md', 'Factor Holdings Comparison': 'FACTOR_HOLDINGS_WIKI.md', 'USA Company Holdings Leadership': 'HOLDINGS_LEADERSHIP_WIKI.md'}.get(region, 'WIKI.md')
     path=Path(__file__).resolve().parent / filename
     if path.is_file():
         st.markdown(path.read_text(encoding='utf-8'))

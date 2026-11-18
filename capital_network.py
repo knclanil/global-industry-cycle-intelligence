@@ -495,6 +495,30 @@ def render_capital_network():
     if not layers:
         st.error('No validated market data is available for the selected dates.');return
     nodes,edges=build_unified_graph(layers,top_n,holdings,factor_markets)
+    # Add only verified, ranked holdings from stored snapshots; never synthesize links.
+    try:
+        from holdings_intelligence import STORE
+        rankings_path=STORE/'company_rankings.parquet'
+        latest_path=STORE/'latest_holdings.parquet'
+        if rankings_path.exists() and latest_path.exists():
+            leaders=pd.read_parquet(rankings_path).head(top_n)
+            verified=pd.read_parquet(latest_path)
+            for _,company in leaders.iterrows():
+                cid='company:'+str(company['issuer_id'])
+                if cid not in nodes:
+                    nodes[cid]=node(cid,company['company'],'company')
+                nodes[cid]['score']=float(company['final_score'])
+                for _,holding in verified[verified.issuer_id==company['issuer_id']].iterrows():
+                    kind='factor' if holding.category=='factor' else 'sector'
+                    parent=f'USA:holding:{kind}:{holding.portfolio_id}'
+                    group=f'USA:{"factors" if kind=="factor" else "sectors"}'
+                    if group not in nodes:continue
+                    if parent not in nodes:
+                        nodes[parent]=node(parent,holding.portfolio_id,kind)
+                        edges.append((group,parent))
+                    if (parent,cid) not in edges:edges.append((parent,cid))
+    except (OSError,ValueError,KeyError) as exc:
+        st.warning(f'Verified holdings network unavailable: {exc}')
     selected=st.session_state.get('capital_selected')
     if selected not in nodes:selected=None
     event=st.plotly_chart(make_figure(nodes,edges,selected),use_container_width=True,
