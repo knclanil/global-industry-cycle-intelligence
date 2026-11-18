@@ -246,26 +246,27 @@ def refresh():
         keys = ['portfolio_id', 'issuer_id']
         a = current.sort_values(keys).reset_index(drop=True)
         b = previous.sort_values(keys).reset_index(drop=True)
-        if a.equals(b) and (STORE/'global_factor_rankings.parquet').exists() and (STORE/'coverage.json').exists():
+        if a.equals(b) and (STORE/'global_company_rankings.parquet').exists() and (STORE/'coverage.json').exists():
             print('No new verified holdings changes')
             return 0
     ranking_previous=previous[previous.category.isin(['factor','sector'])].copy() if previous is not None else None
     ranking, changes = rank_companies(ranking_current, ranking_previous)
-    # Independent Global Factor leaderboard; no USA scores or sector ETFs are mixed in.
-    gf = current[current.category == 'global_factor'].copy()
-    if not gf.empty:
-        gf['weight'] = pd.to_numeric(gf.weight)
-        gf['relative_strength'] = gf.groupby('portfolio_id').weight.transform(
-            lambda weights: (weights / max(float(weights.quantile(.9)), 1e-8)).clip(upper=1))
-        gf_rank = gf.groupby('issuer_id', as_index=False).agg(
-            company=('company','first'), ticker=('ticker','first'),
-            fund_coverage=('portfolio_id','nunique'),
-            relative_weight=('relative_strength','mean'))
-        gf_rank['leadership_score'] = (100*(.55*gf_rank.fund_coverage/len(GLOBAL_FACTORS) + .45*gf_rank.relative_weight)).round(2)
-        gf_rank = gf_rank.sort_values(['leadership_score','fund_coverage','issuer_id'],ascending=[False,False,True]).reset_index(drop=True)
-        gf_rank.insert(0,'rank',range(1,len(gf_rank)+1))
-        gf_rank.to_parquet(STORE/'global_factor_rankings.parquet',index=False)
-        print(f'Saved {len(gf_rank)} separate Global Factor company rankings')
+    # Fully independent Global leadership: Global Factor + Global Sector.
+    # A missing source is not a removal: previous is restricted to successfully
+    # verified ETFs above, before either universe is compared.
+    global_current = current[current.category.isin(['global_factor','global_sector'])].copy()
+    global_previous = previous[previous.category.isin(['global_factor','global_sector'])].copy() if previous is not None else None
+    if not global_current.empty:
+        global_rank, global_changes = rank_companies(
+            global_current, global_previous, factor_ids=GLOBAL_FACTORS,
+            factor_category='global_factor', sector_category='global_sector')
+        global_rank.to_parquet(STORE/'global_company_rankings.parquet', index=False)
+        if global_changes.empty:
+            global_changes = pd.DataFrame(columns=['portfolio_id','issuer_id','company','event','previous_weight','current_weight','previous_as_of','current_as_of','points'])
+        global_changes.to_parquet(STORE/'global_latest_changes.parquet',index=False)
+        print(f'Saved {len(global_rank)} independent Global company rankings')
+    else:
+        print('No verified Global ETF sources; preserving previous Global rankings')
     # Existing ETFs may have the same issuer date; only compare genuinely newer snapshots.
     # Missing ETFs are excluded above, never treated as removed.
     coverage = {'verified_active_etfs': sorted(current.portfolio_id.unique().tolist()),
