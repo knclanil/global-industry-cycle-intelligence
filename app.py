@@ -6,14 +6,17 @@ st.set_page_config(page_title='Global Industry Cycle Intelligence', page_icon='ð
 st.markdown("""<style>.stApp{background:#0b1220;color:#e7eef9}
 [data-testid="stMetric"]{background:#142137;border:1px solid #2a3c55;border-radius:12px;padding:16px}
 [data-testid="stMetricLabel"]{color:#b6c7de}</style>""", unsafe_allow_html=True)
-page=st.sidebar.radio('NAVIGATION', ['Global Sectors', 'Global Countries', 'Global Factors', 'Global Asset Flow', 'USA Sector', 'USA Factors', 'USA Asset Flow', 'India Sector', 'India Factors', 'India Asset Flow', 'Data Table', 'Wiki'], key='main_navigation')
-if page == 'Data Table':
+page=st.sidebar.radio('NAVIGATION', ['Global Sectors', 'Global Countries', 'Global Factors', 'Global Asset Flow', 'USA Sector', 'USA Factors', 'USA Asset Flow', 'India Sector', 'India Factors', 'India Asset Flow', 'Factor Holdings Comparison', 'Data Table', 'Wiki'], key='main_navigation')
+if page == 'Factor Holdings Comparison':
+    from factor_holdings import render_factor_holdings
+    render_factor_holdings()
+elif page == 'Data Table':
     from data_table import render_data_table
     render_data_table()
 elif page == 'Wiki':
-    region=st.radio('Documentation for', ['Global Sectors', 'Global Countries', 'Global Factors', 'Global Asset Flow', 'USA Sector', 'USA Factors', 'USA Asset Flow', 'India Sector', 'India Factors', 'India Asset Flow'], horizontal=True)
+    region=st.radio('Documentation for', ['Global Sectors', 'Global Countries', 'Global Factors', 'Global Asset Flow', 'USA Sector', 'USA Factors', 'USA Asset Flow', 'India Sector', 'India Factors', 'India Asset Flow', 'Factor Holdings Comparison'], horizontal=True)
     st.title(f'{region} Wiki')
-    filename = {'India Sector': 'INDIA_WIKI.md', 'Global Sectors': 'GLOBAL_WIKI.md', 'Global Countries': 'COUNTRIES_WIKI.md', 'Global Factors': 'GLOBAL_FACTORS_WIKI.md', 'USA Factors': 'USA_FACTORS_WIKI.md', 'India Factors': 'INDIA_FACTORS_WIKI.md', 'Global Asset Flow': 'GLOBAL_ASSET_WIKI.md', 'USA Asset Flow': 'USA_ASSET_WIKI.md', 'India Asset Flow': 'INDIA_ASSET_WIKI.md'}.get(region, 'WIKI.md')
+    filename = {'India Sector': 'INDIA_WIKI.md', 'Global Sectors': 'GLOBAL_WIKI.md', 'Global Countries': 'COUNTRIES_WIKI.md', 'Global Factors': 'GLOBAL_FACTORS_WIKI.md', 'USA Factors': 'USA_FACTORS_WIKI.md', 'India Factors': 'INDIA_FACTORS_WIKI.md', 'Global Asset Flow': 'GLOBAL_ASSET_WIKI.md', 'USA Asset Flow': 'USA_ASSET_WIKI.md', 'India Asset Flow': 'INDIA_ASSET_WIKI.md', 'Factor Holdings Comparison': 'FACTOR_HOLDINGS_WIKI.md'}.get(region, 'WIKI.md')
     path=Path(__file__).resolve().parent / filename
     if path.is_file():
         st.markdown(path.read_text(encoding='utf-8'))
