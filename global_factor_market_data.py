@@ -2,6 +2,7 @@
 from datetime import date, timedelta
 import pandas as pd
 import market_data as core
+from india_market_data import _clean_provider_rows
 
 SECTORS = {'IWVL': 'Value', 'IWFG': 'Growth', 'IMTM': 'Momentum', 'IQLT': 'Quality', 'ACWV': 'Minimum Volatility', 'ISZE': 'Size', 'IDV': 'Dividend Yield'}
 BENCHMARK = 'ACWI'
@@ -32,7 +33,7 @@ def download(start: date, end: date) -> dict[str, pd.DataFrame]:
         else:
             continue
         frame.index = pd.DatetimeIndex(pd.to_datetime(frame.index)).tz_localize(None).normalize()
-        frame = frame.sort_index().dropna(how='all')
+        frame = _clean_provider_rows(frame.sort_index().dropna(how='all'))
         if not frame.empty:
             frames[ticker] = frame
     return frames

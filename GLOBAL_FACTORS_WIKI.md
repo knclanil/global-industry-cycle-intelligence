@@ -23,3 +23,8 @@ Sector/factor performance bars: 100×(P(end)/P(start)−1) minus 100×(B(end)/B(
 ## Data quality and limitations
 
 Checks flag missing benchmark, nonpositive/duplicate adjusted closes, unavailable factor series, missing benchmark-aligned sessions, stale observations and extreme moves. Missing factor series are omitted; benchmark failure stops calculations. PASS is a structural check, not proof of zero gaps or independent price reconciliation. NSE endpoints may block cloud requests. India factor indices have **no automatic Yahoo factor substitution** without a verified identical index series; only the Nifty 50 benchmark has a known Yahoo symbol (`^NSEI`). Data is fetched on demand, cached for one hour; the scheduled GitHub Action audits USA sectors only. No database. This is descriptive factor proxy rotation, not causal attribution, risk-adjusted factor premiums, or investment advice.
+
+
+### Unavailable ETF symbols
+
+Some proposed factor tickers, including `IWVL` and `ISZE`, may not return usable daily prices from Yahoo Finance. They are excluded, not assigned substitute data. Do not interpret a missing factor as neutral or lagging. A replacement fund must be verified for listing, benchmark, investment universe and history before changing the factor universe.

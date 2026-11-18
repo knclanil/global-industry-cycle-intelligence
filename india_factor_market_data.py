@@ -37,6 +37,8 @@ def download(start: date, end: date) -> dict[str, pd.DataFrame]:
     for ticker, name in NSE_NAMES.items():
         try:
             frame = india._nse_history(session, name, start, end)
+            if not india._structurally_valid(frame):
+                raise ValueError(f'NSE returned invalid OHLC for {name}')
             frame.attrs['source'] = 'NSE India'
             frames[ticker] = frame
         except (requests.RequestException, ValueError, KeyError, TypeError):

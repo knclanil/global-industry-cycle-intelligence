@@ -88,6 +88,29 @@ def _nse_history(session, name: str, start: date, end: date) -> pd.DataFrame:
     return frame
 
 
+def _clean_provider_rows(frame: pd.DataFrame) -> pd.DataFrame:
+    """Remove provider placeholder rows, never synthesize or forward-fill prices.
+
+    Duplicate timestamps are resolved only when their complete OHLC records
+    agree; conflicting duplicates are left intact for validation to reject.
+    """
+    frame = frame.copy()
+    required = ['Open', 'High', 'Low', 'Close', 'Adj Close']
+    if not set(required).issubset(frame.columns):
+        return frame
+    for col in required:
+        frame[col] = pd.to_numeric(frame[col], errors='coerce')
+    frame = frame.dropna(subset=required)
+    frame = frame.loc[(frame[required] > 0).all(axis=1)]
+    if frame.index.has_duplicates:
+        duplicate_rows = frame.loc[frame.index.duplicated(keep=False)]
+        consistent = all(group[required].eq(group[required].iloc[0]).all().all()
+                         for _, group in duplicate_rows.groupby(level=0))
+        if consistent:
+            frame = frame.loc[~frame.index.duplicated(keep='last')]
+    return frame.sort_index()
+
+
 def _yahoo_history(start: date, end: date) -> dict[str, pd.DataFrame]:
     import yfinance as yf
     raw = yf.download(TICKERS, start=start.isoformat(), end=(end + timedelta(days=1)).isoformat(),
@@ -114,10 +137,21 @@ def _yahoo_history(start: date, end: date) -> dict[str, pd.DataFrame]:
         elif 'Volume' in frame:
             frame['Volume'] = frame['Volume'].fillna(0)
         frame.index = pd.DatetimeIndex(pd.to_datetime(frame.index)).tz_localize(None).normalize()
-        frame = frame.sort_index().dropna(how='all')
+        frame = _clean_provider_rows(frame.sort_index().dropna(how='all'))
         if not frame.empty:
             frames[ticker] = frame
     return frames
+
+
+def _structurally_valid(frame: pd.DataFrame) -> bool:
+    required = ['Open', 'High', 'Low', 'Close', 'Adj Close']
+    if frame.empty or not set(required).issubset(frame.columns) or frame.index.has_duplicates:
+        return False
+    prices = frame[required]
+    if prices.isna().any().any() or (prices <= 0).any().any():
+        return False
+    return not ((frame['High'] < frame[['Open', 'Low', 'Close']].max(axis=1)) |
+                (frame['Low'] > frame[['Open', 'High', 'Close']].min(axis=1))).any()
 
 
 def download(start: date, end: date) -> dict[str, pd.DataFrame]:
@@ -137,6 +171,8 @@ def download(start: date, end: date) -> dict[str, pd.DataFrame]:
     for ticker, name in NSE_NAMES.items():
         try:
             frame = _nse_history(session, name, start, end)
+            if not _structurally_valid(frame):
+                raise ValueError(f'NSE returned invalid OHLC for {name}')
             frame.attrs['source'] = 'NSE India'
             frames[ticker] = frame
         except (requests.RequestException, ValueError, KeyError, TypeError) as exc:
