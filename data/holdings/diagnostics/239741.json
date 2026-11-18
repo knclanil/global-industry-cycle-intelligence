@@ -1,0 +1,23 @@
+{
+  "portfolio_id": "239741",
+  "timestamp_utc": "2026-11-18T19:27:53.449497+00:00",
+  "error": "Holdings table recognized, but issuer-declared holdings-as-of date missing",
+  "status_code": 200,
+  "content_type": "text/csv",
+  "content_disposition": "attachment; filename=IXC_holdings.csv",
+  "content_length": 4568,
+  "body_sha256": "b8580298a7687f8c1216ffdf757c5b3a4e116187633c28eaf7870fd7c9f73438",
+  "detected_magic": "6953686172657320",
+  "metadata_labels": [
+    "iShares Global Energy ETF",
+    "Fund Holdings as of",
+    "Inception Date",
+    "Shares Outstanding",
+    "Stock",
+    "Bond",
+    "Cash",
+    "Other",
+    "Ticker",
+    "The content contained herein is owned or licensed by BlackRock an"
+  ]
+}

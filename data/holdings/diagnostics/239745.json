@@ -1,0 +1,23 @@
+{
+  "portfolio_id": "239745",
+  "timestamp_utc": "2026-11-18T19:27:54.203805+00:00",
+  "error": "Holdings table recognized, but issuer-declared holdings-as-of date missing",
+  "status_code": 200,
+  "content_type": "text/csv",
+  "content_disposition": "attachment; filename=EXI_holdings.csv",
+  "content_length": 4573,
+  "body_sha256": "e2b5a4652b5af6e4659930dcfee9c4fdfbe90be6440a8f1bef18d45e5f8ddb26",
+  "detected_magic": "6953686172657320",
+  "metadata_labels": [
+    "iShares Global Industrials ETF",
+    "Fund Holdings as of",
+    "Inception Date",
+    "Shares Outstanding",
+    "Stock",
+    "Bond",
+    "Cash",
+    "Other",
+    "Ticker",
+    "The content contained herein is owned or licensed by BlackRock an"
+  ]
+}

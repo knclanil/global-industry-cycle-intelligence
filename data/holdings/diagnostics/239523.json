@@ -1,11 +1,23 @@
 {
   "portfolio_id": "239523",
-  "timestamp_utc": "2026-11-18T18:42:17.366481+00:00",
-  "error": "Holdings table recognized, but document holdings-as-of date missing",
+  "timestamp_utc": "2026-11-18T19:27:50.551551+00:00",
+  "error": "Holdings table recognized, but issuer-declared holdings-as-of date missing",
   "status_code": 200,
   "content_type": "text/csv",
   "content_disposition": "attachment; filename=IYZ_holdings.csv",
   "content_length": 4578,
   "body_sha256": "e460271dd7cbe58dc0e44b074df8c8b183d0245f4316097b689d4f71331920aa",
-  "detected_magic": "6953686172657320"
+  "detected_magic": "6953686172657320",
+  "metadata_labels": [
+    "iShares US Telecommunications ETF",
+    "Fund Holdings as of",
+    "Inception Date",
+    "Shares Outstanding",
+    "Stock",
+    "Bond",
+    "Cash",
+    "Other",
+    "Ticker",
+    "The content contained herein is owned or licensed by BlackRock an"
+  ]
 }
