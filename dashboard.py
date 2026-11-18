@@ -11,11 +11,15 @@ import country_market_data
 import global_factor_market_data
 import usa_factor_market_data
 import india_factor_market_data
+import global_asset_market_data
+import usa_asset_market_data
+import india_asset_market_data
+from asset_regime import infer_asset_regime
 COLORS = {'Leading': '#22c58b', 'Improving': '#4b9cff', 'Weakening': '#f4aa4b', 'Lagging': '#fa7185'}
 
 @st.cache_data(ttl=3600, show_spinner=False)
 def prices_cached(market: str, start: date, end: date):
-    module = {"India": india_market_data, "Global": global_market_data, "Countries": country_market_data, "GlobalFactors": global_factor_market_data, "USAFactors": usa_factor_market_data, "IndiaFactors": india_factor_market_data}.get(market, market_data)
+    module = {"India": india_market_data, "Global": global_market_data, "Countries": country_market_data, "GlobalFactors": global_factor_market_data, "USAFactors": usa_factor_market_data, "IndiaFactors": india_factor_market_data, "GlobalAssets": global_asset_market_data, "USAAssets": usa_asset_market_data, "IndiaAssets": india_asset_market_data}.get(market, market_data)
     return module.download(start, end)
 
 
@@ -36,15 +40,16 @@ def sync_all(market, sectors):
     st.session_state[f"{market}_all_sectors"] = len(st.session_state[f"{market}_sectors"]) == len(sectors)
 
 def render_dashboard(market):
-    module = {'India': india_market_data, 'Global': global_market_data, 'Countries': country_market_data, 'GlobalFactors': global_factor_market_data, 'USAFactors': usa_factor_market_data, 'IndiaFactors': india_factor_market_data}.get(market, market_data)
+    module = {'India': india_market_data, 'Global': global_market_data, 'Countries': country_market_data, 'GlobalFactors': global_factor_market_data, 'USAFactors': usa_factor_market_data, 'IndiaFactors': india_factor_market_data, 'GlobalAssets': global_asset_market_data, 'USAAssets': usa_asset_market_data, 'IndiaAssets': india_asset_market_data}.get(market, market_data)
     SECTORS, LOOKBACKS, QUADRANTS = module.SECTORS, module.LOOKBACKS, module.QUADRANTS
     validate, calculate, relative_trend_from_zero = module.validate, module.calculate, module.relative_trend_from_zero
     benchmark = module.BENCHMARK
-    benchmark_name = {'India': 'Nifty 50', 'Global': 'ACWI', 'Countries': 'ACWI', 'GlobalFactors': 'ACWI', 'USAFactors': 'SPY', 'IndiaFactors': 'Nifty 50'}.get(market, 'SPY')
+    benchmark_name = {'India': 'Nifty 50', 'Global': 'ACWI', 'Countries': 'ACWI', 'GlobalFactors': 'ACWI', 'USAFactors': 'SPY', 'IndiaFactors': 'Nifty 50', 'GlobalAssets': 'ACWI', 'USAAssets': 'SPY', 'IndiaAssets': 'Nifty 50'}.get(market, 'SPY')
+    is_asset = market.endswith('Assets')
     is_country = market == 'Countries'
     is_factor = market.endswith('Factors')
-    item_name = 'country' if is_country else 'factor' if is_factor else 'sector'
-    item_plural = 'countries' if is_country else 'factors' if is_factor else 'sectors'
+    item_name = 'asset class' if is_asset else 'country' if is_country else 'factor' if is_factor else 'sector'
+    item_plural = 'asset classes' if is_asset else 'countries' if is_country else 'factors' if is_factor else 'sectors'
     if f'{market}_sectors' not in st.session_state:
         st.session_state[f'{market}_sectors'] = list(SECTORS)
     if f'{market}_all_sectors' not in st.session_state:
@@ -52,7 +57,7 @@ def render_dashboard(market):
 
     head, refresh = st.columns([6, 1], vertical_alignment='center')
     with head:
-        st.title('Global Countries' if is_country else market.replace('Factors', ' Factors') if is_factor else f'{market} Sector')
+        st.title(market.replace('Assets', ' Asset Flow') if is_asset else 'Global Countries' if is_country else market.replace('Factors', ' Factors') if is_factor else f'{market} Sector')
         st.caption(f'{market} Rotation  •  {len(SECTORS)} {item_plural} vs {benchmark_name}  •  No database')
     with refresh:
         if st.button('↻ Refresh now', use_container_width=True):
@@ -63,7 +68,7 @@ def render_dashboard(market):
         left, mid, right = st.columns([2.2, 2.6, 2.6])
         with left:
             st.checkbox(f'Select all {item_plural}', key=f'{market}_all_sectors', on_change=set_sector_from_all, args=(market, SECTORS))
-            chosen = st.multiselect('COUNTRIES' if is_country else 'FACTORS' if is_factor else 'SECTORS', list(SECTORS), key=f'{market}_sectors',
+            chosen = st.multiselect('ASSET CLASSES' if is_asset else 'COUNTRIES' if is_country else 'FACTORS' if is_factor else 'SECTORS', list(SECTORS), key=f'{market}_sectors',
                                     format_func=lambda t: f'{SECTORS[t]} ({t})', on_change=sync_all, args=(market, SECTORS))
         with mid:
             lookback = st.select_slider('RELATIVE TIME', options=list(LOOKBACKS), value='3M')
@@ -96,21 +101,21 @@ def render_dashboard(market):
         except Exception as exc:
             st.error(f'Unable to calculate the dashboard: {exc}')
             st.stop()
-    if market in ('India', 'Global', 'Countries', 'GlobalFactors', 'USAFactors', 'IndiaFactors'):
+    if market in ('India', 'Global', 'Countries', 'GlobalFactors', 'USAFactors', 'IndiaFactors', 'GlobalAssets', 'USAAssets', 'IndiaAssets'):
         missing = [ticker for ticker in chosen if ticker not in rows['ETF'].tolist()] if not rows.empty else chosen
         if missing:
             st.warning(f'Unavailable or insufficient-history {market} {item_plural}: ' + ', '.join(missing) + '. These are excluded from calculations.')
     if rows.empty:
         st.warning('No sector has enough valid observations for the selected settings.'); st.stop()
 
-    now_et = datetime.now(ZoneInfo('Asia/Kolkata' if market in ('India', 'IndiaFactors') else 'America/New_York')).strftime('%Y-%m-%d %I:%M %p') + (' IST' if market == 'India' else ' ET')
+    now_et = datetime.now(ZoneInfo('Asia/Kolkata' if market in ('India', 'IndiaFactors', 'IndiaAssets') else 'America/New_York')).strftime('%Y-%m-%d %I:%M %p') + (' IST' if market in ('India', 'IndiaFactors', 'IndiaAssets') else ' ET')
     if report['status'] == 'PASS':
         st.success(f'Primary-source validation: PASS  •  Latest verified session: {report["latest"]}  •  Retrieved: {now_et}')
     else:
         st.warning(f'Primary-source validation: WARNING  •  Latest session: {report["latest"]}  •  Retrieved: {now_et}')
         with st.expander('Data quality warnings'):
             for issue in report['warnings']: st.write('• ' + issue)
-    if market in ('India', 'IndiaFactors'):
+    if market in ('India', 'IndiaFactors', 'IndiaAssets'):
         sources = {t: f.attrs.get('source', 'Unknown') for t, f in frames.items()}
         nse_count = sum(source == 'NSE India' for source in sources.values())
         fallback = [f"{module.SECTORS.get(t, 'Nifty 50')} ({t})" for t, source in sources.items() if 'fallback' in source]
@@ -121,6 +126,14 @@ def render_dashboard(market):
     else:
         st.caption(f'Source: Yahoo Finance (yfinance). Benchmark: {benchmark_name}. Independent cross-provider verification is not yet implemented; PASS means provider consistency checks only.')
     st.caption(f'Effective analysis dates: {first.date()} → {last.date()}  •  Relative window: {lookback}')
+    if is_asset:
+        st.info('ASSET ROTATION PROXY — price outperformance and momentum are NOT actual net capital flows. No verified ETF creation/redemption or fund-flow data is used.')
+        regime, explanation = infer_asset_regime(rows, SECTORS)
+        st.metric('Market regime · heuristic', regime)
+        st.caption(explanation + ' This is a descriptive signal, not a verified fund-flow measurement or forecast.')
+        if market == 'IndiaAssets':
+            st.caption('Indian ETF coverage is limited: corporate bonds, broad commodities, and REITs are not represented without verified series. NSE/NSEPython is preferred for the Nifty 50 benchmark; ETF proxies use Yahoo Finance.')
+
 
     cards = st.columns(4)
     counts = rows['Quadrant'].value_counts()
@@ -262,3 +275,4 @@ Relative strength = 100 × ({item_name}/{benchmark_name} price ratio today ÷ ra
 Momentum = current relative strength − relative strength M sessions ago, M = max(2, L//2).
 {item_name.title()} trends are cumulative {item_name} return minus cumulative {benchmark_name} return since the first selected trading day; every line starts at zero.
 These are custom, descriptive indicators, not proprietary RRG calculations or predictions.""")
+

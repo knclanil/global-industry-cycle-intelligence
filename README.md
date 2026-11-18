@@ -83,3 +83,13 @@ The **Global Countries** page covers 20 US-listed country ETFs against ACWI with
 
 ### India historical index retrieval (NSEPythonServer)
 `requirements.txt` installs `nsepythonserver` for hosted Streamlit. Both India Sector and India Factors first try the wrapper's `index_history` against Nifty Indices, then the existing NSE India endpoint, and finally verified Yahoo Finance fallbacks (India Factors: Nifty 50 benchmark only). Data is validated; missing factor indices are excluded, never fabricated. This integration has offline mocked tests but has **not** been verified against live NSE servers from this environment.
+
+## Cross-asset rotation dashboards
+
+Three new pages — **Global Asset Flow**, **USA Asset Flow**, and **India Asset Flow** — compare price-based cross-asset leadership with the existing rotation map, relative-performance bars, zero-based trends, classifications and a conservative market-regime heuristic. **These pages do not contain verified ETF net flows**, so "flow" is a descriptive page label rather than a measurement of actual investor subscriptions or redemptions.
+
+- Global: ACWI benchmark, USD-listed equity, bond, credit, commodity, gold, REIT and cash ETF proxies.
+- USA: SPY benchmark, USD-listed US equity, duration, credit, commodity, gold, REIT and T-bill ETF proxies.
+- India: Nifty 50 benchmark (NSEPython/NSE primary, verified Yahoo ^NSEI fallback), India-listed equity, gold, silver, liquid and *availability-unverified* government bond ETF proxies. Coverage is incomplete for corporate bonds, broad commodities and REITs. Missing tickers are excluded, not fabricated.
+
+See `GLOBAL_ASSET_WIKI.md`, `USA_ASSET_WIKI.md`, `INDIA_ASSET_WIKI.md` for definitions and caveats.
