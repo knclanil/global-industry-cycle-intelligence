@@ -1,0 +1,15 @@
+{
+  "^CNXAUTO": "NSEPythonServer (Nifty Indices)",
+  "^CNXENERGY": "NSEPythonServer (Nifty Indices)",
+  "^CNXFMCG": "NSEPythonServer (Nifty Indices)",
+  "^CNXINFRA": "NSEPythonServer (Nifty Indices)",
+  "^CNXIT": "NSEPythonServer (Nifty Indices)",
+  "^CNXMEDIA": "NSEPythonServer (Nifty Indices)",
+  "^CNXMETAL": "NSEPythonServer (Nifty Indices)",
+  "^CNXPHARMA": "NSEPythonServer (Nifty Indices)",
+  "^CNXPSUBANK": "NSEPythonServer (Nifty Indices)",
+  "^CNXREALTY": "NSEPythonServer (Nifty Indices)",
+  "^NIFTYBANK": "NSEPythonServer (Nifty Indices)",
+  "^NIFTYFIN_SERVICE": "NSEPythonServer (Nifty Indices)",
+  "^NSEI": "NSEPythonServer (Nifty Indices)"
+}

@@ -1,0 +1,7 @@
+{
+  "GOLDBEES.NS": "Yahoo Finance (ETF price proxy)",
+  "LIQUIDBEES.NS": "Yahoo Finance (ETF price proxy)",
+  "NIFTYBEES.NS": "Yahoo Finance (ETF price proxy)",
+  "SILVERBEES.NS": "Yahoo Finance (ETF price proxy)",
+  "^NSEI": "NSEPythonServer (Nifty 50)"
+}

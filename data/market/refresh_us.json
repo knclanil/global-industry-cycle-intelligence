@@ -1,0 +1,240 @@
+{
+  "region": "us",
+  "refreshed_utc": "2026-11-18T17:43:06.483399+00:00",
+  "markets": {
+    "USA": {
+      "status": "OK",
+      "changed": [
+        "XLC",
+        "XLY",
+        "XLP",
+        "XLE",
+        "XLF",
+        "XLV",
+        "XLI",
+        "XLB",
+        "XLRE",
+        "XLK",
+        "XLU",
+        "SPY"
+      ],
+      "unchanged": [],
+      "unavailable_this_run": [],
+      "request_start": "2021-11-14",
+      "latest_dates": {
+        "XLC": "2026-11-18",
+        "XLY": "2026-11-18",
+        "XLP": "2026-11-18",
+        "XLE": "2026-11-18",
+        "XLF": "2026-11-18",
+        "XLV": "2026-11-18",
+        "XLI": "2026-11-18",
+        "XLB": "2026-11-18",
+        "XLRE": "2026-11-18",
+        "XLK": "2026-11-18",
+        "XLU": "2026-11-18",
+        "SPY": "2026-11-18"
+      }
+    },
+    "Global": {
+      "status": "OK",
+      "changed": [
+        "IXN",
+        "IXG",
+        "IXJ",
+        "IXC",
+        "KXI",
+        "RXI",
+        "EXI",
+        "MXI",
+        "JXI",
+        "IXP",
+        "ACWI"
+      ],
+      "unchanged": [],
+      "unavailable_this_run": [],
+      "request_start": "2021-11-14",
+      "latest_dates": {
+        "IXN": "2026-11-18",
+        "IXG": "2026-11-18",
+        "IXJ": "2026-11-18",
+        "IXC": "2026-11-18",
+        "KXI": "2026-11-18",
+        "RXI": "2026-11-18",
+        "EXI": "2026-11-18",
+        "MXI": "2026-11-18",
+        "JXI": "2026-11-18",
+        "IXP": "2026-11-18",
+        "ACWI": "2026-11-18"
+      }
+    },
+    "Countries": {
+      "status": "OK",
+      "changed": [
+        "SPY",
+        "INDA",
+        "EWJ",
+        "MCHI",
+        "EWU",
+        "EWG",
+        "EWQ",
+        "EWL",
+        "EWC",
+        "EWA",
+        "EWY",
+        "EWT",
+        "EWZ",
+        "EWW",
+        "EZA",
+        "EIDO",
+        "THD",
+        "EWM",
+        "KSA",
+        "UAE",
+        "ACWI"
+      ],
+      "unchanged": [],
+      "unavailable_this_run": [],
+      "request_start": "2021-11-14",
+      "latest_dates": {
+        "SPY": "2026-11-18",
+        "INDA": "2026-11-18",
+        "EWJ": "2026-11-18",
+        "MCHI": "2026-11-18",
+        "EWU": "2026-11-18",
+        "EWG": "2026-11-18",
+        "EWQ": "2026-11-18",
+        "EWL": "2026-11-18",
+        "EWC": "2026-11-18",
+        "EWA": "2026-11-18",
+        "EWY": "2026-11-18",
+        "EWT": "2026-11-18",
+        "EWZ": "2026-11-18",
+        "EWW": "2026-11-18",
+        "EZA": "2026-11-18",
+        "EIDO": "2026-11-18",
+        "THD": "2026-11-18",
+        "EWM": "2026-11-18",
+        "KSA": "2026-11-18",
+        "UAE": "2026-11-18",
+        "ACWI": "2026-11-18"
+      }
+    },
+    "GlobalFactors": {
+      "status": "PARTIAL",
+      "changed": [
+        "IWFG",
+        "IMTM",
+        "IQLT",
+        "ACWV",
+        "IDV",
+        "ACWI"
+      ],
+      "unchanged": [],
+      "unavailable_this_run": [
+        "IWVL",
+        "ISZE"
+      ],
+      "request_start": "2021-11-14",
+      "latest_dates": {
+        "IWVL": null,
+        "IWFG": "2026-11-18",
+        "IMTM": "2026-11-18",
+        "IQLT": "2026-11-18",
+        "ACWV": "2026-11-18",
+        "ISZE": null,
+        "IDV": "2026-11-18",
+        "ACWI": "2026-11-18"
+      }
+    },
+    "USAFactors": {
+      "status": "OK",
+      "changed": [
+        "IVE",
+        "IVW",
+        "MTUM",
+        "QUAL",
+        "USMV",
+        "IWM",
+        "VYM",
+        "SPY"
+      ],
+      "unchanged": [],
+      "unavailable_this_run": [],
+      "request_start": "2021-11-14",
+      "latest_dates": {
+        "IVE": "2026-11-18",
+        "IVW": "2026-11-18",
+        "MTUM": "2026-11-18",
+        "QUAL": "2026-11-18",
+        "USMV": "2026-11-18",
+        "IWM": "2026-11-18",
+        "VYM": "2026-11-18",
+        "SPY": "2026-11-18"
+      }
+    },
+    "GlobalAssets": {
+      "status": "OK",
+      "changed": [
+        "VT",
+        "BNDX",
+        "IEF",
+        "LQD",
+        "HYG",
+        "GLD",
+        "DBC",
+        "REET",
+        "BIL",
+        "ACWI"
+      ],
+      "unchanged": [],
+      "unavailable_this_run": [],
+      "request_start": "2021-11-14",
+      "latest_dates": {
+        "VT": "2026-11-18",
+        "BNDX": "2026-11-18",
+        "IEF": "2026-11-18",
+        "LQD": "2026-11-18",
+        "HYG": "2026-11-18",
+        "GLD": "2026-11-18",
+        "DBC": "2026-11-18",
+        "REET": "2026-11-18",
+        "BIL": "2026-11-18",
+        "ACWI": "2026-11-18"
+      }
+    },
+    "USAAssets": {
+      "status": "OK",
+      "changed": [
+        "VTI",
+        "IEF",
+        "TLT",
+        "LQD",
+        "HYG",
+        "GLD",
+        "DBC",
+        "VNQ",
+        "SGOV",
+        "SPY"
+      ],
+      "unchanged": [],
+      "unavailable_this_run": [],
+      "request_start": "2021-11-14",
+      "latest_dates": {
+        "VTI": "2026-11-18",
+        "IEF": "2026-11-18",
+        "TLT": "2026-11-18",
+        "LQD": "2026-11-18",
+        "HYG": "2026-11-18",
+        "GLD": "2026-11-18",
+        "DBC": "2026-11-18",
+        "VNQ": "2026-11-18",
+        "SGOV": "2026-11-18",
+        "SPY": "2026-11-18"
+      }
+    }
+  },
+  "errors": [
+    "GlobalFactors: unavailable this run: IWVL, ISZE"
+  ]
+}

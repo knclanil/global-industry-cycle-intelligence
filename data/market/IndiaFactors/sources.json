@@ -1,0 +1,9 @@
+{
+  "NIFTY100_LOWVOL30": "NSEPythonServer (Nifty Indices)",
+  "NIFTY200_MOMENTUM30": "NSEPythonServer (Nifty Indices)",
+  "NIFTY200_QUALITY30": "NSEPythonServer (Nifty Indices)",
+  "NIFTY50_EQUALWEIGHT": "NSEPythonServer (Nifty Indices)",
+  "NIFTY50_VALUE20": "NSEPythonServer (Nifty Indices)",
+  "NIFTY_ALPHA50": "NSEPythonServer (Nifty Indices)",
+  "^NSEI": "NSEPythonServer (Nifty Indices)"
+}
