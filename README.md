@@ -71,3 +71,7 @@ Open the **Wiki** page using the app sidebar to read the complete calculation me
 ### Wiki deployment troubleshooting
 
 The Wiki normally reads `WIKI.md` from the same folder as `app.py`. Commit **both files** to the root of the deployed GitHub branch (not inside an extra nested folder). The application also includes a built-in documentation fallback, so the Wiki continues working if `WIKI.md` is missing. To edit documentation, update `WIKI.md` and commit it.
+
+### India market-data source priority
+
+India sector and Nifty 50 daily index prices are requested from NSE India historical index endpoints first. When an individual index cannot be retrieved, Yahoo Finance is used as a fallback for that index. The India dashboard identifies fallback series. Source availability is not the same as independent price reconciliation; the dashboard does not claim audited NSE/Yahoo agreement. NSE may restrict automated requests.

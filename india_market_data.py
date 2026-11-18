@@ -23,32 +23,132 @@ LOOKBACKS = {'1W': 5, '2W': 10, '4W': 20, '1M': 21, '3M': 63, '6M': 126, '12M': 
 QUADRANTS = ('Leading', 'Improving', 'Weakening', 'Lagging')
 
 
-def download(start: date, end: date) -> dict[str, pd.DataFrame]:
+# Official NSE index names. The public NSE endpoint may restrict automated access;
+# Yahoo Finance is used only when an NSE series cannot be retrieved and validated.
+NSE_NAMES = {
+    '^NIFTYBANK': 'NIFTY BANK', '^CNXIT': 'NIFTY IT',
+    '^CNXAUTO': 'NIFTY AUTO', '^CNXFMCG': 'NIFTY FMCG',
+    '^CNXPHARMA': 'NIFTY PHARMA', '^CNXMETAL': 'NIFTY METAL',
+    '^CNXREALTY': 'NIFTY REALTY', '^CNXENERGY': 'NIFTY ENERGY',
+    '^CNXINFRA': 'NIFTY INFRASTRUCTURE',
+    '^NIFTYFIN_SERVICE': 'NIFTY FINANCIAL SERVICES',
+    '^CNXMEDIA': 'NIFTY MEDIA', '^CNXPSUBANK': 'NIFTY PSU BANK',
+    BENCHMARK: 'NIFTY 50',
+}
+
+
+def _nse_history(session, name: str, start: date, end: date) -> pd.DataFrame:
+    """Download historical NSE index OHLC without silently fabricating observations."""
+    import requests
+    from urllib.parse import quote
+    session.get('https://www.nseindia.com/', timeout=15).raise_for_status()
+    records = []
+    cursor = start
+    while cursor <= end:
+        finish = min(cursor + timedelta(days=89), end)
+        response = session.get(
+            'https://www.nseindia.com/api/historical/indicesHistory',
+            params={'indexType': name, 'from': cursor.strftime('%d-%m-%Y'),
+                    'to': finish.strftime('%d-%m-%Y')}, timeout=25)
+        response.raise_for_status()
+        payload = response.json()
+        chunk = payload.get('data') if isinstance(payload, dict) else None
+        if isinstance(chunk, dict):
+            chunk = chunk.get('indexCloseOnlineRecords') or chunk.get('data')
+        if not isinstance(chunk, list):
+            raise ValueError(f'NSE returned an unexpected response for {name}')
+        records.extend(chunk)
+        cursor = finish + timedelta(days=1)
+    if not records:
+        raise ValueError(f'NSE returned no index history for {name}')
+    raw = pd.DataFrame(records)
+    def field(*candidates):
+        for candidate in candidates:
+            if candidate in raw:
+                return raw[candidate]
+        raise ValueError(f'NSE response missing {candidates[0]} for {name}')
+    dates = pd.to_datetime(field('EOD_TIMESTAMP', 'TIMESTAMP', 'CH_TIMESTAMP', 'HistoricalDate'),
+                           dayfirst=True, errors='coerce')
+    def number(*keys):
+        return pd.to_numeric(field(*keys).astype(str).str.replace(',', '', regex=False), errors='coerce')
+    # Construct with positional arrays: dates are index, raw fields use integer indexes.
+    frame = pd.DataFrame({
+        'Open': number('EOD_OPEN_INDEX_VAL', 'CH_OPENING_VALUE', 'OPEN').to_numpy(),
+        'High': number('EOD_HIGH_INDEX_VAL', 'CH_HIGH_INDEX_VAL', 'HIGH').to_numpy(),
+        'Low': number('EOD_LOW_INDEX_VAL', 'CH_LOW_INDEX_VAL', 'LOW').to_numpy(),
+        'Close': number('EOD_CLOSE_INDEX_VAL', 'CH_CLOSING_VALUE', 'CLOSE').to_numpy(),
+    }, index=pd.DatetimeIndex(dates).tz_localize(None).normalize())
+    frame = frame.loc[~frame.index.isna()].sort_index()
+    frame = frame.loc[~frame.index.duplicated(keep='last')]
+    frame = frame.dropna(subset=['Open', 'High', 'Low', 'Close'])
+    if len(frame) < 2 or (frame[['Open', 'High', 'Low', 'Close']] <= 0).any().any():
+        raise ValueError(f'NSE returned insufficient/invalid history for {name}')
+    frame['Adj Close'] = frame['Close']  # Index levels do not pay dividends.
+    frame['Volume'] = 0
+    return frame
+
+
+def _yahoo_history(start: date, end: date) -> dict[str, pd.DataFrame]:
     import yfinance as yf
     raw = yf.download(TICKERS, start=start.isoformat(), end=(end + timedelta(days=1)).isoformat(),
                       auto_adjust=False, actions=False, group_by='ticker', threads=True, progress=False)
-    if raw.empty:
-        raise ValueError('Market-data provider returned no observations.')
     frames = {}
+    if raw.empty:
+        return frames
     for ticker in TICKERS:
-        if not isinstance(raw.columns, pd.MultiIndex):
-            continue
-        if ticker in raw.columns.get_level_values(0):
-            frame = raw[ticker].copy()
-        elif ticker in raw.columns.get_level_values(1):
-            frame = raw.xs(ticker, axis=1, level=1).copy()
+        if isinstance(raw.columns, pd.MultiIndex):
+            if ticker in raw.columns.get_level_values(0):
+                frame = raw[ticker].copy()
+            elif ticker in raw.columns.get_level_values(1):
+                frame = raw.xs(ticker, axis=1, level=1).copy()
+            else:
+                continue
+        elif len(TICKERS) == 1:
+            frame = raw.copy()
         else:
             continue
-        if 'Adj Close' not in frame.columns and 'Close' in frame.columns:
+        if 'Adj Close' not in frame and 'Close' in frame:
             frame['Adj Close'] = frame['Close']
-        if 'Volume' not in frame.columns and 'Close' in frame.columns:
+        if 'Volume' not in frame and 'Close' in frame:
             frame['Volume'] = 0
-        elif 'Volume' in frame.columns:
+        elif 'Volume' in frame:
             frame['Volume'] = frame['Volume'].fillna(0)
         frame.index = pd.DatetimeIndex(pd.to_datetime(frame.index)).tz_localize(None).normalize()
         frame = frame.sort_index().dropna(how='all')
         if not frame.empty:
             frames[ticker] = frame
+    return frames
+
+
+def download(start: date, end: date) -> dict[str, pd.DataFrame]:
+    """Prefer NSE India index history; fall back per index to Yahoo Finance.
+
+    Source metadata is retained in DataFrame.attrs and shown in the UI.
+    """
+    import requests
+    session = requests.Session()
+    session.headers.update({
+        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/124.0 Safari/537.36',
+        'Accept': 'application/json, text/plain, */*',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Referer': 'https://www.nseindia.com/',
+    })
+    frames, failed = {}, []
+    for ticker, name in NSE_NAMES.items():
+        try:
+            frame = _nse_history(session, name, start, end)
+            frame.attrs['source'] = 'NSE India'
+            frames[ticker] = frame
+        except (requests.RequestException, ValueError, KeyError, TypeError) as exc:
+            failed.append(ticker)
+    if failed:
+        yahoo = _yahoo_history(start, end)
+        for ticker in failed:
+            if ticker in yahoo:
+                yahoo[ticker].attrs['source'] = 'Yahoo Finance (fallback)'
+                frames[ticker] = yahoo[ticker]
+    if not frames:
+        raise ValueError('Neither NSE India nor Yahoo Finance returned usable index history.')
     return frames
 
 

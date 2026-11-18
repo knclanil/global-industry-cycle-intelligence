@@ -101,7 +101,16 @@ def render_dashboard(market):
         st.warning(f'Primary-source validation: WARNING  •  Latest session: {report["latest"]}  •  Retrieved: {now_et}')
         with st.expander('Data quality warnings'):
             for issue in report['warnings']: st.write('• ' + issue)
-    st.caption('Source: Yahoo Finance (yfinance). Independent cross-provider verification is not yet implemented; PASS means primary-source checks only.')
+    if market == 'India':
+        sources = {t: f.attrs.get('source', 'Unknown') for t, f in frames.items()}
+        nse_count = sum(source == 'NSE India' for source in sources.values())
+        fallback = [f"{module.SECTORS.get(t, 'Nifty 50')} ({t})" for t, source in sources.items() if 'fallback' in source]
+        st.caption(f'Sources: NSE India primary ({nse_count} series); Yahoo Finance fallback ({len(fallback)} series). Data-quality PASS does not imply independent price verification.')
+        if fallback:
+            with st.expander('Yahoo Finance fallback series'):
+                st.write(', '.join(fallback))
+    else:
+        st.caption('Source: Yahoo Finance (yfinance). Independent cross-provider verification is not yet implemented; PASS means provider consistency checks only.')
     st.caption(f'Effective analysis dates: {first.date()} → {last.date()}  •  Relative window: {lookback}')
 
     cards = st.columns(4)

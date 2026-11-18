@@ -1,6 +1,6 @@
 # India Sector Wiki
 
-**Benchmark:** Nifty 50 (`^NSEI`), compared with Yahoo Finance NSE sector index series. Symbols are provider-specific; some may be unavailable or renamed. The app warns and excludes unavailable sectors. Index prices are **price-return indices**, not investable ETFs or necessarily total-return series. Sector and benchmark price-index conventions should be reviewed before interpreting results. No second-provider validation is performed.
+**Benchmark:** Nifty 50 (`^NSEI`), compared with NSE India sector index history (Yahoo Finance fallback). Symbols are provider-specific; some may be unavailable or renamed. The app warns and excludes unavailable sectors. Index prices are **price-return indices**, not investable ETFs or necessarily total-return series. Sector and benchmark price-index conventions should be reviewed before interpreting results. No second-provider validation is performed.
 
 # Dashboard Wiki
 
@@ -24,7 +24,7 @@
 | ^CNXPSUBANK | Public Sector Banks |
 | ^NSEI | Benchmark: Nifty 50 |
 
-**Data provider:** Yahoo Finance, retrieved using the Python `yfinance` package. The dashboard uses **daily closing prices (adjusted close when provided)** for all returns and relative indicators; OHLC and volume are downloaded for integrity checks. Adjusted prices may be revised by the provider, and their handling of distributions and corporate actions is not independently certified. This application does not query an independent second market-data provider.
+**Data providers:** NSE India historical indices API is attempted first for each index. If an NSE request fails or returns unusable history, Yahoo Finance (`yfinance`) is used as a fallback for that index. The dashboard identifies fallback series. The dashboard uses **daily closing prices (adjusted close when provided)** for all returns and relative indicators; OHLC and volume are downloaded for integrity checks. Adjusted prices may be revised by the provider, and their handling of distributions and corporate actions is not independently certified. Both providers are queried for availability, but matching prices are **not** independently cross-checked.
 
 ## 2. Controls and effective dates
 
@@ -33,7 +33,7 @@
 - **FROM DATE → TO DATE:** Defines the display period and the classification **as-of** date. The app uses the first and last available trading sessions *inside* the chosen calendar range. Weekends and exchange holidays therefore do not generate observations. The app also retrieves up to **600 calendar days before From Date** to warm up the indicators.
 - **QUADRANT FILTER:** Shows only sectors in the chosen quadrant on the charts and table. The four KPI counts still describe the complete selected sector set, before this filter.
 - **Show smooth movement path:** Toggles the historical rotation trail. **Path length (sessions)** chooses the maximum number of recent plotted observations: 5, 10, 20, 40 or 60. **Movement path for** chooses one sector. Only one trail is shown at a time to reduce overlapping paths; other sector endpoints remain on the map.
-- **Refresh now:** Clears Streamlit's cached price download and reruns the dashboard. It does not force Yahoo Finance to publish a new session.
+- **Refresh now:** Clears Streamlit's cached price download and reruns the dashboard. It does not force either data provider to publish a new session.
 
 The app permits dates from **January 1, 2019** through the current date. Relative Time is independent of the From/To span: a 12M indicator can be shown as of the last day of a short selected period if sufficient earlier data is available.
 
@@ -147,7 +147,7 @@ Missing values are **not forward-filled** in the trend series. An invalid or una
 3. **The quadrant model is custom**, not the proprietary JdK RRG method. Its axes and quadrant names should not be treated as directly interchangeable with commercial RRG charts.
 4. **Lookback and display window are different concepts.** The rotation map and period-excess chart can show different signs without a calculation error.
 5. **Smooth paths are cosmetic**, and intermediate positions on the spline are not observed data.
-6. **Provider dependence:** There is no second-source verification, and Yahoo Finance may revise or delay prices.
+6. **Provider dependence:** There is no independent cross-provider price reconciliation; NSE endpoints may block automated access and Yahoo Finance may revise or delay prices.
 7. **No database or continuous streaming:** Data is downloaded on demand; scheduled validation does not update an open dashboard.
 8. **Date and data availability:** index inception dates, holidays, incomplete sessions and missing provider records can restrict historical comparisons.
 
