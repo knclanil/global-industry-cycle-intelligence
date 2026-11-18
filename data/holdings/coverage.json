@@ -12,6 +12,7 @@
     "239523",
     "239524",
     "239563",
+    "239605",
     "239695",
     "239710",
     "239725",
@@ -28,8 +29,8 @@
     "251614",
     "256101"
   ],
-  "verified_count": 27,
-  "expected_active_count": 28,
+  "verified_count": 28,
+  "expected_active_count": 33,
   "groups": {
     "USA Factor": [
       "iShares Core High Dividend ETF",
@@ -52,6 +53,9 @@
       "iShares U.S. Technology ETF",
       "iShares U.S. Telecommunications ETF",
       "iShares U.S. Utilities ETF"
+    ],
+    "Global Factor": [
+      "iShares MSCI Global Min Vol Factor ETF"
     ],
     "Global Sector": [
       "iShares Global Comm Services ETF",
