@@ -1,0 +1,11 @@
+{
+  "portfolio_id": "251614",
+  "timestamp_utc": "2026-11-18T18:42:13.554022+00:00",
+  "error": "Holdings table recognized, but document holdings-as-of date missing",
+  "status_code": 200,
+  "content_type": "text/csv",
+  "content_disposition": "attachment; filename=MTUM_holdings.csv",
+  "content_length": 4579,
+  "body_sha256": "a5daec3cf2e6cc750bf02128e2d89914ee0a597de2f49f7cd9a12066bcc11179",
+  "detected_magic": "6953686172657320"
+}
