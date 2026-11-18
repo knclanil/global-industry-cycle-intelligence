@@ -8,10 +8,11 @@ ROOT=Path(__file__).resolve().parent
 STORE=ROOT/'data'/'holdings'
 FACTORS=['239695','239728','256101','239563','239725','239710','251614']
 SECTORS=['239505','239511','239506','239524','239508','239507','239520','239503','239523','239514','239522']
+GLOBAL_FACTORS=['271538','275382','239499','239605','271540']
 GLOBAL_SECTORS=['239740','239744','239753','239739','239742','239741','239751','239745','239748','239750']
-GROUPS={**{p:'USA Factor' for p in FACTORS},**{p:'USA Sector' for p in SECTORS},**{p:'Global Sector' for p in GLOBAL_SECTORS}}
+GROUPS={**{p:'USA Factor' for p in FACTORS},**{p:'USA Sector' for p in SECTORS},**{p:'Global Sector' for p in GLOBAL_SECTORS},**{p:'Global Factor' for p in GLOBAL_FACTORS}}
 SOURCES={**{p:'factor' for p in FACTORS},**{p:'sector' for p in SECTORS}}
-ALL_SOURCES={**SOURCES, **{p:'global_sector' for p in GLOBAL_SECTORS}}
+ALL_SOURCES={**SOURCES, **{p:'global_sector' for p in GLOBAL_SECTORS},**{p:'global_factor' for p in GLOBAL_FACTORS}}
 BASE_URL='https://www.blackrock.com/varnish-api/blk-one01-product-data/product-data/api/v1/get-fund-document'
 
 def url_for(pid,asof):
@@ -119,9 +120,9 @@ def leadership_state(row):
 def display_strategy(fund_title, group):
     """Human-readable strategy label; never expose source portfolio identifiers."""
     title = str(fund_title or '').lower()
-    if group == 'USA Factor':
+    if group in ('USA Factor', 'Global Factor'):
         for phrase, label in [('min vol', 'Minimum Volatility'), ('minimum volatility', 'Minimum Volatility'),
-                              ('momentum', 'Momentum'), ('quality', 'Quality'), ('value', 'Value'),
+                              ('momentum', 'Momentum'), ('quality', 'Quality'), ('value', 'Value'), ('multifactor', 'Multifactor'), ('multi-factor', 'Multifactor'), ('dividend', 'Dividend'),
                               ('growth', 'Growth'), ('size', 'Size'), ('small-cap', 'Small Cap'),
                               ('russell 2000', 'Small Cap / Broad Market'), ('multifactor', 'Multifactor'),
                               ('multi-factor', 'Multifactor')]:
@@ -191,20 +192,52 @@ def render_holdings_intelligence():
     d.metric('Snapshot dates',len(asofs))
     if len(coverage) < len(SOURCES):
         st.warning('Provisional coverage: missing ETFs are not interpreted as removed holdings. Breadth scores use the configured factor denominator.')
-    st.caption('Leadership score combines USA Factor breadth and relative weight with USA Sector prominence. Global Sector holdings are displayed separately and are not silently added to the USA score. Reported weight changes do not establish trading.')
-    if 'group' in holdings.columns and 'fund_title' in holdings.columns:
-        st.subheader('iShares holdings by fund group')
-        for group_name in ['USA Factor','USA Sector','Global Sector']:
-            group_data=holdings[holdings['group']==group_name]
-            with st.expander(group_name, expanded=True):
-                funds=group_data[['fund_title','as_of']].drop_duplicates().sort_values('fund_title').copy()
-                funds['Type / Sector'] = funds['fund_title'].map(lambda name: display_strategy(name, group_name))
-                st.dataframe(funds[['fund_title','Type / Sector','as_of']].rename(columns={
-                    'fund_title':'iShares Fund','as_of':'Holdings as of'}),hide_index=True,use_container_width=True)
-                if not funds.empty:
-                    selection=st.selectbox('View fund holdings', funds['fund_title'].tolist(), key='fund_'+group_name)
-                    rows=group_data[group_data.fund_title==selection].sort_values('weight',ascending=False)
-                    st.dataframe(holdings_display_table(rows),hide_index=True,use_container_width=True)
+    st.caption('Leadership score combines USA Factor breadth and relative weight with USA Sector prominence. Global Factor and Global Sector holdings are displayed separately and are not silently added to the USA score. Reported weight changes do not establish trading.')
+    st.subheader('iShares holdings by fund group')
+    # Always render the four groups, even when a deployed Parquet snapshot predates
+    # Global Factor support. Never mislabel an old snapshot as newly verified.
+    holdings = holdings.copy()
+    holdings['portfolio_id'] = holdings['portfolio_id'].astype(str)
+    holdings['group'] = holdings['portfolio_id'].map(GROUPS)
+    if 'fund_title' not in holdings.columns:
+        holdings['fund_title'] = ''
+    for group_name in ['USA Factor', 'USA Sector', 'Global Factor', 'Global Sector']:
+        group_data = holdings[holdings['group'] == group_name].copy()
+        with st.expander(group_name, expanded=(group_name == 'Global Factor')):
+            if group_data.empty:
+                st.info('No verified holdings loaded for this group yet. Run the Verified iShares holdings refresh workflow and confirm the latest holdings snapshot was committed to the deployed branch.')
+                continue
+            funds = group_data[['fund_title', 'as_of']].drop_duplicates().copy()
+            funds['fund_title'] = funds['fund_title'].fillna('').astype(str).str.strip()
+            funds = funds[funds['fund_title'] != ''].sort_values('fund_title')
+            if funds.empty:
+                st.warning('Holdings exist for this group, but fund titles are missing from the saved snapshot. Refresh holdings to populate issuer-provided fund titles.')
+                continue
+            label = 'Factor Type' if 'Factor' in group_name else 'Sector'
+            funds[label] = funds['fund_title'].map(lambda name: display_strategy(name, group_name))
+            st.dataframe(funds[['fund_title', label, 'as_of']].rename(columns={
+                'fund_title': 'iShares Fund', 'as_of': 'Holdings as of'}),
+                hide_index=True, use_container_width=True)
+            selection = st.selectbox('View fund holdings', funds['fund_title'].tolist(), key='fund_'+group_name)
+            rows = group_data[group_data.fund_title == selection].sort_values('weight', ascending=False)
+            st.dataframe(holdings_display_table(rows), hide_index=True, use_container_width=True)
+    st.subheader('Global Factor company leadership')
+    global_rankings_path = STORE / 'global_factor_rankings.parquet'
+    if global_rankings_path.exists():
+        global_ranking = pd.read_parquet(global_rankings_path)
+        st.caption('Separate Global Factor exposure ranking; not mixed with USA Factor scores.')
+        global_query = st.text_input('Search Global Factor company or ticker', key='global_factor_query')
+        if global_query:
+            global_ranking = global_ranking[
+                global_ranking.company.astype(str).str.contains(global_query, case=False, regex=False)
+                | global_ranking.ticker.astype(str).str.contains(global_query, case=False, regex=False)]
+        st.dataframe(global_ranking.drop(columns=['issuer_id'], errors='ignore').head(500),
+                     hide_index=True, use_container_width=True)
+        st.download_button('Download Global Factor rankings CSV',
+                           global_ranking.drop(columns=['issuer_id'], errors='ignore').to_csv(index=False).encode(),
+                           file_name='global_factor_rankings.csv', mime='text/csv')
+    else:
+        st.info('Global Factor rankings are not available yet. They will appear after a verified Global Factor holdings refresh.')
     ranking=ranking.copy()
     ranking['Leadership state']=ranking.apply(leadership_state,axis=1)
     controls=st.columns([2,2,1])

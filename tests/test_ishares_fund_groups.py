@@ -11,5 +11,5 @@ def test_title_from_first_cell_and_group():
     assert result.fund_title.iloc[0]=='iShares Global Tech ETF'
 
 def test_all_sources_are_grouped():
-    assert len(GROUPS)==28
-    assert set(GROUPS.values())=={'USA Factor','USA Sector','Global Sector'}
+    assert len(GROUPS)==33
+    assert set(GROUPS.values())=={'USA Factor','USA Sector','Global Factor','Global Sector'}
