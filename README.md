@@ -80,3 +80,6 @@ The **Global Sectors** navigation page uses ten global sector ETFs (IXN, IXG, IX
 ## Global Countries
 
 The **Global Countries** page covers 20 US-listed country ETFs against ACWI with the same charts and controls. Its methodology is documented in `COUNTRIES_WIKI.md`.
+
+### India historical index retrieval (NSEPythonServer)
+`requirements.txt` installs `nsepythonserver` for hosted Streamlit. Both India Sector and India Factors first try the wrapper's `index_history` against Nifty Indices, then the existing NSE India endpoint, and finally verified Yahoo Finance fallbacks (India Factors: Nifty 50 benchmark only). Data is validated; missing factor indices are excluded, never fabricated. This integration has offline mocked tests but has **not** been verified against live NSE servers from this environment.

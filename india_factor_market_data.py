@@ -33,8 +33,17 @@ def download(start: date, end: date) -> dict[str, pd.DataFrame]:
     session = requests.Session()
     session.headers.update({'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/124.0 Safari/537.36',
                             'Accept': 'application/json, text/plain, */*', 'Referer': 'https://www.nseindia.com/'})
+    import nsepython_provider
     frames = {}
     for ticker, name in NSE_NAMES.items():
+        try:
+            frame = nsepython_provider.history(name, start, end)
+            if not india._structurally_valid(frame):
+                raise ValueError('NSEPython returned invalid OHLC')
+            frames[ticker] = frame
+            continue
+        except (ImportError, ValueError, KeyError, TypeError, RuntimeError, requests.RequestException):
+            pass  # Try existing NSE API next.
         try:
             frame = india._nse_history(session, name, start, end)
             if not india._structurally_valid(frame):

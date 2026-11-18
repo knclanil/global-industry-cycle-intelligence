@@ -163,3 +163,6 @@ Unavailable or invalid Indian sector index series are excluded and reported as w
 **PASS** means the available downloaded series passed the implemented internal checks; it does **not** certify complete historical coverage, zero exchange-calendar gaps, or agreement with an independent official source. **WARNING** flags concerns without necessarily suppressing every valid sector. **FAIL** prevents calculations when required benchmark data cannot be trusted. Unavailable sector histories may be excluded from the output, so verify which sectors appear in the classification table.
 
 The app has **not completed a live, all-symbol, exchange-calendar-aware gap audit** for Global, USA, and India, and does not perform independent price reconciliation. Missing weekday observations may be exchange holidays; historical coverage and as-of dates can vary by provider. The scheduled GitHub workflow checks **USA only**; it does not validate India or Global on a schedule.
+
+### NSEPythonServer provider
+Indian sector indices now attempt the hosted `nsepythonserver.index_history` API first, followed by the existing direct NSE historical API and verified Yahoo symbol fallback. All results are validated without inventing prices. Wrapper availability and upstream access are not guaranteed; see India Factors Wiki for implementation details.

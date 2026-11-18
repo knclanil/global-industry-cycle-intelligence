@@ -167,8 +167,17 @@ def download(start: date, end: date) -> dict[str, pd.DataFrame]:
         'Accept-Language': 'en-US,en;q=0.9',
         'Referer': 'https://www.nseindia.com/',
     })
+    import nsepython_provider
     frames, failed = {}, []
     for ticker, name in NSE_NAMES.items():
+        try:
+            frame = nsepython_provider.history(name, start, end)
+            if not _structurally_valid(frame):
+                raise ValueError('NSEPython returned invalid OHLC')
+            frames[ticker] = frame
+            continue
+        except (ImportError, ValueError, KeyError, TypeError, RuntimeError, requests.RequestException):
+            pass  # Try direct NSE endpoint, then verified Yahoo ticker.
         try:
             frame = _nse_history(session, name, start, end)
             if not _structurally_valid(frame):
