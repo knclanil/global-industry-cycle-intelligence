@@ -9,12 +9,12 @@ st.markdown("""<style>.stApp{background:#0b1220;color:#e7eef9}
 # Grouped sidebar navigation. The selected page is stored in session state so
 # changing groups does not reset the current dashboard's other widgets.
 NAV_GROUPS = {
-    '🌐 GLOBAL INTELLIGENCE': ['Global Capital Intelligence Network'],
+    '🌐 GLOBAL INTELLIGENCE': ['Global Capital Intelligence Network', 'USA Company Holdings Leadership'],
     '🌎 COUNTRY ANALYSIS': ['Global Countries'],
     '💰 ASSET CLASS ANALYSIS': ['Global Asset Flow', 'USA Asset Flow', 'India Asset Flow'],
     '📊 SECTOR ANALYSIS': ['Global Sectors', 'USA Sector', 'India Sector'],
     '🧩 FACTOR ANALYSIS': ['Global Factors', 'USA Factors', 'India Factors', 'Factor Holdings Comparison'],
-    '📚 DATA & RESEARCH': ['USA Company Holdings Leadership', 'Data Table', 'Wiki'],
+    '📚 DATA & RESEARCH': ['Data Table', 'Wiki'],
 }
 PAGE_ICONS = {
     'Global Capital Intelligence Network': '🕸️',

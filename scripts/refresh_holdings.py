@@ -241,6 +241,15 @@ def refresh():
             print('No new verified holdings changes')
             return 0
     ranking, changes = rank_companies(current, previous)
+    # Existing ETFs may have the same issuer date; only compare genuinely newer snapshots.
+    # Missing ETFs are excluded above, never treated as removed.
+    coverage = {'verified_active_etfs': sorted(current.portfolio_id.unique().tolist()),
+                'verified_count': int(current.portfolio_id.nunique()),
+                'expected_active_count': len(SOURCES),
+                'pending_count': len(pending),
+                'holdings_dates': sorted(current.as_of.unique().tolist()),
+                'ranking_status': 'complete' if current.portfolio_id.nunique() == len(SOURCES) else 'provisional'}
+    (STORE / 'coverage.json').write_text(json.dumps(coverage, indent=2), encoding='utf-8')
     datekey = max(current.as_of)
     fingerprint = hashlib.sha256(pd.util.hash_pandas_object(current, index=False).values.tobytes()).hexdigest()[:12]
     snapshot = STORE / 'snapshots' / f'{datekey}-{fingerprint}.parquet'

@@ -103,21 +103,70 @@ def read_latest():
     p=STORE/'company_rankings.parquet'
     return pd.read_parquet(p) if p.exists() else pd.DataFrame()
 
+def leadership_state(row):
+    """Descriptive state, not a prediction of price performance."""
+    change = float(row.get('change_score', 0))
+    score = float(row.get('base_score', 0))
+    if change >= 3: return 'Strengthening leader' if score >= 35 else 'Emerging exposure'
+    if change <= -3: return 'Weakening leader' if score >= 35 else 'Declining exposure'
+    return 'Established leader' if score >= 35 else 'Stable / limited exposure'
+
+
 def render_holdings_intelligence():
     import streamlit as st
-    st.title('🏆 USA Company Holdings Leadership')
-    st.caption('18 registered BlackRock iShares sources · 7 factor ETFs + 11 sector ETFs · verified holdings only')
-    ranking=read_latest()
-    if ranking.empty:
-        st.info('No verified holdings snapshots have been processed yet. Run the holdings refresh GitHub Action after deployment. No company rankings are inferred from source links alone.')
+    st.title('🏆 Company Holdings Leadership Intelligence')
+    st.caption('Verified BlackRock iShares constituent exposures · not institutional transaction or cash-flow data')
+    ranking = read_latest()
+    holdings_path = STORE / 'latest_holdings.parquet'
+    if ranking.empty or not holdings_path.exists():
+        st.warning('Rankings are not present in this deployed app. Check data/holdings/company_rankings.parquet in the GitHub branch used by Streamlit, then reboot the app.')
+        st.code('data/holdings/company_rankings.parquet')
         return
-    st.caption('Leadership: 45% factor breadth + 40% factor weight conviction + 15% sector prominence. Recent verified holdings changes adjust the score by up to ±30 points.')
-    top=st.selectbox('Top N companies',[10,20,50,100,500],index=1)
-    st.dataframe(ranking.head(top),hide_index=True,use_container_width=True)
-    with st.expander('Full company ranking',expanded=False):st.dataframe(ranking,hide_index=True,use_container_width=True)
+    holdings = pd.read_parquet(holdings_path)
+    coverage = sorted(holdings.portfolio_id.astype(str).unique())
+    asofs = sorted(holdings.as_of.astype(str).unique())
+    a,b,c,d = st.columns(4)
+    a.metric('Ranked companies',f'{len(ranking):,}')
+    b.metric('Verified active ETFs',f'{len(coverage)}/{len(SOURCES)}')
+    c.metric('Latest holdings as of',max(asofs) if asofs else 'N/A')
+    d.metric('Snapshot dates',len(asofs))
+    if len(coverage) < len(SOURCES):
+        st.warning('Provisional coverage: missing ETFs are not interpreted as removed holdings. Breadth scores use the configured factor denominator.')
+    st.caption('Base score: 45% factor breadth + 40% relative factor weight + 15% sector prominence; verified changes adjust up to ±30 points. Weights may change without any trading.')
+    ranking=ranking.copy()
+    ranking['Leadership state']=ranking.apply(leadership_state,axis=1)
+    controls=st.columns([2,2,1])
+    query=controls[0].text_input('Search ticker or company',placeholder='e.g. AAPL')
+    state=controls[1].selectbox('Leadership state',['All',*sorted(ranking['Leadership state'].unique())])
+    top=controls[2].selectbox('Rows',[20,50,100,500,3000],index=1)
+    filtered=ranking
+    if query:
+        mask=filtered['ticker'].astype(str).str.contains(query,case=False,regex=False)|filtered['company'].astype(str).str.contains(query,case=False,regex=False)
+        filtered=filtered[mask]
+    if state!='All':filtered=filtered[filtered['Leadership state']==state]
+    st.dataframe(filtered.head(top),hide_index=True,use_container_width=True)
+    st.download_button('Download filtered rankings CSV',filtered.to_csv(index=False).encode(),file_name='company_holdings_rankings.csv',mime='text/csv')
+    st.subheader('Company ETF exposure drill-down')
+    candidates=ranking[['issuer_id','ticker','company']].copy()
+    candidates['label']=candidates['ticker'].astype(str)+' — '+candidates['company'].astype(str)+' ['+candidates['issuer_id'].astype(str)+']'
+    chosen=st.selectbox('Select company',candidates['label'].tolist(),index=0)
+    issuer=candidates.loc[candidates.label==chosen,'issuer_id'].iloc[0]
+    positions=holdings[holdings.issuer_id==issuer].sort_values('weight',ascending=False)
+    st.dataframe(positions[['portfolio_id','category','company','ticker','weight','as_of']],hide_index=True,use_container_width=True)
     changes_path=STORE/'latest_changes.parquet'
     if changes_path.exists():
         changes=pd.read_parquet(changes_path)
-        st.subheader('Latest verified holdings changes')
-        if changes.empty:st.caption('No material changes in the latest comparison.')
-        else:st.dataframe(changes,hide_index=True,use_container_width=True)
+        st.subheader('Latest verified exposure changes')
+        if changes.empty:st.info('No material verified changes in the most recent comparison.')
+        else:
+            st.dataframe(changes,hide_index=True,use_container_width=True)
+            st.download_button('Download changes CSV',changes.to_csv(index=False).encode(),file_name='holdings_changes.csv',mime='text/csv')
+    history=STORE/'holding_events.parquet'
+    if history.exists():
+        events=pd.read_parquet(history)
+        with st.expander('Historical event log'):
+            st.dataframe(events.tail(1000),hide_index=True,use_container_width=True)
+    with st.expander('Data integrity and interpretation'):
+        st.write('A verified ETF weight is an observed portfolio allocation, not evidence of discretionary manager conviction, cash inflows, purchases, or sales. Leadership states are descriptive thresholds, not return forecasts. Unresolved issuer identifiers must not be merged across funds.')
+        st.write('Active ETFs:',', '.join(coverage))
+        st.write('Holdings dates:',', '.join(asofs))
