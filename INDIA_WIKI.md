@@ -156,3 +156,10 @@ Missing values are **not forward-filled** in the trend series. An invalid or una
 ### Sector-specific data quality handling
 
 Unavailable or invalid Indian sector index series are excluded and reported as warnings rather than preventing all other sectors from being displayed. Incomplete Yahoo Finance placeholder rows are discarded, never forward-filled or interpolated. Invalid or unavailable Nifty 50 benchmark data still blocks all calculations. This is primary-source validation, not independent exchange verification.
+
+
+## Data-quality interpretation and known gaps
+
+**PASS** means the available downloaded series passed the implemented internal checks; it does **not** certify complete historical coverage, zero exchange-calendar gaps, or agreement with an independent official source. **WARNING** flags concerns without necessarily suppressing every valid sector. **FAIL** prevents calculations when required benchmark data cannot be trusted. Unavailable sector histories may be excluded from the output, so verify which sectors appear in the classification table.
+
+The app has **not completed a live, all-symbol, exchange-calendar-aware gap audit** for Global, USA, and India, and does not perform independent price reconciliation. Missing weekday observations may be exchange holidays; historical coverage and as-of dates can vary by provider. The scheduled GitHub workflow checks **USA only**; it does not validate India or Global on a schedule.

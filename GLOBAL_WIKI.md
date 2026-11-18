@@ -50,3 +50,10 @@ All lines start at **0 percentage points** on the first selected trading session
 ## Validation and limitations
 
 The dashboard checks benchmark availability, valid adjusted closes, duplicate dates, missing sessions, recent session coverage, and large daily price changes. Sector problems are shown as warnings; missing or invalid benchmark data prevents classifications. Yahoo data may be delayed or revised. No independent provider reconciliation or investment recommendation is implied. The USA daily GitHub Actions check does not automatically validate Global Sectors.
+
+
+## Data-quality interpretation and known gaps
+
+**PASS** means the available downloaded series passed the implemented internal checks; it does **not** certify complete historical coverage, zero exchange-calendar gaps, or agreement with an independent official source. **WARNING** flags concerns without necessarily suppressing every valid sector. **FAIL** prevents calculations when required benchmark data cannot be trusted. Unavailable sector histories may be excluded from the output, so verify which sectors appear in the classification table.
+
+The app has **not completed a live, all-symbol, exchange-calendar-aware gap audit** for Global, USA, and India, and does not perform independent price reconciliation. Missing weekday observations may be exchange holidays; historical coverage and as-of dates can vary by provider. The scheduled GitHub workflow checks **USA only**; it does not validate India or Global on a schedule.

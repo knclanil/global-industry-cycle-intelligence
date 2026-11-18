@@ -7,11 +7,12 @@ import streamlit as st
 import market_data
 import india_market_data
 import global_market_data
+import country_market_data
 COLORS = {'Leading': '#22c58b', 'Improving': '#4b9cff', 'Weakening': '#f4aa4b', 'Lagging': '#fa7185'}
 
 @st.cache_data(ttl=3600, show_spinner=False)
 def prices_cached(market: str, start: date, end: date):
-    module = {"India": india_market_data, "Global": global_market_data}.get(market, market_data)
+    module = {"India": india_market_data, "Global": global_market_data, "Countries": country_market_data}.get(market, market_data)
     return module.download(start, end)
 
 
@@ -32,11 +33,14 @@ def sync_all(market, sectors):
     st.session_state[f"{market}_all_sectors"] = len(st.session_state[f"{market}_sectors"]) == len(sectors)
 
 def render_dashboard(market):
-    module = {'India': india_market_data, 'Global': global_market_data}.get(market, market_data)
+    module = {'India': india_market_data, 'Global': global_market_data, 'Countries': country_market_data}.get(market, market_data)
     SECTORS, LOOKBACKS, QUADRANTS = module.SECTORS, module.LOOKBACKS, module.QUADRANTS
     validate, calculate, relative_trend_from_zero = module.validate, module.calculate, module.relative_trend_from_zero
     benchmark = module.BENCHMARK
-    benchmark_name = {'India': 'Nifty 50', 'Global': 'ACWI'}.get(market, 'SPY')
+    benchmark_name = {'India': 'Nifty 50', 'Global': 'ACWI', 'Countries': 'ACWI'}.get(market, 'SPY')
+    is_country = market == 'Countries'
+    item_name = 'country' if is_country else 'sector'
+    item_plural = 'countries' if is_country else 'sectors'
     if f'{market}_sectors' not in st.session_state:
         st.session_state[f'{market}_sectors'] = list(SECTORS)
     if f'{market}_all_sectors' not in st.session_state:
@@ -44,8 +48,8 @@ def render_dashboard(market):
 
     head, refresh = st.columns([6, 1], vertical_alignment='center')
     with head:
-        st.title(f'{market} Sector')
-        st.caption(f'{market} Sector Rotation  •  {len(SECTORS)} sectors vs {benchmark_name}  •  No database')
+        st.title('Global Countries' if is_country else f'{market} Sector')
+        st.caption(f'{market} Rotation  •  {len(SECTORS)} {item_plural} vs {benchmark_name}  •  No database')
     with refresh:
         if st.button('↻ Refresh now', use_container_width=True):
             prices_cached.clear()
@@ -54,8 +58,8 @@ def render_dashboard(market):
     with st.container(border=True):
         left, mid, right = st.columns([2.2, 2.6, 2.6])
         with left:
-            st.checkbox('Select all sectors', key=f'{market}_all_sectors', on_change=set_sector_from_all, args=(market, SECTORS))
-            chosen = st.multiselect('SECTORS', list(SECTORS), key=f'{market}_sectors',
+            st.checkbox(f'Select all {item_plural}', key=f'{market}_all_sectors', on_change=set_sector_from_all, args=(market, SECTORS))
+            chosen = st.multiselect('COUNTRIES' if is_country else 'SECTORS', list(SECTORS), key=f'{market}_sectors',
                                     format_func=lambda t: f'{SECTORS[t]} ({t})', on_change=sync_all, args=(market, SECTORS))
         with mid:
             lookback = st.select_slider('RELATIVE TIME', options=list(LOOKBACKS), value='3M')
@@ -67,7 +71,7 @@ def render_dashboard(market):
             st.caption('Controls the displayed history and period returns.')
 
     if not chosen:
-        st.info('Select at least one sector.'); st.stop()
+        st.info(f'Select at least one {item_name}.'); st.stop()
     if len(selected) != 2:
         st.info('Select both From Date and To Date.'); st.stop()
     start, end = selected
@@ -88,10 +92,10 @@ def render_dashboard(market):
         except Exception as exc:
             st.error(f'Unable to calculate the dashboard: {exc}')
             st.stop()
-    if market in ('India', 'Global'):
+    if market in ('India', 'Global', 'Countries'):
         missing = [ticker for ticker in chosen if ticker not in rows['ETF'].tolist()] if not rows.empty else chosen
         if missing:
-            st.warning(f'Unavailable or insufficient-history {market} sectors: ' + ', '.join(missing) + '. These are excluded from calculations.')
+            st.warning(f'Unavailable or insufficient-history {market} {item_plural}: ' + ', '.join(missing) + '. These are excluded from calculations.')
     if rows.empty:
         st.warning('No sector has enough valid observations for the selected settings.'); st.stop()
 
@@ -124,7 +128,7 @@ def render_dashboard(market):
 
     # Show one smooth movement path at a time. Multiple historical paths overlap
     # geometrically, so avoid plotting them simultaneously.
-    st.markdown('#### Sector rotation overview')
+    st.markdown(f'#### {item_name.title()} rotation overview')
     control1, control2, control3 = st.columns([1.2, 1.3, 2])
     with control1:
         show_trails = st.toggle('Show smooth movement path', value=True,
@@ -133,7 +137,7 @@ def render_dashboard(market):
         trail_points = st.select_slider('Path length (sessions)', options=[5, 10, 20, 40, 60], value=20,
                                          disabled=not show_trails)
     with control3:
-        focus_ticker = st.selectbox('Movement path for', visible['ETF'].tolist(),
+        focus_ticker = st.selectbox(f'Movement path for {item_name}', visible['ETF'].tolist(),
                                     format_func=lambda t: f'{SECTORS[t]} ({t})',
                                     disabled=not show_trails)
 
@@ -195,7 +199,7 @@ def render_dashboard(market):
     with rotation_col:
         st.markdown('**Relative rotation map**')
         st.plotly_chart(fig, use_container_width=True, key='sector_rotation_map')
-        st.caption('One smooth sector trail at a time; all sector endpoints remain visible.')
+        st.caption(f'One smooth {item_name} trail at a time; all {item_name} endpoints remain visible.')
 
     ranked = visible.sort_values('Excess vs SPY (pp)')
     bar = go.Figure(go.Bar(y=ranked['ETF'], x=ranked['Excess vs SPY (pp)'], orientation='h',
@@ -206,13 +210,13 @@ def render_dashboard(market):
     bar.update_xaxes(title=f'Excess return vs {benchmark_name} (percentage points)')
     style(bar, height=460)
     with performance_col:
-        st.markdown('**Sector performance · selected date range**')
+        st.markdown(f'**{item_name.title()} performance · selected date range**')
         st.plotly_chart(bar, use_container_width=True, key='sector_performance')
         st.caption(f'Excess return versus {benchmark_name}, in percentage points.')
 
     # Date-range cumulative performance relative to {benchmark_name}: each series starts at 0 pp.
-    st.markdown(f'#### Sector trends vs {benchmark_name}')
-    st.caption(f'Cumulative sector return minus cumulative {benchmark_name} return, in percentage points. Every selected sector starts at 0 on the first trading session of the From/To range. Above zero = outperforming {benchmark_name}; below zero = underperforming.')
+    st.markdown(f'#### {item_name.title()} trends vs {benchmark_name}')
+    st.caption(f'Cumulative {item_name} return minus cumulative {benchmark_name} return, in percentage points. Every selected {item_name} starts at 0 on the first trading session of the From/To range. Above zero = outperforming {benchmark_name}; below zero = underperforming.')
     try:
         trend_data = relative_trend_from_zero(frames, visible['ETF'].tolist(), first, last)
         trend_fig = go.Figure()
@@ -237,8 +241,8 @@ def render_dashboard(market):
     except ValueError as exc:
         st.warning(f'Trend unavailable: {exc}')
 
-    st.subheader('Sector classification')
-    table = visible.sort_values('Relative strength (%)', ascending=False).rename(columns={'ETF': 'Index' if market == 'India' else 'ETF', 'Excess vs SPY (pp)': f'Excess vs {benchmark_name} (pp)'})
+    st.subheader(f'{item_name.title()} classification')
+    table = visible.sort_values('Relative strength (%)', ascending=False).rename(columns={'ETF': 'Index' if market == 'India' else 'ETF', 'Excess vs SPY (pp)': f'Excess vs {benchmark_name} (pp)', 'Sector': 'Country' if is_country else 'Sector'})
     st.dataframe(table, hide_index=True,
                  use_container_width=True, column_config={
                      'Relative strength (%)': st.column_config.NumberColumn(format='%.2f%%'),
@@ -250,7 +254,7 @@ def render_dashboard(market):
         st.markdown(f"""**Leading:** relative strength ≥ 0 and momentum ≥ 0. **Improving:** strength < 0 and momentum ≥ 0.
 **Weakening:** strength ≥ 0 and momentum < 0. **Lagging:** strength < 0 and momentum < 0.
 
-Relative strength = 100 × (sector/{benchmark_name} price ratio today ÷ ratio L sessions ago − 1).
+Relative strength = 100 × ({item_name}/{benchmark_name} price ratio today ÷ ratio L sessions ago − 1).
 Momentum = current relative strength − relative strength M sessions ago, M = max(2, L//2).
-Sector trends are cumulative sector return minus cumulative {benchmark_name} return since the first selected trading day; every line starts at zero.
+{item_name.title()} trends are cumulative {item_name} return minus cumulative {benchmark_name} return since the first selected trading day; every line starts at zero.
 These are custom, descriptive indicators, not proprietary RRG calculations or predictions.""")

@@ -1,31 +1,23 @@
 # Global Industry Cycle Intelligence
 
-## Pages
-- **USA Sector** — 11 US sector ETFs versus SPY.
-- **India Sector** — 12 Indian sector index symbols versus Nifty 50 (`^NSEI`).
-- **Wiki** — methodology for each market, with a market selector.
+## Dashboard navigation (display order)
 
-Both sector pages use the same controls, KPIs, relative rotation map, sector performance bars, zero-based relative trend chart, and classification table. The India series use Yahoo Finance NSE index tickers. Availability varies by symbol and provider; missing indices are warned about and omitted, not fabricated. No database.
+1. **Global Sectors** — 10 global sector ETFs compared with ACWI.
+2. **USA Sector** — 11 US sector ETFs compared with SPY.
+3. **India Sector** — Indian sector indices compared with Nifty 50 (`^NSEI`).
+4. **Wiki** — methodology for all three markets, with the same Global → USA → India selector order.
 
-Run: `pip install -r requirements.txt` then `streamlit run app.py`.
+Each market has the same sector/date slicers, four quadrant KPIs, relative rotation map, excess-performance bars, zero-based relative trend chart, and classification table. The app has no database.
 
-The scheduled GitHub Action checks **USA** data only; India data is downloaded when its page loads or Refresh now is pressed.
+## Data sourcing and validation at a glance
 
-# Global Industry Cycle Intelligence
+| Market | Primary | Fallback | Scheduled audit |
+|---|---|---|---|
+| Global | Yahoo Finance (`yfinance`) | None | Not currently scheduled |
+| USA | Yahoo Finance (`yfinance`) | None | USA only, weekdays |
+| India | NSE India endpoints | Yahoo Finance, per unavailable series | Not currently scheduled |
 
-A **USA sector rotation** dashboard designed for **GitHub + Streamlit Community Cloud**. No database, no API keys required for the initial Yahoo Finance feed.
-
-## Features
-
-- 11 US sector ETFs, SPY benchmark
-- Select All / single / multi-sector slicer
-- Relative Time: 1W, 2W, 4W, 1M, 3M, 6M, 12M
-- From Date / To Date historical slicer
-- Four KPI cards: Leading, Improving, Weakening, Lagging
-- Interactive relative rotation map with historical trails
-- Sector excess-performance bar chart and sortable classification table
-- Data integrity checks and explicit primary-source verification status
-- Refresh Now button, one-hour data cache, scheduled GitHub Actions data-quality checks
+A dashboard PASS indicates **internal structural validation**, not zero missing observations, an exchange-calendar audit, or independent cross-provider price reconciliation. Market data is fetched on demand and cached for one hour; an idle open browser may not refresh automatically. See the in-app Wiki for detailed formulas, missing-series handling and limitations.
 
 ## Deploy to Streamlit
 
@@ -80,3 +72,8 @@ India sector and Nifty 50 daily index prices are requested from NSE India histor
 ## Global Sectors
 
 The **Global Sectors** navigation page uses ten global sector ETFs (IXN, IXG, IXJ, IXC, KXI, RXI, EXI, MXI, JXI, IXP) against **ACWI**. Yahoo Finance supplies adjusted daily prices. It shares the USA/India visual layout and relative-strength, momentum, excess-return and zero-start trend definitions. See `GLOBAL_WIKI.md`. The scheduled GitHub Action currently checks USA data only.
+
+
+## Global Countries
+
+The **Global Countries** page covers 20 US-listed country ETFs against ACWI with the same charts and controls. Its methodology is documented in `COUNTRIES_WIKI.md`.
