@@ -355,8 +355,12 @@ def make_figure(nodes, edges, selected=None):
     yvals = [xy[1] for xy in pos.values()]
     xmin, xmax = min(xvals), max(xvals)
     ymin, ymax = min(yvals), max(yvals)
-    xpad = max(5, (xmax - xmin) * .11)
-    ypad = max(5, (ymax - ymin) * .12)
+    # Fit the constellation independently in both dimensions. A locked 1:1
+    # data-axis aspect ratio caused the tall network to occupy only a narrow
+    # diagonal strip on wide screens. Plotly markers remain circular in pixels
+    # even when the x/y coordinate scales differ.
+    xpad = max(3.0, (xmax - xmin) * .065)
+    ypad = max(3.0, (ymax - ymin) * .085)
     xr = (xmin-xpad, xmax+xpad)
     yr = (ymin-ypad, ymax+ypad)
 
@@ -449,12 +453,12 @@ def make_figure(nodes, edges, selected=None):
                 opacity=label_opacity, hoverinfo='skip', showlegend=False))
 
     fig.update_layout(template='plotly_dark',paper_bgcolor='#070d1b',
-        plot_bgcolor='#070d1b',height=890,
+        plot_bgcolor='#070d1b',height=790,autosize=True,
         margin=dict(l=12,r=12,t=12,b=12),dragmode='pan',clickmode='event+select',
-        xaxis=dict(visible=False,range=xr,scaleanchor='y',scaleratio=1,
-                   showgrid=False,zeroline=False),
+        xaxis=dict(visible=False,range=xr,
+                   showgrid=False,zeroline=False,constrain='range'),
         yaxis=dict(visible=False,range=yr,showgrid=False,zeroline=False),
-        uirevision='capital_cosmos_v3',hovermode='closest',
+        uirevision='capital_cosmos_autofit_v4',hovermode='closest',
         font=dict(color='#dce8fa'))
     return fig
 
