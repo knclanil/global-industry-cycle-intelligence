@@ -6,15 +6,15 @@ st.set_page_config(page_title='Global Industry Cycle Intelligence', page_icon='ð
 st.markdown("""<style>.stApp{background:#0b1220;color:#e7eef9}
 [data-testid="stMetric"]{background:#142137;border:1px solid #2a3c55;border-radius:12px;padding:16px}
 [data-testid="stMetricLabel"]{color:#b6c7de}</style>""", unsafe_allow_html=True)
-page=st.sidebar.radio('NAVIGATION', ['USA Sector', 'India Sector', 'Wiki'], key='main_navigation')
+page=st.sidebar.radio('NAVIGATION', ['USA Sector', 'India Sector', 'Global Sectors', 'Wiki'], key='main_navigation')
 if page == 'Wiki':
-    region=st.radio('Documentation for', ['USA Sector', 'India Sector'], horizontal=True)
+    region=st.radio('Documentation for', ['USA Sector', 'India Sector', 'Global Sectors'], horizontal=True)
     st.title(f'{region} Wiki')
-    filename='INDIA_WIKI.md' if region == 'India Sector' else 'WIKI.md'
+    filename = {'India Sector': 'INDIA_WIKI.md', 'Global Sectors': 'GLOBAL_WIKI.md'}.get(region, 'WIKI.md')
     path=Path(__file__).resolve().parent / filename
     if path.is_file():
         st.markdown(path.read_text(encoding='utf-8'))
     else:
         st.info('Documentation file is missing from deployment. Refer to the repository README for methodology.')
 else:
-    render_dashboard('India' if page == 'India Sector' else 'USA')
+    render_dashboard({'India Sector': 'India', 'Global Sectors': 'Global'}.get(page, 'USA'))

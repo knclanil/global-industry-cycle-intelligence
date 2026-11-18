@@ -6,11 +6,12 @@ import plotly.graph_objects as go
 import streamlit as st
 import market_data
 import india_market_data
+import global_market_data
 COLORS = {'Leading': '#22c58b', 'Improving': '#4b9cff', 'Weakening': '#f4aa4b', 'Lagging': '#fa7185'}
 
 @st.cache_data(ttl=3600, show_spinner=False)
 def prices_cached(market: str, start: date, end: date):
-    module = india_market_data if market == "India" else market_data
+    module = {"India": india_market_data, "Global": global_market_data}.get(market, market_data)
     return module.download(start, end)
 
 
@@ -31,11 +32,11 @@ def sync_all(market, sectors):
     st.session_state[f"{market}_all_sectors"] = len(st.session_state[f"{market}_sectors"]) == len(sectors)
 
 def render_dashboard(market):
-    module = india_market_data if market == 'India' else market_data
+    module = {'India': india_market_data, 'Global': global_market_data}.get(market, market_data)
     SECTORS, LOOKBACKS, QUADRANTS = module.SECTORS, module.LOOKBACKS, module.QUADRANTS
     validate, calculate, relative_trend_from_zero = module.validate, module.calculate, module.relative_trend_from_zero
     benchmark = module.BENCHMARK
-    benchmark_name = 'Nifty 50' if market == 'India' else 'SPY'
+    benchmark_name = {'India': 'Nifty 50', 'Global': 'ACWI'}.get(market, 'SPY')
     if f'{market}_sectors' not in st.session_state:
         st.session_state[f'{market}_sectors'] = list(SECTORS)
     if f'{market}_all_sectors' not in st.session_state:
@@ -87,10 +88,10 @@ def render_dashboard(market):
         except Exception as exc:
             st.error(f'Unable to calculate the dashboard: {exc}')
             st.stop()
-    if market == 'India':
+    if market in ('India', 'Global'):
         missing = [ticker for ticker in chosen if ticker not in rows['ETF'].tolist()] if not rows.empty else chosen
         if missing:
-            st.warning('Unavailable or insufficient-history India sectors: ' + ', '.join(missing) + '. These are excluded from calculations.')
+            st.warning(f'Unavailable or insufficient-history {market} sectors: ' + ', '.join(missing) + '. These are excluded from calculations.')
     if rows.empty:
         st.warning('No sector has enough valid observations for the selected settings.'); st.stop()
 
@@ -110,7 +111,7 @@ def render_dashboard(market):
             with st.expander('Yahoo Finance fallback series'):
                 st.write(', '.join(fallback))
     else:
-        st.caption('Source: Yahoo Finance (yfinance). Independent cross-provider verification is not yet implemented; PASS means provider consistency checks only.')
+        st.caption(f'Source: Yahoo Finance (yfinance). Benchmark: {benchmark_name}. Independent cross-provider verification is not yet implemented; PASS means provider consistency checks only.')
     st.caption(f'Effective analysis dates: {first.date()} → {last.date()}  •  Relative window: {lookback}')
 
     cards = st.columns(4)

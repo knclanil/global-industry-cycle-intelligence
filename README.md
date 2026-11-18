@@ -75,3 +75,8 @@ The Wiki normally reads `WIKI.md` from the same folder as `app.py`. Commit **bot
 ### India market-data source priority
 
 India sector and Nifty 50 daily index prices are requested from NSE India historical index endpoints first. When an individual index cannot be retrieved, Yahoo Finance is used as a fallback for that index. The India dashboard identifies fallback series. Source availability is not the same as independent price reconciliation; the dashboard does not claim audited NSE/Yahoo agreement. NSE may restrict automated requests.
+
+
+## Global Sectors
+
+The **Global Sectors** navigation page uses ten global sector ETFs (IXN, IXG, IXJ, IXC, KXI, RXI, EXI, MXI, JXI, IXP) against **ACWI**. Yahoo Finance supplies adjusted daily prices. It shares the USA/India visual layout and relative-strength, momentum, excess-return and zero-start trend definitions. See `GLOBAL_WIKI.md`. The scheduled GitHub Action currently checks USA data only.
