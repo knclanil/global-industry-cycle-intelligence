@@ -146,3 +146,11 @@ This is a deterministic orbital/galaxy layout, not a physical gravity simulation
 
 ### Midnight Cosmos visual refresh (November 2026)
 The Capital Intelligence Galaxy uses a near-black navy canvas, faint seeded stars, curved low-contrast connections, and layered glowing planet markers. Planet diameter represents a peer-relative score; original quadrant colors and the Global Assets / Country Assets hierarchy remain unchanged. Structural nodes use a fixed size. Click a planet to highlight its immediate neighbors. This is a visual redesign, not a change to market data or a claim of measured capital flows.
+
+## Persistent nightly incremental refresh
+
+The workflow `.github/workflows/nightly-market-refresh.yml` runs after NSE and US market closes, stores per-symbol Parquet snapshots in `data/market/`, and commits changed snapshots to the repository. India runs at 18:00 IST weekdays; US-listed global/USA data runs at 00:30 UTC Tuesday–Saturday (19:30 EST / 20:30 EDT). GitHub scheduled workflows may be delayed. Holidays result in no new session, not fabricated prices.
+
+**Initial setup:** enable GitHub Actions with read/write workflow permissions (`Settings → Actions → General → Workflow permissions → Read and write permissions`), then open `Actions → Incremental market data refresh → Run workflow → all`. The workflow's default branch must be the deployment branch. The initial historical bootstrap downloads five years; subsequent refreshes request a 10-calendar-day overlap and replace revised dates. On provider failure existing snapshots remain untouched; see `data/market/refresh_*.json` and workflow logs.
+
+The dashboard loads committed snapshots rather than fetching live prices on normal interactions; until the first bootstrap it falls back to existing live downloads for continuity. `st.cache_data` still caches loaded frames for one hour; a redeploy or cache expiry loads new commits. Price-provider redistribution terms should be checked before using a public repository. This workflow stores prices, **not precomputed RS/momentum scores**, which remain date-range-dependent.

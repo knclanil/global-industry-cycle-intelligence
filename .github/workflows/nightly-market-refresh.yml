@@ -1,0 +1,52 @@
+name: Incremental market data refresh
+on:
+  schedule:
+    # India: 18:00 IST (12:30 UTC), Mon-Fri, after NSE 15:30 IST close.
+    - cron: '30 12 * * 1-5'
+    # US-listed instruments: 19:30 EST / 20:30 EDT, after NYSE 16:00 ET close.
+    - cron: '30 0 * * 2-6'
+  workflow_dispatch:
+    inputs:
+      region:
+        description: 'Market group to refresh'
+        required: true
+        type: choice
+        options: [india, us, all]
+        default: all
+permissions:
+  contents: write
+concurrency:
+  group: market-data-writer
+  cancel-in-progress: false
+jobs:
+  refresh:
+    if: github.event_name == 'workflow_dispatch' || github.event.schedule != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Refresh India
+        if: (github.event_name == 'schedule' && github.event.schedule == '30 12 * * 1-5') || (github.event_name == 'workflow_dispatch' && (inputs.region == 'india' || inputs.region == 'all'))
+        run: python scripts/incremental_refresh.py --region india
+      - name: Refresh US and global US-listed instruments
+        if: (github.event_name == 'schedule' && github.event.schedule == '30 0 * * 2-6') || (github.event_name == 'workflow_dispatch' && (inputs.region == 'us' || inputs.region == 'all'))
+        run: python scripts/incremental_refresh.py --region us
+      - name: Commit updated snapshots
+        if: always()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/market/
+          if ! git diff --cached --quiet; then
+            git commit -m 'data: incremental market snapshots [skip ci]'
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push origin HEAD:"${GITHUB_REF_NAME}"
+          fi

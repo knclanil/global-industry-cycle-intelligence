@@ -20,7 +20,13 @@ COLORS = {'Leading': '#22c58b', 'Improving': '#4b9cff', 'Weakening': '#f4aa4b', 
 @st.cache_data(ttl=3600, show_spinner=False)
 def prices_cached(market: str, start: date, end: date):
     module = {"India": india_market_data, "Global": global_market_data, "Countries": country_market_data, "GlobalFactors": global_factor_market_data, "USAFactors": usa_factor_market_data, "IndiaFactors": india_factor_market_data, "GlobalAssets": global_asset_market_data, "USAAssets": usa_asset_market_data, "IndiaAssets": india_asset_market_data}.get(market, market_data)
-    return module.download(start, end)
+    from stored_market_data import read_market
+    frames = read_market(market, list(module.TICKERS), start, end)
+    # Compatibility fallback before first successful scheduled bootstrap.
+    # Once snapshots exist, never fetch missing symbols during a user interaction.
+    if not frames:
+        return module.download(start, end)
+    return frames
 
 
 def style(fig, height=485):
@@ -58,7 +64,7 @@ def render_dashboard(market):
     head, refresh = st.columns([6, 1], vertical_alignment='center')
     with head:
         st.title(market.replace('Assets', ' Asset Flow') if is_asset else 'Global Countries' if is_country else market.replace('Factors', ' Factors') if is_factor else f'{market} Sector')
-        st.caption(f'{market} Rotation  •  {len(SECTORS)} {item_plural} vs {benchmark_name}  •  No database')
+        st.caption(f'{market} Rotation  •  {len(SECTORS)} {item_plural} vs {benchmark_name}  •  Repository-backed daily snapshots')
     with refresh:
         if st.button('↻ Refresh now', use_container_width=True):
             prices_cached.clear()
