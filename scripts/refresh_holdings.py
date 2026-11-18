@@ -24,7 +24,7 @@ from holdings_intelligence import STORE, SOURCES, url_for, normalize, rank_compa
 # headers vary, and issuer-declared effective date must be parsed independently.
 HEADER_ALIASES = {
     'ticker': {'ticker','tickersymbol','symbol','securityticker','stockticker','holdingsticker'},
-    'weight': {'weight','weightpct','weightpercent','weightpercentage','portfolioweight','weighting','weightofnetassets','percentofnetassets','netassetspercent','ofnetassets'},
+    'weight': {'weight','weightpct','weightpercent','weightpercentage','portfolioweight','weighting','weightofnetassets','percentofnetassets','netassetspercent','ofnetassets','marketweight','marketweightpct','marketweightpercent'},
     'name': {'name','securityname','description','securitydescription','companyname'},
 }
 
@@ -223,13 +223,16 @@ def refresh():
             details['attempts'] = getattr(exc, 'attempts', [])
             diagnostic.write_text(json.dumps(details, indent=2), encoding='utf-8')
     for msg in failures: print('WARNING', msg, file=sys.stderr)
-    if failures:
-        print(f'SKIPPED ranking update: {len(failures)} of {len(all_sources)} sources unavailable or unverified. '
-              'Prior verified rankings are preserved; no removals inferred. See data/holdings/diagnostics.', file=sys.stderr)
+    if not successes:
+        print('No verified active ETF sources; rankings preserved.', file=sys.stderr)
         return 1 if os.environ.get('HOLDINGS_STRICT') == '1' else 0
+    if failures:
+        print(f'PROVISIONAL ranking: {len(successes)}/{len(SOURCES)} active ETFs verified; missing ETFs are not removals.', file=sys.stderr)
     current = pd.concat(successes, ignore_index=True)
     prior_file = STORE / 'latest_holdings.parquet'
     previous = pd.read_parquet(prior_file) if prior_file.exists() else None
+    if previous is not None:
+        previous = previous[previous.portfolio_id.isin(current.portfolio_id.unique())].copy()
     if previous is not None:
         keys = ['portfolio_id', 'issuer_id']
         a = current.sort_values(keys).reset_index(drop=True)
@@ -243,7 +246,9 @@ def refresh():
     snapshot = STORE / 'snapshots' / f'{datekey}-{fingerprint}.parquet'
     snapshot.parent.mkdir(parents=True, exist_ok=True)
     current.to_parquet(snapshot, index=False)
-    current.to_parquet(prior_file, index=False)
+    old_saved = pd.read_parquet(prior_file) if prior_file.exists() else None
+    persisted = current if old_saved is None else pd.concat([current, old_saved[~old_saved.portfolio_id.isin(current.portfolio_id.unique())]], ignore_index=True)
+    persisted.to_parquet(prior_file, index=False)
     ranking.to_parquet(STORE / 'company_rankings.parquet', index=False)
     if changes.empty:
         changes = pd.DataFrame(columns=['portfolio_id', 'issuer_id', 'company', 'event', 'previous_weight', 'current_weight', 'previous_as_of', 'current_as_of', 'points'])

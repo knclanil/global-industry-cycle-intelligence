@@ -38,7 +38,15 @@ def normalize(frame,pid,asof):
     out=out[~out.issuer_id.isin(['TICKER:','TICKER:NAN','TICKER:NONE'])]
     if out.empty:raise ValueError('No valid equity issuer holdings')
     if out.duplicated(['portfolio_id','issuer_id']).any():
-        raise ValueError('Ambiguous duplicate issuer identifiers within ETF; manual validation required')
+        # A ticker collision is not proof of a shared issuer. Keep distinct
+        # names separate and ETF-local until their identities are verified.
+        import hashlib
+        duplicates = out.duplicated(['portfolio_id','issuer_id'], keep=False)
+        out.loc[duplicates, 'issuer_id'] = out.loc[duplicates].apply(
+            lambda r: 'UNRESOLVED:'+str(pid)+':'+hashlib.sha256(
+                (str(r['ticker'])+'|'+str(r['company'])).encode()).hexdigest()[:20], axis=1)
+        if out.duplicated(['portfolio_id','issuer_id']).any():
+            raise ValueError('Repeated identical issuer/security identifiers require review')
     return out.reset_index(drop=True)
 
 def rank_companies(current,previous=None):
