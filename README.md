@@ -143,3 +143,6 @@ The first dashboard page now displays a bilateral **Global Capital Intelligence 
 - Existing Relative Time, date-range, Top N and holdings upload controls remain available. The layout supports Plotly pan and zoom, with a selected-node detail view.
 
 This is a deterministic orbital/galaxy layout, not a physical gravity simulation. It does not include continuous animation or guaranteed collision-free labeling at very large Top N values.
+
+### Midnight Cosmos visual refresh (November 2026)
+The Capital Intelligence Galaxy uses a near-black navy canvas, faint seeded stars, curved low-contrast connections, and layered glowing planet markers. Planet diameter represents a peer-relative score; original quadrant colors and the Global Assets / Country Assets hierarchy remain unchanged. Structural nodes use a fixed size. Click a planet to highlight its immediate neighbors. This is a visual redesign, not a change to market data or a claim of measured capital flows.

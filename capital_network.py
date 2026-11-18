@@ -337,50 +337,121 @@ def layout(nodes,edges):
     return pos
 
 
-def make_figure(nodes,edges,selected=None):
-    """Curved, translucent network edges and colored floating nodes, inspired by the supplied reference."""
-    pos=galaxy_layout(nodes,edges);fig=go.Figure()
+def make_figure(nodes, edges, selected=None):
+    """Midnight-cosmos styling: layered luminous planets, restrained stars, and thin arcs.
+
+    Scores affect diameter only; colors still represent the original quadrants.
+    The star field is decorative and does not encode market observations.
+    """
+    import random
     from collections import defaultdict
-    segments=defaultdict(lambda: ([],[]))
+
+    pos = galaxy_layout(nodes, edges)
+    fig = go.Figure()
+    if not pos:
+        return fig
+
+    xvals = [xy[0] for xy in pos.values()]
+    yvals = [xy[1] for xy in pos.values()]
+    xmin, xmax = min(xvals), max(xvals)
+    ymin, ymax = min(yvals), max(yvals)
+    xpad = max(5, (xmax - xmin) * .11)
+    ypad = max(5, (ymax - ymin) * .12)
+    xr = (xmin-xpad, xmax+xpad)
+    yr = (ymin-ypad, ymax+ypad)
+
+    # A subtle, seeded star field, visually behind the network and not selectable.
+    rng = random.Random(71)
+    stars_x, stars_y, stars_size = [], [], []
+    for _ in range(160):
+        stars_x.append(rng.uniform(*xr))
+        stars_y.append(rng.uniform(*yr))
+        stars_size.append(rng.choice([.7, .9, 1.1, 1.5]))
+    fig.add_trace(go.Scattergl(x=stars_x, y=stars_y, mode='markers',
+        marker=dict(size=stars_size, color='rgba(171,193,229,0.23)'),
+        hoverinfo='skip', showlegend=False))
+
+    connected = {selected} if selected else set()
+    if selected:
+        for a,b in edges:
+            if selected == a: connected.add(b)
+            if selected == b: connected.add(a)
+
+    segments = defaultdict(lambda: ([], []))
     for a,b in edges:
-        if a not in pos or b not in pos:continue
-        x1,y1=pos[a];x2,y2=pos[b]
-        dx=x2-x1;dy=y2-y1
-        # Subtle curvature increases the organic appearance without implying fund flows.
-        bend=.12*math.hypot(dx,dy)*(-1 if sum(ord(c) for c in b)%2 else 1)
-        mx=(x1+x2)/2-bend*dy/(math.hypot(dx,dy)+1e-6)
-        my=(y1+y2)/2+bend*dx/(math.hypot(dx,dy)+1e-6)
-        group='selected' if selected in (a,b) else 'normal'
-        xs,ys=segments[group]
-        for i in range(13):
-            t=i/12;xs.append((1-t)**2*x1+2*(1-t)*t*mx+t*t*x2)
+        if a not in pos or b not in pos: continue
+        x1,y1 = pos[a]; x2,y2 = pos[b]
+        dx,dy = x2-x1,y2-y1
+        dist = math.hypot(dx,dy)
+        bend = .095 * dist * (-1 if sum(map(ord,b)) % 2 else 1)
+        mx = (x1+x2)/2 - bend*dy/(dist+1e-9)
+        my = (y1+y2)/2 + bend*dx/(dist+1e-9)
+        group = 'active' if selected in (a,b) else 'dim' if selected else 'normal'
+        xs,ys = segments[group]
+        for j in range(17):
+            t=j/16
+            xs.append((1-t)**2*x1+2*(1-t)*t*mx+t*t*x2)
             ys.append((1-t)**2*y1+2*(1-t)*t*my+t*t*y2)
         xs.append(None);ys.append(None)
-    for group in ('normal','selected'):
+    for group in ('dim','normal','active'):
         xs,ys=segments[group]
-        if xs:fig.add_trace(go.Scattergl(x=xs,y=ys,mode='lines',line=dict(color='rgba(113,151,202,0.24)' if group=='normal' else 'rgba(180,225,255,0.85)',width=1 if group=='normal' else 2.5),hoverinfo='skip',showlegend=False))
-    for kind in ('root','country','asset_group','asset','equity','sector_group','factor_group','sector','factor','company'):
+        if not xs:continue
+        color={'dim':'rgba(97,124,165,0.09)','normal':'rgba(114,153,196,0.26)',
+               'active':'rgba(173,218,255,0.80)'}[group]
+        fig.add_trace(go.Scattergl(x=xs,y=ys,mode='lines',
+            line=dict(color=color,width=2.2 if group=='active' else .85),
+            hoverinfo='skip',showlegend=False))
+
+    kinds=('root','country','asset_group','asset','equity','sector_group',
+           'factor_group','sector','factor','company')
+    for kind in kinds:
         items=[n for n in nodes.values() if n['kind']==kind]
         if not items:continue
-        fig.add_trace(go.Scattergl(
-            x=[pos[n['id']][0] for n in items],y=[pos[n['id']][1] for n in items],
-            mode='markers+text',
-            text=[n['label'][:17]+'…' if len(n['label'])>18 else n['label'] for n in items],
-            textposition='top center',textfont=dict(size=10,color='#d8e5f7'),
-            marker=dict(size=[42 if kind=='root' else (12+31*math.sqrt(max(0.,min(100.,n['score']))/100.) if n['score'] is not None else 16) + (5 if n['id']==selected else 0) for n in items],
-                        color=[COLORS.get(n['quadrant'],'#a1b3ce') if kind!='root' else '#a77cff' for n in items],
-                        line=dict(color='#dbe9ff',width=1.1),opacity=.92),
+        xs=[pos[n['id']][0] for n in items]
+        ys=[pos[n['id']][1] for n in items]
+        sizes=[48 if kind=='root' else
+               (13+29*math.sqrt(max(0,min(100,n['score']))/100)
+                if n['score'] is not None else 19) for n in items]
+        colors=[('#a98bff' if kind=='root' else
+                 COLORS.get(n['quadrant'],'#7892b2')) for n in items]
+        opacity=[1 if not selected or n['id'] in connected else .28 for n in items]
+        # Three concentric layers produce a planet-like illuminated disc.
+        for multiplier,alpha in ((1.72,.085),(1.35,.16)):
+            fig.add_trace(go.Scattergl(x=xs,y=ys,mode='markers',
+                marker=dict(size=[v*multiplier for v in sizes],color=colors,
+                            opacity=[alpha*o for o in opacity],line=dict(width=0)),
+                hoverinfo='skip',showlegend=False))
+        fig.add_trace(go.Scattergl(x=xs,y=ys,mode='markers',
+            marker=dict(size=sizes,color=colors,opacity=opacity,
+                        line=dict(color='rgba(225,239,255,0.80)',width=1.15)),
             customdata=[[n['id']] for n in items],
-            hovertemplate='%{text}<extra>'+kind.title()+'</extra>',name=kind.title(),showlegend=False))
-    fig.update_layout(template='plotly_dark',paper_bgcolor='#0b1220',plot_bgcolor='#0b1220',
-        height=920,margin=dict(l=18,r=18,t=25,b=25),dragmode='pan',clickmode='event+select',
-        xaxis=dict(visible=False,scaleanchor='y',scaleratio=1),yaxis=dict(visible=False),
-        uirevision='capital_force_galaxy_v2',hovermode='closest')
+            hovertext=[f"{n['label']}<br>Score: {n['score']:.1f}/100" if n['score'] is not None
+                       else f"{n['label']}<br>Structural node · not scored" for n in items],
+            hovertemplate='%{hovertext}<extra></extra>',
+            showlegend=False))
+        # Small, displaced specular highlights make circles read as planets.
+        fig.add_trace(go.Scattergl(x=[x-.10 for x in xs],y=[y+.10 for y in ys],
+            mode='markers',marker=dict(size=[max(2,v*.13) for v in sizes],
+                color='rgba(245,250,255,0.38)',opacity=opacity),
+            hoverinfo='skip',showlegend=False))
+        labels=[n['label'] if len(n['label'])<=21 else n['label'][:19]+'…' for n in items]
+        fig.add_trace(go.Scattergl(x=xs,y=ys,mode='text',text=labels,
+            textposition='top center',textfont=dict(size=11 if kind in ('root','country','equity') else 9,
+                color='#dce8fa'),opacity=opacity,hoverinfo='skip',showlegend=False))
+
+    fig.update_layout(template='plotly_dark',paper_bgcolor='#070d1b',
+        plot_bgcolor='#070d1b',height=890,
+        margin=dict(l=12,r=12,t=12,b=12),dragmode='pan',clickmode='event+select',
+        xaxis=dict(visible=False,range=xr,scaleanchor='y',scaleratio=1,
+                   showgrid=False,zeroline=False),
+        yaxis=dict(visible=False,range=yr,showgrid=False,zeroline=False),
+        uirevision='capital_cosmos_v3',hovermode='closest',
+        font=dict(color='#dce8fa'))
     return fig
 
 def render_capital_network():
     st.title('🌌 Global Capital Intelligence Galaxy')
-    st.caption('Organic force-directed galaxy · Global assets to the left, countries to the right · Planet size = score · Relationships are not measured money flows')
+    st.caption('Midnight Cosmos · luminous score-sized planets · country and global asset galaxies · connections show relationships, not measured fund flows')
     c1,c2,c3=st.columns([1.5,2.6,1.2])
     with c1:lookback=st.select_slider('RELATIVE TIME',options=list(country_market_data.LOOKBACKS),value='3M')
     with c2:period=st.date_input('FROM DATE → TO DATE',value=(date.today()-timedelta(days=365),date.today()),max_value=date.today())
