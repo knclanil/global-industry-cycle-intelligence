@@ -59,19 +59,19 @@ button{cursor:pointer}button:hover{background:#223043}button.active{border-color
 <div id="legend">NODE TYPES <span class="dot" style="background:#36c5a0"></span>Countries <span class="dot" style="background:#e3ac58"></span>Assets <span class="dot" style="background:#a99af7"></span>Factors <span class="dot" style="background:#62a9e8"></span>Sectors<br>MARKET STATUS <span class="dot" style="background:#39cf91"></span>Leading <span class="dot" style="background:#65a9ff"></span>Improving <span class="dot" style="background:#eab45e"></span>Weakening <span class="dot" style="background:#ed7280"></span>Lagging</div>
 <div id="fallback">The interactive 3D renderer could not load. Check whether your browser or network blocks the external JavaScript library.</div></div>
 <script>const PAYLOAD=__PAYLOAD__;</script>
-<script src="https://unpkg.com/three@0.160.1/build/three.min.js"></script>
+<script src="https://unpkg.com/three@0.149.0/build/three.min.js"></script>
 <script src="https://unpkg.com/three-spritetext@1.9.3/dist/three-spritetext.min.js"></script>
 <script src="https://unpkg.com/3d-force-graph@1.73.4/dist/3d-force-graph.min.js"></script>
 <script>
 (function(){
-if(typeof ForceGraph3D==='undefined'||typeof SpriteText==='undefined'){document.getElementById('fallback').style.display='block';return;}
+if(typeof THREE==='undefined'||typeof ForceGraph3D==='undefined'||typeof SpriteText==='undefined'){document.getElementById('fallback').style.display='block';return;}
 const allNodes=PAYLOAD.nodes,allLinks=PAYLOAD.links, byId=new Map(allNodes.map(n=>[n.id,n]));
 const expanded=new Set(allNodes.filter(n=>n.kind==='group').map(n=>n.id));let selected=null;
 const endpoint=x=>typeof x==='object'?x.id:x;
 function visible(){let ids=new Set(allNodes.filter(n=>n.kind==='group').map(n=>n.id));
-for(const l of allLinks){const p=endpoint(l.source),c=endpoint(l.target);if(ids.has(p)&&expanded.has(p))ids.add(c)}
+for(let pass=0;pass<3;pass++){for(const l of allLinks){const p=endpoint(l.source),c=endpoint(l.target);if(ids.has(p)&&expanded.has(p))ids.add(c)}}
 return {nodes:allNodes.filter(n=>ids.has(n.id)).map(n=>({...n})),links:allLinks.filter(l=>ids.has(endpoint(l.source))&&ids.has(endpoint(l.target))).map(l=>({source:endpoint(l.source),target:endpoint(l.target)}))};}
-const el=document.getElementById('graph');const graph=ForceGraph3D()(el).backgroundColor('#05070b').showNavInfo(false)
+const el=document.getElementById('graph');let graph;try{graph=ForceGraph3D()(el)}catch(err){document.getElementById('fallback').style.display='block';document.getElementById('fallback').textContent='3D initialization failed: '+err.message;return;}graph.backgroundColor('#05070b').showNavInfo(false)
  .nodeRelSize(3).nodeVal(n=>n.size||4).nodeColor(n=>n.color).nodeOpacity(.92)
  .linkColor(l=>selected&&(endpoint(l.source)===selected||endpoint(l.target)===selected)?'#9eafc6':'#38414d')
  .linkOpacity(.36).linkWidth(l=>selected&&(endpoint(l.source)===selected||endpoint(l.target)===selected)?1.7:.55)
