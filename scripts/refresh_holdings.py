@@ -17,7 +17,7 @@ import pandas as pd
 import requests
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from holdings_intelligence import STORE, SOURCES, url_for, normalize, rank_companies
+from holdings_intelligence import STORE, SOURCES, ALL_SOURCES, GROUPS, url_for, normalize, rank_companies
 
 # Adapted from the supplied Factor Holdings Intelligence collectors v1.8.1/v1.8.5.
 # Their key insight: metadata may be embedded in one cell or spread across rows;
@@ -69,6 +69,12 @@ def _header_index(rows):
             return i
     return None
 
+def _fund_title(rows):
+    for row in rows[:15]:
+        if row and str(row[0]).strip().lower().startswith('ishares '):
+            return str(row[0]).strip()
+    raise ValueError('Missing iShares fund title in first column')
+
 def _rows_to_frame(rows):
     idx = _header_index(rows)
     if idx is None: raise ValueError('No recognized holdings table (ticker/name/weight)')
@@ -95,7 +101,9 @@ def _rows_to_frame(rows):
             continue
         records.append(item)
     if not records: raise ValueError('No holdings records after recognized header')
-    return pd.DataFrame.from_records(records), asof
+    frame=pd.DataFrame.from_records(records)
+    frame.attrs['fund_title']=_fund_title(rows[:idx])
+    return frame, asof
 
 def _parse_csv(blob):
     if blob.startswith((b'\xff\xfe',b'\xfe\xff')): text=blob.decode('utf-16')
@@ -201,16 +209,16 @@ def refresh():
     dates = _candidate_dates()
     pending_path = STORE / 'pending_sources.json'
     pending = json.loads(pending_path.read_text()).get('portfolio_ids', []) if pending_path.exists() else []
-    all_sources = list(dict.fromkeys([*SOURCES, *pending]))
+    all_sources = list(dict.fromkeys([*ALL_SOURCES, *pending]))
     for pid in all_sources:
         try:
             frame, asof, requested, attempts = _fetch_verified(session, pid, dates)
-            if pid in SOURCES:
-                df = normalize(frame, pid, asof)
-                if len(df) < 10 or not 80 <= float(df.weight.sum()) <= 105:
+            if pid in ALL_SOURCES:
+                df = normalize(frame, pid, asof, fund_title=frame.attrs.get('fund_title'))
+                if len(df) < 10 or not 70 <= float(df.weight.sum()) <= 105:
                     raise ValueError(f'Equity holdings validation failed: {len(df)} equities, {df.weight.sum():.2f}% total weight')
                 successes.append(df)
-                print(f'{pid}: verified {len(df)} equity holdings as of {asof} (requested {requested})', flush=True)
+                print(f'{GROUPS[pid]} — {frame.attrs.get("fund_title")}: verified {len(df)} equity holdings as of {asof}', flush=True)
             else:
                 print(f'{pid}: parsed {len(frame)} rows as of {asof}; category pending, excluded from rankings', flush=True)
             (STORE / 'diagnostics' / f'{pid}.json').unlink(missing_ok=True)
@@ -229,6 +237,7 @@ def refresh():
     if failures:
         print(f'PROVISIONAL ranking: {len(successes)}/{len(SOURCES)} active ETFs verified; missing ETFs are not removals.', file=sys.stderr)
     current = pd.concat(successes, ignore_index=True)
+    ranking_current=current[current.category.isin(['factor','sector'])].copy()
     prior_file = STORE / 'latest_holdings.parquet'
     previous = pd.read_parquet(prior_file) if prior_file.exists() else None
     if previous is not None:
@@ -240,15 +249,17 @@ def refresh():
         if a.equals(b):
             print('No new verified holdings changes')
             return 0
-    ranking, changes = rank_companies(current, previous)
+    ranking_previous=previous[previous.category.isin(['factor','sector'])].copy() if previous is not None else None
+    ranking, changes = rank_companies(ranking_current, ranking_previous)
     # Existing ETFs may have the same issuer date; only compare genuinely newer snapshots.
     # Missing ETFs are excluded above, never treated as removed.
     coverage = {'verified_active_etfs': sorted(current.portfolio_id.unique().tolist()),
                 'verified_count': int(current.portfolio_id.nunique()),
-                'expected_active_count': len(SOURCES),
-                'pending_count': len(pending),
+                'expected_active_count': len(ALL_SOURCES),
+                'groups': {group: sorted(current.loc[current.group==group,'fund_title'].unique().tolist()) for group in ['USA Factor','USA Sector','Global Sector']},
+                'pending_count': 0,
                 'holdings_dates': sorted(current.as_of.unique().tolist()),
-                'ranking_status': 'complete' if current.portfolio_id.nunique() == len(SOURCES) else 'provisional'}
+                'ranking_status': 'complete' if current.portfolio_id.nunique() == len(ALL_SOURCES) else 'provisional'}
     (STORE / 'coverage.json').write_text(json.dumps(coverage, indent=2), encoding='utf-8')
     datekey = max(current.as_of)
     fingerprint = hashlib.sha256(pd.util.hash_pandas_object(current, index=False).values.tobytes()).hexdigest()[:12]

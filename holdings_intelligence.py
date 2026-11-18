@@ -8,14 +8,17 @@ ROOT=Path(__file__).resolve().parent
 STORE=ROOT/'data'/'holdings'
 FACTORS=['239695','239728','256101','239563','239725','239710','251614']
 SECTORS=['239505','239511','239506','239524','239508','239507','239520','239503','239523','239514','239522']
+GLOBAL_SECTORS=['239740','239744','239753','239739','239742','239741','239751','239745','239748','239750']
+GROUPS={**{p:'USA Factor' for p in FACTORS},**{p:'USA Sector' for p in SECTORS},**{p:'Global Sector' for p in GLOBAL_SECTORS}}
 SOURCES={**{p:'factor' for p in FACTORS},**{p:'sector' for p in SECTORS}}
+ALL_SOURCES={**SOURCES, **{p:'global_sector' for p in GLOBAL_SECTORS}}
 BASE_URL='https://www.blackrock.com/varnish-api/blk-one01-product-data/product-data/api/v1/get-fund-document'
 
 def url_for(pid,asof):
     from urllib.parse import urlencode
     return BASE_URL+'?'+urlencode(dict(appType='PRODUCT_PAGE',appSubType='ISHARES',targetSite='us-ishares',locale='en_US',portfolioId=pid,userType='individual',asOfDate=asof,component='holdings'))
 
-def normalize(frame,pid,asof):
+def normalize(frame,pid,asof,fund_title=None):
     """Fail closed on unrecognized files; do not infer missing issuers or weights."""
     df=frame.copy()
     df.columns=[str(c).strip().lower().replace(' ','_').replace('%','pct') for c in df.columns]
@@ -28,7 +31,8 @@ def normalize(frame,pid,asof):
     out=pd.DataFrame({'company':df[name].astype(str).str.strip(),'ticker':df[ticker].astype(str).str.strip().str.upper() if ticker else '',
         'isin':df[isin].astype(str).str.strip().str.upper() if isin else '',
         'weight':pd.to_numeric(df[weight].astype(str).str.replace('%','',regex=False).str.replace(',','',regex=False),errors='coerce'),
-        'portfolio_id':pid,'category':SOURCES[pid],'as_of':asof})
+        'portfolio_id':pid,'category':ALL_SOURCES[pid],'group':GROUPS[pid],
+        'fund_title':str(fund_title or '').strip(),'as_of':asof})
     if asset:
         valid=df[asset].astype(str).str.lower().str.contains('equity|stock',regex=True)
         out=out.loc[valid]
@@ -81,13 +85,13 @@ def rank_companies(current,previous=None):
             pid,issuer=key
             a=old.loc[key] if key in old.index else None; b=new.loc[key] if key in new.index else None
             if a is not None and b is not None and str(a.as_of)==str(b.as_of):continue
-            if a is None: event='added'; points=8 if SOURCES[pid]=='factor' else 4
-            elif b is None:event='removed';points=-10 if SOURCES[pid]=='factor' else -6
+            if a is None: event='added'; points=8 if ALL_SOURCES[pid]=='factor' else 4
+            elif b is None:event='removed';points=-10 if ALL_SOURCES[pid]=='factor' else -6
             else:
                 delta=float(b.weight)-float(a.weight)
                 if abs(delta)<.10 or abs(delta)/max(float(a.weight),.01)<.05:continue
                 event='increased' if delta>0 else 'decreased'
-                points=(min(4,4*delta) if delta>0 else max(-5,5*delta)) if SOURCES[pid]=='factor' else (min(3,3*delta) if delta>0 else max(-4,4*delta))
+                points=(min(4,4*delta) if delta>0 else max(-5,5*delta)) if ALL_SOURCES[pid]=='factor' else (min(3,3*delta) if delta>0 else max(-4,4*delta))
             events.append(dict(portfolio_id=pid,issuer_id=issuer,company=str((b if b is not None else a).company),event=event,
                 previous_weight=float(a.weight) if a is not None else 0.,current_weight=float(b.weight) if b is not None else 0.,
                 previous_as_of=str(a.as_of) if a is not None else '',current_as_of=str(b.as_of) if b is not None else '',points=round(points,3)))
@@ -127,12 +131,23 @@ def render_holdings_intelligence():
     asofs = sorted(holdings.as_of.astype(str).unique())
     a,b,c,d = st.columns(4)
     a.metric('Ranked companies',f'{len(ranking):,}')
-    b.metric('Verified active ETFs',f'{len(coverage)}/{len(SOURCES)}')
+    b.metric('Verified iShares funds',f'{len(coverage)}')
     c.metric('Latest holdings as of',max(asofs) if asofs else 'N/A')
     d.metric('Snapshot dates',len(asofs))
     if len(coverage) < len(SOURCES):
         st.warning('Provisional coverage: missing ETFs are not interpreted as removed holdings. Breadth scores use the configured factor denominator.')
-    st.caption('Base score: 45% factor breadth + 40% relative factor weight + 15% sector prominence; verified changes adjust up to ±30 points. Weights may change without any trading.')
+    st.caption('Leadership score combines USA Factor breadth and relative weight with USA Sector prominence. Global Sector holdings are displayed separately and are not silently added to the USA score. Reported weight changes do not establish trading.')
+    if 'group' in holdings.columns and 'fund_title' in holdings.columns:
+        st.subheader('iShares holdings by fund group')
+        for group_name in ['USA Factor','USA Sector','Global Sector']:
+            group_data=holdings[holdings['group']==group_name]
+            with st.expander(group_name, expanded=True):
+                funds=group_data[['fund_title','as_of','portfolio_id']].drop_duplicates().sort_values('fund_title')
+                st.dataframe(funds[['fund_title','as_of']].rename(columns={'fund_title':'iShares fund','as_of':'Holdings as of'}),hide_index=True,use_container_width=True)
+                if not funds.empty:
+                    selection=st.selectbox('View fund holdings', funds['fund_title'].tolist(), key='fund_'+group_name)
+                    rows=group_data[group_data.fund_title==selection].sort_values('weight',ascending=False)
+                    st.dataframe(rows[['ticker','company','weight','as_of']].rename(columns={'ticker':'Ticker','company':'Company','weight':'Weight (%)','as_of':'Holdings as of'}),hide_index=True,use_container_width=True)
     ranking=ranking.copy()
     ranking['Leadership state']=ranking.apply(leadership_state,axis=1)
     controls=st.columns([2,2,1])
@@ -152,7 +167,8 @@ def render_holdings_intelligence():
     chosen=st.selectbox('Select company',candidates['label'].tolist(),index=0)
     issuer=candidates.loc[candidates.label==chosen,'issuer_id'].iloc[0]
     positions=holdings[holdings.issuer_id==issuer].sort_values('weight',ascending=False)
-    st.dataframe(positions[['portfolio_id','category','company','ticker','weight','as_of']],hide_index=True,use_container_width=True)
+    columns=['group','fund_title','company','ticker','weight','as_of'] if {'group','fund_title'}.issubset(positions.columns) else ['category','company','ticker','weight','as_of']
+    st.dataframe(positions[columns],hide_index=True,use_container_width=True)
     changes_path=STORE/'latest_changes.parquet'
     if changes_path.exists():
         changes=pd.read_parquet(changes_path)
