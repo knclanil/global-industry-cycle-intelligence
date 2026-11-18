@@ -1,27 +1,6 @@
 {
   "portfolio_id": "239710",
-  "timestamp_utc": "2026-11-18T19:46:44.297313+00:00",
-  "error": "Holdings table recognized, but issuer-declared holdings-as-of date missing",
-  "status_code": 200,
-  "content_type": "text/csv",
-  "content_disposition": "attachment; filename=IWM_holdings.csv",
-  "content_length": 4567,
-  "body_sha256": "e869e468fed076d81a00ad171cdeacdc0f1a6527c5936b563e088a91ebaf129b",
-  "detected_magic": "6953686172657320",
-  "metadata_labels": [
-    "iShares Russell  ETF",
-    "Fund Holdings as of",
-    "Inception Date",
-    "Shares Outstanding",
-    "Stock",
-    "Bond",
-    "Cash",
-    "Other",
-    "Ticker",
-    "The content contained herein is owned or licensed by BlackRock an"
-  ],
-  "holdings_date_raw": [
-    "-"
-  ],
-  "holdings_date_parsed": null
+  "timestamp_utc": "2026-11-18T20:00:10.791564+00:00",
+  "error": "Ambiguous duplicate issuer identifiers within ETF; manual validation required",
+  "attempts": []
 }

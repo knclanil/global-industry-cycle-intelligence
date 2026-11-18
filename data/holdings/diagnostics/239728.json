@@ -1,12 +1,12 @@
 {
   "portfolio_id": "239728",
-  "timestamp_utc": "2026-11-18T19:46:42.584261+00:00",
-  "error": "No recognized iShares CSV holdings header",
+  "timestamp_utc": "2026-11-18T20:00:04.857673+00:00",
+  "error": "No verified holdings document across requested dates: 20261117: No recognized iShares CSV holdings header; 20261116: No recognized iShares CSV holdings header; 20261113: No recognized iShares CSV holdings header; 20261112: No recognized iShares CSV holdings header; 20261111: No recognized iShares CSV holdings header; 20261110: No recognized iShares",
   "status_code": 200,
   "content_type": "text/csv",
   "content_disposition": "attachment; filename=IVE_holdings.csv",
-  "content_length": 4592,
-  "body_sha256": "7db9fd60f44f735bfc92f54d446cf2d1650de449c374030da51a4558b33052d6",
+  "content_length": 81121,
+  "body_sha256": "720a4b4fcfcedda8d4b06d914354f03ce40d6cb6fbd8c5885ce6d7e91fe1a2f7",
   "detected_magic": "6953686172657320",
   "metadata_labels": [
     "iShares SP  Value ETF",
@@ -18,10 +18,43 @@
     "Cash",
     "Other",
     "Ticker",
-    "The content contained herein is owned or licensed by BlackRock an"
+    "AAPL"
   ],
-  "holdings_date_raw": [
-    "-"
-  ],
-  "holdings_date_parsed": null
+  "attempts": [
+    {
+      "requested_date": "20261117",
+      "error": "No recognized iShares CSV holdings header",
+      "status_code": 200
+    },
+    {
+      "requested_date": "20261116",
+      "error": "No recognized iShares CSV holdings header",
+      "status_code": 200
+    },
+    {
+      "requested_date": "20261113",
+      "error": "No recognized iShares CSV holdings header",
+      "status_code": 200
+    },
+    {
+      "requested_date": "20261112",
+      "error": "No recognized iShares CSV holdings header",
+      "status_code": 200
+    },
+    {
+      "requested_date": "20261111",
+      "error": "No recognized iShares CSV holdings header",
+      "status_code": 200
+    },
+    {
+      "requested_date": "20261110",
+      "error": "No recognized iShares CSV holdings header",
+      "status_code": 200
+    },
+    {
+      "requested_date": "20261109",
+      "error": "No recognized iShares CSV holdings header",
+      "status_code": 200
+    }
+  ]
 }
