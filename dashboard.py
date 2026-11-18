@@ -8,11 +8,14 @@ import market_data
 import india_market_data
 import global_market_data
 import country_market_data
+import global_factor_market_data
+import usa_factor_market_data
+import india_factor_market_data
 COLORS = {'Leading': '#22c58b', 'Improving': '#4b9cff', 'Weakening': '#f4aa4b', 'Lagging': '#fa7185'}
 
 @st.cache_data(ttl=3600, show_spinner=False)
 def prices_cached(market: str, start: date, end: date):
-    module = {"India": india_market_data, "Global": global_market_data, "Countries": country_market_data}.get(market, market_data)
+    module = {"India": india_market_data, "Global": global_market_data, "Countries": country_market_data, "GlobalFactors": global_factor_market_data, "USAFactors": usa_factor_market_data, "IndiaFactors": india_factor_market_data}.get(market, market_data)
     return module.download(start, end)
 
 
@@ -33,14 +36,15 @@ def sync_all(market, sectors):
     st.session_state[f"{market}_all_sectors"] = len(st.session_state[f"{market}_sectors"]) == len(sectors)
 
 def render_dashboard(market):
-    module = {'India': india_market_data, 'Global': global_market_data, 'Countries': country_market_data}.get(market, market_data)
+    module = {'India': india_market_data, 'Global': global_market_data, 'Countries': country_market_data, 'GlobalFactors': global_factor_market_data, 'USAFactors': usa_factor_market_data, 'IndiaFactors': india_factor_market_data}.get(market, market_data)
     SECTORS, LOOKBACKS, QUADRANTS = module.SECTORS, module.LOOKBACKS, module.QUADRANTS
     validate, calculate, relative_trend_from_zero = module.validate, module.calculate, module.relative_trend_from_zero
     benchmark = module.BENCHMARK
-    benchmark_name = {'India': 'Nifty 50', 'Global': 'ACWI', 'Countries': 'ACWI'}.get(market, 'SPY')
+    benchmark_name = {'India': 'Nifty 50', 'Global': 'ACWI', 'Countries': 'ACWI', 'GlobalFactors': 'ACWI', 'USAFactors': 'SPY', 'IndiaFactors': 'Nifty 50'}.get(market, 'SPY')
     is_country = market == 'Countries'
-    item_name = 'country' if is_country else 'sector'
-    item_plural = 'countries' if is_country else 'sectors'
+    is_factor = market.endswith('Factors')
+    item_name = 'country' if is_country else 'factor' if is_factor else 'sector'
+    item_plural = 'countries' if is_country else 'factors' if is_factor else 'sectors'
     if f'{market}_sectors' not in st.session_state:
         st.session_state[f'{market}_sectors'] = list(SECTORS)
     if f'{market}_all_sectors' not in st.session_state:
@@ -48,7 +52,7 @@ def render_dashboard(market):
 
     head, refresh = st.columns([6, 1], vertical_alignment='center')
     with head:
-        st.title('Global Countries' if is_country else f'{market} Sector')
+        st.title('Global Countries' if is_country else market.replace('Factors', ' Factors') if is_factor else f'{market} Sector')
         st.caption(f'{market} Rotation  •  {len(SECTORS)} {item_plural} vs {benchmark_name}  •  No database')
     with refresh:
         if st.button('↻ Refresh now', use_container_width=True):
@@ -59,7 +63,7 @@ def render_dashboard(market):
         left, mid, right = st.columns([2.2, 2.6, 2.6])
         with left:
             st.checkbox(f'Select all {item_plural}', key=f'{market}_all_sectors', on_change=set_sector_from_all, args=(market, SECTORS))
-            chosen = st.multiselect('COUNTRIES' if is_country else 'SECTORS', list(SECTORS), key=f'{market}_sectors',
+            chosen = st.multiselect('COUNTRIES' if is_country else 'FACTORS' if is_factor else 'SECTORS', list(SECTORS), key=f'{market}_sectors',
                                     format_func=lambda t: f'{SECTORS[t]} ({t})', on_change=sync_all, args=(market, SECTORS))
         with mid:
             lookback = st.select_slider('RELATIVE TIME', options=list(LOOKBACKS), value='3M')
@@ -92,25 +96,25 @@ def render_dashboard(market):
         except Exception as exc:
             st.error(f'Unable to calculate the dashboard: {exc}')
             st.stop()
-    if market in ('India', 'Global', 'Countries'):
+    if market in ('India', 'Global', 'Countries', 'GlobalFactors', 'USAFactors', 'IndiaFactors'):
         missing = [ticker for ticker in chosen if ticker not in rows['ETF'].tolist()] if not rows.empty else chosen
         if missing:
             st.warning(f'Unavailable or insufficient-history {market} {item_plural}: ' + ', '.join(missing) + '. These are excluded from calculations.')
     if rows.empty:
         st.warning('No sector has enough valid observations for the selected settings.'); st.stop()
 
-    now_et = datetime.now(ZoneInfo('Asia/Kolkata' if market == 'India' else 'America/New_York')).strftime('%Y-%m-%d %I:%M %p') + (' IST' if market == 'India' else ' ET')
+    now_et = datetime.now(ZoneInfo('Asia/Kolkata' if market in ('India', 'IndiaFactors') else 'America/New_York')).strftime('%Y-%m-%d %I:%M %p') + (' IST' if market == 'India' else ' ET')
     if report['status'] == 'PASS':
         st.success(f'Primary-source validation: PASS  •  Latest verified session: {report["latest"]}  •  Retrieved: {now_et}')
     else:
         st.warning(f'Primary-source validation: WARNING  •  Latest session: {report["latest"]}  •  Retrieved: {now_et}')
         with st.expander('Data quality warnings'):
             for issue in report['warnings']: st.write('• ' + issue)
-    if market == 'India':
+    if market in ('India', 'IndiaFactors'):
         sources = {t: f.attrs.get('source', 'Unknown') for t, f in frames.items()}
         nse_count = sum(source == 'NSE India' for source in sources.values())
         fallback = [f"{module.SECTORS.get(t, 'Nifty 50')} ({t})" for t, source in sources.items() if 'fallback' in source]
-        st.caption(f'Sources: NSE India primary ({nse_count} series); Yahoo Finance fallback ({len(fallback)} series). Data-quality PASS does not imply independent price verification.')
+        st.caption(f'Sources: NSE India primary ({nse_count} series); Yahoo Finance fallback ({len(fallback)} series). India factors have no unverified Yahoo factor-index substitutes. Data-quality PASS does not imply independent price verification.')
         if fallback:
             with st.expander('Yahoo Finance fallback series'):
                 st.write(', '.join(fallback))

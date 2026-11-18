@@ -2,6 +2,9 @@
 
 ## Dashboard navigation (display order)
 
+The live application includes **Global Factors** (ACWI), **USA Factors** (SPY), and **India Factors** (Nifty 50) alongside the sector and country dashboards. Each has the same rotation, performance, zero-based trend and classification visuals. See `GLOBAL_FACTORS_WIKI.md`, `USA_FACTORS_WIKI.md`, and `INDIA_FACTORS_WIKI.md`. India factors use NSE historical factor indices; Yahoo is a benchmark-only fallback, not an unverified factor-index replacement.
+
+
 1. **Global Sectors** — 10 global sector ETFs compared with ACWI.
 2. **USA Sector** — 11 US sector ETFs compared with SPY.
 3. **India Sector** — Indian sector indices compared with Nifty 50 (`^NSEI`).
