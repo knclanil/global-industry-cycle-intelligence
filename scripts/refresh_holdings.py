@@ -17,7 +17,7 @@ import pandas as pd
 import requests
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from holdings_intelligence import STORE, SOURCES, ALL_SOURCES, GROUPS, GLOBAL_FACTORS, url_for, normalize, rank_companies
+from holdings_intelligence import STORE, SOURCES, ALL_SOURCES, GROUPS, GLOBAL_FACTORS, url_for, normalize, rank_companies, load_etf_performance
 
 # Adapted from the supplied Factor Holdings Intelligence collectors v1.8.1/v1.8.5.
 # Their key insight: metadata may be embedded in one cell or spread across rows;
@@ -246,7 +246,7 @@ def refresh():
         keys = ['portfolio_id', 'issuer_id']
         a = current.sort_values(keys).reset_index(drop=True)
         b = previous.sort_values(keys).reset_index(drop=True)
-        if (a.equals(b) and {'country','sector'}.issubset(a.columns)
+        if (False and a.equals(b) and {'country','sector'}.issubset(a.columns)
                 and (STORE/'global_company_rankings.parquet').exists()
                 and (STORE/'coverage.json').exists()
                 and all({'country','sector'}.issubset(pd.read_parquet(path).columns)

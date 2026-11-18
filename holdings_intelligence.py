@@ -84,65 +84,134 @@ def normalize(frame,pid,asof,fund_title=None):
         raise ValueError('Ticker-country consolidation did not yield unique ETF holdings')
     return out.reset_index(drop=True)
 
-def rank_companies(current,previous=None, factor_ids=None, factor_category="factor", sector_category="sector"):
-    """Rank one geographic universe without mixing its ETF holdings with another."""
-    if factor_ids is None: factor_ids = FACTORS
-    if current.empty:return pd.DataFrame(),pd.DataFrame()
-    d=current.copy(); d['weight']=pd.to_numeric(d.weight)
-    # ETF-specific weight strength, capped at each ETF's 90th percentile.
-    thresholds=d.groupby('portfolio_id').weight.transform(lambda x:max(float(x.quantile(.9)),1e-8))
-    d['conviction']=np.minimum(1,d.weight/thresholds)
-    factors=d[d.category==factor_category]; sectors=d[d.category==sector_category]
-    rows=[]
-    for issuer,grp in d.groupby('issuer_id'):
-        fg=factors[factors.issuer_id==issuer]; sg=sectors[sectors.issuer_id==issuer]
-        breadth=fg.portfolio_id.nunique()/len(factor_ids)
-        conviction=float(fg.conviction.mean()) if not fg.empty else 0
-        sector_score=0.; sector_rank=None; leader=False
+def load_etf_performance(path=None):
+    """Verified ETF/strategy scores, explicitly keyed by portfolio ID and region.
+
+    CSV columns: portfolio_id, region, performance_score (0..100).
+    Missing scores are NOT treated as laggards.
+    """
+    path = Path(path) if path is not None else STORE / 'etf_performance_scores.csv'
+    if not path.exists():
+        return {}
+    frame = pd.read_csv(path, dtype={'portfolio_id': str, 'region': str})
+    required = {'portfolio_id', 'region', 'performance_score'}
+    if not required.issubset(frame.columns):
+        raise ValueError(f'ETF performance file requires {sorted(required)}')
+    frame['performance_score'] = pd.to_numeric(frame.performance_score, errors='raise')
+    if frame.performance_score.isna().any() or not frame.performance_score.between(0, 100).all():
+        raise ValueError('ETF performance scores must be between 0 and 100')
+    frame['region'] = frame.region.astype(str).str.upper().str.strip()
+    frame['portfolio_id'] = frame.portfolio_id.astype(str).str.strip()
+    if frame.duplicated(['region', 'portfolio_id']).any():
+        raise ValueError('Duplicate ETF performance score keys')
+    for row in frame.itertuples(index=False):
+        expected = 'Global' if row.portfolio_id in GLOBAL_FACTORS + GLOBAL_SECTORS else 'USA'
+        if row.portfolio_id not in ALL_SOURCES or row.region != expected.upper():
+            raise ValueError(f'ETF score has unknown or mismatched region/ID: {row.region}/{row.portfolio_id}')
+    return {(row.region, row.portfolio_id): float(row.performance_score) for row in frame.itertuples(index=False)}
+
+
+def rank_companies(current, previous=None, factor_ids=None, factor_category='factor',
+                   sector_category='sector', performance_scores=None):
+    """50/50 performance-weighted sector/factor conviction plus up to 10 breadth points.
+
+    Only verified score matches contribute to a performance component. If none
+    are available, a neutral score of 50 is shown and flagged as provisional.
+    Missing factor/sector coverage is not scored zero; available side is
+    reweighted to 100%. Holdings change events are informational, not a
+    second unbounded bonus on the leadership score.
+    """
+    if factor_ids is None: factor_ids = GLOBAL_FACTORS if factor_category == 'global_factor' else FACTORS
+    if current.empty: return pd.DataFrame(), pd.DataFrame()
+    region = 'GLOBAL' if factor_category == 'global_factor' else 'USA'
+    performance_scores = load_etf_performance() if performance_scores is None else performance_scores
+    d = current[current.category.isin([factor_category, sector_category])].copy()
+    if d.empty: return pd.DataFrame(), pd.DataFrame()
+    d['portfolio_id'] = d.portfolio_id.astype(str)
+    d['weight'] = pd.to_numeric(d.weight, errors='coerce')
+    d = d.dropna(subset=['weight'])
+    thresholds = d.groupby('portfolio_id').weight.transform(lambda x: max(float(x.quantile(.9)), 1e-8))
+    d['conviction'] = np.minimum(1, d.weight / thresholds)
+    # Scores may be keyed by (region, ETF ID), or simply ETF ID in a test.
+    d['performance'] = d.portfolio_id.map(lambda pid: performance_scores.get((region, pid), performance_scores.get(pid, np.nan)))
+    d['performance'] = pd.to_numeric(d.performance, errors='coerce')
+    d.loc[~d.performance.between(0, 100), 'performance'] = np.nan
+    factors = d[d.category == factor_category]; sectors = d[d.category == sector_category]
+    universe_size = len(GLOBAL_FACTORS + GLOBAL_SECTORS) if region == 'GLOBAL' else len(FACTORS + SECTORS)
+
+    def component(positions):
+        if positions.empty: return np.nan, 0
+        valid = positions.dropna(subset=['performance'])
+        if valid.empty: return np.nan, 0
+        # The conviction factor captures holding size *relative to the ETF*.
+        # Average across distinct matched ETFs: adding tiny holdings does not
+        # inflate the score by summing repeated exposures.
+        value = (valid.conviction * valid.performance).mean()
+        return float(value), len(valid)
+
+    rows = []
+    for issuer, grp in d.groupby('issuer_id'):
+        fg = factors[factors.issuer_id == issuer]
+        sg = sectors[sectors.issuer_id == issuer]
+        fs, fn = component(fg); ss, sn = component(sg)
+        available = [v for v in (ss, fs) if np.isfinite(v)]
+        # Explicitly neutral, NOT zero, when no performance source is available.
+        alignment = float(np.mean(available)) if available else 50.0
+        etf_count = int(grp.portfolio_id.nunique())
+        breadth_bonus = 10.0 * np.log1p(etf_count) / np.log1p(universe_size)
+        score = min(100.0, alignment + breadth_bonus)
+        representative = grp.sort_values('weight', ascending=False).iloc[0]
+        sector_rank = None; leader = False
         if not sg.empty:
-            scored=[]
-            for _,h in sg.iterrows():
-                peers=sectors[sectors.portfolio_id==h.portfolio_id].sort_values('weight',ascending=False)
-                n=len(peers); rank=int((peers.weight>h.weight).sum()+1)
-                scored.append(((n-rank)/(n-1) if n>1 else 1.,rank,rank<=max(1,int(np.ceil(n*.1))),str(h.portfolio_id)))
-            sector_score,sector_rank,leader,sector_etf=max(scored,key=lambda v:v[0])
-        base=100*(.45*breadth+.40*conviction+.15*sector_score)
-        # Use the issuer's largest verified ETF exposure as the source for
-        # descriptive attributes. Do not infer country from ETF domicile.
-        representative=grp.sort_values('weight',ascending=False).iloc[0]
-        country_name=str(representative.get('country','Not provided')).strip()
-        sector_name=str(representative.get('sector','Not provided')).strip()
-        rows.append(dict(issuer_id=issuer,company=grp.company.iloc[0],ticker=grp.ticker.iloc[0],
-            country=country_name if country_name and country_name.lower()!='nan' else 'Not provided',
-            sector=sector_name if sector_name and sector_name.lower()!='nan' else 'Not provided',
+            best = None
+            for _, h in sg.iterrows():
+                peers = sectors[sectors.portfolio_id == h.portfolio_id]
+                rank = int((peers.weight > h.weight).sum() + 1)
+                if best is None or rank < best[0]: best = (rank, len(peers))
+            sector_rank = best[0]
+            leader = sector_rank <= max(1, int(np.ceil(best[1] * .1)))
+        rows.append(dict(issuer_id=issuer, company=representative.company, ticker=representative.ticker,
+            country=str(representative.get('country', 'Not provided')),
+            sector=str(representative.get('sector', 'Not provided')),
             factor_count=int(fg.portfolio_id.nunique()),
-            factor_etfs=', '.join(sorted(fg.portfolio_id.unique())),factor_conviction=round(conviction*100,2),
-            sector_etfs=', '.join(sorted(sg.portfolio_id.unique())),sector_rank=sector_rank,sector_leader=bool(leader),base_score=round(base,2)))
-    ranking=pd.DataFrame(rows)
-    events=[]
+            factor_etfs=', '.join(sorted(fg.portfolio_id.unique())),
+            factor_conviction=round(float(fg.conviction.mean()) * 100, 2) if not fg.empty else 0,
+            sector_etfs=', '.join(sorted(sg.portfolio_id.unique())),
+            sector_rank=sector_rank, sector_leader=bool(leader),
+            sector_alignment=round(ss, 2) if np.isfinite(ss) else np.nan,
+            factor_alignment=round(fs, 2) if np.isfinite(fs) else np.nan,
+            scored_sector_etfs=sn, scored_factor_etfs=fn,
+            etf_count=etf_count, breadth_bonus=round(breadth_bonus, 2),
+            performance_status='Verified' if fn + sn == etf_count else ('Partial' if fn + sn else 'Missing'),
+            base_score=round(alignment, 2)))
+    ranking = pd.DataFrame(rows)
+    events = []
     if previous is not None and not previous.empty:
-        old=previous.set_index(['portfolio_id','issuer_id']); new=d.set_index(['portfolio_id','issuer_id'])
-        for key in sorted(set(old.index)|set(new.index)):
-            pid,issuer=key
-            a=old.loc[key] if key in old.index else None; b=new.loc[key] if key in new.index else None
-            if a is not None and b is not None and str(a.as_of)==str(b.as_of):continue
-            if a is None: event='added'; points=8 if ALL_SOURCES[pid]==factor_category else 4
-            elif b is None:event='removed';points=-10 if ALL_SOURCES[pid]==factor_category else -6
+        old = previous.set_index(['portfolio_id', 'issuer_id']); new = d.set_index(['portfolio_id', 'issuer_id'])
+        for key in sorted(set(old.index) | set(new.index)):
+            pid, issuer = key
+            a = old.loc[key] if key in old.index else None
+            b = new.loc[key] if key in new.index else None
+            if a is not None and b is not None and str(a.as_of) == str(b.as_of): continue
+            if a is None: event = 'added'
+            elif b is None: event = 'removed'
             else:
-                delta=float(b.weight)-float(a.weight)
-                if abs(delta)<.10 or abs(delta)/max(float(a.weight),.01)<.05:continue
-                event='increased' if delta>0 else 'decreased'
-                points=(min(4,4*delta) if delta>0 else max(-5,5*delta)) if ALL_SOURCES[pid]==factor_category else (min(3,3*delta) if delta>0 else max(-4,4*delta))
-            events.append(dict(portfolio_id=pid,issuer_id=issuer,company=str((b if b is not None else a).company),event=event,
-                previous_weight=float(a.weight) if a is not None else 0.,current_weight=float(b.weight) if b is not None else 0.,
-                previous_as_of=str(a.as_of) if a is not None else '',current_as_of=str(b.as_of) if b is not None else '',points=round(points,3)))
-    changes=pd.DataFrame(events)
-    adjustments=changes.groupby('issuer_id').points.sum() if not changes.empty else pd.Series(dtype=float)
-    ranking['change_score']=ranking.issuer_id.map(adjustments).fillna(0).clip(-30,30).round(2)
-    ranking['final_score']=(ranking.base_score+ranking.change_score).clip(0,100).round(2)
-    ranking=ranking.sort_values(['final_score','factor_count','factor_conviction','issuer_id'],ascending=[False,False,False,True]).reset_index(drop=True)
-    ranking.insert(0,'rank',np.arange(1,len(ranking)+1))
-    return ranking,changes
+                delta = float(b.weight) - float(a.weight)
+                if abs(delta) < .10 or abs(delta) / max(float(a.weight), .01) < .05: continue
+                event = 'increased' if delta > 0 else 'decreased'
+            events.append(dict(portfolio_id=pid, issuer_id=issuer,
+                company=str((b if b is not None else a).company), event=event,
+                previous_weight=float(a.weight) if a is not None else 0.,
+                current_weight=float(b.weight) if b is not None else 0.,
+                previous_as_of=str(a.as_of) if a is not None else '',
+                current_as_of=str(b.as_of) if b is not None else '', points=0.))
+    changes = pd.DataFrame(events)
+    ranking['change_score'] = 0.0
+    ranking['final_score'] = (ranking.base_score + ranking.breadth_bonus).clip(0, 100).round(2)
+    ranking = ranking.sort_values(['final_score', 'etf_count', 'issuer_id'],
+                                  ascending=[False, False, True]).reset_index(drop=True)
+    ranking.insert(0, 'rank', np.arange(1, len(ranking) + 1))
+    return ranking, changes
 
 def read_latest():
     p=STORE/'company_rankings.parquet'
@@ -208,6 +277,9 @@ def ranking_display_table(ranking, holdings, region='USA'):
     return data.drop(columns=['issuer_id'], errors='ignore').rename(columns={
         'country':'Country', 'sector':'Sector',
         'factor_count':'Factor Fund Coverage', 'factor_conviction':'Relative Factor Weight',
+        'sector_alignment':'Sector Alignment', 'factor_alignment':'Factor Alignment',
+        'etf_count':'ETF Count', 'breadth_bonus':'ETF Breadth Bonus',
+        'performance_status':'Performance Data Status',
         'sector_rank':'Sector Position', 'sector_leader':'Sector Leader',
         'base_score':'Base Score', 'change_score':'Holdings Change Score',
         'final_score':'Leadership Score', 'rank':'Rank', 'company':'Company', 'ticker':'Ticker'})
@@ -222,12 +294,14 @@ def render_leadership_tab(st, region, ranking, holdings):
     if ranking.empty:
         st.info(f'No verified {region} leadership rankings saved yet. Run the holdings refresh to populate this table.')
         return
-    st.caption('Factor breadth 45% · relative factor weight 40% · sector position 15%. Rankings are exposure signals, not evidence of purchases or sales.')
+    st.caption('Sector alignment 50% · factor alignment 50% (reweighted if one is unavailable) · up to 10 ETF breadth bonus points. Missing performance data is explicitly flagged. Rankings measure ETF exposure, not company price leadership.')
     a,b,c = st.columns(3)
     a.metric('Ranked companies', f'{len(ranking):,}')
     b.metric('Verified iShares funds', region_holdings.portfolio_id.nunique())
     c.metric('Latest holdings as of', max(region_holdings.as_of.astype(str)) if not region_holdings.empty else 'N/A')
     ranking = ranking.copy()
+    if 'performance_status' in ranking and (ranking.performance_status != 'Verified').any():
+        st.warning('Some ETF performance scores are missing. Rankings with Partial or Missing status are provisional; supply verified ETF performance scores to compare leaders and laggards.')
     ranking['Leadership state'] = ranking.apply(leadership_state, axis=1)
     controls = st.columns([2,2,1])
     query = controls[0].text_input(f'Search {region} company or ticker', key=f'{prefix}_leader_query')

@@ -6,7 +6,7 @@ def sample(pid, category, issuer, weight):
 
 def test_global_scoring_includes_global_sector_and_excludes_usa():
     d=pd.DataFrame([sample('271538','global_factor','ABC',4),sample('239750','global_sector','ABC',10),sample('271538','global_factor','XYZ',1),sample('239750','global_sector','XYZ',1)])
-    rank, changes=rank_companies(d, factor_ids=GLOBAL_FACTORS,factor_category='global_factor',sector_category='global_sector')
+    rank, changes=rank_companies(d, factor_ids=GLOBAL_FACTORS,factor_category='global_factor',sector_category='global_sector',performance_scores={'271538':80,'239750':80})
     assert len(rank)==2
     assert rank.iloc[0].company=='ABC'
     assert rank.iloc[0].sector_leader
