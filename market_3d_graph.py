@@ -101,21 +101,43 @@ for(const k of sorted){const portion=(end-start)*weight.get(k)/total,mid=angle+p
 place('global',-.5*Math.PI,1.5*Math.PI,0);
 const maxR=Math.max(450,...[...polar.values()].map(v=>v.r))+270;const width=Math.max(stage.clientWidth,maxR*2),height=Math.max(stage.clientHeight,maxR*2),cx=width/2,cy=height/2;
 for(const [id,v] of polar)points.set(id,{x:cx+Math.cos(v.angle)*v.r,y:cy+Math.sin(v.angle)*v.r});return {rows,points,width,height,count,maxDepth,cx,cy}}
-function updateSvg(){svg.setAttribute('width',Math.ceil(layout.width*zoom));svg.setAttribute('height',Math.ceil(layout.height*zoom));svg.setAttribute('viewBox',`0 0 ${layout.width} ${layout.height}`)}
-function center(id,smooth=false){const p=layout.points.get(id);if(!p)return;stage.scrollTo({left:p.x*zoom-stage.clientWidth/2,top:p.y*zoom-stage.clientHeight/2,behavior:smooth?'smooth':'instant'})}
-function fit(){if(!layout)return;zoom=Math.max(.18,Math.min(1.5,Math.min((stage.clientWidth-30)/layout.width,(stage.clientHeight-30)/layout.height)));updateSvg();center('global')}
-function draw(mode='keep'){const previous=layout,oldZoom=zoom,oldCenter=previous?{x:(stage.scrollLeft+stage.clientWidth/2)/oldZoom,y:(stage.scrollTop+stage.clientHeight/2)/oldZoom}:null;layout=measure();updateSvg();edges.replaceChildren();nodes.replaceChildren();
+function bounds(){
+ // Fit to actual visible geometry, including the permanent labels, rather than
+ // the much larger theoretical square occupied by the orbital layout.
+ let minX=Infinity,minY=Infinity,maxX=-Infinity,maxY=-Infinity;
+ for(const row of layout.rows){const n=items.get(row.id),p=layout.points.get(row.id),r=diameter(n)/2;
+ const labelWidth=Math.min(520,Math.max(42,n.label.length*7.8));
+ minX=Math.min(minX,p.x-r-12);maxX=Math.max(maxX,p.x+r+12+labelWidth);
+ minY=Math.min(minY,p.y-r-15);maxY=Math.max(maxY,p.y+r+15);
+ }
+ const pad=35;return {x:minX-pad,y:minY-pad,w:Math.max(1,maxX-minX+pad*2),h:Math.max(1,maxY-minY+pad*2)};
+}
+function updateSvg(){const b=layout.fitBounds||{x:0,y:0,w:layout.width,h:layout.height};
+ svg.setAttribute('width',Math.ceil(b.w*zoom));svg.setAttribute('height',Math.ceil(b.h*zoom));
+ svg.setAttribute('viewBox',`${b.x} ${b.y} ${b.w} ${b.h}`);
+}
+function stagePoint(p){const b=layout.fitBounds||{x:0,y:0};return {x:(p.x-b.x)*zoom,y:(p.y-b.y)*zoom}}
+
+function center(id,smooth=false){const p=layout.points.get(id);if(!p)return;const v=stagePoint(p);stage.scrollTo({left:v.x-stage.clientWidth/2,top:v.y-stage.clientHeight/2,behavior:smooth?'smooth':'instant'})}
+function fit(){if(!layout)return;
+ layout.fitBounds=bounds();const b=layout.fitBounds;
+ // Use the real occupied rectangle; maximize visible area without clipping.
+ zoom=Math.max(.08,Math.min(4,Math.min((stage.clientWidth-24)/b.w,(stage.clientHeight-100)/b.h)));
+ updateSvg();stage.scrollLeft=Math.max(0,(svg.clientWidth-stage.clientWidth)/2);
+ stage.scrollTop=Math.max(0,(svg.clientHeight-stage.clientHeight)/2);
+}
+function draw(mode='keep'){const previous=layout,oldZoom=zoom,oldCenter=previous?{x:(stage.scrollLeft+stage.clientWidth/2)/oldZoom+(previous.fitBounds?.x||0),y:(stage.scrollTop+stage.clientHeight/2)/oldZoom+(previous.fitBounds?.y||0)}:null;layout=measure();layout.fitBounds=bounds();updateSvg();edges.replaceChildren();nodes.replaceChildren();
 for(const r of layout.rows){const n=items.get(r.id),p=layout.points.get(r.id);if(n.parent&&layout.points.has(n.parent)){const q=layout.points.get(n.parent);edges.append(el('path',{d:`M ${q.x} ${q.y} L ${p.x} ${p.y}`,class:'edge'}))}}
 for(const r of layout.rows){const n=items.get(r.id),p=layout.points.get(r.id),rad=diameter(n)/2,g=el('g',{class:'node',transform:`translate(${p.x} ${p.y})`,tabindex:'0',role:'button','aria-label':n.label});g.append(el('circle',{r:rad}));const sc=score(n);if(sc!==null){const t=el('text',{class:'score-inside','font-size':Math.max(10,Math.min(18,rad*.84)),y:0});t.textContent=String(Math.round(sc));g.append(t)}const text=el('text',{class:'label'+(['root','group','asset'].includes(n.kind)?' strong':''),x:rad+9,y:5});text.textContent=n.label;g.append(text);const title=el('title');title.textContent=n.label;g.append(title);g.addEventListener('pointerenter',e=>tooltip(e,n));g.addEventListener('pointermove',e=>tooltip(e,n));g.addEventListener('pointerleave',()=>tip.style.display='none');const toggle=()=>{if(!children.has(n.id))return;expanded.has(n.id)?expanded.delete(n.id):expanded.add(n.id);focusId=n.id;draw('focus')};g.addEventListener('click',toggle);g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle()}});nodes.append(g)}
 status.textContent=`${layout.count} / ${data.nodes.length} nodes · 2D orbital view · Higher score = closer orbit and larger circle · Drag to pan · Click to expand`;
-requestAnimationFrame(()=>{if(mode==='fit')fit();else if(mode==='focus'&&focusId)center(focusId,true);else if(oldCenter){stage.scrollLeft=oldCenter.x*zoom-stage.clientWidth/2;stage.scrollTop=oldCenter.y*zoom-stage.clientHeight/2}else center('global')})}
+requestAnimationFrame(()=>{if(mode==='fit')fit();else if(mode==='focus'&&focusId)center(focusId,true);else if(oldCenter){stage.scrollLeft=(oldCenter.x-(layout.fitBounds?.x||0))*zoom-stage.clientWidth/2;stage.scrollTop=(oldCenter.y-(layout.fitBounds?.y||0))*zoom-stage.clientHeight/2}else center('global')})}
 function tooltip(e,n){tip.style.display='block';tip.replaceChildren();const h=document.createElement('strong');h.textContent=n.label;tip.append(h);const d=document.createElement('div');d.textContent=`Performance: ${score(n)===null?'unavailable':score(n).toFixed(1)+'/100'} · Diameter: ${Math.round(diameter(n))} units`+(n.ticker?' · ETF: '+n.ticker:'');tip.append(d);tip.style.left=Math.max(8,Math.min(e.clientX+14,innerWidth-365))+'px';tip.style.top=Math.max(8,Math.min(e.clientY+12,innerHeight-90))+'px'}
 function setZoom(v){const x=(stage.scrollLeft+stage.clientWidth/2)/zoom,y=(stage.scrollTop+stage.clientHeight/2)/zoom;zoom=Math.max(.15,Math.min(3,v));updateSvg();stage.scrollLeft=x*zoom-stage.clientWidth/2;stage.scrollTop=y*zoom-stage.clientHeight/2}
 $('fit').onclick=fit;$('open').onclick=()=>{expanded=new Set(data.nodes.map(n=>n.id));zoom=1;draw('fit')};$('close').onclick=()=>{expanded=new Set(['global']);zoom=1;draw('fit')};$('plus').onclick=()=>setZoom(zoom*1.2);$('minus').onclick=()=>setZoom(zoom/1.2);
 $('search').oninput=e=>{const q=e.target.value.toLowerCase().trim();if(!q)return;const n=data.nodes.find(n=>n.label.toLowerCase().includes(q)||(n.ticker||'').toLowerCase().includes(q));if(!n)return;for(let p=n.parent;p;p=parent.get(p))expanded.add(p);zoom=Math.max(zoom,.75);focusId=n.id;draw('focus')};
 // Drag on the background to pan; click targets retain expansion behavior.
 stage.addEventListener('pointerdown',e=>{if(e.target.closest('.node'))return;drag={x:e.clientX,y:e.clientY,left:stage.scrollLeft,top:stage.scrollTop};stage.setPointerCapture(e.pointerId)});stage.addEventListener('pointermove',e=>{if(drag){stage.scrollLeft=drag.left+drag.x-e.clientX;stage.scrollTop=drag.top+drag.y-e.clientY}});stage.addEventListener('pointerup',()=>drag=null);stage.addEventListener('pointercancel',()=>drag=null);
-let timer;new ResizeObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>draw('keep'),180)}).observe(stage);draw('fit');
+let timer;new ResizeObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>draw('fit'),180)}).observe(stage);draw('fit');
 })();
 </script></body></html>'''
 def render():
