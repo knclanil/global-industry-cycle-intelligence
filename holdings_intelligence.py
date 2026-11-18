@@ -116,6 +116,61 @@ def leadership_state(row):
     return 'Established leader' if score >= 35 else 'Stable / limited exposure'
 
 
+def display_strategy(fund_title, group):
+    """Human-readable strategy label; never expose source portfolio identifiers."""
+    title = str(fund_title or '').lower()
+    if group == 'USA Factor':
+        for phrase, label in [('min vol', 'Minimum Volatility'), ('minimum volatility', 'Minimum Volatility'),
+                              ('momentum', 'Momentum'), ('quality', 'Quality'), ('value', 'Value'),
+                              ('growth', 'Growth'), ('size', 'Size'), ('small-cap', 'Small Cap'),
+                              ('russell 2000', 'Small Cap / Broad Market'), ('multifactor', 'Multifactor'),
+                              ('multi-factor', 'Multifactor')]:
+            if phrase in title: return label
+        return 'Other / Unclassified'
+    if group in ('USA Sector', 'Global Sector'):
+        for phrase, label in [('information technology', 'Information Technology'), ('technology', 'Technology'),
+                              ('tech', 'Technology'), ('health care', 'Health Care'), ('healthcare', 'Health Care'),
+                              ('financial', 'Financials'), ('consumer discretionary', 'Consumer Discretionary'),
+                              ('consumer staples', 'Consumer Staples'), ('communication', 'Communication Services'),
+                              ('industrial', 'Industrials'), ('materials', 'Materials'), ('energy', 'Energy'),
+                              ('utilities', 'Utilities'), ('real estate', 'Real Estate'),
+                              ('semiconductor', 'Semiconductors')]:
+            if phrase in title: return label
+        return 'Other / Unclassified'
+    return 'Other / Unclassified'
+
+
+def holdings_display_table(frame):
+    """Readable holdings table without internal identifiers or numeric category codes."""
+    data = frame.copy()
+    if 'group' not in data: data['group'] = data.get('category', 'Other')
+    if 'fund_title' not in data: data['fund_title'] = ''
+    data['Type / Sector'] = [display_strategy(title, group) for title, group in zip(data.fund_title, data.group)]
+    columns = ['group', 'Type / Sector', 'fund_title', 'ticker', 'company', 'weight', 'as_of']
+    data = data[[c for c in columns if c in data.columns]]
+    return data.rename(columns={'group':'Group', 'fund_title':'iShares Fund',
+                                'ticker':'Ticker', 'company':'Company',
+                                'weight':'Weight (%)', 'as_of':'Holdings as of'})
+
+
+def ranking_display_table(ranking, holdings):
+    """Replace portfolio-ID lists with human-readable fund names in ranking tables."""
+    data = ranking.copy()
+    names = holdings[['portfolio_id', 'fund_title', 'group']].drop_duplicates('portfolio_id').copy()
+    name_map = dict(zip(names.portfolio_id.astype(str), names.fund_title))
+    for column, output in [('factor_etfs', 'USA Factor Funds'), ('sector_etfs', 'USA Sector Funds')]:
+        if column in data:
+            data[output] = data[column].fillna('').map(
+                lambda value: ', '.join(name_map.get(x.strip(), 'Fund name unavailable')
+                                        for x in str(value).split(',') if x.strip()))
+            data = data.drop(columns=[column])
+    return data.drop(columns=['issuer_id'], errors='ignore').rename(columns={
+        'factor_count':'Factor Fund Coverage', 'factor_conviction':'Relative Factor Weight',
+        'sector_rank':'Sector Position', 'sector_leader':'Sector Leader',
+        'base_score':'Base Score', 'change_score':'Holdings Change Score',
+        'final_score':'Leadership Score', 'rank':'Rank', 'company':'Company', 'ticker':'Ticker'})
+
+
 def render_holdings_intelligence():
     import streamlit as st
     st.title('🏆 Company Holdings Leadership Intelligence')
@@ -142,12 +197,14 @@ def render_holdings_intelligence():
         for group_name in ['USA Factor','USA Sector','Global Sector']:
             group_data=holdings[holdings['group']==group_name]
             with st.expander(group_name, expanded=True):
-                funds=group_data[['fund_title','as_of','portfolio_id']].drop_duplicates().sort_values('fund_title')
-                st.dataframe(funds[['fund_title','as_of']].rename(columns={'fund_title':'iShares fund','as_of':'Holdings as of'}),hide_index=True,use_container_width=True)
+                funds=group_data[['fund_title','as_of']].drop_duplicates().sort_values('fund_title').copy()
+                funds['Type / Sector'] = funds['fund_title'].map(lambda name: display_strategy(name, group_name))
+                st.dataframe(funds[['fund_title','Type / Sector','as_of']].rename(columns={
+                    'fund_title':'iShares Fund','as_of':'Holdings as of'}),hide_index=True,use_container_width=True)
                 if not funds.empty:
                     selection=st.selectbox('View fund holdings', funds['fund_title'].tolist(), key='fund_'+group_name)
                     rows=group_data[group_data.fund_title==selection].sort_values('weight',ascending=False)
-                    st.dataframe(rows[['ticker','company','weight','as_of']].rename(columns={'ticker':'Ticker','company':'Company','weight':'Weight (%)','as_of':'Holdings as of'}),hide_index=True,use_container_width=True)
+                    st.dataframe(holdings_display_table(rows),hide_index=True,use_container_width=True)
     ranking=ranking.copy()
     ranking['Leadership state']=ranking.apply(leadership_state,axis=1)
     controls=st.columns([2,2,1])
@@ -159,30 +216,31 @@ def render_holdings_intelligence():
         mask=filtered['ticker'].astype(str).str.contains(query,case=False,regex=False)|filtered['company'].astype(str).str.contains(query,case=False,regex=False)
         filtered=filtered[mask]
     if state!='All':filtered=filtered[filtered['Leadership state']==state]
-    st.dataframe(filtered.head(top),hide_index=True,use_container_width=True)
-    st.download_button('Download filtered rankings CSV',filtered.to_csv(index=False).encode(),file_name='company_holdings_rankings.csv',mime='text/csv')
+    visible_ranking=ranking_display_table(filtered,holdings)
+    st.dataframe(visible_ranking.head(top),hide_index=True,use_container_width=True)
+    st.download_button('Download filtered rankings CSV',visible_ranking.to_csv(index=False).encode(),file_name='company_holdings_rankings.csv',mime='text/csv')
     st.subheader('Company ETF exposure drill-down')
     candidates=ranking[['issuer_id','ticker','company']].copy()
     candidates['label']=candidates['ticker'].astype(str)+' — '+candidates['company'].astype(str)+' ['+candidates['issuer_id'].astype(str)+']'
     chosen=st.selectbox('Select company',candidates['label'].tolist(),index=0)
     issuer=candidates.loc[candidates.label==chosen,'issuer_id'].iloc[0]
     positions=holdings[holdings.issuer_id==issuer].sort_values('weight',ascending=False)
-    columns=['group','fund_title','company','ticker','weight','as_of'] if {'group','fund_title'}.issubset(positions.columns) else ['category','company','ticker','weight','as_of']
-    st.dataframe(positions[columns],hide_index=True,use_container_width=True)
+    st.dataframe(holdings_display_table(positions),hide_index=True,use_container_width=True)
     changes_path=STORE/'latest_changes.parquet'
     if changes_path.exists():
         changes=pd.read_parquet(changes_path)
         st.subheader('Latest verified exposure changes')
         if changes.empty:st.info('No material verified changes in the most recent comparison.')
         else:
-            st.dataframe(changes,hide_index=True,use_container_width=True)
-            st.download_button('Download changes CSV',changes.to_csv(index=False).encode(),file_name='holdings_changes.csv',mime='text/csv')
+            changes_visible=changes.drop(columns=['portfolio_id','issuer_id'],errors='ignore')
+            st.dataframe(changes_visible,hide_index=True,use_container_width=True)
+            st.download_button('Download changes CSV',changes_visible.to_csv(index=False).encode(),file_name='holdings_changes.csv',mime='text/csv')
     history=STORE/'holding_events.parquet'
     if history.exists():
         events=pd.read_parquet(history)
         with st.expander('Historical event log'):
-            st.dataframe(events.tail(1000),hide_index=True,use_container_width=True)
+            st.dataframe(events.tail(1000).drop(columns=['portfolio_id','issuer_id'],errors='ignore'),hide_index=True,use_container_width=True)
     with st.expander('Data integrity and interpretation'):
         st.write('A verified ETF weight is an observed portfolio allocation, not evidence of discretionary manager conviction, cash inflows, purchases, or sales. Leadership states are descriptive thresholds, not return forecasts. Unresolved issuer identifiers must not be merged across funds.')
-        st.write('Active ETFs:',', '.join(coverage))
+        st.write('Active iShares funds:',', '.join(sorted(holdings.fund_title.dropna().unique())) if 'fund_title' in holdings else 'Fund titles unavailable')
         st.write('Holdings dates:',', '.join(asofs))
