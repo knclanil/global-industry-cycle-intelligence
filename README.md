@@ -93,3 +93,8 @@ Three new pages — **Global Asset Flow**, **USA Asset Flow**, and **India Asset
 - India: Nifty 50 benchmark (NSEPython/NSE primary, verified Yahoo ^NSEI fallback), India-listed equity, gold, silver, liquid and *availability-unverified* government bond ETF proxies. Coverage is incomplete for corporate bonds, broad commodities and REITs. Missing tickers are excluded, not fabricated.
 
 See `GLOBAL_ASSET_WIKI.md`, `USA_ASSET_WIKI.md`, `INDIA_ASSET_WIKI.md` for definitions and caveats.
+
+
+## Data Table — raw observations
+
+The **Data Table** sidebar page shows source-returned daily OHLCV and adjusted-close observations for all ten dashboards, with symbol and date filters, source labels, coverage and missing-series reports, duplicate/invalid-price flags, validation messages, and downloadable CSV exports. A refresh button clears the shared one-hour market-data cache. No database or price filling is used. Source libraries may clean some data before the page receives it; validation is not independent provider verification.
