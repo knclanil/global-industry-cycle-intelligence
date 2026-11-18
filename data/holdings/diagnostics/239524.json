@@ -1,11 +1,23 @@
 {
   "portfolio_id": "239524",
-  "timestamp_utc": "2026-11-18T18:42:15.289782+00:00",
-  "error": "Holdings table recognized, but document holdings-as-of date missing",
+  "timestamp_utc": "2026-11-18T19:27:48.629453+00:00",
+  "error": "Holdings table recognized, but issuer-declared holdings-as-of date missing",
   "status_code": 200,
   "content_type": "text/csv",
   "content_disposition": "attachment; filename=IDU_holdings.csv",
   "content_length": 4569,
   "body_sha256": "0132544bc7fddadd0c6cb7e1e9224349308a6c39f7cc3f8dffbca15f7f279d14",
-  "detected_magic": "6953686172657320"
+  "detected_magic": "6953686172657320",
+  "metadata_labels": [
+    "iShares US Utilities ETF",
+    "Fund Holdings as of",
+    "Inception Date",
+    "Shares Outstanding",
+    "Stock",
+    "Bond",
+    "Cash",
+    "Other",
+    "Ticker",
+    "The content contained herein is owned or licensed by BlackRock an"
+  ]
 }

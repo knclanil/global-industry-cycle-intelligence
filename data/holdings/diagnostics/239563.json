@@ -1,11 +1,23 @@
 {
   "portfolio_id": "239563",
-  "timestamp_utc": "2026-11-18T18:42:11.765545+00:00",
-  "error": "Holdings table recognized, but document holdings-as-of date missing",
+  "timestamp_utc": "2026-11-18T19:27:45.606918+00:00",
+  "error": "Holdings table recognized, but issuer-declared holdings-as-of date missing",
   "status_code": 200,
   "content_type": "text/csv",
   "content_disposition": "attachment; filename=HDV_holdings.csv",
   "content_length": 4573,
   "body_sha256": "f45d3336ee156bb0173fe098c9e04ae73dc865cb4b8ea0b5f7280cd431728d8a",
-  "detected_magic": "6953686172657320"
+  "detected_magic": "6953686172657320",
+  "metadata_labels": [
+    "iShares Core High Dividend ETF",
+    "Fund Holdings as of",
+    "Inception Date",
+    "Shares Outstanding",
+    "Stock",
+    "Bond",
+    "Cash",
+    "Other",
+    "Ticker",
+    "The content contained herein is owned or licensed by BlackRock an"
+  ]
 }

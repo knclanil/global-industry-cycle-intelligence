@@ -1,11 +1,23 @@
 {
   "portfolio_id": "239520",
-  "timestamp_utc": "2026-11-18T18:42:16.415695+00:00",
-  "error": "Holdings table recognized, but document holdings-as-of date missing",
+  "timestamp_utc": "2026-11-18T19:27:49.944285+00:00",
+  "error": "Holdings table recognized, but issuer-declared holdings-as-of date missing",
   "status_code": 200,
   "content_type": "text/csv",
   "content_disposition": "attachment; filename=IYR_holdings.csv",
   "content_length": 4571,
   "body_sha256": "e3c1f054e96e64f361c25ea331b663fb139814af6a604af8552cb3cf48dbf5b5",
-  "detected_magic": "6953686172657320"
+  "detected_magic": "6953686172657320",
+  "metadata_labels": [
+    "iShares US Real Estate ETF",
+    "Fund Holdings as of",
+    "Inception Date",
+    "Shares Outstanding",
+    "Stock",
+    "Bond",
+    "Cash",
+    "Other",
+    "Ticker",
+    "The content contained herein is owned or licensed by BlackRock an"
+  ]
 }

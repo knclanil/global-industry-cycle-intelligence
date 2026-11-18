@@ -1,0 +1,23 @@
+{
+  "portfolio_id": "239750",
+  "timestamp_utc": "2026-11-18T19:27:55.069928+00:00",
+  "error": "Holdings table recognized, but issuer-declared holdings-as-of date missing",
+  "status_code": 200,
+  "content_type": "text/csv",
+  "content_disposition": "attachment; filename=IXN_holdings.csv",
+  "content_length": 4566,
+  "body_sha256": "02527b3be34c16285d5755acc41fe200e6e954302b41204b37e3502a40f60adf",
+  "detected_magic": "6953686172657320",
+  "metadata_labels": [
+    "iShares Global Tech ETF",
+    "Fund Holdings as of",
+    "Inception Date",
+    "Shares Outstanding",
+    "Stock",
+    "Bond",
+    "Cash",
+    "Other",
+    "Ticker",
+    "The content contained herein is owned or licensed by BlackRock an"
+  ]
+}
