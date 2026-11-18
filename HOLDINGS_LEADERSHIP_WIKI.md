@@ -27,3 +27,11 @@ GitHub Actions runs after US market close on weekdays and supports manual dispat
 ## Limitations
 
 Sector and factor memberships are the composition of the specified ETFs, not a universal classification of all investment factors. ISIN is preferred for issuer identity, with ticker fallback; share classes and identifier changes require additional issuer-master mapping before guaranteed legal-issuer deduplication. Portfolio weight is not investment performance or direct capital flow.
+
+## Additional sources awaiting classification (November 18, 2026)
+
+Ten further BlackRock iShares portfolio IDs have been received: **239740, 239744, 239753, 239739, 239742, 239741, 239751, 239745, 239748, 239750**. They are tracked in `data/holdings/pending_sources.json` but **excluded from the factor/sector score and refresh universe** until their ETF category is verified. This avoids incorrectly changing the factor breadth denominator or assigning sector leadership. Total registered endpoints: **28** (18 classified, 10 pending).
+
+## Refresh failure diagnosis and parser update
+
+The first GitHub Actions run rejected all 18 sources because the previous parser could not verify holdings-as-of dates. The updated parser checks common iShares CSV metadata preambles (including quoted dates with month names), CSV table offsets, and Excel workbook metadata; it never treats the requested URL date as the published holdings date. Live BlackRock responses were not accessible in the build environment, so this adapter is **not yet validated against the actual endpoint response**. If the API returns JSON or a different schema, capture a sanitized response content-type and the first metadata lines for a source-specific adapter. No source failure should be interpreted as a removed holding.

@@ -8,18 +8,50 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from holdings_intelligence import STORE,SOURCES,url_for,normalize,rank_companies
 
 
+DATE_PATTERNS = (
+    r"(?:Fund\s+Holdings\s+as\s+of|Holdings\s+as\s+of|As\s+of\s+Date|Holdings\s+Date|Data\s+as\s+of)\s*[:,-]?\s*[\"']?\s*(\d{1,2}[/.-]\d{1,2}[/.-]\d{4}|\d{4}-\d{2}-\d{2}|[A-Za-z]+\s+\d{1,2},?\s+\d{4})",
+    r"(?:Fund\s+Holdings\s+as\s+of|Holdings\s+as\s+of)\s*[,\t]\s*[\"']?\s*(\d{1,2}[/.-]\d{1,2}[/.-]\d{4}|\d{4}-\d{2}-\d{2})",
+)
+
+def verified_date(text):
+    """Only a date explicitly labeled as holdings-as-of in the document qualifies."""
+    for pattern in DATE_PATTERNS:
+        match=re.search(pattern,text,re.I)
+        if match:
+            date=pd.to_datetime(match.group(1),errors='coerce')
+            if not pd.isna(date):return date.date().isoformat()
+    return None
+
+def has_holdings_columns(frame):
+    cols={str(c).strip().lower().replace(' ','_') for c in frame.columns}
+    return bool(cols & {'name','company','security_name','issuer_name'}) and bool(cols & {'weight_(%)','weight_%','weight_pct','weight','portfolio_weight','weightage'})
+
 def parse_document(blob):
-    if blob[:2]==b'PK':return pd.read_excel(io.BytesIO(blob))
-    if blob[:4]==b'\xd0\xcf\x11\xe0':return pd.read_excel(io.BytesIO(blob))
-    text=blob.decode('utf-8-sig')
-    if text.lstrip().startswith(('{','<','<!')):raise ValueError('Received API response/HTML, not holdings spreadsheet')
-    for skip in range(0,12):
+    """Read holdings AND source metadata, including the common iShares CSV preamble."""
+    if blob[:2]==b'PK' or blob[:4]==b'\xd0\xcf\x11\xe0':
+        book=pd.ExcelFile(io.BytesIO(blob))
+        for sheet in book.sheet_names:
+            raw=pd.read_excel(book,sheet_name=sheet,header=None,nrows=35)
+            preamble='\n'.join(' '.join(str(v) for v in row if pd.notna(v)) for row in raw.values)
+            asof=verified_date(preamble)
+            for skip in range(0,25):
+                try:
+                    frame=pd.read_excel(book,sheet_name=sheet,skiprows=skip)
+                    if has_holdings_columns(frame):return frame,asof
+                except (ValueError,IndexError):pass
+        raise ValueError('No recognized holdings table in workbook')
+    text=blob.decode('utf-8-sig',errors='replace')
+    if text.lstrip().startswith(('{','<','<!')):raise ValueError('Received JSON/HTML rather than a holdings spreadsheet')
+    # iShares CSV metadata often has a date on the second line, e.g.
+    # Fund Holdings as of,"Nov 17, 2026".  Parse before stripping metadata.
+    asof=verified_date('\n'.join(text.splitlines()[:35]))
+    for skip in range(0,35):
         for sep in (',','\t',';'):
             try:
-                df=pd.read_csv(io.StringIO(text),skiprows=skip,sep=sep,on_bad_lines='skip')
-                if any('weight' in str(c).lower() for c in df.columns):return df
+                frame=pd.read_csv(io.StringIO(text),skiprows=skip,sep=sep,on_bad_lines='skip',low_memory=False)
+                if has_holdings_columns(frame):return frame,asof
             except (ValueError,pd.errors.ParserError):pass
-    raise ValueError('No recognized holdings table')
+    raise ValueError('No recognized holdings table; inspect source format')
 
 def refresh():
     STORE.mkdir(parents=True,exist_ok=True)
@@ -30,18 +62,14 @@ def refresh():
         try:
             response=session.get(url_for(pid,today),timeout=45);response.raise_for_status()
             if len(response.content)<100:raise ValueError('Empty or suspicious response')
-            frame=parse_document(response.content)
-            # Do not assert request date is actual holdings date. Prefer a verified date
-            # field; otherwise reject to avoid generating false daily change events.
-            date_cols=[c for c in frame.columns if str(c).lower().replace(' ','_') in ('as_of','as_of_date','holdings_date')]
-            if date_cols:
-                asof=pd.to_datetime(frame[date_cols[0]].dropna().iloc[0]).date().isoformat()
-            else:
-                # Many iShares CSV files carry the holdings date in the preamble.
-                header=response.content[:2500].decode('utf-8-sig',errors='replace')
-                match=re.search(r'(?:Fund Holdings as of|Holdings as of|As of Date)[^\r\n]{0,60}?(\d{1,2}/\d{1,2}/\d{4}|\d{4}-\d{2}-\d{2})',header,re.I)
-                if not match:raise ValueError('Actual holdings as-of date not verified in source; needs source-specific parser')
-                asof=pd.to_datetime(match.group(1)).date().isoformat()
+            frame,document_asof=parse_document(response.content)
+            date_cols=[c for c in frame.columns if str(c).lower().strip().replace(' ','_') in ('as_of','as_of_date','holdings_date')]
+            asof=document_asof
+            if not asof and date_cols:
+                dates=pd.to_datetime(frame[date_cols[0]].dropna(),errors='coerce').dropna()
+                if not dates.empty:asof=dates.iloc[0].date().isoformat()
+            if not asof:
+                raise ValueError('Actual holdings as-of date not verified; source format may require adapter')
             df=normalize(frame,pid,asof)
             successes.append(df)
             print(f'{pid}: validated {len(df)} holdings as of {asof}')

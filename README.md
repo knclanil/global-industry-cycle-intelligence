@@ -158,3 +158,7 @@ The dashboard loads committed snapshots rather than fetching live prices on norm
 
 ## USA Company Holdings Leadership
 The **USA Company Holdings Leadership** page and [methodology wiki](HOLDINGS_LEADERSHIP_WIKI.md) rank verified issuer holdings across 7 factor and 11 sector iShares portfolios. A separate [GitHub Actions workflow](.github/workflows/holdings-refresh.yml) attempts automatic verified refresh. Upstream files must expose verifiable as-of dates; failed sources never trigger false removals.
+
+
+### Additional iShares holdings sources and refresh parser
+Ten additional source IDs are tracked in `data/holdings/pending_sources.json` pending factor/sector classification. The holdings refresh parser now recognizes iShares CSV/Excel holdings-date preambles; verify against live documents before treating the pipeline as production-ready. See `HOLDINGS_LEADERSHIP_WIKI.md`.

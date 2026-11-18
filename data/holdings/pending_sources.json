@@ -1,0 +1,17 @@
+{
+  "description": "Additional BlackRock iShares sources; awaiting verified factor/sector classification. Excluded from scoring until classified.",
+  "reference_as_of": "2026-11-17",
+  "portfolio_ids": [
+    "239740",
+    "239744",
+    "239753",
+    "239739",
+    "239742",
+    "239741",
+    "239751",
+    "239745",
+    "239748",
+    "239750"
+  ],
+  "category": "pending"
+}
