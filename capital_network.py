@@ -81,81 +81,167 @@ def build_graph(path,market,layers,top_n,holdings=None):
                             edges.append((fid,hid))
     return nodes,edges
 
+def build_unified_graph(layers, top_n, holdings=None, factor_markets=('Global','USA','India')):
+    """Show both country and asset networks simultaneously; reuse shared company IDs."""
+    nodes={'root':node('root','GLOBAL','root')}; edges=[]
+    def add(n,parent):
+        if n['id'] not in nodes:nodes[n['id']]=n
+        if parent in nodes and (parent,n['id']) not in edges:edges.append((parent,n['id']))
+    countries=layers.get('Countries',pd.DataFrame())
+    if not countries.empty:
+        preferred=countries[countries['ETF'].isin(['SPY','INDA','EUSA'])]
+        selection=pd.concat([preferred,countries.nlargest(top_n,'Network Score')]).drop_duplicates('ETF').head(top_n+2)
+        for _,r in selection.iterrows():
+            add(node('country:'+str(r['ETF']),r['Sector'],'country','Countries',r),'root')
+    for country_name,terms,asset_layer,sector_layer in [
+        ('USA',('united states','usa','u.s.'),'USA Assets','USA Sectors'),
+        ('India',('india',),'India Assets','India Sectors')]:
+        matches=[n for n in nodes.values() if n['kind']=='country' and
+                 (any(t in n['label'].lower() for t in terms) or
+                  (country_name=='USA' and n['ticker'] in ('SPY','EUSA','IVV')))]
+        if not matches:continue
+        cid=matches[0]['id'];assets=layers.get(asset_layer,pd.DataFrame())
+        if assets.empty:continue
+        eq=assets[assets['Sector'].str.contains('Equit|Stock|Nifty',case=False,na=False)]
+        for _,r in pd.concat([eq,assets.nlargest(top_n,'Network Score')]).drop_duplicates('ETF').head(top_n).iterrows():
+            aid=f'{country_name}:asset:{r["ETF"]}'
+            add(node(aid,r['Sector'],'asset',asset_layer,r),cid)
+            if any(t in str(r['Sector']).lower() for t in ('equit','stock','nifty','s&p 500')):
+                sector=layers.get(sector_layer,pd.DataFrame())
+                if not sector.empty:
+                    for _,sr in sector.nlargest(top_n,'Network Score').iterrows():
+                        add(node(f'{country_name}:sector:{sr["ETF"]}',sr['Sector'],'sector',sector_layer,sr),aid)
+    assets=layers.get('Global Assets',pd.DataFrame())
+    if not assets.empty:
+        eq=assets[assets['Sector'].str.contains('Equit|Stock',case=False,na=False)]
+        for _,r in pd.concat([eq,assets.nlargest(top_n,'Network Score')]).drop_duplicates('ETF').head(top_n).iterrows():
+            aid='global:asset:'+str(r['ETF'])
+            add(node(aid,r['Sector'],'asset','Global Assets',r),'root')
+            if not any(t in str(r['Sector']).lower() for t in ('equit','stock')):continue
+            for market in factor_markets:
+                factors=layers.get(market+' Factors',pd.DataFrame())
+                if factors.empty:continue
+                for _,f in factors.nlargest(top_n,'Network Score').iterrows():
+                    fid=f'factor:{market}:{f["ETF"]}'
+                    add(node(fid,f'{market} · {f["Sector"]}','factor',market+' Factors',f),aid)
+                    if holdings is None or holdings.empty:continue
+                    subset=holdings[holdings['factor'].astype(str).str.upper()==str(f['ETF']).upper()].nlargest(top_n,'weight')
+                    for _,h in subset.iterrows():
+                        identity=str(h.get('isin','')).strip() or str(h.get('ticker','')).strip() or str(h['company']).strip()
+                        hid='company:'+market+':'+identity.upper()
+                        add(node(hid,h['company'],'company'),fid)
+    return nodes,edges
+
+
 def layout(nodes,edges):
-    """Deterministic left-to-right hierarchy with shared company nodes."""
-    levels={'root':0,'country':1,'asset':2,'sector':3,'factor':3,'company':4}
-    if any(n['kind']=='country' for n in nodes.values()):levels['asset']=2
-    grouped={}
-    for n in nodes.values():grouped.setdefault(levels[n['kind']],[]).append(n)
-    pos={}
-    for depth,items in grouped.items():
-        items.sort(key=lambda n:(-float(n['score'] or 0),n['label']))
-        for i,n in enumerate(items):pos[n['id']]=(depth*2.8,(len(items)-1)*.68-i*1.36)
+    """Stable, organic radial layout: countries left, asset classes right, shared companies outside."""
+    import numpy as np
+    from collections import defaultdict
+    children=defaultdict(list)
+    for a,b in edges:children[a].append(b)
+    pos={'root':(0.,0.)}
+    country_roots=sorted((x for x in children['root'] if nodes[x]['kind']=='country'))
+    asset_roots=sorted((x for x in children['root'] if nodes[x]['kind']=='asset'))
+    # Sector and factor descendants form radial clusters around their parent.
+    def place_branch(nid,angle,radius,spread,depth=1):
+        if nid in pos:return
+        pos[nid]=(radius*math.cos(angle),radius*math.sin(angle))
+        kids=[k for k in children[nid] if k not in pos]
+        if not kids:return
+        if len(kids)==1:angles=[angle]
+        else:angles=np.linspace(angle-spread/2,angle+spread/2,len(kids))
+        for k,a in zip(kids,angles):place_branch(k,float(a),radius+2.3,max(.26,spread*.70),depth+1)
+    for i,nid in enumerate(country_roots):
+        angle=math.pi-(i-(len(country_roots)-1)/2)*min(.45,2.1/max(1,len(country_roots)-1))
+        place_branch(nid,angle,3.2,.42)
+    for i,nid in enumerate(asset_roots):
+        angle=(i-(len(asset_roots)-1)/2)*min(.40,2.3/max(1,len(asset_roots)-1))
+        place_branch(nid,angle,3.2,.48)
+    # Shared company nodes were already positioned at first factor; all edges remain visible.
+    for nid in nodes:
+        if nid not in pos:pos[nid]=(0.,0.)
     return pos
 
+
 def make_figure(nodes,edges,selected=None):
+    """Curved, translucent network edges and colored floating nodes, inspired by the supplied reference."""
     pos=layout(nodes,edges);fig=go.Figure()
+    from collections import defaultdict
+    segments=defaultdict(lambda: ([],[]))
     for a,b in edges:
         if a not in pos or b not in pos:continue
         x1,y1=pos[a];x2,y2=pos[b]
-        fig.add_trace(go.Scatter(x=[x1,x2],y=[y1,y2],mode='lines',line=dict(color='#4a617f' if selected not in (a,b) else '#c4d5ee',width=1.1 if selected not in (a,b) else 3),hoverinfo='skip',showlegend=False))
+        dx=x2-x1;dy=y2-y1
+        # Subtle curvature increases the organic appearance without implying fund flows.
+        bend=.12*math.hypot(dx,dy)*(-1 if sum(ord(c) for c in b)%2 else 1)
+        mx=(x1+x2)/2-bend*dy/(math.hypot(dx,dy)+1e-6)
+        my=(y1+y2)/2+bend*dx/(math.hypot(dx,dy)+1e-6)
+        group='selected' if selected in (a,b) else 'normal'
+        xs,ys=segments[group]
+        for i in range(13):
+            t=i/12;xs.append((1-t)**2*x1+2*(1-t)*t*mx+t*t*x2)
+            ys.append((1-t)**2*y1+2*(1-t)*t*my+t*t*y2)
+        xs.append(None);ys.append(None)
+    for group in ('normal','selected'):
+        xs,ys=segments[group]
+        if xs:fig.add_trace(go.Scattergl(x=xs,y=ys,mode='lines',line=dict(color='rgba(113,151,202,0.24)' if group=='normal' else 'rgba(180,225,255,0.85)',width=1 if group=='normal' else 2.5),hoverinfo='skip',showlegend=False))
     for kind in ('root','country','asset','sector','factor','company'):
         items=[n for n in nodes.values() if n['kind']==kind]
         if not items:continue
-        fig.add_trace(go.Scatter(x=[pos[n['id']][0] for n in items],y=[pos[n['id']][1] for n in items],mode='markers+text',
-          text=[(n['label'][:19]+'…' if len(n['label'])>20 else n['label']) for n in items],textposition='top center',
-          textfont=dict(size=10,color='#e3ebf7'),marker=dict(size=[27 if n['id']==selected else 17+min((n['score'] or 50)/11,9) for n in items],color=[COLORS.get(n['quadrant'],'#a1b3ce') for n in items],line=dict(color='#e5f0ff',width=1)),
-          customdata=[[n['id']] for n in items],hovertemplate='%{text}<extra>'+kind.title()+'</extra>',name=kind.title(),showlegend=False))
-    fig.update_layout(template='plotly_dark',paper_bgcolor='#0b1220',plot_bgcolor='#0b1220',height=690,margin=dict(l=30,r=30,t=45,b=25),dragmode='pan',clickmode='event+select',xaxis=dict(visible=False,range=[-.8,max((p[0] for p in pos.values()),default=1)+1]),yaxis=dict(visible=False),uirevision='network')
+        fig.add_trace(go.Scattergl(
+            x=[pos[n['id']][0] for n in items],y=[pos[n['id']][1] for n in items],
+            mode='markers+text',
+            text=[n['label'][:17]+'…' if len(n['label'])>18 else n['label'] for n in items],
+            textposition='top center',textfont=dict(size=10,color='#d8e5f7'),
+            marker=dict(size=[33 if n['id']==selected else (30 if kind=='root' else 12+min((n['score'] or 40)/8,13)) for n in items],
+                        color=[COLORS.get(n['quadrant'],'#a1b3ce') if kind!='root' else '#a77cff' for n in items],
+                        line=dict(color='#dbe9ff',width=1.1),opacity=.92),
+            customdata=[[n['id']] for n in items],
+            hovertemplate='%{text}<extra>'+kind.title()+'</extra>',name=kind.title(),showlegend=False))
+    fig.update_layout(template='plotly_dark',paper_bgcolor='#0b1220',plot_bgcolor='#0b1220',
+        height=780,margin=dict(l=12,r=12,t=12,b=12),dragmode='pan',clickmode='event+select',
+        xaxis=dict(visible=False,scaleanchor='y',scaleratio=1),yaxis=dict(visible=False),
+        uirevision='capital_organic_network',hovermode='closest')
     return fig
 
 def render_capital_network():
     st.title('🌐 Global Capital Intelligence Network')
-    st.caption('Interactive market leadership relationships • **Not measured capital flows** • Company edges require uploaded, verifiable holdings')
-    c1,c2,c3,c4=st.columns([2.4,1.4,1.5,2.7])
-    with c1:path=st.selectbox('EXPLORATION PATH',['Country → assets → sectors → companies','Assets → equity → factors → companies'])
-    with c2:market=st.selectbox('FACTOR MARKET',['Global','USA','India'],disabled=path.startswith('Country'))
-    with c3:lookback=st.select_slider('RELATIVE TIME',options=list(country_market_data.LOOKBACKS),value='3M')
-    with c4:period=st.date_input('FROM DATE → TO DATE',value=(date.today()-timedelta(days=365),date.today()),max_value=date.today())
-    c5,c6,c7=st.columns([1.1,1.1,3])
-    with c5:top_n=st.selectbox('TOP N PER BRANCH',[5,10,20],index=0)
-    with c6:depth=st.slider('VISIBLE DEPTH',1,4,4)
-    with c7:st.caption('Click a node for its verified score and relationships. Pan and zoom using the chart toolbar. Gray nodes have no comparable score.')
-    if len(period)!=2 or period[0]>=period[1]:st.info('Choose a valid start and end date.');return
+    st.caption('Organic market relationship network · **Not measured capital flows** · Click any node to inspect it')
+    c1,c2,c3=st.columns([1.5,2.6,1.2])
+    with c1:lookback=st.select_slider('RELATIVE TIME',options=list(country_market_data.LOOKBACKS),value='3M')
+    with c2:period=st.date_input('FROM DATE → TO DATE',value=(date.today()-timedelta(days=365),date.today()),max_value=date.today())
+    with c3:top_n=st.selectbox('TOP N PER CLUSTER',[3,5,10,20],index=1)
+    with st.expander('Network filters & company holdings',expanded=False):
+        factor_markets=st.multiselect('FACTOR MARKETS',['Global','USA','India'],default=['Global','USA','India'])
+        st.caption('Company nodes require actual factor constituent weights. Upload CSV/XLSX containing factor, company, weight (%), and preferably ISIN/ticker. No synthetic company connections are generated.')
+        uploaded=st.file_uploader('Factor holdings files',type=['csv','xlsx'],accept_multiple_files=True,key='network_holdings')
+    if not isinstance(period,(tuple,list)) or len(period)!=2 or period[0]>=period[1]:
+        st.info('Choose a valid start and end date.');return
     start,end=period
     holdings=None
-    if path.startswith('Assets'):
-        with st.expander('Company constituents (optional; required to display company nodes)'):
-            st.caption('Upload CSV/XLSX with factor, company, weight (%), and ideally ISIN, ticker, as_of, source. Factor identifiers must match the factor ETF/index ticker. Files are processed only in this session.')
-            uploaded=st.file_uploader('Factor holdings files',type=['csv','xlsx'],accept_multiple_files=True,key='network_holdings')
-            if uploaded:
-                pieces=[]
-                for file in uploaded:
-                    try:pieces.append(parse_holdings(file,source=file.name))
-                    except Exception as exc:st.warning(f'{file.name}: {exc}')
-                if pieces:
-                    holdings=pd.concat(pieces,ignore_index=True)
-                    st.success(f'{len(holdings):,} positive-weight holdings loaded. As-of dates and completeness must be checked against issuer files.')
-    requested=['Countries','USA Assets','India Assets','USA Sectors','India Sectors'] if path.startswith('Country') else ['Global Assets',market+' Factors']
+    if uploaded:
+        pieces=[]
+        for file in uploaded:
+            try:pieces.append(parse_holdings(file,source=file.name))
+            except Exception as exc:st.warning(f'{file.name}: {exc}')
+        if pieces:holdings=pd.concat(pieces,ignore_index=True)
+    requested=['Countries','USA Assets','India Assets','USA Sectors','India Sectors','Global Assets']+[m+' Factors' for m in factor_markets]
     layers={};reports={};errors={}
-    with st.spinner('Loading verified market prices and building network…'):
+    with st.spinner('Loading market data and constructing the network…'):
         for layer in requested:
             try:layers[layer],reports[layer]=fetch_layer(layer,start,end,lookback)
             except Exception as exc:errors[layer]=str(exc)
     if errors:
-        with st.expander(f'Unavailable data layers ({len(errors)})',expanded=True):
+        with st.expander(f'Data availability: {len(errors)} unavailable layers'):
             for k,v in errors.items():st.warning(f'{k}: {v}')
     if not layers:
-        st.error('No market layers could be loaded. Network scores and connections have been withheld.');return
-    nodes,edges=build_graph(path,market,layers,top_n,holdings)
-    if depth<4:
-        level={'root':0,'country':1,'asset':1 if path.startswith('Assets') else 2,'sector':3,'factor':2,'company':3}
-        keep={nid for nid,n in nodes.items() if level[n['kind']]<=depth}
-        nodes={k:v for k,v in nodes.items() if k in keep};edges=[(a,b) for a,b in edges if a in keep and b in keep]
-    if not edges:st.info('No supported relationships for the current selection. Try a wider date range or another path.')
+        st.error('No validated market data is available for the selected dates.');return
+    nodes,edges=build_unified_graph(layers,top_n,holdings,factor_markets)
     selected=st.session_state.get('capital_selected')
     if selected not in nodes:selected=None
-    event=st.plotly_chart(make_figure(nodes,edges,selected),use_container_width=True,key='capital_network_plot',on_select='rerun',selection_mode='points',config={'displaylogo':False,'scrollZoom':True})
+    event=st.plotly_chart(make_figure(nodes,edges,selected),use_container_width=True,
+        key='capital_network_plot',on_select='rerun',selection_mode='points',
+        config={'displaylogo':False,'scrollZoom':True,'modeBarButtonsToRemove':['lasso2d','select2d']})
     try:
         for point in event.selection.points:
             if point.get('customdata'):
@@ -164,13 +250,14 @@ def render_capital_network():
     if selected in nodes:st.session_state.capital_selected=selected
     if selected in nodes:
         n=nodes[selected]
-        st.subheader('Selected node · '+n['label'])
-        a,b,c,d=st.columns(4)
-        a.metric('Type',n['kind'].title());b.metric('Rotation score',f"{n['score']:.1f}/100" if n['score'] is not None else 'N/A')
-        c.metric('Regime',n['quadrant'] or 'Not scored');d.metric('Period return',f"{n['return']:+.2f}%" if n['return'] is not None else 'N/A')
-        neighbors=[nodes[t] for x,y in edges for t in ([y] if x==selected else [x] if y==selected else []) if t in nodes]
-        if neighbors:st.dataframe(pd.DataFrame([{'Connected node':x['label'],'Type':x['kind'],'Rotation score':x['score']} for x in neighbors]),hide_index=True,use_container_width=True)
-        if n['layer']:st.caption(f"Source layer: {n['layer']} • Symbol: {n['ticker']} • Relative strength: {n['relative']:+.2f}% • Peer-normalized score is not comparable across unrelated universes.")
-    st.caption(f"Showing {len(nodes)} nodes and {len(edges)} verified/proxy relationships. Scores: 60% peer RS percentile + 40% peer momentum percentile. Node color: green Leading, blue Improving, amber Weakening, red Lagging. Data layer validation: "+', '.join(f'{k} {v["status"]}' for k,v in reports.items()))
-    if path.startswith('Country'):st.info('Country-specific asset and sector drill-down is currently supported for USA and India only. Sector → company edges are withheld until sector constituent files are available. Other country nodes remain at country level.')
-    else:st.info('Factor → company connections appear only for uploaded holdings matching factor symbols. Their presence denotes constituent membership, not actual fund subscriptions/redemptions. Company consensus scoring remains available on Factor Holdings Comparison.')
+        with st.expander('Selected node · '+n['label'],expanded=True):
+            a,b,c,d=st.columns(4)
+            a.metric('Node type',n['kind'].title())
+            b.metric('Rotation score',f"{n['score']:.1f}/100" if n['score'] is not None else 'N/A')
+            c.metric('Regime',n['quadrant'] or 'Not scored')
+            d.metric('Period return',f"{n['return']:+.2f}%" if n['return'] is not None else 'N/A')
+            neighbors=[nodes[t] for x,y in edges for t in ([y] if x==selected else [x] if y==selected else []) if t in nodes]
+            if neighbors:st.dataframe(pd.DataFrame([{'Connected node':x['label'],'Type':x['kind'],'Rotation score':x['score']} for x in neighbors]),hide_index=True,use_container_width=True)
+            if n['layer']:st.caption(f"Source: {n['layer']} · Symbol: {n['ticker']} · Relative strength: {n['relative']:+.2f}%")
+    st.caption(f'{len(nodes)} nodes · {len(edges)} relationships · Green: Leading · Blue: Improving · Amber: Weakening · Red: Lagging. Scores are peer-relative and do not measure capital inflows.')
+    if holdings is None:st.caption('Company connections are hidden until verified holdings are uploaded. Sector → company links also require sector constituent files.')
