@@ -9,6 +9,7 @@ st.markdown("""<style>.stApp{background:#0b1220;color:#e7eef9}
 # Grouped sidebar navigation. The selected page is stored in session state so
 # changing groups does not reset the current dashboard's other widgets.
 NAV_GROUPS = {
+    '🌐 GLOBAL INTELLIGENCE': ['Global Capital Intelligence Network'],
     '🌎 COUNTRY ANALYSIS': ['Global Countries'],
     '💰 ASSET CLASS ANALYSIS': ['Global Asset Flow', 'USA Asset Flow', 'India Asset Flow'],
     '📊 SECTOR ANALYSIS': ['Global Sectors', 'USA Sector', 'India Sector'],
@@ -16,6 +17,7 @@ NAV_GROUPS = {
     '📚 DATA & RESEARCH': ['Data Table', 'Wiki'],
 }
 PAGE_ICONS = {
+    'Global Capital Intelligence Network': '🕸️',
     'Global Countries': '🌎',
     'Global Asset Flow': '🌍', 'USA Asset Flow': '🇺🇸', 'India Asset Flow': '🇮🇳',
     'Global Sectors': '🌍', 'USA Sector': '🇺🇸', 'India Sector': '🇮🇳',
@@ -24,7 +26,7 @@ PAGE_ICONS = {
 }
 ALL_PAGES = [item for items in NAV_GROUPS.values() for item in items]
 if st.session_state.get('selected_page') not in ALL_PAGES:
-    st.session_state.selected_page = 'Global Countries'
+    st.session_state.selected_page = 'Global Capital Intelligence Network'
 
 st.markdown("""<style>
 [data-testid="stSidebar"] {background: #101a2d;}
@@ -59,7 +61,10 @@ with st.sidebar:
     st.divider()
 page = st.session_state.selected_page
 
-if page == 'Factor Holdings Comparison':
+if page == 'Global Capital Intelligence Network':
+    from capital_network import render_capital_network
+    render_capital_network()
+elif page == 'Factor Holdings Comparison':
     from factor_holdings import render_factor_holdings
     render_factor_holdings()
 elif page == 'Data Table':

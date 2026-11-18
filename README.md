@@ -109,3 +109,9 @@ Open **Wiki** in the application and select any dashboard. Every dashboard's Wik
 
 ## Factor Holdings Comparison
 One page with Global / USA / India slicer, full-universe and top-10 views, factor-count and normalized weight/rank consensus, company factor profile, data-coverage checks and CSV exports. Upload official constituent-weight CSV/XLSX files; holdings downloads are **not automated**. See `FACTOR_HOLDINGS_WIKI.md` for formula, worked example and limitations.
+
+## Global Capital Intelligence Network (new first page)
+
+A full-width, interactive Plotly relationship network with Country → Assets → Sectors and Global Assets → Equity → Global/USA/India Factors → Companies views. The page retains relative-time and date-range slicers, supports top-N, depth filtering, zoom/pan, node selection and a detail panel. Market nodes reuse the existing validated adjusted-price rotation calculations; the new 0–100 network score is a **within-layer percentile** (60% relative-strength percentile, 40% RS-momentum percentile). Scores across different universes are not directly comparable.
+
+**Coverage boundaries:** Country-level asset and sector layers currently exist only for USA and India. Country → sector → company requires sector constituents and is intentionally not shown without them. Factor → company edges require user-uploaded holdings (CSV/XLSX, columns `factor,company,weight`, optionally `ticker,isin,as_of,source`); no fake holdings are supplied. Network edges represent membership/relationships and price-rotation proxies, **not measured fund flows**. The visual is a structured graph, not a physics-simulated neural network; click nodes to inspect connections. Data downloads require internet access when deployed. A live Streamlit Cloud rendering check has not been performed.
