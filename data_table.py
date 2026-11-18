@@ -31,7 +31,11 @@ def raw_rows(frames, symbols=None, start=None, end=None):
         df.insert(0, 'Session', pd.to_datetime(df.index, errors='coerce'))
         df.insert(0, 'Symbol', ticker)
         df.insert(1, 'Source', frame.attrs.get('source', 'Unspecified provider'))
-        df.insert(2, 'Row duplicate', bool(frame.index.has_duplicates))
+        df.insert(2, 'Instrument type', frame.attrs.get('instrument_type', 'ETF / index proxy'))
+        df.insert(3, 'Return basis', frame.attrs.get('return_basis', 'Provider adjusted close'))
+        df.insert(4, 'Fallback used', frame.attrs.get('fallback_used', 'No'))
+        df.insert(5, 'Underlying symbol', frame.attrs.get('underlying_symbol', ticker))
+        df.insert(6, 'Row duplicate', bool(frame.index.has_duplicates))
         # Per-row duplicate indicator, not merely a series-level flag.
         df['Row duplicate'] = frame.index.duplicated(keep=False)
         for field in FIELDS:
@@ -41,9 +45,9 @@ def raw_rows(frames, symbols=None, start=None, end=None):
         df['Invalid price'] = prices.isna().any(axis=1) | prices.le(0).any(axis=1)
         df['Invalid OHLC'] = (prices['High'] < prices[['Open', 'Close', 'Low']].max(axis=1)) | (prices['Low'] > prices[['Open', 'Close', 'High']].min(axis=1))
         df['Invalid volume'] = pd.to_numeric(df['Volume'], errors='coerce').lt(0)
-        rows.append(df[['Session', 'Symbol', 'Source', *FIELDS, 'Row duplicate', 'Invalid price', 'Invalid OHLC', 'Invalid volume']].reset_index(drop=True))
+        rows.append(df[['Session', 'Symbol', 'Source', 'Instrument type', 'Return basis', 'Fallback used', 'Underlying symbol', *FIELDS, 'Row duplicate', 'Invalid price', 'Invalid OHLC', 'Invalid volume']].reset_index(drop=True))
     if not rows:
-        return pd.DataFrame(columns=['Session', 'Symbol', 'Source', *FIELDS, 'Row duplicate', 'Invalid price', 'Invalid OHLC', 'Invalid volume'])
+        return pd.DataFrame(columns=['Session', 'Symbol', 'Source', 'Instrument type', 'Return basis', 'Fallback used', 'Underlying symbol', *FIELDS, 'Row duplicate', 'Invalid price', 'Invalid OHLC', 'Invalid volume'])
     result = pd.concat(rows, ignore_index=True)
     result['Session'] = pd.to_datetime(result['Session'], errors='coerce')
     if start is not None:
@@ -58,14 +62,14 @@ def coverage(frames, module, start, end):
     for symbol in [*module.SECTORS, module.BENCHMARK]:
         frame = frames.get(symbol)
         if frame is None or frame.empty:
-            items.append({'Symbol': symbol, 'Name': 'Benchmark' if symbol == module.BENCHMARK else module.SECTORS[symbol], 'Source': 'Unavailable', 'Sessions': 0, 'First': None, 'Last': None, 'Duplicate sessions': None, 'Invalid adjusted closes': None, 'Status': 'MISSING'})
+            items.append({'Symbol': symbol, 'Name': 'Benchmark' if symbol == module.BENCHMARK else module.SECTORS[symbol], 'Source': 'Unavailable', 'Instrument type': None, 'Return basis': None, 'Fallback used': None, 'Underlying symbol': None, 'Sessions': 0, 'First': None, 'Last': None, 'Duplicate sessions': None, 'Invalid adjusted closes': None, 'Status': 'MISSING'})
             continue
         idx = pd.to_datetime(frame.index, errors='coerce')
         within = frame.loc[(idx >= pd.Timestamp(start)) & (idx <= pd.Timestamp(end))]
         adj = pd.to_numeric(within['Adj Close'], errors='coerce') if 'Adj Close' in within else pd.Series(dtype=float)
         invalid = int((adj.isna() | adj.le(0)).sum()) if 'Adj Close' in within else len(within)
         dupes = int(within.index.duplicated(keep=False).sum())
-        items.append({'Symbol': symbol, 'Name': 'Benchmark' if symbol == module.BENCHMARK else module.SECTORS[symbol], 'Source': frame.attrs.get('source', 'Unspecified provider'), 'Sessions': len(within), 'First': within.index.min().date().isoformat() if len(within) else None, 'Last': within.index.max().date().isoformat() if len(within) else None, 'Duplicate sessions': dupes, 'Invalid adjusted closes': invalid, 'Status': 'REVIEW' if dupes or invalid else 'AVAILABLE' if len(within) else 'NO ROWS IN RANGE'})
+        items.append({'Symbol': symbol, 'Name': 'Benchmark' if symbol == module.BENCHMARK else module.SECTORS[symbol], 'Source': frame.attrs.get('source', 'Unspecified provider'), 'Instrument type': frame.attrs.get('instrument_type', 'ETF / index proxy'), 'Return basis': frame.attrs.get('return_basis', 'Provider adjusted close'), 'Fallback used': frame.attrs.get('fallback_used', 'No'), 'Underlying symbol': frame.attrs.get('underlying_symbol', symbol), 'Sessions': len(within), 'First': within.index.min().date().isoformat() if len(within) else None, 'Last': within.index.max().date().isoformat() if len(within) else None, 'Duplicate sessions': dupes, 'Invalid adjusted closes': invalid, 'Status': 'REVIEW' if dupes or invalid else 'AVAILABLE' if len(within) else 'NO ROWS IN RANGE'})
     return pd.DataFrame(items)
 
 

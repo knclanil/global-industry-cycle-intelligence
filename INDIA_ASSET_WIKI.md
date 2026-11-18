@@ -25,3 +25,8 @@ Heuristic only: Risk-on requires at least two positive excess-return risk-sensit
 ## Availability and validation
 Missing instruments are excluded. Missing or invalid benchmark is fatal. No artificial data or forward fills are used. Provider structural checks are not independent price verification. Live market availability is not guaranteed.
 
+
+## Government bonds: verified-source fallback logic
+The India Asset Flow government-bond key is `NIFTY_GSEC_10Y` (a logical dashboard identifier, **not** a Yahoo ticker). The loader first attempts the Nifty 10-year benchmark G-Sec index through NSEPythonServer and the NSE historical-index API using candidate NSE names. The accepted name and live data availability are **not independently confirmed**. Only structurally valid OHLC observations are accepted.
+
+If no valid index series is retrieved, the loader attempts Yahoo Finance `SETF10GILT.NS` as a government-bond ETF fallback. If both fail, government bonds are excluded and no data are fabricated. The index and ETF histories are **never spliced together**. An NSE price index uses its Close as the analytical price and is **not a total-return series**; the ETF uses its provider-adjusted close. This methodology mismatch can materially affect rankings. The Data Table reports `Source`, `Instrument type`, `Return basis`, `Fallback used`, and `Underlying symbol` for each retrieved series. These are data-provenance labels, not independent confirmation of provider accuracy.

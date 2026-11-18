@@ -4,9 +4,12 @@ import pandas as pd
 import market_data as core
 from india_market_data import _clean_provider_rows
 
-SECTORS = {'NIFTYBEES.NS': 'Equities · India', 'GOLDBEES.NS': 'Gold', 'SILVERBEES.NS': 'Silver', 'LIQUIDBEES.NS': 'Cash / Liquid ETF', 'SETF10GILT.NS': 'Government Bonds · 10Y (availability unverified)'}
+SECTORS = {'NIFTYBEES.NS': 'Equities · India', 'GOLDBEES.NS': 'Gold', 'SILVERBEES.NS': 'Silver', 'LIQUIDBEES.NS': 'Cash / Liquid ETF', 'NIFTY_GSEC_10Y': 'Government Bonds · 10Y (index / ETF fallback)'}
 BENCHMARK = '^NSEI'
-TICKERS = [*SECTORS, BENCHMARK]
+TICKERS = [t for t in SECTORS if t != 'NIFTY_GSEC_10Y'] + ['SETF10GILT.NS', BENCHMARK]
+GSEC_KEY = 'NIFTY_GSEC_10Y'
+GSEC_INDEX_NAMES = ('NIFTY 10 YR BENCHMARK G-SEC', 'NIFTY 10 YEAR BENCHMARK G-SEC')
+GSEC_ETF = 'SETF10GILT.NS'
 LOOKBACKS = core.LOOKBACKS
 QUADRANTS = core.QUADRANTS
 
@@ -39,6 +42,12 @@ def download(start: date, end: date) -> dict[str, pd.DataFrame]:
             if not frame.empty:
                 frame.attrs['source'] = 'Yahoo Finance (ETF price proxy)'
                 frames[ticker] = frame
+    # Government-bond index first; ETF fallback is a distinct return basis.
+    # Do not splice index and ETF observations into one history.
+    bond, diagnostics = _government_bond_history(start, end, frames.get(GSEC_ETF))
+    if bond is not None:
+        frames[GSEC_KEY] = bond
+    frames.pop(GSEC_ETF, None)
     # Prefer official Indian index history for benchmark when valid.
     import requests
     session = requests.Session()
@@ -61,6 +70,59 @@ def download(start: date, end: date) -> dict[str, pd.DataFrame]:
         except (ValueError, KeyError, TypeError, RuntimeError, requests.RequestException):
             pass
     return frames
+
+
+def _government_bond_history(start, end, etf_frame=None, python_history=None, direct_history=None):
+    """Choose one validated source, never concatenate index and ETF histories.
+
+    The NSE index is a price-level proxy (Adj Close == Close), whereas an ETF
+    adjusted close can incorporate distributions. Metadata makes this visible.
+    """
+    import requests
+    import india_market_data as india
+    errors = []
+    if python_history is None:
+        from nsepython_provider import history as python_history
+    if direct_history is None:
+        direct_history = india._nse_history
+    for name in GSEC_INDEX_NAMES:
+        for provider, load in (
+            ('NSEPythonServer', lambda: python_history(name, start, end)),
+            ('NSE India API', lambda: direct_history(_nse_session(), name, start, end)),
+        ):
+            try:
+                candidate = load()
+                if not india._structurally_valid(candidate):
+                    raise ValueError('invalid OHLC or duplicate sessions')
+                candidate = candidate.loc[pd.Timestamp(start):pd.Timestamp(end)].copy()
+                if len(candidate) < 2:
+                    raise ValueError('fewer than two sessions in range')
+                candidate.attrs.update(source=f'{provider} · {name}', instrument_type='Government bond index',
+                                       return_basis='Price index (not total return)',
+                                       fallback_used='No', underlying_symbol=name)
+                return candidate, errors
+            except (ImportError, ValueError, KeyError, TypeError, RuntimeError,
+                    requests.RequestException, OSError) as exc:
+                errors.append(f'{provider} / {name}: {type(exc).__name__}: {exc}')
+    if etf_frame is not None and india._structurally_valid(etf_frame):
+        candidate = etf_frame.loc[pd.Timestamp(start):pd.Timestamp(end)].copy()
+        if len(candidate) >= 2:
+            candidate.attrs.update(source=f'Yahoo Finance · {GSEC_ETF} (ETF fallback)',
+                                   instrument_type='Government bond ETF',
+                                   return_basis='ETF adjusted close (provider)',
+                                   fallback_used='Yes', underlying_symbol=GSEC_ETF)
+            return candidate, errors
+    errors.append(f'{GSEC_ETF}: unavailable or invalid ETF fallback')
+    return None, errors
+
+
+def _nse_session():
+    import requests
+    session = requests.Session()
+    session.headers.update({'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/124.0',
+                            'Accept': 'application/json, text/plain, */*',
+                            'Referer': 'https://www.nseindia.com/'})
+    return session
 
 
 def _to_core(frames):
@@ -86,7 +148,7 @@ def _validate_global(mapped, requested_end):
         return {'status': 'FAIL', 'errors': ['^NSEI benchmark history is invalid'], 'warnings': [], 'latest': None}
     latest = ref.index.max()
     required = {'Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume'}
-    for ticker in TICKERS:
+    for ticker in [*SECTORS, BENCHMARK]:
         key = 'SPY' if ticker == BENCHMARK else ticker
         df = mapped.get(key)
         if df is None or df.empty:

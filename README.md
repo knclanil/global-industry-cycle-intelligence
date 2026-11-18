@@ -98,3 +98,6 @@ See `GLOBAL_ASSET_WIKI.md`, `USA_ASSET_WIKI.md`, `INDIA_ASSET_WIKI.md` for defin
 ## Data Table — raw observations
 
 The **Data Table** sidebar page shows source-returned daily OHLCV and adjusted-close observations for all ten dashboards, with symbol and date filters, source labels, coverage and missing-series reports, duplicate/invalid-price flags, validation messages, and downloadable CSV exports. A refresh button clears the shared one-hour market-data cache. No database or price filling is used. Source libraries may clean some data before the page receives it; validation is not independent provider verification.
+
+### India government-bond fallback and Data Table provenance
+India Asset Flow uses logical key `NIFTY_GSEC_10Y` for government bonds. It attempts an NSE 10-year benchmark G-Sec index via NSEPythonServer, then direct NSE history; if unavailable, it uses `SETF10GILT.NS` only when Yahoo returns valid history. No index/ETF stitching or forward-fill occurs. Check Data Table → India Asset Flow for source, instrument type, return basis, fallback flag, and underlying symbol. NSE index **price returns** and ETF **adjusted-close returns** are not identical methodologies. Live NSE availability is not guaranteed.
