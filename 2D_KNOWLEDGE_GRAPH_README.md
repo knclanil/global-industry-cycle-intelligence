@@ -1,0 +1,1 @@
+Responsive SVG knowledge graph replacement. No Three.js, no CDN, no companies/holdings. Replace project files with nightly_build contents. Click groups to expand/collapse; pan, zoom, search, select, fit. Data sourced from existing fetch_layer and graph_payload.
