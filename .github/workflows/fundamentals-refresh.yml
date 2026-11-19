@@ -3,6 +3,11 @@ on:
   schedule:
     - cron: '15 4 * * 2-6'
   workflow_dispatch:
+    inputs:
+      limit:
+        description: "Maximum new SEC issuers to process"
+        required: false
+        default: "250"
 permissions:
   contents: write
 concurrency:
@@ -19,12 +24,24 @@ jobs:
           python-version: '3.11'
           cache: pip
       - run: pip install -r requirements.txt
+      - name: Verify SEC credentials
+        env:
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+        run: |
+          python - <<'PYCODE'
+          import os, sys
+          ua = os.getenv("SEC_USER_AGENT", "").strip()
+          if not ua or "@" not in ua or "example.com" in ua.lower():
+              print("::error::Set the repository Actions secret SEC_USER_AGENT to your application name and real contact email (Settings > Secrets and variables > Actions).")
+              sys.exit(1)
+          print("SEC_USER_AGENT is configured (value hidden).")
+          PYCODE
       - name: Refresh SEC company facts
         env:
           SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
-        run: python scripts/refresh_fundamentals.py --limit 250
+        run: python scripts/refresh_fundamentals.py --limit "${{ github.event.inputs.limit || '250' }}"
       - name: Commit verified SEC snapshots
-        if: always()
+        if: success()
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
