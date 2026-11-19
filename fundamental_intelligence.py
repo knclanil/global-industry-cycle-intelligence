@@ -45,15 +45,72 @@ def company_directory():
     data = sec_get('https://www.sec.gov/files/company_tickers.json')
     return pd.DataFrame(data.values())
 
+def _ticker(value):
+    import re
+    return re.sub(r'[^A-Z0-9]', '', str(value).upper().strip())
+
+
+def _name(value):
+    import re
+    name = str(value).upper().replace('&', ' AND ')
+    name = re.sub(r'[^A-Z0-9 ]', ' ', name)
+    stop = {'INC','INCORPORATED','CORP','CORPORATION','CO','COMPANY','LTD',
+            'LIMITED','PLC','CLASS','CL','COMMON','STOCK','THE','HOLDINGS',
+            'HOLDING','GROUP','SA','NV','AG'}
+    return ' '.join(x for x in name.split() if x not in stop)
+
+
+def _is_us(country):
+    return str(country).strip().upper() in {
+        'US', 'USA', 'UNITED STATES', 'UNITED STATES OF AMERICA', 'U.S.', 'U.S.A.'}
+
+
 def resolve_us_company(ticker, company, directory):
-    candidates = directory[directory.ticker.astype(str).str.upper() == str(ticker).upper()]
+    """Conservative CIK resolution with normalized ticker and issuer names."""
+    if directory.empty or not {'ticker','title','cik_str'}.issubset(directory.columns):
+        return None
+    key = _ticker(ticker)
+    candidates = directory[directory.ticker.astype(str).map(_ticker).eq(key)]
     if len(candidates) != 1:
         return None
     import difflib
-    name = str(candidates.iloc[0].title)
-    similarity = difflib.SequenceMatcher(None, name.upper(), str(company).upper()).ratio()
-    # Avoid silently linking a different issuer with a reused ticker.
-    return int(candidates.iloc[0].cik_str) if similarity >= 0.52 else None
+    candidate = candidates.iloc[0]
+    a, b = _name(candidate.title), _name(company)
+    if not a or not b:
+        return None
+    similarity = difflib.SequenceMatcher(None, a, b).ratio()
+    if a != b and similarity < 0.62 and not (len(a) >= 7 and len(b) >= 7 and (a in b or b in a)):
+        return None
+    return int(candidate.cik_str)
+
+
+def _cached_cik_index():
+    """Use SEC's own CIK/ticker metadata when a directory snapshot is absent."""
+    index = {}
+    for path in STORE.glob('facts_*.json'):
+        try:
+            payload = json.loads(path.read_text(encoding='utf-8'))
+            cik = int(payload.get('cik') or path.stem.split('_')[-1])
+            name = payload.get('entityName', '')
+            for ticker in payload.get('tickers', []):
+                index.setdefault(_ticker(ticker), []).append((cik, name))
+        except (OSError, ValueError, TypeError, json.JSONDecodeError):
+            continue
+    return index
+
+
+def _resolve_cached(ticker, company, directory, index):
+    cik = resolve_us_company(ticker, company, directory)
+    if cik is not None and (STORE / f'facts_{cik:010d}.json').exists():
+        return cik
+    candidates = index.get(_ticker(ticker), [])
+    if len(candidates) == 1:
+        cik, name = candidates[0]
+        import difflib
+        a, b = _name(name), _name(company)
+        if a and b and (a == b or difflib.SequenceMatcher(None, a, b).ratio() >= 0.62):
+            return cik
+    return None
 
 def select_facts(facts, tag, currency='USD'):
     """Annual filing observations only; preserve accession and filing dates.
@@ -110,6 +167,7 @@ def extract_company_facts(payload):
     frame['net_margin'] = frame.net_income / frame.revenue.replace(0,np.nan)
     frame['roe'] = frame.net_income / frame.equity.replace(0,np.nan)
     frame['debt'] = frame.debt_current.fillna(0) + frame.debt_long.fillna(0)
+    frame.loc[frame.debt_current.isna() & frame.debt_long.isna(), 'debt'] = np.nan
     frame['net_debt'] = frame.debt - frame.cash
     frame['fcf_margin'] = frame.free_cash_flow / frame.revenue.replace(0,np.nan)
     frame['cash_conversion'] = frame.operating_cash_flow / frame.net_income.replace(0,np.nan)
@@ -144,7 +202,7 @@ def refresh_us(universe, max_companies=20, directory=None, delay=0.18):
     updated, skipped, matched, errors = 0, 0, 0, []
     seen_ciks = set()
     for row in universe.drop_duplicates('issuer_id').itertuples(index=False):
-        if str(row.country).lower() not in ('united states','usa','us'):
+        if not _is_us(row.country):
             skipped += 1; continue
         cik = resolve_us_company(row.ticker,row.company,directory)
         if cik is None:
@@ -168,26 +226,74 @@ def refresh_us(universe, max_companies=20, directory=None, delay=0.18):
             errors.append(f'{row.ticker}: {str(exc)[:160]}')
     return {'updated':updated,'skipped':skipped,'matched':matched,'errors':errors}
 
+def coverage_diagnostics(universe):
+    directory_file = STORE / 'sec_company_directory.json'
+    try:
+        directory = pd.DataFrame(json.loads(directory_file.read_text())) if directory_file.exists() else pd.DataFrame()
+    except (OSError, ValueError):
+        directory = pd.DataFrame()
+    cached = _cached_cik_index()
+    us = universe[universe.country.map(_is_us)].drop_duplicates('issuer_id')
+    matched = 0
+    with_facts = 0
+    with_annual = 0
+    samples = []
+    for row in us.itertuples(index=False):
+        directory_cik = resolve_us_company(row.ticker, row.company, directory)
+        if directory_cik is not None:
+            matched += 1
+        cik = _resolve_cached(row.ticker, row.company, directory, cached)
+        if cik is None:
+            if len(samples) < 12:
+                samples.append({'ticker':row.ticker,'company':row.company,'issue':'No verified CIK / cached facts match'})
+            continue
+        with_facts += 1
+        try:
+            payload = json.loads((STORE / f'facts_{cik:010d}.json').read_text())
+            frame = extract_company_facts(payload)
+            if not frame.empty and frame[[x for x in ('revenue','net_income','assets','operating_cash_flow') if x in frame]].notna().any().any():
+                with_annual += 1
+            elif len(samples) < 12:
+                samples.append({'ticker':row.ticker,'company':row.company,'issue':'Cached facts lack supported annual observations'})
+        except (OSError, ValueError, KeyError, TypeError) as exc:
+            if len(samples) < 12:
+                samples.append({'ticker':row.ticker,'company':row.company,'issue':f'Extraction: {str(exc)[:90]}'})
+    return {'us_issuers':len(us), 'directory_matched':matched,
+            'cached_company_facts':len(list(STORE.glob('facts_*.json'))),
+            'holdings_with_cached_facts':with_facts,'holdings_with_annual_data':with_annual,
+            'unmatched_samples':samples}
+
+
 def available_profiles(universe):
     directory_file = STORE/'sec_company_directory.json'
-    if directory_file.exists():
-        directory = pd.DataFrame(json.loads(directory_file.read_text()))
-    else:
-        directory = pd.DataFrame(columns=['ticker','title','cik_str'])
+    try:
+        directory = pd.DataFrame(json.loads(directory_file.read_text())) if directory_file.exists() else pd.DataFrame()
+    except (OSError, ValueError):
+        directory = pd.DataFrame()
+    cached = _cached_cik_index()
     profiles = []
     for row in universe.itertuples(index=False):
-        cik = resolve_us_company(row.ticker,row.company,directory) if not directory.empty and str(row.country).lower() in ('united states','usa','us') else None
+        if not _is_us(row.country):
+            continue
+        cik = _resolve_cached(row.ticker, row.company, directory, cached)
         path = STORE/f'facts_{cik:010d}.json' if cik is not None else None
         if path and path.exists():
             try:
                 payload = json.loads(path.read_text())
                 frame = extract_company_facts(payload)
-                if frame.empty: continue
-                latest = frame.sort_values('period_end').iloc[-1]
+                if frame.empty:
+                    continue
+                # Prefer the latest fiscal period with at least one real financial value.
+                value_cols = [x for x in ('revenue','net_income','assets','operating_cash_flow') if x in frame]
+                valid = frame[frame[value_cols].notna().any(axis=1)] if value_cols else frame.iloc[0:0]
+                if valid.empty:
+                    continue
+                latest = valid.sort_values('period_end').iloc[-1]
                 data = {k:latest.get(k,np.nan) for k in ('roe','operating_margin','net_margin','revenue_growth','earnings_growth','fcf_margin','cash_conversion','net_debt')}
                 profiles.append({**row._asdict(),**data,'cik':cik,'period_end':latest.period_end,
-                                 'source':'SEC EDGAR XBRL', 'facts_file':str(path.name)})
-            except (ValueError, KeyError, TypeError): pass
+                                 'source':'SEC EDGAR XBRL','facts_file':path.name})
+            except (OSError, ValueError, KeyError, TypeError):
+                continue
     return pd.DataFrame(profiles)
 
 def score_profiles(profiles):
@@ -251,9 +357,9 @@ def render_fundamental_intelligence():
                 st.write(result)
                 st.cache_data.clear()
             except Exception as exc:st.error(f'SEC refresh unavailable: {exc}')
-    @st.cache_data(ttl=3600)
-    def cached_profiles():return score_profiles(available_profiles(load_universe()))
-    scored = cached_profiles()
+    # Disk-backed GitHub Actions snapshots change independently of Streamlit's cache.
+    # Avoid stale 0-coverage results after the workflow publishes new facts.
+    scored = score_profiles(available_profiles(universe))
     region = st.radio('Holdings universe',['USA','Global'],horizontal=True)
     scope = universe[universe.region.eq(region)]
     st.metric('Unique ETF issuers',scope.issuer_id.nunique())
@@ -265,6 +371,18 @@ def render_fundamental_intelligence():
             if status.get('errors'): st.warning(f"SEC refresh reported {len(status['errors'])} errors. Check refresh_status.json for details.")
         except (ValueError, OSError): pass
     st.metric('Issuers with SEC annual financials',scored[scored.region.eq(region)].issuer_id.nunique() if not scored.empty else 0)
+    with st.expander('SEC matching and extraction diagnostics', expanded=bool(scored.empty)):
+        diag = coverage_diagnostics(universe)
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric('US holdings issuers',diag['us_issuers'])
+        c2.metric('CIK matches in SEC directory',diag['directory_matched'])
+        c3.metric('Holdings with cached facts',diag['holdings_with_cached_facts'])
+        c4.metric('Holdings with annual data',diag['holdings_with_annual_data'])
+        st.caption(f"Total SEC fact files: {diag['cached_company_facts']}. The directory-match count includes issuers not yet downloaded.")
+        if diag['unmatched_samples']:
+            st.dataframe(pd.DataFrame(diag['unmatched_samples']),hide_index=True,use_container_width=True)
+        if st.button('Recheck on-disk fundamentals'):
+            st.rerun()
     if scored.empty or scored[scored.region.eq(region)].empty:
         st.info('No verified fundamentals cached for this universe. US issuers can be refreshed from SEC; international coverage requires an additional filings provider.')
         return
