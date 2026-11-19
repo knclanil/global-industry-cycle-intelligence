@@ -302,6 +302,14 @@ def render_india_overlap_leadership():
     pairs = _get(DATA / 'factor_index_overlaps.csv')
     intersections = _get(DATA / 'sector_factor_overlaps.csv')
     finance = _get(FINANCIALS / 'company_financial_summary.csv')
+    if not members.empty and (companies.empty or patterns.empty or pairs.empty or intersections.empty):
+        from india_overlap_rankings import build_leadership
+        computed = build_leadership(members.to_dict('records'))
+        if companies.empty: companies = pd.DataFrame(computed['companies'])
+        if patterns.empty: patterns = pd.DataFrame(computed['factor_membership_patterns'])
+        if pairs.empty: pairs = pd.DataFrame(computed['factor_index_overlaps'])
+        if intersections.empty: intersections = pd.DataFrame(computed['sector_factor_overlaps'])
+        st.caption('Overlap tables calculated from saved NSE constituents; no live network access.')
     if companies.empty or members.empty:
         st.warning('No saved NSE overlap/ranking outputs available. First run **India NSE Constituents Refresh** in '
                    'GitHub Actions. It now builds the ranking exports after updating constituents. If constituents.csv '

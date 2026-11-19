@@ -48,8 +48,8 @@ def _source_context(status: pd.DataFrame) -> None:
     if status.empty:
         st.info("No NSE snapshots have been built yet. Run the India constituents refresh workflow; this page will display verified imported records when available.")
         return
-    loaded = status[status["constituent_count"].astype(int) > 0]
-    failures = status[status["status"].isin(["error", "cached_after_error"])]
+    loaded = status[pd.to_numeric(status["constituent_count"],errors="coerce").fillna(0) > 0]
+    failures = status[status.get("status",pd.Series("",index=status.index)).isin(["error", "cached_after_error"])]
     if loaded.empty:
         st.warning("None of the 31 index sources has a valid constituent snapshot yet. This is a source-collection issue, not an empty Indian equity market. Check **Data Coverage** below.")
     elif not failures.empty:
@@ -218,19 +218,24 @@ def _render_sector_intersection(companies: pd.DataFrame, memberships: pd.DataFra
 def _render_sources(status: pd.DataFrame, memberships: pd.DataFrame) -> None:
     st.markdown("#### NSE source-index browser")
     if status.empty:
-        st.info("Source catalogue will populate after the first pipeline run.")
+        st.info('Index refresh status not saved; displaying verified constituents directly instead.')
+        if not memberships.empty:
+            st.dataframe(memberships[['index_name','company_name','symbol','isin']].drop_duplicates(),
+                         use_container_width=True,hide_index=True)
         return
     category = st.selectbox("Index category", ["All categories", "Sector", "Thematic", "Factor", "Strategy"],
                             key="in_source_category")
     subset = status if category == "All categories" else status[status["category"] == category]
     cols = ["index_name", "category", "factor_family", "parent_universe", "constituent_count",
             "status", "retrieved_utc", "source_type", "source_url"]
+    for col in cols:
+        if col not in subset: subset = subset.assign(**{col:''})
     display = subset[cols].copy()
     display.columns = ["NSE Index", "Category", "Factor", "Parent Universe", "Constituents",
                        "Refresh Status", "Retrieved UTC", "Data Origin", "Official CSV"]
     st.dataframe(display, hide_index=True, use_container_width=True, height=455,
                  column_config={"Official CSV": st.column_config.LinkColumn("Official CSV", display_text="NSE CSV")})
-    indexed = status[status["constituent_count"].astype(int) > 0]
+    indexed = status[pd.to_numeric(status["constituent_count"],errors="coerce").fillna(0) > 0]
     if indexed.empty:
         return
     by_name = dict(zip(indexed["index_name"], indexed["index_slug"]))
@@ -249,8 +254,9 @@ def _render_coverage(status: pd.DataFrame, companies: pd.DataFrame, memberships:
     if status.empty:
         st.info("No collection diagnostics yet. Run **India NSE Constituents Refresh** in GitHub Actions.")
         return
-    good = status[status["constituent_count"].astype(int) > 0]
-    missing = status[status["constituent_count"].astype(int) == 0]
+    counts=pd.to_numeric(status.get("constituent_count",pd.Series(0,index=status.index)),errors="coerce").fillna(0)
+    good = status[counts > 0]
+    missing = status[counts == 0]
     c1, c2, c3, c4 = st.columns(4)
     c1.metric("Loaded indices", f"{len(good)}/{len(INDIA_INDICES)}")
     c2.metric("Missing sources", len(missing))
@@ -453,7 +459,9 @@ def render_india_constituents() -> None:
             return
     m1, m2, m3, m4 = st.columns(4)
     m1.metric("NSE indices tracked", len(INDIA_INDICES))
-    m2.metric("Indices with data", int((status["constituent_count"].astype(int) > 0).sum()) if not status.empty else 0)
+    m2.metric('Indices with data',
+        int((pd.to_numeric(status['constituent_count'],errors='coerce').fillna(0)>0).sum())
+        if not status.empty else (memberships['index_slug'].nunique() if not memberships.empty else 0))
     m3.metric("Unique securities", len(companies))
     m4.metric("Index memberships", len(memberships))
     _source_context(status)

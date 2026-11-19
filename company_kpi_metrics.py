@@ -243,6 +243,9 @@ def render_company_kpi_metrics():
         with st.expander('Trend methodology and limitations'):
             st.markdown('Quarterly income and cash-flow observations use 10-Q facts with approximately 65–110 day durations. Balance-sheet facts are point-in-time. Missing Q4 standalone flows are not synthesized from annual reports. The debt line represents **long-term debt**, not total debt. Missing values remain gaps, never zeros. Historical values may be restated in subsequent SEC filings.')
     with tab_summary:
+        st.markdown("#### Revenue → Net Income · Source-reconciled flow")
+        from financial_research_ui import _sankey
+        _sankey(inc[[selected]] if selected in inc.columns else inc.iloc[:, :0], bank=bank)
         _card_group('At a glance', [
             ('Revenue', rev, 'money', 'Reported annual revenue'),
             ('Net income', net, 'money', 'Reported annual net income'),

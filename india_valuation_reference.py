@@ -75,7 +75,7 @@ def parse_tables(html):
                 output[candidate] = frame
             elif name not in output:
                 output[name] = frame
-    peer_nodes = root.xpath('//*[@id="peers"]//table')
+    peer_nodes = root.xpath('//*[@id="peers"]//table | //*[@id="peer-comparison"]//table | //section[contains(@class, "peer")]//table | //div[contains(@class, "peer")]//table')
     if peer_nodes:
         try:
             peers = _html_table_to_frame(peer_nodes[0])

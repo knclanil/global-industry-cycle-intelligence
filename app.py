@@ -9,7 +9,9 @@ st.markdown("""<style>.stApp{background:#0b1220;color:#e7eef9}
 # Grouped sidebar navigation. The selected page is stored in session state so
 # changing groups does not reset the current dashboard's other widgets.
 NAV_GROUPS = {
-    '🌐 GLOBAL INTELLIGENCE': ['Global Capital Intelligence Network', 'Company Holdings Leadership', 'Company Financial Research', 'USA Company Financial KPI Intelligence', 'India Company Financial KPI Intelligence', 'India Fundamental Valuation'],
+    '🕸️ KNOWLEDGE GRAPH': ['Global Capital Intelligence Network'],
+    '🌐 GLOBAL INTELLIGENCE': ['Company Holdings Leadership'],
+    '💼 COMPANY FINANCIALS': ['Company Financial Research', 'USA Company Financial KPI Intelligence', 'India Company Financial KPI Intelligence', 'India Fundamental Valuation'],
     '🌎 COUNTRY ANALYSIS': ['Global Countries'],
     '💰 ASSET CLASS ANALYSIS': ['Global Asset Flow', 'USA Asset Flow', 'India Asset Flow'],
     '📊 SECTOR ANALYSIS': ['Global Sectors', 'USA Sector', 'India Sector'],
@@ -38,6 +40,18 @@ st.markdown("""<style>
 }
 [data-testid="stSidebar"] [data-testid="stButton"] button:hover {
   background:#213550; border-color:#385170; color:white;
+}
+/* Active route uses Streamlit's primary button type; never highlight inactive pages. */
+[data-testid="stSidebar"] [data-testid="stButton"] button[kind="primary"],
+[data-testid="stSidebar"] [data-testid="stButton"] button[data-testid="stBaseButton-primary"] {
+  background:linear-gradient(90deg,#145678,#1c3550)!important;
+  color:#fff!important; border:1px solid #4ac6ed!important;
+  box-shadow:inset 4px 0 #55d5ff,0 0 0 1px rgba(81,183,232,.15);
+  font-weight:750!important;
+}
+[data-testid="stSidebar"] [data-testid="stButton"] button[kind="secondary"] {
+  background:transparent!important; border:1px solid transparent!important;
+  color:#b9c8df!important; font-weight:450;
 }
 [data-testid="stSidebar"] details {border:0;}
 [data-testid="stSidebar"] details summary {font-size:0.81rem; font-weight:700; letter-spacing:0.025em;}

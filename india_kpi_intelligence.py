@@ -113,6 +113,107 @@ def load_reference(symbol):
             'loaded_utc': datetime.now(timezone.utc).isoformat()}
 
 
+def render_india_revenue_sankey(tables):
+    """Only reconcile one published annual P&L period. Residual is explicitly labelled."""
+    sales = aligned_annual(tables.get('Profit & Loss'), [r'^Sales\s*\+?$', r'^Revenue\s*\+?$'])
+    profit = aligned_annual(tables.get('Profit & Loss'), [r'^Net Profit\s*\+?$', r'^Net Profit After Tax$', r'^Profit After Tax$'])
+    operating = aligned_annual(tables.get('Profit & Loss'), [r'^Operating Profit\s*\+?$'])
+    common = [date for date in sales.index if date in profit.index]
+    common = [date for date in common if available(sales[date]) and available(profit[date])]
+    if not common:
+        st.info('Revenue-to-net-income flow unavailable: no aligned annual revenue and net profit.')
+        return
+    date = common[-1]
+    revenue, net = float(sales[date]), float(profit[date])
+    if not (revenue > 0 and 0 <= net <= revenue):
+        st.info('Net loss or non-reconciling financials: review the income statement; no false Sankey flows are drawn.')
+        return
+    if date in operating.index and available(operating[date]) and net <= float(operating[date]) <= revenue:
+        op = float(operating[date])
+        names = ['Revenue', 'Operating costs & adjustments (residual)', 'Operating profit',
+                 'Other items & taxes (residual)', 'Net profit']
+        src, dst, vals = [0,0,2,2], [1,2,3,4], [revenue-op,op,op-net,net]
+    else:
+        names = ['Revenue','Costs, taxes & adjustments (residual)','Net profit']
+        src, dst, vals = [0,0], [1,2], [revenue-net,net]
+    fig = go.Figure(go.Sankey(arrangement='snap',
+       node=dict(label=names, pad=24, thickness=18,
+                 color=['#2e82b7' if n in ('Revenue','Operating profit') else '#25a77e' if n == 'Net profit' else '#b86a79' for n in names]),
+       link=dict(source=src,target=dst,value=vals,color='rgba(81,183,232,.32)')))
+    fig.update_layout(title=f'Revenue → Net Profit · {date} · ₹ crore',
+        paper_bgcolor='#142137',plot_bgcolor='#142137',font=dict(color='#e7eef9'),
+        height=390,margin=dict(l=15,r=15,t=55,b=15))
+    st.plotly_chart(fig,use_container_width=True)
+    st.caption('Residuals are mathematical differences from reported totals, not independently reported expense categories.')
+
+
+def render_nse_peer_fallback(symbol):
+    """Constituent peer context when Screener does not publish an accessible peer table.
+
+    A shared NSE sector index is *not* Screener's published peer set.
+    """
+    membership = _read(HOLDINGS, 'constituents.csv')
+    if membership.empty or not {'symbol','category','index_name','company_key'}.issubset(membership):
+        st.info('No Screener peer table was available and no saved NSE peer memberships were found.')
+        return
+    matched = membership[(membership['symbol'].str.upper() == symbol) &
+        membership['category'].isin(['Sector','Thematic'])]
+    if matched.empty:
+        st.info('Screener peer data is unavailable. This security has no matching saved NSE sector/thematic index.')
+        return
+    same = membership[(membership['index_name'].isin(set(matched['index_name']))) &
+        (membership['category'].isin(['Sector','Thematic']))].drop_duplicates('company_key')
+    cached_financials = _read(Path(__file__).resolve().parent/'data'/'india_financials',
+                              'company_financial_summary.csv')
+    fields=['company_key','symbol','company_name']
+    view=same[fields].copy()
+    view.columns=['company_key','Symbol','Company']
+    if not cached_financials.empty and 'company_key' in cached_financials:
+        cols=['company_key']+[k for k in ['pe','pb','market_cap','roe','revenue_yoy','retrieved_utc'] if k in cached_financials]
+        view=view.merge(cached_financials[cols].drop_duplicates('company_key'),on='company_key',how='left')
+    view=view.drop(columns=['company_key']).sort_values('Symbol')
+    st.warning('Screener peer comparison was not included in the accessible response. '
+               'Displaying **alternative NSE shared-sector constituents**, not Screener peer rankings.')
+    st.caption('Shared NSE indices: '+', '.join(sorted(matched['index_name'].unique())))
+    st.dataframe(view, use_container_width=True, hide_index=True, height=380)
+    st.download_button('Export NSE shared-sector context', view.to_csv(index=False).encode('utf-8'),
+                       file_name=f'{symbol}_nse_shared_sector_context.csv',mime='text/csv')
+
+
+def render_india_sources(cached, tables, selected, provenance, symbol):
+    """Show actual provider coverage without mistaking HTTP success for usable financial data."""
+    st.markdown('#### Source coverage and retrieval diagnostics')
+    name_map = [('NSE quote', cached.get('nse', {})), ('Screener consolidated', cached.get('screener', {})),
+                ('Yahoo market financials', cached.get('yahoo', {}))]
+    results=[]
+    for name, response in name_map:
+        fields = response.get('quote_fields', {}) if isinstance(response,dict) else {}
+        is_screener=name.startswith('Screener')
+        n_tables=len(tables) if is_screener else 0
+        numeric=sum(available(v) for v in fields.values()) if isinstance(fields,dict) else 0
+        results.append({'Provider':name,'Response received':bool(response),
+                        'Statement tables':n_tables,'Usable numeric quote fields':numeric,
+                        'Status':'Usable data' if (n_tables or numeric) else 'Missing / unverified'})
+    st.dataframe(pd.DataFrame(results),use_container_width=True,hide_index=True)
+    st.markdown('#### Consolidated statement availability')
+    expected=['Quarterly Results','Profit & Loss','Balance Sheet','Cash Flows','Ratios','Shareholding Pattern','Peer Comparison']
+    st.dataframe(pd.DataFrame([{'Table':name,'Available':isinstance(tables.get(name),pd.DataFrame) and not tables[name].empty,
+            'Rows':len(tables[name]) if isinstance(tables.get(name),pd.DataFrame) else 0}
+            for name in expected]),use_container_width=True,hide_index=True)
+    st.markdown('#### Metric sources')
+    st.dataframe(pd.DataFrame([{'Metric':key.replace('_',' ').title(),'Value':number(v,'crore' if key=='market_cap_cr' else 'number'),
+        'Selected source':provenance.get(key,'Unknown')} for key,v in selected.items()]),use_container_width=True,hide_index=True)
+    if cached.get('errors'):
+        with st.expander(f"Provider errors ({len(cached['errors'])})",expanded=False):
+            for error in cached['errors']:
+                st.warning(error)
+    else:
+        st.success('No provider exceptions were recorded. Missing tables may still reflect restricted or incomplete source data.')
+    st.caption('Financial statements and market prices can have different dates and scopes. Source availability does not guarantee complete coverage.')
+    st.link_button('↗ Screener consolidated report',company_url(symbol))
+    st.link_button('↗ Yahoo financials',f'https://finance.yahoo.com/quote/{symbol}.NS/financials/')
+
+
 def tile_group(title, entries):
     st.markdown(f'<div class="ik-section">{escape(title)}</div>', unsafe_allow_html=True)
     for start in range(0, len(entries), 5):
@@ -234,6 +335,8 @@ def render_india_kpi_intelligence():
             ('Cash from operations',raw_cfo,'crore','Screener · annual'),
             ('FCF proxy',fcf,'crore','Screener · CFO minus verified capex'),
             ('Market price',selected['price'],'inr',provenance.get('price','N/A'))])
+        st.markdown('#### Revenue → Net Income')
+        render_india_revenue_sankey(tables)
         tile_group('Market snapshot', [entry('Market capitalization','market_cap_cr','crore'),
                                        entry('P/E','trailing_pe','ratio'),entry('P/B','price_to_book','ratio'),
                                        entry('Dividend yield','dividend_pct','pct'), entry('ROE','roe_pct','pct')])
@@ -288,21 +391,7 @@ def render_india_kpi_intelligence():
     with tabs[5]:
         render_screener_trends(tables)
     with tabs[6]:
-        st.markdown('#### Metric provenance')
-        st.dataframe(pd.DataFrame([{'Metric': k.replace('_',' ').title(),
-            'Value':number(v,'crore' if k=='market_cap_cr' else 'number'),
-            'Provider':provenance.get(k,'N/A'), 'Status':assessment['missing'].get(k,'Available')}
-            for k,v in selected.items()]),use_container_width=True,hide_index=True)
-        st.markdown('#### Provider status')
-        for source, ok in [('NSE quote',bool(cached['nse'])),
-                           ('Screener consolidated',bool(tables)),('Yahoo market financials',bool(cached['yahoo']))]:
-            st.write(('✅ ' if ok else '⚠️ ')+source)
-        for error in cached['errors']:
-            st.caption(error)
-        st.link_button('↗ Screener consolidated financial statements',company_url(symbol))
-        st.link_button('↗ Yahoo .NS financials',f'https://finance.yahoo.com/quote/{symbol}.NS/financials/')
-        st.caption('Provider access and data terms apply. No bypass of website restrictions. '
-                   'This page is a reference-style KPI viewer; differences in consolidated/standalone scope and fiscal dates are not reconciled automatically.')
+        render_india_sources(cached,tables,selected,provenance,symbol)
 
 
     # All Screener tables are taken from the same previously fetched
@@ -318,7 +407,7 @@ def render_india_kpi_intelligence():
         ('Profit & Loss', 'Profit & Loss', True),
         ('Balance Sheet', 'Balance Sheet', True),
         ('Cash Flows', 'Cash Flow', True),
-        ('Ratios', 'Ratios', True),
+        ('Ratios', 'Financial Ratios & Efficiency', True),
         ('Shareholding Pattern', 'Shareholding Pattern', False),
     ]
     # Additional yearly shareholding tables are included if published.
@@ -341,8 +430,11 @@ def render_india_kpi_intelligence():
             # Peer tables have company rows and mixed units; ownership tables have %.
             report = prepare_source_table(raw, periods=count, financial=is_financial)
             if report.empty:
-                st.info(f'{label} is not available in the accessible consolidated '
-                        'Screener response for this company. This does not imply zero.')
+                if source_key == 'Peer Comparison':
+                    render_nse_peer_fallback(symbol)
+                else:
+                    st.info(f'{label} is not available in the accessible consolidated '
+                            'Screener response for this company. This does not imply zero.')
             else:
                 if is_financial:
                     st.caption('Reported period columns · ₹ crore except per-share or % rows.')

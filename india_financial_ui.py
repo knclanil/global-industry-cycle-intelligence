@@ -75,7 +75,7 @@ def _aggregation_table(frame: pd.DataFrame, records: pd.DataFrame, group_type: s
         return
     rename = {
         'group_name':'Index / factor family', 'parent_universe':'Parent',
-        'constituents':'NSE constituents', 'companies_with_snapshots':'Yahoo snapshots',
+        'constituents':'NSE constituents', 'companies_with_snapshots':'Financial snapshots',
         'annual_income_coverage':'Annual income', 'annual_balance_coverage':'Balance sheets',
         'annual_cashflow_coverage':'Cash flows', 'price_coverage':'Market quotes',
         'pct_with_income':'Revenue coverage %',
@@ -85,11 +85,12 @@ def _aggregation_table(frame: pd.DataFrame, records: pd.DataFrame, group_type: s
         'median_fcf_yield':'Median FCF yield',
     }
     view = view.rename(columns=rename)
-    measure_cols = ['Index / factor family','Parent','NSE constituents','Yahoo snapshots','Annual income',
+    measure_cols = ['Index / factor family','Parent','NSE constituents','Financial snapshots','Annual income',
                     'Balance sheets','Cash flows','Market quotes','Revenue coverage %',
                     'Median sales YoY','Median operating margin','Median net margin',
                     'Median ROE','Median FCF margin','Median P/E','Median FCF yield']
     for col in measure_cols[2:]:
+        if col not in view: view[col] = pd.NA
         view[col] = pd.to_numeric(view[col], errors='coerce')
     for col in ('Median sales YoY','Median operating margin','Median net margin',
                 'Median ROE','Median FCF margin','Median FCF yield'):
@@ -129,14 +130,19 @@ def _group_company_detail(memberships: pd.DataFrame, company_fin: pd.DataFrame, 
         selection = memberships[memberships[label_key] == name]
     unique = selection.drop_duplicates('company_key')
     if company_fin.empty or 'company_key' not in company_fin:
-        st.info(f'{len(unique)} NSE companies are members; Yahoo financial snapshots are not cached yet.')
+        st.info(f'{len(unique)} NSE companies are members. No verified cached financial statements are available yet. '
+                'Run the financial refresh workflow or research these companies individually from India Company Financial KPI Intelligence.')
+        st.dataframe(unique[[c for c in ('company_name','symbol','isin') if c in unique]],
+                     hide_index=True,use_container_width=True)
         return
     merged = unique[['company_key', 'company_name', 'symbol', 'isin']].merge(company_fin, how='left', on='company_key', suffixes=('', '_y'))
+    for col in ('financial_period','revenue_yoy','operating_margin','net_margin','roe','fcf_margin','pe','retrieved_utc'):
+        if col not in merged: merged[col] = pd.NA
     display = merged[['company_name','symbol','isin','financial_period','revenue_yoy',
                       'operating_margin','net_margin','roe','fcf_margin','pe','retrieved_utc']].copy()
     display.columns = ['Company','NSE Symbol','ISIN','Fiscal period','Revenue YoY','Operating margin',
                        'Net margin','ROE','FCF margin','P/E','Yahoo snapshot UTC']
-    st.caption(f'{len(unique):,} verified NSE members · {merged["financial_period"].replace("", pd.NA).notna().sum():,} with annual financial periods.')
+    st.caption(f'{len(unique):,} verified NSE members · {merged["financial_period"].replace("", pd.NA).notna().sum():,} with annual financial periods. Source may be Yahoo cached snapshots or Screener session research; provider coverage is not inferred.')
     st.dataframe(display, hide_index=True, use_container_width=True, height=365)
     st.download_button('⬇ Download group constituents and KPIs', display.to_csv(index=False).encode('utf-8'),
                        file_name='india_group_constituent_financials.csv', mime='text/csv')
@@ -189,11 +195,20 @@ def _factor_sector_heatmap(memberships: pd.DataFrame, summary: pd.DataFrame):
 def render_india_sector_factor_financials():
     _style()
     _header('INDIA · NSE HOLDINGS × FINANCIALS', 'India Sector & Factor Financial Analysis',
-            '31 NSE indices · unique constituents · Yahoo company financials · descriptive group medians, not index returns or rankings')
+            '31 NSE indices · verified constituents · available company financials · descriptive unweighted medians')
     memberships = _read(HOLDINGS, 'constituents.csv')
     aggregates = _read(DATA, 'index_financial_summary.csv')
     financials = _read(DATA, 'company_financial_summary.csv')
     companies = _read(HOLDINGS, 'companies.csv')
+    from india_live_coverage import collect_snapshots, build_groups, merge_session_research
+    if financials.empty and not companies.empty:
+        financials = collect_snapshots(memberships, companies, DATA)
+    financials = merge_session_research(financials, companies,
+        st.session_state.get("india_kpi_reference_results", {}))
+    # Always derive sector and factor aggregates from the SAME saved company
+    # financials currently being displayed; no stale precomputed table mismatch.
+    if not memberships.empty:
+        aggregates = build_groups(memberships, financials)
     if memberships.empty or companies.empty:
         st.warning('NSE constituent data is missing. Run India NSE Constituents Refresh and commit its generated files.')
         return
@@ -201,16 +216,16 @@ def render_india_sector_factor_financials():
     counts = st.columns(4)
     counts[0].metric('NSE securities', len(companies))
     counts[1].metric('Verified index memberships', len(memberships))
-    counts[2].metric('Yahoo company snapshots', count_fin)
+    counts[2].metric('Verified company snapshots', count_fin)
     counts[3].metric('Annual income statements', int((financials['income_period'] != '').sum()) if 'income_period' in financials else 0)
     st.markdown('<div class="ifr-callout">NSE index membership does not provide an allocation weight. '
         'Sector and factor measures below are unweighted company medians, never weighted index fundamentals. '
         'Factor families merge duplicate company memberships across their different Nifty parent universes.</div>',
         unsafe_allow_html=True)
-    if aggregates.empty or 'group_type' not in aggregates:
-        st.warning('Financial group data has not been built. Run **GitHub Actions → India Company Financials Refresh**, '
-                   'or `python scripts/refresh_india_financials.py --rebuild-only` after downloading NSE constituents.')
-        return
+    if financials.empty:
+        st.warning('NSE memberships are available, but no verified company financial snapshots were found. '
+                   'Run **India Company Financials Refresh**; until then all financial medians are unavailable. '
+                   'Membership-based index and overlap analysis will still render.')
     tabs = st.tabs(['Sector & thematic', 'Factor families', 'All source indices', 'Sector × factor matrix', 'Coverage & diagnostics'])
     with tabs[0]:
         names = set(memberships.loc[memberships['category'].isin(['Sector','Thematic']),'index_slug'])
@@ -245,4 +260,8 @@ def render_india_sector_factor_financials():
                     'Yahoo Finance via yfinance: annual/quarterly company statements and cached price reference. '
                     'Screener.in: direct consolidated report for independent research, not scraped or republished. '
                     'Unpublished constituent weights remain unknown. Company financials may be standalone or consolidated depending on Yahoo; scope is not assumed.')
-        st.caption('GitHub Actions can refresh the full NSE universe (no 25-company limit). For individual company research, use India Company Financial KPI Intelligence.')
+        st.markdown('#### Data completeness by index')
+        if not aggregates.empty:
+            fields=['group_name','constituents','companies_with_snapshots','annual_income_coverage','annual_balance_coverage','annual_cashflow_coverage','price_coverage']
+            st.dataframe(aggregates[[c for c in fields if c in aggregates]],use_container_width=True,hide_index=True)
+        st.caption('Missing company figures remain unavailable and never contribute to a median. Financial estimates are not holdings-weighted.')
