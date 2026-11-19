@@ -9,3 +9,4 @@ openpyxl>=3.1
 networkx>=3.2,<4
 
 pyarrow>=17,<25
+lxml>=5,<7
