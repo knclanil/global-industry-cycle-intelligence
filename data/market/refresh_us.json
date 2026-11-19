@@ -1,6 +1,6 @@
 {
   "region": "us",
-  "refreshed_utc": "2026-11-18T17:43:06.483399+00:00",
+  "refreshed_utc": "2026-11-19T07:43:54.436280+00:00",
   "markets": {
     "USA": {
       "status": "OK",
@@ -20,7 +20,7 @@
       ],
       "unchanged": [],
       "unavailable_this_run": [],
-      "request_start": "2021-11-14",
+      "request_start": "2026-11-08",
       "latest_dates": {
         "XLC": "2026-11-18",
         "XLY": "2026-11-18",
@@ -53,7 +53,7 @@
       ],
       "unchanged": [],
       "unavailable_this_run": [],
-      "request_start": "2021-11-14",
+      "request_start": "2026-11-08",
       "latest_dates": {
         "IXN": "2026-11-18",
         "IXG": "2026-11-18",
@@ -95,7 +95,7 @@
       ],
       "unchanged": [],
       "unavailable_this_run": [],
-      "request_start": "2021-11-14",
+      "request_start": "2026-11-08",
       "latest_dates": {
         "SPY": "2026-11-18",
         "INDA": "2026-11-18",
@@ -135,7 +135,7 @@
         "IWVL",
         "ISZE"
       ],
-      "request_start": "2021-11-14",
+      "request_start": "2021-11-15",
       "latest_dates": {
         "IWVL": null,
         "IWFG": "2026-11-18",
@@ -161,7 +161,7 @@
       ],
       "unchanged": [],
       "unavailable_this_run": [],
-      "request_start": "2021-11-14",
+      "request_start": "2026-11-08",
       "latest_dates": {
         "IVE": "2026-11-18",
         "IVW": "2026-11-18",
@@ -189,7 +189,7 @@
       ],
       "unchanged": [],
       "unavailable_this_run": [],
-      "request_start": "2021-11-14",
+      "request_start": "2026-11-08",
       "latest_dates": {
         "VT": "2026-11-18",
         "BNDX": "2026-11-18",
@@ -219,7 +219,7 @@
       ],
       "unchanged": [],
       "unavailable_this_run": [],
-      "request_start": "2021-11-14",
+      "request_start": "2026-11-08",
       "latest_dates": {
         "VTI": "2026-11-18",
         "IEF": "2026-11-18",
