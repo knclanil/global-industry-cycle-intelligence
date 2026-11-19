@@ -13,6 +13,7 @@ def test_group_order_and_all_pages():
         '📊 SECTOR ANALYSIS', '🧩 FACTOR ANALYSIS', '📚 DATA & RESEARCH'
     ]
     pages = [page for items in groups.values() for page in items]
-    assert len(pages) == len(set(pages)) == 19
+    assert len(pages) == len(set(pages)) == 20
+    assert 'India Overlap & Leadership' in pages
     assert 'Factor Holdings Comparison' not in pages
     assert pages[-2:] == ['Data Table', 'Wiki']

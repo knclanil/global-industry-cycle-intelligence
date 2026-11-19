@@ -48,3 +48,21 @@ successful collections record index-specific additions, removals, ticker
 changes, and published constituent weight changes, when verifiable.
 Failed/suspicious sources retain prior data, never triggering false removals.
 See `INDIA_CONSTITUENTS_GUIDE.md` for details, date semantics, and safeguards.
+
+## India Sector × Factor Overlap & Leadership (membership-only)
+
+After an NSE constituent refresh, the workflow runs
+`python scripts/build_india_overlap_rankings.py` and commits:
+
+- `leadership_companies.csv` — separate Factor, Sector and Combined membership scores/ranks.
+- `factor_index_overlaps.csv` — same-family pairwise company overlaps.
+- `factor_membership_patterns.csv` — exact source-index patterns per factor family.
+- `sector_factor_overlaps.csv` — unique-company count for sector index × factor family.
+- `leadership_build_summary.json` — coverage and score version.
+
+Missing a factor index is **not** a negative point: verified parent-universe
+eligibility isn't in these 31 CSVs. Missing published constituent weight is
+unknown, not zero. Equal Weight Strategy is listed but excluded from Factor
+scoring. All outputs use the original ISIN-based `company_key` derived from
+verified NSE constituents. Financial KPIs are separate and have no influence
+on the membership score.

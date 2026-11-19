@@ -33,6 +33,8 @@ jobs:
           NSE_REQUEST_USER_AGENT: ${{ vars.NSE_REQUEST_USER_AGENT }}
         run: |
           python scripts/refresh_india_constituents.py --from-dir data/india_holdings/manual --require-data
+      - name: Compute India sector-factor overlaps and membership rankings
+        run: python scripts/build_india_overlap_rankings.py
       - name: Write job summary
         if: always()
         run: |
@@ -42,8 +44,14 @@ jobs:
             cat data/india_holdings/build_summary.json >> "$GITHUB_STEP_SUMMARY"
             echo '```' >> "$GITHUB_STEP_SUMMARY"
           fi
-      - name: Commit constituent snapshots, changes, and diagnostics
-        if: always()
+          if [ -f data/india_holdings/leadership_build_summary.json ]; then
+            echo '## India NSE membership-based rankings' >> "$GITHUB_STEP_SUMMARY"
+            echo '```json' >> "$GITHUB_STEP_SUMMARY"
+            cat data/india_holdings/leadership_build_summary.json >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Commit verified NSE snapshots, overlaps, rankings and diagnostics
+        if: success()
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'

@@ -195,3 +195,16 @@ Two **additional** India pages are available (USA Company Financial Research and
 The original **India Sector & Factor Holdings** continues collecting/tracking 31 NSE constituent CSV sources. To populate the financial pages, first run **India NSE Constituents Refresh**, then **India Company Financials Refresh** in GitHub Actions. The latter processes 25 symbols per batch by default. These financial pages make no external requests while loading; they read persisted snapshots. **No ranking function or inferred holding weights** are included.
 
 Read **[`INDIA_FINANCIAL_ANALYSIS_GUIDE.md`](INDIA_FINANCIAL_ANALYSIS_GUIDE.md)** before deploying to a public app: Yahoo Finance/yfinance and Screener.in have data-access and redistribution restrictions, and their data must not be republished without appropriate rights. Screener pages are linked only; they are not scraped.
+
+
+## India Sector × Factor Overlap & Membership Rankings
+
+Open **Factor Analysis → India Overlap & Leadership** to inspect source-backed
+factor confirmations, exact factor index intersection patterns, sector/factor
+heatmaps, and three *membership-only* research rankings (Factor, Sector and
+Combined). These are **not** financial quality or valuation rankings and do
+not use missing constituent weights as zeros.
+
+The NSE constituents GitHub Actions job also invokes
+`python scripts/build_india_overlap_rankings.py`, which prepares compact data
+exports for fast Streamlit loading. See `INDIA_OVERLAP_LEADERSHIP_GUIDE.md`.

@@ -9,11 +9,11 @@ st.markdown("""<style>.stApp{background:#0b1220;color:#e7eef9}
 # Grouped sidebar navigation. The selected page is stored in session state so
 # changing groups does not reset the current dashboard's other widgets.
 NAV_GROUPS = {
-    '🌐 GLOBAL INTELLIGENCE': ['Global Capital Intelligence Network', 'Company Holdings Leadership', 'Company Financial Research', 'Company Financial KPIs'],
+    '🌐 GLOBAL INTELLIGENCE': ['Global Capital Intelligence Network', 'Company Holdings Leadership', 'Company Financial Research', 'Company Financial KPIs', 'India Company Financial KPIs'],
     '🌎 COUNTRY ANALYSIS': ['Global Countries'],
     '💰 ASSET CLASS ANALYSIS': ['Global Asset Flow', 'USA Asset Flow', 'India Asset Flow'],
     '📊 SECTOR ANALYSIS': ['Global Sectors', 'USA Sector', 'India Sector'],
-    '🧩 FACTOR ANALYSIS': ['Global Factors', 'USA Factors', 'India Factors', 'India Sector & Factor Holdings'],
+    '🧩 FACTOR ANALYSIS': ['Global Factors', 'USA Factors', 'India Factors', 'India Sector & Factor Holdings', 'India Overlap & Leadership', 'India Sector & Factor Financials'],
     '📚 DATA & RESEARCH': ['Data Table', 'Wiki'],
 }
 PAGE_ICONS = {
@@ -21,8 +21,8 @@ PAGE_ICONS = {
     'Global Countries': '🌎',
     'Global Asset Flow': '🌍', 'USA Asset Flow': '🇺🇸', 'India Asset Flow': '🇮🇳',
     'Global Sectors': '🌍', 'USA Sector': '🇺🇸', 'India Sector': '🇮🇳',
-    'Global Factors': '🌍', 'USA Factors': '🇺🇸', 'India Factors': '🇮🇳', 'India Sector & Factor Holdings': '🇮🇳',
-    'Company Holdings Leadership': '🏆', 'Company Financial Research': '📑', 'Company Financial KPIs': '📊', 'Data Table': '🗂️', 'Wiki': '📖',
+    'Global Factors': '🌍', 'USA Factors': '🇺🇸', 'India Factors': '🇮🇳', 'India Sector & Factor Holdings': '🇮🇳', 'India Overlap & Leadership': '🏆', 'India Sector & Factor Financials': '📈',
+    'Company Holdings Leadership': '🏆', 'Company Financial Research': '📑', 'Company Financial KPIs': '📊', 'India Company Financial KPIs': '🇮🇳', 'Data Table': '🗂️', 'Wiki': '📖',
 }
 ALL_PAGES = [item for items in NAV_GROUPS.values() for item in items]
 if st.session_state.get('selected_page') not in ALL_PAGES:
@@ -73,6 +73,15 @@ elif page == 'Company Financial Research':
 elif page == 'Company Financial KPIs':
     from company_kpi_metrics import render_company_kpi_metrics
     render_company_kpi_metrics()
+elif page == 'India Company Financial KPIs':
+    from india_financial_ui import render_india_company_kpis
+    render_india_company_kpis()
+elif page == 'India Sector & Factor Financials':
+    from india_financial_ui import render_india_sector_factor_financials
+    render_india_sector_factor_financials()
+elif page == 'India Overlap & Leadership':
+    from india_rankings_ui import render_india_overlap_leadership
+    render_india_overlap_leadership()
 elif page == 'India Sector & Factor Holdings':
     from india_constituents_ui import render_india_constituents
     render_india_constituents()
@@ -80,9 +89,9 @@ elif page == 'Data Table':
     from data_table import render_data_table
     render_data_table()
 elif page == 'Wiki':
-    region=st.radio('Documentation for', ['Global Sectors', 'Global Countries', 'Global Factors', 'Global Asset Flow', 'USA Sector', 'USA Factors', 'USA Asset Flow', 'India Sector', 'India Factors', 'India Asset Flow', 'Company Holdings Leadership'], horizontal=True)
+    region=st.radio('Documentation for', ['Global Sectors', 'Global Countries', 'Global Factors', 'Global Asset Flow', 'USA Sector', 'USA Factors', 'USA Asset Flow', 'India Sector', 'India Factors', 'India Asset Flow', 'Company Holdings Leadership', 'India Sector & Factor Holdings', 'India Overlap & Leadership', 'India Sector & Factor Financials', 'India Company Financial KPIs'], horizontal=True)
     st.title(f'{region} Wiki')
-    filename = {'India Sector': 'INDIA_WIKI.md', 'Global Sectors': 'GLOBAL_WIKI.md', 'Global Countries': 'COUNTRIES_WIKI.md', 'Global Factors': 'GLOBAL_FACTORS_WIKI.md', 'USA Factors': 'USA_FACTORS_WIKI.md', 'India Factors': 'INDIA_FACTORS_WIKI.md', 'Global Asset Flow': 'GLOBAL_ASSET_WIKI.md', 'USA Asset Flow': 'USA_ASSET_WIKI.md', 'India Asset Flow': 'INDIA_ASSET_WIKI.md', 'Company Holdings Leadership': 'HOLDINGS_LEADERSHIP_WIKI.md'}.get(region, 'WIKI.md')
+    filename = {'India Sector': 'INDIA_WIKI.md', 'Global Sectors': 'GLOBAL_WIKI.md', 'Global Countries': 'COUNTRIES_WIKI.md', 'Global Factors': 'GLOBAL_FACTORS_WIKI.md', 'USA Factors': 'USA_FACTORS_WIKI.md', 'India Factors': 'INDIA_FACTORS_WIKI.md', 'Global Asset Flow': 'GLOBAL_ASSET_WIKI.md', 'USA Asset Flow': 'USA_ASSET_WIKI.md', 'India Asset Flow': 'INDIA_ASSET_WIKI.md', 'Company Holdings Leadership': 'HOLDINGS_LEADERSHIP_WIKI.md', 'India Sector & Factor Holdings': 'INDIA_CONSTITUENTS_GUIDE.md', 'India Overlap & Leadership': 'INDIA_OVERLAP_LEADERSHIP_GUIDE.md', 'India Sector & Factor Financials': 'INDIA_FINANCIAL_ANALYSIS_GUIDE.md', 'India Company Financial KPIs': 'INDIA_FINANCIAL_ANALYSIS_GUIDE.md'}.get(region, 'WIKI.md')
     path=Path(__file__).resolve().parent / filename
     if path.is_file():
         st.markdown(path.read_text(encoding='utf-8'))
