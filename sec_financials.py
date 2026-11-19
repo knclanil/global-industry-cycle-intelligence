@@ -12,16 +12,22 @@ from pathlib import Path
 import pandas as pd
 import requests
 
-CACHE = Path('data/sec_cache')
+ROOT = Path(__file__).resolve().parent
+CACHE = ROOT / 'data' / 'sec_cache'
+FUNDAMENTALS = ROOT / 'data' / 'fundamentals'
 BASE = 'https://data.sec.gov/api/xbrl/companyfacts/CIK{cik:010d}.json'
 TICKERS = 'https://www.sec.gov/files/company_tickers.json'
+
 def _user_agent():
     agent = os.getenv('SEC_USER_AGENT', '').strip()
     if agent:
         return agent
     try:
         import streamlit as st
-        return str(st.secrets.get('SEC_USER_AGENT', '')).strip()
+        agent = str(st.secrets.get('SEC_USER_AGENT', '')).strip()
+        if agent:
+            return agent
+        return str(st.secrets.get('sec', {}).get('user_agent', '')).strip()
     except Exception:
         return ''
 
@@ -87,35 +93,64 @@ STATEMENTS = {
  'Cash Flow':['Operating cash flow','Capital expenditures','Free cash flow','Investing cash flow','Financing cash flow','Dividends paid','Share repurchases'],
 }
 
+def _read_json(path):
+    try:
+        return json.loads(path.read_text(encoding='utf-8'))
+    except (OSError, ValueError) as exc:
+        raise RuntimeError(f'Invalid cached SEC file {path}: {exc}') from exc
+
+
 def _get(url, cache_file):
-    if cache_file.exists() and time.time()-cache_file.stat().st_mtime < MAX_AGE:
-        return json.loads(cache_file.read_text(encoding='utf-8'))
-    user_agent = _user_agent()
-    if not user_agent or '@' not in user_agent:
-        if cache_file.exists():
-            return json.loads(cache_file.read_text(encoding='utf-8'))
-        raise RuntimeError('Set SEC_USER_AGENT to a descriptive organization/contact email in Streamlit secrets or environment.')
-    cache_file.parent.mkdir(parents=True,exist_ok=True)
-    response=requests.get(url,headers={'User-Agent':user_agent,'Accept-Encoding':'gzip, deflate','Host':'data.sec.gov' if 'data.sec.gov' in url else 'www.sec.gov'},timeout=35)
-    response.raise_for_status()
-    data=response.json()
-    tmp=cache_file.with_suffix('.tmp')
-    tmp.write_text(json.dumps(data),encoding='utf-8')
-    tmp.replace(cache_file)
-    return data
+    # The Streamlit page must never depend on SEC network access.
+    if cache_file.exists():
+        return _read_json(cache_file)
+    raise RuntimeError(
+        'SEC financial data is not cached for this company. '
+        'Run the SEC fundamentals GitHub Actions workflow, then redeploy. '
+        'The Streamlit viewer intentionally makes no live SEC requests.'
+    )
+
+
+def _directory():
+    for path in (FUNDAMENTALS / 'sec_company_directory.json',
+                 CACHE / 'company_tickers.json'):
+        if path.exists():
+            raw = _read_json(path)
+            if isinstance(raw, list):
+                return raw
+            if isinstance(raw, dict):
+                return list(raw.values())
+    raise RuntimeError(
+        'SEC company directory is not cached. Run the SEC fundamentals '
+        'GitHub Actions workflow and commit data/fundamentals/sec_company_directory.json.'
+    )
+
 
 def resolve_cik(ticker):
-    ticker=str(ticker).strip().upper().replace('.','-')
-    registry=_get(TICKERS,CACHE/'company_tickers.json')
-    for item in registry.values():
-        if str(item.get('ticker','')).upper().replace('.','-')==ticker:
-            return int(item['cik_str']),item.get('title',ticker)
-    return None,None
+    ticker = str(ticker).strip().upper().replace('.', '-')
+    matches = [item for item in _directory()
+               if str(item.get('ticker', '')).upper().replace('.', '-') == ticker]
+    if len(matches) == 1:
+        item = matches[0]
+        return int(item['cik_str']), item.get('title', ticker)
+    if len(matches) > 1:
+        raise ValueError(f'Ambiguous SEC CIK mapping for {ticker}.')
+    return None, None
+
 
 def load_company(ticker):
-    cik,name=resolve_cik(ticker)
-    if cik is None: raise ValueError(f'No SEC CIK match for {ticker}; SEC coverage may be unavailable.')
-    return _get(BASE.format(cik=cik),CACHE/f'CIK{cik:010d}.json'),cik,name
+    cik, name = resolve_cik(ticker)
+    if cik is None:
+        raise ValueError(f'No SEC CIK match for {ticker}; SEC coverage may be unavailable.')
+    # Reuse the existing background fundamentals pipeline output first.
+    for path in (FUNDAMENTALS / f'facts_{cik:010d}.json',
+                 CACHE / f'CIK{cik:010d}.json'):
+        if path.exists():
+            return _read_json(path), cik, name
+    raise RuntimeError(
+        f'No cached SEC Company Facts for {ticker} (CIK {cik:010d}). '
+        'Run the SEC fundamentals GitHub Actions workflow to collect this issuer.'
+    )
 
 def _facts(data, label, cadence='annual'):
     """Select a consistent fiscal-period fact, not the first tag with any history.
