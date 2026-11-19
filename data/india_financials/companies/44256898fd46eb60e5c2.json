@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "company_key": "ISIN:INE463V01026",
+  "symbol": "ANANDRATHI",
+  "company_name": "Anand Rathi Wealth Ltd.",
+  "isin": "INE463V01026",
+  "industry": "Financial Services",
+  "sector": "Financial Services",
+  "yahoo_ticker": "ANANDRATHI.NS",
+  "currency": "INR",
+  "quote": {
+    "price": 2369.6,
+    "market_cap": 393451405312.0,
+    "shares_outstanding": 166041268.0,
+    "currency": "INR",
+    "asof_utc": "2026-11-19T20:52:04+00:00",
+    "provenance": "yahoo_finance_quote_snapshot"
+  },
+  "statements": {
+    "annual": {
+      "income": {
+        "2026-03-31": {
+          "ebitda": 5857779000.0
+        },
+        "2025-03-31": {
+          "ebitda": 4414287000.0
+        },
+        "2024-03-31": {
+          "ebitda": 3314342000.0
+        },
+        "2023-03-31": {
+          "ebitda": 2489330000.0
+        }
+      },
+      "balance": {
+        "2026-03-31": {
+          "goodwill": 24865000.0
+        },
+        "2025-03-31": {
+          "goodwill": 24865000.0
+        },
+        "2024-03-31": {
+          "goodwill": 29011000.0
+        },
+        "2023-03-31": {
+          "goodwill": 29011000.0
+        }
+      },
+      "cashflow": {}
+    },
+    "quarterly": {
+      "income": {
+        "2026-09-30": {
+          "ebitda": 1294612000.0
+        },
+        "2026-06-30": {
+          "ebitda": 2189283000.0
+        },
+        "2026-03-31": {
+          "ebitda": 1531890000.0
+        },
+        "2025-12-31": {
+          "ebitda": 1475356000.0
+        },
+        "2025-09-30": {
+          "ebitda": 1471566000.0
+        }
+      },
+      "balance": {
+        "2026-09-30": {
+          "goodwill": 24865000.0
+        },
+        "2026-03-31": {
+          "goodwill": 24865000.0
+        },
+        "2025-03-31": {
+          "goodwill": 24865000.0
+        }
+      },
+      "cashflow": {}
+    }
+  },
+  "retrieved_utc": "2026-11-19T20:52:04+00:00",
+  "source_urls": {
+    "yahoo": "https://finance.yahoo.com/quote/ANANDRATHI.NS/financials/",
+    "screener_consolidated_reference": "https://www.screener.in/company/ANANDRATHI/consolidated/",
+    "nse_membership": "https://www.niftyindices.com/"
+  },
+  "source_notes": [],
+  "statement_scope": "Yahoo Finance provider; consolidated/standalone scope NOT independently verified"
+}

@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "company_key": "ISIN:INE208C01025",
+  "symbol": "AEGISLOG",
+  "company_name": "Aegis Logistics Ltd.",
+  "isin": "INE208C01025",
+  "industry": "Oil Gas & Consumable Fuels",
+  "sector": "Energy",
+  "yahoo_ticker": "AEGISLOG.NS",
+  "currency": "INR",
+  "quote": {
+    "price": 1169.2,
+    "market_cap": 444209037312.0,
+    "shares_outstanding": 379925619.0,
+    "currency": "INR",
+    "asof_utc": "2026-11-19T20:51:38+00:00",
+    "provenance": "yahoo_finance_quote_snapshot"
+  },
+  "statements": {
+    "annual": {
+      "income": {
+        "2026-03-31": {
+          "ebitda": 17666431000.0
+        },
+        "2025-03-31": {
+          "ebitda": 12994479000.0
+        },
+        "2024-03-31": {
+          "ebitda": 11079487000.0
+        },
+        "2023-03-31": {
+          "ebitda": 8541628000.0
+        }
+      },
+      "balance": {
+        "2026-03-31": {
+          "goodwill": 148336000.0,
+          "inventory": 1285649000.0
+        },
+        "2025-03-31": {
+          "goodwill": 148336000.0,
+          "inventory": 1845090000.0
+        },
+        "2024-03-31": {
+          "goodwill": 148336000.0,
+          "inventory": 635823000.0
+        },
+        "2023-03-31": {
+          "goodwill": 148336000.0,
+          "inventory": 1474724000.0
+        }
+      },
+      "cashflow": {}
+    },
+    "quarterly": {
+      "income": {
+        "2026-09-30": {
+          "ebitda": 4774600000.0
+        },
+        "2026-06-30": {
+          "ebitda": 7669800000.0
+        },
+        "2026-03-31": {
+          "ebitda": 6588200000.0
+        },
+        "2025-12-31": {
+          "ebitda": 3250500000.0
+        },
+        "2025-09-30": {
+          "ebitda": 3345100000.0
+        }
+      },
+      "balance": {
+        "2026-09-30": {
+          "goodwill": 148300000.0,
+          "inventory": 4639900000.0
+        },
+        "2026-03-31": {
+          "goodwill": 148336000.0,
+          "inventory": 1285649000.0
+        },
+        "2025-09-30": {
+          "goodwill": 148300000.0,
+          "inventory": 1149500000.0
+        },
+        "2025-03-31": {
+          "goodwill": 148336000.0,
+          "inventory": 1845090000.0
+        }
+      },
+      "cashflow": {}
+    }
+  },
+  "retrieved_utc": "2026-11-19T20:51:38+00:00",
+  "source_urls": {
+    "yahoo": "https://finance.yahoo.com/quote/AEGISLOG.NS/financials/",
+    "screener_consolidated_reference": "https://www.screener.in/company/AEGISLOG/consolidated/",
+    "nse_membership": "https://www.niftyindices.com/"
+  },
+  "source_notes": [],
+  "statement_scope": "Yahoo Finance provider; consolidated/standalone scope NOT independently verified"
+}

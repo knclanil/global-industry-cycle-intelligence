@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "company_key": "ISIN:INE0INX01018",
+  "symbol": "AEGISVOPAK",
+  "company_name": "Aegis Vopak Terminals Ltd.",
+  "isin": "INE0INX01018",
+  "industry": "Oil Gas & Consumable Fuels",
+  "sector": "Energy",
+  "yahoo_ticker": "AEGISVOPAK.NS",
+  "currency": "INR",
+  "quote": {
+    "price": 284.65,
+    "market_cap": 315389804544.0,
+    "shares_outstanding": 1107991489.0,
+    "currency": "INR",
+    "asof_utc": "2026-11-19T20:51:41+00:00",
+    "provenance": "yahoo_finance_quote_snapshot"
+  },
+  "statements": {
+    "annual": {
+      "income": {
+        "2026-03-31": {
+          "ebitda": 7208342000.0
+        },
+        "2025-03-31": {
+          "ebitda": 6042987000.0
+        },
+        "2024-03-31": {
+          "ebitda": 4042750000.0
+        },
+        "2023-03-31": {
+          "ebitda": 2314050000.0
+        }
+      },
+      "balance": {
+        "2026-03-31": {
+          "goodwill": 135789000.0,
+          "inventory": 176019000.0
+        },
+        "2025-03-31": {
+          "goodwill": 135789000.0,
+          "inventory": 145161000.0
+        },
+        "2024-03-31": {
+          "goodwill": 135790000.0,
+          "inventory": 60260000.0
+        },
+        "2023-03-31": {
+          "goodwill": 135790000.0,
+          "inventory": 79800000.0
+        }
+      },
+      "cashflow": {}
+    },
+    "quarterly": {
+      "income": {
+        "2026-09-30": {
+          "ebitda": 1599043000.0
+        },
+        "2026-06-30": {
+          "ebitda": 1283220000.0
+        },
+        "2026-03-31": {
+          "ebitda": 1281555000.0
+        },
+        "2025-12-31": {
+          "ebitda": 986234000.0
+        },
+        "2025-09-30": {
+          "ebitda": 1359063000.0
+        }
+      },
+      "balance": {
+        "2026-09-30": {
+          "goodwill": 135789000.0,
+          "inventory": 152232000.0
+        },
+        "2026-03-31": {
+          "goodwill": 135789000.0,
+          "inventory": 176019000.0
+        },
+        "2025-09-30": {
+          "goodwill": 135789000.0,
+          "inventory": 113277000.0
+        },
+        "2025-03-31": {
+          "goodwill": 135789000.0,
+          "inventory": 145161000.0
+        }
+      },
+      "cashflow": {}
+    }
+  },
+  "retrieved_utc": "2026-11-19T20:51:41+00:00",
+  "source_urls": {
+    "yahoo": "https://finance.yahoo.com/quote/AEGISVOPAK.NS/financials/",
+    "screener_consolidated_reference": "https://www.screener.in/company/AEGISVOPAK/consolidated/",
+    "nse_membership": "https://www.niftyindices.com/"
+  },
+  "source_notes": [],
+  "statement_scope": "Yahoo Finance provider; consolidated/standalone scope NOT independently verified"
+}

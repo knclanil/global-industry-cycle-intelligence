@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "company_key": "ISIN:INE742F01042",
+  "symbol": "ADANIPORTS",
+  "company_name": "Adani Ports and Special Economic Zone Ltd.",
+  "isin": "INE742F01042",
+  "industry": "Services",
+  "sector": "Industrials",
+  "yahoo_ticker": "ADANIPORTS.NS",
+  "currency": "INR",
+  "quote": {
+    "price": 1917.1,
+    "market_cap": 4416919830528.0,
+    "shares_outstanding": 2303959098.0,
+    "currency": "INR",
+    "asof_utc": "2026-11-19T20:51:32+00:00",
+    "provenance": "yahoo_finance_quote_snapshot"
+  },
+  "statements": {
+    "annual": {
+      "income": {
+        "2026-03-31": {
+          "ebitda": 241173100000.0
+        },
+        "2025-03-31": {
+          "ebitda": 200952300000.0
+        },
+        "2024-03-31": {
+          "ebitda": 166937000000.0
+        },
+        "2023-03-31": {
+          "ebitda": 114686600000.0
+        }
+      },
+      "balance": {
+        "2026-03-31": {
+          "goodwill": 97358200000.0,
+          "inventory": 6850000000.0
+        },
+        "2025-03-31": {
+          "goodwill": 70935900000.0,
+          "inventory": 5218000000.0
+        },
+        "2024-03-31": {
+          "goodwill": 69069300000.0,
+          "inventory": 4375100000.0
+        },
+        "2023-03-31": {
+          "goodwill": 69074700000.0,
+          "inventory": 4519700000.0
+        }
+      },
+      "cashflow": {}
+    },
+    "quarterly": {
+      "income": {
+        "2026-09-30": {
+          "ebitda": 54994900000.0
+        },
+        "2026-06-30": {
+          "ebitda": 53020400000.0
+        },
+        "2026-03-31": {
+          "ebitda": 50764700000.0
+        },
+        "2025-12-31": {
+          "ebitda": 44463300000.0
+        },
+        "2025-06-30": {
+          "ebitda": 46302800000.0
+        }
+      },
+      "balance": {
+        "2026-09-30": {
+          "goodwill": 98130700000.0,
+          "inventory": 7887600000.0
+        },
+        "2026-03-31": {
+          "goodwill": 97358200000.0,
+          "inventory": 6850000000.0
+        },
+        "2025-03-31": {
+          "goodwill": 70935900000.0,
+          "inventory": 5218000000.0
+        }
+      },
+      "cashflow": {}
+    }
+  },
+  "retrieved_utc": "2026-11-19T20:51:32+00:00",
+  "source_urls": {
+    "yahoo": "https://finance.yahoo.com/quote/ADANIPORTS.NS/financials/",
+    "screener_consolidated_reference": "https://www.screener.in/company/ADANIPORTS/consolidated/",
+    "nse_membership": "https://www.niftyindices.com/"
+  },
+  "source_notes": [],
+  "statement_scope": "Yahoo Finance provider; consolidated/standalone scope NOT independently verified"
+}

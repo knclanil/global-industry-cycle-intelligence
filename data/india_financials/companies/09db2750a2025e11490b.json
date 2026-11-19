@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "company_key": "ISIN:INE031B01049",
+  "symbol": "AJANTPHARM",
+  "company_name": "Ajanta Pharmaceuticals Ltd.",
+  "isin": "INE031B01049",
+  "industry": "Healthcare",
+  "sector": "Healthcare",
+  "yahoo_ticker": "AJANTPHARM.NS",
+  "currency": "INR",
+  "quote": {
+    "price": 3270.3,
+    "market_cap": 408653496320.0,
+    "shares_outstanding": 124959024.0,
+    "currency": "INR",
+    "asof_utc": "2026-11-19T20:51:53+00:00",
+    "provenance": "yahoo_finance_quote_snapshot"
+  },
+  "statements": {
+    "annual": {
+      "income": {
+        "2026-03-31": {
+          "ebitda": 15669000000.0
+        },
+        "2025-03-31": {
+          "ebitda": 13540000000.0
+        },
+        "2024-03-31": {
+          "ebitda": 12565400000.0
+        },
+        "2023-03-31": {
+          "ebitda": 8818900000.0
+        }
+      },
+      "balance": {
+        "2026-03-31": {
+          "inventory": 9385400000.0
+        },
+        "2025-03-31": {
+          "inventory": 9038500000.0
+        },
+        "2024-03-31": {
+          "inventory": 8283600000.0
+        },
+        "2023-03-31": {
+          "inventory": 8156300000.0
+        }
+      },
+      "cashflow": {}
+    },
+    "quarterly": {
+      "income": {
+        "2026-09-30": {
+          "ebitda": 5849500000.0
+        },
+        "2026-06-30": {
+          "ebitda": 4944800000.0
+        },
+        "2026-03-31": {
+          "ebitda": 3948400000.0
+        },
+        "2025-12-31": {
+          "ebitda": 4072100000.0
+        },
+        "2025-06-30": {
+          "ebitda": 3776800000.0
+        }
+      },
+      "balance": {
+        "2026-09-30": {
+          "inventory": 9665800000.0
+        },
+        "2026-03-31": {
+          "inventory": 9385400000.0
+        },
+        "2025-03-31": {
+          "inventory": 9038500000.0
+        }
+      },
+      "cashflow": {}
+    }
+  },
+  "retrieved_utc": "2026-11-19T20:51:53+00:00",
+  "source_urls": {
+    "yahoo": "https://finance.yahoo.com/quote/AJANTPHARM.NS/financials/",
+    "screener_consolidated_reference": "https://www.screener.in/company/AJANTPHARM/consolidated/",
+    "nse_membership": "https://www.niftyindices.com/"
+  },
+  "source_notes": [],
+  "statement_scope": "Yahoo Finance provider; consolidated/standalone scope NOT independently verified"
+}

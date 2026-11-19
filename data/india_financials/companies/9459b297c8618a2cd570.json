@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "company_key": "ISIN:INE012A01025",
+  "symbol": "ACC",
+  "company_name": "ACC Ltd.",
+  "isin": "INE012A01025",
+  "industry": "Construction Materials",
+  "sector": "Basic Materials",
+  "yahoo_ticker": "ACC.NS",
+  "currency": "INR",
+  "quote": {
+    "price": 1268.6,
+    "market_cap": 238226915328.0,
+    "shares_outstanding": 187787263.0,
+    "currency": "INR",
+    "asof_utc": "2026-11-19T20:51:15+00:00",
+    "provenance": "yahoo_finance_quote_snapshot"
+  },
+  "statements": {
+    "annual": {
+      "income": {
+        "2026-03-31": {
+          "ebitda": 33869400000.0
+        },
+        "2025-03-31": {
+          "ebitda": 42363100000.0
+        },
+        "2024-03-31": {
+          "ebitda": 37969900000.0
+        },
+        "2022-12-31": {
+          "ebitda": 15978600000.0
+        }
+      },
+      "balance": {
+        "2026-03-31": {
+          "goodwill": 3946300000.0,
+          "inventory": 17891200000.0
+        },
+        "2025-03-31": {
+          "goodwill": 3946300000.0,
+          "inventory": 19254200000.0
+        },
+        "2024-03-31": {
+          "goodwill": 3961900000.0,
+          "inventory": 18685500000.0
+        },
+        "2022-12-31": {
+          "goodwill": 37700000.0,
+          "inventory": 17519800000.0
+        }
+      },
+      "cashflow": {}
+    },
+    "quarterly": {
+      "income": {
+        "2026-09-30": {
+          "ebitda": 4380000000.0
+        },
+        "2026-06-30": {
+          "ebitda": 4880000000.0
+        },
+        "2026-03-31": {
+          "ebitda": 6769200000.0
+        },
+        "2025-12-31": {
+          "ebitda": 7914300000.0
+        },
+        "2025-09-30": {
+          "ebitda": 10710000000.0
+        }
+      },
+      "balance": {
+        "2026-09-30": {
+          "goodwill": 3950000000.0,
+          "inventory": 18250000000.0
+        },
+        "2026-03-31": {
+          "goodwill": 3946300000.0,
+          "inventory": 17891200000.0
+        },
+        "2025-03-31": {
+          "goodwill": 3946300000.0,
+          "inventory": 19254200000.0
+        }
+      },
+      "cashflow": {}
+    }
+  },
+  "retrieved_utc": "2026-11-19T20:51:15+00:00",
+  "source_urls": {
+    "yahoo": "https://finance.yahoo.com/quote/ACC.NS/financials/",
+    "screener_consolidated_reference": "https://www.screener.in/company/ACC/consolidated/",
+    "nse_membership": "https://www.niftyindices.com/"
+  },
+  "source_notes": [],
+  "statement_scope": "Yahoo Finance provider; consolidated/standalone scope NOT independently verified"
+}

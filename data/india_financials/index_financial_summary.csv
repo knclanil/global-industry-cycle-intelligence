@@ -1,0 +1,39 @@
+group_type,group_name,index_slug,parent_universe,constituents,companies_with_snapshots,annual_income_coverage,annual_balance_coverage,annual_cashflow_coverage,price_coverage,pct_with_income,median_revenue_yoy,n_revenue_yoy,median_operating_margin,n_operating_margin,median_net_margin,n_net_margin,median_roe,n_roe,median_fcf_margin,n_fcf_margin,median_debt_to_equity,n_debt_to_equity,median_pe,n_pe,median_fcf_yield,n_fcf_yield
+Factor Family,Alpha,,Multiple,54,5,4,5,0,5,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Factor Family,Dividend,,Multiple,50,1,1,0,0,1,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Factor Family,Growth,,Multiple,50,5,5,5,0,5,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Factor Family,Low Volatility,,Multiple,68,2,2,2,0,2,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Factor Family,Momentum,,Multiple,57,8,7,7,0,8,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Factor Family,Quality,,Multiple,73,4,4,3,0,4,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Factor Family,Value,,Multiple,62,0,0,0,0,0,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Index,Nifty Alpha Index,nifty_alpha_index,Not specified,50,4,3,4,0,4,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Index,Nifty Auto,nifty_auto,Not specified,15,0,0,0,0,0,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Index,Nifty Bank,nifty_bank,Not specified,14,0,0,0,0,0,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Index,Nifty Dividend Opportunities 50,nifty_dividend_opportunities_50,Not specified,50,1,1,0,0,1,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Index,Nifty Energy,nifty_energy,Not specified,40,5,5,5,0,5,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Index,Nifty FMCG,nifty_fmcg,Not specified,15,0,0,0,0,0,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Index,Nifty Financial Services,nifty_financial_services,Not specified,20,0,0,0,0,0,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Index,Nifty IT,nifty_it,Not specified,10,0,0,0,0,0,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Index,Nifty India Defence,nifty_india_defence,Not specified,22,1,1,1,0,1,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Index,Nifty India Manufacturing,nifty_india_manufacturing,Not specified,77,4,4,4,0,4,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Index,Nifty Infrastructure,nifty_infrastructure,Not specified,30,3,3,3,0,3,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Index,Nifty Low Volatility 50,nifty_low_volatility_50,Not specified,50,0,0,0,0,0,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Index,Nifty Media,nifty_media,Not specified,10,0,0,0,0,0,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Index,Nifty Metal,nifty_metal,Not specified,15,1,1,1,0,1,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Index,Nifty Oil & Gas,nifty_oil_gas,Not specified,15,2,2,2,0,2,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Index,Nifty PSU Bank,nifty_psu_bank,Not specified,12,0,0,0,0,0,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Index,Nifty Pharma,nifty_pharma,Not specified,20,3,3,3,0,3,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Index,Nifty Realty,nifty_realty,Not specified,10,2,2,2,0,2,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Index,Nifty100 Low Volatility 30,nifty100_low_volatility_30,Nifty 100,30,0,0,0,0,0,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Index,Nifty100 Quality 30,nifty100_quality_30,Nifty 100,30,1,1,1,0,1,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Index,Nifty200 Alpha 30,nifty200_alpha_30,Nifty 200,30,4,3,4,0,4,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Index,Nifty200 Momentum 30,nifty200_momentum_30,Nifty 200,30,5,4,5,0,5,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Index,Nifty200 Quality 30,nifty200_quality_30,Nifty 200,30,0,0,0,0,0,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Index,Nifty200 Value 30,nifty200_value_30,Nifty 200,30,0,0,0,0,0,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Index,Nifty50 Equal Weight,nifty50_equal_weight,Nifty 50,50,2,2,2,0,2,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Index,Nifty50 Value 20,nifty50_value_20,Nifty 50,20,0,0,0,0,0,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Index,Nifty500 Growth 50,nifty500_growth_50,Nifty 500,50,5,5,5,0,5,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Index,Nifty500 Low Volatility 50,nifty500_low_volatility_50,Nifty 500,50,2,2,2,0,2,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Index,Nifty500 Momentum 50,nifty500_momentum_50,Nifty 500,50,7,6,6,0,7,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Index,Nifty500 Quality 50,nifty500_quality_50,Nifty 500,50,4,4,3,0,4,0.0,,0,,0,,0,,0,,0,,0,,0,,0
+Index,Nifty500 Value 50,nifty500_value_50,Nifty 500,50,0,0,0,0,0,0.0,,0,,0,,0,,0,,0,,0,,0,,0
