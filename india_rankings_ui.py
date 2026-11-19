@@ -329,14 +329,9 @@ def render_india_overlap_leadership():
     m3.metric('Sector / theme members', int(companies['sector_score'].notna().sum()))
     m4.metric('Factor + sector overlap', int(companies['combined_score'].notna().sum()))
     st.caption(f"Latest collected membership snapshot: {_report_date(companies)}. Source timestamps represent retrieval, not NSE reconstitution effective dates.")
-    st.markdown("<div class='iol-panel'>The combined indicator ranks <b>only companies observed in both</b> "
-                "factor and sector/thematic indices. It rewards <b>distinct factor families</b> and "
-                "<b>repeated selection across same-family indices</b>, then applies a balance penalty. "
-                "Missing an index never produces a negative point unless eligibility is independently verified "
-                "(currently unavailable). Scores do not use financial performance or imputed weights.</div>",
-                unsafe_allow_html=True)
-    tabs = st.tabs(['🏆 Combined', '🧩 Factor ranking', '🏭 Sector ranking',
-                    '🔗 Factor overlap', '🌐 Sector × Factor', '🔎 Company evidence', '📐 Methodology'])
+    with st.expander('About membership-based scoring'):
+        st.caption('Combined scores require factor and sector membership. Rankings use verified NSE constituent overlap, not portfolio weights or fundamental valuation. Methodology is available in the Methodology tab.')
+    tabs = st.tabs(['Combined', 'Factors', 'Sectors', 'Factor Overlap', 'Sector × Factor', 'Company Evidence', 'Methodology'])
     with tabs[0]:
         _rank_table(companies, 'Combined', finance)
     with tabs[1]:

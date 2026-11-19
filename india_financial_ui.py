@@ -95,7 +95,7 @@ def _aggregation_table(frame: pd.DataFrame, records: pd.DataFrame, group_type: s
     for col in ('Median sales YoY','Median operating margin','Median net margin',
                 'Median ROE','Median FCF margin','Median FCF yield'):
         view[col] = view[col] * 100
-    st.caption('Unweighted company-level medians · NSE membership-based groups · No holdings weights or company rankings.')
+    st.caption('Financial coverage · Unweighted constituent medians')
     chart_names = view['Index / factor family'].tolist()
     coverage_values = [100 * a/b if b else 0 for a, b in zip(view['Annual income'], view['NSE constituents'])]
     plot = go.Figure(go.Bar(x=coverage_values, y=chart_names, orientation='h',
@@ -112,9 +112,12 @@ def _aggregation_table(frame: pd.DataFrame, records: pd.DataFrame, group_type: s
                      'Median net margin': st.column_config.NumberColumn(format='%.2f'),
                      'Median ROE': st.column_config.NumberColumn(format='%.2f'),
                      'Median FCF margin': st.column_config.NumberColumn(format='%.2f'),
-                     'Median FCF yield': st.column_config.NumberColumn(format='%.2f'),
+                     'Median FCF yield': st.column_config.NumberColumn(format='%.2f%%'),
+                     'Median P/E': st.column_config.NumberColumn(format='%.1f×'),
+                     'NSE constituents': st.column_config.NumberColumn(format='%d'),
+                     'Annual income': st.column_config.NumberColumn(format='%d'),
                  })
-    st.caption('Median percentage columns are displayed as %; P/E is a multiple. Coverage and sample sizes differ across indices.')
+    st.caption('Medians use available company observations only · % except P/E (×).')
     st.download_button('⬇ Export financial aggregation', view.to_csv(index=False).encode('utf-8'),
                        file_name=f'india_{group_type.lower().replace(" ", "_")}_financials.csv', mime='text/csv')
 
@@ -218,10 +221,8 @@ def render_india_sector_factor_financials():
     counts[1].metric('Verified index memberships', len(memberships))
     counts[2].metric('Verified company snapshots', count_fin)
     counts[3].metric('Annual income statements', int((financials['income_period'] != '').sum()) if 'income_period' in financials else 0)
-    st.markdown('<div class="ifr-callout">NSE index membership does not provide an allocation weight. '
-        'Sector and factor measures below are unweighted company medians, never weighted index fundamentals. '
-        'Factor families merge duplicate company memberships across their different Nifty parent universes.</div>',
-        unsafe_allow_html=True)
+    with st.expander('Methodology · data coverage'):
+        st.caption('Unweighted company medians · Published index memberships · Missing weights not estimated · Factor families deduplicated.')
     if financials.empty:
         st.warning('NSE memberships are available, but no verified company financial snapshots were found. '
                    'Run **India Company Financials Refresh**; until then all financial medians are unavailable. '

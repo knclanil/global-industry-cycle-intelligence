@@ -94,6 +94,22 @@ def _render_company_directory(companies: pd.DataFrame, memberships: pd.DataFrame
                  hide_index=True, height=430)
     st.download_button("⬇ Export displayed companies", available.to_csv(index=False).encode("utf-8"),
                        file_name="india_company_constituent_directory.csv", mime="text/csv")
+    with st.expander('Index membership distribution'):
+        import plotly.graph_objects as go
+        freq = pd.to_numeric(available.get('index_count', pd.Series(dtype=float)), errors='coerce').dropna()
+        if not freq.empty:
+            buckets = freq.astype(int).value_counts().sort_index()
+            fig = go.Figure(go.Bar(x=[str(v) for v in buckets.index], y=buckets.values,
+                                   marker_color='#51b7e8',
+                                   hovertemplate='%{x} indices: %{y} companies<extra></extra>'))
+            fig.update_layout(template='plotly_dark', paper_bgcolor='#142137', plot_bgcolor='#142137',
+                              font=dict(color='#dce8f7', family='Inter, Arial'),
+                              height=250, margin=dict(l=20,r=10,t=15,b=35),
+                              xaxis_title='NSE index memberships per company', yaxis_title='Companies',
+                              xaxis=dict(type='category'), showlegend=False)
+            st.plotly_chart(fig, use_container_width=True, config={'displayModeBar':False})
+        else:
+            st.caption('Membership count not available for this selection.')
     st.markdown("#### Source-index detail")
     labels = {row["company_key"]: f'{row["company_name"]}  ·  {row["symbol"]}' for _, row in available.iterrows()}
     company_key = st.selectbox("Inspect a company", list(labels), format_func=lambda key: labels[key],
@@ -210,7 +226,24 @@ def _render_sector_intersection(companies: pd.DataFrame, memberships: pd.DataFra
             row[family] = len(sector_keys & family_to_ids.get(family, set()))
         rows.append(row)
     matrix = pd.DataFrame(rows).sort_values("Sector / Theme")
-    st.dataframe(matrix, hide_index=True, use_container_width=True, height=430)
+    # Matrix: scan intensity at a glance; retain original counts and export underneath.
+    families = [c for c in matrix.columns if c not in ('Sector / Theme', 'Constituents')]
+    if families and not matrix.empty:
+        import plotly.graph_objects as go
+        heat = matrix.set_index('Sector / Theme')[families].apply(pd.to_numeric, errors='coerce').fillna(0)
+        fig = go.Figure(go.Heatmap(z=heat.values, x=list(heat.columns), y=list(heat.index),
+                                  colorscale=[[0, '#122036'], [.35, '#196588'], [1, '#50c8ef']],
+                                  text=heat.values.astype(int), texttemplate='%{text}',
+                                  hovertemplate='%{y} × %{x}: %{z:.0f} companies<extra></extra>',
+                                  colorbar=dict(title='Companies')))
+        fig.update_layout(template='plotly_dark', paper_bgcolor='#142137', plot_bgcolor='#142137',
+                          font=dict(color='#dce8f7', family='Inter, Arial'),
+                          height=max(360, 32*len(heat)+75),
+                          margin=dict(l=8, r=8, t=25, b=40), xaxis=dict(side='top'),
+                          yaxis=dict(autorange='reversed'))
+        st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
+    with st.expander('View exact overlap counts & export'):
+        st.dataframe(matrix, hide_index=True, use_container_width=True, height=380)
     st.download_button("⬇ Export sector–factor intersections", matrix.to_csv(index=False).encode("utf-8"),
                        file_name="india_sector_factor_intersections.csv", mime="text/csv")
 
@@ -465,9 +498,10 @@ def render_india_constituents() -> None:
     m3.metric("Unique securities", len(companies))
     m4.metric("Index memberships", len(memberships))
     _source_context(status)
-    st.markdown("<div class='india-note'>Collections are prepared outside Streamlit for fast loading. One company appears once in the directory, while its factor-family, Nifty parent-universe, sector, and thematic memberships remain separate. No scores or negative points are calculated.</div>", unsafe_allow_html=True)
-    tabs = st.tabs(["🏢 Company Directory", "🧩 Factor Membership Matrix", "🏭 Sector & Factor Overlap",
-                    "📁 Source Index Browser", "🔄 Holdings Changes", "🛡️ Data Coverage"])
+    with st.expander("Data methodology"):
+        st.caption("One company per verified identifier · Original NSE memberships retained · No imputed weights.")
+    tabs = st.tabs(["Companies", "Factor Matrix", "Sector × Factor",
+                    "Source Indices", "Holdings Changes", "Data Coverage"])
     with tabs[0]:
         if companies.empty or memberships.empty:
             st.info("No company records to display yet. Run the scheduled or manual NSE constituent collection job to populate this page.")

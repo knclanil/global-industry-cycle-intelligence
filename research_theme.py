@@ -22,6 +22,8 @@ RESEARCH_CSS = """
 """
 
 def apply_research_theme():
+    from design_system import apply_global_design
+    apply_global_design()
     st.markdown(RESEARCH_CSS, unsafe_allow_html=True)
 
 PLOTLY_LAYOUT = dict(

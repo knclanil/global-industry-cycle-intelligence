@@ -20,7 +20,7 @@ def render_india_valuation():
     apply_research_theme()
     st.caption('INDIA / NSE COMPANY RESEARCH / REFERENCE VALUATION ENGINE')
     st.markdown('### India Fundamental Valuation & Financial Trends')
-    st.caption('Original reference methodology: NSE equity quote → Screener consolidated tables → Yahoo Finance fallback. Sources are attempted independently, and each published metric has provenance. Requests run only on button clicks.')
+    st.caption('NSE · Screener · Yahoo  |  Source-attributed valuation')
     directory=_read(HOLDINGS,'companies.csv')
     valid_symbols=[]
     if not directory.empty and 'symbol' in directory.columns:

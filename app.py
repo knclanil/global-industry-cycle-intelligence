@@ -3,9 +3,8 @@ from pathlib import Path
 import streamlit as st
 from dashboard import render_dashboard
 st.set_page_config(page_title='Global Industry Cycle Intelligence', page_icon='🌐', layout='wide')
-st.markdown("""<style>.stApp{background:#0b1220;color:#e7eef9}
-[data-testid="stMetric"]{background:#142137;border:1px solid #2a3c55;border-radius:12px;padding:16px}
-[data-testid="stMetricLabel"]{color:#b6c7de}</style>""", unsafe_allow_html=True)
+from design_system import apply_global_design
+apply_global_design()
 # Grouped sidebar navigation. The selected page is stored in session state so
 # changing groups does not reset the current dashboard's other widgets.
 NAV_GROUPS = {
@@ -17,6 +16,16 @@ NAV_GROUPS = {
     '📊 SECTOR ANALYSIS': ['Global Sectors', 'USA Sector', 'India Sector'],
     '🧩 FACTOR ANALYSIS': ['Global Factors', 'USA Factors', 'India Factors', 'India Sector & Factor Holdings', 'India Overlap & Leadership', 'India Sector & Factor Financials'],
     '📚 DATA & RESEARCH': ['Data Table', 'Wiki'],
+}
+PAGE_LABELS = {
+ 'Global Capital Intelligence Network': 'Capital Network',
+ 'USA Company Financial KPI Intelligence': 'USA Financial KPIs',
+ 'India Company Financial KPI Intelligence': 'India Financial KPIs',
+ 'India Sector & Factor Financials': 'India Sector & Factor Financials',
+ 'India Sector & Factor Holdings': 'India Holdings Explorer',
+ 'India Overlap & Leadership': 'India Overlap & Leadership',
+ 'India Fundamental Valuation': 'India Valuation',
+ 'Company Financial Research': 'USA Financial Research',
 }
 PAGE_ICONS = {
     'Global Capital Intelligence Network': '🕸️',
@@ -58,15 +67,14 @@ st.markdown("""<style>
 [data-testid="stSidebar"] hr {margin:0.7rem 0; border-color:#30405b;}
 </style>""", unsafe_allow_html=True)
 with st.sidebar:
-    st.markdown('### ◈ GLOBAL INDUSTRY\nCYCLE INTELLIGENCE')
-    st.caption('Market Rotation & Intelligence')
+    st.markdown('<div class="app-brand">◈ MARKET INTELLIGENCE</div><div class="app-brand-name">Global Industry<br>Cycle Intelligence</div><div class="app-brand-sub">Research terminal</div>', unsafe_allow_html=True)
     st.divider()
     for group, items in NAV_GROUPS.items():
         expanded = st.session_state.selected_page in items
         with st.expander(group, expanded=expanded):
             for item in items:
                 active = item == st.session_state.selected_page
-                label = f"{'▌ ' if active else '   '}{PAGE_ICONS[item]}  {item}"
+                label = f"{PAGE_ICONS[item]}  {PAGE_LABELS.get(item, item)}"
                 if st.button(label, key=f'nav_{item}', use_container_width=True,
                              type='primary' if active else 'secondary'):
                     if not active:
@@ -74,6 +82,8 @@ with st.sidebar:
                         st.rerun()
     st.divider()
 page = st.session_state.selected_page
+group_name = next((g.replace('🕸️ ', '').replace('🌐 ', '').replace('💼 ', '').replace('🌎 ', '').replace('💰 ', '').replace('📊 ', '').replace('🧩 ', '').replace('📚 ', '').title() for g, pages in NAV_GROUPS.items() if page in pages), 'Intelligence')
+st.markdown(f'<div class="app-topline"><span class="app-path">GLOBAL INDUSTRY  /  {group_name.upper()}  /  {page.upper()}</span><span class="app-pill">RESEARCH</span></div>', unsafe_allow_html=True)
 
 if page == 'Global Capital Intelligence Network':
     from capital_network import render_capital_network

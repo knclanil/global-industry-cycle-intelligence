@@ -6,8 +6,7 @@ def render_company_financial_research():
     from research_theme import apply_research_theme
     apply_research_theme()
     st.title('📑 Company Financial Research')
-    st.caption('SEC-sourced annual and quarterly statements, business quality, and conservative valuation research.')
-    st.caption('On-demand research · SEC company facts · Cached financial statements')
+    st.caption('SEC financial statements · Business quality · Conservative valuation')
     with st.expander('Data coverage and methodology', expanded=False):
         st.info('Search one SEC-reporting company at a time. Global issuers without SEC filings require another provider. Data availability depends on the saved SEC cache.')
     default = str(st.session_state.get('research_ticker', 'AAPL'))

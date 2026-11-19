@@ -267,8 +267,7 @@ def render_india_kpi_intelligence():
     _styles()
     st.markdown('<div class="ik-kicker">INDIA  /  COMPANY FUNDAMENTALS  /  FINANCIAL KPI INTELLIGENCE</div>', unsafe_allow_html=True)
     st.title('🇮🇳 India Company Financial KPI Intelligence')
-    st.caption('NSE quotes → Screener consolidated financials → Yahoo fallback, per metric. '
-               'Amounts in INR crore · price and EPS in ₹ per share · sources indicated on each tile.')
+    st.caption('NSE · Screener consolidated · Yahoo  |  INR crore unless noted')
     directory = _read(HOLDINGS, 'companies.csv')
     symbols = []
     if not directory.empty and 'symbol' in directory:

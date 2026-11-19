@@ -93,8 +93,7 @@ def render_company_kpi_metrics():
     @media(max-width:800px){.kpi-number{font-size:.95rem}.kpi-tile{padding:8px 6px}}
     </style>''', unsafe_allow_html=True)
     st.title('🇺🇸 USA Company Financial KPI Intelligence')
-    st.caption('Dedicated fundamental KPI workspace · official SEC financial statements · dark dashboard theme')
-    st.caption('One company at a time · Verified SEC statements · N/A means unavailable')
+    st.caption('SEC filings  ·  Annual & quarterly financials  ·  USD')
     with st.form('kpi_company_form'):
         ticker = st.text_input('Company ticker', value=st.session_state.get('kpi_ticker', st.session_state.get('research_ticker', 'AAPL'))).strip().upper()
         submit = st.form_submit_button('Analyze financial KPIs', type='primary')
