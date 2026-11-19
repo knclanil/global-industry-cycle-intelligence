@@ -25,6 +25,7 @@ from india_valuation_reference import (
 )
 from research_theme import apply_research_theme, PLOTLY_LAYOUT
 from india_financial_ui import _read
+from india_screener_statements import prepare_statement
 
 HOLDINGS = Path(__file__).resolve().parent / 'data' / 'india_holdings'
 
@@ -320,3 +321,34 @@ def render_india_kpi_intelligence():
         st.link_button('↗ Yahoo .NS financials',f'https://finance.yahoo.com/quote/{symbol}.NS/financials/')
         st.caption('Provider access and data terms apply. No bypass of website restrictions. '
                    'This page is a reference-style KPI viewer; differences in consolidated/standalone scope and fiscal dates are not reconciled automatically.')
+
+
+    # The original consolidated Screener statements appear at the bottom of
+    # India Company Financial KPI Intelligence, without any additional request.
+    st.divider()
+    st.markdown('### 📑 Consolidated Balance Sheet & Cash Flow')
+    st.caption('Source: Screener.in · reported consolidated figures · ₹ crore unless the original row specifies otherwise. '
+               'Historical periods are chronological; missing entries are N/A. No figures are inferred or mixed with Yahoo.')
+    period_choice = st.segmented_control(
+        'Historical periods', ['5 years', '8 years', '12 years', 'All available'],
+        default='8 years', key='india_kpi_screener_statement_periods')
+    count = {'5 years': 5, '8 years': 8, '12 years': 12, 'All available': 0}.get(period_choice, 8)
+    for source_key, heading in [('Balance Sheet', 'Balance Sheet'), ('Cash Flows', 'Cash Flow Statement')]:
+        st.markdown(f'#### {heading}')
+        report = prepare_statement(tables.get(source_key), periods=count)
+        if report.empty:
+            st.info(f'{heading} is unavailable from Screener for {symbol}. '
+                    'Other available KPI values are preserved; this section does not invent financial statements.')
+        else:
+            st.dataframe(report, use_container_width=True, hide_index=True,
+                         height=min(540, max(185, 38 * (len(report) + 1))))
+            st.download_button(
+                f'Download {heading} CSV',
+                data=report.to_csv(index=False).encode('utf-8-sig'),
+                file_name=f'{symbol}_screener_{source_key.lower().replace(" ", "_")}.csv',
+                mime='text/csv', key=f'india_kpi_{source_key}_csv')
+    if cached['screener'].get('retrieved_utc'):
+        st.caption('Screener retrieved (UTC): ' + str(cached['screener']['retrieved_utc'])[:19].replace('T', ' '))
+    st.link_button('↗ View original consolidated statements on Screener', company_url(symbol))
+    st.caption('These are the source-reported statements for reference, not independently audited by this dashboard. '
+               'Please verify important decisions against company filings and applicable source usage terms.')
