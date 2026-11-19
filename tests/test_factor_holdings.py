@@ -1,7 +1,7 @@
 import io
 import pandas as pd
 import pytest
-from factor_holdings import parse_holdings,score_holdings
+from holdings_constituent_utils import parse_holdings,score_holdings
 
 def test_parse_csv_and_weights():
     f=io.BytesIO(b'Company Name,Weight (%),Ticker\nAlpha,2.5%,AAA\nBeta,1.2%,BBB\n');f.name='x.csv'

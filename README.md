@@ -107,8 +107,6 @@ India Asset Flow uses logical key `NIFTY_GSEC_10Y` for government bonds. It atte
 Open **Wiki** in the application and select any dashboard. Every dashboard's Wiki now includes a step-by-step numerical walkthrough of relative price ratio, relative strength, momentum, quadrant classification, selected-period excess return, and zero-based trends. Asset Flow pages additionally explain the Market Regime heuristic and the difference between price rotation and verified fund flows. These are illustrative calculations, not live data.
 
 
-## Factor Holdings Comparison
-One page with Global / USA / India slicer, full-universe and top-10 views, factor-count and normalized weight/rank consensus, company factor profile, data-coverage checks and CSV exports. Upload official constituent-weight CSV/XLSX files; holdings downloads are **not automated**. See `FACTOR_HOLDINGS_WIKI.md` for formula, worked example and limitations.
 
 ## Global Capital Intelligence Network (new first page)
 

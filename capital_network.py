@@ -5,7 +5,7 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 from dashboard import prices_cached
-from factor_holdings import parse_holdings, score_holdings, FACTORS
+from holdings_constituent_utils import parse_holdings, score_holdings, FACTORS
 import country_market_data, global_asset_market_data, usa_asset_market_data, india_asset_market_data
 import global_market_data, market_data, india_market_data
 import global_factor_market_data, usa_factor_market_data, india_factor_market_data
