@@ -256,9 +256,13 @@ def render_financial_research(ticker):
         if not income.empty:
             _sankey(income,bank=bank)
             fig=go.Figure()
-            for label in ['Revenue','Operating income','Net income']:
-                if label in income.index and income.loc[label].notna().any():
-                    values=(income.loc[label]/1e9).iloc[::-1]
+            # Debt is a balance-sheet (point-in-time) measure, not an income item.
+            # Align it by reporting-period end; never replace unavailable debt with zero.
+            balance_sheet = stmts['Balance Sheet'][0]
+            for label in ['Revenue','Operating income','Net income','Long-term debt']:
+                source = balance_sheet if label == 'Long-term debt' else income
+                if label in source.index and source.loc[label].notna().any():
+                    values = (source.loc[label].reindex(income.columns) / 1e9).iloc[::-1]
                     fig.add_trace(go.Bar(
                         name=label,
                         x=list(income.columns)[::-1],
@@ -269,12 +273,13 @@ def render_financial_research(ticker):
                         cliponaxis=False,
                         hovertemplate='%{x}<br>%{fullData.name}: $%{y:,.2f}B<extra></extra>',
                     ))
-            fig.update_layout(title='Revenue and earnings history',barmode='group',template='plotly_dark',
+            fig.update_layout(title='Revenue, earnings and debt history',barmode='group',template='plotly_dark',
                               yaxis_title='USD billions',hoverlabel=dict(bgcolor='#213550',font_color='#f2f7ff'),height=420,
                               margin=dict(t=80,b=50,l=55,r=25),uniformtext_minsize=9,uniformtext_mode='hide')
             from research_theme import PLOTLY_LAYOUT
             fig.update_layout(**PLOTLY_LAYOUT)
             st.plotly_chart(fig,use_container_width=True)
+            st.caption('Debt bars represent reported long-term debt at each period end; missing debt is not treated as zero. Debt is a balance-sheet stock, while revenue and earnings are period flows.')
         st.info('SEC filings do not supply current stock prices or forward valuation multiples. Business-segment revenue is shown only when reliably sourced.')
     _statement(tab2,'Income Statement',stmts,ticker,cadence)
     _statement(tab3,'Balance Sheet',stmts,ticker,cadence)
