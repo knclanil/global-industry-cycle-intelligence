@@ -11,6 +11,7 @@ from pathlib import Path
 import pandas as pd
 import numpy as np
 import requests
+import time
 
 ROOT = Path(__file__).resolve().parent
 STORE = ROOT / 'data' / 'fundamentals'
@@ -130,27 +131,42 @@ def load_universe():
     df = df[df.region.ne('')]
     return df[['issuer_id','ticker','company','country','sector','region']].drop_duplicates()
 
-def refresh_us(universe, max_companies=20):
-    if universe.empty: return {'updated':0,'skipped':0,'errors':[]}
-    directory = company_directory()
+def refresh_us(universe, max_companies=20, directory=None, delay=0.18):
+    """Fetch up to max_companies *new* verified US CIKs, checkpointing each.
+
+    Never match a foreign issuer or a ticker without a sufficiently close
+    SEC company name. A missing/invalid SEC user agent is a hard failure.
+    """
+    if universe.empty: return {'updated':0,'skipped':0,'errors':[], 'matched':0}
+    sec_headers()  # fail early rather than hiding missing configuration
+    if directory is None: directory = company_directory()
     existing = {p.stem for p in STORE.glob('facts_*.json')}
-    updated, skipped, errors = 0, 0, []
+    updated, skipped, matched, errors = 0, 0, 0, []
+    seen_ciks = set()
     for row in universe.drop_duplicates('issuer_id').itertuples(index=False):
         if str(row.country).lower() not in ('united states','usa','us'):
             skipped += 1; continue
         cik = resolve_us_company(row.ticker,row.company,directory)
         if cik is None:
             skipped += 1; continue
+        if cik in seen_ciks: continue
+        seen_ciks.add(cik)
+        matched += 1
         key = f'facts_{cik:010d}'
         if key in existing: continue
         if updated >= max_companies: break
         try:
             payload = sec_get(f'{SEC}/api/xbrl/companyfacts/CIK{cik:010d}.json')
-            (STORE/f'{key}.json').write_text(json.dumps(payload),encoding='utf-8')
+            if not isinstance(payload, dict) or not payload.get('facts'):
+                raise ValueError('SEC response contains no XBRL facts')
+            tmp = STORE/f'{key}.tmp'
+            tmp.write_text(json.dumps(payload),encoding='utf-8')
+            tmp.replace(STORE/f'{key}.json')
             updated += 1
-        except (requests.RequestException, ValueError) as exc:
-            errors.append(f'{row.ticker}: {str(exc)[:120]}')
-    return {'updated':updated,'skipped':skipped,'errors':errors}
+            time.sleep(max(0.11, delay))
+        except (requests.RequestException, ValueError, OSError) as exc:
+            errors.append(f'{row.ticker}: {str(exc)[:160]}')
+    return {'updated':updated,'skipped':skipped,'matched':matched,'errors':errors}
 
 def available_profiles(universe):
     directory_file = STORE/'sec_company_directory.json'
@@ -231,7 +247,7 @@ def render_fundamental_intelligence():
             try:
                 directory = company_directory()
                 (STORE/'sec_company_directory.json').write_text(directory.to_json(orient='records'),encoding='utf-8')
-                result = refresh_us(universe)
+                result = refresh_us(universe, directory=directory)
                 st.write(result)
                 st.cache_data.clear()
             except Exception as exc:st.error(f'SEC refresh unavailable: {exc}')
@@ -241,6 +257,13 @@ def render_fundamental_intelligence():
     region = st.radio('Holdings universe',['USA','Global'],horizontal=True)
     scope = universe[universe.region.eq(region)]
     st.metric('Unique ETF issuers',scope.issuer_id.nunique())
+    status_file = STORE/'refresh_status.json'
+    if status_file.exists():
+        try:
+            status = json.loads(status_file.read_text())
+            st.caption(f"Last automated SEC refresh: {status.get('as_of_utc', 'unknown')} · Cached SEC company facts: {status.get('cached_sec_facts', 0)} · Last batch added: {status.get('updated', 0)}")
+            if status.get('errors'): st.warning(f"SEC refresh reported {len(status['errors'])} errors. Check refresh_status.json for details.")
+        except (ValueError, OSError): pass
     st.metric('Issuers with SEC annual financials',scored[scored.region.eq(region)].issuer_id.nunique() if not scored.empty else 0)
     if scored.empty or scored[scored.region.eq(region)].empty:
         st.info('No verified fundamentals cached for this universe. US issuers can be refreshed from SEC; international coverage requires an additional filings provider.')
