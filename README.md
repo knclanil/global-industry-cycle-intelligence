@@ -182,3 +182,16 @@ The **USA Company Holdings Leadership** page and [methodology wiki](HOLDINGS_LEA
 
 ### Additional iShares holdings sources and refresh parser
 Ten additional source IDs are tracked in `data/holdings/pending_sources.json` pending factor/sector classification. The holdings refresh parser now recognizes iShares CSV/Excel holdings-date preambles; verify against live documents before treating the pipeline as production-ready. See `HOLDINGS_LEADERSHIP_WIKI.md`.
+
+---
+
+## India Company Financial KPIs + Sector/Factor Financial Analysis (2026-11)
+
+Two **additional** India pages are available (USA Company Financial Research and Company Financial KPIs remain unchanged):
+
+- **Global Intelligence → India Company Financial KPIs**: one-company annual/quarterly Yahoo Finance research, returns and balance-sheet KPIs, asset per-share / Graham screens, hypothetical cash-flow intrinsic value and liquidation scenarios, official NSE holdings membership and independent Screener consolidated links.
+- **Factor Analysis → India Sector & Factor Financials**: NSE-verified sector/index membership with **unweighted** group financial KPI medians, factor-family deduplication, company drilldowns, sector × factor heatmap and provider coverage.
+
+The original **India Sector & Factor Holdings** continues collecting/tracking 31 NSE constituent CSV sources. To populate the financial pages, first run **India NSE Constituents Refresh**, then **India Company Financials Refresh** in GitHub Actions. The latter processes 25 symbols per batch by default. These financial pages make no external requests while loading; they read persisted snapshots. **No ranking function or inferred holding weights** are included.
+
+Read **[`INDIA_FINANCIAL_ANALYSIS_GUIDE.md`](INDIA_FINANCIAL_ANALYSIS_GUIDE.md)** before deploying to a public app: Yahoo Finance/yfinance and Screener.in have data-access and redistribution restrictions, and their data must not be republished without appropriate rights. Screener pages are linked only; they are not scraped.

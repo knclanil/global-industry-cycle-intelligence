@@ -109,6 +109,11 @@ def _render_company_directory(companies: pd.DataFrame, memberships: pd.DataFrame
     display["Published Weight (%)"] = display["Published Weight (%)"].replace("", "N/A")
     st.dataframe(display, hide_index=True, use_container_width=True, height=min(460, 95 + 35 * len(display)),
                  column_config={"Official CSV": st.column_config.LinkColumn("Official CSV", display_text="Open source")})
+    if st.button("📊 Open India Company Financial KPIs", key="india_directory_open_financials", type="primary"):
+        st.session_state.india_financial_symbol = str(identity['symbol']).upper()
+        st.session_state.pop('india_financial_select', None)
+        st.session_state.selected_page = 'India Company Financial KPIs'
+        st.rerun()
 
 
 def _render_factors(companies: pd.DataFrame, memberships: pd.DataFrame) -> None:
@@ -151,6 +156,31 @@ def _render_factors(companies: pd.DataFrame, memberships: pd.DataFrame) -> None:
                                                  "index_memberships": "Index Memberships",
                                                  "source_indices": "Loaded Indices"}))
     st.dataframe(family_data.sort_values("Factor Family"), hide_index=True, use_container_width=True)
+    st.markdown("#### Cross-universe factor overlap · exact memberships")
+    st.caption("Exact intersection patterns across available Nifty parent universes. Membership overlap only; no eligibility penalties or ranking.")
+    overlap_families = sorted(factors.groupby('factor_family')['index_slug'].nunique().loc[lambda x: x > 1].index)
+    if overlap_families:
+        overlap_family = st.selectbox('Factor to compare', overlap_families,
+                                      index=overlap_families.index('Value') if 'Value' in overlap_families else 0,
+                                      key='india_factor_overlap_selection')
+        factor_set = factors[factors['factor_family'] == overlap_family].copy()
+        presence = (factor_set.groupby('company_key')['index_name']
+                    .agg(lambda names: tuple(sorted(set(names)))))
+        company_names = dict(zip(companies['company_key'], companies['company_name']))
+        symbols = dict(zip(companies['company_key'], companies['symbol']))
+        exact = {}
+        for key, pattern in presence.items():
+            exact.setdefault(pattern, []).append(key)
+        descriptions = []
+        for pattern, member_keys in sorted(exact.items(), key=lambda v: (-len(v[1]), v[0])):
+            descriptions.append({'Exact index combination': ' + '.join(pattern),
+                                 'Unique companies': len(member_keys),
+                                 'NSE symbols': ', '.join(sorted({symbols.get(k, '') for k in member_keys}))})
+        exact_df = pd.DataFrame(descriptions)
+        st.dataframe(exact_df, hide_index=True, use_container_width=True, height=min(430, 90 + 35 * len(exact_df)))
+        st.download_button('⬇ Export factor overlap combinations', exact_df.to_csv(index=False).encode('utf-8'),
+                           file_name=f'india_{overlap_family.lower().replace(" ", "_")}_exact_overlaps.csv', mime='text/csv',
+                           key='india_factor_overlap_export')
 
 
 def _render_sector_intersection(companies: pd.DataFrame, memberships: pd.DataFrame) -> None:

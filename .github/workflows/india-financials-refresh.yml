@@ -1,0 +1,60 @@
+name: India Company Financials Refresh
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: 'Maximum companies to attempt this run (25 default, up to full universe)'
+        required: false
+        default: '25'
+      symbols:
+        description: 'Optional comma-separated NSE symbols (for example RELIANCE,TCS,INFY)'
+        required: false
+        default: ''
+  schedule:
+    # Weekdays, after NSE constituent refresh. Yahoo statements update less often.
+    - cron: '45 13 * * 1-5'
+permissions:
+  contents: write
+concurrency:
+  group: market-data-writer
+  cancel-in-progress: false
+jobs:
+  financials:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: requirements.txt
+      - name: Install financial refresh dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Refresh Indian company financial snapshots
+        env:
+          PYTHONUNBUFFERED: '1'
+          BATCH_LIMIT: ${{ github.event.inputs.limit || '25' }}
+          NSE_SYMBOLS: ${{ github.event.inputs.symbols || '' }}
+        run: |
+          python scripts/refresh_india_financials.py --limit "$BATCH_LIMIT" --symbols "$NSE_SYMBOLS"
+      - name: Financial collection report
+        if: always()
+        run: |
+          if [ -f data/india_financials/build_summary.json ]; then
+            echo '## NSE-universe Yahoo Finance coverage' >> "$GITHUB_STEP_SUMMARY"
+            echo '```json' >> "$GITHUB_STEP_SUMMARY"
+            cat data/india_financials/build_summary.json >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Commit validated financial snapshots and summary
+        if: always()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if [ -d data/india_financials ]; then git add data/india_financials/; fi
+          if ! git diff --cached --quiet; then
+            git commit -m 'data: refresh India financial statements and coverage [skip ci]'
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push origin HEAD:"${GITHUB_REF_NAME}"
+          fi
