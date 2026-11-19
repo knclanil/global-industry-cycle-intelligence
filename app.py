@@ -13,7 +13,7 @@ NAV_GROUPS = {
     '🌎 COUNTRY ANALYSIS': ['Global Countries'],
     '💰 ASSET CLASS ANALYSIS': ['Global Asset Flow', 'USA Asset Flow', 'India Asset Flow'],
     '📊 SECTOR ANALYSIS': ['Global Sectors', 'USA Sector', 'India Sector'],
-    '🧩 FACTOR ANALYSIS': ['Global Factors', 'USA Factors', 'India Factors'],
+    '🧩 FACTOR ANALYSIS': ['Global Factors', 'USA Factors', 'India Factors', 'India Sector & Factor Holdings'],
     '📚 DATA & RESEARCH': ['Data Table', 'Wiki'],
 }
 PAGE_ICONS = {
@@ -21,7 +21,7 @@ PAGE_ICONS = {
     'Global Countries': '🌎',
     'Global Asset Flow': '🌍', 'USA Asset Flow': '🇺🇸', 'India Asset Flow': '🇮🇳',
     'Global Sectors': '🌍', 'USA Sector': '🇺🇸', 'India Sector': '🇮🇳',
-    'Global Factors': '🌍', 'USA Factors': '🇺🇸', 'India Factors': '🇮🇳',
+    'Global Factors': '🌍', 'USA Factors': '🇺🇸', 'India Factors': '🇮🇳', 'India Sector & Factor Holdings': '🇮🇳',
     'Company Holdings Leadership': '🏆', 'Company Financial Research': '📑', 'Company Financial KPIs': '📊', 'Data Table': '🗂️', 'Wiki': '📖',
 }
 ALL_PAGES = [item for items in NAV_GROUPS.values() for item in items]
@@ -73,6 +73,9 @@ elif page == 'Company Financial Research':
 elif page == 'Company Financial KPIs':
     from company_kpi_metrics import render_company_kpi_metrics
     render_company_kpi_metrics()
+elif page == 'India Sector & Factor Holdings':
+    from india_constituents_ui import render_india_constituents
+    render_india_constituents()
 elif page == 'Data Table':
     from data_table import render_data_table
     render_data_table()

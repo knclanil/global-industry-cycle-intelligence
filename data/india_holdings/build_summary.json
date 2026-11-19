@@ -1,0 +1,11 @@
+{
+  "built_utc": "2026-11-19T20:02:41+00:00",
+  "tracked_indices": 31,
+  "loaded_indices": 0,
+  "newly_updated_indices": 0,
+  "failed_indices": 0,
+  "unique_companies_or_securities": 0,
+  "index_constituent_memberships": 0,
+  "known_constituent_weight_entries": 0,
+  "methodology": "descriptive membership only; no ranking, penalties, or imputed weights"
+}

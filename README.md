@@ -1,5 +1,12 @@
 # Global Industry Cycle Intelligence
 
+## NEW: India Sector & Factor Holdings (Constituent Explorer)
+
+Under **Factor Analysis → India Sector & Factor Holdings**, explore the 31 NSE sector, thematic and factor constituent indices supplied for this project. The page consolidates securities by verified ISIN where possible, preserves every original index membership, shows factor-family versus parent-universe matrices, sector/factor overlaps, source-level diagnostic coverage, and CSV exports. **No ranking, absence penalties, or guessed weights are calculated.**
+
+The page reads committed snapshots rather than downloading NSE files in Streamlit. To populate the initially empty data, run **Actions → India NSE Constituents Refresh → Run workflow**. For NSE 403 downloads, commit the original constituent CSV under `data/india_holdings/manual/` and rerun the job. See [`INDIA_CONSTITUENTS_GUIDE.md`](INDIA_CONSTITUENTS_GUIDE.md) and [`data/india_holdings/README.md`](data/india_holdings/README.md).
+
+
 ## Dashboard navigation (display order)
 
 The live application includes **Global Factors** (ACWI), **USA Factors** (SPY), and **India Factors** (Nifty 50) alongside the sector and country dashboards. Each has the same rotation, performance, zero-based trend and classification visuals. See `GLOBAL_FACTORS_WIKI.md`, `USA_FACTORS_WIKI.md`, and `INDIA_FACTORS_WIKI.md`. India factors use NSE historical factor indices; Yahoo is a benchmark-only fallback, not an unverified factor-index replacement.
