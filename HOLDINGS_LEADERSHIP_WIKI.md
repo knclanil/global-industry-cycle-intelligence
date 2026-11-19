@@ -1,96 +1,43 @@
-# USA & Global Company Holdings Leadership — Current Methodology
+# USA Company Holdings Leadership — Methodology
 
-**Status:** Documents the implementation supplied in the November 18, 2026 performance-weighted leadership build. This package is documentation prepared for repository publication, **not a live GitHub Wiki edit**.
+## Sources and verification
 
-## Purpose and interpretation
+18 BlackRock iShares portfolio document endpoints: **7 factor ETFs** (239695, 239728, 256101, 239563, 239725, 239710, 251614) and **11 sector ETFs** (239505, 239511, 239506, 239524, 239508, 239507, 239520, 239503, 239523, 239514, 239522). These are **portfolio IDs**, not verified fund tickers. The provided initial reference date is November 17, 2026. Actual holdings, portfolio identifiers and as-of dates must be verified from the downloaded files; links alone do not establish issuer membership.
 
-This is a **performance-aligned ETF holdings ranking**, not a direct company stock-return ranking, capital-flow measure, investment recommendation, or proof of ETF manager buying. A company's holdings weight is not its own share-price performance. All input performance scores must be verified and aligned to the same observation period.
+## Leadership score
 
-## Separate ranking universes
+Each verified issuer has a single rank. The score measures **portfolio prominence**, not price momentum, manager buying, or future returns.
 
-| Universe | Factor ETF count | Sector ETF count | Total configured |
-|---|---:|---:|---:|
-| USA | 7 | 11 | 18 |
-| Global | 5 | 10 | 15 |
+- **Factor breadth (45%)** = distinct factor ETFs holding the issuer / 7.
+- **Factor conviction (40%)** = average of `min(1, issuer ETF weight / ETF 90th-percentile issuer weight)` across factor ETFs that hold the issuer; zero for factor-unheld issuers.
+- **Sector prominence (15%)** = highest normalized within-ETF sector weight rank `(N-r)/(N-1)` across sector ETFs holding the issuer; zero if absent. A sector leader ranks in the top `ceil(10% × N)` holdings by weight. Ties in sector weight receive the same competition rank.
 
-USA factor IDs: `239695, 239728, 256101, 239563, 239725, 239710, 251614`.
+`Base Score = 100 × (0.45 × breadth + 0.40 × conviction + 0.15 × prominence)`.
 
-USA sector IDs: `239505, 239511, 239506, 239524, 239508, 239507, 239520, 239503, 239523, 239514, 239522`.
+## Changes and penalties
 
-Global factor IDs: `271538, 275382, 239499, 239605, 271540`.
+Compare consecutive **verified, complete** holdings snapshots for the same ETF. A missing or malformed download is **not** a removal. New factor position: +8; factor removal: −10; new sector position: +4; sector removal: −6. Material increases and decreases are scored continuously per **percentage-point** change: factor +4/−5 maximum per ETF; sector +3/−4 maximum per ETF. An ordinary weight change requires both at least 0.10 percentage points and 5% relative change. Adds/removals do not receive a second weight-change adjustment. Net changes are clipped to [−30,+30]. `Final Score = clip(Base Score + Change Score, 0, 100)`. Changes are calculated against the previous valid snapshot, not accumulated indefinitely. The baseline snapshot has no change score. Weight changes can result from market price movements and do not prove trading or net investor flows.
 
-Global sector IDs: `239740, 239744, 239753, 239739, 239742, 239741, 239751, 239745, 239748, 239750`.
+Rank by final score descending; ties break on factor count, factor conviction, then stable issuer ID. The full ranked list is available on **USA Company Holdings Leadership**, with a Top N selector. Galaxy company-node size uses the final score once verified rankings exist; unverified companies are not synthesized.
 
-Portfolio IDs are data-source identifiers, not customer-facing ETF tickers. Fund titles are read from verified source files. No cross-universe pooling of ETFs, score normalization, company ranking, or breadth denominators.
+## Automatic refresh and audit
 
-## Calculation, exactly as implemented
+GitHub Actions runs after US market close on weekdays and supports manual dispatch. It fetches all 18 sources, validates issuer identifiers, equity weights and **actual source as-of dates**, compares the last complete snapshot, and writes Parquet snapshots, ranking, latest changes and an event log to `data/holdings/`. **Fail-closed:** if any source is unavailable or its as-of date cannot be verified, the run reports failure and does not overwrite the previous complete ranking. BlackRock file formats and access restrictions may require a source-specific adapter before the first successful run; scheduled execution does not guarantee upstream availability. Verify the action logs after deployment.
 
-For a company *i* in an ETF *j*, with reported portfolio weight `w_ij`:
+## Limitations
 
-`Conviction_ij = min(1, w_ij / max(P90_j, 1e-8))`
+Sector and factor memberships are the composition of the specified ETFs, not a universal classification of all investment factors. ISIN is preferred for issuer identity, with ticker fallback; share classes and identifier changes require additional issuer-master mapping before guaranteed legal-issuer deduplication. Portfolio weight is not investment performance or direct capital flow.
 
-where `P90_j` is the 90th percentile of **reported holding weights within ETF j**. This makes the holding weight relative to that ETF's distribution. The implemented code does not clamp negative weights at zero; source validation should ensure eligible equity weights are appropriate.
+## Additional sources awaiting classification (November 18, 2026)
 
-For each category (sector or factor), use only ETF positions that have a verified performance score `P_j` between 0 and 100:
+Ten further BlackRock iShares portfolio IDs have been received: **239740, 239744, 239753, 239739, 239742, 239741, 239751, 239745, 239748, 239750**. They are tracked in `data/holdings/pending_sources.json` but **excluded from the factor/sector score and refresh universe** until their ETF category is verified. This avoids incorrectly changing the factor breadth denominator or assigning sector leadership. Total registered endpoints: **28** (18 classified, 10 pending).
 
-`SectorAlignment_i = mean(Conviction_ij × P_j)` over scored sector ETF positions holding *i*.
+## Refresh failure diagnosis and parser update
 
-`FactorAlignment_i = mean(Conviction_ij × P_j)` over scored factor ETF positions holding *i*.
+The first GitHub Actions run rejected all 18 sources because the previous parser could not verify holdings-as-of dates. The updated parser checks common iShares CSV metadata preambles (including quoted dates with month names), CSV table offsets, and Excel workbook metadata; it never treats the requested URL date as the published holdings date. Live BlackRock responses were not accessible in the build environment, so this adapter is **not yet validated against the actual endpoint response**. If the API returns JSON or a different schema, capture a sanitized response content-type and the first metadata lines for a source-specific adapter. No source failure should be interpreted as a removed holding.
 
-The mean is **across matched ETF positions**. It is not a ratio of the sum of weighted performance to the sum of company weights; it is not a pure average of sector performance either.
+## BlackRock reference-collector adapter (November 2026)
 
-`Base_i = (SectorAlignment_i + FactorAlignment_i) / 2` when both are available.
+The holdings refresh parser now supports variable preambles, UTF-8/UTF-16 CSV, Excel, alternate ticker/name/weight headers, and issuer-declared dates including `Fund Holdings as of` and `17-Nov-2026`. These adaptations follow the supplied Factor Holdings Intelligence collectors (`collect_provided_sources_v1_8_1.py`, `collect_blackrock_v1_8_5.py`). The URL's `asOfDate` parameter is **not** accepted as evidence of the actual published holdings date.
 
-When only one component is scored, `Base_i` equals that available component (no zero penalty for an absent category). When neither is scored, `Base_i = 50` **as a neutral provisional placeholder**, not verified performance.
-
-`ETFCount_i = number of distinct configured ETF portfolio IDs holding company i`.
-
-`BreadthBonus_i = 10 × ln(1 + ETFCount_i) / ln(1 + UniverseETFCount)`.
-
-`LeadershipScore_i = min(100, Base_i + BreadthBonus_i)`.
-
-Thus, the effective 50% sector / 50% factor weighting is **conditional on both being scored**. The bonus is additive and can contribute up to 10 points. Because the base can already reach 100, the additive bonus can saturate the final score at 100; the ranking is not a convex 50/50/10 weighted average.
-
-### Ranking and tie-breaks
-
-Sort by leadership score descending, then distinct ETF count descending, then stable issuer ID ascending. The displayed score is rounded to two decimals. Holdings change events do **not** modify this version's leadership score (`change_score = 0`).
-
-### Performance coverage flags
-
-- **Verified:** all ETF positions holding that company have matched valid performance scores.
-- **Partial:** some, but not all, have scores.
-- **Missing:** none have scores; neutral base 50 is provisional.
-
-A company with Partial/Missing status should **not** be presented as a confirmed leader. The current implementation checks per-company ETF position coverage; operational source freshness and benchmark methodology require separate validation.
-
-## Illustrative example (not live results)
-
-A company has two sector ETF holdings: convictions 0.80 and 0.50, ETF performance scores 90 and 30. Sector alignment = `(0.80×90 + 0.50×30)/2 = 43.5`.
-
-It also has two factor ETF holdings: convictions 0.90 and 0.60, scores 85 and 40. Factor alignment = `(0.90×85 + 0.60×40)/2 = 50.25`.
-
-Base = `(43.5 + 50.25)/2 = 46.875`. With 4 distinct ETFs in the USA 18-ETF universe, bonus = `10×ln(5)/ln(19) ≈ 5.47`, giving **final ≈ 52.34**.
-
-A large position in a lagging ETF still contributes positively when the performance score is above zero, but less than an equivalent position in a leading ETF. This formula does **not** explicitly subtract a laggard penalty.
-
-## Performance data: required, not automatically wired
-
-Provide `data/holdings/etf_performance_scores.csv` with columns:
-
-```csv
-portfolio_id,region,performance_score
-```
-
-`region` must be `USA` or `GLOBAL`, each portfolio ID must belong to that universe, and scores must be numeric within 0–100. Duplicated `(region, portfolio_id)` keys are rejected. **No actual performance values are bundled or invented.** The November 18 build loads this CSV if available; **direct automatic connection to the dashboard's sector/factor rotation score calculation is not yet implemented**. Align all scores to a consistent period before ranking.
-
-## Holdings identity, normalization and refresh
-
-Within a single ETF, identical verified issuer/ticker and country positions should be consolidated; tickers reused by different issuers/countries must not be merged. Prefer stable verified issuer identifiers and review ambiguous share classes or symbols. The existing ingestion pipeline should be checked for complete implementation of these safeguards before production use.
-
-The refresh workflow uses downloaded holdings and published as-of dates, not a URL date as proof of freshness. Failed or incomplete source downloads should not be interpreted as sales or overwrite the last complete snapshot. Holdings additions, removals and material weight changes are available as **informational events**, not additional leadership-score bonuses. The scheduled GitHub Actions workflow requires successful live verification of all configured sources.
-
-## Key limitations and testing
-
-The score measures **relative prominence in performance-ranked ETFs**. It does not establish company-specific momentum, investment returns, causal capital flows, or forecast performance. Coverage differences can change ranking comparability. The 90th-percentile normalization can saturate large holdings, and the additive bonus can saturate high scores. Validate source completeness, same-date performance windows, cross-country issuer matching, sensitivity to score/bonus weights, ranking stability and forward returns before treating the model as predictive.
-
-**Previous methodology (superseded for the primary score):** 45% factor breadth + 40% factor conviction + 15% sector prominence, plus holdings-change adjustments. Do not use this older equation to interpret rankings from the current build.
+The 10 additional portfolio IDs are fetched for format/date diagnostics but remain excluded from company ranking until their factor/sector classification is verified. An incomplete refresh never overwrites the prior ranking or treats unavailable holdings as removals. Green GitHub Actions status means the job ran; check for `Saved ... company rankings` to confirm successful ingestion.

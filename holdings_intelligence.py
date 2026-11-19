@@ -113,13 +113,13 @@ def load_etf_performance(path=None):
 
 def rank_companies(current, previous=None, factor_ids=None, factor_category='factor',
                    sector_category='sector', performance_scores=None):
-    """50/50 performance-weighted sector/factor conviction plus up to 10 breadth points.
+    """Balanced sector/factor leadership with a consistency penalty and breadth bonus.
 
     Only verified score matches contribute to a performance component. If none
     are available, a neutral score of 50 is shown and flagged as provisional.
-    Missing factor/sector coverage is not scored zero; available side is
-    reweighted to 100%. Holdings change events are informational, not a
-    second unbounded bonus on the leadership score.
+    Balanced leadership requires verified sector AND factor coverage. Missing
+    data is never interpreted as zero; ineligible companies have no final rank.
+    Holdings change events are informational, not a second score bonus.
     """
     if factor_ids is None: factor_ids = GLOBAL_FACTORS if factor_category == 'global_factor' else FACTORS
     if current.empty: return pd.DataFrame(), pd.DataFrame()
@@ -155,11 +155,13 @@ def rank_companies(current, previous=None, factor_ids=None, factor_category='fac
         sg = sectors[sectors.issuer_id == issuer]
         fs, fn = component(fg); ss, sn = component(sg)
         available = [v for v in (ss, fs) if np.isfinite(v)]
-        # Explicitly neutral, NOT zero, when no performance source is available.
+        # Preserve a descriptive baseline, but do not rank incomplete profiles.
         alignment = float(np.mean(available)) if available else 50.0
+        balanced_eligible = bool(np.isfinite(ss) and np.isfinite(fs))
+        consistency_penalty = 0.20 * abs(ss - fs) if balanced_eligible else np.nan
+        balanced_base = 0.50 * ss + 0.50 * fs - consistency_penalty if balanced_eligible else np.nan
         etf_count = int(grp.portfolio_id.nunique())
         breadth_bonus = 10.0 * np.log1p(etf_count) / np.log1p(universe_size)
-        score = min(100.0, alignment + breadth_bonus)
         representative = grp.sort_values('weight', ascending=False).iloc[0]
         sector_rank = None; leader = False
         if not sg.empty:
@@ -182,6 +184,10 @@ def rank_companies(current, previous=None, factor_ids=None, factor_category='fac
             factor_alignment=round(fs, 2) if np.isfinite(fs) else np.nan,
             scored_sector_etfs=sn, scored_factor_etfs=fn,
             etf_count=etf_count, breadth_bonus=round(breadth_bonus, 2),
+            consistency_penalty=round(consistency_penalty, 2) if balanced_eligible else np.nan,
+            balanced_base_score=round(balanced_base, 2) if balanced_eligible else np.nan,
+            balanced_eligible=balanced_eligible,
+            coverage_status='Eligible' if balanced_eligible else 'Insufficient Coverage',
             performance_status='Verified' if fn + sn == etf_count else ('Partial' if fn + sn else 'Missing'),
             base_score=round(alignment, 2)))
     ranking = pd.DataFrame(rows)
@@ -207,10 +213,13 @@ def rank_companies(current, previous=None, factor_ids=None, factor_category='fac
                 current_as_of=str(b.as_of) if b is not None else '', points=0.))
     changes = pd.DataFrame(events)
     ranking['change_score'] = 0.0
-    ranking['final_score'] = (ranking.base_score + ranking.breadth_bonus).clip(0, 100).round(2)
-    ranking = ranking.sort_values(['final_score', 'etf_count', 'issuer_id'],
-                                  ascending=[False, False, True]).reset_index(drop=True)
-    ranking.insert(0, 'rank', np.arange(1, len(ranking) + 1))
+    ranking['final_score'] = (ranking.balanced_base_score + ranking.breadth_bonus).clip(0, 100).round(2)
+    # Missing either dimension is not a weak score: keep unranked and visible.
+    ranking = ranking.sort_values(['balanced_eligible', 'final_score', 'etf_count', 'issuer_id'],
+                                  ascending=[False, False, False, True], na_position='last').reset_index(drop=True)
+    ranking.insert(0, 'rank', pd.Series(pd.NA, index=ranking.index, dtype='Int64'))
+    eligible = ranking.balanced_eligible
+    ranking.loc[eligible, 'rank'] = np.arange(1, int(eligible.sum()) + 1)
     return ranking, changes
 
 def read_latest():
@@ -219,8 +228,10 @@ def read_latest():
 
 def leadership_state(row):
     """Descriptive state, not a prediction of price performance."""
+    if row.get('balanced_eligible') is False or row.get('coverage_status') == 'Insufficient Coverage':
+        return 'Insufficient Coverage'
     change = float(row.get('change_score', 0))
-    score = float(row.get('base_score', 0))
+    score = float(row.get('final_score', row.get('base_score', 0)))
     if change >= 3: return 'Strengthening leader' if score >= 35 else 'Emerging exposure'
     if change <= -3: return 'Weakening leader' if score >= 35 else 'Declining exposure'
     return 'Established leader' if score >= 35 else 'Stable / limited exposure'
@@ -279,6 +290,9 @@ def ranking_display_table(ranking, holdings, region='USA'):
         'factor_count':'Factor Fund Coverage', 'factor_conviction':'Relative Factor Weight',
         'sector_alignment':'Sector Alignment', 'factor_alignment':'Factor Alignment',
         'etf_count':'ETF Count', 'breadth_bonus':'ETF Breadth Bonus',
+        'consistency_penalty':'Consistency Penalty',
+        'balanced_base_score':'Balanced Base Score',
+        'coverage_status':'Balanced Coverage', 'balanced_eligible':'Balanced Eligible',
         'performance_status':'Performance Data Status',
         'sector_rank':'Sector Position', 'sector_leader':'Sector Leader',
         'base_score':'Base Score', 'change_score':'Holdings Change Score',
@@ -294,14 +308,16 @@ def render_leadership_tab(st, region, ranking, holdings):
     if ranking.empty:
         st.info(f'No verified {region} leadership rankings saved yet. Run the holdings refresh to populate this table.')
         return
-    st.caption('Sector alignment 50% · factor alignment 50% (reweighted if one is unavailable) · up to 10 ETF breadth bonus points. Missing performance data is explicitly flagged. Rankings measure ETF exposure, not company price leadership.')
+    st.caption('Balanced leadership = 50% sector alignment + 50% factor alignment − 20% of their absolute difference + up to 10 ETF breadth points (capped at 100). Both dimensions require verified scores; incomplete companies remain unranked. Measures ETF exposure, not company stock returns.')
     a,b,c = st.columns(3)
     a.metric('Ranked companies', f'{len(ranking):,}')
     b.metric('Verified iShares funds', region_holdings.portfolio_id.nunique())
     c.metric('Latest holdings as of', max(region_holdings.as_of.astype(str)) if not region_holdings.empty else 'N/A')
     ranking = ranking.copy()
+    if 'balanced_eligible' in ranking and (~ranking.balanced_eligible).any():
+        st.warning('Some companies lack scored sector or factor ETF exposure and are unranked (Insufficient Coverage). Eligible companies with Partial ETF score coverage remain provisional.')
     if 'performance_status' in ranking and (ranking.performance_status != 'Verified').any():
-        st.warning('Some ETF performance scores are missing. Rankings with Partial or Missing status are provisional; supply verified ETF performance scores to compare leaders and laggards.')
+        st.info('Some ETF performance scores are missing; check Performance Data Status before interpreting rankings.')
     ranking['Leadership state'] = ranking.apply(leadership_state, axis=1)
     controls = st.columns([2,2,1])
     query = controls[0].text_input(f'Search {region} company or ticker', key=f'{prefix}_leader_query')
