@@ -8,7 +8,7 @@ apply_global_design()
 # Grouped sidebar navigation. The selected page is stored in session state so
 # changing groups does not reset the current dashboard's other widgets.
 NAV_GROUPS = {
-    '🕸️ KNOWLEDGE GRAPH': ['Global Capital Intelligence Network'],
+    '🕸️ KNOWLEDGE GRAPHS': ['Global Capital Intelligence Network', 'Leading & Lagging Companies'],
     '🌐 GLOBAL INTELLIGENCE': ['Company Holdings Leadership'],
     '💼 COMPANY FINANCIALS': ['Company Financial Research', 'USA Company Financial KPI Intelligence', 'India Company Financial KPI Intelligence', 'India Fundamental Valuation'],
     '🌎 COUNTRY ANALYSIS': ['Global Countries'],
@@ -19,6 +19,7 @@ NAV_GROUPS = {
 }
 PAGE_LABELS = {
  'Global Capital Intelligence Network': 'Capital Network',
+ 'Leading & Lagging Companies': 'Leading & Lagging',
  'USA Company Financial KPI Intelligence': 'USA Financial KPIs',
  'India Company Financial KPI Intelligence': 'India Financial KPIs',
  'India Sector & Factor Financials': 'India Sector & Factor Financials',
@@ -28,7 +29,7 @@ PAGE_LABELS = {
  'Company Financial Research': 'USA Financial Research',
 }
 PAGE_ICONS = {
-    'Global Capital Intelligence Network': '🕸️',
+    'Global Capital Intelligence Network': '🕸️', 'Leading & Lagging Companies': '🔀',
     'Global Countries': '🌎',
     'Global Asset Flow': '🌍', 'USA Asset Flow': '🇺🇸', 'India Asset Flow': '🇮🇳',
     'Global Sectors': '🌍', 'USA Sector': '🇺🇸', 'India Sector': '🇮🇳',
@@ -88,6 +89,9 @@ st.markdown(f'<div class="app-topline"><span class="app-path">GLOBAL INDUSTRY  /
 if page == 'Global Capital Intelligence Network':
     from capital_network import render_capital_network
     render_capital_network()
+elif page == 'Leading & Lagging Companies':
+    from leading_lagging_ui import render_leading_lagging_graph
+    render_leading_lagging_graph()
 elif page == 'Company Holdings Leadership':
     from holdings_intelligence import render_holdings_intelligence
     render_holdings_intelligence()
