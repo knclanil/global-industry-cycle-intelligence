@@ -26,6 +26,7 @@ from india_valuation_reference import (
 from research_theme import apply_research_theme, PLOTLY_LAYOUT
 from india_financial_ui import _read
 from india_screener_statements import prepare_statement, prepare_source_table
+from india_screener_trends import render_screener_trends
 
 HOLDINGS = Path(__file__).resolve().parent / 'data' / 'india_holdings'
 
@@ -285,26 +286,7 @@ def render_india_kpi_intelligence():
                    'This is not validated FCFE or FCFF, and bank/NBFC valuations need different methods. '
                    'DCF values require at least three comparable annual FCF observations and share count.')
     with tabs[5]:
-        freq=st.radio('Reporting frequency', ['Annual', 'Quarterly'],horizontal=True,key='india_kpi_reference_frequency')
-        if freq=='Annual':
-            sales_hist=series_for(tables,'Profit & Loss',[r'^Sales\s*\+?$',r'^Revenue'])
-            profit_hist=series_for(tables,'Profit & Loss',[r'^Net Profit\s*\+?$'])
-            op_hist=series_for(tables,'Profit & Loss',[r'^Operating Profit\s*\+?$'])
-            cfo_hist=series_for(tables,'Cash Flows',[r'^Cash from Operating Activit'])
-            borrow_hist=series_for(tables,'Balance Sheet',[r'^Borrowings\s*\+?$'])
-            st.caption('Screener annual consolidated values shown in ₹ crore; periods are source-labelled.')
-            a,b=st.columns(2)
-            with a: metric_plot('Revenue & earnings', [('Sales',sales_hist),('Net profit',profit_hist),('Operating profit',op_hist)])
-            with b: metric_plot('Operating cash flow & borrowings',[('Cash from operations',cfo_hist),('Borrowings',borrow_hist)])
-        else:
-            quarters=tables.get('Quarterly Results')
-            st.caption('Quarterly figures from Screener consolidated results if accessible. '
-                       'No annual totals are reclassified as individual quarters.')
-            q_sales=row_series(quarters,[r'^Sales\s*\+?$',r'^Revenue'])
-            q_profit=row_series(quarters,[r'^Net Profit\s*\+?$'])
-            q_op=row_series(quarters,[r'^Operating Profit\s*\+?$'])
-            metric_plot('Quarterly sales & earnings',[('Sales',q_sales),('Net profit',q_profit),('Operating profit',q_op)])
-        st.caption('No missing reporting periods are replaced with zero. Cash flows and balance-sheet values are annual unless explicit quarterly values are provided.')
+        render_screener_trends(tables)
     with tabs[6]:
         st.markdown('#### Metric provenance')
         st.dataframe(pd.DataFrame([{'Metric': k.replace('_',' ').title(),
