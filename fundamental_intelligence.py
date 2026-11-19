@@ -29,11 +29,34 @@ TAGS = {
     'shares':['CommonStockSharesOutstanding'],
 }
 
-def sec_headers():
+def get_sec_user_agent():
+    """Resolve SEC identity from process environment or Streamlit secrets.
+
+    Do not expose the secret in logs or the dashboard.
+    """
     identity = os.environ.get('SEC_USER_AGENT', '').strip()
+    if identity:
+        return identity
+    try:
+        import streamlit as st
+        identity = str(st.secrets.get('SEC_USER_AGENT', '')).strip()
+        if identity:
+            return identity
+        # Also support secrets organized under a [sec] TOML section.
+        section = st.secrets.get('sec', {})
+        return str(section.get('user_agent', '')).strip()
+    except (ImportError, KeyError, AttributeError, OSError, ValueError):
+        return ''
+
+
+def sec_headers():
+    identity = get_sec_user_agent()
     if not identity or '@' not in identity:
-        raise ValueError('Configure SEC_USER_AGENT with a descriptive application name and contact email before refreshing SEC data.')
-    return {'User-Agent':identity, 'Accept-Encoding':'gzip, deflate', 'Accept':'application/json'}
+        raise ValueError(
+            'SEC identity is unavailable to this process. Verify SEC_USER_AGENT '
+            'in the running Streamlit app environment or secrets (not only GitHub Actions).'
+        )
+    return {'User-Agent': identity, 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json'}
 
 def sec_get(path):
     response = requests.get(path, headers=sec_headers(), timeout=25)
@@ -348,7 +371,7 @@ def render_fundamental_intelligence():
         return
     with st.expander('Data refresh and coverage',expanded=False):
         st.write('US annual XBRL statements are retrieved from SEC EDGAR on demand. Global filings require an approved provider; unavailable coverage is marked missing.')
-        st.caption('Set SEC_USER_AGENT in Streamlit secrets/environment (application name and contact email). Refresh is limited to 20 new issuers per click.')
+        st.caption('SEC identity: ' + ('configured' if get_sec_user_agent() and '@' in get_sec_user_agent() else 'unavailable to this app') + '. Background refresh is recommended for large universes.')
         if st.button('Refresh up to 20 US issuer filings'):
             try:
                 directory = company_directory()
@@ -424,14 +447,23 @@ def render_fundamental_intelligence():
             st.markdown('#### Financial statements and historical trends')
             cols = [x for x in ['period_end','revenue','operating_income','net_income','assets','liabilities','equity','cash','operating_cash_flow','capex','free_cash_flow','debt','revenue_growth','operating_margin','fcf_margin'] if x in statements]
             st.dataframe(statements[cols].sort_values('period_end',ascending=False),hide_index=True,use_container_width=True)
-            st.line_chart(statements.set_index('period_end')[['revenue','net_income','free_cash_flow']])
+            chart = statements[['period_end', 'revenue', 'net_income', 'free_cash_flow']].copy()
+            chart['period_end'] = pd.to_datetime(chart['period_end'], errors='coerce')
+            chart = chart.dropna(subset=['period_end']).sort_values('period_end')
+            chart = chart.drop_duplicates(subset=['period_end'], keep='last').tail(10)
+            if not chart.empty:
+                chart = chart.set_index('period_end')[['revenue', 'net_income', 'free_cash_flow']] / 1_000_000_000
+                st.caption('USD billions · fiscal year end · oldest to newest')
+                st.line_chart(chart)
             with st.expander('Audit trail — source filing accession, taxonomy and filing date'):
                 trace_cols = ['period_end']+[c for c in statements if c.endswith(('_filed','_accession','_tag'))]
                 st.dataframe(statements[trace_cols],hide_index=True,use_container_width=True)
         st.markdown('#### Official SEC filings')
         if st.button('Load latest filing index'):
             try:st.session_state[f'filings_{row.cik}'] = filing_list(row.cik)
-            except Exception as exc:st.error(f'Filing index unavailable: {exc}')
+            except requests.HTTPError as exc: st.error(f'SEC filing request failed (HTTP {exc.response.status_code if exc.response is not None else "unknown"}). Please retry later.')
+            except requests.RequestException as exc: st.error(f'SEC filing network request failed: {type(exc).__name__}.')
+            except Exception as exc: st.error(f'Filing index unavailable: {exc}')
         filings = st.session_state.get(f'filings_{row.cik}')
         if filings is not None and not filings.empty:
             st.dataframe(filings,hide_index=True,use_container_width=True,column_config={'url':st.column_config.LinkColumn('Read original filing')})
