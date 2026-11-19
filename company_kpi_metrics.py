@@ -197,22 +197,51 @@ def render_company_kpi_metrics():
         from asset_valuation import render_asset_valuation
         render_asset_valuation(data, selected, assets, liabilities, equity, ca, net, eps, fcf, bank=bank)
     with tab_trends:
-        st.markdown('### Historical KPI trends')
-        hist = sorted(set(inc.columns) | set(bs.columns) | set(cf.columns), reverse=True)[:10]
-        _chart('Revenue, operating income & net income', hist,
-               [(label, [(_value(inc, label, p) / 1e9 if _value(inc, label, p) is not None else None) for p in hist])
-                for label in ('Revenue', 'Operating income', 'Net income')])
-        _chart('Margins', hist,
-               [(label, [(_ratio(_value(inc, numerator, p), _value(inc, 'Revenue', p)) * 100
-                         if _ratio(_value(inc, numerator, p), _value(inc, 'Revenue', p)) is not None else None) for p in hist])
-                for label, numerator in [('Gross margin', 'Gross profit'), ('Operating margin', 'Operating income'), ('Net margin', 'Net income')]], 'percent')
-        _chart('Cash flow and long-term debt', hist,
-               [(label, [(_value(source, tag, p) / 1e9 if _value(source, tag, p) is not None else None) for p in hist])
-                for label, source, tag in [('Operating cash flow', cf, 'Operating cash flow'),
-                                           ('Free cash flow', cf, 'Free cash flow'),
-                                           ('Long-term debt', bs, 'Long-term debt')]])
-        st.markdown('### Valuation & market data')
-        st.info('Market cap, enterprise value, P/E, EV/EBITDA, FCF yield, forward estimates and dividend yield are not calculated here because the existing SEC-only source does not provide verified current prices. No placeholder prices are invented.')
+        st.markdown('### Financial performance trends')
+        frequency = st.radio('Reporting frequency', ['Annual', 'Quarterly'],
+                             horizontal=True, key='kpi_trends_frequency')
+        if frequency == 'Quarterly':
+            st.caption('Standalone fiscal quarters from SEC 10-Q filings. Cash flow is shown only when a verified standalone quarter is available; missing quarters are not estimated.')
+            q_count = st.select_slider('Quarters to display', options=[4, 8, 12, 16, 20], value=12,
+                                       key='kpi_trends_quarters')
+            try:
+                quarterly = statements(data, 'quarterly', q_count, ticker=ticker)
+                t_inc, t_bs, t_cf = (quarterly[k][0] for k in ('Income Statement', 'Balance Sheet', 'Cash Flow'))
+            except Exception as exc:
+                st.warning(f'Quarterly financial statements unavailable: {exc}')
+                t_inc, t_bs, t_cf = pd.DataFrame(), pd.DataFrame(), pd.DataFrame()
+            hist = sorted(set(t_inc.columns) | set(t_bs.columns) | set(t_cf.columns), reverse=True)[:q_count]
+            if hist:
+                st.caption('Period labels are actual SEC reporting end dates. 10-K-only fourth-quarter flow data may be absent; no annual totals are treated as quarterly amounts.')
+        else:
+            t_inc, t_bs, t_cf = inc, bs, cf
+            years = st.select_slider('Years to display', options=[3, 5, 7, 10], value=10,
+                                     key='kpi_trends_years')
+            hist = sorted(set(inc.columns) | set(bs.columns) | set(cf.columns), reverse=True)[:years]
+        if not hist:
+            st.info(f'No verified {frequency.lower()} trend data available for this company.')
+        else:
+            left, right = st.columns(2, gap='medium')
+            with left:
+                _chart('Revenue & earnings', hist,
+                       [(label, [(_value(t_inc, label, p) / 1e9 if _value(t_inc, label, p) is not None else None) for p in hist])
+                        for label in ('Revenue', 'Operating income', 'Net income')])
+            with right:
+                _chart('Profit margins', hist,
+                       [(label, [(_ratio(_value(t_inc, numerator, p), _value(t_inc, 'Revenue', p)) * 100
+                                  if _ratio(_value(t_inc, numerator, p), _value(t_inc, 'Revenue', p)) is not None else None) for p in hist])
+                        for label, numerator in [('Gross margin', 'Gross profit'), ('Operating margin', 'Operating income'), ('Net margin', 'Net income')]], 'percent')
+            left, right = st.columns(2, gap='medium')
+            with left:
+                _chart('Operating & free cash flow', hist,
+                       [(label, [(_value(t_cf, label, p) / 1e9 if _value(t_cf, label, p) is not None else None) for p in hist])
+                        for label in ('Operating cash flow', 'Free cash flow')])
+            with right:
+                _chart('Cash & long-term debt', hist,
+                       [(label, [(_value(t_bs, label, p) / 1e9 if _value(t_bs, label, p) is not None else None) for p in hist])
+                        for label in ('Cash and equivalents', 'Long-term debt')])
+        with st.expander('Trend methodology and limitations'):
+            st.markdown('Quarterly income and cash-flow observations use 10-Q facts with approximately 65–110 day durations. Balance-sheet facts are point-in-time. Missing Q4 standalone flows are not synthesized from annual reports. The debt line represents **long-term debt**, not total debt. Missing values remain gaps, never zeros. Historical values may be restated in subsequent SEC filings.')
     with tab_summary:
         _card_group('At a glance', [
             ('Revenue', rev, 'money', 'Reported annual revenue'),
