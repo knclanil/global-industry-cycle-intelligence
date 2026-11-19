@@ -21,7 +21,7 @@ This release preserves **Company Financial Research (US)**, **Company Financial 
 1. Deploy the **contents** of `nightly_build/` to the GitHub repository **root**. Do not delete the existing `data/india_holdings/` tree; it holds your 31 verified source snapshots and history.
 2. Verify `requirements.txt` includes `yfinance`, pandas, Plotly and Streamlit.
 3. First run **Actions → India NSE Constituents Refresh**. The `data/india_holdings/build_summary.json` file should show `loaded_indices` greater than zero. Your previous result of **31 indices, 328 unique securities and 975 index memberships** was provided in conversation; **these actual NSE records were not included in this ZIP**.
-4. If you have rights to retrieve and display Yahoo-derived data in your target deployment, run **Actions → India Company Financials Refresh → Run workflow**. Default batch is **25 companies**, and the workflow's optional `symbols` input supports e.g. `RELIANCE,TCS,INFY` for targeted collection.
+4. If you have rights to retrieve and display Yahoo-derived data in your target deployment, run **Actions → India Company Financials Refresh → Run workflow**. Default run attempts **the full eligible NSE universe** (`limit=0`), and the workflow's optional `symbols` input supports e.g. `RELIANCE,TCS,INFY` for targeted collection.
 5. The workflow saves `data/india_financials/companies/<hashed-company-key>.json`, a company KPI summary CSV, a source-index/factor-family financial summary CSV, and detailed status/coverage files. It commits the results. Verify these outputs and your usage rights before enabling collection into any public repository.
 6. Restart Streamlit. Under the existing navigation, open **Global Intelligence → India Company Financial KPIs** and **Factor Analysis → India Sector & Factor Financials**.
 
@@ -34,7 +34,7 @@ This release preserves **Company Financial Research (US)**, **Company Financial 
 python scripts/refresh_india_financials.py --symbols RELIANCE --limit 1
 
 # Gradually process the universe; successful snapshots are not refetched for 14 days
-python scripts/refresh_india_financials.py --limit 25
+python scripts/refresh_india_financials.py --limit 0
 
 # Recompute the summary CSVs from existing snapshots without any Yahoo calls
 python scripts/refresh_india_financials.py --rebuild-only
@@ -84,3 +84,8 @@ data/india_financials/
 ### Verification
 
 Unit tests use **synthetic fixtures only**. Their test numbers are not production financial facts. The code was verified for compilation and tested locally with mocked Yahoo financial statements. No live Yahoo/NSE call or deployed Streamlit screenshot was run in the package-building environment.
+
+
+## Live direct ticker research (MGL example)
+
+The **India Company Financial KPIs** page now includes a **Direct NSE ticker** mode (e.g. `MGL` or `MGL.NS`). Click **Fetch live Yahoo financials** to request annual and quarterly statements on demand; the page remains fast on ordinary reruns and falls back to the last saved statement when Yahoo rejects the request. NSE constituent membership is never invented for ad-hoc tickers. The GitHub financial refresh action accepts `limit=0` for the entire eligible NSE universe, and optional `symbols=MGL` for one ticker even if it is not in the index snapshot. For details see `INDIA_LIVE_FINANCIALS_SETUP.md`.

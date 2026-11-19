@@ -4,7 +4,7 @@
 This batch job is the ONLY component that contacts Yahoo. Streamlit reads
 persisted, individually keyed company snapshots for fast page loading.
 
-  python scripts/refresh_india_financials.py --limit 25
+  python scripts/refresh_india_financials.py --limit 0   # all verified NSE issuers
   python scripts/refresh_india_financials.py --symbols RELIANCE,TCS,INFY --force
   python scripts/refresh_india_financials.py --rebuild-only
 
@@ -140,7 +140,7 @@ def fetch_yahoo_company(company: dict) -> dict:
     }
     return {
         'schema_version': 1, 'company_key': company['company_key'],
-        'symbol': sym, 'company_name': company['company_name'],
+        'symbol': sym, 'company_name': str(info.get('longName') or info.get('shortName') or company['company_name']),
         'isin': company.get('isin', ''), 'industry': company.get('industry', ''),
         'sector': str(info.get('sector') or ''), 'yahoo_ticker': ticker_name,
         'currency': str(info.get('financialCurrency') or '').upper(),
@@ -201,15 +201,23 @@ def rebuild_exports(companies: list[dict], root: Path = DATA) -> dict:
     return manifest
 
 
-def refresh(companies_csv: Path = COMPANIES_CSV, root: Path = DATA, limit=25, stale_days=14,
+def refresh(companies_csv: Path = COMPANIES_CSV, root: Path = DATA, limit=0, stale_days=14,
             symbols: set[str] | None = None, force=False, delay=1.2, fetcher=fetch_yahoo_company):
     companies = _read_csv(Path(companies_csv))
-    if not companies:
+    if not companies and symbols:
+        companies = []  # Direct-ticker research can run without an NSE constituent cache.
+    elif not companies:
         raise RuntimeError(f'No NSE companies found in {companies_csv}. Run India NSE Constituents Refresh first; no demo values will be substituted.')
     if symbols:
+        # A directly requested .NS ticker may not appear in the 31 NSE index
+        # constituent lists. Collect it as a clearly unverified research ticker;
+        # NEVER fabricate index membership or merge it into sector/factor cohorts.
         unknown = symbols - {str(c.get('symbol') or '').upper() for c in companies}
-        if unknown:
-            raise ValueError('Symbols not in verified NSE universe: ' + ', '.join(sorted(unknown)))
+        for symbol in sorted(unknown):
+            sym = safe_symbol(symbol)
+            companies.append({'company_key': 'TICKER:' + sym, 'symbol': sym,
+                              'company_name': sym, 'isin': '', 'industry': ''})
+            print(f'AD HOC: {sym}.NS (not a verified NSE constituent)', flush=True)
     seen: dict[str, dict] = {}
     for company in companies:
         if company.get('company_key'):
@@ -243,7 +251,7 @@ def refresh(companies_csv: Path = COMPANIES_CSV, root: Path = DATA, limit=25, st
                     continue
             except (KeyError, ValueError):
                 pass
-        if refreshed >= limit:
+        if limit > 0 and refreshed >= limit:
             break
         refreshed += 1
         try:
@@ -266,6 +274,10 @@ def refresh(companies_csv: Path = COMPANIES_CSV, root: Path = DATA, limit=25, st
                 'snapshot_utc': previous.get('retrieved_utc', '') if previous else '',
             }
             print(f"FAILED {company['symbol']}: {type(exc).__name__}: {str(exc)[:140]}", flush=True)
+        if refreshed and refreshed % 20 == 0:
+            _atomic_csv(root / 'refresh_status.csv', sorted(by_key.values(), key=lambda x: x['symbol']), STATUS_FIELDS)
+            partial = rebuild_exports(companies, root)
+            print(f'CHECKPOINT: {refreshed} attempted; {partial["cached_company_snapshots"]} total cached', flush=True)
         if delay > 0:
             time.sleep(delay)
     _atomic_csv(root / 'refresh_status.csv', sorted(by_key.values(), key=lambda x: x['symbol']), STATUS_FIELDS)
@@ -278,9 +290,9 @@ def refresh(companies_csv: Path = COMPANIES_CSV, root: Path = DATA, limit=25, st
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--limit', type=int, default=25, help='Max companies attempted this run (default 25)')
+    p.add_argument('--limit', type=int, default=0, help='Max attempted, 0 = ALL eligible companies (default: all)')
     p.add_argument('--stale-days', type=int, default=14)
-    p.add_argument('--symbols', type=str, default='', help='Comma-separated NSE symbols; must belong to universe')
+    p.add_argument('--symbols', type=str, default='', help='Comma-separated .NS tickers, even outside the verified NSE index universe')
     p.add_argument('--force', action='store_true')
     p.add_argument('--delay', type=float, default=1.2)
     p.add_argument('--rebuild-only', action='store_true', help='Recompute views from existing cached data')
@@ -289,8 +301,8 @@ def main():
     args = p.parse_args()
     symbols = set(safe_symbol(x) for x in args.symbols.split(',') if x.strip()) or None
     companies = _read_csv(args.companies_csv)
-    if not companies:
-        raise SystemExit('ERROR: companies.csv empty/missing; run India NSE Constituents Refresh first')
+    if not companies and not symbols:
+        raise SystemExit('ERROR: companies.csv empty/missing; run India NSE Constituents Refresh first, or specify --symbols for direct ticker research')
     if args.rebuild_only:
         report = rebuild_exports(companies, args.data_dir)
     else:

@@ -3,9 +3,9 @@ on:
   workflow_dispatch:
     inputs:
       limit:
-        description: 'Maximum companies to attempt this run (25 default, up to full universe)'
+        description: 'Max companies to attempt; 0 means entire eligible NSE universe'
         required: false
-        default: '25'
+        default: '0'
       symbols:
         description: 'Optional comma-separated NSE symbols (for example RELIANCE,TCS,INFY)'
         required: false
@@ -21,7 +21,7 @@ concurrency:
 jobs:
   financials:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 180
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -34,10 +34,17 @@ jobs:
       - name: Refresh Indian company financial snapshots
         env:
           PYTHONUNBUFFERED: '1'
-          BATCH_LIMIT: ${{ github.event.inputs.limit || '25' }}
+          BATCH_LIMIT: ${{ github.event.inputs.limit || '0' }}
           NSE_SYMBOLS: ${{ github.event.inputs.symbols || '' }}
         run: |
-          python scripts/refresh_india_financials.py --limit "$BATCH_LIMIT" --symbols "$NSE_SYMBOLS"
+          # Stop collection before the job hard timeout, leaving time to commit checkpoints.
+          timeout --signal=TERM --kill-after=30s 160m python scripts/refresh_india_financials.py --limit "$BATCH_LIMIT" --symbols "$NSE_SYMBOLS" || status=$?
+          if [ "${status:-0}" -eq 124 ]; then
+            echo "Collection time budget reached; committing all saved checkpoints."
+          elif [ "${status:-0}" -ne 0 ]; then
+            echo "Financial collection exited with status ${status}; see logs and committed diagnostics."
+            exit "$status"
+          fi
       - name: Financial collection report
         if: always()
         run: |

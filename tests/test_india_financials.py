@@ -114,3 +114,42 @@ def test_mock_batch_persistence_and_second_run_skip(tmp_path):
     assert len(runs) == 1
     assert (root / 'company_financial_summary.csv').is_file()
     assert (root / 'index_financial_summary.csv').is_file()
+
+
+def test_full_universe_refresh_has_no_25_company_cap(tmp_path):
+    """The full refresh attempts all eligible records and saves their KPI summaries."""
+    root = tmp_path / 'financials'
+    directory = tmp_path / 'holdings'
+    directory.mkdir()
+    companies = directory / 'companies.csv'
+    with companies.open('w', newline='', encoding='utf-8') as f:
+        writer = csv.DictWriter(f, fieldnames=['company_key', 'symbol', 'company_name', 'isin', 'industry'])
+        writer.writeheader()
+        for i in range(27):
+            writer.writerow({'company_key': f'ISIN:INTEST{i:05}', 'symbol': f'TEST{i}',
+                             'company_name': f'Company {i}', 'isin': f'INTEST{i:05}', 'industry': 'Test'})
+    fetched = []
+    def stub(row):
+        fetched.append(row['symbol'])
+        return make_document(row['company_key'], row['symbol'])
+    stats = refresh(companies, root, limit=0, delay=0, fetcher=stub)
+    assert stats['attempted_this_run'] == 27
+    assert stats['cached_company_snapshots'] == 27
+    assert len(fetched) == 27
+    assert (root / 'refresh_status.csv').exists()
+
+
+def test_direct_ticker_research_is_not_disguised_as_nse_membership(tmp_path):
+    root = tmp_path / 'financials'
+    not_existing = tmp_path / 'no_companies.csv'
+    def stub(row):
+        assert row['company_key'] == 'TICKER:MGL'
+        assert row['symbol'] == 'MGL'
+        assert row.get('isin', '') == ''
+        return make_document(row['company_key'], row['symbol'])
+    stats = refresh(not_existing, root, limit=0, symbols={'MGL'}, delay=0, fetcher=stub)
+    assert stats['cached_company_snapshots'] == 1
+    assert stats['successful_this_run'] == 1
+    saved = __import__('india_financial_data').load_company('TICKER:MGL', root)
+    assert saved['symbol'] == 'MGL'
+    assert saved['company_key'].startswith('TICKER:')

@@ -21,6 +21,7 @@ from india_financial_data import (
     safe_symbol, screener_url,
 )
 from research_theme import PLOTLY_LAYOUT, apply_research_theme
+from scripts.refresh_india_financials import fetch_yahoo_company
 
 BASE = Path(__file__).resolve().parent
 HOLDINGS = BASE / 'data' / 'india_holdings'
@@ -50,6 +51,21 @@ def _snapshot(path: str, mtime_ns: int) -> dict:
         return json.loads(Path(path).read_text(encoding='utf-8'))
     except (ValueError, OSError):
         return {}
+
+
+@st.cache_data(show_spinner=False, ttl=900, max_entries=36)
+def _fetch_live_company(company_key: str, symbol: str, name: str, isin: str,
+                        industry: str, refresh_nonce: int = 0) -> dict:
+    """A single, user-triggered Yahoo request. Never run on ordinary rerenders.
+
+    Cached for 15 minutes per company/refresh nonce. NSE constituent identifiers
+    come from locally verified holdings; ticker-only research is explicitly marked.
+    No Screener data is scraped, and no live result is silently committed to Git.
+    """
+    return fetch_yahoo_company({
+        'company_key': company_key, 'symbol': safe_symbol(symbol),
+        'company_name': name, 'isin': isin, 'industry': industry,
+    })
 
 
 def _num(value):
@@ -127,10 +143,12 @@ def _header(kicker: str, title: str, subtitle: str):
 
 
 def _source_buttons(symbol: str):
-    c1, c2 = st.columns(2)
-    c1.link_button('↗ Screener · consolidated statements', screener_url(symbol), use_container_width=True)
-    c2.link_button('↗ Yahoo Finance · financial statements', f'https://finance.yahoo.com/quote/{symbol}.NS/financials/', use_container_width=True)
-    st.caption('Screener is a separate external research source, not a source copied into this dashboard. '
+    c1, c2, c3, c4 = st.columns(4)
+    c1.link_button('↗ Screener · consolidated', screener_url(symbol), use_container_width=True)
+    c2.link_button('↗ Yahoo · Income', f'https://finance.yahoo.com/quote/{symbol}.NS/financials/', use_container_width=True)
+    c3.link_button('↗ Yahoo · Balance', f'https://finance.yahoo.com/quote/{symbol}.NS/balance-sheet/', use_container_width=True)
+    c4.link_button('↗ Yahoo · Cash flow', f'https://finance.yahoo.com/quote/{symbol}.NS/cash-flow/', use_container_width=True)
+    st.caption('Screener is an external consolidated-financial reference; its contents are not copied into this dashboard. '
                'Yahoo statement scope (consolidated vs standalone) may differ from Screener. Do not compare them as identical without verification.')
 
 
@@ -189,39 +207,104 @@ def _statement_view(payload: dict, frequency: str):
 def render_india_company_kpis():
     _style()
     _header('INDIA · FINANCIAL RESEARCH', 'India Company Financial KPIs',
-            'NSE constituent universe · Cached Yahoo financial statements · India-specific INR / crore formatting')
+            'Live Yahoo Finance on demand · NSE index membership · INR crore · Screener consolidated reference')
     companies = _read(HOLDINGS, 'companies.csv')
     memberships = _read(HOLDINGS, 'constituents.csv')
     summary = _read(DATA, 'company_financial_summary.csv')
-    if companies.empty or 'company_key' not in companies:
-        st.warning('No Indian constituent directory found. Run India NSE Constituents Refresh before financial-data collection.')
-        return
-    companies = companies.drop_duplicates(subset=['company_key'])
-    company_map = {row['company_key']: row for _, row in companies.iterrows()}
+    company_map = {}
+    if not companies.empty and 'company_key' in companies and 'symbol' in companies:
+        companies = companies.drop_duplicates(subset=['company_key'])
+        company_map = {row['company_key']: row for _, row in companies.iterrows()}
     keys = list(company_map)
-    if not keys:
-        st.info('No NSE companies available.')
-        return
+
+    # Direct ticker research is deliberately independent of the NSE holdings cache:
+    # MGL.NS must be available for research even when it is not among the 328
+    # currently collected members. The ticker still undergoes strict validation.
     requested_symbol = str(st.session_state.get('india_financial_symbol', '')).strip().upper()
-    default = next((i for i,k in enumerate(keys) if company_map[k]['symbol'] == requested_symbol), 0)
-    c1, c2, c3 = st.columns([3.1, 1.2, 1.25])
-    selection = c1.selectbox('NSE company (all tracked constituents)', keys,
-        index=default, format_func=lambda k: f"{company_map[k]['symbol']}  ·  {company_map[k]['company_name']}",
-        key='india_financial_select')
-    frequency = c2.selectbox('Reporting', ['annual','quarterly'], format_func=str.title, key='india_fin_freq')
-    company = company_map[selection]
-    symbol = company['symbol']
+    options = ['NSE holdings directory', 'Direct NSE ticker'] if keys else ['Direct NSE ticker']
+    if not keys:
+        st.info('No saved NSE constituent directory is available in this deployment. '
+                'Direct ticker research remains available through Yahoo Finance.')
+    source = st.radio('Company selection', options, horizontal=True, key='india_fin_company_source')
+    left, right = st.columns([3.4, 1.0])
+    if source == 'NSE holdings directory':
+        default = next((i for i, k in enumerate(keys)
+                        if company_map[k].get('symbol', '').upper() == requested_symbol), 0)
+        selection = left.selectbox('NSE company · all tracked constituents', keys,
+            index=default, format_func=lambda k: f"{company_map[k]['symbol']}  ·  {company_map[k]['company_name']}",
+            key='india_financial_select')
+        company = dict(company_map[selection])
+    else:
+        direct = left.text_input('NSE ticker · e.g. MGL or MGL.NS',
+                                 value=requested_symbol or 'MGL', key='india_fin_direct_ticker')
+        direct = direct.strip().upper()
+        if direct.endswith('.NS'):
+            direct = direct[:-3]
+        try:
+            symbol_validated = safe_symbol(direct)
+        except ValueError as exc:
+            st.error(str(exc))
+            return
+        matched = next((dict(c) for c in company_map.values()
+                        if c.get('symbol', '').upper() == symbol_validated), None)
+        company = matched or {'company_key': 'TICKER:' + symbol_validated,
+                              'symbol': symbol_validated, 'company_name': symbol_validated,
+                              'isin': '', 'industry': ''}
+        selection = company['company_key']
+    symbol = safe_symbol(company['symbol'])
+    frequency = right.selectbox('Reporting', ['annual', 'quarterly'], format_func=str.title,
+                                key='india_fin_freq')
+
     company_path = company_file(selection)
-    payload = _snapshot(str(company_path), _mtime(company_path))
-    c3.metric('Financial data', 'Cached' if payload else 'Pending')
+    disk_payload = _snapshot(str(company_path), _mtime(company_path))
+    if disk_payload and (disk_payload.get('company_key') != selection or disk_payload.get('symbol') != symbol):
+        disk_payload = {}
+    live_payloads = st.session_state.setdefault('india_live_payloads', {})
+    active_live = live_payloads.get(selection, {})
+    if active_live and (active_live.get('company_key') != selection or active_live.get('symbol') != symbol):
+        active_live = {}
+    payload = active_live or disk_payload
+    controls, indicator, extra = st.columns([1.8, 1.1, 2.7])
+    with controls:
+        fetch_clicked = st.button('⚡ Fetch live Yahoo financials', type='primary',
+                                  use_container_width=True, key='india_live_yahoo_button')
+    indicator.metric('Financial statements', 'Live' if active_live else 'Saved' if disk_payload else 'Not loaded')
+    with extra:
+        st.caption('Live request is made **only when you click**. Data is reused in this session; '
+                   'background GitHub refresh saves financial snapshots for sector/factor comparisons.')
+    if fetch_clicked:
+        with st.spinner(f'Requesting {symbol}.NS financial statements from Yahoo Finance…'):
+            try:
+                nonce = st.session_state.get('india_live_nonce', {}).get(selection, 0) + 1
+                st.session_state.setdefault('india_live_nonce', {})[selection] = nonce
+                refreshed = _fetch_live_company(selection, symbol, company['company_name'],
+                                                 company.get('isin', ''), company.get('industry', ''), nonce)
+                if not any(refreshed.get('statements', {}).get(frequency, {}).values()):
+                    st.warning(f'Yahoo returned no {frequency} statements for {symbol}. '
+                               'Try the other reporting frequency or view the provider links below.')
+                live_payloads[selection] = refreshed
+                payload = refreshed
+                st.success(f'Loaded Yahoo financial data for {symbol}.NS. '
+                           'This live session snapshot is not automatically committed to GitHub.')
+            except Exception as exc:
+                st.error(f'Yahoo financial request failed for {symbol}.NS: '
+                         f'{type(exc).__name__}: {str(exc)[:300]}')
+                if disk_payload:
+                    st.info('Showing the previously saved financial statements instead.')
+                    payload = disk_payload
+                else:
+                    payload = active_live
     if not payload:
-        st.warning(f'No saved Yahoo financial statements for {symbol} yet. '
-                   'Run **GitHub Actions → India Company Financials Refresh** with symbol '
-                   f'`{symbol}` or use the regular 25-company batches. The page does not contact Yahoo live.')
+        st.info(f'No cached financial statements for {symbol}.NS. '
+                '**Click Fetch live Yahoo financials** to request this company now. '
+                'No 25-company batch is required for individual research.')
         _source_buttons(symbol)
-        if not summary.empty:
-            st.caption(f'{len(summary)} of {len(companies)} companies have a saved financial snapshot.')
+        st.caption(f'Saved financial snapshots: {len(summary)} / '
+                   f'{len(companies) if not companies.empty else 0} NSE constituent companies. '
+                   'Yahoo may reject or omit requests, especially during rate limits.')
         return
+    if selection.startswith('TICKER:'):
+        st.caption('Direct-ticker research: this security has not been verified against the saved NSE holdings directory.')
     if payload.get('company_key') != selection:
         st.error('Cached financial record does not match selected NSE company identity.')
         return
@@ -237,7 +320,7 @@ def render_india_company_kpis():
     metrics = result['metrics']
     cur = payload.get('currency') or 'unknown'
     quote_cur = (payload.get('quote') or {}).get('currency') or 'unknown'
-    st.markdown(f'### {escape(company["company_name"])} · {escape(symbol)}')
+    st.markdown(f'### {escape(payload.get("company_name") or company["company_name"])} · {escape(symbol)}')
     st.caption(f"ISIN {company.get('isin') or 'N/A'} · Yahoo {payload.get('yahoo_ticker')} · "
                f"Financial currency {cur} · Snapshot {payload.get('retrieved_utc') or 'unknown'} · "
                f"Fiscal period {period}")
@@ -580,4 +663,4 @@ def render_india_sector_factor_financials():
                     'Yahoo Finance via yfinance: annual/quarterly company statements and cached price reference. '
                     'Screener.in: direct consolidated report for independent research, not scraped or republished. '
                     'Unpublished constituent weights remain unknown. Company financials may be standalone or consolidated depending on Yahoo; scope is not assumed.')
-        st.caption('Run the scheduled GitHub Actions refresh to update provider snapshots without blocking the Streamlit app.')
+        st.caption('GitHub Actions can refresh the full NSE universe (no 25-company limit). For a single company, use India Company Financial KPIs → Fetch live Yahoo financials.')
