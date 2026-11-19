@@ -68,3 +68,29 @@ def prepare_statement(frame: pd.DataFrame | None, periods: int = 8) -> pd.DataFr
     for col in result.columns[1:]:
         result[col] = result[col].map(_cell)
     return result.reset_index(drop=True)
+
+
+def prepare_source_table(frame: pd.DataFrame | None, periods: int = 8,
+                         *, financial: bool = False) -> pd.DataFrame:
+    """Normalize Screener tables for display without changing their data.
+
+    Financial and shareholder-period tables select the latest N dated columns.
+    Peer comparison preserves all fields and companies instead.
+    """
+    if frame is None or frame.empty:
+        return pd.DataFrame()
+    if financial:
+        return prepare_statement(frame, periods=periods)
+    frame = frame.copy()
+    frame.columns = [str(c).strip() for c in frame.columns]
+    if len(frame.columns) > 1:
+        period_cols = [c for c in frame.columns[1:] if _PERIOD_RE.fullmatch(str(c).strip())]
+        if period_cols:
+            period_cols = sorted(period_cols, key=lambda c: _period_order(str(c)))
+            if periods > 0:
+                period_cols = period_cols[-periods:]
+            frame = frame.loc[:, [frame.columns[0]] + period_cols].copy()
+    # Source supplied percentages, ownership counts, P/E and price are NOT INR crore.
+    for c in frame.columns:
+        frame[c] = frame[c].map(lambda v: 'N/A' if pd.isna(v) or str(v).strip() in ('', 'nan', 'None') else str(v).strip())
+    return frame.reset_index(drop=True)

@@ -25,7 +25,7 @@ from india_valuation_reference import (
 )
 from research_theme import apply_research_theme, PLOTLY_LAYOUT
 from india_financial_ui import _read
-from india_screener_statements import prepare_statement
+from india_screener_statements import prepare_statement, prepare_source_table
 
 HOLDINGS = Path(__file__).resolve().parent / 'data' / 'india_holdings'
 
@@ -323,32 +323,60 @@ def render_india_kpi_intelligence():
                    'This page is a reference-style KPI viewer; differences in consolidated/standalone scope and fiscal dates are not reconciled automatically.')
 
 
-    # The original consolidated Screener statements appear at the bottom of
-    # India Company Financial KPI Intelligence, without any additional request.
+    # All Screener tables are taken from the same previously fetched
+    # consolidated response. No extra requests when switching sections.
     st.divider()
-    st.markdown('### 📑 Consolidated Balance Sheet & Cash Flow')
-    st.caption('Source: Screener.in · reported consolidated figures · ₹ crore unless the original row specifies otherwise. '
-               'Historical periods are chronological; missing entries are N/A. No figures are inferred or mixed with Yahoo.')
-    period_choice = st.segmented_control(
-        'Historical periods', ['5 years', '8 years', '12 years', 'All available'],
-        default='8 years', key='india_kpi_screener_statement_periods')
-    count = {'5 years': 5, '8 years': 8, '12 years': 12, 'All available': 0}.get(period_choice, 8)
-    for source_key, heading in [('Balance Sheet', 'Balance Sheet'), ('Cash Flows', 'Cash Flow Statement')]:
-        st.markdown(f'#### {heading}')
-        report = prepare_statement(tables.get(source_key), periods=count)
-        if report.empty:
-            st.info(f'{heading} is unavailable from Screener for {symbol}. '
-                    'Other available KPI values are preserved; this section does not invent financial statements.')
-        else:
-            st.dataframe(report, use_container_width=True, hide_index=True,
-                         height=min(540, max(185, 38 * (len(report) + 1))))
-            st.download_button(
-                f'Download {heading} CSV',
-                data=report.to_csv(index=False).encode('utf-8-sig'),
-                file_name=f'{symbol}_screener_{source_key.lower().replace(" ", "_")}.csv',
-                mime='text/csv', key=f'india_kpi_{source_key}_csv')
+    st.markdown('### 📑 Screener · Consolidated Financial Statements & Ownership')
+    st.caption('Source: Screener.in · consolidated where available. Financial statement amounts '
+               'are generally ₹ crore; quarterly EPS, percentages, peer prices and ownership '
+               'figures retain their original source units. No synthetic data.')
+    categories = [
+        ('Peer Comparison', 'Peer Comparison', False),
+        ('Quarterly Results', 'Quarterly Results', True),
+        ('Profit & Loss', 'Profit & Loss', True),
+        ('Balance Sheet', 'Balance Sheet', True),
+        ('Cash Flows', 'Cash Flow', True),
+        ('Ratios', 'Ratios', True),
+        ('Shareholding Pattern', 'Shareholding Pattern', False),
+    ]
+    # Additional yearly shareholding tables are included if published.
+    categories.extend((k, k, False) for k in tables
+                      if k.startswith('Shareholding Pattern ('))
+    available_count = sum(1 for key, _, _ in categories
+                          if isinstance(tables.get(key), pd.DataFrame)
+                          and not tables[key].empty)
+    st.caption(f'{available_count} of {len(categories)} published tables available from this fetch.')
+    period_choice = st.selectbox(
+        'History window', ['5 periods', '8 periods', '12 periods', 'All available'],
+        index=1, key='india_kpi_screener_table_periods')
+    count = {'5 periods': 5, '8 periods': 8, '12 periods': 12,
+             'All available': 0}[period_choice]
+    table_tabs = st.tabs([label for _, label, _ in categories])
+    for tab, (source_key, label, is_financial) in zip(table_tabs, categories):
+        with tab:
+            raw = tables.get(source_key)
+            # Each quarterly/annual financial table has reporting-period headings.
+            # Peer tables have company rows and mixed units; ownership tables have %.
+            report = prepare_source_table(raw, periods=count, financial=is_financial)
+            if report.empty:
+                st.info(f'{label} is not available in the accessible consolidated '
+                        'Screener response for this company. This does not imply zero.')
+            else:
+                if is_financial:
+                    st.caption('Reported period columns · ₹ crore except per-share or % rows.')
+                elif source_key == 'Peer Comparison':
+                    st.caption('Published peer comparison · mixed units as labelled by Screener.')
+                else:
+                    st.caption('Published shareholding percentages / shareholder counts · source units.')
+                st.dataframe(report, use_container_width=True, hide_index=True,
+                             height=min(560, max(220, 36 * (len(report) + 1))))
+                st.download_button(
+                    f'Export {label} · CSV', report.to_csv(index=False).encode('utf-8-sig'),
+                    file_name=f'{symbol}_screener_{re.sub(r"[^a-z0-9]+", "_", source_key.lower()).strip("_")}.csv',
+                    mime='text/csv', key=f'india_kpi_screener_export_{source_key}')
     if cached['screener'].get('retrieved_utc'):
-        st.caption('Screener retrieved (UTC): ' + str(cached['screener']['retrieved_utc'])[:19].replace('T', ' '))
-    st.link_button('↗ View original consolidated statements on Screener', company_url(symbol))
-    st.caption('These are the source-reported statements for reference, not independently audited by this dashboard. '
-               'Please verify important decisions against company filings and applicable source usage terms.')
+        st.caption('Retrieved (UTC): ' + str(cached['screener']['retrieved_utc'])[:19].replace('T', ' '))
+    st.link_button('↗ Open Screener consolidated source', company_url(symbol))
+    st.caption('Table availability depends on published content and permitted provider access; '
+               'peer tables can be loaded dynamically by the source and therefore may be absent. '
+               'Verify figures against official company filings and source usage terms.')

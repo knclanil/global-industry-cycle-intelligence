@@ -21,7 +21,7 @@ def normalize_symbol(value):
 
 BASE_URL = 'https://www.screener.in/company/{}/consolidated/'
 HEADERS = {'User-Agent': 'IndiaValuationResearch/1.0 (manual, low-volume financial research)'}
-TABLES = {'profit-loss': 'Profit & Loss', 'balance-sheet': 'Balance Sheet', 'cash-flow': 'Cash Flows', 'ratios': 'Ratios', 'quarters': 'Quarterly Results'}
+TABLES = {'profit-loss': 'Profit & Loss', 'balance-sheet': 'Balance Sheet', 'cash-flow': 'Cash Flows', 'ratios': 'Ratios', 'quarters': 'Quarterly Results', 'shareholding': 'Shareholding Pattern'}
 
 
 def company_url(symbol):
@@ -29,8 +29,30 @@ def company_url(symbol):
     return BASE_URL.format(quote(normalize_symbol(symbol), safe=''))
 
 
+def _html_table_to_frame(node):
+    """Keep published header and all reported rows; no inferred values."""
+    from lxml import html as lxml_html
+    frame = pd.read_html(
+        io.StringIO(lxml_html.tostring(node, encoding='unicode')),
+        displayed_only=False,
+    )[0]
+    if isinstance(frame.columns, pd.MultiIndex):
+        frame.columns = [
+            ' '.join(dict.fromkeys(str(item).strip() for item in column
+                                  if str(item).strip() and not str(item).startswith('Unnamed:')))
+            for column in frame.columns
+        ]
+    else:
+        frame.columns = [str(c).strip() for c in frame.columns]
+    return frame
+
+
 def parse_tables(html):
-    """Extract visible financial tables from Screener section IDs; retain source row labels."""
+    """Read published visible company tables from a single Screener response.
+
+    Shareholding can include quarterly and yearly variants. Peers may be
+    loaded separately by Screener; no private/AJAX endpoints are requested.
+    """
     from lxml import html as lxml_html
     root = lxml_html.fromstring(html)
     output = {}
@@ -38,19 +60,27 @@ def parse_tables(html):
         nodes = root.xpath(f'//*[@id="{section_id}"]//table')
         if not nodes:
             continue
-        try:
-            frame = pd.read_html(io.StringIO(lxml_html.tostring(nodes[0], encoding='unicode')), displayed_only=False)[0]
-            frame.columns = [str(x).strip() for x in frame.columns]
-            output[name] = frame
-        except (ValueError, IndexError):
-            continue
-    # Screener's peer-comparison table can include a published median P/E.
+        for idx, node in enumerate(nodes):
+            try:
+                frame = _html_table_to_frame(node)
+            except (ValueError, IndexError):
+                continue
+            if frame.empty:
+                continue
+            if section_id == 'shareholding':
+                # Only include variants with distinct data; preserve separately.
+                candidate = name if idx == 0 else f'{name} ({"Yearly" if idx == 1 else f"View {idx+1}"})'
+                if any(frame.equals(existing) for key, existing in output.items() if key.startswith(name)):
+                    continue
+                output[candidate] = frame
+            elif name not in output:
+                output[name] = frame
     peer_nodes = root.xpath('//*[@id="peers"]//table')
     if peer_nodes:
         try:
-            output['Peer Comparison'] = pd.read_html(
-                io.StringIO(lxml_html.tostring(peer_nodes[0], encoding='unicode')),
-                displayed_only=False)[0]
+            peers = _html_table_to_frame(peer_nodes[0])
+            if not peers.empty:
+                output['Peer Comparison'] = peers
         except (ValueError, IndexError):
             pass
     return output
