@@ -1,0 +1,195 @@
+"""Dedicated, on-demand financial KPI dashboard using existing SEC statement cache."""
+import re
+import pandas as pd
+import streamlit as st
+import plotly.graph_objects as go
+from research_theme import apply_research_theme, PLOTLY_LAYOUT
+from sec_financials import load_company, statements, is_bank
+
+
+def _value(df, label, period):
+    if label not in df.index or period not in df.columns:
+        return None
+    v = pd.to_numeric(pd.Series([df.at[label, period]]), errors='coerce').iloc[0]
+    return float(v) if pd.notna(v) else None
+
+
+def _ratio(a, b):
+    return a / b if a is not None and b is not None and b != 0 else None
+
+
+def _display(v, kind='money'):
+    if v is None or pd.isna(v):
+        return 'N/A'
+    if kind == 'percent':
+        return f'{v * 100:,.1f}%'
+    if kind == 'multiple':
+        return f'{v:,.2f}×'
+    if kind == 'eps':
+        return f'${v:,.2f}'
+    if abs(v) >= 1e12:
+        return f'${v / 1e12:,.2f}T'
+    if abs(v) >= 1e9:
+        return f'${v / 1e9:,.2f}B'
+    if abs(v) >= 1e6:
+        return f'${v / 1e6:,.2f}M'
+    return f'${v:,.0f}'
+
+
+def _card_group(title, metrics):
+    st.markdown(f'### {title}')
+    for start in range(0, len(metrics), 4):
+        cols = st.columns(4)
+        for col, (label, val, kind, note) in zip(cols, metrics[start:start + 4]):
+            with col:
+                st.metric(label, _display(val, kind))
+                st.caption(note)
+
+
+def _growth(df, label, periods, span=1):
+    if len(periods) <= span:
+        return None
+    latest, earlier = _value(df, label, periods[0]), _value(df, label, periods[span])
+    return _ratio(latest - earlier, abs(earlier)) if latest is not None and earlier is not None else None
+
+
+def _cagr(df, label, periods, years):
+    if len(periods) <= years:
+        return None
+    first, last = _value(df, label, periods[years]), _value(df, label, periods[0])
+    if first is None or last is None or first <= 0 or last <= 0:
+        return None
+    return (last / first) ** (1 / years) - 1
+
+
+def _chart(title, periods, items, kind='money'):
+    fig = go.Figure()
+    for label, values in items:
+        if any(v is not None for v in values):
+            fig.add_trace(go.Scatter(x=periods[::-1], y=values[::-1], mode='lines+markers', name=label,
+                                     connectgaps=False))
+    if not fig.data:
+        st.info(f'{title}: insufficient verified historical data.')
+        return
+    fig.update_layout(**PLOTLY_LAYOUT)
+    fig.update_layout(title=title, height=330, margin=dict(l=35, r=20, t=55, b=40),
+                      yaxis_title='Percent' if kind == 'percent' else 'USD billions')
+    st.plotly_chart(fig, use_container_width=True)
+
+
+def render_company_kpi_metrics():
+    apply_research_theme()
+    st.title('📊 Company Financial KPI Intelligence')
+    st.caption('Dedicated fundamental KPI workspace · official SEC financial statements · dark dashboard theme')
+    st.info('Loads one company on demand. No live market pricing is assumed; unavailable financial inputs are shown as N/A.')
+    with st.form('kpi_company_form'):
+        ticker = st.text_input('Company ticker', value=st.session_state.get('kpi_ticker', st.session_state.get('research_ticker', 'AAPL'))).strip().upper()
+        submit = st.form_submit_button('Analyze financial KPIs', type='primary')
+    if submit:
+        if not re.fullmatch(r'[A-Z0-9][A-Z0-9.\-]{0,14}', ticker):
+            st.error('Enter a valid ticker.')
+            return
+        st.session_state.kpi_ticker = ticker
+        st.session_state.kpi_loaded = ticker
+    if not st.session_state.get('kpi_loaded'):
+        st.caption('Choose a ticker and click Analyze financial KPIs to begin.')
+        return
+    ticker = st.session_state.kpi_loaded
+    try:
+        data, cik, name = load_company(ticker)
+        result = statements(data, 'annual', 10, ticker=ticker)
+    except Exception as exc:
+        st.warning(f'Financial KPI data unavailable for {ticker}: {exc}')
+        st.caption('The SEC cache may not yet contain this issuer. Run the background fundamentals refresh.')
+        return
+    inc, bs, cf = (result[k][0] for k in ('Income Statement', 'Balance Sheet', 'Cash Flow'))
+    periods = sorted(set(inc.columns) | set(bs.columns) | set(cf.columns), reverse=True)
+    if not periods:
+        st.warning('No usable annual reporting periods were found.')
+        return
+    selected = st.selectbox('Financial reporting period', periods, index=0)
+    bank = is_bank(data, ticker)
+    st.subheader(f'{name} · {ticker}')
+    st.caption(f'SEC CIK {cik:010d} · Fiscal period ending {selected} · Annual reporting · USD unless stated otherwise')
+    if bank:
+        st.warning('Bank financial statements need industry-specific capital and credit-quality metrics. Generic leverage and operating metrics below are not interpreted as bank health scores.')
+    i = lambda label: _value(inc, label, selected)
+    b = lambda label: _value(bs, label, selected)
+    c = lambda label: _value(cf, label, selected)
+    rev, net, op, gross, eps = (i(x) for x in ('Revenue', 'Net income', 'Operating income', 'Gross profit', 'Diluted EPS'))
+    assets, liabilities, equity = (b(x) for x in ('Total assets', 'Total liabilities', 'Stockholders equity'))
+    cash, debt, ca, cl = (b(x) for x in ('Cash and equivalents', 'Long-term debt', 'Current assets', 'Current liabilities'))
+    ocf, fcf, capex = (c(x) for x in ('Operating cash flow', 'Free cash flow', 'Capital expenditures'))
+    # Debt is long-term debt only; do not call it total debt.
+    net_lt_debt = debt - cash if debt is not None and cash is not None else None
+    year_periods = sorted(inc.columns, reverse=True)
+    if selected in year_periods:
+        year_periods = year_periods[year_periods.index(selected):]
+    else:
+        year_periods = []
+    _card_group('Growth & earnings', [
+        ('Revenue', rev, 'money', 'Reported annual revenue'),
+        ('Net income', net, 'money', 'Reported annual earnings'),
+        ('Diluted EPS', eps, 'eps', 'USD per diluted share'),
+        ('Revenue YoY', _growth(inc, 'Revenue', year_periods), 'percent', 'Previous available annual period; check dates'),
+        ('Net income YoY', _growth(inc, 'Net income', year_periods), 'percent', 'Previous available annual period; check dates'),
+        ('EPS YoY', _growth(inc, 'Diluted EPS', year_periods), 'percent', 'Previous available annual period; check dates'),
+        ('Revenue 3Y CAGR', _cagr(inc, 'Revenue', year_periods, 3), 'percent', 'Requires four consecutive fiscal years'),
+        ('Revenue 5Y CAGR', _cagr(inc, 'Revenue', year_periods, 5), 'percent', 'Requires six consecutive fiscal years'),
+        ('EPS 5Y CAGR', _cagr(inc, 'Diluted EPS', year_periods, 5), 'percent', 'Positive start and end EPS required'),
+        ('FCF YoY', _growth(cf, 'Free cash flow', sorted(cf.columns, reverse=True)), 'percent', 'Available fiscal years; not TTM'),
+    ])
+    _card_group('Profitability & capital efficiency', [
+        ('Gross margin', _ratio(gross, rev), 'percent', 'Gross profit / revenue'),
+        ('Operating margin', _ratio(op, rev), 'percent', 'Operating income / revenue'),
+        ('Net margin', _ratio(net, rev), 'percent', 'Net income / revenue'),
+        ('FCF margin', _ratio(fcf, rev), 'percent', 'Free cash flow / revenue'),
+        ('ROE (period-end)', _ratio(net, equity) if equity is not None and equity > 0 else None, 'percent', 'Net income / period-end equity; not average ROE'),
+        ('ROA (period-end)', _ratio(net, assets), 'percent', 'Net income / period-end assets; not average ROA'),
+        ('ROIC', None, 'percent', 'Requires verified NOPAT and invested capital'),
+        ('EBITDA margin', None, 'percent', 'Requires verified depreciation/amortization'),
+    ])
+    _card_group('Balance sheet & financial strength', [
+        ('Total assets', assets, 'money', 'Period-end assets'),
+        ('Total liabilities', liabilities, 'money', 'Period-end liabilities'),
+        ('Stockholders equity', equity, 'money', 'Period-end equity'),
+        ('Cash & equivalents', cash, 'money', 'Reported cash balance'),
+        ('Long-term debt', debt, 'money', 'Only reported long-term debt concept'),
+        ('Long-term debt less cash', net_lt_debt, 'money', 'Not full net debt; short-term debt excluded'),
+        ('Long-term debt / equity', _ratio(debt, equity) if equity is not None and equity > 0 else None, 'multiple', 'Excludes other borrowings'),
+        ('Current ratio', _ratio(ca, cl), 'multiple', 'Current assets / current liabilities'),
+        ('Net debt / EBITDA', None, 'multiple', 'Requires verified total debt and EBITDA'),
+        ('Interest coverage', None, 'multiple', 'Requires comparable interest expense'),
+        ('Quick ratio', None, 'multiple', 'Requires inventory and other current-asset detail'),
+        ('Debt maturity profile', None, 'money', 'Requires debt maturity disclosures'),
+    ])
+    _card_group('Cash flow & capital allocation', [
+        ('Operating cash flow', ocf, 'money', 'Reported cash from operations'),
+        ('Capital expenditures', capex, 'money', 'Reported purchases of PP&E'),
+        ('Free cash flow', fcf, 'money', 'OCF less absolute capital expenditures'),
+        ('OCF / net income', _ratio(ocf, net), 'multiple', 'Cash conversion before capex'),
+        ('FCF / net income', _ratio(fcf, net), 'multiple', 'Cash conversion after capex'),
+        ('Capex / revenue', _ratio(abs(capex), rev) if capex is not None else None, 'percent', 'Reinvestment intensity'),
+        ('Dividends paid', c('Dividends paid'), 'money', 'Reported dividends paid'),
+        ('Share repurchases', c('Share repurchases'), 'money', 'Reported common share buybacks'),
+        ('FCF 5Y CAGR', _cagr(cf, 'Free cash flow', sorted(cf.columns, reverse=True), 5), 'percent', 'Positive FCF endpoints required'),
+        ('Share count change', None, 'percent', 'Requires comparable historical shares outstanding'),
+    ])
+    st.markdown('### Historical KPI trends')
+    hist = sorted(set(inc.columns) | set(bs.columns) | set(cf.columns), reverse=True)[:10]
+    _chart('Revenue, operating income & net income', hist,
+           [(label, [(_value(inc, label, p) / 1e9 if _value(inc, label, p) is not None else None) for p in hist])
+            for label in ('Revenue', 'Operating income', 'Net income')])
+    _chart('Margins', hist,
+           [(label, [(_ratio(_value(inc, numerator, p), _value(inc, 'Revenue', p)) * 100
+                     if _ratio(_value(inc, numerator, p), _value(inc, 'Revenue', p)) is not None else None) for p in hist])
+            for label, numerator in [('Gross margin', 'Gross profit'), ('Operating margin', 'Operating income'), ('Net margin', 'Net income')]], 'percent')
+    _chart('Cash flow and long-term debt', hist,
+           [(label, [(_value(source, tag, p) / 1e9 if _value(source, tag, p) is not None else None) for p in hist])
+            for label, source, tag in [('Operating cash flow', cf, 'Operating cash flow'),
+                                       ('Free cash flow', cf, 'Free cash flow'),
+                                       ('Long-term debt', bs, 'Long-term debt')]])
+    st.markdown('### Valuation & market data')
+    st.info('Market cap, enterprise value, P/E, EV/EBITDA, FCF yield, forward estimates and dividend yield are not calculated here because the existing SEC-only source does not provide verified current prices. No placeholder prices are invented.')
+    with st.expander('Metric definitions, coverage and limitations'):
+        st.markdown('''**Data source:** SEC Company Facts, via the existing project cache. **N/A** means the required fact is missing or a calculation is not safely supported.\n\n**Period alignment:** Point-in-time balance-sheet values and annual income/cash-flow flows are shown for the selected fiscal period end. Growth is meaningful only for comparable consecutive annual periods; verify filing dates before interpreting growth.\n\n**Industry limitations:** Banking, insurance and REIT reporting require specialized indicators. ROIC, debt maturity, full net debt and market valuation remain unavailable until validated input mappings or price feeds are integrated. This page does not generate investment recommendations.''')

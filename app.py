@@ -9,7 +9,7 @@ st.markdown("""<style>.stApp{background:#0b1220;color:#e7eef9}
 # Grouped sidebar navigation. The selected page is stored in session state so
 # changing groups does not reset the current dashboard's other widgets.
 NAV_GROUPS = {
-    '🌐 GLOBAL INTELLIGENCE': ['Global Capital Intelligence Network', 'Company Holdings Leadership', 'Fundamental Intelligence', 'Company Financial Research'],
+    '🌐 GLOBAL INTELLIGENCE': ['Global Capital Intelligence Network', 'Company Holdings Leadership', 'Fundamental Intelligence', 'Company Financial Research', 'Company Financial KPIs'],
     '🌎 COUNTRY ANALYSIS': ['Global Countries'],
     '💰 ASSET CLASS ANALYSIS': ['Global Asset Flow', 'USA Asset Flow', 'India Asset Flow'],
     '📊 SECTOR ANALYSIS': ['Global Sectors', 'USA Sector', 'India Sector'],
@@ -22,7 +22,7 @@ PAGE_ICONS = {
     'Global Asset Flow': '🌍', 'USA Asset Flow': '🇺🇸', 'India Asset Flow': '🇮🇳',
     'Global Sectors': '🌍', 'USA Sector': '🇺🇸', 'India Sector': '🇮🇳',
     'Global Factors': '🌍', 'USA Factors': '🇺🇸', 'India Factors': '🇮🇳',
-    'Company Holdings Leadership': '🏆', 'Fundamental Intelligence': '🔎', 'Company Financial Research': '📑', 'Factor Holdings Comparison': '📋', 'Data Table': '🗂️', 'Wiki': '📖',
+    'Company Holdings Leadership': '🏆', 'Fundamental Intelligence': '🔎', 'Company Financial Research': '📑', 'Company Financial KPIs': '📊', 'Factor Holdings Comparison': '📋', 'Data Table': '🗂️', 'Wiki': '📖',
 }
 ALL_PAGES = [item for items in NAV_GROUPS.values() for item in items]
 if st.session_state.get('selected_page') not in ALL_PAGES:
@@ -73,6 +73,9 @@ elif page == 'Fundamental Intelligence':
 elif page == 'Company Financial Research':
     from company_financial_research import render_company_financial_research
     render_company_financial_research()
+elif page == 'Company Financial KPIs':
+    from company_kpi_metrics import render_company_kpi_metrics
+    render_company_kpi_metrics()
 elif page == 'Factor Holdings Comparison':
     from factor_holdings import render_factor_holdings
     render_factor_holdings()
