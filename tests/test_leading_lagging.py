@@ -57,3 +57,34 @@ def test_unmapped_generic_index_not_misidentified_as_sector():
     from leading_lagging_engine import _title_proxy
     sig=pd.DataFrame([{'kind':'sector','source_id':'XLK','label':'Information Technology'}])
     assert _title_proxy('iShares Core S&P 500 ETF','sector',sig) is None
+
+
+def test_usa_average_etf_weight_uses_distinct_qualifying_funds():
+    rows = pd.DataFrame([
+        {'issuer_id':'A|US','company':'Example A','ticker':'AAA','portfolio_id':'239505','fund_title':'iShares U.S. Technology ETF','weight':6.0},
+        {'issuer_id':'A|US','company':'Example A','ticker':'AAA','portfolio_id':'239695','fund_title':'iShares MSCI USA Momentum Factor ETF','weight':2.0},
+        # Duplicate membership must not inflate or dilute the average.
+        {'issuer_id':'A|US','company':'Example A','ticker':'AAA','portfolio_id':'239505','fund_title':'iShares U.S. Technology ETF','weight':6.0},
+    ])
+    signals = pd.DataFrame([
+        {'kind':'sector','source_id':'XLK','label':'Technology','quadrant':'Leading','relative_strength':5,'rs_momentum':2},
+        {'kind':'factor','source_id':'MTUM','label':'Momentum','quadrant':'Leading','relative_strength':4,'rs_momentum':1},
+    ])
+    out,_=build_lists('USA',rows,signals)
+    assert len(out)==1
+    assert out.iloc[0]['Avg ETF % weight']==4.0
+    assert out.iloc[0]['Exposure']==8.0
+
+
+def test_india_average_etf_weight_unavailable():
+    rows=pd.DataFrame([
+        {'company_key':'ISIN:A','company_name':'A','symbol':'AAA','index_slug':'nifty_bank'},
+        {'company_key':'ISIN:A','company_name':'A','symbol':'AAA','index_slug':'nifty50_value_20'},
+    ])
+    signals=pd.DataFrame([
+        {'kind':'sector','source_id':'^NIFTYBANK','label':'Bank','quadrant':'Leading','relative_strength':5,'rs_momentum':1},
+        {'kind':'factor','source_id':'NIFTY50_VALUE20','label':'Value','quadrant':'Leading','relative_strength':4,'rs_momentum':1},
+    ])
+    out,_=build_lists('India',rows,signals)
+    assert len(out)==1
+    assert pd.isna(out.iloc[0]['Avg ETF % weight'])

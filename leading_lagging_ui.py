@@ -61,8 +61,10 @@ def _graph(ranking:pd.DataFrame, side:str, count:int):
                     line=dict(color='#142137',width=2)),
         text=[f"#{r['Rank']} {r['Ticker']}" for r in companies],textposition='middle center',
         textfont=dict(color='#071726',size=10),
-        customdata=[[r['Company'],r['Score'],r['Sector indices'],r['Factor indices']] for r in companies],
-        hovertemplate='<b>%{customdata[0]}</b><br>Evidence score: %{customdata[1]:.2f}<br>Sector indices: %{customdata[2]}<br>Factor indices: %{customdata[3]}<extra></extra>',showlegend=False))
+        customdata=[[r['Company'], r['Score'], r['Sector indices'], r['Factor indices'],
+                     ('N/A' if pd.isna(r.get('Avg ETF % weight')) else f"{r['Avg ETF % weight']:.2f}%")]
+                    for r in companies],
+        hovertemplate='<b>%{customdata[0]}</b><br>Evidence score: %{customdata[1]:.2f}<br>Sector indices: %{customdata[2]}<br>Factor indices: %{customdata[3]}<br>Avg ETF weight: %{customdata[4]}<extra></extra>',showlegend=False))
     fig.update_layout(paper_bgcolor='#142137',plot_bgcolor='#142137',font=dict(color='#dce8f8'),
                       xaxis=dict(visible=False,range=[-3.8,3.8],fixedrange=False),
                       yaxis=dict(visible=False,scaleanchor=None),hovermode='closest',
@@ -117,10 +119,18 @@ def render_leading_lagging_graph():
                 continue
             if show=='Graph & rankings': _graph(results,side,max_companies)
             cols=['Rank','Ticker','Company','Score','Sector indices','Factor indices','Sector sources','Factor sources','Signal basis']
-            if region!='India': cols.insert(6,'Exposure')
+            config = {'Score':st.column_config.NumberColumn('Evidence score',format='%.2f')}
+            if region!='India':
+                cols.insert(6, 'Avg ETF % weight')
+                cols.insert(7, 'Exposure')
+                config['Avg ETF % weight'] = st.column_config.NumberColumn(
+                    'Avg ETF % weight', format='%.2f%%',
+                    help='Average verified company holding weight (%) across distinct qualifying leading/lagging sector and factor ETFs; not a weighted index average.')
+                config['Exposure'] = st.column_config.NumberColumn('Sum ETF weight %',format='%.2f%%')
             st.dataframe(subset[cols].sort_values('Rank'),hide_index=True,use_container_width=True,
-                column_config={'Score':st.column_config.NumberColumn('Evidence score',format='%.2f'),
-                               'Exposure':st.column_config.NumberColumn('Sum ETF weight %',format='%.2f')})
+                column_config=config)
+            if region!='India':
+                st.caption('Avg ETF % weight = arithmetic mean of the company’s reported weights in the qualifying sector and factor ETFs. Each ETF counts once. The sum is shown separately; neither metric changes the evidence ranking.')
             st.download_button(f'Download {side.lower()} CSV',subset.to_csv(index=False).encode(),file_name=f'{region.lower()}_{side.lower()}_companies.csv',mime='text/csv')
     with tabs[2]:
         st.caption('Source index signals, not individual-company stock returns. Only audited linkages are used.')

@@ -241,6 +241,14 @@ def build_lists(region: str, holdings: pd.DataFrame, signals: pd.DataFrame, *, m
         if sec is None or fac is None: continue
         # Geometric mean favors strength on BOTH dimensions. Small breadth bonus.
         strength_score = np.sqrt(sec * fac) + min(ns + nf - 2, 6) * 0.15
+        # Arithmetic mean of verified constituent weight percentages across the
+        # distinct, qualifying sector AND factor ETFs in this classification.
+        # Each company-ETF pair was deduplicated above. An absent/unusable weight
+        # is never treated as 0; India's unweighted memberships remain N/A.
+        verified_etf_weights = ([w for w, _ in (*r['sector'].values(), *r['factor'].values())]
+                                if region != 'India' else [])
+        avg_etf_weight = (round(float(np.mean(verified_etf_weights)), 3)
+                          if verified_etf_weights else None)
         rows.append(dict(Company=r['company'], Ticker=r['ticker'], company_key=r['company_key'],
                          Category=r['side'], Score=round(float(strength_score), 3),
                          **{'Sector indices': ns, 'Factor indices': nf,
@@ -248,7 +256,8 @@ def build_lists(region: str, holdings: pd.DataFrame, signals: pd.DataFrame, *, m
                             'Sector sources': ' · '.join(sorted(r['sector_names'])),
                             'Factor sources': ' · '.join(sorted(r['factor_names'])),
                             'Signal basis': 'Category ETF proxy' if any(s.get('mapping_method') == 'category_proxy' for _,s in (*r['sector'].values(), *r['factor'].values())) else 'Direct source mapping',
-                            'Exposure': round(sum(v[0] for v in (*r['sector'].values(), *r['factor'].values())), 3) if region!='India' else None}))
+                            'Avg ETF % weight': avg_etf_weight,
+                            'Exposure': round(sum(verified_etf_weights), 3) if region!='India' else None}))
     frame = pd.DataFrame(rows)
     if not frame.empty:
         frame = frame.sort_values(['Category','Score','Sector indices','Factor indices','Ticker'],
