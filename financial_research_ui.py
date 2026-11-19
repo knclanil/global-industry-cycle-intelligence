@@ -93,10 +93,10 @@ def _sankey(income, bank=False):
     fig=go.Figure(go.Sankey(arrangement='snap',
         node=dict(pad=25,thickness=17,label=[f'{label}<br>{_money(node_values[i])}' for i,label in enumerate(labels)],color=colors),
         link=dict(source=src,target=dst,value=vals,
-                  color=['rgba(50,110,165,.28)']*len(vals),
+                  color=['rgba(81,183,232,.28)']*len(vals),
                   hovertemplate='%{source.label} → %{target.label}<br>%{value:$,.0f}<extra></extra>')))
-    fig.update_layout(title=f'Revenue to net income · period ended {selected}',font=dict(color='#17263C',size=12),
-                      paper_bgcolor='white',height=420,margin=dict(l=15,r=15,t=55,b=15))
+    fig.update_layout(title=f'Revenue to net income · period ended {selected}',font=dict(color='#E7EEF9',size=12),
+                      paper_bgcolor='#142137',plot_bgcolor='#142137',height=420,margin=dict(l=15,r=15,t=55,b=15))
     st.plotly_chart(fig,use_container_width=True)
     st.caption(caption)
 
@@ -182,8 +182,8 @@ def _bank_sankey(income):
          link=dict(source=src,target=dst,value=values,color=link_colors,
                    hovertemplate='%{source.label} → %{target.label}<br>$%{value:,.0f}<extra></extra>')))
     fig.update_layout(title=f'Banking revenue and earnings · period ended {period}',
-                      height=490,font=dict(color='#17263C',size=12),
-                      paper_bgcolor='white',margin=dict(l=12,r=12,t=55,b=10))
+                      height=490,font=dict(color='#E7EEF9',size=12),
+                      paper_bgcolor='#142137',plot_bgcolor='#142137',margin=dict(l=12,r=12,t=55,b=10))
     st.plotly_chart(fig,use_container_width=True)
     st.caption('Detailed flows require matching SEC facts and reconciliation. Residuals are calculated, not reported expense lines.')
     with st.expander('Bank financial reconciliation — automatic checks'):
