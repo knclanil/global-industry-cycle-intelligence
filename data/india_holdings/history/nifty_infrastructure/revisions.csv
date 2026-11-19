@@ -1,0 +1,2 @@
+index_slug,index_name,category,factor_family,parent_universe,revision_id,observed_utc,previous_observed_utc,snapshot_path,constituent_count,source_type,source_url,revision_type,added,removed,weight_changed,symbol_changed
+nifty_infrastructure,Nifty Infrastructure,Thematic,,Not specified,687f508ea9b5c74faf52,2026-11-19T20:23:23.460759+00:00,,history/nifty_infrastructure/687f508ea9b5c74faf52.csv,30,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_niftyinfralist.csv,baseline,0,0,0,0

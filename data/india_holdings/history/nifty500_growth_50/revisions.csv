@@ -1,0 +1,2 @@
+index_slug,index_name,category,factor_family,parent_universe,revision_id,observed_utc,previous_observed_utc,snapshot_path,constituent_count,source_type,source_url,revision_type,added,removed,weight_changed,symbol_changed
+nifty500_growth_50,Nifty500 Growth 50,Factor,Growth,Nifty 500,14bed84f8433e3b1ac8a,2026-11-19T20:23:41.974741+00:00,,history/nifty500_growth_50/14bed84f8433e3b1ac8a.csv,50,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_nifty500Growth50list.csv,baseline,0,0,0,0

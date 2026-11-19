@@ -1,0 +1,2 @@
+index_slug,index_name,category,factor_family,parent_universe,revision_id,observed_utc,previous_observed_utc,snapshot_path,constituent_count,source_type,source_url,revision_type,added,removed,weight_changed,symbol_changed
+nifty200_alpha_30,Nifty200 Alpha 30,Factor,Alpha,Nifty 200,42bb57607221620595b5,2026-11-19T20:23:34.260625+00:00,,history/nifty200_alpha_30/42bb57607221620595b5.csv,30,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_nifty200alpha30_list.csv,baseline,0,0,0,0

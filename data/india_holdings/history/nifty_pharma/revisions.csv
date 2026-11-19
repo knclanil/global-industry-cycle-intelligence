@@ -1,0 +1,2 @@
+index_slug,index_name,category,factor_family,parent_universe,revision_id,observed_utc,previous_observed_utc,snapshot_path,constituent_count,source_type,source_url,revision_type,added,removed,weight_changed,symbol_changed
+nifty_pharma,Nifty Pharma,Sector,,Not specified,ebcf38d5316bc707cda7,2026-11-19T20:23:15.897078+00:00,,history/nifty_pharma/ebcf38d5316bc707cda7.csv,20,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_niftypharmalist.csv,baseline,0,0,0,0

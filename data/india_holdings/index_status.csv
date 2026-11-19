@@ -1,32 +1,32 @@
-index_slug,index_name,category,factor_family,parent_universe,status,constituent_count,retrieved_utc,snapshot_utc,source_type,source_url,error
-nifty_media,Nifty Media,Sector,,Not specified,not_collected,0,,,,https://www.niftyindices.com/IndexConstituent/ind_niftymedialist.csv,
-nifty_psu_bank,Nifty PSU Bank,Sector,,Not specified,not_collected,0,,,,https://www.niftyindices.com/IndexConstituent/ind_niftypsubanklist.csv,
-nifty_bank,Nifty Bank,Sector,,Not specified,not_collected,0,,,,https://www.niftyindices.com/IndexConstituent/ind_niftybanklist.csv,
-nifty_financial_services,Nifty Financial Services,Sector,,Not specified,not_collected,0,,,,https://www.niftyindices.com/IndexConstituent/ind_niftyfinancelist.csv,
-nifty_pharma,Nifty Pharma,Sector,,Not specified,not_collected,0,,,,https://www.niftyindices.com/IndexConstituent/ind_niftypharmalist.csv,
-nifty_it,Nifty IT,Sector,,Not specified,not_collected,0,,,,https://www.niftyindices.com/IndexConstituent/ind_niftyitlist.csv,
-nifty_realty,Nifty Realty,Sector,,Not specified,not_collected,0,,,,https://www.niftyindices.com/IndexConstituent/ind_niftyrealtylist.csv,
-nifty_fmcg,Nifty FMCG,Sector,,Not specified,not_collected,0,,,,https://www.niftyindices.com/IndexConstituent/ind_niftyfmcglist.csv,
-nifty_oil_gas,Nifty Oil & Gas,Sector,,Not specified,not_collected,0,,,,https://www.niftyindices.com/IndexConstituent/ind_niftyoilgaslist.csv,
-nifty_metal,Nifty Metal,Sector,,Not specified,not_collected,0,,,,https://www.niftyindices.com/IndexConstituent/ind_niftymetallist.csv,
-nifty_auto,Nifty Auto,Sector,,Not specified,not_collected,0,,,,https://www.niftyindices.com/IndexConstituent/ind_niftyautolist.csv,
-nifty_infrastructure,Nifty Infrastructure,Thematic,,Not specified,not_collected,0,,,,https://www.niftyindices.com/IndexConstituent/ind_niftyinfralist.csv,
-nifty_india_defence,Nifty India Defence,Thematic,,Not specified,not_collected,0,,,,https://www.niftyindices.com/IndexConstituent/ind_niftyindiadefence_list.csv,
-nifty_energy,Nifty Energy,Sector,,Not specified,not_collected,0,,,,https://www.niftyindices.com/IndexConstituent/ind_niftyenergylist.csv,
-nifty_india_manufacturing,Nifty India Manufacturing,Thematic,,Not specified,not_collected,0,,,,https://www.niftyindices.com/IndexConstituent/ind_niftyindiamanufacturing_list.csv,
-nifty500_low_volatility_50,Nifty500 Low Volatility 50,Factor,Low Volatility,Nifty 500,not_collected,0,,,,https://www.niftyindices.com/IndexConstituent/ind_nifty500LowVolatility50_list.csv,
-nifty500_momentum_50,Nifty500 Momentum 50,Factor,Momentum,Nifty 500,not_collected,0,,,,https://www.niftyindices.com/IndexConstituent/ind_nifty500Momentum50_list.csv,
-nifty500_quality_50,Nifty500 Quality 50,Factor,Quality,Nifty 500,not_collected,0,,,,https://www.niftyindices.com/IndexConstituent/ind_nifty500Quality50_list.csv,
-nifty500_value_50,Nifty500 Value 50,Factor,Value,Nifty 500,not_collected,0,,,,https://www.niftyindices.com/IndexConstituent/ind_nifty500Value50_list.csv,
-nifty200_momentum_30,Nifty200 Momentum 30,Factor,Momentum,Nifty 200,not_collected,0,,,,https://www.niftyindices.com/IndexConstituent/ind_nifty200Momentum30_list.csv,
-nifty200_value_30,Nifty200 Value 30,Factor,Value,Nifty 200,not_collected,0,,,,https://www.niftyindices.com/IndexConstituent/ind_nifty200Value30_list.csv,
-nifty200_alpha_30,Nifty200 Alpha 30,Factor,Alpha,Nifty 200,not_collected,0,,,,https://www.niftyindices.com/IndexConstituent/ind_nifty200alpha30_list.csv,
-nifty200_quality_30,Nifty200 Quality 30,Factor,Quality,Nifty 200,not_collected,0,,,,https://www.niftyindices.com/IndexConstituent/ind_nifty200Quality30_list.csv,
-nifty100_low_volatility_30,Nifty100 Low Volatility 30,Factor,Low Volatility,Nifty 100,not_collected,0,,,,https://www.niftyindices.com/IndexConstituent/ind_Nifty100LowVolatility30list.csv,
-nifty_alpha_index,Nifty Alpha Index,Factor,Alpha,Not specified,not_collected,0,,,,https://www.niftyindices.com/IndexConstituent/ind_nifty_Alpha_Index.csv,
-nifty_low_volatility_50,Nifty Low Volatility 50,Factor,Low Volatility,Not specified,not_collected,0,,,,https://www.niftyindices.com/IndexConstituent/nifty_low_Volatility50_Index.csv,
-nifty_dividend_opportunities_50,Nifty Dividend Opportunities 50,Factor,Dividend,Not specified,not_collected,0,,,,https://www.niftyindices.com/IndexConstituent/ind_niftydivopp50list.csv,
-nifty100_quality_30,Nifty100 Quality 30,Factor,Quality,Nifty 100,not_collected,0,,,,https://www.niftyindices.com/IndexConstituent/ind_nifty100Quality30list.csv,
-nifty500_growth_50,Nifty500 Growth 50,Factor,Growth,Nifty 500,not_collected,0,,,,https://www.niftyindices.com/IndexConstituent/ind_nifty500Growth50list.csv,
-nifty50_equal_weight,Nifty50 Equal Weight,Strategy,Equal Weight,Nifty 50,not_collected,0,,,,https://www.niftyindices.com/IndexConstituent/ind_Nifty50EqualWeight.csv,
-nifty50_value_20,Nifty50 Value 20,Factor,Value,Nifty 50,not_collected,0,,,,https://www.niftyindices.com/IndexConstituent/ind_Nifty50_Value20.csv,
+index_slug,index_name,category,factor_family,parent_universe,status,constituent_count,retrieved_utc,snapshot_utc,source_type,source_url,error,change_status,additions,removals,weight_changes,symbol_changes
+nifty_media,Nifty Media,Sector,,Not specified,updated,10,2026-11-19T20:23:11.572024+00:00,2026-11-19T20:23:11.572024+00:00,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_niftymedialist.csv,,baseline,0,0,0,0
+nifty_psu_bank,Nifty PSU Bank,Sector,,Not specified,updated,12,2026-11-19T20:23:12.674372+00:00,2026-11-19T20:23:12.674372+00:00,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_niftypsubanklist.csv,,baseline,0,0,0,0
+nifty_bank,Nifty Bank,Sector,,Not specified,updated,14,2026-11-19T20:23:13.744595+00:00,2026-11-19T20:23:13.744595+00:00,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_niftybanklist.csv,,baseline,0,0,0,0
+nifty_financial_services,Nifty Financial Services,Sector,,Not specified,updated,20,2026-11-19T20:23:14.822439+00:00,2026-11-19T20:23:14.822439+00:00,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_niftyfinancelist.csv,,baseline,0,0,0,0
+nifty_pharma,Nifty Pharma,Sector,,Not specified,updated,20,2026-11-19T20:23:15.897078+00:00,2026-11-19T20:23:15.897078+00:00,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_niftypharmalist.csv,,baseline,0,0,0,0
+nifty_it,Nifty IT,Sector,,Not specified,updated,10,2026-11-19T20:23:16.964087+00:00,2026-11-19T20:23:16.964087+00:00,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_niftyitlist.csv,,baseline,0,0,0,0
+nifty_realty,Nifty Realty,Sector,,Not specified,updated,10,2026-11-19T20:23:18.052526+00:00,2026-11-19T20:23:18.052526+00:00,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_niftyrealtylist.csv,,baseline,0,0,0,0
+nifty_fmcg,Nifty FMCG,Sector,,Not specified,updated,15,2026-11-19T20:23:19.143451+00:00,2026-11-19T20:23:19.143451+00:00,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_niftyfmcglist.csv,,baseline,0,0,0,0
+nifty_oil_gas,Nifty Oil & Gas,Sector,,Not specified,updated,15,2026-11-19T20:23:20.211115+00:00,2026-11-19T20:23:20.211115+00:00,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_niftyoilgaslist.csv,,baseline,0,0,0,0
+nifty_metal,Nifty Metal,Sector,,Not specified,updated,15,2026-11-19T20:23:21.317158+00:00,2026-11-19T20:23:21.317158+00:00,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_niftymetallist.csv,,baseline,0,0,0,0
+nifty_auto,Nifty Auto,Sector,,Not specified,updated,15,2026-11-19T20:23:22.394560+00:00,2026-11-19T20:23:22.394560+00:00,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_niftyautolist.csv,,baseline,0,0,0,0
+nifty_infrastructure,Nifty Infrastructure,Thematic,,Not specified,updated,30,2026-11-19T20:23:23.460759+00:00,2026-11-19T20:23:23.460759+00:00,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_niftyinfralist.csv,,baseline,0,0,0,0
+nifty_india_defence,Nifty India Defence,Thematic,,Not specified,updated,22,2026-11-19T20:23:24.545854+00:00,2026-11-19T20:23:24.545854+00:00,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_niftyindiadefence_list.csv,,baseline,0,0,0,0
+nifty_energy,Nifty Energy,Sector,,Not specified,updated,40,2026-11-19T20:23:25.617238+00:00,2026-11-19T20:23:25.617238+00:00,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_niftyenergylist.csv,,baseline,0,0,0,0
+nifty_india_manufacturing,Nifty India Manufacturing,Thematic,,Not specified,updated,77,2026-11-19T20:23:26.716349+00:00,2026-11-19T20:23:26.716349+00:00,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_niftyindiamanufacturing_list.csv,,baseline,0,0,0,0
+nifty500_low_volatility_50,Nifty500 Low Volatility 50,Factor,Low Volatility,Nifty 500,updated,50,2026-11-19T20:23:27.796291+00:00,2026-11-19T20:23:27.796291+00:00,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_nifty500LowVolatility50_list.csv,,baseline,0,0,0,0
+nifty500_momentum_50,Nifty500 Momentum 50,Factor,Momentum,Nifty 500,updated,50,2026-11-19T20:23:28.896361+00:00,2026-11-19T20:23:28.896361+00:00,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_nifty500Momentum50_list.csv,,baseline,0,0,0,0
+nifty500_quality_50,Nifty500 Quality 50,Factor,Quality,Nifty 500,updated,50,2026-11-19T20:23:29.965159+00:00,2026-11-19T20:23:29.965159+00:00,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_nifty500Quality50_list.csv,,baseline,0,0,0,0
+nifty500_value_50,Nifty500 Value 50,Factor,Value,Nifty 500,updated,50,2026-11-19T20:23:31.031234+00:00,2026-11-19T20:23:31.031234+00:00,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_nifty500Value50_list.csv,,baseline,0,0,0,0
+nifty200_momentum_30,Nifty200 Momentum 30,Factor,Momentum,Nifty 200,updated,30,2026-11-19T20:23:32.098903+00:00,2026-11-19T20:23:32.098903+00:00,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_nifty200Momentum30_list.csv,,baseline,0,0,0,0
+nifty200_value_30,Nifty200 Value 30,Factor,Value,Nifty 200,updated,30,2026-11-19T20:23:33.186864+00:00,2026-11-19T20:23:33.186864+00:00,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_nifty200Value30_list.csv,,baseline,0,0,0,0
+nifty200_alpha_30,Nifty200 Alpha 30,Factor,Alpha,Nifty 200,updated,30,2026-11-19T20:23:34.260625+00:00,2026-11-19T20:23:34.260625+00:00,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_nifty200alpha30_list.csv,,baseline,0,0,0,0
+nifty200_quality_30,Nifty200 Quality 30,Factor,Quality,Nifty 200,updated,30,2026-11-19T20:23:35.332388+00:00,2026-11-19T20:23:35.332388+00:00,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_nifty200Quality30_list.csv,,baseline,0,0,0,0
+nifty100_low_volatility_30,Nifty100 Low Volatility 30,Factor,Low Volatility,Nifty 100,updated,30,2026-11-19T20:23:36.406806+00:00,2026-11-19T20:23:36.406806+00:00,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_Nifty100LowVolatility30list.csv,,baseline,0,0,0,0
+nifty_alpha_index,Nifty Alpha Index,Factor,Alpha,Not specified,updated,50,2026-11-19T20:23:37.481014+00:00,2026-11-19T20:23:37.481014+00:00,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_nifty_Alpha_Index.csv,,baseline,0,0,0,0
+nifty_low_volatility_50,Nifty Low Volatility 50,Factor,Low Volatility,Not specified,updated,50,2026-11-19T20:23:38.554883+00:00,2026-11-19T20:23:38.554883+00:00,direct_nse,https://www.niftyindices.com/IndexConstituent/nifty_low_Volatility50_Index.csv,,baseline,0,0,0,0
+nifty_dividend_opportunities_50,Nifty Dividend Opportunities 50,Factor,Dividend,Not specified,updated,50,2026-11-19T20:23:39.625038+00:00,2026-11-19T20:23:39.625038+00:00,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_niftydivopp50list.csv,,baseline,0,0,0,0
+nifty100_quality_30,Nifty100 Quality 30,Factor,Quality,Nifty 100,updated,30,2026-11-19T20:23:40.892394+00:00,2026-11-19T20:23:40.892394+00:00,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_nifty100Quality30list.csv,,baseline,0,0,0,0
+nifty500_growth_50,Nifty500 Growth 50,Factor,Growth,Nifty 500,updated,50,2026-11-19T20:23:41.974741+00:00,2026-11-19T20:23:41.974741+00:00,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_nifty500Growth50list.csv,,baseline,0,0,0,0
+nifty50_equal_weight,Nifty50 Equal Weight,Strategy,Equal Weight,Nifty 50,updated,50,2026-11-19T20:23:43.058434+00:00,2026-11-19T20:23:43.058434+00:00,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_Nifty50EqualWeight.csv,,baseline,0,0,0,0
+nifty50_value_20,Nifty50 Value 20,Factor,Value,Nifty 50,updated,20,2026-11-19T20:23:44.131847+00:00,2026-11-19T20:23:44.131847+00:00,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_Nifty50_Value20.csv,,baseline,0,0,0,0
