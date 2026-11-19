@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "company_key": "ISIN:INE814H01029",
+  "symbol": "ADANIPOWER",
+  "company_name": "Adani Power Ltd.",
+  "isin": "INE814H01029",
+  "industry": "Power",
+  "sector": "Utilities",
+  "yahoo_ticker": "ADANIPOWER.NS",
+  "currency": "INR",
+  "quote": {
+    "price": 210.5,
+    "market_cap": 4059428290560.0,
+    "shares_outstanding": 19284694705.0,
+    "currency": "INR",
+    "asof_utc": "2026-11-19T20:51:35+00:00",
+    "provenance": "yahoo_finance_quote_snapshot"
+  },
+  "statements": {
+    "annual": {
+      "income": {
+        "2026-03-31": {
+          "ebitda": 230178500000.0
+        },
+        "2025-03-31": {
+          "ebitda": 237410000000.0
+        },
+        "2024-03-31": {
+          "ebitda": 278022700000.0
+        },
+        "2023-03-31": {
+          "ebitda": 140185400000.0
+        }
+      },
+      "balance": {
+        "2026-03-31": {
+          "goodwill": 2045200000.0,
+          "inventory": 36234800000.0
+        },
+        "2025-03-31": {
+          "goodwill": 2045200000.0,
+          "inventory": 33172800000.0
+        },
+        "2024-03-31": {
+          "goodwill": 1906100000.0,
+          "inventory": 41421000000.0
+        },
+        "2023-03-31": {
+          "goodwill": 1906100000.0,
+          "inventory": 30752000000.0
+        }
+      },
+      "cashflow": {}
+    },
+    "quarterly": {
+      "income": {
+        "2026-09-30": {
+          "ebitda": 87401800000.0
+        },
+        "2026-06-30": {
+          "ebitda": 84867800000.0
+        },
+        "2026-03-31": {
+          "ebitda": 64984700000.0
+        },
+        "2025-12-31": {
+          "ebitda": 47813300000.0
+        },
+        "2025-06-30": {
+          "ebitda": 61498300000.0
+        }
+      },
+      "balance": {
+        "2026-09-30": {
+          "goodwill": 2045200000.0,
+          "inventory": 39966300000.0
+        },
+        "2026-03-31": {
+          "goodwill": 2045200000.0,
+          "inventory": 36234800000.0
+        },
+        "2025-03-31": {
+          "goodwill": 2045200000.0,
+          "inventory": 33172800000.0
+        }
+      },
+      "cashflow": {}
+    }
+  },
+  "retrieved_utc": "2026-11-19T20:51:35+00:00",
+  "source_urls": {
+    "yahoo": "https://finance.yahoo.com/quote/ADANIPOWER.NS/financials/",
+    "screener_consolidated_reference": "https://www.screener.in/company/ADANIPOWER/consolidated/",
+    "nse_membership": "https://www.niftyindices.com/"
+  },
+  "source_notes": [],
+  "statement_scope": "Yahoo Finance provider; consolidated/standalone scope NOT independently verified"
+}

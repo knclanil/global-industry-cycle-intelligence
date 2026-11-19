@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "company_key": "ISIN:INE079A01024",
+  "symbol": "AMBUJACEM",
+  "company_name": "Ambuja Cements Ltd.",
+  "isin": "INE079A01024",
+  "industry": "Construction Materials",
+  "sector": "Basic Materials",
+  "yahoo_ticker": "AMBUJACEM.NS",
+  "currency": "INR",
+  "quote": {
+    "price": 396.8,
+    "market_cap": 985975422976.0,
+    "shares_outstanding": 2484817186.0,
+    "currency": "INR",
+    "asof_utc": "2026-11-19T20:52:02+00:00",
+    "provenance": "yahoo_finance_quote_snapshot"
+  },
+  "statements": {
+    "annual": {
+      "income": {
+        "2026-03-31": {
+          "ebitda": 70927900000.0
+        },
+        "2025-03-31": {
+          "ebitda": 86166500000.0
+        },
+        "2024-03-31": {
+          "ebitda": 78003800000.0
+        },
+        "2022-12-31": {
+          "ebitda": 41884100000.0
+        }
+      },
+      "balance": {
+        "2026-03-31": {
+          "goodwill": 135455200000.0,
+          "inventory": 45523300000.0
+        },
+        "2025-03-31": {
+          "goodwill": 109428300000.0,
+          "inventory": 42480100000.0
+        },
+        "2024-03-31": {
+          "goodwill": 88027500000.0,
+          "inventory": 36085500000.0
+        },
+        "2021-12-31": {
+          "goodwill": 78696900000.0,
+          "inventory": 27380400000.0
+        }
+      },
+      "cashflow": {}
+    },
+    "quarterly": {
+      "income": {
+        "2026-09-30": {
+          "ebitda": 12490000000.0
+        },
+        "2026-06-30": {
+          "ebitda": 17390000000.0
+        },
+        "2026-03-31": {
+          "ebitda": 16016600000.0
+        },
+        "2025-12-31": {
+          "ebitda": 14302900000.0
+        },
+        "2025-09-30": {
+          "ebitda": 18000000000.0
+        }
+      },
+      "balance": {
+        "2026-09-30": {
+          "goodwill": 135460000000.0,
+          "inventory": 47110000000.0
+        },
+        "2026-03-31": {
+          "goodwill": 135455200000.0,
+          "inventory": 45523300000.0
+        },
+        "2025-03-31": {
+          "goodwill": 109428300000.0,
+          "inventory": 42480100000.0
+        }
+      },
+      "cashflow": {}
+    }
+  },
+  "retrieved_utc": "2026-11-19T20:52:02+00:00",
+  "source_urls": {
+    "yahoo": "https://finance.yahoo.com/quote/AMBUJACEM.NS/financials/",
+    "screener_consolidated_reference": "https://www.screener.in/company/AMBUJACEM/consolidated/",
+    "nse_membership": "https://www.niftyindices.com/"
+  },
+  "source_notes": [],
+  "statement_scope": "Yahoo Finance provider; consolidated/standalone scope NOT independently verified"
+}

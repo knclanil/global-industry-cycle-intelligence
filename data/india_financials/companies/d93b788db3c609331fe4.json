@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "company_key": "ISIN:INE423A01024",
+  "symbol": "ADANIENT",
+  "company_name": "Adani Enterprises Ltd.",
+  "isin": "INE423A01024",
+  "industry": "Metals & Mining",
+  "sector": "Energy",
+  "yahoo_ticker": "ADANIENT.NS",
+  "currency": "INR",
+  "quote": {
+    "price": 2703.1,
+    "market_cap": 3659247648768.0,
+    "shares_outstanding": 1353722600.0,
+    "currency": "INR",
+    "asof_utc": "2026-11-19T20:51:26+00:00",
+    "provenance": "yahoo_finance_quote_snapshot"
+  },
+  "statements": {
+    "annual": {
+      "income": {
+        "2026-03-31": {
+          "ebitda": 260529100000.0
+        },
+        "2025-03-31": {
+          "ebitda": 195776700000.0
+        },
+        "2024-03-31": {
+          "ebitda": 116865200000.0
+        },
+        "2023-03-31": {
+          "ebitda": 86774300000.0
+        }
+      },
+      "balance": {
+        "2026-03-31": {
+          "goodwill": 8988100000.0,
+          "inventory": 187129800000.0
+        },
+        "2025-03-31": {
+          "goodwill": 10860500000.0,
+          "inventory": 102873900000.0
+        },
+        "2024-03-31": {
+          "goodwill": 10400100000.0,
+          "inventory": 94868600000.0
+        },
+        "2023-03-31": {
+          "goodwill": 8871600000.0,
+          "inventory": 69180500000.0
+        }
+      },
+      "cashflow": {}
+    },
+    "quarterly": {
+      "income": {
+        "2026-09-30": {
+          "ebitda": 43696000000.0
+        },
+        "2026-06-30": {
+          "ebitda": 10648800000.0
+        },
+        "2026-03-31": {
+          "ebitda": 26343900000.0
+        },
+        "2025-12-31": {
+          "ebitda": 86900600000.0
+        },
+        "2025-06-30": {
+          "ebitda": 29773900000.0
+        }
+      },
+      "balance": {
+        "2026-09-30": {
+          "goodwill": 8988300000.0,
+          "inventory": 274292900000.0
+        },
+        "2026-03-31": {
+          "goodwill": 8988100000.0,
+          "inventory": 187129800000.0
+        },
+        "2025-03-31": {
+          "goodwill": 10860500000.0,
+          "inventory": 102873900000.0
+        }
+      },
+      "cashflow": {}
+    }
+  },
+  "retrieved_utc": "2026-11-19T20:51:26+00:00",
+  "source_urls": {
+    "yahoo": "https://finance.yahoo.com/quote/ADANIENT.NS/financials/",
+    "screener_consolidated_reference": "https://www.screener.in/company/ADANIENT/consolidated/",
+    "nse_membership": "https://www.niftyindices.com/"
+  },
+  "source_notes": [],
+  "statement_scope": "Yahoo Finance provider; consolidated/standalone scope NOT independently verified"
+}

@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "company_key": "ISIN:INE371P01015",
+  "symbol": "AMBER",
+  "company_name": "Amber Enterprises India Ltd.",
+  "isin": "INE371P01015",
+  "industry": "Consumer Durables",
+  "sector": "Consumer Cyclical",
+  "yahoo_ticker": "AMBER.NS",
+  "currency": "INR",
+  "quote": {
+    "price": 6697.0,
+    "market_cap": 236188237824.0,
+    "shares_outstanding": 35267767.0,
+    "currency": "INR",
+    "asof_utc": "2026-11-19T20:51:59+00:00",
+    "provenance": "yahoo_finance_quote_snapshot"
+  },
+  "statements": {
+    "annual": {
+      "income": {
+        "2026-03-31": {
+          "ebitda": 9022535000.0
+        },
+        "2025-03-31": {
+          "ebitda": 7702432000.0
+        },
+        "2024-03-31": {
+          "ebitda": 5306440000.0
+        },
+        "2023-03-31": {
+          "ebitda": 4554187000.0
+        }
+      },
+      "balance": {
+        "2026-03-31": {
+          "goodwill": 16780573000.0,
+          "inventory": 24520217000.0
+        },
+        "2025-03-31": {
+          "goodwill": 3608655000.0,
+          "inventory": 16550691000.0
+        },
+        "2024-03-31": {
+          "goodwill": 3608655000.0,
+          "inventory": 8408350000.0
+        },
+        "2023-03-31": {
+          "goodwill": 1424969000.0,
+          "inventory": 10912827000.0
+        }
+      },
+      "cashflow": {}
+    },
+    "quarterly": {
+      "income": {
+        "2026-09-30": {
+          "ebitda": 1209281000.0
+        },
+        "2026-06-30": {
+          "ebitda": 2363946000.0
+        },
+        "2026-03-31": {
+          "ebitda": 3753512000.0
+        },
+        "2025-12-31": {
+          "ebitda": 1891266000.0
+        },
+        "2025-06-30": {
+          "ebitda": 2794857000.0
+        }
+      },
+      "balance": {
+        "2026-09-30": {
+          "goodwill": 17128936000.0,
+          "inventory": 26214801000.0
+        },
+        "2026-03-31": {
+          "goodwill": 16780573000.0,
+          "inventory": 24520217000.0
+        },
+        "2025-03-31": {
+          "goodwill": 3608655000.0,
+          "inventory": 16550691000.0
+        }
+      },
+      "cashflow": {}
+    }
+  },
+  "retrieved_utc": "2026-11-19T20:51:59+00:00",
+  "source_urls": {
+    "yahoo": "https://finance.yahoo.com/quote/AMBER.NS/financials/",
+    "screener_consolidated_reference": "https://www.screener.in/company/AMBER/consolidated/",
+    "nse_membership": "https://www.niftyindices.com/"
+  },
+  "source_notes": [],
+  "statement_scope": "Yahoo Finance provider; consolidated/standalone scope NOT independently verified"
+}

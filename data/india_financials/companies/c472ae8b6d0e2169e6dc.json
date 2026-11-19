@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "company_key": "ISIN:INE358A01014",
+  "symbol": "ABBOTINDIA",
+  "company_name": "Abbott India Ltd.",
+  "isin": "INE358A01014",
+  "industry": "Healthcare",
+  "sector": "Healthcare",
+  "yahoo_ticker": "ABBOTINDIA.NS",
+  "currency": "INR",
+  "quote": {
+    "price": 25695.0,
+    "market_cap": 546000830464.0,
+    "shares_outstanding": 21249302.0,
+    "currency": "INR",
+    "asof_utc": "2026-11-19T20:51:03+00:00",
+    "provenance": "yahoo_finance_quote_snapshot"
+  },
+  "statements": {
+    "annual": {
+      "income": {
+        "2026-03-31": {
+          "ebitda": 21802200000.0
+        },
+        "2025-03-31": {
+          "ebitda": 19701800000.0
+        },
+        "2024-03-31": {
+          "ebitda": 17013700000.0
+        },
+        "2023-03-31": {
+          "ebitda": 13597800000.0
+        }
+      },
+      "balance": {
+        "2026-03-31": {
+          "inventory": 9472600000.0
+        },
+        "2025-03-31": {
+          "inventory": 8820400000.0
+        },
+        "2024-03-31": {
+          "inventory": 6195800000.0
+        },
+        "2023-03-31": {
+          "inventory": 6488500000.0
+        }
+      },
+      "cashflow": {}
+    },
+    "quarterly": {
+      "income": {
+        "2026-09-30": {
+          "ebitda": 6359100000.0
+        },
+        "2026-06-30": {
+          "ebitda": 5978700000.0
+        },
+        "2026-03-31": {
+          "ebitda": 5564400000.0
+        },
+        "2025-12-31": {
+          "ebitda": 5332300000.0
+        },
+        "2025-09-30": {
+          "ebitda": 5721200000.0
+        }
+      },
+      "balance": {
+        "2026-09-30": {
+          "inventory": 9627700000.0
+        },
+        "2026-03-31": {
+          "inventory": 9472600000.0
+        },
+        "2025-09-30": {
+          "inventory": 9378600000.0
+        },
+        "2025-03-31": {
+          "inventory": 8820400000.0
+        }
+      },
+      "cashflow": {}
+    }
+  },
+  "retrieved_utc": "2026-11-19T20:51:03+00:00",
+  "source_urls": {
+    "yahoo": "https://finance.yahoo.com/quote/ABBOTINDIA.NS/financials/",
+    "screener_consolidated_reference": "https://www.screener.in/company/ABBOTINDIA/consolidated/",
+    "nse_membership": "https://www.niftyindices.com/"
+  },
+  "source_notes": [],
+  "statement_scope": "Yahoo Finance provider; consolidated/standalone scope NOT independently verified"
+}
