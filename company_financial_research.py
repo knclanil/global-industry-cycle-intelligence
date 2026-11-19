@@ -3,9 +3,13 @@ import re
 import streamlit as st
 
 def render_company_financial_research():
+    from research_theme import apply_research_theme
+    apply_research_theme()
     st.title('📑 Company Financial Research')
     st.caption('SEC-sourced annual and quarterly statements, business quality, and conservative valuation research.')
-    st.info('This page does not scan the ETF universe. Enter a US SEC-reporting ticker and select Load. Global issuers without SEC filings require another provider.')
+    st.caption('On-demand research · SEC company facts · Cached financial statements')
+    with st.expander('Data coverage and methodology', expanded=False):
+        st.info('Search one SEC-reporting company at a time. Global issuers without SEC filings require another provider. Data availability depends on the saved SEC cache.')
     default = str(st.session_state.get('research_ticker', 'AAPL'))
     with st.form('research_company_form'):
         ticker = st.text_input('Company ticker', value=default, placeholder='AAPL').strip().upper()

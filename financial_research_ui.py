@@ -224,14 +224,15 @@ def _checks(df):
 
 def render_financial_research(ticker):
     st.divider()
-    st.header('Company financial research')
+    st.subheader('Financial statements & analysis')
     st.caption('SEC filings · Buffett/Graham-inspired screening · source-based evidence, not investment advice.')
     with st.spinner(f'Loading SEC financial filings for {ticker}...'):
         try: data,cik,legal_name=load_company(ticker)
         except Exception as exc:
             st.warning(f'Financial statements unavailable for {ticker}: {exc}')
             return
-    st.markdown(f'**{ticker} — {legal_name}** · SEC CIK {cik:010d}')
+    st.markdown(f'### {legal_name} <span style="color:#51b7e8;font-size:0.75em">{ticker}</span>', unsafe_allow_html=True)
+    st.caption(f'SEC CIK {cik:010d} · Official filing-backed research')
     st.link_button('SEC company filings ↗',f'https://www.sec.gov/edgar/browse/?CIK={cik}&owner=exclude')
     cadence=st.radio('Reporting frequency',['Annual','Quarterly'],horizontal=True,key='sec_frequency')
     periods=st.slider('Periods to display',3,10,6,key='sec_periods')
@@ -264,13 +265,15 @@ def render_financial_research(ticker):
                         y=values,
                         text=[f'${v:,.2f}B' if pd.notna(v) else '' for v in values],
                         textposition='outside',
-                        textfont=dict(size=11, color='#17263C'),
+                        textfont=dict(size=11, color='#dce8f7'),
                         cliponaxis=False,
                         hovertemplate='%{x}<br>%{fullData.name}: $%{y:,.2f}B<extra></extra>',
                     ))
-            fig.update_layout(title='Revenue and earnings history',barmode='group',template='plotly_white',
-                              yaxis_title='USD billions',hoverlabel=dict(bgcolor='white',font_color='#17263C'),height=420,
+            fig.update_layout(title='Revenue and earnings history',barmode='group',template='plotly_dark',
+                              yaxis_title='USD billions',hoverlabel=dict(bgcolor='#213550',font_color='#f2f7ff'),height=420,
                               margin=dict(t=80,b=50,l=55,r=25),uniformtext_minsize=9,uniformtext_mode='hide')
+            from research_theme import PLOTLY_LAYOUT
+            fig.update_layout(**PLOTLY_LAYOUT)
             st.plotly_chart(fig,use_container_width=True)
         st.info('SEC filings do not supply current stock prices or forward valuation multiples. Business-segment revenue is shown only when reliably sourced.')
     _statement(tab2,'Income Statement',stmts,ticker,cadence)
