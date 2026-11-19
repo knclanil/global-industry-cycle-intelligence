@@ -37,13 +37,18 @@ def _display(v, kind='money'):
 
 
 def _card_group(title, metrics):
-    st.markdown(f'### {title}')
-    for start in range(0, len(metrics), 4):
-        cols = st.columns(4)
-        for col, (label, val, kind, note) in zip(cols, metrics[start:start + 4]):
+    """Compact KPI tiles; omit repetitive captions from the main viewport."""
+    st.markdown(f'<div class="kpi-section-title">{title}</div>', unsafe_allow_html=True)
+    for start in range(0, len(metrics), 5):
+        cols = st.columns(5, gap='small')
+        for col, (label, val, kind, note) in zip(cols, metrics[start:start + 5]):
             with col:
-                st.metric(label, _display(val, kind))
-                st.caption(note)
+                st.markdown(
+                    '<div class="kpi-tile" title="' + __import__('html').escape(note, quote=True) + '">'
+                    '<div class="kpi-label">' + __import__('html').escape(label) + '</div>'
+                    '<div class="kpi-number">' + __import__('html').escape(_display(val, kind)) + '</div>'
+                    '</div>', unsafe_allow_html=True,
+                )
 
 
 def _growth(df, label, periods, span=1):
@@ -79,9 +84,17 @@ def _chart(title, periods, items, kind='money'):
 
 def render_company_kpi_metrics():
     apply_research_theme()
+    st.markdown('''<style>
+    .kpi-section-title {font-size:1.02rem;font-weight:700;color:#e8f2ff;margin:14px 0 9px}
+    .kpi-tile {background:#142137;border:1px solid #2a3c55;border-radius:10px;
+        min-height:78px;padding:10px 12px;margin-bottom:5px;}
+    .kpi-label {font-size:.74rem;color:#afc2d9;line-height:1.2;min-height:18px}
+    .kpi-number {font-size:1.23rem;font-weight:700;color:#f1f7ff;margin-top:6px;white-space:nowrap}
+    @media(max-width:800px){.kpi-number{font-size:.95rem}.kpi-tile{padding:8px 6px}}
+    </style>''', unsafe_allow_html=True)
     st.title('📊 Company Financial KPI Intelligence')
     st.caption('Dedicated fundamental KPI workspace · official SEC financial statements · dark dashboard theme')
-    st.info('Loads one company on demand. No live market pricing is assumed; unavailable financial inputs are shown as N/A.')
+    st.caption('One company at a time · Verified SEC statements · N/A means unavailable')
     with st.form('kpi_company_form'):
         ticker = st.text_input('Company ticker', value=st.session_state.get('kpi_ticker', st.session_state.get('research_ticker', 'AAPL'))).strip().upper()
         submit = st.form_submit_button('Analyze financial KPIs', type='primary')
@@ -127,7 +140,9 @@ def render_company_kpi_metrics():
         year_periods = year_periods[year_periods.index(selected):]
     else:
         year_periods = []
-    _card_group('Growth & earnings', [
+    tab_summary, tab_growth, tab_strength, tab_cash, tab_value, tab_trends = st.tabs(['Overview', 'Growth & Margins', 'Balance Sheet', 'Cash Flow', 'Asset & Intrinsic Value', 'Trends'])
+    with tab_growth:
+        _card_group('Growth & earnings', [
         ('Revenue', rev, 'money', 'Reported annual revenue'),
         ('Net income', net, 'money', 'Reported annual earnings'),
         ('Diluted EPS', eps, 'eps', 'USD per diluted share'),
@@ -139,7 +154,8 @@ def render_company_kpi_metrics():
         ('EPS 5Y CAGR', _cagr(inc, 'Diluted EPS', year_periods, 5), 'percent', 'Positive start and end EPS required'),
         ('FCF YoY', _growth(cf, 'Free cash flow', sorted(cf.columns, reverse=True)), 'percent', 'Available fiscal years; not TTM'),
     ])
-    _card_group('Profitability & capital efficiency', [
+    with tab_growth:
+        _card_group('Profitability & capital efficiency', [
         ('Gross margin', _ratio(gross, rev), 'percent', 'Gross profit / revenue'),
         ('Operating margin', _ratio(op, rev), 'percent', 'Operating income / revenue'),
         ('Net margin', _ratio(net, rev), 'percent', 'Net income / revenue'),
@@ -149,7 +165,8 @@ def render_company_kpi_metrics():
         ('ROIC', None, 'percent', 'Requires verified NOPAT and invested capital'),
         ('EBITDA margin', None, 'percent', 'Requires verified depreciation/amortization'),
     ])
-    _card_group('Balance sheet & financial strength', [
+    with tab_strength:
+        _card_group('Balance sheet & financial strength', [
         ('Total assets', assets, 'money', 'Period-end assets'),
         ('Total liabilities', liabilities, 'money', 'Period-end liabilities'),
         ('Stockholders equity', equity, 'money', 'Period-end equity'),
@@ -163,7 +180,8 @@ def render_company_kpi_metrics():
         ('Quick ratio', None, 'multiple', 'Requires inventory and other current-asset detail'),
         ('Debt maturity profile', None, 'money', 'Requires debt maturity disclosures'),
     ])
-    _card_group('Cash flow & capital allocation', [
+    with tab_cash:
+        _card_group('Cash flow & capital allocation', [
         ('Operating cash flow', ocf, 'money', 'Reported cash from operations'),
         ('Capital expenditures', capex, 'money', 'Reported purchases of PP&E'),
         ('Free cash flow', fcf, 'money', 'OCF less absolute capital expenditures'),
@@ -175,23 +193,39 @@ def render_company_kpi_metrics():
         ('FCF 5Y CAGR', _cagr(cf, 'Free cash flow', sorted(cf.columns, reverse=True), 5), 'percent', 'Positive FCF endpoints required'),
         ('Share count change', None, 'percent', 'Requires comparable historical shares outstanding'),
     ])
-    from asset_valuation import render_asset_valuation
-    render_asset_valuation(data, selected, assets, liabilities, equity, ca, net, eps, fcf, bank=bank)
-    st.markdown('### Historical KPI trends')
-    hist = sorted(set(inc.columns) | set(bs.columns) | set(cf.columns), reverse=True)[:10]
-    _chart('Revenue, operating income & net income', hist,
-           [(label, [(_value(inc, label, p) / 1e9 if _value(inc, label, p) is not None else None) for p in hist])
-            for label in ('Revenue', 'Operating income', 'Net income')])
-    _chart('Margins', hist,
-           [(label, [(_ratio(_value(inc, numerator, p), _value(inc, 'Revenue', p)) * 100
-                     if _ratio(_value(inc, numerator, p), _value(inc, 'Revenue', p)) is not None else None) for p in hist])
-            for label, numerator in [('Gross margin', 'Gross profit'), ('Operating margin', 'Operating income'), ('Net margin', 'Net income')]], 'percent')
-    _chart('Cash flow and long-term debt', hist,
-           [(label, [(_value(source, tag, p) / 1e9 if _value(source, tag, p) is not None else None) for p in hist])
-            for label, source, tag in [('Operating cash flow', cf, 'Operating cash flow'),
-                                       ('Free cash flow', cf, 'Free cash flow'),
-                                       ('Long-term debt', bs, 'Long-term debt')]])
-    st.markdown('### Valuation & market data')
-    st.info('Market cap, enterprise value, P/E, EV/EBITDA, FCF yield, forward estimates and dividend yield are not calculated here because the existing SEC-only source does not provide verified current prices. No placeholder prices are invented.')
+    with tab_value:
+        from asset_valuation import render_asset_valuation
+        render_asset_valuation(data, selected, assets, liabilities, equity, ca, net, eps, fcf, bank=bank)
+    with tab_trends:
+        st.markdown('### Historical KPI trends')
+        hist = sorted(set(inc.columns) | set(bs.columns) | set(cf.columns), reverse=True)[:10]
+        _chart('Revenue, operating income & net income', hist,
+               [(label, [(_value(inc, label, p) / 1e9 if _value(inc, label, p) is not None else None) for p in hist])
+                for label in ('Revenue', 'Operating income', 'Net income')])
+        _chart('Margins', hist,
+               [(label, [(_ratio(_value(inc, numerator, p), _value(inc, 'Revenue', p)) * 100
+                         if _ratio(_value(inc, numerator, p), _value(inc, 'Revenue', p)) is not None else None) for p in hist])
+                for label, numerator in [('Gross margin', 'Gross profit'), ('Operating margin', 'Operating income'), ('Net margin', 'Net income')]], 'percent')
+        _chart('Cash flow and long-term debt', hist,
+               [(label, [(_value(source, tag, p) / 1e9 if _value(source, tag, p) is not None else None) for p in hist])
+                for label, source, tag in [('Operating cash flow', cf, 'Operating cash flow'),
+                                           ('Free cash flow', cf, 'Free cash flow'),
+                                           ('Long-term debt', bs, 'Long-term debt')]])
+        st.markdown('### Valuation & market data')
+        st.info('Market cap, enterprise value, P/E, EV/EBITDA, FCF yield, forward estimates and dividend yield are not calculated here because the existing SEC-only source does not provide verified current prices. No placeholder prices are invented.')
+    with tab_summary:
+        _card_group('At a glance', [
+            ('Revenue', rev, 'money', 'Reported annual revenue'),
+            ('Net income', net, 'money', 'Reported annual net income'),
+            ('Diluted EPS', eps, 'eps', 'Reported diluted EPS'),
+            ('Operating margin', _ratio(op, rev), 'percent', 'Operating income / revenue'),
+            ('Free cash flow', fcf, 'money', 'Operating cash flow less capex'),
+            ('Revenue growth', _growth(inc, 'Revenue', year_periods), 'percent', 'Previous annual period'),
+            ('Cash & equivalents', cash, 'money', 'Period-end cash'),
+            ('Long-term debt', debt, 'money', 'Excludes short-term borrowings'),
+            ('Return on equity', _ratio(net, equity) if equity is not None and equity > 0 else None, 'percent', 'Period-end equity'),
+            ('FCF margin', _ratio(fcf, rev), 'percent', 'Free cash flow / revenue'),
+        ])
+        st.caption('Explore the tabs for full metrics, valuation assumptions and historical charts. Hover over a tile for its definition.')
     with st.expander('Metric definitions, coverage and limitations'):
         st.markdown('''**Data source:** SEC Company Facts, via the existing project cache. **N/A** means the required fact is missing or a calculation is not safely supported.\n\n**Period alignment:** Point-in-time balance-sheet values and annual income/cash-flow flows are shown for the selected fiscal period end. Growth is meaningful only for comparable consecutive annual periods; verify filing dates before interpreting growth.\n\n**Industry limitations:** Banking, insurance and REIT reporting require specialized indicators. ROIC, debt maturity, full net debt and market valuation remain unavailable until validated input mappings or price feeds are integrated. This page does not generate investment recommendations.''')

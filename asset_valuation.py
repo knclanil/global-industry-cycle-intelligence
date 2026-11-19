@@ -41,7 +41,7 @@ def _per_share(numerator, shares):
 
 
 def render_asset_valuation(data, period, assets, liabilities, equity, current_assets, net_income, eps, fcf, bank=False):
-    st.markdown('## Asset Value & Intrinsic Value')
+    st.markdown('### Asset Value & Intrinsic Value')
     st.caption('Book-value measures use reported SEC facts. Liquidation and DCF values are assumption-driven scenarios, not guaranteed sale proceeds or price targets.')
     shares, shares_source = _fact(data, ['EntityCommonStockSharesOutstanding', 'CommonStockSharesOutstanding'], 'shares', period)
     preferred, preferred_source = _fact(data, ['PreferredStockValue', 'PreferredStockCarryingValue'], 'USD', period)
