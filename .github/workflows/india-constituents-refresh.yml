@@ -32,7 +32,7 @@ jobs:
         env:
           NSE_REQUEST_USER_AGENT: ${{ vars.NSE_REQUEST_USER_AGENT }}
         run: |
-          python scripts/refresh_india_constituents.py --from-dir data/india_holdings/manual
+          python scripts/refresh_india_constituents.py --from-dir data/india_holdings/manual --require-data
       - name: Write job summary
         if: always()
         run: |
@@ -42,7 +42,8 @@ jobs:
             cat data/india_holdings/build_summary.json >> "$GITHUB_STEP_SUMMARY"
             echo '```' >> "$GITHUB_STEP_SUMMARY"
           fi
-      - name: Commit constituent snapshots and diagnostics
+      - name: Commit constituent snapshots, changes, and diagnostics
+        if: always()
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'

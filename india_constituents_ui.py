@@ -249,6 +249,161 @@ def _render_coverage(status: pd.DataFrame, companies: pd.DataFrame, memberships:
                        file_name="india_nse_source_coverage.csv", mime="text/csv")
 
 
+
+def _render_holding_changes(revisions: pd.DataFrame, changes: pd.DataFrame) -> None:
+    """Show observed NSE constituent changes from saved, validated snapshots only."""
+    from india_holdings_history import compare_snapshots
+
+    st.markdown("#### Constituents · change history")
+    st.caption("Observed additions, removals, symbol changes and **published** weight changes. "
+               "Dates are **snapshot retrieval times**, not official NSE effective dates. "
+               "The first saved snapshot per index is the baseline, not an addition event.")
+    if revisions.empty:
+        st.info("No historical baselines exist yet. Run **India NSE Constituents Refresh** after deploying "
+                "this update. Valid source data must be collected before changes can be tracked.")
+        return
+    if not {"index_slug", "revision_id", "snapshot_path", "observed_utc"}.issubset(revisions.columns):
+        st.error("Stored revision history has an invalid schema. Re-run the India NSE refresh workflow.")
+        return
+    if not changes.empty and not {"index_slug", "change_type", "symbol", "observed_utc"}.issubset(changes.columns):
+        st.error("Stored event history has an invalid schema. Re-run the India NSE refresh workflow.")
+        return
+    added = int((changes["change_type"] == "Added").sum()) if not changes.empty else 0
+    removed = int((changes["change_type"] == "Removed").sum()) if not changes.empty else 0
+    wchanges = int((changes["change_type"] == "Weight Changed").sum()) if not changes.empty else 0
+    c1, c2, c3, c4 = st.columns(4)
+    c1.metric("Historical revisions", len(revisions))
+    c2.metric("Observed additions", added)
+    c3.metric("Observed removals", removed)
+    c4.metric("Published weight changes", wchanges)
+    st.markdown("<div class='india-note'>A stock joining or leaving an <b>individual NSE index</b> "
+                "is recorded as an event. Its presence in other sector/factor indices is not altered. "
+                "Failed or suspicious downloads never create removal events. Unpublished weights are N/A. "
+                "There is no company scoring or inferred holding weight.</div>", unsafe_allow_html=True)
+
+    options = {r["index_slug"]: r["index_name"] for _, r in revisions.iterrows()}
+    index_options = ["All tracked indices"] + sorted(options, key=lambda x: options[x])
+    f1, f2, f3 = st.columns([1.4, 1.2, 1.5])
+    idx_slug = f1.selectbox("Index", index_options, format_func=lambda s: options.get(s, s),
+                            key="in_history_index")
+    change_types = ["All events", "Added", "Removed", "Symbol Changed", "Weight Changed"]
+    event_type = f2.selectbox("Change", change_types, key="in_history_event_type")
+    search = f3.text_input("Company or symbol", key="in_history_search",
+                           placeholder="Find additions, removals, or symbol changes")
+    visible = changes.copy()
+    if not visible.empty:
+        if idx_slug != "All tracked indices":
+            visible = visible[visible["index_slug"] == idx_slug]
+        if event_type != "All events":
+            visible = visible[visible["change_type"] == event_type]
+        if search:
+            needle = search.lower().strip()
+            visible = visible[
+                visible["company_name"].str.lower().str.contains(needle, regex=False)
+                | visible["symbol"].str.lower().str.contains(needle, regex=False)
+                | visible["previous_symbol"].str.lower().str.contains(needle, regex=False)
+                | visible["isin"].str.lower().str.contains(needle, regex=False)
+            ]
+        visible = visible.sort_values("observed_utc", ascending=False)
+    st.caption(f"{len(visible):,} observed events · History starts when the first validated snapshot was saved.")
+    if visible.empty:
+        st.info("No recorded constituent changes match these filters. The source may have only a baseline, "
+                "or subsequent validated snapshots have been unchanged.")
+    else:
+        cols = ["observed_utc", "index_name", "change_type", "company_name", "symbol",
+                "previous_symbol", "isin", "old_weight_pct", "new_weight_pct", "source_url"]
+        display = visible[cols].rename(columns={
+            "observed_utc": "Observed UTC", "index_name": "NSE Index",
+            "change_type": "Event", "company_name": "Company", "symbol": "NSE Symbol",
+            "previous_symbol": "Previous Symbol", "isin": "ISIN",
+            "old_weight_pct": "Previous Weight (%)", "new_weight_pct": "New Weight (%)",
+            "source_url": "NSE Source",
+        })
+        for field in ("Previous Weight (%)", "New Weight (%)"):
+            display[field] = display[field].replace("", "N/A")
+        st.dataframe(display, use_container_width=True, hide_index=True, height=370,
+                     column_config={"NSE Source": st.column_config.LinkColumn("NSE Source", display_text="Official CSV")})
+        st.download_button("⬇ Export filtered change log", visible.to_csv(index=False).encode("utf-8"),
+                           file_name="india_nse_holdings_changes.csv", mime="text/csv", key="in_change_export")
+
+    st.markdown("#### Index snapshot history")
+    if idx_slug == "All tracked indices":
+        count_table = revisions.groupby(["index_slug", "index_name"], as_index=False).agg(
+            Snapshot_versions=("revision_id", "count"),
+            First_observed_UTC=("observed_utc", "min"),
+            Last_observed_change_UTC=("observed_utc", "max"),
+        )
+        st.dataframe(count_table.rename(columns={"index_name": "NSE Index", "index_slug": "Index ID"}),
+                     use_container_width=True, hide_index=True, height=290)
+        st.caption("Snapshot versions are stored only when validated constituent data changes; "
+                   "a repeated identical download does not create a new version.")
+        if options:
+            idx_slug = st.selectbox("Select an index to compare two snapshots", sorted(options, key=lambda x: options[x]),
+                                    format_func=lambda s: options[s], key="in_history_compare_index")
+
+    this_index = revisions[revisions["index_slug"] == idx_slug].sort_values("observed_utc")
+    if this_index.empty:
+        return
+    series = this_index[["observed_utc", "constituent_count"]].copy()
+    series["constituent_count"] = pd.to_numeric(series["constituent_count"], errors="coerce")
+    series["observed_utc"] = pd.to_datetime(series["observed_utc"], utc=True, errors="coerce")
+    series = series.dropna().rename(columns={"observed_utc": "Retrieved UTC", "constituent_count": "Constituents"})
+    if len(series) > 1:
+        st.line_chart(series, x="Retrieved UTC", y="Constituents", height=225)
+    else:
+        st.caption("One recorded baseline for this index. At least two different validated snapshots "
+                   "are needed to draw a constituent count trend.")
+    st.dataframe(this_index[["observed_utc", "revision_type", "constituent_count", "added", "removed",
+                             "weight_changed", "symbol_changed", "source_type"]].rename(columns={
+                                 "observed_utc": "Retrieved UTC", "revision_type": "Revision",
+                                 "constituent_count": "Constituents", "added": "Added", "removed": "Removed",
+                                 "weight_changed": "Weight updates", "symbol_changed": "Symbol updates",
+                                 "source_type": "Source",
+                             }), use_container_width=True, hide_index=True, height=235)
+
+    if len(this_index) < 2:
+        return
+    by_id = {str(r["revision_id"]): r for _, r in this_index.iterrows()}
+    keys = list(by_id)
+    c1, c2 = st.columns(2)
+    earliest = c1.selectbox("Compare from", keys, index=max(0, len(keys) - 2),
+                            format_func=lambda key: by_id[key]["observed_utc"] + " · " + key[:8],
+                            key="in_history_from")
+    latest = c2.selectbox("Compare to", keys, index=len(keys) - 1,
+                          format_func=lambda key: by_id[key]["observed_utc"] + " · " + key[:8],
+                          key="in_history_to")
+    if earliest == latest:
+        st.caption("Choose two different versions to calculate additions and removals.")
+        return
+    old_path = DATA / str(by_id[earliest]["snapshot_path"])
+    new_path = DATA / str(by_id[latest]["snapshot_path"])
+    # Only read paths constructed within the committed India-history directory.
+    history_root = (DATA / "history" / idx_slug).resolve()
+    if old_path.resolve().parent != history_root or new_path.resolve().parent != history_root:
+        st.error("Invalid stored snapshot path. History paths must remain inside the index's own directory.")
+        return
+    old = _load_csv(str(old_path), _mtime(old_path))
+    new = _load_csv(str(new_path), _mtime(new_path))
+    if old.empty or new.empty:
+        st.warning("One of the selected historical source snapshots is missing. "
+                   "Ensure the data/india_holdings/history directory was committed to GitHub.")
+        return
+    delta = compare_snapshots(old.to_dict("records"), new.to_dict("records"))
+    if not delta:
+        st.caption("No additions, removals, symbol changes or measurable published weight changes between these versions.")
+        return
+    details = pd.DataFrame(delta)[["change_type", "company_name", "symbol", "previous_symbol", "isin",
+                                    "old_weight_pct", "new_weight_pct"]]
+    st.caption(f"Comparison identifies {sum(d['change_type'] == 'Added' for d in delta)} additions and "
+               f"{sum(d['change_type'] == 'Removed' for d in delta)} removals, plus any verified symbol/weight changes.")
+    st.dataframe(details.rename(columns={"change_type": "Change", "company_name": "Company",
+                                         "symbol": "NSE Symbol", "previous_symbol": "Previous Symbol",
+                                         "isin": "ISIN", "old_weight_pct": "Previous Weight (%)",
+                                         "new_weight_pct": "New Weight (%)"}),
+                 use_container_width=True, hide_index=True, height=min(390, 80 + 36 * len(details)))
+    st.download_button("⬇ Export snapshot comparison", details.to_csv(index=False).encode("utf-8"),
+                       file_name=f"{idx_slug}_snapshot_comparison.csv", mime="text/csv", key="in_compare_export")
+
 def render_india_constituents() -> None:
     _style()
     st.markdown("<div class='india-kicker'>INDIA · INDEX CONSTITUENT INTELLIGENCE</div>", unsafe_allow_html=True)
@@ -257,6 +412,8 @@ def render_india_constituents() -> None:
     companies = _get("companies.csv")
     memberships = _get("constituents.csv")
     status = _get("index_status.csv")
+    revisions = _get("index_revisions.csv")
+    holding_changes = _get("holding_changes.csv")
     for name, frame, required in [
         ("companies.csv", companies, {"company_key", "symbol", "company_name"}),
         ("constituents.csv", memberships, {"company_key", "index_slug", "category"}),
@@ -273,7 +430,7 @@ def render_india_constituents() -> None:
     _source_context(status)
     st.markdown("<div class='india-note'>Collections are prepared outside Streamlit for fast loading. One company appears once in the directory, while its factor-family, Nifty parent-universe, sector, and thematic memberships remain separate. No scores or negative points are calculated.</div>", unsafe_allow_html=True)
     tabs = st.tabs(["🏢 Company Directory", "🧩 Factor Membership Matrix", "🏭 Sector & Factor Overlap",
-                    "📁 Source Index Browser", "🛡️ Data Coverage"])
+                    "📁 Source Index Browser", "🔄 Holdings Changes", "🛡️ Data Coverage"])
     with tabs[0]:
         if companies.empty or memberships.empty:
             st.info("No company records to display yet. Run the scheduled or manual NSE constituent collection job to populate this page.")
@@ -286,4 +443,6 @@ def render_india_constituents() -> None:
     with tabs[3]:
         _render_sources(status, memberships)
     with tabs[4]:
+        _render_holding_changes(revisions, holding_changes)
+    with tabs[5]:
         _render_coverage(status, companies, memberships)

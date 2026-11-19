@@ -6,6 +6,21 @@ Under **Factor Analysis → India Sector & Factor Holdings**, explore the 31 NSE
 
 The page reads committed snapshots rather than downloading NSE files in Streamlit. To populate the initially empty data, run **Actions → India NSE Constituents Refresh → Run workflow**. For NSE 403 downloads, commit the original constituent CSV under `data/india_holdings/manual/` and rerun the job. See [`INDIA_CONSTITUENTS_GUIDE.md`](INDIA_CONSTITUENTS_GUIDE.md) and [`data/india_holdings/README.md`](data/india_holdings/README.md).
 
+**New: India Holdings Changes** — The same page includes an observed changes tab with
+index-by-index additions/removals, verified weight changes, symbol changes,
+immutable snapshot history, a source index constituent-count trend, and
+historical snapshot comparison. The first valid snapshot is the baseline;
+no historical changes are invented. Scheduled NSE retrieval is handled by
+GitHub Actions. See `INDIA_CONSTITUENTS_GUIDE.md` for safeguards and data files.
+
+**Safe upgrades:** The release archive deliberately excludes generated
+`data/india_holdings/*.csv`/`*.json` so copying it into an existing repository
+cannot replace collected NSE records with empty placeholders. Preserve all
+current `data/india_holdings/snapshots/`, `snapshot_meta/`, `manual/`, and
+`history/` files. The first scheduled refresh after upgrade migrates older
+snapshots into the history system automatically.
+
+
 
 ## Dashboard navigation (display order)
 

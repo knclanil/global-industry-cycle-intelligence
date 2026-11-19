@@ -29,3 +29,83 @@ Use **GitHub → Actions → India NSE Constituents Refresh → Run workflow**. 
 If some URLs reject cloud downloads, place corresponding authentic CSVs at `data/india_holdings/manual/<slug>.csv` (or the original NSE CSV filename). `--offline` lets you build using local CSVs only. Slugs and official URLs are listed in `india_constituents.py`.
 
 **Data caveat:** A direct download was not possible in the build environment, so the delivered package initially has no actual NSE constituents. It is ready to populate when the GitHub Action or manual CSV imports run; the interface displays accurate coverage status in the meantime.
+
+## Historical constituent tracking (new)
+
+Every successful NSE refresh compares that index's latest validated list with
+its previous validated list. **The first validated list is a baseline, not a
+mass addition.** Only subsequent observed changes generate events. The
+existing weekday GitHub Actions job automatically runs this comparison and
+commits the files; Streamlit never downloads source data during page loads.
+
+New **🔄 Holdings Changes** tab includes:
+
+- An audit trail of index-specific **Added**, **Removed**, **Symbol Changed**,
+  and **Weight Changed** events (when weights are published on both dates).
+- Searchable, filterable changes with the source index, NSE symbol, ISIN,
+  old/new published weights if available, and time the change was **observed**.
+- Per-index immutable snapshot history and a constituent-count trend.
+- A two-snapshot comparison and CSV exports for events and differences.
+
+### Storage
+
+- `data/india_holdings/history/<index_slug>/<revision_id>.csv` — preserved
+  validated constituents for each **distinct** observed state. Unchanged source
+  files, including changes in row order, do not create another version.
+- `data/india_holdings/history/<index_slug>/revisions.csv` — per-index revision
+  provenance and observed differences, with first-collection baseline.
+- `data/india_holdings/history/<index_slug>/events.csv` — index-specific events.
+- `data/india_holdings/index_revisions.csv` and `holding_changes.csv` — combined
+  read-only dashboard exports built from the per-index historical records.
+- `data/india_holdings/index_status.csv` — refresh status and per-run deltas;
+  `build_summary.json` — current coverage plus per-run and historical totals.
+
+On upgrading from an earlier version that already has `snapshots/<slug>.csv`,
+the previous successful file is saved as a **legacy baseline** before a fresh
+validated download is compared against it. Previously unsaved dates cannot be
+recreated retroactively.
+
+### Safety and interpretation
+
+- Download errors or invalid HTML/CSV never count as company removals. Existing
+  verified snapshots are retained. A reduction below 70% of the prior index
+  size or turnover above 60% is blocked for human review; if it is a genuine
+  large index change, rerun with `--allow-large-changes` **only after checking
+  the source**. The error is reported in the Data Coverage tab.
+- An addition/removal is **from that particular index**; it does not imply a
+  company entered/left India's stock market or the consolidated universe.
+- If a symbol changes but the ISIN remains the same, it is logged as a
+  `Symbol Changed` event, not a removal and addition. When one date lacks an
+  ISIN, a unique symbol can serve as a safe fallback.
+- A weight change is only measurable when both snapshots explicitly publish
+  weights. Newly available/absent weight values are not reported as changes.
+  A change needs to be at least **0.01 percentage point** to avoid rounding noise.
+- Observations are stamped with the UTC **retrieval** time, **not** the official
+  effective date, rebalance date, or corporate action announcement date.
+- These logs contain **no rankings, negative points, synthetic weights, or
+  fabricated historical events**.
+
+To run a local collection and append history:
+
+```bash
+python scripts/refresh_india_constituents.py --from-dir data/india_holdings/manual
+```
+
+The daily job tries NSE first; if NSE fails, an authentic local file is used as
+fallback. A fallback that contradicts a prior direct-NSE snapshot is blocked
+until reviewed to prevent reintroducing old holdings. To deliberately import a
+new manual CSV when NSE is accessible, use `--prefer-manual`.
+
+For a fully offline import of authentic manually downloaded NSE constituent CSVs:
+
+```bash
+python scripts/refresh_india_constituents.py --offline --from-dir data/india_holdings/manual
+```
+
+The scheduled workflow now uses `--require-data`: if **none** of the 31 index
+sources can be loaded, the workflow is marked failed rather than silently
+reporting success. Diagnostics are still committed by the final `if: always()`
+step to help identify which downloads were blocked.
+
+**Historical tracking starts with the first valid collection.** If all 31
+sources remain uncollected, the page cannot show historical holdings events.

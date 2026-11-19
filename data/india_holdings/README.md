@@ -37,3 +37,14 @@ See `INDIA_CONSTITUENTS_GUIDE.md` in the repository root for page details and th
 - **Weights:** Source percentage only, when the uploaded/downloaded file includes an explicit weight column. Otherwise blank/N/A. No guessed top-10 weights.
 - **Date:** A retrieval timestamp describes when the CSV was collected, **not** the official effective/rebalance date.
 - **Snapshot completeness:** Each of the 31 index sources has its own status; a failed request cannot delete its previously parsed snapshot.
+
+## Observed change tracking
+
+The same background refresh preserves distinct, validated versions under
+`history/<index_slug>/` and materializes `index_revisions.csv` and
+`holding_changes.csv` for the dashboard's **Holdings Changes** tab.
+Initial collection establishes a baseline, not an addition. Subsequent
+successful collections record index-specific additions, removals, ticker
+changes, and published constituent weight changes, when verifiable.
+Failed/suspicious sources retain prior data, never triggering false removals.
+See `INDIA_CONSTITUENTS_GUIDE.md` for details, date semantics, and safeguards.

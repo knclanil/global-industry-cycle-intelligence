@@ -92,6 +92,7 @@ STATUS_FIELDS = [
     "index_slug", "index_name", "category", "factor_family", "parent_universe",
     "status", "constituent_count", "retrieved_utc", "snapshot_utc",
     "source_type", "source_url", "error",
+    "change_status", "additions", "removals", "weight_changes", "symbol_changes",
 ]
 
 
