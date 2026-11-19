@@ -357,9 +357,24 @@ def render_fundamental_intelligence():
                 st.write(result)
                 st.cache_data.clear()
             except Exception as exc:st.error(f'SEC refresh unavailable: {exc}')
-    # Disk-backed GitHub Actions snapshots change independently of Streamlit's cache.
-    # Avoid stale 0-coverage results after the workflow publishes new facts.
-    scored = score_profiles(available_profiles(universe))
+    # SEC JSON parsing is expensive: memoize until underlying files change.
+    # The fingerprint uses metadata only, so ordinary UI reruns are fast.
+    @st.cache_data(show_spinner=False, max_entries=3)
+    def _cached_scores(fingerprint, _universe):
+        return score_profiles(available_profiles(_universe))
+
+    facts_files = list(STORE.glob('facts_*.json'))
+    directory_path = STORE / 'sec_company_directory.json'
+    fingerprint = tuple(sorted((p.name, p.stat().st_size, p.stat().st_mtime_ns)
+                               for p in facts_files))
+    if directory_path.exists():
+        fingerprint += ((directory_path.name, directory_path.stat().st_size,
+                         directory_path.stat().st_mtime_ns),)
+    # Include holdings identity in the key to avoid cross-universe stale results.
+    fingerprint += (('holdings', len(universe), int(pd.util.hash_pandas_object(
+        universe[['issuer_id','ticker','company','country','region']], index=False).sum())),)
+    with st.spinner('Loading cached company fundamentals…'):
+        scored = _cached_scores(fingerprint, universe)
     region = st.radio('Holdings universe',['USA','Global'],horizontal=True)
     scope = universe[universe.region.eq(region)]
     st.metric('Unique ETF issuers',scope.issuer_id.nunique())
@@ -371,18 +386,23 @@ def render_fundamental_intelligence():
             if status.get('errors'): st.warning(f"SEC refresh reported {len(status['errors'])} errors. Check refresh_status.json for details.")
         except (ValueError, OSError): pass
     st.metric('Issuers with SEC annual financials',scored[scored.region.eq(region)].issuer_id.nunique() if not scored.empty else 0)
-    with st.expander('SEC matching and extraction diagnostics', expanded=bool(scored.empty)):
-        diag = coverage_diagnostics(universe)
-        c1, c2, c3, c4 = st.columns(4)
-        c1.metric('US holdings issuers',diag['us_issuers'])
-        c2.metric('CIK matches in SEC directory',diag['directory_matched'])
-        c3.metric('Holdings with cached facts',diag['holdings_with_cached_facts'])
-        c4.metric('Holdings with annual data',diag['holdings_with_annual_data'])
-        st.caption(f"Total SEC fact files: {diag['cached_company_facts']}. The directory-match count includes issuers not yet downloaded.")
-        if diag['unmatched_samples']:
-            st.dataframe(pd.DataFrame(diag['unmatched_samples']),hide_index=True,use_container_width=True)
-        if st.button('Recheck on-disk fundamentals'):
-            st.rerun()
+    with st.expander('SEC matching and extraction diagnostics', expanded=False):
+        st.caption('Detailed diagnostics scan all holdings and SEC filings; run only when needed.')
+        if st.button('Run detailed diagnostics'):
+            with st.spinner('Checking company identifiers and cached statements…'):
+                st.session_state['fundamentals_diagnostics'] = coverage_diagnostics(universe)
+        diag = st.session_state.get('fundamentals_diagnostics')
+        if diag is not None:
+            c1, c2, c3, c4 = st.columns(4)
+            c1.metric('US holdings issuers',diag['us_issuers'])
+            c2.metric('CIK matches in SEC directory',diag['directory_matched'])
+            c3.metric('Holdings with cached facts',diag['holdings_with_cached_facts'])
+            c4.metric('Holdings with annual data',diag['holdings_with_annual_data'])
+            st.caption(f"Total SEC fact files: {diag['cached_company_facts']}. The directory-match count includes issuers not yet downloaded.")
+            if diag['unmatched_samples']:
+                st.dataframe(pd.DataFrame(diag['unmatched_samples']),hide_index=True,use_container_width=True)
+            if st.button('Recheck on-disk fundamentals'):
+                st.rerun()
     if scored.empty or scored[scored.region.eq(region)].empty:
         st.info('No verified fundamentals cached for this universe. US issuers can be refreshed from SEC; international coverage requires an additional filings provider.')
         return
