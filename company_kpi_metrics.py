@@ -175,6 +175,8 @@ def render_company_kpi_metrics():
         ('FCF 5Y CAGR', _cagr(cf, 'Free cash flow', sorted(cf.columns, reverse=True), 5), 'percent', 'Positive FCF endpoints required'),
         ('Share count change', None, 'percent', 'Requires comparable historical shares outstanding'),
     ])
+    from asset_valuation import render_asset_valuation
+    render_asset_valuation(data, selected, assets, liabilities, equity, ca, net, eps, fcf, bank=bank)
     st.markdown('### Historical KPI trends')
     hist = sorted(set(inc.columns) | set(bs.columns) | set(cf.columns), reverse=True)[:10]
     _chart('Revenue, operating income & net income', hist,
