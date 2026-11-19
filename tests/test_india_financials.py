@@ -153,3 +153,16 @@ def test_direct_ticker_research_is_not_disguised_as_nse_membership(tmp_path):
     saved = __import__('india_financial_data').load_company('TICKER:MGL', root)
     assert saved['symbol'] == 'MGL'
     assert saved['company_key'].startswith('TICKER:')
+
+
+def test_statement_coverage_distinguishes_sparse_annual_rows():
+    from india_financial_data import statement_coverage
+    sample = {'statements': {'annual': {
+        'income': {'2026-03-31': {'diluted_eps': 4.0},
+                   '2025-03-31': {'revenue': 9.0}},
+        'balance': {'2026-03-31': {'inventory': 3.0}},
+        'cashflow': {}}}}
+    coverage = statement_coverage(sample)
+    assert coverage['income_periods'] == 1
+    assert coverage['balance_periods'] == 0
+    assert coverage['best_periods'] == ['2025-03-31']

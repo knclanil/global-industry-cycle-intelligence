@@ -28,7 +28,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from india_financial_data import (
     DATA, AGGREGATE_FIELDS, aggregate_member_financials, company_file, load_company,
-    normalize_yahoo_statements, now_utc, safe_symbol, yahoo_symbol, screener_url, summary_row,
+    normalize_yahoo_statements, now_utc, safe_symbol, yahoo_symbol, screener_url, summary_row, statement_coverage,
 )
 
 COMPANIES_CSV = ROOT / "data" / "india_holdings" / "companies.csv"
@@ -103,6 +103,11 @@ def fetch_yahoo_company(company: dict) -> dict:
     statement_data = normalize_yahoo_statements(
         *(sheets[name] for name in ('annual_income', 'annual_balance', 'annual_cashflow',
                                     'quarterly_income', 'quarterly_balance', 'quarterly_cashflow')))
+    coverage = statement_coverage({'statements': statement_data}, 'annual')
+    quarterly_coverage = statement_coverage({'statements': statement_data}, 'quarterly')
+    if not (coverage['best_periods'] or quarterly_coverage['best_periods']):
+        raise RuntimeError('Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). '
+                           + '; '.join(errors[:3]))
     if not any(statement_data['annual'].values()) and not any(statement_data['quarterly'].values()):
         raise RuntimeError('Yahoo returned no usable annual or quarterly financial statements; ' + '; '.join(errors[:2]))
     info = {}
@@ -152,6 +157,7 @@ def fetch_yahoo_company(company: dict) -> dict:
             'nse_membership': 'https://www.niftyindices.com/',
         },
         'source_notes': errors,
+        'coverage': {'annual': coverage, 'quarterly': quarterly_coverage},
         'statement_scope': 'Yahoo Finance provider; consolidated/standalone scope NOT independently verified',
     }
 

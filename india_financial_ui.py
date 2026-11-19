@@ -18,7 +18,7 @@ import streamlit as st
 from india_financial_data import (
     AGGREGATE_FIELDS, DATA, MONEY_METRICS, PERCENT_KPIS, RATIO_KPIS, build_kpis,
     company_file, equity_dcf_proxy, liquidation_proxy, load_company,
-    safe_symbol, screener_url,
+    safe_symbol, screener_url, statement_coverage,
 )
 from research_theme import PLOTLY_LAYOUT, apply_research_theme
 from scripts.refresh_india_financials import fetch_yahoo_company
@@ -284,8 +284,15 @@ def render_india_company_kpis():
                                'Try the other reporting frequency or view the provider links below.')
                 live_payloads[selection] = refreshed
                 payload = refreshed
-                st.success(f'Loaded Yahoo financial data for {symbol}.NS. '
-                           'This live session snapshot is not automatically committed to GitHub.')
+                check = statement_coverage(refreshed, frequency)
+                if not check['best_periods']:
+                    st.warning(f'Yahoo responded for {symbol}.NS but did not supply any usable {frequency} '
+                               'income, balance-sheet or cash-flow core periods. Check Sources & Holdings.')
+                else:
+                    st.success(f'Loaded Yahoo {frequency} statements for {symbol}.NS '
+                               f'(income: {check["income_periods"]}, balance: {check["balance_periods"]}, '
+                               f'cash flow: {check["cashflow_periods"]} periods). '
+                               'This session snapshot is not automatically committed to GitHub.')
             except Exception as exc:
                 st.error(f'Yahoo financial request failed for {symbol}.NS: '
                          f'{type(exc).__name__}: {str(exc)[:300]}')
@@ -315,6 +322,32 @@ def render_india_company_kpis():
     if not periods:
         st.warning('No verified data for the selected reporting frequency.')
         return
+    coverage = statement_coverage(payload, frequency)
+    eligible_periods = coverage['best_periods']
+    if eligible_periods:
+        # Prefer fiscal periods with core financial values rather than ancillary
+        # Yahoo columns that may be present without any useful KPI inputs.
+        periods = eligible_periods
+    else:
+        st.error('Yahoo returned a statement shell, but none of the selected frequency periods '
+                 'contains usable revenue/earnings, assets/equity or operating cash flow. '
+                 'The source may be incomplete or rate-limited. No financial KPIs can be shown.')
+        st.caption('Available raw period columns: ' + ', '.join(periods[:12]))
+        if payload.get('source_notes'):
+            with st.expander('Yahoo collection errors and notes'):
+                st.write(payload['source_notes'])
+        _source_buttons(symbol)
+        return
+    with st.expander('Financial data coverage / extraction diagnostics', expanded=False):
+        st.write({'annual/quarterly': frequency,
+                  'income periods': coverage['income_periods'],
+                  'balance sheet periods': coverage['balance_periods'],
+                  'cash flow periods': coverage['cashflow_periods'],
+                  'income fields parsed': coverage['income_metric_rows'],
+                  'balance fields parsed': coverage['balance_metric_rows'],
+                  'cash flow fields parsed': coverage['cashflow_metric_rows']})
+        if payload.get('source_notes'):
+            st.write(payload['source_notes'])
     period = st.selectbox('Fiscal period ending', periods, key='india_fin_period')
     result = build_kpis(payload, frequency, period)
     metrics = result['metrics']

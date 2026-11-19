@@ -153,6 +153,36 @@ def normalize_yahoo_statements(annual_income, annual_balance, annual_cashflow,
     }
 
 
+def statement_coverage(payload: dict, frequency: str = "annual") -> dict:
+    """Expose what Yahoo actually returned; retrieval alone is not coverage.
+
+    Counts refer to periods containing one or more mapped statement rows.
+    No missing values are converted to zeros.
+    """
+    group = ((payload.get("statements") or {}).get(frequency) or {})
+    core = {
+        "income": ("revenue", "net_income", "operating_income"),
+        "balance": ("total_assets", "equity", "total_liabilities"),
+        "cashflow": ("operating_cash_flow", "free_cash_flow"),
+    }
+    sections = {name: (group.get(name) or {}) for name in core}
+    key_periods = {
+        name: sorted([date for date, values in sections[name].items()
+                      if any(values.get(k) is not None for k in keys)], reverse=True)
+        for name, keys in core.items()
+    }
+    return {
+        "core_periods": key_periods,
+        "income_periods": len(key_periods["income"]),
+        "balance_periods": len(key_periods["balance"]),
+        "cashflow_periods": len(key_periods["cashflow"]),
+        "income_metric_rows": sum(len(x) for x in sections["income"].values()),
+        "balance_metric_rows": sum(len(x) for x in sections["balance"].values()),
+        "cashflow_metric_rows": sum(len(x) for x in sections["cashflow"].values()),
+        "best_periods": sorted(set().union(*key_periods.values()), reverse=True),
+    }
+
+
 def asof_row(section: dict, date: str, *, tolerance_days: int = 65) -> tuple[dict, str]:
     """Avoid combining data from unrelated fiscal periods."""
     if date in section:
