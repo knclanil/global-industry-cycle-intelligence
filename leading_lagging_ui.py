@@ -104,9 +104,11 @@ def render_leading_lagging_graph():
     s2.metric('Lagging companies',len(lagging))
     s3.metric('Verified rotation indices',len(signals))
     s4.metric('Unmapped sources',len(missing))
+    if region != 'India':
+        st.caption('USA/Global: where exact fund price mappings are unavailable, issuer fund titles are mapped to clearly labeled **sector/factor ETF category proxies**. Rankings reflect those proxies—not the source ETFs’ own returns or individual-company returns.')
     st.caption('Leading: positive relative strength and momentum on BOTH sides. Lagging: negative relative strength and momentum on BOTH sides. Improving/Weakening remain unclassified. These are index signals, not company-price performance or valuation.')
     if region != 'India' and len(missing):
-        st.info('USA/Global source portfolios require verified mapping to market-price rotation series. Configure data/market/rotation_source_links.csv (see guide).')
+        st.info('Some holdings funds have no unambiguous sector/factor proxy. See Rotation & coverage. Optional exact mappings: data/market/rotation_source_links.csv.')
     tabs=st.tabs(['▲ Leading','▼ Lagging','Rotation & coverage'])
     for tab,side,subset in [(tabs[0],'Leading',leading),(tabs[1],'Lagging',lagging)]:
         with tab:
@@ -114,7 +116,7 @@ def render_leading_lagging_graph():
                 st.info(f'No eligible {side.lower()} company has verified matching sector AND factor signals at this lookback.')
                 continue
             if show=='Graph & rankings': _graph(results,side,max_companies)
-            cols=['Rank','Ticker','Company','Score','Sector indices','Factor indices','Sector sources','Factor sources']
+            cols=['Rank','Ticker','Company','Score','Sector indices','Factor indices','Sector sources','Factor sources','Signal basis']
             if region!='India': cols.insert(6,'Exposure')
             st.dataframe(subset[cols].sort_values('Rank'),hide_index=True,use_container_width=True,
                 column_config={'Score':st.column_config.NumberColumn('Evidence score',format='%.2f'),

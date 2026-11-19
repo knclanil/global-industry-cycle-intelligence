@@ -34,3 +34,26 @@ def test_no_fabrication_without_signal():
     rows=pd.DataFrame([{'company_key':'A','company_name':'A','symbol':'AAA','index_slug':'nifty_bank'}])
     out,_=build_lists('India',rows,pd.DataFrame())
     assert out.empty
+
+def test_usa_sector_factor_category_proxy_populates_rankings():
+    from leading_lagging_engine import source_signal_mapping
+    rows = pd.DataFrame([
+        {'issuer_id':'TICKER_COUNTRY:AAA|US','company':'Company AAA','ticker':'AAA','portfolio_id':'239505','fund_title':'iShares U.S. Technology ETF','weight':4.5},
+        {'issuer_id':'TICKER_COUNTRY:AAA|US','company':'Company AAA','ticker':'AAA','portfolio_id':'239695','fund_title':'iShares MSCI USA Momentum Factor ETF','weight':2.0},
+    ])
+    signals = pd.DataFrame([
+        {'kind':'sector','source_id':'XLK','label':'Technology','quadrant':'Leading','relative_strength':5,'rs_momentum':2},
+        {'kind':'factor','source_id':'MTUM','label':'Momentum','quadrant':'Leading','relative_strength':4,'rs_momentum':1},
+    ])
+    matched,missing=source_signal_mapping('USA',rows,signals)
+    assert len(matched)==2,missing
+    assert all(v['mapping_method']=='category_proxy' for v in matched.values())
+    result,_=build_lists('USA',rows,signals)
+    assert len(result)==1 and result.iloc[0].Ticker=='AAA'
+    assert result.iloc[0]['Signal basis']=='Category ETF proxy'
+
+
+def test_unmapped_generic_index_not_misidentified_as_sector():
+    from leading_lagging_engine import _title_proxy
+    sig=pd.DataFrame([{'kind':'sector','source_id':'XLK','label':'Information Technology'}])
+    assert _title_proxy('iShares Core S&P 500 ETF','sector',sig) is None

@@ -84,6 +84,55 @@ def rotation_signals(region: str, lookback: int = 63) -> pd.DataFrame:
     return pd.DataFrame(out)
 
 
+# Sector and factor reference ETFs are market proxies, NOT necessarily the same
+# iShares ETF used for holdings. Matching is based on issuer-provided fund title;
+# ambiguous names are deliberately left unmapped. Explicit mappings take priority.
+SECTOR_KEYWORDS = [
+    ('Communication Services', ('communication services', 'communications sector', 'telecommunication')),
+    ('Consumer Discretionary', ('consumer discretionary',)),
+    ('Consumer Staples', ('consumer staples',)),
+    ('Financials', ('financials', 'financial sector', 'financial services')),
+    ('Healthcare', ('healthcare', 'health care')),
+    ('Technology', ('information technology', 'technology sector', 'u.s. technology', 'global tech')),
+    ('Industrials', ('industrials', 'industrial sector')),
+    ('Materials', ('materials', 'basic materials')),
+    ('Real Estate', ('real estate', 'reit')),
+    ('Utilities', ('utilities', 'utility sector')),
+    ('Energy', ('energy sector', 'global energy', 'u.s. energy')),
+]
+FACTOR_KEYWORDS = [
+    ('Minimum Volatility', ('minimum volatility', 'min vol', 'low volatility', 'min volatility')),
+    ('Momentum', ('momentum',)),
+    ('Quality', ('quality',)),
+    ('Value', ('value factor', 'value etf', 'value index', 'msci value', 's&p 500 value', 'russell 1000 value')),
+    ('Growth', ('growth factor', 'growth etf', 'growth index', 'msci growth', 's&p 500 growth', 'russell 1000 growth')),
+    ('Dividend Yield', ('dividend yield', 'high dividend', 'dividend select', 'dividend growth')),
+    ('Small Cap', ('small cap', 'small-cap', 'size factor')),
+    ('Size', ('size factor', 'small cap', 'small-cap')),
+]
+
+def _title_proxy(title: str, kind: str, signals: pd.DataFrame):
+    """A transparent category *proxy*; never implies portfolio-price identity."""
+    title = re.sub(r'\s+', ' ', str(title).lower()).strip()
+    if not title or title in ('nan','none'): return None
+    # Do not map broad/multi-sector ETFs as if they were a pure factor/sector.
+    if any(bad in title for bad in ('multi-factor', 'multifactor', 'multi sector', 'multi-sector')):
+        return None
+    rules = SECTOR_KEYWORDS if kind == 'sector' else FACTOR_KEYWORDS
+    matches = [family for family, keys in rules if any(k in title for k in keys)]
+    # Size is called 'Small Cap' in the USA price universe, and 'Size' globally.
+    if set(matches) == {'Small Cap','Size'}:
+        matches = ['Small Cap'] if (signals['label'].str.casefold() == 'small cap').any() else ['Size']
+    if len(set(matches)) != 1: return None
+    family = matches[0]
+    candidates = signals[(signals['kind'] == kind) & (signals['label'].str.casefold() == family.casefold())]
+    if len(candidates) != 1: return None
+    row = candidates.iloc[0].to_dict()
+    row['mapping_method'] = 'category_proxy'
+    row['mapping_note'] = f"{title} → {family} reference ETF (NOT the source fund price)"
+    return row
+
+
 def source_signal_mapping(region: str, holdings: pd.DataFrame, signals: pd.DataFrame) -> tuple[dict, list[dict]]:
     """Map exact official portfolio/index identity where possible; don't guess ambiguous names."""
     if signals.empty:
@@ -102,22 +151,41 @@ def source_signal_mapping(region: str, holdings: pd.DataFrame, signals: pd.DataF
             if slug not in matches:
                 skipped.append({'Source': definition.name, 'Reason': 'No verified matching rotation signal'})
     else:
-        # fund_title descriptions are NOT proof that a benchmark ETF represents
-        # the exact source portfolio. Optional explicit link file is needed.
+        # Optional audited explicit mapping remains highest priority.
         mapping_path = DATA / 'market' / 'rotation_source_links.csv'
         if mapping_path.is_file():
             links = pd.read_csv(mapping_path, dtype=str).fillna('')
             required = {'region', 'source_id', 'market_ticker', 'kind'}
-            if required.issubset(links):
-                lookup = {(str(row.kind).lower(), row.source_id): row for row in signals.itertuples(index=False)}
+            if required.issubset(links.columns):
+                lookup = {(str(r.kind).lower(), r.source_id): r for r in signals.itertuples(index=False)}
                 for row in links.itertuples(index=False):
                     if row.region.strip().upper() != region.upper(): continue
                     kind = row.kind.lower().strip()
                     if (kind, row.market_ticker) in lookup:
-                        matches[row.source_id] = lookup[(kind, row.market_ticker)]._asdict()
+                        match = lookup[(kind, row.market_ticker)]._asdict()
+                        match['mapping_method'] = 'explicit'
+                        match['mapping_note'] = 'Operator-provided source → price series mapping'
+                        matches[row.source_id] = match
+        # Independently support category-proxy rotation for the iShares holdings
+        # funds already downloaded. This avoids a wholly blank USA/Global page
+        # when the optional explicit mapping file contains only a header.
+        if {'portfolio_id','fund_title'}.issubset(holdings.columns):
+            for pid, grp in holdings.groupby(holdings.portfolio_id.astype(str), sort=False):
+                if pid in matches: continue
+                expected_kind = 'sector' if pid in (set(__import__('holdings_intelligence').SECTORS) |
+                                     set(__import__('holdings_intelligence').GLOBAL_SECTORS)) else 'factor'
+                titles = [str(t).strip() for t in grp['fund_title'].dropna().unique() if str(t).strip()]
+                if len(titles) != 1:
+                    skipped.append({'Source':pid,'Fund': ' / '.join(titles[:2]), 'Reason':'Missing or ambiguous issuer fund title'})
+                    continue
+                proxy = _title_proxy(titles[0], expected_kind, signals)
+                if proxy is None:
+                    skipped.append({'Source':pid,'Fund':titles[0], 'Reason':'No unambiguous category proxy with valid price history'})
+                else:
+                    matches[pid] = proxy
         for pid in sorted(holdings.portfolio_id.astype(str).unique()) if not holdings.empty else []:
-            if pid not in matches:
-                skipped.append({'Source': pid, 'Reason': 'No verified portfolio → rotation series mapping'})
+            if pid not in matches and not any(r['Source'] == pid for r in skipped):
+                skipped.append({'Source':pid, 'Reason':'No valid source → rotation series mapping'})
     return matches, skipped
 
 
@@ -179,6 +247,7 @@ def build_lists(region: str, holdings: pd.DataFrame, signals: pd.DataFrame, *, m
                             'Sector RS magnitude':round(sec, 2), 'Factor RS magnitude': round(fac, 2),
                             'Sector sources': ' · '.join(sorted(r['sector_names'])),
                             'Factor sources': ' · '.join(sorted(r['factor_names'])),
+                            'Signal basis': 'Category ETF proxy' if any(s.get('mapping_method') == 'category_proxy' for _,s in (*r['sector'].values(), *r['factor'].values())) else 'Direct source mapping',
                             'Exposure': round(sum(v[0] for v in (*r['sector'].values(), *r['factor'].values())), 3) if region!='India' else None}))
     frame = pd.DataFrame(rows)
     if not frame.empty:

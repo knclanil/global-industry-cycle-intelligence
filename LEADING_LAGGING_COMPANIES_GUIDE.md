@@ -42,3 +42,29 @@ No new live API requests run when opening the page; it reads saved files. Restar
 ## Deployment
 
 Copy all `nightly_build/` *contents* into your repository root. Preserve existing `data/` holdings, financials, historical snapshots, caches, and GitHub Actions permissions. This is a build package, **not a live GitHub deployment**. A runtime visual acceptance test has not yet been performed in Streamlit Cloud.
+
+## USA / Global blank-page fix — November 19, 2026
+
+Previously `data/market/rotation_source_links.csv` was header-only. Consequently, all
+USA and Global sources were unmapped, despite having valid source holdings.
+
+The engine now **automatically identifies an unambiguous sector/factor category
+from the fund title supplied in each iShares holdings download**, and uses the
+existing market-history **reference ETF for that category**. Each result is
+labeled **Category ETF proxy**, not a direct return or price history of the
+source holdings fund. Exact operator-verified mappings in
+`data/market/rotation_source_links.csv` still override the fallback.
+
+No company is classified if its sector or factor price-history signal is absent,
+if its fund's category is ambiguous, or if the sector and factor signals don't
+agree on Leading or Lagging. Missing signals are never treated as lagging.
+
+**To populate**: Run both the Verified iShares holdings refresh and the
+Incremental market data refresh (`region=us` or `all`). Check that
+`data/holdings/latest_holdings.parquet` contains `fund_title` and that
+`data/market/` contains valid adjusted-close histories. Open
+Leading & Lagging → Global / USA → Rotation & coverage for uncovered funds.
+
+A proxy is a research benchmark and not proof that its holdings fund is
+outperforming. For exact source-fund returns, supply a verified portfolio-ID
+→ traded-ticker map and save the traded ETF's own price series.
