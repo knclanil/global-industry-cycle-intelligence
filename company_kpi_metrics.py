@@ -92,7 +92,7 @@ def render_company_kpi_metrics():
     .kpi-number {font-size:1.23rem;font-weight:700;color:#f1f7ff;margin-top:6px;white-space:nowrap}
     @media(max-width:800px){.kpi-number{font-size:.95rem}.kpi-tile{padding:8px 6px}}
     </style>''', unsafe_allow_html=True)
-    st.title('📊 Company Financial KPI Intelligence')
+    st.title('🇺🇸 USA Company Financial KPI Intelligence')
     st.caption('Dedicated fundamental KPI workspace · official SEC financial statements · dark dashboard theme')
     st.caption('One company at a time · Verified SEC statements · N/A means unavailable')
     with st.form('kpi_company_form'):

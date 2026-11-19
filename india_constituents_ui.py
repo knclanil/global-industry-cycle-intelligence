@@ -109,10 +109,9 @@ def _render_company_directory(companies: pd.DataFrame, memberships: pd.DataFrame
     display["Published Weight (%)"] = display["Published Weight (%)"].replace("", "N/A")
     st.dataframe(display, hide_index=True, use_container_width=True, height=min(460, 95 + 35 * len(display)),
                  column_config={"Official CSV": st.column_config.LinkColumn("Official CSV", display_text="Open source")})
-    if st.button("📊 Open India Company Financial KPIs", key="india_directory_open_financials", type="primary"):
-        st.session_state.india_financial_symbol = str(identity['symbol']).upper()
-        st.session_state.pop('india_financial_select', None)
-        st.session_state.selected_page = 'India Company Financial KPIs'
+    if st.button("📊 Open India Company Financial KPI Intelligence", key="india_directory_open_financials", type="primary"):
+        st.session_state.india_kpi_reference_symbol = str(identity['symbol']).upper()
+        st.session_state.selected_page = 'India Company Financial KPI Intelligence'
         st.rerun()
 
 

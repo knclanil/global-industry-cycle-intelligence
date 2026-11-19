@@ -282,8 +282,8 @@ def _company_evidence(ranking: pd.DataFrame, members: pd.DataFrame):
     symbol = str(row['symbol']).strip().upper()
     c1, c2, c3 = st.columns(3)
     if c1.button('📊 Open India Financial KPIs', use_container_width=True, type='primary'):
-        st.session_state.india_financial_symbol = symbol
-        st.session_state.selected_page = 'India Company Financial KPIs'
+        st.session_state.india_kpi_reference_symbol = symbol
+        st.session_state.selected_page = 'India Company Financial KPI Intelligence'
         st.rerun()
     c2.link_button('↗ Screener consolidated', f'https://www.screener.in/company/{symbol}/consolidated/', use_container_width=True)
     c3.link_button('↗ Yahoo Finance', f'https://finance.yahoo.com/quote/{symbol}.NS/', use_container_width=True)
