@@ -97,7 +97,7 @@ group_name = next((g.split(' ', 1)[-1].title() for g, items in NAV_GROUPS.items(
 st.markdown(f'<div class="app-topline"><span class="app-path">GLOBAL INDUSTRY  /  {group_name.upper()}  /  {page.upper()}</span><span class="app-pill">RESEARCH</span></div>', unsafe_allow_html=True)
 
 if page in ('Global Knowledge Graph', 'USA Knowledge Graph', 'India Knowledge Graph'):
-    from regional_workspace import render_graph
+    from regional_rotation_graph import render_graph
     render_graph(page.split(' ',1)[0])
 elif page in ('Global Analysis', 'USA Analysis', 'India Analysis'):
     from regional_workspace import render_analysis

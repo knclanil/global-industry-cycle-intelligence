@@ -37,6 +37,8 @@ jobs:
           else
             python scripts/build_dashboard_cache.py
           fi
+      - name: Build region-specific market rotation knowledge graphs
+        run: python scripts/build_regional_rotation_graphs.py
       - name: Commit derived views
         run: |
           git config user.name 'github-actions[bot]'

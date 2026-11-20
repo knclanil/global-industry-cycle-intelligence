@@ -93,8 +93,10 @@ def build_ishares(region):
     index_columns=['index_slug','index_name','category','factor_family','constituents','snapshot_utc']
     try:
         holdings=pd.read_parquet(ROOT/'data/holdings/latest_holdings.parquet')
-    except (ImportError, OSError, ValueError, FileNotFoundError):
+    except FileNotFoundError:
         return pd.DataFrame(columns=columns),pd.DataFrame(columns=index_columns),pd.DataFrame()
+    except (ImportError, OSError, ValueError) as exc:
+        raise RuntimeError(f'Cannot read iShares parquet for {region}: {exc}. Do not publish empty materialized views.') from exc
     if holdings.empty or 'group' not in holdings:return pd.DataFrame(columns=columns),pd.DataFrame(columns=index_columns),pd.DataFrame()
     holdings=holdings[holdings.group.astype(str).str.startswith('Global' if region=='Global' else 'USA')].copy()
     if holdings.empty:return pd.DataFrame(columns=columns),pd.DataFrame(columns=index_columns),pd.DataFrame()
