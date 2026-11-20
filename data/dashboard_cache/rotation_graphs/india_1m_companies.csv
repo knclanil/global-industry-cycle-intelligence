@@ -1,0 +1,14 @@
+Company,Ticker,company_key,Category,Score,Sector indices,Factor indices,Sector RS magnitude,Factor RS magnitude,Sector sources,Factor sources,Signal basis,Avg ETF % weight,Exposure,Rank
+LTM Ltd.,LTM,ISIN:INE214T01019,Lagging,16.495,1,1,26.28,10.36,Information Technology,Quality (Nifty200 Quality 30),Direct source mapping,,,1
+Oracle Financial Services Software Ltd.,OFSS,ISIN:INE881D01027,Lagging,16.495,1,1,26.28,10.36,Information Technology,Quality (Nifty200 Quality 30),Direct source mapping,,,1
+Persistent Systems Ltd.,PERSISTENT,ISIN:INE262H01021,Lagging,16.495,1,1,26.28,10.36,Information Technology,Quality (Nifty200 Quality 30),Direct source mapping,,,1
+HCL Technologies Ltd.,HCLTECH,ISIN:INE860A01027,Lagging,11.783,1,3,26.28,5.02,Information Technology,Equal Weight (Nifty50 Equal Weight) · Quality (Nifty200 Quality 30) · Value (Nifty50 Value 20),Direct source mapping,,,4
+Infosys Ltd.,INFY,ISIN:INE009A01021,Lagging,11.783,1,3,26.28,5.02,Information Technology,Equal Weight (Nifty50 Equal Weight) · Quality (Nifty200 Quality 30) · Value (Nifty50 Value 20),Direct source mapping,,,4
+Tata Consultancy Services Ltd.,TCS,ISIN:INE467B01029,Lagging,11.04,1,4,26.28,4.27,Information Technology,Equal Weight (Nifty50 Equal Weight) · Low Volatility (Nifty100 Low Volatility 30) · Quality (Nifty200 Quality 30) · Value (Nifty50 Value 20),Direct source mapping,,,6
+Hindustan Zinc Ltd.,HINDZINC,ISIN:INE267A01025,Lagging,8.699,1,1,7.31,10.36,Metals,Quality (Nifty200 Quality 30),Direct source mapping,,,7
+Tech Mahindra Ltd.,TECHM,ISIN:INE669C01036,Lagging,7.582,1,1,26.28,2.19,Information Technology,Equal Weight (Nifty50 Equal Weight),Direct source mapping,,,8
+Wipro Ltd.,WIPRO,ISIN:INE075A01022,Lagging,7.277,1,1,26.28,2.02,Information Technology,Low Volatility (Nifty100 Low Volatility 30),Direct source mapping,,,9
+Hindalco Industries Ltd.,HINDALCO,ISIN:INE038A01020,Lagging,4.294,1,2,7.31,2.35,Metals,Equal Weight (Nifty50 Equal Weight) · Value (Nifty50 Value 20),Direct source mapping,,,10
+Tata Steel Ltd.,TATASTEEL,ISIN:INE081A01020,Lagging,4.294,1,2,7.31,2.35,Metals,Equal Weight (Nifty50 Equal Weight) · Value (Nifty50 Value 20),Direct source mapping,,,10
+Adani Enterprises Ltd.,ADANIENT,ISIN:INE423A01024,Lagging,3.999,1,1,7.31,2.19,Metals,Equal Weight (Nifty50 Equal Weight),Direct source mapping,,,12
+JSW Steel Ltd.,JSWSTEEL,ISIN:INE019A01038,Lagging,3.999,1,1,7.31,2.19,Metals,Equal Weight (Nifty50 Equal Weight),Direct source mapping,,,12
