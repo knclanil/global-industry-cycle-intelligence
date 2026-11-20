@@ -98,80 +98,88 @@ def graph_elements(companies: pd.DataFrame, signals: pd.DataFrame, quadrant: str
 
 def combined_graph_elements(companies: pd.DataFrame, signals: pd.DataFrame,
                             quadrants: tuple[str, ...], limit: int):
-    """Keep independent category lanes; do not merge identical index/company labels
-    across categories because their rotation evidence may differ.
+    """Create ONE network: four rotation nodes, shared center, unique companies.
+
+    Index evidence stays quadrant-scoped. Company IDs are shared so a company
+    connected to several qualifying sector/factor indexes is drawn only once.
     """
     nodes, links = [], []
+    seen = set()
     for quadrant in quadrants:
         lane_nodes, lane_links = graph_elements(companies, signals, quadrant, limit)
-        # Prefix non-rotation IDs to prevent accidentally merging signals shared by lanes.
+
         def scoped(node_id):
-            return node_id if node_id.startswith('q:') else f'{quadrant}|{node_id}'
+            if node_id.startswith(('q:', 'c:')):
+                return node_id
+            return f'{quadrant}|{node_id}'
+
         for node in lane_nodes:
-            nodes.append({**node, 'id': scoped(node['id'])})
+            new_id = scoped(node['id'])
+            if new_id not in seen:
+                nodes.append({**node, 'id': new_id})
+                seen.add(new_id)
         links.extend((scoped(a), scoped(b)) for a, b in lane_links)
-    return nodes, links
+
+    # The rotation nodes are always present, including for quadrants with no
+    # qualifying company links, so the user always sees exactly four endpoints.
+    for quadrant in quadrants:
+        node_id = f'q:{quadrant}'
+        if node_id not in seen:
+            nodes.append({'id': node_id, 'label': quadrant,
+                          'type': 'rotation', 'quadrant': quadrant})
+            seen.add(node_id)
+    return nodes, list(dict.fromkeys(links))
 
 
 def _plot(nodes, links, quadrants):
-    """Left-to-right, three-column Sankey-style knowledge graph.
+    """Render ONE three-column network, not four vertically separated charts.
 
-    Left: four rotation quadrants; center: sector and factor nodes; right:
-    company nodes. Each category has its own horizontal lane.
+    Left: exactly four rotation nodes. Middle: all sector/factor nodes.
+    Right: unique companies. Each edge shows one observed membership relation.
     """
-    if not links:
-        st.info('No companies currently have verified sector AND factor evidence in the selected rotation categories.')
-        return
-
     by_id = {node['id']: node for node in nodes}
-    by_lane = {q: {'rotation': [], 'sector': [], 'factor': [], 'company': []}
-               for q in quadrants}
-    for node in nodes:
-        q = node.get('quadrant')
-        if q in by_lane:
-            by_lane[q][node['type']].append(node)
+    order = {quadrant: i for i, quadrant in enumerate(QUADRANTS)}
 
+    rotations = [by_id[f'q:{q}'] for q in quadrants if f'q:{q}' in by_id]
+    indices = sorted(
+        (n for n in nodes if n['type'] in ('sector', 'factor')),
+        key=lambda n: (order.get(n['quadrant'], 99),
+                       0 if n['type'] == 'sector' else 1, n['label'].lower()))
+    companies = sorted(
+        (n for n in nodes if n['type'] == 'company'),
+        key=lambda n: (order.get(n['quadrant'], 99), n['label'].lower()))
+
+    # All nodes are placed in the SAME coordinate system; no per-quadrant
+    # subplots, separator lines or independently scaled panes.
     positions = {}
-    lane_bounds = {}
-    top = 0.0
-    for quadrant in quadrants:
-        groups = by_lane[quadrant]
-        sectors = sorted(groups['sector'], key=lambda n: n['label'])
-        factors = sorted(groups['factor'], key=lambda n: n['label'])
-        companies = sorted(groups['company'], key=lambda n: n['label'])
-        # Allow space for the entire center column and for all company labels.
-        lane_height = max(6.0, (len(sectors) + len(factors)) * 1.12 + 2.0,
-                          len(companies) * 0.95 + 2.0)
-        center_y = top - lane_height / 2
-        lane_bounds[quadrant] = (top, top - lane_height, center_y)
-        positions[f'q:{quadrant}'] = (0.0, center_y)
-        middle = sectors + factors
-        for idx, node in enumerate(middle):
-            y = center_y + (len(middle) - 1) * 0.56 - idx * 1.12
-            positions[node['id']] = (1.38, y)
-        for idx, node in enumerate(companies):
-            y = center_y + (len(companies) - 1) * 0.475 - idx * 0.95
-            positions[node['id']] = (2.85, y)
-        top -= lane_height + 1.4
+    for i, q in enumerate(quadrants):
+        positions[f'q:{q}'] = (0.0, 1 - (i + 0.5) / len(quadrants))
+    for group, x in ((indices, 1.28), (companies, 2.63)):
+        for i, node in enumerate(group):
+            positions[node['id']] = (x, 1 - (i + 0.5) / max(len(group), 1))
 
     fig = go.Figure()
     for quadrant in quadrants:
-        lane_links = [(a, b) for a, b in links if by_id[a]['quadrant'] == quadrant]
-        # Draw link traces by lane, colored by rotation category.
         xvals, yvals = [], []
-        for source, target in lane_links:
+        for source, target in links:
+            # Sector/factor node provenance determines the edge color.
+            center = by_id.get(source if '|i:' in source else target)
+            if not center or center.get('quadrant') != quadrant:
+                continue
             if source not in positions or target not in positions:
                 continue
-            a, b = positions[source], positions[target]
-            xvals.extend([a[0], b[0], None])
-            yvals.extend([a[1], b[1], None])
-        fig.add_trace(go.Scatter(
-            x=xvals, y=yvals, mode='lines',
-            line={'color': COLORS[quadrant], 'width': 1}, opacity=0.32,
-            hoverinfo='skip', showlegend=False))
+            start, end = positions[source], positions[target]
+            xvals.extend([start[0], end[0], None])
+            yvals.extend([start[1], end[1], None])
+        if xvals:
+            fig.add_trace(go.Scatter(
+                x=xvals, y=yvals, mode='lines',
+                line={'color': COLORS[quadrant], 'width': 1.1}, opacity=0.27,
+                hoverinfo='skip', name=quadrant, showlegend=False))
 
-    for kind in ('rotation', 'sector', 'factor', 'company'):
-        group = [node for node in nodes if node['type'] == kind and node['id'] in positions]
+    for kind, group in (('rotation', rotations), ('sector', [n for n in indices if n['type'] == 'sector']),
+                        ('factor', [n for n in indices if n['type'] == 'factor']),
+                        ('company', companies)):
         if not group:
             continue
         hover = []
@@ -180,42 +188,39 @@ def _plot(nodes, links, quadrants):
             if kind in ('sector', 'factor'):
                 hover.append(f"{q} · {kind.title()}: {node['label']}<br>RS: {node.get('rs')}<br>RS momentum: {node.get('momentum')}")
             elif kind == 'company':
-                hover.append(f"{q} · {node.get('name', node['label'])}<br>Evidence score: {node.get('score')}")
+                hover.append(f"{node.get('name', node['label'])}<br>Evidence score: {node.get('score')}")
             else:
                 hover.append(f'{q} rotation')
         fig.add_trace(go.Scatter(
             x=[positions[n['id']][0] for n in group],
             y=[positions[n['id']][1] for n in group],
             mode='markers+text',
-            marker={'size': 30 if kind == 'rotation' else 16 if kind != 'company' else 18,
+            marker={'size': 27 if kind == 'rotation' else 12 if kind != 'company' else 10,
+                    'symbol': 'diamond' if kind == 'factor' else 'circle',
                     'color': [COLORS[n['quadrant']] if kind == 'rotation' else COLORS[kind]
                               for n in group],
                     'line': {'width': 1, 'color': '#101827'}},
-            text=[n['label'][:23] for n in group],
-            textposition='top center', textfont={'size': 10, 'color': '#e5edf7'},
+            text=[n['label'] if kind == 'rotation' else n['label'][:25] for n in group],
+            textposition='middle left' if kind == 'rotation' else 'middle right',
+            textfont={'size': 11 if kind == 'rotation' else 9, 'color': '#e5edf7'},
             hovertext=hover, hovertemplate='%{hovertext}<extra></extra>',
             name=kind.title()))
 
-    for q in quadrants:
-        upper, lower, center = lane_bounds[q]
-        fig.add_hline(y=lower - 0.65, line_color='rgba(180,200,220,0.18)', line_width=1)
-        fig.add_annotation(x=-0.17, y=upper - 0.3, text=q.upper(), showarrow=False,
-                           xanchor='left', font={'size': 11, 'color': COLORS[q]})
-
-    for x, label in ((0, 'ROTATION'), (1.38, 'SECTORS / FACTORS'), (2.85, 'COMPANIES')):
-        fig.add_annotation(x=x, y=1.2, text=f'<b>{label}</b>', showarrow=False,
-                           font={'size': 14, 'color': '#e5edf7'})
-    total_height = sum(upper - lower for upper, lower, _ in lane_bounds.values())
-    height = max(650, min(2400, int(total_height * 25 + 200)))
+    for x, label in ((0, 'ROTATIONS'), (1.28, 'SECTORS / FACTORS'), (2.63, 'COMPANIES')):
+        fig.add_annotation(x=x, y=1.045, text=f'<b>{label}</b>', showarrow=False,
+                           xanchor='center', font={'size': 13, 'color': '#e5edf7'})
     fig.update_layout(
-        height=height, paper_bgcolor='#101827', plot_bgcolor='#101827',
-        font={'color': '#e5edf7'}, margin={'l': 60, 'r': 90, 't': 60, 'b': 35},
-        xaxis={'visible': False, 'range': [-0.35, 3.22]},
-        yaxis={'visible': False, 'range': [top - 0.4, 2.6]},
+        height=max(680, min(2200, max(len(indices), len(companies)) * 28 + 130)),
+        paper_bgcolor='#101827', plot_bgcolor='#101827',
+        font={'color': '#e5edf7'}, margin={'l': 95, 'r': 145, 't': 70, 'b': 30},
+        xaxis={'visible': False, 'range': [-0.37, 3.08], 'fixedrange': True},
+        yaxis={'visible': False, 'range': [-0.03, 1.10], 'fixedrange': False},
         hovermode='closest', showlegend=True, legend={'orientation': 'h'},
         dragmode='pan')
     st.plotly_chart(fig, use_container_width=True,
                     config={'scrollZoom': True, 'displaylogo': False})
+    if not links:
+        st.info('No company links meet the verified sector AND factor rule for the selected lookback. All four rotations remain visible.')
 
 
 def render_graph(region: str):
@@ -225,8 +230,8 @@ def render_graph(region: str):
     st.caption('LEFT: Leading / Improving / Weakening / Lagging → MIDDLE: sectors & factors → RIGHT: companies. Lines represent verified membership, not fund flows.')
     left, middle, right = st.columns(3)
     period = left.selectbox('Lookback', ['1m','3m','6m'], index=1, key=f'kg_period_{region}')
-    selection = middle.selectbox('Rotation category', ('All four', *QUADRANTS), key=f'kg_quadrant_{region}')
-    quadrants = QUADRANTS if selection == 'All four' else (selection,)
+    middle.caption('One unified network · all four rotations')
+    quadrants = QUADRANTS
     limit = right.slider('Maximum companies', 5, 50, 15, 5, key=f'kg_count_{region}')
     companies, signals = _load(region,period,'companies'), _load(region,period,'signals')
     status = _manifest().get('regions',{}).get(f'{region.lower()}_{period}',{})

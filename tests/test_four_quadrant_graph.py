@@ -30,10 +30,10 @@ def test_does_not_connect_unverified_source():
     assert not links
 
 
-def test_all_quadrants_are_separate_left_to_right_lanes():
+def test_one_network_with_four_rotations_and_shared_company():
     from regional_rotation_graph import combined_graph_elements
     companies = pd.DataFrame([
-        {'Category': q, 'Company': f'{q} Corp', 'Ticker': q[:3], 'company_key':q,
+        {'Category': q, 'Company': 'Shared Corp', 'Ticker': 'SHR', 'company_key':'shared',
          'Score': 2.5, 'Sector sources':'Technology', 'Factor sources':'Momentum'}
         for q in QUADRANTS
     ])
@@ -43,8 +43,16 @@ def test_all_quadrants_are_separate_left_to_right_lanes():
         for kind,name in (('sector','Technology'),('factor','Momentum'))
     ])
     nodes, links = combined_graph_elements(companies, signals, QUADRANTS, 10)
-    assert len(nodes) == 16
-    assert len(links) == 16
+    assert len([n for n in nodes if n['type'] == 'rotation']) == 4
+    assert len([n for n in nodes if n['type'] == 'company']) == 1
+    assert len([n for n in nodes if n['type'] in ('sector','factor')]) == 8
     for q in QUADRANTS:
         assert (f'q:{q}', f'{q}|i:sector:Technology') in links
-        assert (f'{q}|i:factor:Momentum',f'{q}|c:{q}') in links
+        assert (f'{q}|i:factor:Momentum', 'c:shared') in links
+
+
+def test_empty_data_still_has_four_rotation_nodes():
+    from regional_rotation_graph import combined_graph_elements
+    nodes, links = combined_graph_elements(pd.DataFrame(), pd.DataFrame(), QUADRANTS, 10)
+    assert len(nodes) == 4
+    assert not links

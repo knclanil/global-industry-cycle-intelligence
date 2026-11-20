@@ -18,10 +18,20 @@ Use `python -m compileall -q regional_rotation_graph.py leading_lagging_engine.p
 
 **Limitations:** A company may appear in multiple quadrants if it belongs to differently classified index sources. Membership does not prove company momentum, or capital flows. The generator excludes companies without both a qualifying sector and qualifying factor source in the *same* quadrant. This is intentionally conservative. Some quadrants may be empty due to source coverage. This patch does not change market data acquisition or source mappings.
 
-## Three-column layout (updated)
+## Unified three-column network (corrected)
 
-The default view now shows **all four quadrants at once**. The graph flows **left to right**:
+**ONE Plotly visualization**, not four panels, lanes, or graphs.
 
-`Rotation (Leading / Improving / Weakening / Lagging) → Sector and Factor → Company`.
+- Left: **exactly four** large nodes — Leading, Improving, Weakening, Lagging.
+- Middle: **sector and factor** nodes connected to their rotation category.
+- Right: **company** nodes connected to qualifying sector/factor membership.
+- Links are color-coded by rotation; sectors and factors have different marker shapes.
+- Companies sharing a `company_key` appear **once**, with multiple incoming links.
+- The same renderer serves Global, USA and India using their respective snapshots.
 
-Each rotation has its own horizontal lane, avoiding unintended links between different quadrant signals. A category selector can optionally focus on a single lane. Global, USA, and India all use the same layout and their respective snapshots. Companies are still required to have both sector and factor membership evidence within a lane.
+The original conservative **sector AND factor** company qualification is retained.
+A rotation with no qualified companies still appears on the left; its links are blank.
+The graph is not a measurement of company-level relative strength or cash flows.
+
+To apply: replace the root `regional_rotation_graph.py` with the bundled version, apply
+`engine_and_builder.patch` if not already applied, rebuild snapshots, commit and deploy.
