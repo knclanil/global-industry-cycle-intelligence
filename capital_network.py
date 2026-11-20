@@ -1,14 +1,8 @@
-"""Capital membership network: GLOBAL -> ROTATION -> COUNTRY -> SECTOR -> COMPANY -> FACTOR.
+"""Global Capital Network from one canonical six-column membership table.
 
-The GLOBAL root ALSO has its own direct connections to global-scoped sectors,
-companies and factors (independent of the country-specific branches).
-
-Uses *verified* cached sector and factor constituents. This is a relationship
-network, NOT a measured capital-flow network. Country assignment is only made
-when the membership is present in an explicitly country-scoped regional cache.
-
-Drop in as `capital_network.py` at the repository root. The application's
-existing `render_capital_network()` route needs no change.
+Visual path: GLOBAL -> ROTATION -> COUNTRY -> SECTOR -> COMPANY -> FACTOR.
+A 'Global direct' scope represents *global* memberships; it is NOT a country
+or a calculated country rotation. Missing country constituents are not invented.
 """
 from __future__ import annotations
 
@@ -19,442 +13,335 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
-CACHE_DIR = Path(__file__).resolve().parent / "data" / "dashboard_cache" / "rotation_graphs"
-PERIODS = ("1m", "3m", "6m")
-REGIONS = ("USA", "India", "Global")
-# All markets tracked in country_market_data.py. Country nodes represent
-# market coverage, NOT proof of country-specific sector/company memberships.
-COUNTRY_MARKETS = {
-    "SPY": "United States", "INDA": "India", "EWJ": "Japan",
-    "MCHI": "China", "EWU": "United Kingdom", "EWG": "Germany",
-    "EWQ": "France", "EWL": "Switzerland", "EWC": "Canada",
-    "EWA": "Australia", "EWY": "South Korea", "EWT": "Taiwan",
-    "EWZ": "Brazil", "EWW": "Mexico", "EZA": "South Africa",
-    "EIDO": "Indonesia", "THD": "Thailand", "EWM": "Malaysia",
-    "KSA": "Saudi Arabia", "UAE": "United Arab Emirates",
+ROOT = Path(__file__).resolve().parent
+CACHE = ROOT / 'data' / 'dashboard_cache' / 'rotation_graphs'
+COUNTRIES = {
+    'SPY': 'United States', 'INDA': 'India', 'EWJ': 'Japan',
+    'MCHI': 'China', 'EWU': 'United Kingdom', 'EWG': 'Germany',
+    'EWQ': 'France', 'EWL': 'Switzerland', 'EWC': 'Canada',
+    'EWA': 'Australia', 'EWY': 'South Korea', 'EWT': 'Taiwan',
+    'EWZ': 'Brazil', 'EWW': 'Mexico', 'EZA': 'South Africa',
+    'EIDO': 'Indonesia', 'THD': 'Thailand', 'EWM': 'Malaysia',
+    'KSA': 'Saudi Arabia', 'UAE': 'United Arab Emirates',
 }
-COUNTRY_KEYS = {"United States": "USA", "India": "India"}
+COUNTRY_REGION = {'USA': 'United States', 'India': 'India', 'Global': 'Global direct'}
+ROTATIONS = ('Leading', 'Improving', 'Weakening', 'Lagging')
+COLORS = {'Leading': '#31d4a1', 'Improving': '#62a9ff',
+          'Weakening': '#ffc44d', 'Lagging': '#f17692',
+          'Unclassified': '#9aa7ba', 'Global scope': '#aa91e5'}
+COLS = ('Global', 'Rotation', 'Country', 'Sector', 'Company', 'Factor')
 
-QUADRANTS = ("Leading", "Improving", "Weakening", "Lagging")
-COLORS = {"Leading": "#36d6a2", "Improving": "#6ba9ff",
-          "Weakening": "#ffca70", "Lagging": "#fa8297", "Unavailable": "#8f9db3"}
-BG = "#111b2b"
 
-
-@st.cache_data(show_spinner=False, max_entries=40)
-def _csv(path: str, stamp: int) -> pd.DataFrame:
+@st.cache_data(show_spinner=False, max_entries=60)
+def _read(path: str, stamp: int) -> pd.DataFrame:
     try:
-        return pd.read_csv(path, keep_default_na=False, dtype=str)
+        return pd.read_csv(path, dtype=str, keep_default_na=False).fillna('')
     except (OSError, ValueError, pd.errors.EmptyDataError):
         return pd.DataFrame()
 
 
-def _load(region: str, period: str, kind: str, directory: Path = CACHE_DIR) -> pd.DataFrame:
-    file = directory / f"{region.lower()}_{period}_{kind}.csv"
-    return _csv(str(file), file.stat().st_mtime_ns if file.is_file() else -1)
+def read_cache(file: Path) -> pd.DataFrame:
+    return _read(str(file), file.stat().st_mtime_ns if file.exists() else -1)
 
 
-def _normal(value) -> str:
-    return str(value).strip()
+def _clean(value) -> str:
+    return str(value or '').strip()
 
 
-def _graph_data(period: str, directory: Path = CACHE_DIR):
-    """Build evidence-preserving relationships without guessing geographic origin.
+def build_capital_table(period: str, cache: Path = CACHE) -> tuple[pd.DataFrame, dict]:
+    """Create canonical path records from verified cached membership evidence.
 
-    Returns (nodes, edges, diagnostics). Nodes keyed by unique, typed IDs.
-    Global portfolio data branches directly from the GLOBAL root; it is never
-    assigned to an invented USA/India country.
+    Each company may have several rows: one per sector/factor combination.
+    Blank cells mean that the relationship is not verified, not that it is absent.
+    Extra ID columns preserve unique company and membership identities.
     """
-    nodes = {"root": {"label": "GLOBAL", "kind": "root", "country": None}}
+    rotations = read_cache(cache / f'country_{period}_rotations.csv')
+    country_class = {}
+    if {'ETF', 'Quadrant'} <= set(rotations.columns):
+        for r in rotations.to_dict('records'):
+            if _clean(r['Quadrant']) in ROTATIONS:
+                country_class[_clean(r['ETF']).upper()] = _clean(r['Quadrant'])
+
+    records = []
+    def add(rotation='', country='', sector='', company='', factor='', **extra):
+        records.append({**dict(zip(COLS, ('Global', rotation, country, sector, company, factor))),
+                        'scope': extra.get('scope', ''),
+                        'sector_id': extra.get('sector_id', ''),
+                        'company_id': extra.get('company_id', ''),
+                        'factor_id': extra.get('factor_id', ''),
+                        'sector_rotation': extra.get('sector_rotation', ''),
+                        'factor_rotation': extra.get('factor_rotation', ''),
+                        'ticker': extra.get('ticker', ''),
+                        'company_name': extra.get('company_name', ''),
+                        'coverage': extra.get('coverage', '')})
+
+    # Every tracked country exists even if its constituents are not collected.
+    for ticker, name in COUNTRIES.items():
+        scope = 'USA' if ticker == 'SPY' else 'India' if ticker == 'INDA' else ticker
+        add(country=name, rotation=country_class.get(ticker, 'Unclassified'),
+            scope=scope, coverage='country-only' if scope not in ('USA', 'India') else 'country-memberships')
+
+    diagnostics = {'classified_countries': len(country_class), 'tracked_countries': len(COUNTRIES)}
+    for region, country in COUNTRY_REGION.items():
+        scope = region
+        q = ('Global scope' if region == 'Global' else
+             country_class.get('SPY' if region == 'USA' else 'INDA', 'Unclassified'))
+        if region == 'Global':
+            add(rotation=q, country=country, scope=scope, coverage='global-direct-not-country')
+        signals = read_cache(cache / f'{region.lower()}_{period}_signals.csv')
+        memberships = read_cache(cache / f'{region.lower()}_{period}_edges.csv')
+        if not {'source_id', 'kind', 'label'} <= set(signals.columns):
+            diagnostics[f'{region}_signals'] = 'missing/invalid'
+            continue
+        if not {'source_id', 'kind', 'company_key'} <= set(memberships.columns):
+            diagnostics[f'{region}_edges'] = 'missing/invalid'
+            memberships = pd.DataFrame(columns=['source_id', 'kind', 'company_key', 'Company', 'Ticker'])
+
+        source = {}
+        for r in signals.to_dict('records'):
+            kind = _clean(r.get('kind')).lower()
+            if kind in ('sector', 'factor'):
+                source[(kind, _clean(r.get('source_id')))] = (
+                    _clean(r.get('label')) or _clean(r.get('source_id')),
+                    _clean(r.get('quadrant')))
+        by_company = defaultdict(lambda: {'sectors': {}, 'factors': {}, 'ticker': '', 'name': ''})
+        populated_sources = set()
+        for r in memberships.to_dict('records'):
+            kind = _clean(r.get('kind')).lower()
+            sid = _clean(r.get('source_id'))
+            key = _clean(r.get('company_key'))
+            if not key or (kind, sid) not in source:
+                continue
+            populated_sources.add((kind, sid))
+            c = by_company[key]
+            c['ticker'] = _clean(r.get('Ticker')) or c['ticker']
+            c['name'] = _clean(r.get('Company')) or c['name']
+            c['sectors' if kind == 'sector' else 'factors'][sid] = source[(kind, sid)]
+        for company_key, info in by_company.items():
+            sectors = list(info['sectors'].items()) or [('', ('', ''))]
+            factors = list(info['factors'].items()) or [('', ('', ''))]
+            cid = f'{scope}:{company_key}'
+            name = info['ticker'] or info['name'] or company_key
+            for sid, (sector_name, sector_q) in sectors:
+                for fid, (factor_name, factor_q) in factors:
+                    add(rotation=q, country=country, sector=sector_name,
+                        company=name, factor=factor_name, scope=scope,
+                        sector_id=f'{scope}:sector:{sid}' if sid else '',
+                        company_id=cid,
+                        factor_id=f'{scope}:factor:{fid}' if fid else '',
+                        sector_rotation=sector_q, factor_rotation=factor_q,
+                        ticker=info['ticker'], company_name=info['name'],
+                        coverage='verified-membership')
+        # Keep signals visible even when their company-membership source is empty.
+        for (kind, sid), (label, source_q) in source.items():
+            if (kind, sid) in populated_sources:
+                continue
+            add(rotation=q, country=country,
+                sector=label if kind == 'sector' else '',
+                factor=label if kind == 'factor' else '', scope=scope,
+                sector_id=f'{scope}:sector:{sid}' if kind == 'sector' else '',
+                factor_id=f'{scope}:factor:{sid}' if kind == 'factor' else '',
+                sector_rotation=source_q if kind == 'sector' else '',
+                factor_rotation=source_q if kind == 'factor' else '',
+                coverage='signal-without-company')
+        diagnostics[f'{region}_companies'] = len(by_company)
+    return pd.DataFrame(records), diagnostics
+
+
+def filter_table(table: pd.DataFrame, rotations=(), countries=(), sectors=(),
+                 companies=(), factors=(), mode='Any selected') -> pd.DataFrame:
+    """Cross-dimension AND. Multiple selections within each dimension OR.
+
+    Sector/factor ALL means the same company is connected to every selected
+    sector/factor, possibly via different valid rows; it does not require one
+    impossible single row to hold multiple values.
+    """
+    df = table.copy()
+    for col, values in [('Rotation', rotations), ('Country', countries)]:
+        if values:
+            df = df[df[col].isin(values)]
+    if companies:
+        df = df[df['company_id'].isin(companies)]
+    selected_sets = []
+    for val in sectors:
+        selected_sets.append(set(df.loc[df['sector_id'] == val, 'company_id']) - {''})
+    for val in factors:
+        selected_sets.append(set(df.loc[df['factor_id'] == val, 'company_id']) - {''})
+    if selected_sets:
+        matches = (set.intersection(*selected_sets) if mode == 'All selected'
+                   else set.union(*selected_sets))
+        df = df[df['company_id'].isin(matches)]
+        # Keep every *verified* membership for matching companies. This allows
+        # tracing selected sectors through companies to their other factors.
+    return df
+
+
+def make_graph(table: pd.DataFrame, show_country_only=True):
+    """Strict adjacent-column edges from one canonical table; no skipped columns."""
+    nodes = {'root': {'label': 'GLOBAL', 'kind': 'Global', 'rotation': ''}}
     edges = set()
-    diagnostics = {}
-    # Country-level rotations are based on ETF / ACWI relative strength and
-    # momentum. Do not infer a country's rotation from its constituent sectors.
-    rotation_file = directory / f"country_{period}_rotations.csv"
-    country_rotations = {}
-    if rotation_file.is_file():
-        frame = _csv(str(rotation_file), rotation_file.stat().st_mtime_ns)
-        if {"ETF", "Quadrant"}.issubset(frame.columns):
-            country_rotations = {str(r["ETF"]): str(r["Quadrant"])
-                                 for r in frame.to_dict("records")
-                                 if str(r["Quadrant"]) in QUADRANTS}
-    diagnostics["country_rotations"] = {"classified": len(country_rotations),
-                                        "tracked": len(COUNTRY_MARKETS),
-                                        "snapshot_found": rotation_file.is_file()}
-    for quadrant in QUADRANTS:
-        rid = f"rotation:{quadrant}"
-        nodes[rid] = {"label": quadrant, "kind": "rotation", "quadrant": quadrant}
-        edges.add(("root", rid))
-    # Unclassified is an explicit data gap, not a fifth market rotation.
-    if len(country_rotations) != len(COUNTRY_MARKETS):
-        nodes["rotation:Unclassified"] = {"label": "Unclassified (missing data)",
-                                          "kind": "rotation"}
-        edges.add(("root", "rotation:Unclassified"))
-    # Preserve every supported country as a visible node, even when that
-    # market has no country-level constituent dataset yet.
-    for ticker, country_name in COUNTRY_MARKETS.items():
-        scope = COUNTRY_KEYS.get(country_name, ticker)
-        cid = f"country:{scope}"
-        quadrant = country_rotations.get(ticker, "Unclassified")
-        nodes[cid] = {"label": country_name, "kind": "country",
-                      "country": scope, "ticker": ticker, "quadrant": quadrant,
-                      "coverage": "Constituents available" if country_name in COUNTRY_KEYS else
-                                  "Country market tracked; constituent data unavailable"}
-        edges.add((f"rotation:{quadrant}", cid))
-
-    def put(nid, **properties):
-        nodes.setdefault(nid, properties)
-
-    def link(source, target):
-        if source in nodes and target in nodes:
-            edges.add((source, target))
-
-    for region in REGIONS:
-        signals = _load(region, period, "signals", directory)
-        memberships = _load(region, period, "edges", directory)
-        valid_signals = {"source_id", "kind", "label", "quadrant"}.issubset(signals.columns)
-        valid_edges = {"source_id", "kind", "company_key", "Company", "Ticker"}.issubset(memberships.columns)
-        diagnostics[region] = {"signals": len(signals), "memberships": len(memberships),
-                               "signals_valid": valid_signals, "edges_valid": valid_edges}
-        if not valid_signals:
+    for row in table.to_dict('records'):
+        rot = row['Rotation']
+        country = row['Country']
+        scope = row['scope']
+        if not rot or not country:
             continue
-        # Country branches are explicit ONLY for country-scoped evidence.
-        # Global signals and memberships belong directly to the GLOBAL node,
-        # rather than being forced into a fictitious country node.
-        country_id = None
-        if region in ("USA", "India"):
-            country_label = {"USA": "United States", "India": "India"}[region]
-            country_id = f"country:{region}"
-            put(country_id, label=country_label, kind="country", country=region)
-            link(f"rotation:{nodes[country_id].get('quadrant', 'Unclassified')}", country_id)
-
-        lookup = {}
-        for row in signals.to_dict("records"):
-            source_id, kind = _normal(row.get("source_id")), _normal(row.get("kind")).lower()
-            quadrant = _normal(row.get("quadrant"))
-            if not source_id or kind not in ("sector", "factor") or quadrant not in QUADRANTS:
-                continue
-            sid = f"{region}:{kind}:{source_id}"
-            lookup[(kind, source_id)] = sid
-            put(sid, label=_normal(row.get("label")) or source_id, kind=kind,
-                country=region, quadrant=quadrant,
-                rs=_normal(row.get("relative_strength")),
-                momentum=_normal(row.get("rs_momentum")))
-            if region == "Global":
-                # GLOBAL -> SECTOR and GLOBAL -> FACTOR, including signals
-                # whose constituent membership data is unavailable.
-                link("root", sid)
-            elif kind == "sector":
-                link(country_id, sid)
-        if not valid_edges:
-            continue
-        # A company's identity is scoped by region to avoid accidentally
-        # merging identically named but unrelated instruments.
-        for row in memberships.to_dict("records"):
-            source_id, kind = _normal(row.get("source_id")), _normal(row.get("kind")).lower()
-            source_node = lookup.get((kind, source_id))
-            company_key = _normal(row.get("company_key"))
-            if not source_node or not company_key:
-                continue
-            cid = f"{region}:company:{company_key}"
-            label = _normal(row.get("Ticker")) or _normal(row.get("Company")) or company_key
-            put(cid, label=label, name=_normal(row.get("Company")), kind="company", country=region)
-            if region == "Global":
-                # GLOBAL -> COMPANY independently of sector/factor membership.
-                link("root", cid)
-            if kind == "sector":
-                link(source_node, cid)
-            else:
-                link(cid, source_node)
-    return nodes, sorted(edges), diagnostics
+        rid = f'rotation:{rot}'
+        coid = f'country:{scope}'
+        nodes[rid] = {'label': rot, 'kind': 'Rotation', 'rotation': rot}
+        nodes[coid] = {'label': country, 'kind': 'Country', 'rotation': rot}
+        edges.add(('root', rid))
+        edges.add((rid, coid))
+        if row['sector_id']:
+            sid = row['sector_id']
+            nodes[sid] = {'label': row['Sector'], 'kind': 'Sector',
+                          'rotation': row['sector_rotation'], 'scope': scope}
+            edges.add((coid, sid))
+        if row['company_id']:
+            cid = row['company_id']
+            nodes[cid] = {'label': row['Company'], 'kind': 'Company', 'rotation': rot,
+                          'scope': scope, 'name': row['company_name']}
+            if row['sector_id']:
+                edges.add((row['sector_id'], cid))
+            # A factor-only company has no *verified* sector; it appears as
+            # a node but we intentionally do not invent Country -> Sector -> Company.
+        if row['factor_id']:
+            fid = row['factor_id']
+            nodes[fid] = {'label': row['Factor'], 'kind': 'Factor',
+                          'rotation': row['factor_rotation'], 'scope': scope}
+            if row['company_id']:
+                edges.add((row['company_id'], fid))
+            # Factor nodes with no company evidence remain unconnected.
+    return nodes, sorted(edges)
 
 
-def _relations(nodes: dict, edges: list[tuple[str, str]]):
-    countries = defaultdict(set)
-    sectors = defaultdict(set)  # sector -> companies
-    factors = defaultdict(set)  # company -> factors
-    company_sectors = defaultdict(set)
-    company_factors = defaultdict(set)
-    for a, b in edges:
-        if a == "root" and nodes[b]["kind"] == "country":
-            countries[a].add(b)
-        elif nodes[a]["kind"] == "sector" and nodes[b]["kind"] == "company":
-            sectors[a].add(b)
-            company_sectors[b].add(a)
-        elif nodes[a]["kind"] == "company" and nodes[b]["kind"] == "factor":
-            factors[a].add(b)
-            company_factors[a].add(b)
-    return sectors, company_sectors, company_factors
-
-
-def _select(nodes, edges, chosen_countries=(), chosen_sectors=(), chosen_companies=(),
-            chosen_factors=(), chosen_rotations=(), match="Any selected", limit=70,
-            show_context=True):
-    """Filter to the connected subgraph; never leave unrelated countries/sources.
-
-    Within countries, companies, and rotations, multi-select values are ORed.
-    Selected sectors/factors use the requested Any/All logic. Distinct filter
-    categories must all match (AND). Company membership cross-links are kept.
-    """
-    sectors, comp_sectors, comp_factors = _relations(nodes, edges)
-    all_companies = {nid for nid, n in nodes.items() if n["kind"] == "company"}
-    active = any((chosen_countries, chosen_sectors, chosen_companies,
-                  chosen_factors, chosen_rotations))
-    if not active:
-        matched = all_companies
-    else:
-        categories = []
-        if chosen_countries:
-            categories.append({c for c in all_companies
-                               if nodes[c].get("country") in chosen_countries})
-        if chosen_companies:
-            categories.append(set(chosen_companies) & all_companies)
-        if chosen_rotations:
-            # Country ETF rotation takes precedence for country-scoped branches;
-            # the direct Global branch has no country ETF and uses its own
-            # sector/factor signals instead.
-            categories.append({c for c in all_companies if (
-                nodes.get(f"country:{nodes[c].get('country')}", {}).get("quadrant")
-                    in chosen_rotations
-                if nodes[c].get("country") != "Global" else
-                any(nodes[s].get("quadrant") in chosen_rotations
-                    for s in comp_sectors.get(c, set()) | comp_factors.get(c, set())))})
-        selected_source_sets = [set(sectors.get(s, ())) for s in chosen_sectors]
-        selected_source_sets.extend(
-            {c for c, fs in comp_factors.items() if f in fs}
-            for f in chosen_factors)
-        if selected_source_sets:
-            source_matches = (set.intersection(*selected_source_sets)
-                              if match == "All selected" else
-                              set.union(*selected_source_sets))
-            categories.append(source_matches)
-        matched = set.intersection(*categories) if categories else set()
-    matched_full = set(matched)
-    if limit is not None:
-        matched = set(sorted(matched, key=lambda c: (
-            nodes[c]["label"].casefold(), c))[:limit])
-
-    visible = {"root"}
-    if not active and show_context:
-        visible.update(nid for nid, n in nodes.items()
-                       if n["kind"] in ("rotation", "country", "sector", "factor"))
-    else:
-        # Explicit source choices remain visible even if there are no companies.
-        visible.update(s for s in chosen_sectors if s in nodes)
-        visible.update(f for f in chosen_factors if f in nodes)
-        # Country-only and rotation-only filters still show their source signals
-        # even when constituents are not yet available.
-        if chosen_countries:
-            visible.update(nid for nid, n in nodes.items()
-                           if n["kind"] == "country" and
-                           n.get("country") in chosen_countries and
-                           (not chosen_rotations or n.get("quadrant") in chosen_rotations))
-        if chosen_rotations and not (chosen_sectors or chosen_factors or chosen_companies):
-            visible.update(nid for nid, n in nodes.items()
-                           if n["kind"] == "country" and
-                           n.get("quadrant") in chosen_rotations and
-                           (not chosen_countries or n.get("country") in chosen_countries))
-            visible.update(nid for nid, n in nodes.items()
-                           if n["kind"] in ("sector", "factor") and
-                           n.get("quadrant") in chosen_rotations and
-                           (not chosen_countries or n.get("country") in chosen_countries))
-        if chosen_countries and not (chosen_rotations or chosen_sectors or chosen_factors
-                                     or chosen_companies):
-            visible.update(nid for nid, n in nodes.items()
-                           if n["kind"] in ("sector", "factor") and
-                           n.get("country") in chosen_countries)
-    visible.update(matched)
-    for c in matched:
-        visible.update(comp_sectors.get(c, set()))
-        visible.update(comp_factors.get(c, set()))
-    # Only show countries that are connected to something visible, or selected.
-    scopes = {nodes[n].get("country") for n in visible if n in nodes}
-    visible.update(nid for nid, n in nodes.items()
-                   if n["kind"] == "country" and n.get("country") in scopes)
-    for nid in list(visible):
-        if nodes[nid]["kind"] == "country":
-            q = nodes[nid].get("quadrant", "Unclassified")
-            visible.add(f"rotation:{q}")
-    if not active:
-        visible.update(f"rotation:{q}" for q in QUADRANTS)
-    visible.add("root")
-    visible &= set(nodes)
-    kept_edges = [(a, b) for a, b in edges if a in visible and b in visible]
-    return visible, kept_edges, matched, len(matched_full)
-
-
-def _plot(nodes, edges, matched, visible, height=680):
-    groups = [[], [], [], [], [], []]
-    rank = {"root": 0, "rotation": 1, "country": 2,
-            "sector": 3, "company": 4, "factor": 5}
-    for nid in visible:
-        groups[rank[nodes[nid]["kind"]]].append(nid)
+def plot_network(nodes: dict, edges: list, height=720):
+    kinds = ('Global', 'Rotation', 'Country', 'Sector', 'Company', 'Factor')
+    groups = [[nid for nid, n in nodes.items() if n['kind'] == k] for k in kinds]
     for group in groups:
-        group.sort(key=lambda n: (nodes[n].get("country") or "", nodes[n]["label"].lower(), n))
-    positions = {}
-    for col, group in enumerate(groups):
-        for idx, nid in enumerate(group):
-            positions[nid] = (col, 1 - (idx + .5) / max(1, len(group)))
+        group.sort(key=lambda n: (nodes[n].get('scope', ''), nodes[n]['label'].casefold(), n))
+    pos = {nid: (i, 1 - (j + .5) / max(1, len(group)))
+           for i, group in enumerate(groups) for j, nid in enumerate(group)}
     fig = go.Figure()
-    # Render country-classification relationships separately and LAST so that
-    # they remain visible even when thousands of other membership edges cross.
-    regular = []
-    rotation_country = defaultdict(list)
-    for a, b in edges:
-        if (nodes[a]["kind"] == "rotation" and
-                nodes[b]["kind"] == "country"):
-            rotation_country[nodes[a].get("quadrant") or "Unclassified"].append((a, b))
-        else:
-            regular.append((a, b))
-
-    # Ordinary memberships: deliberately low contrast so that the country
-    # classification links are not drowned by the global direct branch.
-    for direct_global in (False, True):
-        for active in (False, True):
-            xs, ys = [], []
-            for a, b in regular:
-                if (a == "root" and nodes[b].get("country") == "Global") != direct_global:
-                    continue
-                if ((nodes[a]["kind"] == "company" and a in matched or
-                     nodes[b]["kind"] == "company" and b in matched) != active):
-                    continue
-                xs.extend((positions[a][0], positions[b][0], None))
-                ys.extend((positions[a][1], positions[b][1], None))
-            if xs:
-                fig.add_trace(go.Scattergl(
-                    x=xs, y=ys, mode="lines", hoverinfo="skip",
-                    line={"color": "#9b79bb" if direct_global else
-                           "#39bba5" if active else "#536780",
-                          "width": 1.15 if active else .65},
-                    opacity=.22 if direct_global else .42 if active else .12,
-                    showlegend=False, name="Other verified relationships"))
-
-    # Explicit, easily visible links: ROTATION -> COUNTRY.
-    # One trace for each classification ensures the correct colour is retained.
-    for q in (*QUADRANTS, "Unclassified"):
-        pairs = rotation_country.get(q, [])
-        if not pairs:
-            continue
+    # Every displayed edge joins *adjacent* columns, at a consistent line width.
+    for q in (*ROTATIONS, 'Unclassified', 'Global scope'):
         xs, ys = [], []
-        for a, b in pairs:
-            xs.extend((positions[a][0], positions[b][0], None))
-            ys.extend((positions[a][1], positions[b][1], None))
-        fig.add_trace(go.Scattergl(
-            x=xs, y=ys, mode="lines", hoverinfo="skip",
-            line={"color": COLORS.get(q, "#a9b6c9"), "width": 3.8},
-            opacity=1.0, showlegend=False,
-            name=f"{q} → countries"))
-    for index, kind in enumerate(("root", "rotation", "country", "sector", "company", "factor")):
-        ids = groups[index]
-        if not ids:
+        for a, b in edges:
+            color_group = (nodes[b].get('rotation') if nodes[b]['kind'] == 'Country'
+                           else nodes[a].get('rotation') if nodes[a]['kind'] == 'Rotation'
+                           else '')
+            if color_group != q:
+                continue
+            xs += [pos[a][0], pos[b][0], None]
+            ys += [pos[a][1], pos[b][1], None]
+        if xs:
+            fig.add_trace(go.Scattergl(x=xs, y=ys, mode='lines', hoverinfo='skip',
+                                      line=dict(color=COLORS[q], width=1.7),
+                                      opacity=.76, showlegend=False))
+    # Sector->company and company->factor edges have no country rotation on
+    # those endpoints; draw them at the SAME visual weight as other edges.
+    xs, ys = [], []
+    for a, b in edges:
+        if nodes[a]['kind'] in ('Rotation', 'Global'):
             continue
-        tooltips = []
-        for nid in ids:
-            n = nodes[nid]
-            tip = f"<b>{n['label']}</b><br>Type: {kind.title()}"
-            if n.get("country"):
-                tip += f"<br>Source region: {n['country']}"
-            if n.get("quadrant"):
-                tip += f"<br>Rotation: {n['quadrant']}<br>RS: {n.get('rs','')}<br>Momentum: {n.get('momentum','')}"
-            if n.get("name"):
-                tip += f"<br>{n['name']}"
-            tooltips.append(tip)
-        fig.add_trace(go.Scattergl(x=[positions[n][0] for n in ids],
-            y=[positions[n][1] for n in ids], mode="markers+text",
-            marker={"size": [16 if kind in ("root", "country") else 10 if n in matched else 7 for n in ids],
-                    "color": [("#52e0c4" if n in matched else COLORS.get(nodes[n].get("quadrant"),
-                               {"root": "#75e4cf", "rotation": "#b9b8ec", "country": "#cdd7e6", "sector": "#81b8f8",
-                                "company": "#9aa8bd", "factor": "#bdaaf2"}[kind])) for n in ids]},
-            text=[nodes[n]["label"] if kind != "company" or n in matched and len(ids) <= 35 else "" for n in ids],
-            textposition="middle right" if kind != "root" else "top center",
-            textfont={"size": 10, "color": "#e5edf7"}, hovertext=tooltips,
-            hovertemplate="%{hovertext}<extra></extra>", showlegend=False))
-    for i, caption in enumerate(("GLOBAL", "ROTATION", "COUNTRIES", "SECTORS", "COMPANIES", "FACTORS")):
-        fig.add_annotation(x=i, y=1.05, text=f"<b>{caption}</b>", showarrow=False,
-                           font={"size": 13, "color": "#f2f6ff"})
-    fig.update_layout(height=height, paper_bgcolor=BG, plot_bgcolor=BG,
-        margin={"l": 85, "r": 110, "t": 65, "b": 30},
-        xaxis={"visible": False, "range": [-.35, 5.45], "fixedrange": True},
-        yaxis={"visible": False, "range": [-.04, 1.1]},
-        dragmode="pan", hovermode="closest", font={"color": "#e5edf7"})
+        if nodes[b]['kind'] == 'Country':
+            continue
+        xs += [pos[a][0], pos[b][0], None]
+        ys += [pos[a][1], pos[b][1], None]
+    if xs:
+        fig.add_trace(go.Scattergl(x=xs, y=ys, mode='lines', hoverinfo='skip',
+                                  line=dict(color='#7194a9', width=1.7),
+                                  opacity=.42, showlegend=False))
+    for i, group in enumerate(groups):
+        if not group:
+            continue
+        fig.add_trace(go.Scattergl(
+            x=[pos[n][0] for n in group], y=[pos[n][1] for n in group],
+            mode='markers+text',
+            marker=dict(size=10 if i not in (0, 4) else 8,
+                        color=[COLORS.get(nodes[n].get('rotation'), '#8cd7c8') for n in group]),
+            text=[nodes[n]['label'] if i != 4 or len(group) <= 28 else '' for n in group],
+            textposition='middle right', textfont=dict(size=10, color='#e5edf7'),
+            hovertext=[f"{nodes[n]['label']}<br>{nodes[n]['kind']}<br>Scope: {nodes[n].get('scope', '')}"
+                       for n in group], hovertemplate='%{hovertext}<extra></extra>',
+            showlegend=False))
+    for i, k in enumerate(kinds):
+        fig.add_annotation(x=i, y=1.065, text=f'<b>{k.upper()}</b>', showarrow=False,
+                           font=dict(size=12, color='#e5edf7'))
+    fig.update_layout(height=height, paper_bgcolor='#101b2b', plot_bgcolor='#101b2b',
+                      margin=dict(l=60, r=100, t=65, b=30),
+                      xaxis=dict(visible=False, range=[-.3, 5.5]),
+                      yaxis=dict(visible=False, range=[-.06, 1.12]),
+                      showlegend=False, dragmode='pan')
     return fig
 
 
-def _selector(label, options, selected=(), key=""):
-    return st.multiselect(label, options=options, default=list(selected), key=key)
-
-
 def render_capital_network():
-    """Streamlit entrypoint used by app.py's existing capital-network route."""
-    st.title("Global Capital Intelligence Network")
-    st.caption("GLOBAL → ROTATION → COUNTRY → SECTORS → COMPANIES → FACTORS · Global direct sector/company/factor branches are also preserved · Memberships, not measured fund flows")
-    period = st.radio("Lookback", PERIODS, index=1, horizontal=True, key="cap_period")
-    nodes, edges, diagnostics = _graph_data(period)
-    if not any(n["kind"] == "company" for n in nodes.values()):
-        st.warning("No verified company memberships available. Country nodes remain visible. "
-                   "Run Refresh Knowledge Graphs and confirm the *_edges.csv files are deployed.")
+    st.title('Global Capital Intelligence Network')
+    st.caption('One verified relationship table · GLOBAL → ROTATION → COUNTRY → SECTOR → COMPANY → FACTOR')
+    period = st.radio('Lookback', ('1m', '3m', '6m'), index=1, horizontal=True, key='cap_period_table')
+    table, diagnostics = build_capital_table(period)
+    if table.empty:
+        st.error('No capital network records available. Check the graph cache files.')
         st.json(diagnostics)
-    missing = [region for region, stats in diagnostics.items() if region in REGIONS and (not stats["signals_valid"] or not stats["edges_valid"])]
-    if missing:
-        st.warning("Some datasets are missing or incomplete: " + ", ".join(missing) + ". Country relationships will be incomplete.")
-    status = diagnostics["country_rotations"]
-    if status["classified"] < status["tracked"]:
-        st.warning(f"Country rotation data: {status['classified']}/{status['tracked']} ETFs classified. "
-                   "Run the country rotation snapshot builder; unclassified markets remain visible "
-                   "without an invented quadrant.")
-    st.info("All 20 country ETF markets are tracked. Only USA and India currently have verified "
-            "country-scoped company-membership datasets; other countries may have no downstream "
-            "company connections. Global-scoped sectors/companies/factors link directly to GLOBAL.")
-    tabs = ("Overview", "Sector / Factor", "Individual Companies")
-    mode = st.radio("View", tabs, horizontal=True, key="cap_view")
-    listing = lambda kind: sorted((n for n, x in nodes.items() if x["kind"] == kind),
-                                  key=lambda n: (nodes[n]["label"].casefold(), n))
-    options = lambda ids: {f"{nodes[n]['label']}  [{nodes[n].get('country') or 'Global'} · {n.split(':')[-1]}]": n for n in ids}
-    country_opts = {COUNTRY_MARKETS[t]: COUNTRY_KEYS.get(COUNTRY_MARKETS[t], t)
-                    for t in COUNTRY_MARKETS}
-    country_opts["Global (direct holdings)"] = "Global"
-    sector_opts = options(listing("sector"))
-    factor_opts = options(listing("factor"))
-    company_opts = options(listing("company"))
-    with st.expander("Filters · select multiple values", expanded=(mode != "Overview")):
-        col1, col2, col3 = st.columns(3)
-        with col1:
-            chosen_countries = _selector("Countries", list(country_opts), key="cap_countries")
-            chosen_rotations = _selector("Country rotation", list(QUADRANTS), key="cap_rotations")
-        with col2:
-            chosen_sectors = _selector("Sectors", list(sector_opts), key="cap_sectors")
-            chosen_factors = _selector("Factors", list(factor_opts), key="cap_factors")
-        with col3:
-            chosen_companies = _selector("Individual companies", list(company_opts), key="cap_companies")
-            match = st.radio("Match filters", ("Any selected", "All selected"), horizontal=True, key="cap_match")
-    filters_active = any((chosen_countries, chosen_rotations, chosen_sectors, chosen_factors, chosen_companies))
-    if mode == "Individual Companies" and not chosen_companies:
-        st.caption("Select one or more companies to focus on their full sector and factor memberships.")
-    show_all = st.checkbox("Show all matching companies (may be slow)", value=False, key="cap_all")
-    limit = None if show_all else (45 if mode == "Overview" else 90)
-    visible, graph_edges, highlighted, full_count = _select(
-        nodes, edges, [country_opts[c] for c in chosen_countries],
-        [sector_opts[s] for s in chosen_sectors],
-        [company_opts[c] for c in chosen_companies],
-        [factor_opts[f] for f in chosen_factors], chosen_rotations,
-        match, limit, show_context=(mode == "Overview" or not filters_active))
-    st.caption(f"{sum(nodes[n]['kind'] == 'country' for n in visible)} visible countries (20 tracked) · {full_count:,} matching companies · "
-               f"{len(highlighted):,} shown · {len(graph_edges):,} visible connections")
-    unsupported = [c for c in chosen_countries if country_opts[c] not in ("USA", "India", "Global")]
-    if unsupported:
-        st.warning("Country-specific company data is not yet available for: " + ", ".join(unsupported)
-                   + ". These countries remain visible but cannot be connected to companies "
-                     "until their verified constituents are added to the builder.")
-    st.plotly_chart(_plot(nodes, graph_edges, highlighted, visible), use_container_width=True,
-                    config={"displaylogo": False, "scrollZoom": True})
-    if full_count > len(highlighted):
-        st.info("The default view limits company nodes for readability. Select 'Show all matching companies' to display every verified match.")
-    with st.expander("Matching companies and connected memberships"):
-        sector_rel, company_sectors, company_factors = _relations(nodes, edges)
-        detail_rows = [{"Country scope": nodes[c]["country"],
-                        "Company": nodes[c].get("name") or nodes[c]["label"],
-                        "Ticker": nodes[c]["label"],
-                        "Sectors": ", ".join(sorted(nodes[s]["label"] for s in company_sectors[c])),
-                        "Factors": ", ".join(sorted(nodes[f]["label"] for f in company_factors[c]))}
-                       for c in sorted(highlighted)]
-        st.dataframe(pd.DataFrame(detail_rows), use_container_width=True, hide_index=True)
+        return
+    st.info('Country-specific company evidence is currently available for USA and India. '
+            'Other tracked countries remain visible but cannot be connected to sectors or '
+            'companies until country-scoped memberships are collected. Global direct is a scope, not a country.')
+    if diagnostics['classified_countries'] < diagnostics['tracked_countries']:
+        st.warning(f"Country classifications: {diagnostics['classified_countries']}/{diagnostics['tracked_countries']}. "
+                   'Missing classifications are shown as Unclassified.')
+    view = st.radio('View', ('Overview', 'Sector / Factor', 'Individual Companies'),
+                    horizontal=True, key='cap_view_table')
+    def options(col, idcol=None):
+        if idcol is None:
+            return sorted(x for x in table[col].unique() if x)
+        entries = table[[col, idcol, 'scope']].drop_duplicates()
+        return {f'{r[col]} [{r["scope"]} · {r[idcol].split(":")[-1]}]': r[idcol]
+                for r in entries.to_dict('records') if r[col] and r[idcol]}
+    sector_options = options('Sector', 'sector_id')
+    factor_options = options('Factor', 'factor_id')
+    company_options = options('Company', 'company_id')
+    with st.expander('Filters — multi-select', expanded=(view != 'Overview')):
+        a, b, c = st.columns(3)
+        with a:
+            rotations = st.multiselect('Rotations', options('Rotation'), key='cap_rotation_table')
+            countries = st.multiselect('Countries / Global direct', options('Country'), key='cap_country_table')
+        with b:
+            sectors = st.multiselect('Sectors', list(sector_options), key='cap_sector_table')
+            factors = st.multiselect('Factors', list(factor_options), key='cap_factor_table')
+        with c:
+            companies = st.multiselect('Companies', list(company_options), key='cap_company_table')
+            match = st.radio('Sector/factor matching', ('Any selected', 'All selected'),
+                             horizontal=True, key='cap_match_table')
+    filtered = filter_table(table, rotations, countries,
+                            [sector_options[x] for x in sectors],
+                            [company_options[x] for x in companies],
+                            [factor_options[x] for x in factors], mode=match)
+    total = filtered.loc[filtered['company_id'].ne(''), 'company_id'].nunique()
+    show_all = st.checkbox('Show all matching companies (may be slow)', key='cap_show_all_table')
+    limit = None if show_all else (45 if view == 'Overview' else 90)
+    if limit is not None and total > limit:
+        keep = sorted(filtered.loc[filtered['company_id'].ne(''), 'company_id'].unique())[:limit]
+        filtered = filtered[filtered['company_id'].isin(keep) |
+                            ((filtered['company_id'] == '') &
+                             (filtered['Sector'] == '') & (filtered['Factor'] == ''))]
+    # If a filter is active, no unrelated country-only rows remain.
+    active = any((rotations, countries, sectors, factors, companies))
+    if active and filtered.empty:
+        st.warning('No verified paths match these filters.')
+        return
+    nodes, edges = make_graph(filtered)
+    st.caption(f'{len(nodes):,} nodes · {len(edges):,} verified adjacent-column links · '
+               f'{total:,} matching companies ({min(total, limit) if limit else total:,} shown)')
+    st.plotly_chart(plot_network(nodes, edges), use_container_width=True,
+                    config={'scrollZoom': True, 'displaylogo': False})
+    with st.expander('Canonical Global / Rotation / Country / Sector / Company / Factor table'):
+        st.dataframe(filtered[list(COLS) + ['sector_rotation', 'factor_rotation', 'coverage']],
+                     use_container_width=True, hide_index=True)
+        st.download_button('Download complete backend table (CSV)',
+                           data=table.to_csv(index=False).encode('utf-8'),
+                           file_name=f'capital_network_{period}_complete.csv', mime='text/csv')
+    if any(x.endswith(('signals', 'edges')) for x in diagnostics):
+        with st.expander('Data coverage diagnostics'):
+            st.json(diagnostics)
