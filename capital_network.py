@@ -390,7 +390,7 @@ def render_capital_network():
         col1, col2, col3 = st.columns(3)
         with col1:
             chosen_countries = _selector("Countries", list(country_opts), key="cap_countries")
-            chosen_rotations = _selector("Sector / Factor rotation", list(QUADRANTS), key="cap_rotations")
+            chosen_rotations = _selector("Country rotation", list(QUADRANTS), key="cap_rotations")
         with col2:
             chosen_sectors = _selector("Sectors", list(sector_opts), key="cap_sectors")
             chosen_factors = _selector("Factors", list(factor_opts), key="cap_factors")
