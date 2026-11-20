@@ -49,13 +49,14 @@ ALIAS = {
     "preferred_equity": ("Preferred Stock Equity",),
     "inventory": ("Inventory",),
     "shares_statement": ("Ordinary Shares Number",),
+    "weighted_average_shares": ("Diluted Average Shares", "Basic Average Shares"),
     "operating_cash_flow": ("Operating Cash Flow", "Cash Flow From Continuing Operating Activities"),
     "capital_expenditure": ("Capital Expenditure", "Capital Expenditures"),
     "free_cash_flow": ("Free Cash Flow",),
     "dividends_paid": ("Cash Dividends Paid", "Common Stock Dividend Paid"),
     "repurchases": ("Repurchase Of Capital Stock", "Common Stock Payments"),
 }
-INCOME = {"revenue", "gross_profit", "operating_income", "ebitda", "net_income", "diluted_eps", "interest_expense", "income_tax_expense"}
+INCOME = {"revenue", "gross_profit", "operating_income", "ebitda", "net_income", "diluted_eps", "weighted_average_shares", "interest_expense", "income_tax_expense"}
 BALANCE = {"total_assets", "total_liabilities", "equity", "current_assets", "current_liabilities", "cash", "total_debt", "long_term_debt", "current_debt", "goodwill", "other_intangibles", "preferred_equity", "inventory", "shares_statement"}
 CASHFLOW = {"operating_cash_flow", "capital_expenditure", "free_cash_flow", "dividends_paid", "repurchases"}
 PERCENT_KPIS = {"gross_margin", "operating_margin", "net_margin", "fcf_margin", "roe", "roa", "revenue_yoy", "earnings_yoy", "eps_yoy", "revenue_3y_cagr", "revenue_5y_cagr", "fcf_yoy", "fcf_yield", "earnings_yield"}

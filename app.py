@@ -10,7 +10,7 @@ apply_global_design()
 NAV_GROUPS = {
     '🕸️ KNOWLEDGE GRAPHS': ['Global Capital Intelligence Network', 'Leading & Lagging Companies'],
     '🌐 GLOBAL INTELLIGENCE': ['Company Holdings Leadership'],
-    '💼 COMPANY FINANCIALS': ['Company Financial Research', 'USA Company Financial KPI Intelligence', 'India Company Financial KPI Intelligence', 'India Fundamental Valuation'],
+    '💼 COMPANY FINANCIALS': ['Fundamental Quality Rankings', 'Company Financial Research', 'USA Company Financial KPI Intelligence', 'India Company Financial KPI Intelligence', 'India Fundamental Valuation'],
     '🌎 COUNTRY ANALYSIS': ['Global Countries'],
     '💰 ASSET CLASS ANALYSIS': ['Global Asset Flow', 'USA Asset Flow', 'India Asset Flow'],
     '📊 SECTOR ANALYSIS': ['Global Sectors', 'USA Sector', 'India Sector'],
@@ -20,6 +20,7 @@ NAV_GROUPS = {
 PAGE_LABELS = {
  'Global Capital Intelligence Network': 'Capital Network',
  'Leading & Lagging Companies': 'Leading & Lagging',
+ 'Fundamental Quality Rankings': 'Quality Rankings',
  'USA Company Financial KPI Intelligence': 'USA Financial KPIs',
  'India Company Financial KPI Intelligence': 'India Financial KPIs',
  'India Sector & Factor Financials': 'India Sector & Factor Financials',
@@ -34,7 +35,7 @@ PAGE_ICONS = {
     'Global Asset Flow': '🌍', 'USA Asset Flow': '🇺🇸', 'India Asset Flow': '🇮🇳',
     'Global Sectors': '🌍', 'USA Sector': '🇺🇸', 'India Sector': '🇮🇳',
     'Global Factors': '🌍', 'USA Factors': '🇺🇸', 'India Factors': '🇮🇳', 'India Sector & Factor Holdings': '🇮🇳', 'India Overlap & Leadership': '🏆', 'India Sector & Factor Financials': '📈',
-    'Company Holdings Leadership': '🏆', 'Company Financial Research': '📑', 'USA Company Financial KPI Intelligence': '📊', 'India Company Financial KPI Intelligence': '🇮🇳', 'India Fundamental Valuation': '💠', 'Data Table': '🗂️', 'Wiki': '📖',
+    'Fundamental Quality Rankings': '🏅', 'Company Holdings Leadership': '🏆', 'Company Financial Research': '📑', 'USA Company Financial KPI Intelligence': '📊', 'India Company Financial KPI Intelligence': '🇮🇳', 'India Fundamental Valuation': '💠', 'Data Table': '🗂️', 'Wiki': '📖',
 }
 ALL_PAGES = [item for items in NAV_GROUPS.values() for item in items]
 if st.session_state.get('selected_page') not in ALL_PAGES:
@@ -95,6 +96,9 @@ elif page == 'Leading & Lagging Companies':
 elif page == 'Company Holdings Leadership':
     from holdings_intelligence import render_holdings_intelligence
     render_holdings_intelligence()
+elif page == 'Fundamental Quality Rankings':
+    from fundamental_rankings_ui import render_fundamental_rankings
+    render_fundamental_rankings()
 elif page == 'Company Financial Research':
     from company_financial_research import render_company_financial_research
     render_company_financial_research()
