@@ -10,15 +10,14 @@ apply_global_design()
 NAV_GROUPS = {
     '🕸️ KNOWLEDGE GRAPHS': ['Global Knowledge Graph', 'USA Knowledge Graph', 'India Knowledge Graph',
                             'Global Capital Intelligence Network', 'Leading & Lagging Companies'],
-    '🌍 GLOBAL': ['Global Countries', 'Global Sectors', 'Global Factors', 'Global Analysis'],
-    '🇺🇸 USA': ['USA Sector', 'USA Factors', 'USA Analysis'],
-    '🇮🇳 INDIA': ['India Sector', 'India Factors', 'India Analysis',
+    '🌍 GLOBAL': ['Global Countries', 'Global Sectors', 'Global Factors', 'Global Asset Flow', 'Global Analysis'],
+    '🇺🇸 USA': ['USA Sector', 'USA Factors', 'USA Asset Flow', 'USA Analysis'],
+    '🇮🇳 INDIA': ['India Sector', 'India Factors', 'India Asset Flow', 'India Analysis',
                   'India Sector & Factor Holdings', 'India Overlap & Leadership', 'India Sector & Factor Financials'],
     '💼 COMPANY FINANCIALS': ['Fundamental Quality Rankings', 'Company Financial Research',
                               'USA Company Financial KPI Intelligence', 'India Company Financial KPI Intelligence',
                               'India Fundamental Valuation'],
-    '📋 OTHER RESEARCH': ['Company Holdings Leadership',
-                          'Global Asset Flow', 'USA Asset Flow', 'India Asset Flow', 'Data Table', 'Wiki'],
+    '📋 OTHER RESEARCH': ['Company Holdings Leadership', 'Data Table', 'Wiki'],
 }
 
 PAGE_LABELS = {
