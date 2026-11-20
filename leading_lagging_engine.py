@@ -9,7 +9,6 @@ from pathlib import Path
 import re
 import pandas as pd
 import numpy as np
-
 ROOT = Path(__file__).resolve().parent
 DATA = ROOT / 'data'
 MARKETS = {
@@ -33,7 +32,6 @@ INDIA_SLUG_TICKERS = {
     'nifty_alpha_index': 'NIFTY_ALPHA50',
     'nifty50_equal_weight': 'NIFTY50_EQUALWEIGHT',
 }
-
 def _clean(value):
     return re.sub(r'[^a-z0-9]+', '', str(value).lower())
 
@@ -46,7 +44,6 @@ def classify(rs: float, momentum: float) -> str:
 
 def rotation_signals(region: str, lookback: int = 63) -> pd.DataFrame:
     """Compute comparable sector/factor performance from local validated close series only.
-
     The last comparable session is shared by each index and its benchmark; indices
     with older or insufficient series are excluded, never labeled lagging.
     """
@@ -82,8 +79,6 @@ def rotation_signals(region: str, lookback: int = 63) -> pd.DataFrame:
                             quadrant=quadrant, as_of=str(aligned.index[-1].date()),
                             source='Repository market history'))
     return pd.DataFrame(out)
-
-
 # Sector and factor reference ETFs are market proxies, NOT necessarily the same
 # iShares ETF used for holdings. Matching is based on issuer-provided fund title;
 # ambiguous names are deliberately left unmapped. Explicit mappings take priority.
@@ -110,7 +105,6 @@ FACTOR_KEYWORDS = [
     ('Small Cap', ('small cap', 'small-cap', 'size factor')),
     ('Size', ('size factor', 'small cap', 'small-cap')),
 ]
-
 def _title_proxy(title: str, kind: str, signals: pd.DataFrame):
     """A transparent category *proxy*; never implies portfolio-price identity."""
     title = re.sub(r'\s+', ' ', str(title).lower()).strip()
@@ -132,7 +126,6 @@ def _title_proxy(title: str, kind: str, signals: pd.DataFrame):
     row['mapping_note'] = f"{title} → {family} reference ETF (NOT the source fund price)"
     return row
 
-
 def source_signal_mapping(region: str, holdings: pd.DataFrame, signals: pd.DataFrame) -> tuple[dict, list[dict]]:
     """Map exact official portfolio/index identity where possible; don't guess ambiguous names."""
     if signals.empty:
@@ -140,7 +133,8 @@ def source_signal_mapping(region: str, holdings: pd.DataFrame, signals: pd.DataF
     matches, skipped = {}, []
     if region == 'India':
         from india_constituents import INDEX_BY_SLUG
-        lookup = signals.set_index('source_id')
+        # Keep source_id available in row.to_dict() for downstream edge generation.
+        lookup = signals.set_index('source_id', drop=False)
         for slug, definition in INDEX_BY_SLUG.items():
             ticker = INDIA_SLUG_TICKERS.get(slug)
             if ticker and ticker in lookup.index:
@@ -188,7 +182,6 @@ def source_signal_mapping(region: str, holdings: pd.DataFrame, signals: pd.DataF
                 skipped.append({'Source':pid, 'Reason':'No valid source → rotation series mapping'})
     return matches, skipped
 
-
 def _as_rows(holdings):
     if holdings.empty: return []
     return holdings.to_dict('records')
@@ -196,7 +189,6 @@ def _as_rows(holdings):
 
 def build_lists(region: str, holdings: pd.DataFrame, signals: pd.DataFrame, *, min_sector=1, min_factor=1):
     """Leading/Lagging require sector AND factor observations in same quadrant.
-
     For weighted iShares portfolios, within-side score is conviction-scaled
     and based on verified exposure; for NSE, source membership is unweighted.
     Final values are ordinal evidence strengths, NOT return forecasts.
@@ -264,7 +256,6 @@ def build_lists(region: str, holdings: pd.DataFrame, signals: pd.DataFrame, *, m
                                   ascending=[True,False,False,False,True]).reset_index(drop=True)
         frame['Rank'] = frame.groupby('Category')['Score'].rank(method='min', ascending=False).astype(int)
     return frame, pd.DataFrame(missing)
-
 
 def load_holdings(region: str) -> pd.DataFrame:
     if region == 'India':
