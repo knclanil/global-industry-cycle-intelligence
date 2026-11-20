@@ -1,0 +1,86 @@
+{
+  "built_utc": "2026-11-20T17:19:16.627387+00:00",
+  "regions": {
+    "global_1m": {
+      "holdings_records": 2570,
+      "rotation_signals": 15,
+      "leading_companies": 0,
+      "lagging_companies": 46,
+      "unmapped_sources": 3,
+      "error": null,
+      "signal_asof": "2026-11-19"
+    },
+    "global_3m": {
+      "holdings_records": 2570,
+      "rotation_signals": 15,
+      "leading_companies": 207,
+      "lagging_companies": 45,
+      "unmapped_sources": 3,
+      "error": null,
+      "signal_asof": "2026-11-19"
+    },
+    "global_6m": {
+      "holdings_records": 2570,
+      "rotation_signals": 15,
+      "leading_companies": 207,
+      "lagging_companies": 20,
+      "unmapped_sources": 3,
+      "error": null,
+      "signal_asof": "2026-11-19"
+    },
+    "usa_1m": {
+      "holdings_records": 4062,
+      "rotation_signals": 18,
+      "leading_companies": 0,
+      "lagging_companies": 0,
+      "unmapped_sources": 1,
+      "error": null,
+      "signal_asof": "2026-11-19"
+    },
+    "usa_3m": {
+      "holdings_records": 4062,
+      "rotation_signals": 18,
+      "leading_companies": 284,
+      "lagging_companies": 54,
+      "unmapped_sources": 1,
+      "error": null,
+      "signal_asof": "2026-11-19"
+    },
+    "usa_6m": {
+      "holdings_records": 4062,
+      "rotation_signals": 18,
+      "leading_companies": 327,
+      "lagging_companies": 54,
+      "unmapped_sources": 1,
+      "error": null,
+      "signal_asof": "2026-11-19"
+    },
+    "india_1m": {
+      "holdings_records": 975,
+      "rotation_signals": 18,
+      "leading_companies": 0,
+      "lagging_companies": 13,
+      "unmapped_sources": 13,
+      "error": null,
+      "signal_asof": "2026-11-19"
+    },
+    "india_3m": {
+      "holdings_records": 975,
+      "rotation_signals": 18,
+      "leading_companies": 6,
+      "lagging_companies": 51,
+      "unmapped_sources": 13,
+      "error": null,
+      "signal_asof": "2026-11-19"
+    },
+    "india_6m": {
+      "holdings_records": 975,
+      "rotation_signals": 18,
+      "leading_companies": 0,
+      "lagging_companies": 52,
+      "unmapped_sources": 13,
+      "error": null,
+      "signal_asof": "2026-11-19"
+    }
+  }
+}

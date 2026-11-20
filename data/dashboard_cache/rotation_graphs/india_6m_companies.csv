@@ -1,0 +1,53 @@
+Company,Ticker,company_key,Category,Score,Sector indices,Factor indices,Sector RS magnitude,Factor RS magnitude,Sector sources,Factor sources,Signal basis,Avg ETF % weight,Exposure,Rank
+Hindustan Zinc Ltd.,HINDZINC,ISIN:INE267A01025,Lagging,21.655,1,1,27.1,17.31,Metals,Quality (Nifty200 Quality 30),Direct source mapping,,,1
+Hindustan Copper Ltd.,HINDCOPPER,ISIN:INE531E01026,Lagging,19.3,1,1,27.1,13.75,Metals,Alpha (Nifty Alpha 50),Direct source mapping,,,2
+National Aluminium Co. Ltd.,NATIONALUM,ISIN:INE139A01034,Lagging,19.133,1,2,27.1,13.3,Metals,Alpha (Nifty Alpha 50) · Momentum (Nifty200 Momentum 30),Direct source mapping,,,3
+Steel Authority of India Ltd.,SAIL,ISIN:INE114A01011,Lagging,19.133,1,2,27.1,13.3,Metals,Alpha (Nifty Alpha 50) · Momentum (Nifty200 Momentum 30),Direct source mapping,,,3
+Vedanta Ltd.,VEDL,ISIN:INE205A01025,Lagging,19.133,1,2,27.1,13.3,Metals,Alpha (Nifty Alpha 50) · Momentum (Nifty200 Momentum 30),Direct source mapping,,,3
+TD Power Systems Ltd.,TDPOWERSYS,ISIN:INE419M01035,Lagging,19.079,1,1,26.48,13.75,Energy,Alpha (Nifty Alpha 50),Direct source mapping,,,6
+Adani Energy Solutions Ltd.,ADANIENSOL,ISIN:INE931S01010,Lagging,18.915,1,2,26.48,13.3,Energy,Alpha (Nifty Alpha 50) · Momentum (Nifty200 Momentum 30),Direct source mapping,,,7
+Bharat Heavy Electricals Ltd.,BHEL,ISIN:INE257A01026,Lagging,18.915,1,2,26.48,13.3,Energy,Alpha (Nifty Alpha 50) · Momentum (Nifty200 Momentum 30),Direct source mapping,,,7
+Hitachi Energy India Ltd.,POWERINDIA,ISIN:INE07Y701011,Lagging,18.915,1,2,26.48,13.3,Energy,Alpha (Nifty Alpha 50) · Momentum (Nifty200 Momentum 30),Direct source mapping,,,7
+ABB India Ltd.,ABB,ISIN:INE117A01022,Lagging,18.445,1,1,26.48,12.85,Energy,Momentum (Nifty200 Momentum 30),Direct source mapping,,,10
+Coal India Ltd.,COALINDIA,ISIN:INE522F01014,Lagging,18.171,1,2,26.48,12.27,Energy,Equal Weight (Nifty50 Equal Weight) · Quality (Nifty200 Quality 30),Direct source mapping,,,11
+Hindalco Industries Ltd.,HINDALCO,ISIN:INE038A01020,Lagging,17.778,1,3,27.1,11.27,Metals,Alpha (Nifty Alpha 50) · Equal Weight (Nifty50 Equal Weight) · Momentum (Nifty200 Momentum 30),Direct source mapping,,,12
+Tata Steel Ltd.,TATASTEEL,ISIN:INE081A01020,Lagging,16.641,1,2,27.1,10.04,Metals,Equal Weight (Nifty50 Equal Weight) · Momentum (Nifty200 Momentum 30),Direct source mapping,,,13
+Colgate Palmolive (India) Ltd.,COLPAL,ISIN:INE259A01022,Lagging,16.286,1,1,15.33,17.31,FMCG,Quality (Nifty200 Quality 30),Direct source mapping,,,14
+Marico Ltd.,MARICO,ISIN:INE196A01026,Lagging,16.286,1,1,15.33,17.31,FMCG,Quality (Nifty200 Quality 30),Direct source mapping,,,14
+Adani Power Ltd.,ADANIPOWER,ISIN:INE814H01029,Lagging,15.535,2,2,17.45,13.3,Energy · Infrastructure,Alpha (Nifty Alpha 50) · Momentum (Nifty200 Momentum 30),Direct source mapping,,,16
+GE Vernova T&D India Ltd.,GVT&D,ISIN:INE200A01026,Lagging,15.535,2,2,17.45,13.3,Energy · Infrastructure,Alpha (Nifty Alpha 50) · Momentum (Nifty200 Momentum 30),Direct source mapping,,,16
+Adani Green Energy Ltd.,ADANIGREEN,ISIN:INE364U01010,Lagging,15.125,2,1,17.45,12.85,Energy · Infrastructure,Momentum (Nifty200 Momentum 30),Direct source mapping,,,18
+CG Power and Industrial Solutions Ltd.,CGPOWER,ISIN:INE067A01029,Lagging,15.125,2,1,17.45,12.85,Energy · Infrastructure,Momentum (Nifty200 Momentum 30),Direct source mapping,,,18
+Radico Khaitan Ltd,RADICO,ISIN:INE944F01028,Lagging,14.515,1,1,15.33,13.75,FMCG,Alpha (Nifty Alpha 50),Direct source mapping,,,20
+Adani Enterprises Ltd.,ADANIENT,ISIN:INE423A01024,Lagging,13.991,1,1,27.1,7.22,Metals,Equal Weight (Nifty50 Equal Weight),Direct source mapping,,,21
+JSW Steel Ltd.,JSWSTEEL,ISIN:INE019A01038,Lagging,13.991,1,1,27.1,7.22,Metals,Equal Weight (Nifty50 Equal Weight),Direct source mapping,,,21
+Britannia Industries Ltd.,BRITANNIA,ISIN:INE216A01030,Lagging,13.598,1,2,15.33,11.8,FMCG,Low Volatility (Nifty100 Low Volatility 30) · Quality (Nifty200 Quality 30),Direct source mapping,,,23
+Hindustan Unilever Ltd.,HINDUNILVR,ISIN:INE030A01027,Lagging,12.849,1,3,15.33,10.27,FMCG,Equal Weight (Nifty50 Equal Weight) · Low Volatility (Nifty100 Low Volatility 30) · Quality (Nifty200 Quality 30),Direct source mapping,,,24
+ITC Ltd.,ITC,ISIN:INE154A01025,Lagging,12.849,1,3,15.33,10.27,FMCG,Equal Weight (Nifty50 Equal Weight) · Low Volatility (Nifty100 Low Volatility 30) · Quality (Nifty200 Quality 30),Direct source mapping,,,24
+Nestle India Ltd.,NESTLEIND,ISIN:INE239A01024,Lagging,12.849,1,3,15.33,10.27,FMCG,Equal Weight (Nifty50 Equal Weight) · Low Volatility (Nifty100 Low Volatility 30) · Quality (Nifty200 Quality 30),Direct source mapping,,,24
+NTPC Ltd.,NTPC,ISIN:INE733E01010,Lagging,12.835,2,3,17.45,8.79,Energy · Infrastructure,Equal Weight (Nifty50 Equal Weight) · Low Volatility (Nifty100 Low Volatility 30) · Momentum (Nifty200 Momentum 30),Direct source mapping,,,27
+Cummins India Ltd.,CUMMINSIND,ISIN:INE298A01020,Lagging,11.406,1,3,8.43,14.63,Infrastructure,Alpha (Nifty Alpha 50) · Momentum (Nifty200 Momentum 30) · Quality (Nifty200 Quality 30),Direct source mapping,,,28
+Oil & Natural Gas Corporation Ltd.,ONGC,ISIN:INE213A01029,Lagging,11.379,2,1,17.45,7.22,Energy · Infrastructure,Equal Weight (Nifty50 Equal Weight),Direct source mapping,,,29
+Power Grid Corporation of India Ltd.,POWERGRID,ISIN:INE752E01010,Lagging,11.161,2,2,17.45,6.76,Energy · Infrastructure,Equal Weight (Nifty50 Equal Weight) · Low Volatility (Nifty100 Low Volatility 30),Direct source mapping,,,30
+Reliance Industries Ltd.,RELIANCE,ISIN:INE002A01018,Lagging,11.161,2,2,17.45,6.76,Energy · Infrastructure,Equal Weight (Nifty50 Equal Weight) · Low Volatility (Nifty100 Low Volatility 30),Direct source mapping,,,30
+Ashok Leyland Ltd.,ASHOKLEY,ISIN:INE208A01029,Lagging,10.764,1,1,8.43,13.75,Infrastructure,Alpha (Nifty Alpha 50),Direct source mapping,,,32
+Bharat Forge Ltd.,BHARATFORG,ISIN:INE465A01025,Lagging,10.737,1,2,8.43,13.3,Infrastructure,Alpha (Nifty Alpha 50) · Momentum (Nifty200 Momentum 30),Direct source mapping,,,33
+Tata Power Co. Ltd.,TATAPOWER,ISIN:INE245A01021,Lagging,10.631,2,1,17.45,6.29,Energy · Infrastructure,Low Volatility (Nifty100 Low Volatility 30),Direct source mapping,,,34
+Tata Consumer Products Ltd.,TATACONSUM,ISIN:INE192A01025,Lagging,10.522,1,1,15.33,7.22,FMCG,Equal Weight (Nifty50 Equal Weight),Direct source mapping,,,35
+Samvardhana Motherson International Ltd.,MOTHERSON,ISIN:INE775A01035,Lagging,10.406,1,1,8.43,12.85,Infrastructure,Momentum (Nifty200 Momentum 30),Direct source mapping,,,36
+Adani Ports and Special Economic Zone Ltd.,ADANIPORTS,ISIN:INE742F01042,Lagging,7.803,1,1,8.43,7.22,Infrastructure,Equal Weight (Nifty50 Equal Weight),Direct source mapping,,,37
+Grasim Industries Ltd.,GRASIM,ISIN:INE047A01021,Lagging,7.803,1,1,8.43,7.22,Infrastructure,Equal Weight (Nifty50 Equal Weight),Direct source mapping,,,37
+InterGlobe Aviation Ltd.,INDIGO,ISIN:INE646L01027,Lagging,7.803,1,1,8.43,7.22,Infrastructure,Equal Weight (Nifty50 Equal Weight),Direct source mapping,,,37
+Max Healthcare Institute Ltd.,MAXHEALTH,ISIN:INE027H01010,Lagging,7.803,1,1,8.43,7.22,Infrastructure,Equal Weight (Nifty50 Equal Weight),Direct source mapping,,,37
+Apollo Hospitals Enterprise Ltd.,APOLLOHOSP,ISIN:INE437A01024,Lagging,7.698,1,2,8.43,6.76,Infrastructure,Equal Weight (Nifty50 Equal Weight) · Low Volatility (Nifty100 Low Volatility 30),Direct source mapping,,,41
+Bharti Airtel Ltd.,BHARTIARTL,ISIN:INE397D01024,Lagging,7.698,1,2,8.43,6.76,Infrastructure,Equal Weight (Nifty50 Equal Weight) · Low Volatility (Nifty100 Low Volatility 30),Direct source mapping,,,41
+Larsen & Toubro Ltd.,LT,ISIN:INE018A01030,Lagging,7.698,1,2,8.43,6.76,Infrastructure,Equal Weight (Nifty50 Equal Weight) · Low Volatility (Nifty100 Low Volatility 30),Direct source mapping,,,41
+UltraTech Cement Ltd.,ULTRACEMCO,ISIN:INE481G01011,Lagging,7.698,1,2,8.43,6.76,Infrastructure,Equal Weight (Nifty50 Equal Weight) · Low Volatility (Nifty100 Low Volatility 30),Direct source mapping,,,41
+LTM Ltd.,LTM,ISIN:INE214T01019,Lagging,5.619,1,1,1.82,17.31,Information Technology,Quality (Nifty200 Quality 30),Direct source mapping,,,45
+Oracle Financial Services Software Ltd.,OFSS,ISIN:INE881D01027,Lagging,5.619,1,1,1.82,17.31,Information Technology,Quality (Nifty200 Quality 30),Direct source mapping,,,45
+Persistent Systems Ltd.,PERSISTENT,ISIN:INE262H01021,Lagging,5.619,1,1,1.82,17.31,Information Technology,Quality (Nifty200 Quality 30),Direct source mapping,,,45
+HCL Technologies Ltd.,HCLTECH,ISIN:INE860A01027,Lagging,4.88,1,2,1.82,12.27,Information Technology,Equal Weight (Nifty50 Equal Weight) · Quality (Nifty200 Quality 30),Direct source mapping,,,48
+Infosys Ltd.,INFY,ISIN:INE009A01021,Lagging,4.88,1,2,1.82,12.27,Information Technology,Equal Weight (Nifty50 Equal Weight) · Quality (Nifty200 Quality 30),Direct source mapping,,,48
+Tata Consultancy Services Ltd.,TCS,ISIN:INE467B01029,Lagging,4.63,1,3,1.82,10.27,Information Technology,Equal Weight (Nifty50 Equal Weight) · Low Volatility (Nifty100 Low Volatility 30) · Quality (Nifty200 Quality 30),Direct source mapping,,,50
+Tech Mahindra Ltd.,TECHM,ISIN:INE669C01036,Lagging,3.63,1,1,1.82,7.22,Information Technology,Equal Weight (Nifty50 Equal Weight),Direct source mapping,,,51
+Wipro Ltd.,WIPRO,ISIN:INE075A01022,Lagging,3.389,1,1,1.82,6.29,Information Technology,Low Volatility (Nifty100 Low Volatility 30),Direct source mapping,,,52

@@ -1,0 +1,19 @@
+region,kind,source_id,label,relative_strength,rs_momentum,quadrant,as_of,source
+India,sector,^NIFTYBANK,Banking,9.176,8.172,Leading,2026-11-19,Repository market history
+India,sector,^CNXIT,Information Technology,-1.761,-0.127,Lagging,2026-11-19,Repository market history
+India,sector,^CNXAUTO,Automobiles,2.343,-7.399,Weakening,2026-11-19,Repository market history
+India,sector,^CNXFMCG,FMCG,-10.862,-8.929,Lagging,2026-11-19,Repository market history
+India,sector,^CNXPHARMA,Pharmaceuticals,5.899,-20.085,Weakening,2026-11-19,Repository market history
+India,sector,^CNXMETAL,Metals,-13.507,-27.182,Lagging,2026-11-19,Repository market history
+India,sector,^CNXREALTY,Real Estate,11.593,-2.331,Weakening,2026-11-19,Repository market history
+India,sector,^CNXENERGY,Energy,-13.621,-25.717,Lagging,2026-11-19,Repository market history
+India,sector,^CNXINFRA,Infrastructure,-4.548,-7.761,Lagging,2026-11-19,Repository market history
+India,sector,^NIFTYFIN_SERVICE,Financial Services,3.745,5.522,Leading,2026-11-19,Repository market history
+India,sector,^CNXMEDIA,Media,18.277,2.837,Leading,2026-11-19,Repository market history
+India,sector,^CNXPSUBANK,Public Sector Banks,13.554,13.478,Leading,2026-11-19,Repository market history
+India,factor,NIFTY50_VALUE20,Value (Nifty50 Value 20),-3.188,0.494,Improving,2026-11-19,Repository market history
+India,factor,NIFTY200_MOMENTUM30,Momentum (Nifty200 Momentum 30),-7.417,-10.863,Lagging,2026-11-19,Repository market history
+India,factor,NIFTY200_QUALITY30,Quality (Nifty200 Quality 30),-9.339,-15.934,Lagging,2026-11-19,Repository market history
+India,factor,NIFTY100_LOWVOL30,Low Volatility (Nifty100 Low Volatility 30),-2.792,-7.004,Lagging,2026-11-19,Repository market history
+India,factor,NIFTY_ALPHA50,Alpha (Nifty Alpha 50),-3.692,-20.109,Lagging,2026-11-19,Repository market history
+India,factor,NIFTY50_EQUALWEIGHT,Equal Weight (Nifty50 Equal Weight),-3.132,-8.184,Lagging,2026-11-19,Repository market history
