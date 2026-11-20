@@ -1,0 +1,33 @@
+{
+  "built_utc": "2026-11-20T16:05:06.902839+00:00",
+  "schema_version": 1,
+  "regions": {
+    "Global": {
+      "companies": 0,
+      "source_indices": 0,
+      "index_memberships": 0,
+      "financial_snapshots": 0,
+      "source": "Verified iShares ETF holdings"
+    },
+    "USA": {
+      "companies": 0,
+      "source_indices": 0,
+      "index_memberships": 0,
+      "financial_snapshots": 0,
+      "source": "Verified iShares ETF holdings"
+    },
+    "India": {
+      "companies": 328,
+      "source_indices": 31,
+      "index_memberships": 975,
+      "financial_snapshots": 0,
+      "source": "NSE constituent snapshots"
+    }
+  },
+  "notes": [
+    "ETF daily market prices are cached separately from their lower-frequency constituent snapshots.",
+    "Missing or inaccessible observations are not replaced with zero.",
+    "India values reflect only verified downloaded company snapshots; reference ratio snapshots do not establish annual statement history.",
+    "USA and Global issuer identities remain region-separated. Global non-SEC issuers need independent financial coverage."
+  ]
+}

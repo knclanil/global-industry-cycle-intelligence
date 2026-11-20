@@ -8,17 +8,22 @@ apply_global_design()
 # Grouped sidebar navigation. The selected page is stored in session state so
 # changing groups does not reset the current dashboard's other widgets.
 NAV_GROUPS = {
-    '🕸️ KNOWLEDGE GRAPHS': ['Global Capital Intelligence Network', 'Leading & Lagging Companies'],
-    '🌐 GLOBAL INTELLIGENCE': ['Company Holdings Leadership'],
-    '💼 COMPANY FINANCIALS': ['Fundamental Quality Rankings', 'Company Financial Research', 'USA Company Financial KPI Intelligence', 'India Company Financial KPI Intelligence', 'India Fundamental Valuation'],
-    '🌎 COUNTRY ANALYSIS': ['Global Countries'],
-    '💰 ASSET CLASS ANALYSIS': ['Global Asset Flow', 'USA Asset Flow', 'India Asset Flow'],
-    '📊 SECTOR ANALYSIS': ['Global Sectors', 'USA Sector', 'India Sector'],
-    '🧩 FACTOR ANALYSIS': ['Global Factors', 'USA Factors', 'India Factors', 'India Sector & Factor Holdings', 'India Overlap & Leadership', 'India Sector & Factor Financials'],
-    '📚 DATA & RESEARCH': ['Data Table', 'Wiki'],
+    '🕸️ KNOWLEDGE GRAPHS': ['Global Knowledge Graph', 'USA Knowledge Graph', 'India Knowledge Graph',
+                            'Global Capital Intelligence Network', 'Leading & Lagging Companies'],
+    '🌍 GLOBAL': ['Global Countries', 'Global Sectors', 'Global Factors', 'Global Analysis'],
+    '🇺🇸 USA': ['USA Sector', 'USA Factors', 'USA Analysis'],
+    '🇮🇳 INDIA': ['India Sector', 'India Factors', 'India Analysis',
+                  'India Sector & Factor Holdings', 'India Overlap & Leadership', 'India Sector & Factor Financials'],
+    '💼 COMPANY FINANCIALS': ['Fundamental Quality Rankings', 'Company Financial Research',
+                              'USA Company Financial KPI Intelligence', 'India Company Financial KPI Intelligence',
+                              'India Fundamental Valuation'],
+    '📋 OTHER RESEARCH': ['Company Holdings Leadership',
+                          'Global Asset Flow', 'USA Asset Flow', 'India Asset Flow', 'Data Table', 'Wiki'],
 }
+
 PAGE_LABELS = {
  'Global Capital Intelligence Network': 'Capital Network',
+ 'Global Countries': 'Countries',
  'Leading & Lagging Companies': 'Leading & Lagging',
  'Fundamental Quality Rankings': 'Quality Rankings',
  'USA Company Financial KPI Intelligence': 'USA Financial KPIs',
@@ -28,10 +33,15 @@ PAGE_LABELS = {
  'India Overlap & Leadership': 'India Overlap & Leadership',
  'India Fundamental Valuation': 'India Valuation',
  'Company Financial Research': 'USA Financial Research',
+ 'Global Knowledge Graph': 'Global', 'USA Knowledge Graph': 'USA', 'India Knowledge Graph': 'India',
+ 'Global Analysis': 'Sector · Factor · Holdings', 'USA Analysis': 'Sector · Factor · Holdings',
+ 'India Analysis': 'Sector · Factor · Holdings',
 }
 PAGE_ICONS = {
+    'Global Knowledge Graph': '🌍', 'USA Knowledge Graph': '🇺🇸', 'India Knowledge Graph': '🇮🇳',
+    'Global Analysis': '📊', 'USA Analysis': '📊', 'India Analysis': '📊',
     'Global Capital Intelligence Network': '🕸️', 'Leading & Lagging Companies': '🔀',
-    'Global Countries': '🌎',
+    'Global Countries': '🗺️',
     'Global Asset Flow': '🌍', 'USA Asset Flow': '🇺🇸', 'India Asset Flow': '🇮🇳',
     'Global Sectors': '🌍', 'USA Sector': '🇺🇸', 'India Sector': '🇮🇳',
     'Global Factors': '🌍', 'USA Factors': '🇺🇸', 'India Factors': '🇮🇳', 'India Sector & Factor Holdings': '🇮🇳', 'India Overlap & Leadership': '🏆', 'India Sector & Factor Financials': '📈',
@@ -84,10 +94,16 @@ with st.sidebar:
                         st.rerun()
     st.divider()
 page = st.session_state.selected_page
-group_name = next((g.replace('🕸️ ', '').replace('🌐 ', '').replace('💼 ', '').replace('🌎 ', '').replace('💰 ', '').replace('📊 ', '').replace('🧩 ', '').replace('📚 ', '').title() for g, pages in NAV_GROUPS.items() if page in pages), 'Intelligence')
+group_name = next((g.split(' ', 1)[-1].title() for g, items in NAV_GROUPS.items() if page in items), 'Intelligence')
 st.markdown(f'<div class="app-topline"><span class="app-path">GLOBAL INDUSTRY  /  {group_name.upper()}  /  {page.upper()}</span><span class="app-pill">RESEARCH</span></div>', unsafe_allow_html=True)
 
-if page == 'Global Capital Intelligence Network':
+if page in ('Global Knowledge Graph', 'USA Knowledge Graph', 'India Knowledge Graph'):
+    from regional_workspace import render_graph
+    render_graph(page.split(' ',1)[0])
+elif page in ('Global Analysis', 'USA Analysis', 'India Analysis'):
+    from regional_workspace import render_analysis
+    render_analysis(page.split(' ',1)[0])
+elif page == 'Global Capital Intelligence Network':
     from capital_network import render_capital_network
     render_capital_network()
 elif page == 'Leading & Lagging Companies':
