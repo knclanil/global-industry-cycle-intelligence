@@ -1,468 +1,319 @@
-"""Interactive, evidence-labeled market relationship network (not fund-flow data)."""
-from datetime import date, timedelta
-import math
+"""Capital membership network: GLOBAL -> COUNTRY -> SECTOR -> COMPANY -> FACTOR.
+
+The GLOBAL root ALSO has its own direct connections to global-scoped sectors,
+companies and factors (independent of the country-specific branches).
+
+Uses *verified* cached sector and factor constituents. This is a relationship
+network, NOT a measured capital-flow network. Country assignment is only made
+when the membership is present in an explicitly country-scoped regional cache.
+
+Drop in as `capital_network.py` at the repository root. The application's
+existing `render_capital_network()` route needs no change.
+"""
+from __future__ import annotations
+
+from collections import defaultdict
+from pathlib import Path
+
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
-from dashboard import prices_cached
-from holdings_constituent_utils import parse_holdings, score_holdings, FACTORS
-import country_market_data, global_asset_market_data, usa_asset_market_data, india_asset_market_data
-import global_market_data, market_data, india_market_data
-import global_factor_market_data, usa_factor_market_data, india_factor_market_data
 
-SOURCES = {
- 'Countries':country_market_data,'Global Assets':global_asset_market_data,
- 'USA Assets':usa_asset_market_data,'India Assets':india_asset_market_data,
- 'Global Sectors':global_market_data,'USA Sectors':market_data,'India Sectors':india_market_data,
- 'Global Factors':global_factor_market_data,'USA Factors':usa_factor_market_data,'India Factors':india_factor_market_data,
-}
-CACHE_KEYS={'Countries':'Countries','Global Assets':'GlobalAssets','USA Assets':'USAAssets','India Assets':'IndiaAssets','Global Sectors':'Global','USA Sectors':'USA','India Sectors':'India','Global Factors':'GlobalFactors','USA Factors':'USAFactors','India Factors':'IndiaFactors'}
-COLORS={'Leading':'#27c999','Improving':'#5c9fff','Weakening':'#e9ad58','Lagging':'#ef6b83','Unavailable':'#73849b'}
+CACHE_DIR = Path(__file__).resolve().parent / "data" / "dashboard_cache" / "rotation_graphs"
+PERIODS = ("1m", "3m", "6m")
+REGIONS = ("USA", "India", "Global")
+QUADRANTS = ("Leading", "Improving", "Weakening", "Lagging")
+COLORS = {"Leading": "#36d6a2", "Improving": "#6ba9ff",
+          "Weakening": "#ffca70", "Lagging": "#fa8297", "Unavailable": "#8f9db3"}
+BG = "#111b2b"
 
-def score_rows(rows):
-    """Peer-relative 0..100 percentile scores, not investment flows."""
-    d=rows.copy()
-    if d.empty:return d
-    for col,out in [('Relative strength (%)','rs_percentile'),('RS momentum (pp)','momentum_percentile')]:
-        d[out]=d[col].rank(pct=True,method='average')*100
-    d['Network Score']=(.6*d.rs_percentile+.4*d.momentum_percentile).round(1)
-    return d
 
-def fetch_layer(layer,start,end,lookback):
-    module=SOURCES[layer]
-    frames=prices_cached(CACHE_KEYS[layer],start-timedelta(days=600),end)
-    report=module.validate(frames,end)
-    if report['status']=='FAIL':raise ValueError('; '.join(report['errors'][:3]))
-    rows,*_=module.calculate(frames,list(module.SECTORS),start,end,lookback)
-    if rows.empty:raise ValueError('No validated observations for selected window')
-    return score_rows(rows),report
+@st.cache_data(show_spinner=False, max_entries=40)
+def _csv(path: str, stamp: int) -> pd.DataFrame:
+    try:
+        return pd.read_csv(path, keep_default_na=False, dtype=str)
+    except (OSError, ValueError, pd.errors.EmptyDataError):
+        return pd.DataFrame()
 
-def node(node_id,label,kind,layer=None,record=None):
-    data={'id':node_id,'label':str(label),'kind':kind,'layer':layer,'score':None,'quadrant':None,'ticker':None,'return':None,'relative':None}
-    if record is not None:
-        data.update(score=float(record['Network Score']),quadrant=str(record['Quadrant']),ticker=str(record['ETF']),relative=float(record['Relative strength (%)']),**{'return':float(record['Return (%)'])})
-    return data
 
-def build_graph(path,market,layers,top_n,holdings=None):
-    """Only create edges supported by price series or uploaded constituent files."""
-    nodes={'root':node('root','GLOBAL','root')}; edges=[]
-    def add(n,parent):
-        nodes[n['id']]=n
-        if parent in nodes:edges.append((parent,n['id']))
-    if path=='Country → assets → sectors → companies':
-        countries=layers.get('Countries',pd.DataFrame())
-        for _,r in pd.concat([countries[countries['ETF'].isin(['SPY','INDA'])], countries.nlargest(top_n,'Network Score')]).drop_duplicates('ETF').iterrows():
-            cid='country:'+str(r['ETF']);add(node(cid,r['Sector'],'country','Countries',r),'root')
-        # Country-specific asset data is available only for USA and India.
-        for market_name,match,asset_layer,sector_layer in [('USA',('United States','USA','US'),'USA Assets','USA Sectors'),('India',('India',),'India Assets','India Sectors')]:
-            country_ids=[n['id'] for n in nodes.values() if n['kind']=='country' and (any(s.lower() in n['label'].lower() for s in match) or (market_name=='USA' and n['ticker'] in ('EUSA','SPY','IVV')))]
-            if not country_ids:continue
-            cid=country_ids[0]
-            for _,r in pd.concat([layers.get(asset_layer,pd.DataFrame())[layers.get(asset_layer,pd.DataFrame())['Sector'].str.contains('Equit|Nifty',case=False,na=False)], layers.get(asset_layer,pd.DataFrame()).nlargest(top_n,'Network Score')]).drop_duplicates('ETF').iterrows() if not layers.get(asset_layer,pd.DataFrame()).empty else []:
-                aid=f'{market_name}:asset:{r["ETF"]}';add(node(aid,r['Sector'],'asset',asset_layer,r),cid)
-                if any(t in str(r['Sector']).lower() for t in ('equity','stock','nifty 50','s&p 500')):
-                    for _,s in layers.get(sector_layer,pd.DataFrame()).nlargest(top_n,'Network Score').iterrows():
-                        sid=f'{market_name}:sector:{s["ETF"]}';add(node(sid,s['Sector'],'sector',sector_layer,s),aid)
-        # No sector-company edges without verified sector constituents.
-    else:
-        assets=layers.get('Global Assets',pd.DataFrame())
-        for _,r in pd.concat([assets[assets['ETF']=='VT'], assets.nlargest(top_n,'Network Score')]).drop_duplicates('ETF').iterrows():
-            aid='global:asset:'+str(r['ETF']);add(node(aid,r['Sector'],'asset','Global Assets',r),'root')
-            if any(t in str(r['Sector']).lower() for t in ('equity','stock')):
-                factor_layer=market+' Factors'
-                for _,f in layers.get(factor_layer,pd.DataFrame()).nlargest(top_n,'Network Score').iterrows():
-                    fid='factor:'+market+':'+str(f['ETF']);add(node(fid,f['Sector'],'factor',factor_layer,f),aid)
-                    if holdings is not None and not holdings.empty:
-                        subset=holdings[holdings['factor'].astype(str).str.upper()==str(f['ETF']).upper()].nlargest(top_n,'weight')
-                        for _,h in subset.iterrows():
-                            identity=str(h.get('isin','')).strip() or str(h.get('ticker','')).strip() or str(h['company']).strip()
-                            hid='company:'+market+':'+identity.upper()
-                            if hid not in nodes:nodes[hid]=node(hid,h['company'],'company')
-                            edges.append((fid,hid))
-    return nodes,edges
+def _load(region: str, period: str, kind: str, directory: Path = CACHE_DIR) -> pd.DataFrame:
+    file = directory / f"{region.lower()}_{period}_{kind}.csv"
+    return _csv(str(file), file.stat().st_mtime_ns if file.is_file() else -1)
 
-def build_unified_graph(layers, top_n, holdings=None, factor_markets=('USA', 'India')):
-    """One rooted hierarchy: Global → Country → Assets → Equity → Sectors | Factors.
 
-    Only USA and India currently have country-specific asset, sector and factor feeds.
-    All other countries terminate at the country node; no invented proxy branches.
+def _normal(value) -> str:
+    return str(value).strip()
+
+
+def _graph_data(period: str, directory: Path = CACHE_DIR):
+    """Build evidence-preserving relationships without guessing geographic origin.
+
+    Returns (nodes, edges, diagnostics). Nodes keyed by unique, typed IDs.
+    Global portfolio data branches directly from the GLOBAL root; it is never
+    assigned to an invented USA/India country.
     """
-    nodes={'root':node('root','GLOBAL','root')}; edges=[]
-    def add(item,parent):
-        if item['id'] not in nodes: nodes[item['id']]=item
-        if parent in nodes and (parent,item['id']) not in edges:edges.append((parent,item['id']))
-    countries=layers.get('Countries',pd.DataFrame())
-    if countries.empty:
-        countries=pd.DataFrame(columns=['ETF','Sector','Network Score'])
-    # Always retain USA and India if their country observations exist.
-    preferred=countries[countries['ETF'].isin(['SPY','INDA'])]
-    chosen=pd.concat([preferred,countries.nlargest(top_n,'Network Score')]).drop_duplicates('ETF').head(top_n+2)
-    specs={'SPY':('USA','USA Assets','USA Sectors','USA Factors'),
-           'INDA':('India','India Assets','India Sectors','India Factors')}
-    for _,country in chosen.iterrows():
-        ticker=str(country['ETF']); cid='country:'+ticker
-        add(node(cid,country['Sector'],'country','Countries',country),'root')
-        if ticker not in specs:continue
-        market,asset_layer,sector_layer,factor_layer=specs[ticker]
-        assets=layers.get(asset_layer,pd.DataFrame())
-        if assets.empty:continue
-        group=market+':assets';add(node(group,'ASSETS','asset_group'),cid)
-        # Include equity first even when its rotation score is low; then other assets.
-        eq=assets[assets['Sector'].str.contains('Equit|Stock|Nifty',case=False,na=False)]
-        other=assets[~assets['ETF'].isin(eq['ETF'])]
-        chosen_assets=pd.concat([eq,other.nlargest(max(top_n-1,0),'Network Score')]).drop_duplicates('ETF')
-        for _,asset in chosen_assets.iterrows():
-            equity=str(asset['ETF']) in set(eq['ETF'])
-            aid=f'{market}:asset:{asset["ETF"]}'
-            add(node(aid,'Equity' if equity else asset['Sector'],'equity' if equity else 'asset',asset_layer,asset),group)
-            if not equity:continue
-            # Both vertical groups are children of THIS country's equity, never GLOBAL.
-            sg=f'{market}:sectors';fg=f'{market}:factors'
-            add(node(sg,'SECTORS','sector_group'),aid)
-            add(node(fg,'FACTORS','factor_group'),aid)
-            sector_rows=layers.get(sector_layer,pd.DataFrame())
-            if not sector_rows.empty:
-                for _,row in sector_rows.nlargest(top_n,'Network Score').iterrows():
-                    add(node(f'{market}:sector:{row["ETF"]}',row['Sector'],'sector',sector_layer,row),sg)
-            factor_rows=layers.get(factor_layer,pd.DataFrame()) if market in factor_markets else pd.DataFrame()
-            if not factor_rows.empty:
-                for _,row in factor_rows.nlargest(top_n,'Network Score').iterrows():
-                    fid=f'factor:{market}:{row["ETF"]}'
-                    add(node(fid,row['Sector'],'factor',factor_layer,row),fg)
-                    if holdings is None or holdings.empty:continue
-                    matches=holdings[holdings['factor'].astype(str).str.upper()==str(row['ETF']).upper()]
-                    for _,h in matches.nlargest(top_n,'weight').iterrows():
-                        isin=str(h.get('isin','')).strip().upper()
-                        tick=str(h.get('ticker','')).strip().upper()
-                        identity=('isin:'+isin if isin and isin not in ('NAN','NONE') else
-                                  'ticker:'+market+':'+tick if tick and tick not in ('NAN','NONE') else
-                                  'name:'+market+':'+str(h['company']).strip().upper())
-                        add(node('company:'+identity,h['company'],'company'),fid)
-    # Independent global asset system, opposite the country system.
-    # Only validated global asset/factor observations create scored nodes.
-    global_assets=layers.get('Global Assets',pd.DataFrame())
-    if not global_assets.empty:
-        group='global:assets'
-        add(node(group,'GLOBAL ASSETS','asset_group'),'root')
-        eq=global_assets[global_assets['Sector'].astype(str).str.contains('Equit|Stock',case=False,na=False)]
-        other=global_assets[~global_assets['ETF'].isin(eq['ETF'])]
-        chosen_global=pd.concat([eq,other.nlargest(max(top_n-1,0),'Network Score')]).drop_duplicates('ETF')
-        for _,asset in chosen_global.iterrows():
-            equity=str(asset['ETF']) in set(eq['ETF'])
-            aid='global:asset:'+str(asset['ETF'])
-            add(node(aid,'Equity' if equity else asset['Sector'],'equity' if equity else 'asset','Global Assets',asset),group)
-            if not equity:continue
-            fg='global:factors'
-            add(node(fg,'FACTORS','factor_group'),aid)
-            factors=layers.get('Global Factors',pd.DataFrame())
-            if factors.empty:continue
-            for _,f in factors.nlargest(top_n,'Network Score').iterrows():
-                fid='factor:Global:'+str(f['ETF'])
-                add(node(fid,f['Sector'],'factor','Global Factors',f),fg)
-                if holdings is None or holdings.empty:continue
-                matches=holdings[holdings['factor'].astype(str).str.upper()==str(f['ETF']).upper()]
-                for _,h in matches.nlargest(top_n,'weight').iterrows():
-                    isin=str(h.get('isin','')).strip().upper()
-                    tick=str(h.get('ticker','')).strip().upper()
-                    identity=('isin:'+isin if isin and isin not in ('NAN','NONE') else
-                              'ticker:Global:'+tick if tick and tick not in ('NAN','NONE') else
-                              'name:Global:'+str(h['company']).strip().upper())
-                    add(node('company:'+identity,h['company'],'company'),fid)
-    return nodes,edges
+    nodes = {"root": {"label": "GLOBAL", "kind": "root", "country": None}}
+    edges = set()
+    diagnostics = {}
+
+    def put(nid, **properties):
+        nodes.setdefault(nid, properties)
+
+    def link(source, target):
+        if source in nodes and target in nodes:
+            edges.add((source, target))
+
+    for region in REGIONS:
+        signals = _load(region, period, "signals", directory)
+        memberships = _load(region, period, "edges", directory)
+        valid_signals = {"source_id", "kind", "label", "quadrant"}.issubset(signals.columns)
+        valid_edges = {"source_id", "kind", "company_key", "Company", "Ticker"}.issubset(memberships.columns)
+        diagnostics[region] = {"signals": len(signals), "memberships": len(memberships),
+                               "signals_valid": valid_signals, "edges_valid": valid_edges}
+        if not valid_signals:
+            continue
+        # Country branches are explicit ONLY for country-scoped evidence.
+        # Global signals and memberships belong directly to the GLOBAL node,
+        # rather than being forced into a fictitious country node.
+        country_id = None
+        if region in ("USA", "India"):
+            country_label = {"USA": "United States", "India": "India"}[region]
+            country_id = f"country:{region}"
+            put(country_id, label=country_label, kind="country", country=region)
+            link("root", country_id)
+
+        lookup = {}
+        for row in signals.to_dict("records"):
+            source_id, kind = _normal(row.get("source_id")), _normal(row.get("kind")).lower()
+            quadrant = _normal(row.get("quadrant"))
+            if not source_id or kind not in ("sector", "factor") or quadrant not in QUADRANTS:
+                continue
+            sid = f"{region}:{kind}:{source_id}"
+            lookup[(kind, source_id)] = sid
+            put(sid, label=_normal(row.get("label")) or source_id, kind=kind,
+                country=region, quadrant=quadrant,
+                rs=_normal(row.get("relative_strength")),
+                momentum=_normal(row.get("rs_momentum")))
+            if region == "Global":
+                # GLOBAL -> SECTOR and GLOBAL -> FACTOR, including signals
+                # whose constituent membership data is unavailable.
+                link("root", sid)
+            elif kind == "sector":
+                link(country_id, sid)
+        if not valid_edges:
+            continue
+        # A company's identity is scoped by region to avoid accidentally
+        # merging identically named but unrelated instruments.
+        for row in memberships.to_dict("records"):
+            source_id, kind = _normal(row.get("source_id")), _normal(row.get("kind")).lower()
+            source_node = lookup.get((kind, source_id))
+            company_key = _normal(row.get("company_key"))
+            if not source_node or not company_key:
+                continue
+            cid = f"{region}:company:{company_key}"
+            label = _normal(row.get("Ticker")) or _normal(row.get("Company")) or company_key
+            put(cid, label=label, name=_normal(row.get("Company")), kind="company", country=region)
+            if region == "Global":
+                # GLOBAL -> COMPANY independently of sector/factor membership.
+                link("root", cid)
+            if kind == "sector":
+                link(source_node, cid)
+            else:
+                link(cid, source_node)
+    return nodes, sorted(edges), diagnostics
 
 
-def galaxy_layout(nodes, edges):
-    """Seeded force-directed galaxy with country and global-asset hemispheres.
-
-    Springs keep verified relationships connected; anchored hubs preserve the
-    global-left/countries-right structure. Deterministic collision relaxation
-    prevents the label pileups of a purely random spring layout.
-    """
-    import networkx as nx
-    import numpy as np
-    from collections import defaultdict, deque
-
-    if not nodes:
-        return {}
-    graph = nx.Graph()
-    graph.add_nodes_from(nodes)
-    graph.add_edges_from((a, b) for a, b in edges if a in nodes and b in nodes)
-    children = defaultdict(list)
-    parents = defaultdict(list)
+def _relations(nodes: dict, edges: list[tuple[str, str]]):
+    countries = defaultdict(set)
+    sectors = defaultdict(set)  # sector -> companies
+    factors = defaultdict(set)  # company -> factors
+    company_sectors = defaultdict(set)
+    company_factors = defaultdict(set)
     for a, b in edges:
-        children[a].append(b)
-        parents[b].append(a)
-
-    # First place each branch in its own constellation. These positions are
-    # starting points, not the final diagram: spring forces subsequently relax.
-    seed = {'root': (0.0, 0.0)}
-    fixed = ['root']
-    if 'global:assets' in nodes:
-        seed['global:assets'] = (-13.0, 0.0)
-        fixed.append('global:assets')
-    country_ids = [c for c in children['root'] if c != 'global:assets']
-    detailed = [c for c in country_ids if children[c]]
-    leaf = [c for c in country_ids if not children[c]]
-    for i, cid in enumerate(detailed):
-        y = (i - (len(detailed)-1)/2) * 24.0
-        seed[cid] = (13.0, y)
-        fixed.append(cid)
-    for i, cid in enumerate(leaf):
-        angle = 2 * math.pi * (i+.5) / max(1,len(leaf))
-        seed[cid] = (8.0 + 5.0 * math.cos(angle), 14.0 * math.sin(angle))
-    # Breadth-first placement keeps sector and factor constellations distinct.
-    queue = deque(['root'])
-    seen = {'root'}
-    while queue:
-        parent = queue.popleft()
-        kids = children[parent]
-        for j, kid in enumerate(kids):
-            if kid not in seen:
-                seen.add(kid)
-                queue.append(kid)
-            if kid in seed:
-                continue
-            px, py = seed.get(parent, (0.0, 0.0))
-            market_global = parent.startswith('global:') or parent == 'global:assets'
-            direction = -1 if market_global else 1
-            offset = (j - (len(kids)-1)/2) * 3.5
-            kind = nodes[kid]['kind']
-            if kind == 'sector_group':
-                offset -= 6.0
-            elif kind == 'factor_group' and not market_global:
-                offset += 6.0
-            seed[kid] = (px + direction * 5.5, py + offset)
-    # Shared companies start at the barycenter of all parent factors.
-    for nid, item in nodes.items():
-        if item['kind'] == 'company':
-            coords = [seed[p] for p in parents[nid] if p in seed]
-            if coords:
-                seed[nid] = (sum(v[0] for v in coords)/len(coords) +
-                             (-5 if any(p.startswith('factor:Global:') for p in parents[nid]) else 5),
-                             sum(v[1] for v in coords)/len(coords))
-    for nid in nodes:
-        seed.setdefault(nid, (0.0, 0.0))
-    if len(nodes) == 1:
-        return seed
-
-    # Spring physics create the organic web shown in the reference screenshot.
-    positions = nx.spring_layout(
-        graph, pos=seed, fixed=fixed, seed=29, iterations=130,
-        k=3.7, scale=None, weight=None, threshold=1e-4,
-    )
-    coords = {nid: np.array(positions[nid], dtype=float) for nid in nodes}
-    # Keep the global asset system to the left, countries to the right.
-    for _ in range(75):
-        moved = False
-        for i, a in enumerate(nodes):
-            if a in fixed:
-                continue
-            for b in list(nodes)[i+1:]:
-                if b in fixed:
-                    continue
-                delta = coords[b]-coords[a]
-                dist = float(np.linalg.norm(delta))
-                # Include a modest text-label allowance as well as planet radius.
-                ra = 1.0 + min(len(nodes[a]['label']), 20)*.055
-                rb = 1.0 + min(len(nodes[b]['label']), 20)*.055
-                gap = ra + rb + .55
-                if dist >= gap:
-                    continue
-                if dist < 1e-7:
-                    angle = ((i * 37 + len(b) * 19) % 360) * math.pi/180
-                    delta = np.array([math.cos(angle),math.sin(angle)])
-                    dist = 1.0
-                shift = (gap-dist) * .53 * delta/dist
-                coords[a] -= shift
-                coords[b] += shift
-                moved = True
-        if not moved:
-            break
-    return {nid: tuple(map(float, xy)) for nid, xy in coords.items()}
+        if a == "root" and nodes[b]["kind"] == "country":
+            countries[a].add(b)
+        elif nodes[a]["kind"] == "sector" and nodes[b]["kind"] == "company":
+            sectors[a].add(b)
+            company_sectors[b].add(a)
+        elif nodes[a]["kind"] == "company" and nodes[b]["kind"] == "factor":
+            factors[a].add(b)
+            company_factors[a].add(b)
+    return sectors, company_sectors, company_factors
 
 
-def layout(nodes,edges):
-    """Country lanes with visibly distinct left SECTORS and right FACTORS columns.
-
-    Asset siblings sit above the equity branches; company nodes share IDs and
-    remain connected to all their parent factors without duplicating entities.
-    """
-    from collections import defaultdict
-    children=defaultdict(list)
-    for a,b in edges:children[a].append(b)
-    pos={'root':(0.,3.)}
-    countries=children['root']
-    detailed=[c for c in countries if children[c]]
-    leaves=[c for c in countries if not children[c]]
-    # Give USA/India large independent lanes, rather than overlapping clusters.
-    lane_width=23.0
-    for i,cid in enumerate(detailed):
-        cx=(i-(len(detailed)-1)/2)*lane_width
-        pos[cid]=(cx,0.)
-        for group in children[cid]:
-            pos[group]=(cx,-2.4)
-            assets=children[group]
-            equity=[a for a in assets if nodes[a]['kind']=='equity']
-            others=[a for a in assets if nodes[a]['kind']!='equity']
-            for j,aid in enumerate(others):
-                pos[aid]=(cx+(j-(len(others)-1)/2)*3.1,-4.7)
-            for aid in equity:
-                pos[aid]=(cx,-7.0)
-                for branch in children[aid]:
-                    sector=nodes[branch]['kind']=='sector_group'
-                    bx=cx+(-5.6 if sector else 5.6)
-                    pos[branch]=(bx,-9.7)
-                    kids=children[branch]
-                    for k,kid in enumerate(kids):
-                        pos[kid]=(bx,-12.2-2.25*k)
-    # Countries without validated asset layers remain clearly visible, as leaves.
-    for j,cid in enumerate(leaves):
-        x=(j-(len(leaves)-1)/2)*4.2
-        pos[cid]=(x, -3.0)
-    # Shared company IDs: one node per company, multiple factor edges.
-    parents=defaultdict(list)
-    for a,b in edges:parents[b].append(a)
-    company_ids=[nid for nid,n in nodes.items() if n['kind']=='company']
-    company_groups=defaultdict(list)
-    for cid in company_ids:
-        ps=[pos[p] for p in parents[cid] if p in pos]
-        market='USA' if any(p.startswith('factor:USA:') for p in parents[cid]) else 'India'
-        company_groups[market].append((cid,ps))
-    for market,items in company_groups.items():
-        for j,(cid,ps) in enumerate(items):
-            x=sum(p[0] for p in ps)/len(ps)+3.6 if ps else 0.
-            pos[cid]=(x,-13.5-2.0*j)
-    for nid in nodes:
-        pos.setdefault(nid,(0.,-1.))
-    return pos
+def _select(nodes, edges, chosen_countries=(), chosen_sectors=(), chosen_companies=(),
+            chosen_factors=(), chosen_rotations=(), match="Any selected", limit=70,
+            show_context=True):
+    """Return visible/highlighted graph with genuinely conjunctive ALL semantics."""
+    sectors, comp_sectors, comp_factors = _relations(nodes, edges)
+    all_companies = {nid for nid, n in nodes.items() if n["kind"] == "company"}
+    criterion_sets = []
+    for values, reverse in ((chosen_sectors, sectors),
+                            (chosen_factors, {f: {c for c, fs in comp_factors.items() if f in fs}
+                                              for f in chosen_factors})):
+        for nid in values:
+            criterion_sets.append(set(reverse.get(nid, set())))
+    for cid in chosen_companies:
+        criterion_sets.append({cid} if cid in all_companies else set())
+    for country in chosen_countries:
+        criterion_sets.append({c for c in all_companies if nodes[c]["country"] == country})
+    for rotation in chosen_rotations:
+        criterion_sets.append({c for c in all_companies if any(
+            nodes[s].get("quadrant") == rotation for s in comp_sectors.get(c, set())) or any(
+            nodes[f].get("quadrant") == rotation for f in comp_factors.get(c, set()))})
+    if criterion_sets:
+        matched = (set.intersection(*criterion_sets) if match == "All selected"
+                   else set.union(*criterion_sets))
+    else:
+        matched = all_companies
+    matched_full = set(matched)
+    if limit is not None:
+        matched = set(sorted(matched, key=lambda c: (nodes[c]["label"].lower(), c))[:limit])
+    visible = {"root"}
+    visible.update(n for n, x in nodes.items() if x["kind"] == "country")
+    # Keep sector signals visible even if no companies qualify (context overview).
+    # Include direct Global factor signals even with no company membership.
+    if show_context:
+        visible.update(n for n, x in nodes.items() if x["kind"] == "sector"
+                       or (x["kind"] == "factor" and x.get("country") == "Global"))
+    visible.update(chosen_sectors)
+    visible.update(chosen_factors)
+    visible.update(matched)
+    for c in matched:
+        visible.update(comp_sectors.get(c, set()))
+        visible.update(comp_factors.get(c, set()))
+    # A factor can exist without any matching company: show it when explicitly selected.
+    visible = {v for v in visible if v in nodes}
+    keep_edges = [(a, b) for a, b in edges if a in visible and b in visible]
+    return visible, keep_edges, matched, len(matched_full)
 
 
-def make_figure(nodes, edges, selected=None):
-    """Midnight-cosmos styling: layered luminous planets, restrained stars, and thin arcs.
-
-    Scores affect diameter only; colors still represent the original quadrants.
-    The star field is decorative and does not encode market observations.
-    """
-    import random
-    from collections import defaultdict
-
-    pos = galaxy_layout(nodes, edges)
+def _plot(nodes, edges, matched, visible, height=680):
+    groups = [[], [], [], [], []]
+    rank = {"root": 0, "country": 1, "sector": 2, "company": 3, "factor": 4}
+    for nid in visible:
+        groups[rank[nodes[nid]["kind"]]].append(nid)
+    for group in groups:
+        group.sort(key=lambda n: (nodes[n].get("country") or "", nodes[n]["label"].lower(), n))
+    positions = {}
+    for col, group in enumerate(groups):
+        for idx, nid in enumerate(group):
+            positions[nid] = (col, 1 - (idx + .5) / max(1, len(group)))
     fig = go.Figure()
-    if not pos:
-        return fig
-
-    xvals = [xy[0] for xy in pos.values()]
-    yvals = [xy[1] for xy in pos.values()]
-    xmin, xmax = min(xvals), max(xvals)
-    ymin, ymax = min(yvals), max(yvals)
-    # Fit the constellation independently in both dimensions. A locked 1:1
-    # data-axis aspect ratio caused the tall network to occupy only a narrow
-    # diagonal strip on wide screens. Plotly markers remain circular in pixels
-    # even when the x/y coordinate scales differ.
-    xpad = max(3.0, (xmax - xmin) * .065)
-    ypad = max(3.0, (ymax - ymin) * .085)
-    xr = (xmin-xpad, xmax+xpad)
-    yr = (ymin-ypad, ymax+ypad)
-
-    # A subtle, seeded star field, visually behind the network and not selectable.
-    rng = random.Random(71)
-    stars_x, stars_y, stars_size = [], [], []
-    for _ in range(160):
-        stars_x.append(rng.uniform(*xr))
-        stars_y.append(rng.uniform(*yr))
-        stars_size.append(rng.choice([.7, .9, 1.1, 1.5]))
-    fig.add_trace(go.Scattergl(x=stars_x, y=stars_y, mode='markers',
-        marker=dict(size=stars_size, color='rgba(171,193,229,0.23)'),
-        hoverinfo='skip', showlegend=False))
-
-    connected = {selected} if selected else set()
-    if selected:
-        for a,b in edges:
-            if selected == a: connected.add(b)
-            if selected == b: connected.add(a)
-
-    segments = defaultdict(lambda: ([], []))
-    for a,b in edges:
-        if a not in pos or b not in pos: continue
-        x1,y1 = pos[a]; x2,y2 = pos[b]
-        dx,dy = x2-x1,y2-y1
-        dist = math.hypot(dx,dy)
-        bend = .095 * dist * (-1 if sum(map(ord,b)) % 2 else 1)
-        mx = (x1+x2)/2 - bend*dy/(dist+1e-9)
-        my = (y1+y2)/2 + bend*dx/(dist+1e-9)
-        group = 'active' if selected in (a,b) else 'dim' if selected else 'normal'
-        xs,ys = segments[group]
-        for j in range(17):
-            t=j/16
-            xs.append((1-t)**2*x1+2*(1-t)*t*mx+t*t*x2)
-            ys.append((1-t)**2*y1+2*(1-t)*t*my+t*t*y2)
-        xs.append(None);ys.append(None)
-    for group in ('dim','normal','active'):
-        xs,ys=segments[group]
-        if not xs:continue
-        color={'dim':'rgba(97,124,165,0.09)','normal':'rgba(114,153,196,0.26)',
-               'active':'rgba(173,218,255,0.80)'}[group]
-        fig.add_trace(go.Scattergl(x=xs,y=ys,mode='lines',
-            line=dict(color=color,width=2.2 if group=='active' else .85),
-            hoverinfo='skip',showlegend=False))
-
-    kinds=('root','country','asset_group','asset','equity','sector_group',
-           'factor_group','sector','factor','company')
-    for kind in kinds:
-        items=[n for n in nodes.values() if n['kind']==kind]
-        if not items:continue
-        xs=[pos[n['id']][0] for n in items]
-        ys=[pos[n['id']][1] for n in items]
-        sizes=[48 if kind=='root' else
-               (13+29*math.sqrt(max(0,min(100,n['score']))/100)
-                if n['score'] is not None else 19) for n in items]
-        colors=[('#a98bff' if kind=='root' else
-                 COLORS.get(n['quadrant'],'#7892b2')) for n in items]
-        opacity=[1 if not selected or n['id'] in connected else .28 for n in items]
-        # Three concentric layers produce a planet-like illuminated disc.
-        for multiplier,alpha in ((1.72,.085),(1.35,.16)):
-            fig.add_trace(go.Scattergl(x=xs,y=ys,mode='markers',
-                marker=dict(size=[v*multiplier for v in sizes],color=colors,
-                            opacity=[alpha*o for o in opacity],line=dict(width=0)),
-                hoverinfo='skip',showlegend=False))
-        fig.add_trace(go.Scattergl(x=xs,y=ys,mode='markers',
-            marker=dict(size=sizes,color=colors,opacity=opacity,
-                        line=dict(color='rgba(225,239,255,0.80)',width=1.15)),
-            customdata=[[n['id']] for n in items],
-            hovertext=[f"{n['label']}<br>Score: {n['score']:.1f}/100" if n['score'] is not None
-                       else f"{n['label']}<br>Structural node · not scored" for n in items],
-            hovertemplate='%{hovertext}<extra></extra>',
-            showlegend=False))
-        # Small, displaced specular highlights make circles read as planets.
-        fig.add_trace(go.Scattergl(x=[x-.10 for x in xs],y=[y+.10 for y in ys],
-            mode='markers',marker=dict(size=[max(2,v*.13) for v in sizes],
-                color='rgba(245,250,255,0.38)',opacity=opacity),
-            hoverinfo='skip',showlegend=False))
-        labels=[n['label'] if len(n['label'])<=21 else n['label'][:19]+'…' for n in items]
-        # Scattergl trace opacity must be a scalar; only marker.opacity supports arrays.
-        # Split labels into highlighted and dimmed traces for per-node fading.
-        for label_opacity in (1.0, 0.28):
-            indices=[i for i,o in enumerate(opacity) if o == label_opacity]
-            if not indices: continue
-            fig.add_trace(go.Scattergl(
-                x=[xs[i] for i in indices], y=[ys[i] for i in indices],
-                mode='text', text=[labels[i] for i in indices],
-                textposition='top center',
-                textfont=dict(size=11 if kind in ('root','country','equity') else 9,
-                              color='#dce8fa'),
-                opacity=label_opacity, hoverinfo='skip', showlegend=False))
-
-    fig.update_layout(template='plotly_dark',paper_bgcolor='#070d1b',
-        plot_bgcolor='#070d1b',height=790,autosize=True,
-        margin=dict(l=12,r=12,t=12,b=12),dragmode='pan',clickmode='event+select',
-        xaxis=dict(visible=False,range=xr,
-                   showgrid=False,zeroline=False,constrain='range'),
-        yaxis=dict(visible=False,range=yr,showgrid=False,zeroline=False),
-        uirevision='capital_cosmos_autofit_v4',hovermode='closest',
-        font=dict(color='#dce8fa'))
+    # Separate highlighted and contextual relationship traces.
+    for direct_global in (False, True):
+        for active in (False, True):
+            xs, ys = [], []
+            for a, b in edges:
+                if (a == "root" and nodes[b].get("country") == "Global") != direct_global:
+                    continue
+                if ((nodes[a]["kind"] == "company" and a in matched or
+                     nodes[b]["kind"] == "company" and b in matched) != active):
+                    continue
+                xs.extend((positions[a][0], positions[b][0], None))
+                ys.extend((positions[a][1], positions[b][1], None))
+            if xs:
+                fig.add_trace(go.Scattergl(x=xs, y=ys, mode="lines", hoverinfo="skip",
+                    line={"color": ("#e1b5ff" if direct_global else "#52e0c4")
+                          if active else ("#9171aa" if direct_global else "#63718a"),
+                          "width": 1.4 if direct_global else 1.65 if active else .9},
+                    opacity=.52 if direct_global else .65 if active else .24, showlegend=False))
+    for index, kind in enumerate(("root", "country", "sector", "company", "factor")):
+        ids = groups[index]
+        if not ids:
+            continue
+        tooltips = []
+        for nid in ids:
+            n = nodes[nid]
+            tip = f"<b>{n['label']}</b><br>Type: {kind.title()}"
+            if n.get("country"):
+                tip += f"<br>Source region: {n['country']}"
+            if n.get("quadrant"):
+                tip += f"<br>Rotation: {n['quadrant']}<br>RS: {n.get('rs','')}<br>Momentum: {n.get('momentum','')}"
+            if n.get("name"):
+                tip += f"<br>{n['name']}"
+            tooltips.append(tip)
+        fig.add_trace(go.Scattergl(x=[positions[n][0] for n in ids],
+            y=[positions[n][1] for n in ids], mode="markers+text",
+            marker={"size": [16 if kind in ("root", "country") else 10 if n in matched else 7 for n in ids],
+                    "color": [("#52e0c4" if n in matched else COLORS.get(nodes[n].get("quadrant"),
+                               {"root": "#75e4cf", "country": "#cdd7e6", "sector": "#81b8f8",
+                                "company": "#9aa8bd", "factor": "#bdaaf2"}[kind])) for n in ids]},
+            text=[nodes[n]["label"] if kind != "company" or n in matched and len(ids) <= 35 else "" for n in ids],
+            textposition="middle right" if kind != "root" else "top center",
+            textfont={"size": 10, "color": "#e5edf7"}, hovertext=tooltips,
+            hovertemplate="%{hovertext}<extra></extra>", showlegend=False))
+    for i, caption in enumerate(("GLOBAL", "COUNTRY", "SECTORS", "COMPANIES", "FACTORS")):
+        fig.add_annotation(x=i, y=1.05, text=f"<b>{caption}</b>", showarrow=False,
+                           font={"size": 13, "color": "#f2f6ff"})
+    fig.update_layout(height=height, paper_bgcolor=BG, plot_bgcolor=BG,
+        margin={"l": 85, "r": 110, "t": 65, "b": 30},
+        xaxis={"visible": False, "range": [-.35, 4.45], "fixedrange": True},
+        yaxis={"visible": False, "range": [-.04, 1.1]},
+        dragmode="pan", hovermode="closest", font={"color": "#e5edf7"})
     return fig
 
+
+def _selector(label, options, selected=(), key=""):
+    return st.multiselect(label, options=options, default=list(selected), key=key)
+
+
 def render_capital_network():
-    """Professional interactive 3D knowledge graph without company holdings."""
-    from market_3d_graph import render
-    render()
+    """Streamlit entrypoint used by app.py's existing capital-network route."""
+    st.title("Global Capital Intelligence Network")
+    st.caption("GLOBAL → COUNTRY → SECTORS → COMPANIES → FACTORS · Plus GLOBAL direct links to its own sectors, companies and factors · Memberships, not measured fund flows")
+    period = st.radio("Lookback", PERIODS, index=1, horizontal=True, key="cap_period")
+    nodes, edges, diagnostics = _graph_data(period)
+    if not edges or not any(n["kind"] == "company" for n in nodes.values()):
+        st.error("No verified company memberships available. Run the Refresh Knowledge Graphs GitHub Action and confirm the *_edges.csv files are deployed.")
+        st.json(diagnostics)
+        return
+    missing = [region for region, stats in diagnostics.items() if not stats["signals_valid"] or not stats["edges_valid"]]
+    if missing:
+        st.warning("Some datasets are missing or incomplete: " + ", ".join(missing) + ". Country relationships will be incomplete.")
+    st.info("USA and India connect through their country nodes. Global-scoped sectors, companies and factors connect directly to GLOBAL and are not assigned to an unsupported country. Purple lines indicate direct Global connections.")
+    tabs = ("Overview", "Sector / Factor", "Individual Companies")
+    mode = st.radio("View", tabs, horizontal=True, key="cap_view")
+    listing = lambda kind: sorted((n for n, x in nodes.items() if x["kind"] == kind),
+                                  key=lambda n: (nodes[n]["label"].casefold(), n))
+    options = lambda ids: {f"{nodes[n]['label']}  [{nodes[n].get('country') or 'Global'} · {n.split(':')[-1]}]": n for n in ids}
+    country_opts = {"United States": "USA", "India": "India", "Global (direct holdings)": "Global"}
+    sector_opts = options(listing("sector"))
+    factor_opts = options(listing("factor"))
+    company_opts = options(listing("company"))
+    with st.expander("Filters · select multiple values", expanded=(mode != "Overview")):
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            chosen_countries = _selector("Countries", list(country_opts), key="cap_countries")
+            chosen_rotations = _selector("Sector / Factor rotation", list(QUADRANTS), key="cap_rotations")
+        with col2:
+            chosen_sectors = _selector("Sectors", list(sector_opts), key="cap_sectors")
+            chosen_factors = _selector("Factors", list(factor_opts), key="cap_factors")
+        with col3:
+            chosen_companies = _selector("Individual companies", list(company_opts), key="cap_companies")
+            match = st.radio("Match filters", ("Any selected", "All selected"), horizontal=True, key="cap_match")
+    filters_active = any((chosen_countries, chosen_rotations, chosen_sectors, chosen_factors, chosen_companies))
+    if mode == "Individual Companies" and not chosen_companies:
+        st.caption("Select one or more companies to focus on their full sector and factor memberships.")
+    show_all = st.checkbox("Show all matching companies (may be slow)", value=False, key="cap_all")
+    limit = None if show_all else (45 if mode == "Overview" else 90)
+    visible, graph_edges, highlighted, full_count = _select(
+        nodes, edges, [country_opts[c] for c in chosen_countries],
+        [sector_opts[s] for s in chosen_sectors],
+        [company_opts[c] for c in chosen_companies],
+        [factor_opts[f] for f in chosen_factors], chosen_rotations,
+        match, limit, show_context=(mode == "Overview" or not filters_active))
+    st.caption(f"{full_count:,} matching companies · {len(highlighted):,} shown · {len(graph_edges):,} visible connections")
+    st.plotly_chart(_plot(nodes, graph_edges, highlighted, visible), use_container_width=True,
+                    config={"displaylogo": False, "scrollZoom": True})
+    if full_count > len(highlighted):
+        st.info("The default view limits company nodes for readability. Select 'Show all matching companies' to display every verified match.")
+    with st.expander("Matching companies and connected memberships"):
+        sector_rel, company_sectors, company_factors = _relations(nodes, edges)
+        detail_rows = [{"Country scope": nodes[c]["country"],
+                        "Company": nodes[c].get("name") or nodes[c]["label"],
+                        "Ticker": nodes[c]["label"],
+                        "Sectors": ", ".join(sorted(nodes[s]["label"] for s in company_sectors[c])),
+                        "Factors": ", ".join(sorted(nodes[f]["label"] for f in company_factors[c]))}
+                       for c in sorted(highlighted)]
+        st.dataframe(pd.DataFrame(detail_rows), use_container_width=True, hide_index=True)
