@@ -1,39 +1,54 @@
-# Fundamental Quality & Consistency Rankings
+# Fundamental Quality & Consistency — Model V3
 
-New independent page: **Company Financials → Quality Rankings**. Existing **Leading & Lagging** market signals are unchanged; Ranking V2 is not included.
+## What this measures
 
-## Purpose
+Business quality ranks **consistent operating performance**, not share-price momentum, ETF membership, or valuation cheapness. USA, Global, and India are separate comparison universes. Companies are ranked only when sufficient verified annual evidence exists. **Single-period India reference ratios are displayed in the separate preliminary snapshot comparison, never promoted to historical rankings.**
 
-A company with high margins and returns in only one reporting year should not outrank a company that has repeatedly demonstrated good performance. The page uses the median of up to five annual reported observations and a separate stability adjustment.
+## Financial history and eligibility
 
-## Metrics, directions, and weights
+- The most recent **three to five consecutive annual fiscal periods** are required. Annual records are kept at their original as-of date; an instant balance-sheet item cannot be confused with a full-year income or cash-flow value.
+- Financial ratios use the **historical median**, not solely the most recent year. Growth uses consecutive annual revenue and calculated EPS, with additional 3–5 year CAGR metrics. EPS is derived from annual net income and stated shares when available; a provider's displayed EPS is not substituted.
+- Each comparable KPI receives an **industry-within-region percentile**. At least **five valid peer observations** are required for a percentile. A company with no appropriate sector peer set remains unranked; the system never pools mismatched industries to manufacture percentile scores.
+- To rank, a company needs ≥3 annual years, ≥5 supported percentile KPIs, **≥70% of the applicable dimension weights**, historical consistency, and financial-strength evidence.
+- Missing observations remain missing. **Missing dimensions are not reweighted upward** to inflate a partially covered company's score. The score is a conservative 0–100 evidence-based score.
+- Accounting ROIC is displayed as unavailable when taxes and invested capital cannot be reliably reconstructed. It is not inferred from ROE.
 
-| Metric | Weight | Preferred direction |
+## Nonfinancial-company business quality
+
+| Domain | Weight | KPIs and evidence |
 |---|---:|---|
-| Return on equity (ROE) | 18% | Higher; require positive book equity |
-| Debt / equity | 13% | Lower; require positive book equity |
-| Current ratio | 10% | Higher |
-| Operating margin | 15% | Higher |
-| Net profit margin | 13% | Higher |
-| Revenue growth | 12% | Higher; based on annual changes |
-| Total liabilities / assets | 11% | Lower |
-| Dividend consistency | 5% | Higher; explicit reported dividends only |
-| Dividend growth | 3% | Higher; at least two valid annual comparisons |
+| Profitability & capital efficiency | 25% | Historical ROE, operating margin, net margin. ROIC is only used if defensible underlying inputs are available; current V3 does not fabricate it. |
+| Financial strength | 20% | Debt/equity, liabilities/assets, current ratio. Negative equity invalidates ordinary ROE/debt-equity comparisons. |
+| Growth quality | 20% | Multi-year revenue CAGR and calculated EPS CAGR, instead of favoring one exceptional revenue-growth year. |
+| Cash flow quality | 20% | FCF margin, cash conversion, positive FCF years, FCF CAGR, and reported dividends / dividend growth where observed. CFO − absolute capex is the FCF proxy. |
+| Historical consistency | 15% | Normalized variability in profitability and revenue growth, plus recurring positive earnings and verified cash-generation history. |
 
-Total 100%. Annual medians reduce sensitivity to unusual years. Per metric, peer percentiles are calculated within the same region and sector only if at least five peers have usable observations. Scores combine 85% of a weighted average of *observed* peer percentiles and 15% stability (ROE, operating, net-margin dispersion). Requires three annual income observations, at least five scored metrics, 60% weighted peer coverage, and two stable profitability signals. If requirements are unmet, show **Unranked / Insufficient coverage** rather than invent a score.
+**Individual domain scoring:** each observed KPI is percentiled against same-region, same-sector peers. A domain must have at least half its specified KPIs, rounded up, to count. Its score is the average of the available eligible percentiles. The final business-quality score is the **sum of domain score × fixed domain weight** for eligible domains, not a renormalized average over missing domains.
 
-Peer sector classifications come from available holdings/financial source metadata, so mixed subindustries may require more targeted comparisons. Standard leverage and liquidity measures are not valid substitutes for bank and insurer capital/solvency measures; treat those sectors' rankings cautiously.
+## Financial institutions
 
-## Data and markets
+Banks and similar financial institutions require a distinct **35% profitability / 25% financial strength / 25% growth / 15% consistency** domain weighting. Traditional industrial current-ratio, cash-flow and debt-to-equity comparisons are excluded in this provisional branch. Insurers, NBFCs, and REITs should be further subdivided as complete sector-specific fields become available. The model does not claim that current provisional financial-sector metrics substitute for asset quality, regulatory capital or underwriting analysis.
 
-- USA: cached, verified SEC XBRL annual Company Facts matched to USA ETF issuer identities.
-- Global: presently SEC-reporting issuers held in Global ETFs **only**. Non-US issuers need an additional licensed annual-financial-statement provider. Global and USA ranks remain independent.
-- India: saved annual financial statements in `data/india_financials/companies/*.json` from your Yahoo refresh workflow. The dashboard doesn't contact NSE/Screener/Yahoo or perform bulk scraping on page open.
-- Historical dividends in SEC filings are *cash paid*, not declared dividends; missing explicit line items are unknown, not zero.
-- No current stock valuation, book value per share, market returns, or ETF weights are included in the quality score.
+## Dividend and cash flow caveats
 
-The app reads current snapshots without downloading all companies. Company score results may be empty if providers have incomplete historical statements, especially current assets, current liabilities, and annual dividends. Make additional coverage visible rather than infer missing figures.
+- Missing dividends do not mean zero dividends. A verified reported zero counts as a zero dividend observation.
+- Companies that retain earnings instead of distributing dividends are **not automatically low quality**; dividend metrics provide only limited supporting evidence.
+- Provider gross cash-flow amounts, sign conventions and annual durations should be verified before drawing conclusions; financing cash flows are not equivalent to capex.
 
-## Validation
+## India reference snapshot: separate, not a historic rank
 
-Run `python -m pytest tests/test_fundamental_rankings_engine.py -q` from the project root.
+The `data/india_financials/reference_snapshot.csv` reference can populate the **India Company Financials** table and its clearly labeled **Snapshot Comparison** for research. It does not contain enough period-specific evidence for the V3 consistency rank, internally reconstructed Graham EPS, or DCF. To activate verified rankings, run the `India Company Financials Refresh` workflow with `limit = 0` and confirm that annual statement JSON files were saved in `data/india_financials/companies/`. That can take multiple runs and is subject to provider availability.
+
+## Valuation must remain separate
+
+**Calculated EPS** = attributable annual common earnings ÷ weighted-average common shares (period-end shares are an explicitly labeled approximation). It is accounting profit per share, not cash flow per share and not a website's published EPS. **Graham Number** = √(22.5 × positive calculated EPS × positive common book value per share). DCF Bear / Base / Bull currently use a *simplified, normalized CFO−capex per-share proxy*; they are not a rigorously reconciled FCFF/WACC or FCFE valuation. Graham, DCF, and current market price do not alter business quality rank. Do not average them into one implied market price.
+
+## Display and diagnostics
+
+Ranking table includes the overall score, domain scores, coverage, number of annual periods, original financial KPIs and company source. Unranked companies can still be viewed separately. Financial reporting dates, peer availability and collection errors should be checked before comparing companies. India snapshot scores are **not comparable** to multi-year quality scores.
+
+## Rebuild and deployment
+
+Refresh the actual US SEC and India provider snapshots first. Deploy code and data together. Do not replace data directories with empty template files. Existing market-based Leading & Lagging rankings are independent and unchanged by Model V3.
+
+**Document version:** 2026-11-20 — Fundamental Quality Model V3.

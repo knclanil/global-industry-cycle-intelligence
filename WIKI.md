@@ -244,3 +244,8 @@ The Relative Rotation Map places each instrument at `(RS, Momentum)` on the late
 The Data Table lets you inspect underlying observations, source labels, missing symbols, duplicate sessions, invalid prices, and CSV exports. Provider data checks can flag problems, but they do **not** independently verify prices against an exchange or guarantee uninterrupted history.
 
 For ETFs, the analysis uses the adjusted closing price supplied by Yahoo Finance. This is a provider-adjusted return proxy, not an independently audited total-return series.
+
+
+## Fundamental Quality & Consistency Rankings
+
+See [Fundamental Quality & Consistency — Calculation and Limitations](FUNDAMENTAL_QUALITY_RANKING_WIKI.md) for the actual score formula, India snapshot distinctions, limitations and suggested improvements.

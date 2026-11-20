@@ -27,7 +27,7 @@ def _load(region, token):
 
 def render_fundamental_rankings():
     st.markdown('## ◈ Fundamental Quality & Consistency')
-    st.caption('Multi-year company fundamentals · Separate from market leadership and stock valuation')
+    st.caption('Five-dimension business quality · Financial-statement history · Valuations shown separately')
     region = st.segmented_control('Market', ['USA', 'Global', 'India'], default='USA', key='fundamental_rank_region') or 'USA'
     if region == 'India':
         _render_india_rankings()
@@ -56,8 +56,8 @@ def render_fundamental_rankings():
         view=df if include else ranked
         if text:
             view=view[view.Ticker.fillna('').str.contains(text, case=False, regex=False) | view.Company.fillna('').str.contains(text, case=False, regex=False)]
-        metrics=['ROE','Debt / equity','Current ratio','Operating margin','Net margin','Revenue growth','Liabilities / assets','Dividend consistency','Dividend growth']
-        cols=['Rank','Ticker','Company','Sector','Fundamental score','Consistency','Years','Metric coverage %'] + metrics + (['Source','Status'] if include else [])
+        metrics=['ROE','Debt / equity','Current ratio','Operating margin','Net margin','Revenue CAGR','EPS CAGR','FCF margin','Cash conversion','Positive FCF years','Liabilities / assets','Dividend consistency']
+        cols=['Rank','Ticker','Company','Sector','Fundamental score','Profitability & capital efficiency score','Financial strength score','Growth quality score','Cash flow quality score','Historical consistency score','Years','Metric coverage %'] + metrics + (['Source','Status'] if include else [])
         config={
             'Fundamental score':st.column_config.ProgressColumn('Quality / 100', min_value=0,max_value=100,format='%.1f'),
             'Consistency':st.column_config.NumberColumn('Consistency / 100',format='%.1f'),
@@ -68,7 +68,7 @@ def render_fundamental_rankings():
         # Financial ratios stored as fractions; format them in percentage points
         # without altering underlying exported raw data.
         shown=view.copy()
-        for metric in ['ROE','Operating margin','Net margin','Revenue growth','Liabilities / assets','Dividend consistency','Dividend growth']:
+        for metric in ['ROE','Operating margin','Net margin','Revenue CAGR','EPS CAGR','FCF margin','Liabilities / assets','Dividend consistency','Positive FCF years']:
             shown[metric]=pd.to_numeric(shown[metric], errors='coerce')*100
         st.dataframe(shown[[c for c in cols if c in shown]],hide_index=True,use_container_width=True,column_config=config,height=520)
         if region == 'India' and 'Financial data type' in df:
@@ -90,8 +90,9 @@ def render_fundamental_rankings():
             st.dataframe(history.sort_values('date',ascending=False),use_container_width=True,hide_index=True)
         st.caption(f"Financial source: {row.get('Source','N/A')} · Latest fiscal period: {row.get('As of','N/A')} · Historical reporting periods: {int(row.get('Years',0))}")
         with st.expander('Ranking methodology'):
-            st.markdown('Company quality is ranked using the median of up to five annual observations. A peer-group percentile is computed within each region and sector only when at least five firms report the metric. Eligible firms need at least three years, five supported metrics, 60% weighted coverage, and stability data. Score = 85% covered-metric percentiles + 15% stability. The score is not valuation or a buy recommendation.')
-            st.dataframe(pd.DataFrame({'Financial metric':list(WEIGHTS),'Weight %':[round(v*100) for v in WEIGHTS.values()]}),hide_index=True,use_container_width=True)
+            st.markdown('**Model V3:** 25% profitability, 20% financial strength, 20% durable growth, 20% cash generation, 15% historical consistency. Annual evidence: at least three fiscal years, five observed KPIs, comparable sector peers (at least five), and ≥70% of dimension weights. Missing dimensions are **not reweighted** upward. Bank/insurer analysis excludes industrial FCF and liquidity measures; their model weights are 35% profitability, 25% financial strength, 25% growth, and 15% consistency. See FUNDAMENTAL_QUALITY_RANKING_WIKI.md. Valuation is independent from quality.')
+            from fundamental_rankings_engine import DIMENSION_WEIGHTS, FINANCIAL_DIMENSION_WEIGHTS
+            st.dataframe(pd.DataFrame({'Dimension': list(DIMENSION_WEIGHTS), 'Nonfinancial %': [int(100 * v) for v in DIMENSION_WEIGHTS.values()], 'Banks/financials %': [int(100 * FINANCIAL_DIMENSION_WEIGHTS.get(k,0)) for k in DIMENSION_WEIGHTS]}), hide_index=True, use_container_width=True)
             st.caption('Dividend consistency is only assessed with three reported annual dividend cash-flow observations. Banks and insurers may need industry-specific models; any metrics lacking comparable peer coverage remain unranked. Global non-US issuers are not assumed to have SEC fundamentals.')
     with s3:
         st.caption('Saved annual statements · Calculated EPS from net income and reported shares · No website EPS')

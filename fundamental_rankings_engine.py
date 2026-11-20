@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parent
 DATA = ROOT / 'data'
 # Percentiles compare firms within a region and an industry cohort when sufficient.
 # More than a single recent observation is mandatory; history matters.
-WEIGHTS = {
+LEGACY_WEIGHTS = {
     'ROE': 0.18,
     'Debt / equity': 0.13,
     'Current ratio': 0.10,
@@ -25,6 +25,24 @@ WEIGHTS = {
     'Dividend consistency': 0.05,
     'Dividend growth': 0.03,
 }
+# Quality Model V3: separate durable business economics from stock valuation.
+# Domain weights sum to 100%; financial institutions have a different domain model.
+DIMENSION_WEIGHTS = {
+    'Profitability & capital efficiency': .25,
+    'Financial strength': .20,
+    'Growth quality': .20,
+    'Cash flow quality': .20,
+    'Historical consistency': .15,
+}
+FINANCIAL_DIMENSION_WEIGHTS = {
+    'Profitability & capital efficiency': .35,
+    'Financial strength': .25,
+    'Growth quality': .25,
+    'Historical consistency': .15,
+}
+# Retain original KPI indicators for the existing comparison table and exports.
+WEIGHTS = LEGACY_WEIGHTS
+
 LOWER_IS_BETTER = {'Debt / equity', 'Liabilities / assets'}
 MIN_YEARS = 3
 MIN_METRICS = 5
@@ -238,6 +256,39 @@ def history_metrics(history):
                                            if len(good) >= 3 else np.nan)
         out[f'{name} samples'] = len(good)
     out['Dividend observations'] = dividend_obs
+    # Five-year cash-generation and shareholder-value diagnostics.
+    fcf_series = []
+    conversion = []
+    diluted_eps_series = []
+    positive_earnings = []
+    positive_fcf = []
+    for row in h:
+        cfo, capex = finite(row.get('operating_cash_flow')), finite(row.get('capital_expenditure'))
+        fcf = cfo - abs(capex) if np.isfinite(cfo) and np.isfinite(capex) else np.nan
+        fcf_series.append(fcf)
+        ni = finite(row.get('net_income'))
+        positive_earnings.append(float(ni > 0) if np.isfinite(ni) else np.nan)
+        positive_fcf.append(float(fcf > 0) if np.isfinite(fcf) else np.nan)
+        conversion.append(_ratio(cfo, ni) if np.isfinite(ni) and ni > 0 else np.nan)
+        shares = finite(row.get('weighted_average_shares'))
+        if not np.isfinite(shares) or shares <= 0:
+            shares = finite(row.get('shares_statement'))
+        diluted_eps_series.append(_ratio(ni, shares))
+    def _median_valid(vals, count=3):
+        valid = np.asarray(vals, dtype=float)
+        valid = valid[np.isfinite(valid)]
+        return float(np.median(valid)) if len(valid) >= count else np.nan
+    out['FCF margin'] = _median_valid([_ratio(fcf, revenue) for fcf, revenue in zip(fcf_series, revenues)])
+    out['Cash conversion'] = _median_valid(conversion)
+    out['Positive FCF years'] = _median_valid(positive_fcf)
+    out['Positive earnings years'] = _median_valid(positive_earnings)
+    out['FCF observations'] = sum(np.isfinite(v) for v in fcf_series)
+    out['Revenue CAGR'] = (revenues[-1] / revenues[0]) ** (1 / (len(h) - 1)) - 1 if (len(h) >= 3 and np.isfinite(revenues[0]) and revenues[0] > 0 and np.isfinite(revenues[-1]) and revenues[-1] > 0) else np.nan
+    good_eps = [v for v in diluted_eps_series if np.isfinite(v)]
+    out['EPS CAGR'] = (good_eps[-1] / good_eps[0]) ** (1 / (len(good_eps)-1)) - 1 if (len(good_eps) >= 3 and good_eps[0] > 0 and good_eps[-1] > 0 and len(good_eps) == len(h)) else np.nan
+    out['FCF CAGR'] = (fcf_series[-1] / fcf_series[0]) ** (1 / (len(h)-1)) - 1 if (len(h) >= 3 and np.isfinite(fcf_series[0]) and fcf_series[0] > 0 and np.isfinite(fcf_series[-1]) and fcf_series[-1] > 0 and all(np.isfinite(v) for v in fcf_series)) else np.nan
+    # ROIC requires taxes and invested capital; not reconstructed from ambiguous tags.
+    out['ROIC'] = np.nan
     return out
 
 
@@ -261,48 +312,134 @@ def _score_group(df, indexes, *, cohort_min=5):
     return frame
 
 
-def rank_fundamentals(df, min_years=MIN_YEARS, min_metrics=MIN_METRICS):
-    """Sector-relative quality ranking with strict coverage and consistency rules.
+def _is_financial_sector(sector):
+    value = str(sector).lower()
+    return any(x in value for x in ('bank', 'insurance', 'financial services', 'nbfc', 'lending', 'credit institution'))
 
-    The ranking uses original financials only, never sector momentum, ETF weight,
-    market price, or proxies for missing financial data.
+
+def _metric_percentile(frame, name, direction, cohort_min=5):
+    x = pd.to_numeric(frame.get(name, pd.Series(np.nan, index=frame.index)), errors='coerce').replace([np.inf, -np.inf], np.nan)
+    if name in ('ROE', 'Debt / equity'):
+        x = x.where(x.ge(0))
+    def compare(group):
+        valid = group.dropna()
+        if len(valid) < cohort_min:
+            return pd.Series(np.nan, index=group.index)
+        low, high = valid.quantile([.05, .95])
+        return group.clip(low, high).rank(pct=True, ascending=(direction == 'higher')) * 100
+    return x.groupby([frame['Region'], frame['Sector']], group_keys=False).transform(compare)
+
+
+def _consistency_from_history(row):
+    h = row.get('History')
+    if not isinstance(h, list) or len(h) < 3:
+        return np.nan
+    good_years = [r for r in h if np.isfinite(finite(r.get('net_income')))]
+    if len(good_years) < 3:
+        return np.nan
+    ratios = []
+    for name in ('ROE', 'Operating margin', 'Net margin', 'Revenue growth'):
+        level, mad = finite(row.get(name)), finite(row.get(f'{name} stability'))
+        if np.isfinite(level) and np.isfinite(mad):
+            ratios.append(max(0, 100 * (1 - min(mad / max(abs(level), .05), 1))))
+    stability = float(np.median(ratios)) if len(ratios) >= 2 else np.nan
+    positives = [float(r['net_income'] > 0) for r in good_years]
+    persistence = 100 * sum(positives)/len(positives)
+    if not np.isfinite(stability):
+        return np.nan
+    # Stable profitability, recurring earnings and observed cash-flow persistence.
+    return .55 * stability + .30 * persistence + .15 * (100 * finite(row.get('Positive FCF years')) if np.isfinite(finite(row.get('Positive FCF years'))) else persistence)
+
+
+def rank_fundamentals(df, min_years=MIN_YEARS, min_metrics=MIN_METRICS):
+    """Multi-year quality model V3. Peers grouped by region and industry.
+
+    Eligibility: 3 consecutive fiscal years, at least 3 supported quality
+    dimensions (including financial strength), >=70% eligible domain weight,
+    and at least 5 observed annual KPIs. Missing data never gets a zero score.
+    Point-in-time reference snapshots are categorically ineligible.
     """
     if df.empty:
         return df.copy()
     out = df.copy()
     out['Sector'] = out.get('Sector', pd.Series('Unclassified', index=out.index)).fillna('Unclassified').astype(str)
     out['Region'] = out.get('Region', pd.Series('Unknown', index=out.index)).fillna('Unknown').astype(str)
-    out = _score_group(out, [out['Region'], out['Sector']])
-    vals = [f'{k} percentile' for k in WEIGHTS]
-    arr = out[vals].to_numpy(dtype=float)
-    weights = np.asarray(list(WEIGHTS.values()), dtype=float)
-    good = np.isfinite(arr)
-    weighted_sum = np.where(good, arr * weights, 0).sum(axis=1)
-    covered_w = (good * weights).sum(axis=1)
-    out['Metrics covered'] = good.sum(axis=1)
-    out['Metric coverage %'] = np.round(covered_w * 100, 1)
-    # Stability: year-to-year ROE, operating/net-margin volatility. Scaled to
-    # each company's long-term metric level; do NOT invent missing history.
-    stability = []
-    for _, r in out.iterrows():
-        avail = []
-        for k in ('ROE', 'Operating margin', 'Net margin'):
-            level, mad = finite(r.get(k)), finite(r.get(f'{k} stability'))
-            if np.isfinite(level) and np.isfinite(mad):
-                scale = max(abs(level), 0.05)
-                avail.append(max(0, 100 * (1 - min(mad / scale, 1))))
-        stability.append(np.mean(avail) if len(avail) >= 2 else np.nan)
-    out['Consistency'] = stability
-    base = np.divide(weighted_sum, covered_w, out=np.full(len(out), np.nan), where=covered_w > 0)
-    # Missing financials are never zero. Insufficient coverage is unranked.
-    eligible = (out['Years'] >= min_years) & (out['Metrics covered'] >= min_metrics) & (out['Metric coverage %'] >= 60) & out['Consistency'].notna()
-    out['Fundamental score'] = np.where(eligible, np.round(0.85 * base + 0.15 * out['Consistency'], 1), np.nan)
-    out['Status'] = np.where(eligible, 'Ranked', 'Insufficient verified financial history / peer coverage')
+    for key in ('ROE','Operating margin','Net margin','Debt / equity','Current ratio',
+                'Liabilities / assets','Revenue CAGR','EPS CAGR','FCF CAGR',
+                'FCF margin','Cash conversion','Positive FCF years','Dividend consistency',
+                'Dividend growth', 'Positive earnings years'):
+        if key not in out:
+            out[key] = np.nan
+    definitions = {
+        'ROE': 'higher', 'Operating margin': 'higher', 'Net margin': 'higher',
+        'Debt / equity': 'lower', 'Current ratio': 'higher',
+        'Liabilities / assets': 'lower', 'Revenue CAGR': 'higher',
+        'EPS CAGR': 'higher', 'FCF CAGR': 'higher', 'FCF margin': 'higher',
+        'Cash conversion': 'higher', 'Positive FCF years': 'higher',
+        'Dividend consistency': 'higher', 'Dividend growth': 'higher',
+        'Positive earnings years': 'higher',
+    }
+    for field, direction in definitions.items():
+        out[field + ' percentile'] = _metric_percentile(out, field, direction)
+    out['Financial institution'] = out['Sector'].map(_is_financial_sector)
+    out['Historical consistency'] = out.apply(_consistency_from_history, axis=1)
+    scores = []
+    coverage = []
+    covered_metrics = []
+    statuses = []
+    for _, row in out.iterrows():
+        financial = bool(row['Financial institution'])
+        dimensions = {
+            'Profitability & capital efficiency': ['ROE','Operating margin','Net margin'],
+            'Financial strength': ['Liabilities / assets','Debt / equity','Current ratio'],
+            'Growth quality': ['Revenue CAGR','EPS CAGR'],
+            'Cash flow quality': ['FCF margin','Cash conversion','Positive FCF years','FCF CAGR','Dividend consistency','Dividend growth'],
+        }
+        if financial:
+            # Industrial working-capital and debt metrics distort banks.
+            dimensions['Financial strength'] = ['Liabilities / assets']
+            dimensions['Profitability & capital efficiency'] = ['ROE','Net margin']
+            dimensions['Growth quality'] = ['Revenue CAGR','EPS CAGR']
+            dimensions.pop('Cash flow quality')
+        weights = FINANCIAL_DIMENSION_WEIGHTS if financial else DIMENSION_WEIGHTS
+        domain_scores = {}
+        observed = set()
+        for domain, metrics in dimensions.items():
+            points = [finite(row.get(m + ' percentile')) for m in metrics]
+            valid = [point for point in points if np.isfinite(point)]
+            for m, p in zip(metrics, points):
+                if np.isfinite(p): observed.add(m)
+            # At least half of each domain's inputs, rounded up.
+            if len(valid) >= (len(metrics)+1)//2:
+                domain_scores[domain] = float(np.mean(valid))
+        historical = finite(row.get('Historical consistency'))
+        if np.isfinite(historical):
+            domain_scores['Historical consistency'] = historical
+        weight_covered = sum(weights[k] for k in domain_scores)
+        covered_dims = len(domain_scores)
+        coverage.append(round(100 * weight_covered, 1))
+        covered_metrics.append(len(observed))
+        valid_history = (finite(row.get('Years')) >= min_years and
+                         isinstance(row.get('History'), list) and len(row.get('History')) >= min_years)
+        eligible = (valid_history and covered_dims >= 3 and
+                    'Financial strength' in domain_scores and
+                    'Historical consistency' in domain_scores and
+                    weight_covered >= .70 and len(observed) >= min_metrics)
+        # Avoid inflating weaker-coverage companies to full scores.
+        score = sum(weights[k] * domain_scores[k] for k in domain_scores) if eligible else np.nan
+        scores.append(round(score, 1) if np.isfinite(score) else np.nan)
+        statuses.append('Ranked' if eligible else 'Insufficient multiyear history / industry-peer coverage')
+        for domain in weights:
+            out.loc[row.name, domain + ' score'] = domain_scores.get(domain, np.nan)
+    out['Metrics covered'] = covered_metrics
+    out['Metric coverage %'] = coverage
+    out['Consistency'] = out['Historical consistency']
+    out['Fundamental score'] = scores
+    out['Status'] = statuses
     out['Rank'] = np.nan
-    for region, idx in out.loc[eligible].groupby('Region').groups.items():
-        ordered = out.loc[idx, 'Fundamental score'].rank(method='min', ascending=False)
-        out.loc[idx, 'Rank'] = ordered
-    return out.sort_values(['Region', 'Fundamental score', 'Ticker'], ascending=[True, False, True], na_position='last')
+    for region, idx in out.loc[out.Status.eq('Ranked')].groupby('Region').groups.items():
+        out.loc[idx, 'Rank'] = out.loc[idx, 'Fundamental score'].rank(method='min', ascending=False)
+    return out.sort_values(['Region','Fundamental score','Ticker'],ascending=[True,False,True],na_position='last')
 
 
 def load_india_reference_snapshot():
