@@ -1,33 +1,43 @@
-# Global Capital Network: one canonical relationship table
+# Global Capital Network — connected model (GitHub Desktop)
 
-Replace **only `capital_network.py`** at the repository root using GitHub Desktop, then **Commit to main → Push origin**. The existing cache builder and GitHub Actions workflows stay in place. This implementation reads existing `country_{period}_rotations.csv` plus `{region}_{period}_signals.csv` and `{region}_{period}_edges.csv` at runtime (for 1m/3m/6m), so no new snapshot or workflow is required.
+## Installation (no command line required for deployment)
 
-## What's different
+1. Extract this ZIP.
+2. In GitHub Desktop choose **Repository → Show in Explorer/Finder**.
+3. Copy **both** `capital_network.py` and `capital_network_model.py` into the **root** of `global-industry-cycle-intelligence`, beside `app.py`. Replace the old `capital_network.py`.
+4. In GitHub Desktop, **Commit to main**, then **Push origin**.
+5. Open Streamlit → Capital Network. The existing `app.py` should call `render_capital_network()`; this package does not overwrite `app.py` or unrelated dashboards.
 
-- Builds **one canonical backend DataFrame** with six main columns: **Global, Rotation, Country, Sector, Company, Factor**, plus unique source IDs, signal quadrants and evidence coverage.
-- Constructs visualization edges **only from adjacent columns**. No long Global → sector or Global → company lines bypassing columns.
-- Displays the Global-direct data in a clearly named **Global scope** rotation and **Global direct** scope (not a country or a calculated market rotation), so all visible paths follow the same six-column structure.
-- Each country links to its actual country ETF rotation when that data is available.
-- Country → Sector → Company links require actual country-scoped membership data. **USA and India currently have those caches**; the other 18 country nodes remain country-only until you collect their verified constituents. The graph will never invent downstream connections.
-- A factor-only membership does not justify inventing a sector link. Those entities may be disconnected from an upstream country chain: this is a real data gap, explained by the canonical table's `coverage` field.
-- Multiple rotation, country, sector, company and factor selections; unrelated countries and company records are removed on filter. Company-centric detail remains available in the backing table. Full data can be downloaded via the Streamlit page's CSV button.
-- Default number of company nodes is limited for readability; **Show all matching companies** expands them.
+## What it fixes
 
-## Expected cached inputs
+- The GLOBAL node always links to each **visible rotation**. Every country links to its own verified country ETF quadrant. There are no isolated Global roots.
+- All verified paths use adjacent columns only: **Global → Rotation → Country → Sector → Company → Factor**.
+- One canonical backend relationship table stores each evidence path with source-scoped IDs and provenance. Distinct company memberships are not merged by ticker alone across regions.
+- Multiple filters (rotation, country, sector, factor, company) with **Any/All** matching; unrelated records vanish when filtering.
+- Global-direct memberships use their own explicit **Global scope → Global direct** branch, not a fabricated country classification.
+- Every verified graph line has consistent stroke thickness. Company tickers are shown for readable small selections.
+- Sector-less factor membership is presented using a clearly labelled **Sector not verified** gap and dashed UNVERIFIED visual connectors. This is a display scaffold, **not evidence of a sector holding**. Factor-only evidence is retained.
+- Country-only nodes are still visible if sector/company data for that country does not exist; this does **not** invent country-to-sector links.
+- The model displays **Global rotation breadth** as a clearly disclosed equal-weighted 0–100 country classification indicator. It is **not** a benchmark return, measured capital flow, or market-cap-weighted global strength score. Missing countries are excluded and coverage is shown.
 
-`data/dashboard_cache/rotation_graphs/`:
+## Important limits
 
-- `country_1m_rotations.csv` (and 3m, 6m), with `ETF`, `Quadrant`
-- `usa_1m_signals.csv`, `usa_1m_edges.csv` (and 3m, 6m)
-- `india_1m_signals.csv`, `india_1m_edges.csv` (and 3m, 6m)
-- `global_1m_signals.csv`, `global_1m_edges.csv` (and 3m, 6m)
+Current source snapshots, based on the available repository implementation, contain verified sector/company constituent membership for **USA, India, and a separate Global-direct scope**. **Other countries have a country ETF rotation but no verified country-scoped sectors/companies** until constituent datasets are supplied. The chart cannot truthfully show Country → Sector for those countries yet.
 
-If cache files are absent, the app exposes diagnostics and does not fabricate relationships.
+Existing GitHub Actions workflows should continue producing:
 
-## Run tests
+- `data/dashboard_cache/rotation_graphs/country_{1m,3m,6m}_rotations.csv`
+- `data/dashboard_cache/rotation_graphs/{global,usa,india}_{1m,3m,6m}_signals.csv`
+- `data/dashboard_cache/rotation_graphs/{global,usa,india}_{1m,3m,6m}_edges.csv`
 
-After `pip install -r requirements.txt` and `pip install pytest`:
+The graph uses those existing caches. If a cache is missing, the page shows partial coverage and diagnostics rather than inventing relationships.
 
-`python -m pytest tests/test_capital_table.py -q`
+## Validation
 
-These tests use minimal temporary CSVs. Deployment in your live Streamlit Cloud environment still needs verification.
+Tests included at `tests/test_capital_network_model.py` (four passing using synthetic evidence). Run locally with:
+
+```bash
+python -m pytest tests/test_capital_network_model.py -q
+```
+
+**Not deployed or end-to-end tested against your live Streamlit environment.** Verify after pushing and monitor deployment logs.
