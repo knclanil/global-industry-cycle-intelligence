@@ -1,18 +1,18 @@
 {
-  "built_utc": "2026-11-20T17:03:24.237383+00:00",
+  "built_utc": "2026-11-20T16:05:06.902839+00:00",
   "schema_version": 1,
   "regions": {
     "Global": {
-      "companies": 1476,
-      "source_indices": 15,
-      "index_memberships": 2570,
+      "companies": 0,
+      "source_indices": 0,
+      "index_memberships": 0,
       "financial_snapshots": 0,
       "source": "Verified iShares ETF holdings"
     },
     "USA": {
-      "companies": 2992,
-      "source_indices": 18,
-      "index_memberships": 4062,
+      "companies": 0,
+      "source_indices": 0,
+      "index_memberships": 0,
       "financial_snapshots": 0,
       "source": "Verified iShares ETF holdings"
     },
