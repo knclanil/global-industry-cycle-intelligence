@@ -305,25 +305,108 @@ def rank_fundamentals(df, min_years=MIN_YEARS, min_metrics=MIN_METRICS):
     return out.sort_values(['Region', 'Fundamental score', 'Ticker'], ascending=[True, False, True], na_position='last')
 
 
+def load_india_reference_snapshot():
+    """Read historical *point-in-time* ratio snapshots from the supplied reference project.
+
+    This is a snapshot of published/provider ratios, NOT annual financial history.
+    It must never be promoted to a five-year quality/consistency ranking or
+    used to calculate the user's statement-derived Graham EPS or DCF.
+    """
+    source = DATA / 'india_financials' / 'reference_snapshot.csv'
+    if not source.is_file():
+        return pd.DataFrame()
+    try:
+        raw = pd.read_csv(source, dtype={'symbol': str})
+    except (OSError, ValueError, pd.errors.ParserError):
+        return pd.DataFrame()
+    if 'symbol' not in raw.columns:
+        return pd.DataFrame()
+    # Optional verified NSE holdings directory: never infer membership.
+    companies = DATA / 'india_holdings' / 'company_directory.csv'
+    sectors = {}
+    names = {}
+    if companies.exists():
+        try:
+            directory = pd.read_csv(companies, dtype=str).fillna('')
+            for _, record in directory.iterrows():
+                key = str(record.get('symbol', '')).strip().upper()
+                if key:
+                    sectors[key] = record.get('industry', '') or 'Unclassified'
+                    names[key] = record.get('company_name', '') or key
+        except (OSError, ValueError, pd.errors.ParserError):
+            pass
+    mapping = {
+        'ROE': 'roe_pct', 'Debt / equity': 'debt_equity_ratio',
+        'Current ratio': 'current_ratio',
+        'Operating margin': 'operating_margin_pct', 'Net margin': 'profit_margin_pct',
+        'Revenue growth': 'revenue_growth_pct',
+        'Liabilities / assets': 'liabilities_assets_pct',
+    }
+    rows = []
+    for _, record in raw.iterrows():
+        ticker = str(record.get('symbol', '')).strip().upper().removesuffix('.NS')
+        if not ticker or ticker.lower() == 'nan':
+            continue
+        metrics = {key: np.nan for key in WEIGHTS}
+        for metric, column in mapping.items():
+            val = finite(record.get(column))
+            if np.isfinite(val):
+                metrics[metric] = val / 100 if metric in (
+                    'ROE', 'Operating margin', 'Net margin',
+                    'Revenue growth', 'Liabilities / assets') else val
+        # A provider's single snapshot does not provide 3 distinct annual observations.
+        rows.append({
+            'Region': 'India', 'Ticker': ticker, 'Company': names.get(ticker, ticker),
+            'Sector': sectors.get(ticker, 'Unclassified'),
+            'Source': 'Reference NSE/Yahoo snapshot (single period)',
+            'As of': str(record.get('last_success_utc', '') or ''),
+            'Years': 0, 'History': [], 'Dividend observations': 0,
+            'Financial data type': 'Single-period ratio snapshot',
+            'Revenue INR': finite(record.get('revenue_inr')),
+            'Market cap INR': finite(record.get('market_cap_inr')),
+            'P/E': finite(record.get('pe_ttm')),
+            'P/B': finite(record.get('pb')),
+            'Dividend yield %': finite(record.get('dividend_yield_pct')),
+            **metrics,
+        })
+    return pd.DataFrame(rows).drop_duplicates('Ticker', keep='last')
+
+
 def load_india_profiles():
-    """Company-by-company saved annual Yahoo financials; no bulk live requests."""
+    """Merge verified multi-year Yahoo financials with reference snapshot coverage.
+
+    Multi-year statement histories win over point-in-time data, and a snapshot
+    is never used to fill missing years or artificially qualify a rank.
+    """
     folder = DATA / 'india_financials' / 'companies'
     rows = []
-    for p in folder.glob('*.json'):
+    for p in sorted(folder.glob('*.json')):
         try:
             payload = json.loads(p.read_text(encoding='utf-8'))
             h = build_history_india(payload)
             vals = history_metrics(h)
             from fundamental_valuation_engine import evaluate
             valuation = evaluate(h, sector=payload.get('industry') or payload.get('sector') or '')
-            rows.append({'Region': 'India', 'Ticker': payload.get('symbol', ''),
-                         'Company': payload.get('company_name', ''),
+            ticker = str(payload.get('symbol', '')).strip().upper().removesuffix('.NS')
+            if not ticker:
+                continue
+            rows.append({'Region': 'India', 'Ticker': ticker,
+                         'Company': payload.get('company_name') or ticker,
                          'Sector': payload.get('industry') or payload.get('sector') or 'Unclassified',
-                         'Source': 'Yahoo snapshot', **vals, **valuation})
+                         'Source': 'Yahoo annual statement snapshot',
+                         'Financial data type': 'Annual financial statements',
+                         **vals, **valuation})
         except (OSError, ValueError, KeyError, TypeError):
             continue
-    return pd.DataFrame(rows)
-
+    annual = pd.DataFrame(rows)
+    reference = load_india_reference_snapshot()
+    if annual.empty:
+        return reference
+    if reference.empty:
+        return annual
+    existing = set(annual.Ticker)
+    return pd.concat([annual, reference[~reference.Ticker.isin(existing)]],
+                     ignore_index=True, sort=False)
 
 def load_sec_profiles(region):
     """Only match SEC cached filings to independently verified ETF companies."""

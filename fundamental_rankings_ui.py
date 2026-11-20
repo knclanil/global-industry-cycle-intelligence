@@ -22,11 +22,14 @@ def render_fundamental_rankings():
     with st.spinner('Reading saved company financial statements…'):
         df = _load(region, _snapshot_token())
     if df.empty:
-        st.warning('No matching saved financial statements available for this market. Run the existing SEC or India financial refresh; no values are estimated.')
+        st.warning('No financial records found for this market. For India, check the attached reference snapshot or run the annual-statements refresh.')
         if region == 'Global':
             st.info('Global currently covers only verified SEC-reporting companies in Global ETF holdings. Other international issuers require a licensed global financial source.')
         return
     ranked = df[df.Status.eq('Ranked')]
+    india_snapshot_only = region == 'India' and ranked.empty and (df['Years'].fillna(0) < 3).all()
+    if india_snapshot_only:
+        st.info('India: available provider ratio snapshots are displayed below, but no companies qualify for a multi-year quality rank yet. Three consecutive years of actual annual statements are required. Graham and DCF remain N/A without financial inputs.')
     a,b,c,d = st.columns(4)
     a.metric('Financial snapshots', len(df))
     b.metric('Ranked companies', len(ranked))
@@ -36,12 +39,12 @@ def render_fundamental_rankings():
     with s1:
         f1,f2=st.columns([2,1])
         text=f1.text_input('Search company', placeholder='Ticker or name', key=f'fund_search_{region}')
-        include=f2.toggle('Show incomplete coverage', value=False)
+        include=f2.toggle('Show incomplete coverage', value=india_snapshot_only)
         view=df if include else ranked
         if text:
             view=view[view.Ticker.fillna('').str.contains(text, case=False, regex=False) | view.Company.fillna('').str.contains(text, case=False, regex=False)]
         metrics=['ROE','Debt / equity','Current ratio','Operating margin','Net margin','Revenue growth','Liabilities / assets','Dividend consistency','Dividend growth']
-        cols=['Rank','Ticker','Company','Sector','Fundamental score','Consistency','Years','Metric coverage %'] + metrics + (['Status'] if include else [])
+        cols=['Rank','Ticker','Company','Sector','Fundamental score','Consistency','Years','Metric coverage %'] + metrics + (['Source','Status'] if include else [])
         config={
             'Fundamental score':st.column_config.ProgressColumn('Quality / 100', min_value=0,max_value=100,format='%.1f'),
             'Consistency':st.column_config.NumberColumn('Consistency / 100',format='%.1f'),
@@ -55,6 +58,10 @@ def render_fundamental_rankings():
         for metric in ['ROE','Operating margin','Net margin','Revenue growth','Liabilities / assets','Dividend consistency','Dividend growth']:
             shown[metric]=pd.to_numeric(shown[metric], errors='coerce')*100
         st.dataframe(shown[[c for c in cols if c in shown]],hide_index=True,use_container_width=True,column_config=config,height=520)
+        if region == 'India' and 'Financial data type' in df:
+            with st.expander('India financial coverage & source limitations'):
+                st.dataframe(df.groupby(['Source', 'Status'], dropna=False).size().rename('Companies').reset_index(), hide_index=True, use_container_width=True)
+                st.caption('Single-period reference ratios may originate from NSE/Yahoo and have not been independently reconstructed from annual statements. They are displayed for research only, and cannot establish multi-year consistency or support statement-derived EPS, Graham or DCF values.')
         st.download_button('Export all company fundamental data',df.drop(columns=['History'],errors='ignore').to_csv(index=False),
                            file_name=f'{region.lower()}_fundamental_quality.csv',mime='text/csv')
     with s2:
