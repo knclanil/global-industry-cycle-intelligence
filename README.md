@@ -1,26 +1,28 @@
-# Global Capital Network — direct Global relationships
+# Hide unrelated nodes when filters are selected
 
-Replace only `capital_network.py` in the root of your `global-industry-cycle-intelligence` repository.
+Replacement files for your existing GitHub Desktop repository:
 
-## Layout
+- `capital_network.py` — Capital Network, Global → Country → Sector → Company → Factor.
+- `regional_rotation_graph.py` — Global, USA, India Knowledge Graphs, Rotation → Sector → Company → Factor.
 
-The same five-column plot now contains both paths:
-
-- Country path: **GLOBAL → COUNTRY → SECTOR → COMPANY → FACTOR** (USA / India, when verified)
-- Direct global source path: **GLOBAL → global SECTOR → global COMPANY → global FACTOR**, plus distinct direct Global-to-sector, Global-to-company, and Global-to-factor evidence links.
-
-The global data is NOT assigned to any country without evidence. Direct Global links are purple. The three views (Overview, Sector / Factor, Individual Companies), multi-select filters, and company highlighting remain.
-
-## Install with GitHub Desktop
+## Install (GitHub Desktop)
 
 1. Download and extract the ZIP.
-2. In GitHub Desktop choose your repository and **Repository → Show in Explorer/Finder**.
-3. Copy the ZIP's `capital_network.py` into the repository's main folder; replace the existing copy.
-4. In GitHub Desktop: **Commit to main** then **Push origin**.
-5. After Streamlit redeploys, open the Capital Network and select the lookback period.
+2. In GitHub Desktop choose **Repository → Show in Explorer/Finder**.
+3. Copy the two `.py` files into the **root** of your repository, alongside `app.py`, replacing the existing files.
+4. In GitHub Desktop, **Commit to main** and **Push origin**.
+5. Let Streamlit redeploy. No cache rebuild is needed if your current `*_signals.csv` and `*_edges.csv` already work.
 
-This changes graph rendering and does not regenerate caches. Existing `data/dashboard_cache/rotation_graphs/{global,usa,india}_{1m,3m,6m}_{signals,edges}.csv` must exist for the full network. If datasets are missing, run the Refresh Knowledge Graphs GitHub Action.
+## How filtering behaves
 
-Tests: `pytest -q test_capital_network.py` (requires pytest, pandas, plotly; Streamlit needed only for UI runtime). Four targeted tests passed in the build environment. No Streamlit Cloud deployment was performed.
+- With no filters, keep the overview and the 20 tracked country nodes in the Capital Network.
+- Once you select country, rotation, sector, factor, or company, **only matching companies, their verified sector/factor connections, the relevant country node(s) and Global root** remain. Unrelated branches disappear rather than fading.
+- Multiple values in the Country, Rotation, and Company filters select **any of those values**. Sector / Factor `Any selected` or `All selected` controls whether companies must match at least one or every chosen source. **Different filter categories are combined**: a company must meet every selected category.
+- If a selected sector, factor, or country has no verified company connections, keep the selected node as an explanation; do not invent companies. Other unrelated nodes disappear.
+- Knowledge Graph focused views hide rotation nodes with no visible source connections. Overview remains unfiltered.
+- Global continues to have its own direct global-sector, global-company and global-factor connections in Capital Network.
+- The underlying data and CSV snapshots are not modified.
 
-**Important:** These edges represent verified constituent memberships and signal classifications, not measured cross-border capital flows.
+## Verification
+
+Run `python test_strict_filter.py` from the extracted directory (requires pandas and plotly; Streamlit is stubbed when absent). These are targeted logic tests, not a live deployment test.

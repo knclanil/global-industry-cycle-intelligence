@@ -22,6 +22,19 @@ import streamlit as st
 CACHE_DIR = Path(__file__).resolve().parent / "data" / "dashboard_cache" / "rotation_graphs"
 PERIODS = ("1m", "3m", "6m")
 REGIONS = ("USA", "India", "Global")
+# All markets tracked in country_market_data.py. Country nodes represent
+# market coverage, NOT proof of country-specific sector/company memberships.
+COUNTRY_MARKETS = {
+    "SPY": "United States", "INDA": "India", "EWJ": "Japan",
+    "MCHI": "China", "EWU": "United Kingdom", "EWG": "Germany",
+    "EWQ": "France", "EWL": "Switzerland", "EWC": "Canada",
+    "EWA": "Australia", "EWY": "South Korea", "EWT": "Taiwan",
+    "EWZ": "Brazil", "EWW": "Mexico", "EZA": "South Africa",
+    "EIDO": "Indonesia", "THD": "Thailand", "EWM": "Malaysia",
+    "KSA": "Saudi Arabia", "UAE": "United Arab Emirates",
+}
+COUNTRY_KEYS = {"United States": "USA", "India": "India"}
+
 QUADRANTS = ("Leading", "Improving", "Weakening", "Lagging")
 COLORS = {"Leading": "#36d6a2", "Improving": "#6ba9ff",
           "Weakening": "#ffca70", "Lagging": "#fa8297", "Unavailable": "#8f9db3"}
@@ -55,6 +68,16 @@ def _graph_data(period: str, directory: Path = CACHE_DIR):
     nodes = {"root": {"label": "GLOBAL", "kind": "root", "country": None}}
     edges = set()
     diagnostics = {}
+    # Preserve every supported country as a visible node, even when that
+    # market has no country-level constituent dataset yet.
+    for ticker, country_name in COUNTRY_MARKETS.items():
+        scope = COUNTRY_KEYS.get(country_name, ticker)
+        cid = f"country:{scope}"
+        nodes[cid] = {"label": country_name, "kind": "country",
+                      "country": scope, "ticker": ticker,
+                      "coverage": "Constituents available" if country_name in COUNTRY_KEYS else
+                                  "Country market tracked; constituent data unavailable"}
+        edges.add(("root", cid))
 
     def put(nid, **properties):
         nodes.setdefault(nid, properties)
@@ -144,48 +167,81 @@ def _relations(nodes: dict, edges: list[tuple[str, str]]):
 def _select(nodes, edges, chosen_countries=(), chosen_sectors=(), chosen_companies=(),
             chosen_factors=(), chosen_rotations=(), match="Any selected", limit=70,
             show_context=True):
-    """Return visible/highlighted graph with genuinely conjunctive ALL semantics."""
+    """Filter to the connected subgraph; never leave unrelated countries/sources.
+
+    Within countries, companies, and rotations, multi-select values are ORed.
+    Selected sectors/factors use the requested Any/All logic. Distinct filter
+    categories must all match (AND). Company membership cross-links are kept.
+    """
     sectors, comp_sectors, comp_factors = _relations(nodes, edges)
     all_companies = {nid for nid, n in nodes.items() if n["kind"] == "company"}
-    criterion_sets = []
-    for values, reverse in ((chosen_sectors, sectors),
-                            (chosen_factors, {f: {c for c, fs in comp_factors.items() if f in fs}
-                                              for f in chosen_factors})):
-        for nid in values:
-            criterion_sets.append(set(reverse.get(nid, set())))
-    for cid in chosen_companies:
-        criterion_sets.append({cid} if cid in all_companies else set())
-    for country in chosen_countries:
-        criterion_sets.append({c for c in all_companies if nodes[c]["country"] == country})
-    for rotation in chosen_rotations:
-        criterion_sets.append({c for c in all_companies if any(
-            nodes[s].get("quadrant") == rotation for s in comp_sectors.get(c, set())) or any(
-            nodes[f].get("quadrant") == rotation for f in comp_factors.get(c, set()))})
-    if criterion_sets:
-        matched = (set.intersection(*criterion_sets) if match == "All selected"
-                   else set.union(*criterion_sets))
-    else:
+    active = any((chosen_countries, chosen_sectors, chosen_companies,
+                  chosen_factors, chosen_rotations))
+    if not active:
         matched = all_companies
+    else:
+        categories = []
+        if chosen_countries:
+            categories.append({c for c in all_companies
+                               if nodes[c].get("country") in chosen_countries})
+        if chosen_companies:
+            categories.append(set(chosen_companies) & all_companies)
+        if chosen_rotations:
+            categories.append({c for c in all_companies if any(
+                nodes[s].get("quadrant") in chosen_rotations
+                for s in comp_sectors.get(c, set()) | comp_factors.get(c, set()))})
+        selected_source_sets = [set(sectors.get(s, ())) for s in chosen_sectors]
+        selected_source_sets.extend(
+            {c for c, fs in comp_factors.items() if f in fs}
+            for f in chosen_factors)
+        if selected_source_sets:
+            source_matches = (set.intersection(*selected_source_sets)
+                              if match == "All selected" else
+                              set.union(*selected_source_sets))
+            categories.append(source_matches)
+        matched = set.intersection(*categories) if categories else set()
     matched_full = set(matched)
     if limit is not None:
-        matched = set(sorted(matched, key=lambda c: (nodes[c]["label"].lower(), c))[:limit])
+        matched = set(sorted(matched, key=lambda c: (
+            nodes[c]["label"].casefold(), c))[:limit])
+
     visible = {"root"}
-    visible.update(n for n, x in nodes.items() if x["kind"] == "country")
-    # Keep sector signals visible even if no companies qualify (context overview).
-    # Include direct Global factor signals even with no company membership.
-    if show_context:
-        visible.update(n for n, x in nodes.items() if x["kind"] == "sector"
-                       or (x["kind"] == "factor" and x.get("country") == "Global"))
-    visible.update(chosen_sectors)
-    visible.update(chosen_factors)
+    if not active and show_context:
+        visible.update(nid for nid, n in nodes.items()
+                       if n["kind"] in ("country", "sector", "factor"))
+    else:
+        # Explicit source choices remain visible even if there are no companies.
+        visible.update(s for s in chosen_sectors if s in nodes)
+        visible.update(f for f in chosen_factors if f in nodes)
+        # Country-only and rotation-only filters still show their source signals
+        # even when constituents are not yet available.
+        if chosen_countries:
+            visible.update(nid for nid, n in nodes.items()
+                           if n["kind"] == "country" and
+                           n.get("country") in chosen_countries)
+        if chosen_rotations and not (chosen_sectors or chosen_factors or chosen_companies):
+            visible.update(nid for nid, n in nodes.items()
+                           if n["kind"] in ("sector", "factor") and
+                           n.get("quadrant") in chosen_rotations and
+                           (not chosen_countries or n.get("country") in chosen_countries))
+        if chosen_countries and not (chosen_rotations or chosen_sectors or chosen_factors
+                                     or chosen_companies):
+            visible.update(nid for nid, n in nodes.items()
+                           if n["kind"] in ("sector", "factor") and
+                           n.get("country") in chosen_countries)
     visible.update(matched)
     for c in matched:
         visible.update(comp_sectors.get(c, set()))
         visible.update(comp_factors.get(c, set()))
-    # A factor can exist without any matching company: show it when explicitly selected.
-    visible = {v for v in visible if v in nodes}
-    keep_edges = [(a, b) for a, b in edges if a in visible and b in visible]
-    return visible, keep_edges, matched, len(matched_full)
+    # Only show countries that are connected to something visible, or selected.
+    scopes = {nodes[n].get("country") for n in visible if n in nodes}
+    visible.update(nid for nid, n in nodes.items()
+                   if n["kind"] == "country" and n.get("country") in scopes)
+    if "Global" in scopes:
+        visible.add("root")
+    visible &= set(nodes)
+    kept_edges = [(a, b) for a, b in edges if a in visible and b in visible]
+    return visible, kept_edges, matched, len(matched_full)
 
 
 def _plot(nodes, edges, matched, visible, height=680):
@@ -264,20 +320,25 @@ def render_capital_network():
     st.caption("GLOBAL → COUNTRY → SECTORS → COMPANIES → FACTORS · Plus GLOBAL direct links to its own sectors, companies and factors · Memberships, not measured fund flows")
     period = st.radio("Lookback", PERIODS, index=1, horizontal=True, key="cap_period")
     nodes, edges, diagnostics = _graph_data(period)
-    if not edges or not any(n["kind"] == "company" for n in nodes.values()):
-        st.error("No verified company memberships available. Run the Refresh Knowledge Graphs GitHub Action and confirm the *_edges.csv files are deployed.")
+    if not any(n["kind"] == "company" for n in nodes.values()):
+        st.warning("No verified company memberships available. Country nodes remain visible. "
+                   "Run Refresh Knowledge Graphs and confirm the *_edges.csv files are deployed.")
         st.json(diagnostics)
-        return
     missing = [region for region, stats in diagnostics.items() if not stats["signals_valid"] or not stats["edges_valid"]]
     if missing:
         st.warning("Some datasets are missing or incomplete: " + ", ".join(missing) + ". Country relationships will be incomplete.")
-    st.info("USA and India connect through their country nodes. Global-scoped sectors, companies and factors connect directly to GLOBAL and are not assigned to an unsupported country. Purple lines indicate direct Global connections.")
+    st.info("All 20 countries from the project's country-ETF universe appear. "
+            "Only USA and India currently have verified country-scoped sector/company/factor "
+            "membership snapshots. Other country nodes show market coverage but no invented "
+            "company links. Global-scoped relationships connect directly to GLOBAL (purple).")
     tabs = ("Overview", "Sector / Factor", "Individual Companies")
     mode = st.radio("View", tabs, horizontal=True, key="cap_view")
     listing = lambda kind: sorted((n for n, x in nodes.items() if x["kind"] == kind),
                                   key=lambda n: (nodes[n]["label"].casefold(), n))
     options = lambda ids: {f"{nodes[n]['label']}  [{nodes[n].get('country') or 'Global'} · {n.split(':')[-1]}]": n for n in ids}
-    country_opts = {"United States": "USA", "India": "India", "Global (direct holdings)": "Global"}
+    country_opts = {COUNTRY_MARKETS[t]: COUNTRY_KEYS.get(COUNTRY_MARKETS[t], t)
+                    for t in COUNTRY_MARKETS}
+    country_opts["Global (direct holdings)"] = "Global"
     sector_opts = options(listing("sector"))
     factor_opts = options(listing("factor"))
     company_opts = options(listing("company"))
@@ -303,7 +364,13 @@ def render_capital_network():
         [company_opts[c] for c in chosen_companies],
         [factor_opts[f] for f in chosen_factors], chosen_rotations,
         match, limit, show_context=(mode == "Overview" or not filters_active))
-    st.caption(f"{full_count:,} matching companies · {len(highlighted):,} shown · {len(graph_edges):,} visible connections")
+    st.caption(f"{sum(nodes[n]["kind"] == "country" for n in visible)} visible countries (20 tracked) · {full_count:,} matching companies · "
+               f"{len(highlighted):,} shown · {len(graph_edges):,} visible connections")
+    unsupported = [c for c in chosen_countries if country_opts[c] not in ("USA", "India", "Global")]
+    if unsupported:
+        st.warning("Country-specific company data is not yet available for: " + ", ".join(unsupported)
+                   + ". These countries remain visible but cannot be connected to companies "
+                     "until their verified constituents are added to the builder.")
     st.plotly_chart(_plot(nodes, graph_edges, highlighted, visible), use_container_width=True,
                     config={"displaylogo": False, "scrollZoom": True})
     if full_count > len(highlighted):
