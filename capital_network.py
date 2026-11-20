@@ -296,11 +296,23 @@ def _plot(nodes, edges, matched, visible, height=680):
         for idx, nid in enumerate(group):
             positions[nid] = (col, 1 - (idx + .5) / max(1, len(group)))
     fig = go.Figure()
-    # Separate highlighted and contextual relationship traces.
+    # Render country-classification relationships separately and LAST so that
+    # they remain visible even when thousands of other membership edges cross.
+    regular = []
+    rotation_country = defaultdict(list)
+    for a, b in edges:
+        if (nodes[a]["kind"] == "rotation" and
+                nodes[b]["kind"] == "country"):
+            rotation_country[nodes[a].get("quadrant") or "Unclassified"].append((a, b))
+        else:
+            regular.append((a, b))
+
+    # Ordinary memberships: deliberately low contrast so that the country
+    # classification links are not drowned by the global direct branch.
     for direct_global in (False, True):
         for active in (False, True):
             xs, ys = [], []
-            for a, b in edges:
+            for a, b in regular:
                 if (a == "root" and nodes[b].get("country") == "Global") != direct_global:
                     continue
                 if ((nodes[a]["kind"] == "company" and a in matched or
@@ -309,11 +321,29 @@ def _plot(nodes, edges, matched, visible, height=680):
                 xs.extend((positions[a][0], positions[b][0], None))
                 ys.extend((positions[a][1], positions[b][1], None))
             if xs:
-                fig.add_trace(go.Scattergl(x=xs, y=ys, mode="lines", hoverinfo="skip",
-                    line={"color": ("#e1b5ff" if direct_global else "#52e0c4")
-                          if active else ("#9171aa" if direct_global else "#63718a"),
-                          "width": 1.4 if direct_global else 1.65 if active else .9},
-                    opacity=.52 if direct_global else .65 if active else .24, showlegend=False))
+                fig.add_trace(go.Scattergl(
+                    x=xs, y=ys, mode="lines", hoverinfo="skip",
+                    line={"color": "#9b79bb" if direct_global else
+                           "#39bba5" if active else "#536780",
+                          "width": 1.15 if active else .65},
+                    opacity=.22 if direct_global else .42 if active else .12,
+                    showlegend=False, name="Other verified relationships"))
+
+    # Explicit, easily visible links: ROTATION -> COUNTRY.
+    # One trace for each classification ensures the correct colour is retained.
+    for q in (*QUADRANTS, "Unclassified"):
+        pairs = rotation_country.get(q, [])
+        if not pairs:
+            continue
+        xs, ys = [], []
+        for a, b in pairs:
+            xs.extend((positions[a][0], positions[b][0], None))
+            ys.extend((positions[a][1], positions[b][1], None))
+        fig.add_trace(go.Scattergl(
+            x=xs, y=ys, mode="lines", hoverinfo="skip",
+            line={"color": COLORS.get(q, "#a9b6c9"), "width": 3.8},
+            opacity=1.0, showlegend=False,
+            name=f"{q} → countries"))
     for index, kind in enumerate(("root", "rotation", "country", "sector", "company", "factor")):
         ids = groups[index]
         if not ids:
