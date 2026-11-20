@@ -1,13 +1,23 @@
 """Compact dark-theme quality and consistency research rankings."""
 import pandas as pd
 import streamlit as st
-from fundamental_rankings_engine import get_rankings, WEIGHTS, DATA
+from fundamental_rankings_engine import get_rankings, WEIGHTS, DATA, snapshot_comparison, load_india_reference_snapshot
 
 
 def _snapshot_token():
-    locations = [DATA / 'india_financials' / 'companies', DATA / 'fundamentals', DATA / 'holdings']
-    # A bounded directory scan; avoid parsing source facts during widget redraws.
-    return tuple((str(p), p.stat().st_mtime_ns) for d in locations if d.exists() for p in d.glob('*.json')) + tuple((str(p), p.stat().st_mtime_ns) for p in (DATA / 'holdings').glob('*.parquet')) if (DATA / 'holdings').exists() else ()
+    """Invalidate the UI cache whenever saved financial sources change."""
+    locations = [DATA / 'india_financials', DATA / 'fundamentals', DATA / 'holdings']
+    entries = []
+    for folder in locations:
+        if folder.exists():
+            for extension in ('*.json', '*.csv', '*.parquet'):
+                for p in folder.glob(extension):
+                    entries.append((str(p), p.stat().st_mtime_ns, p.stat().st_size))
+            # India financial company JSONs live one directory deeper.
+            if (folder / 'companies').exists():
+                for p in (folder / 'companies').glob('*.json'):
+                    entries.append((str(p), p.stat().st_mtime_ns, p.stat().st_size))
+    return tuple(sorted(entries))
 
 
 @st.cache_data(show_spinner=False, ttl=900)
@@ -19,6 +29,9 @@ def render_fundamental_rankings():
     st.markdown('## ◈ Fundamental Quality & Consistency')
     st.caption('Multi-year company fundamentals · Separate from market leadership and stock valuation')
     region = st.segmented_control('Market', ['USA', 'Global', 'India'], default='USA', key='fundamental_rank_region') or 'USA'
+    if region == 'India':
+        _render_india_rankings()
+        return
     with st.spinner('Reading saved company financial statements…'):
         df = _load(region, _snapshot_token())
     if df.empty:
@@ -113,3 +126,73 @@ def render_fundamental_rankings():
 
 Fiscal period, share basis, and sources are displayed. Missing financial inputs are N/A. The existing fundamental quality ranking is **not changed** by valuations.
             ''')
+
+
+
+def _render_india_rankings():
+    """Always show imported Indian ratios; keep historical rankings distinct."""
+    from pathlib import Path
+    token = _snapshot_token()
+    with st.spinner('Loading saved India financial data…'):
+        df = _load('India', token)
+    if df.empty:
+        st.error('India financial records are not available in this deployment.')
+        st.caption('Expected: data/india_financials/reference_snapshot.csv (or annual company JSON files).')
+        candidate = DATA / 'india_financials' / 'reference_snapshot.csv'
+        st.code(f'Snapshot exists: {candidate.is_file()} | location: {candidate} | app root: {Path.cwd()}')
+        st.info('The previous package includes a 514-company ratio snapshot, but it must be committed under the same repository root as app.py. This page does not download or create financial statements.')
+        return
+
+    snap = snapshot_comparison(df)
+    ranked = df[df['Status'].eq('Ranked')]
+    one_date = snap[snap.get('Financial data type', pd.Series(index=snap.index, dtype=str)).eq('Single-period ratio snapshot')]
+    m1, m2, m3, m4 = st.columns(4)
+    m1.metric('Companies with data', f'{len(df):,}')
+    m2.metric('Multi-year ranked', f'{len(ranked):,}')
+    m3.metric('Snapshot comparisons', f'{snap["Snapshot comparison / 100"].notna().sum():,}')
+    m4.metric('Annual statement histories', f'{(pd.to_numeric(df["Years"], errors="coerce") >= 3).sum():,}')
+
+    tab1, tab2, tab3 = st.tabs(['Company financials', 'Verified consistency ranks', 'Intrinsic & Graham'])
+    with tab1:
+        st.info('Single-date ratio comparison, **not** a multi-year consistency rank. Historical rankings require three consecutive years of actual financial statements.')
+        term = st.text_input('Search NSE company', key='india_fundamental_find', placeholder='Symbol or company')
+        view = snap
+        if term:
+            view = view[view['Ticker'].fillna('').str.contains(term, case=False, regex=False)
+                        | view['Company'].fillna('').str.contains(term, case=False, regex=False)]
+        cols = ['Snapshot position','Ticker','Company','Snapshot comparison / 100',
+                'Snapshot metric coverage %','ROE','Debt / equity','Current ratio',
+                'Operating margin','Net margin','Revenue growth','Liabilities / assets',
+                'P/E','P/B','Source','As of']
+        display = view.copy()
+        for metric in ['ROE', 'Operating margin', 'Net margin', 'Revenue growth', 'Liabilities / assets']:
+            display[metric] = pd.to_numeric(display[metric], errors='coerce') * 100
+        config = {
+            'Snapshot position': st.column_config.NumberColumn('Snapshot #', format='%d'),
+            'Snapshot comparison / 100': st.column_config.ProgressColumn('Snapshot / 100', min_value=0, max_value=100, format='%.1f'),
+            'Snapshot metric coverage %': st.column_config.NumberColumn('Coverage', format='%.1f%%'),
+            **{metric:st.column_config.NumberColumn(metric,format='%.1f%%') for metric in ['ROE', 'Operating margin', 'Net margin', 'Revenue growth', 'Liabilities / assets']},
+        }
+        st.dataframe(display[[col for col in cols if col in display.columns]],
+                     use_container_width=True, hide_index=True, height=560, column_config=config)
+        st.download_button('Export India company ratios', view.drop(columns=['History'], errors='ignore').to_csv(index=False),
+                           'india_company_ratios.csv', mime='text/csv', key='india_snapshot_export')
+    with tab2:
+        if ranked.empty:
+            st.warning('No verified India consistency ranks yet. Financial snapshots are available in the first tab, but they do not contain annual ROE, margin, leverage and dividend histories.')
+            st.caption('To calculate real consistency scores, save 3–5 consecutive years of annual consolidated financial statements per company to data/india_financials/companies/SYMBOL.json using the documented schema. Merely refreshing current ratios will not establish historical performance.')
+        else:
+            cols = ['Rank','Ticker','Company','Sector','Fundamental score','Consistency','Years','Metric coverage %','Source']
+            st.dataframe(ranked[[col for col in cols if col in ranked]], use_container_width=True, hide_index=True)
+    with tab3:
+        cols = ['Ticker','Company','Calculated EPS','Book value / share','Graham number',
+                'DCF Bear','DCF Base','DCF Bull','FCF observations','Valuation note']
+        st.dataframe(df[[col for col in cols if col in df]], use_container_width=True, hide_index=True)
+        st.caption('Graham and DCF require underlying statement-derived net income, reported shares and cash-flow history. A single-date financial-ratio export cannot support these calculations.')
+    with st.expander('Source & coverage diagnostics'):
+        expected = DATA / 'india_financials' / 'reference_snapshot.csv'
+        st.write({'snapshot_present': expected.exists(),
+                  'snapshot_rows': len(load_india_reference_snapshot()),
+                  'annual_histories': int((pd.to_numeric(df['Years'],errors='coerce') >= 3).sum()),
+                  'source_types': df['Source'].value_counts().to_dict()})
+        st.caption('An NSE 403 or a Yahoo rate limit should not affect this cached page. Verify snapshot files are actually deployed.')

@@ -312,8 +312,16 @@ def load_india_reference_snapshot():
     It must never be promoted to a five-year quality/consistency ranking or
     used to calculate the user's statement-derived Graham EPS or DCF.
     """
-    source = DATA / 'india_financials' / 'reference_snapshot.csv'
-    if not source.is_file():
+    # Streamlit deployments can run with the project root or nightly_build as cwd.
+    # Prefer the module-local file, then explicit conventional app directories.
+    candidates = [
+        DATA / 'india_financials' / 'reference_snapshot.csv',
+        ROOT / 'nightly_build' / 'data' / 'india_financials' / 'reference_snapshot.csv',
+        Path.cwd() / 'data' / 'india_financials' / 'reference_snapshot.csv',
+        Path.cwd() / 'nightly_build' / 'data' / 'india_financials' / 'reference_snapshot.csv',
+    ]
+    source = next((candidate for candidate in candidates if candidate.is_file()), None)
+    if source is None:
         return pd.DataFrame()
     try:
         raw = pd.read_csv(source, dtype={'symbol': str})
@@ -451,3 +459,46 @@ def get_rankings(region):
         raise ValueError('Invalid region')
     profiles = load_india_profiles() if region == 'India' else load_sec_profiles(region)
     return rank_fundamentals(profiles) if not profiles.empty else profiles
+
+
+def snapshot_comparison(india_profiles: pd.DataFrame) -> pd.DataFrame:
+    """Single-date Indian ratio comparison; deliberately NOT historical quality ranks.
+
+    Only observed, comparable ratios are used. This offers a useful nonblank
+    research screen while preserving the three-year requirement for quality rank.
+    """
+    if india_profiles.empty:
+        return india_profiles.copy()
+    frame = india_profiles.copy()
+    supported = [name for name in WEIGHTS if name not in
+                 ('Dividend consistency', 'Dividend growth')]
+    for name in supported:
+        if name not in frame.columns:
+            frame[name] = np.nan
+        data = pd.to_numeric(frame[name], errors='coerce').replace([np.inf, -np.inf], np.nan)
+        if name in ('ROE', 'Debt / equity'):
+            data = data.where(data.ge(0))
+        valid = data.dropna()
+        if len(valid) < 5:
+            frame[name + ' snapshot percentile'] = np.nan
+            continue
+        lo, hi = valid.quantile([0.05, 0.95])
+        frame[name + ' snapshot percentile'] = data.clip(lo, hi).rank(
+            pct=True, ascending=name not in LOWER_IS_BETTER) * 100
+    weights = np.array([WEIGHTS[name] for name in supported], dtype=float)
+    scores = frame[[name + ' snapshot percentile' for name in supported]].to_numpy(dtype=float)
+    available = np.isfinite(scores)
+    coverage = (available * weights).sum(axis=1) / weights.sum()
+    numerator = (np.where(available, scores, 0) * weights).sum(axis=1)
+    denominator = (available * weights).sum(axis=1)
+    frame['Snapshot metric coverage %'] = np.round(100 * coverage, 1)
+    # At least four ratios and 60% of available indicator weights; not a
+    # substitute for multi-year financial history or industry-relative scoring.
+    eligible = (available.sum(axis=1) >= 4) & (coverage >= .60)
+    score = np.divide(numerator, denominator,
+                      out=np.full(len(frame), np.nan), where=denominator > 0)
+    frame['Snapshot comparison / 100'] = np.where(eligible, np.round(score, 1), np.nan)
+    frame['Snapshot position'] = frame['Snapshot comparison / 100'].rank(
+        method='min', ascending=False)
+    return frame.sort_values(['Snapshot comparison / 100', 'Ticker'],
+                             ascending=[False, True], na_position='last')
