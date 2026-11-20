@@ -1,28 +1,27 @@
-# Hide unrelated nodes when filters are selected
+# Multi-select filters on all Knowledge Graph views + remove old Leading & Lagging page
 
-Replacement files for your existing GitHub Desktop repository:
+Copy **these three files** to the root folder of your existing GitHub repository, replacing the existing files:
 
-- `capital_network.py` — Capital Network, Global → Country → Sector → Company → Factor.
-- `regional_rotation_graph.py` — Global, USA, India Knowledge Graphs, Rotation → Sector → Company → Factor.
+- `app.py` — removes only the **Leading & Lagging Companies** navigation page and route. It does **not** remove the four Leading/Improving/Weakening/Lagging rotation categories inside graphs.
+- `regional_rotation_graph.py` — gives **Overview**, **Sector / Factor**, and **Individual Companies** the same multi-select controls for rotations, sectors, companies, and factors on all three regions (Global, USA, India). Selecting filters removes unrelated nodes and displays verified matching memberships.
+- `capital_network.py` — maintains the latest six-column **Global → Rotation → Country → Sector → Company → Factor** network, direct Global memberships, and multi-value country/rotation/sector/company/factor selection.
 
-## Install (GitHub Desktop)
+## Install with GitHub Desktop
 
-1. Download and extract the ZIP.
-2. In GitHub Desktop choose **Repository → Show in Explorer/Finder**.
-3. Copy the two `.py` files into the **root** of your repository, alongside `app.py`, replacing the existing files.
-4. In GitHub Desktop, **Commit to main** and **Push origin**.
-5. Let Streamlit redeploy. No cache rebuild is needed if your current `*_signals.csv` and `*_edges.csv` already work.
+1. Extract the ZIP.
+2. GitHub Desktop → Repository → Show in Explorer / Finder.
+3. Copy these three Python files into the repository root and choose **Replace**.
+4. In GitHub Desktop, review **Changes**, commit `Enable multi-select on all graphs and remove legacy page`, then **Push origin**.
+5. Open the Streamlit app after it redeploys. It uses existing graph snapshots; no new builder is included in this package.
 
-## How filtering behaves
+## Filter rules
 
-- With no filters, keep the overview and the 20 tracked country nodes in the Capital Network.
-- Once you select country, rotation, sector, factor, or company, **only matching companies, their verified sector/factor connections, the relevant country node(s) and Global root** remain. Unrelated branches disappear rather than fading.
-- Multiple values in the Country, Rotation, and Company filters select **any of those values**. Sector / Factor `Any selected` or `All selected` controls whether companies must match at least one or every chosen source. **Different filter categories are combined**: a company must meet every selected category.
-- If a selected sector, factor, or country has no verified company connections, keep the selected node as an explanation; do not invent companies. Other unrelated nodes disappear.
-- Knowledge Graph focused views hide rotation nodes with no visible source connections. Overview remains unfiltered.
-- Global continues to have its own direct global-sector, global-company and global-factor connections in Capital Network.
-- The underlying data and CSV snapshots are not modified.
+- Empty selections mean **no restriction** for that category.
+- Within one category, multiple choices match **ANY** of the chosen values.
+- Between rotation, company, and selected sector/factor criteria, the constraints are intersected.
+- The **ANY / ALL** control applies to selected sector/factor memberships.
+- Once a filter is active, unrelated sectors/companies/factors are removed from the graph (selected empty sector nodes may remain without made-up links).
+- Selecting a company retains all its *verified* sector and factor memberships, including relationships across different rotation classes.
+- With no selection, the overview remains broad and uses a company display cap for readability; checkbox allows showing all.
 
-## Verification
-
-Run `python test_strict_filter.py` from the extracted directory (requires pandas and plotly; Streamlit is stubbed when absent). These are targeted logic tests, not a live deployment test.
+**Dependencies:** Existing `rotation_graph_evidence.py`, generated signal/edge snapshots, and application modules must already be in your repo. No data is invented for countries without verified company memberships. Existing GitHub Actions scripts remain unchanged. Full live Streamlit deployment has not been performed here; Python syntax validation passed.

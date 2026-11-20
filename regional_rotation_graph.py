@@ -246,98 +246,79 @@ def render_graph(region: str):
         (n for n in nodes if n["type"] == "company"),
         key=lambda n: (n.get("label", "").casefold(), n["id"]),
     )
-    match_mode = "Any selected"
-    if view == "Overview":
-        focus = "all"
-        show_all = st.checkbox(
-            "Show every company (dense graph)", value=False,
-            key=f"kg_overview_all_{region}",
-        )
-        max_companies = None if show_all else 60
-        if not show_all:
-            st.caption("Overview shows all classified sectors and factors and up to "
-                       "60 companies. Use the other views to highlight specific connections.")
-    else:
-        # The same filters are used by BOTH focused views. Selection criteria
-        # combine across filter categories and preserve all evidenced cross-links.
-        st.caption("Select any combination of rotations, sectors, factors and "
-                   "companies. Matching companies are highlighted in green; "
-                   "their connected sectors and factors appear across the graph.")
+    # All three graph views expose the same multi-value filters. Empty filters
+    # mean no restriction; selecting values immediately removes unrelated nodes.
+    st.caption("Select multiple rotations, sectors, factors, and companies. "
+               "Only connected results stay visible; unrelated nodes disappear.")
+    with st.expander("Filters · select multiple values", expanded=True):
         col1, col2 = st.columns([1.6, 1])
         with col1:
             rotation_filter = st.multiselect(
-                "Rotations (multiple)", list(QUADRANTS),
-                default=list(QUADRANTS), key=f"kg_rotations_{region}_{view}")
+                "Rotations (multiple)", list(QUADRANTS), default=[],
+                key=f"kg_rotations_{region}",
+                placeholder="All rotations")
         with col2:
             match_mode = st.radio(
-                "Matching across selected sectors / factors",
-                ["Any selected", "All selected"], horizontal=True,
-                key=f"kg_match_{region}_{view}",
-                help="ANY: company belongs to at least one selected source. "
-                     "ALL: company belongs to every selected source.")
-        available_sectors = [n for n in sources if n["type"] == "sector"
-                             and n["quadrant"] in rotation_filter]
-        available_factors = [n for n in sources if n["type"] == "factor"
-                             and n["quadrant"] in rotation_filter]
-        sector_options = {n["id"]: f"{n['label']}  ·  {n['quadrant']}" for n in available_sectors}
-        factor_options = {n["id"]: f"{n['label']}  ·  {n['quadrant']}" for n in available_factors}
+                "Match selected sector/factor nodes", ["Any selected", "All selected"],
+                horizontal=True, key=f"kg_match_{region}")
+        sector_options = {n["id"]: f"{n['label']} · {n['quadrant']}" for n in sources
+                          if n["type"] == "sector"}
+        factor_options = {n["id"]: f"{n['label']} · {n['quadrant']}" for n in sources
+                          if n["type"] == "factor"}
+        company_options = {n["id"]: f"{n.get('name') or n['label']} · {n['label']}"
+                           for n in companies_all}
         left, right = st.columns(2)
         with left:
             selected_sectors = st.multiselect(
                 "Sectors (multiple)", list(sector_options),
                 format_func=lambda sid: sector_options.get(sid, sid),
-                key=f"kg_sector_multi_{region}_{view}")
+                key=f"kg_sectors_{region}")
         with right:
             selected_factors = st.multiselect(
                 "Factors (multiple)", list(factor_options),
                 format_func=lambda sid: factor_options.get(sid, sid),
-                key=f"kg_factor_multi_{region}_{view}")
-        company_options = {n["id"]: f"{n.get('name') or n['label']} · {n['label']}"
-                           for n in companies_all}
+                key=f"kg_factors_{region}")
         selected_companies = st.multiselect(
             "Individual companies (multiple)", list(company_options),
             format_func=lambda cid: company_options.get(cid, cid),
-            key=f"kg_company_multi_{region}_{view}",
-            placeholder="Select one or several companies (optional)")
-        selected_sources = set(selected_sectors) | set(selected_factors)
-        eligible_sources = {n["id"] for n in sources
-                            if n["quadrant"] in rotation_filter}
-        # A company qualifies for the chosen rotation(s) if it belongs to a
-        # sector OR a factor classified in one of those rotations.
-        rotation_companies = set().union(
-            *(memberships.get(sid, set()) for sid in eligible_sources)) if eligible_sources else set()
-        if selected_sources:
-            source_memberships = [memberships.get(sid, set()) for sid in selected_sources]
-            matched = (set.intersection(*map(set, source_memberships))
-                       if match_mode == "All selected" else
-                       set.union(*map(set, source_memberships)))
-            matched &= rotation_companies
+            key=f"kg_companies_{region}", placeholder="All companies")
+
+    active = bool(rotation_filter or selected_sectors or selected_factors or selected_companies)
+    show_all = st.checkbox("Show all matching companies (dense graph)", value=False,
+                           key=f"kg_show_all_{region}")
+    max_companies = None if show_all else (60 if view == "Overview" else 100)
+    if not active:
+        focus = "all"
+    else:
+        # A rotation is a constraint on sector/factor index signals; it is NOT
+        # a derived rotation for the individual company.
+        allowed_sources = {n["id"] for n in sources
+                           if not rotation_filter or n["quadrant"] in rotation_filter}
+        chosen_sources = set(selected_sectors) | set(selected_factors)
+        if chosen_sources:
+            source_sets = [set(memberships.get(sid, ())) for sid in chosen_sources]
+            matched = (set.intersection(*source_sets) if match_mode == "All selected"
+                       else set.union(*source_sets))
         else:
-            matched = set(rotation_companies)
+            matched = {n["id"] for n in companies_all}
+        if rotation_filter:
+            rotation_companies = set().union(
+                *(memberships.get(sid, set()) for sid in allowed_sources)) if allowed_sources else set()
+            matched &= rotation_companies
         if selected_companies:
             matched &= set(selected_companies)
-        if view == "Individual Companies" and not selected_companies:
-            st.info("Select one or more companies to highlight their complete connections.")
-            matched = set()
-        elif not rotation_filter:
-            st.info("Select at least one rotation to find connected companies.")
-        elif not matched:
-            st.info("No verified company memberships match this selection.")
-        # Show selected source nodes even if their companies have no memberships.
-        # Include the other sector/factor nodes connected to matching companies.
-        visible_sources = selected_sources or (
-            eligible_sources if view == "Sector / Factor" and not selected_companies else set())
+        # Show selected sources even if they lack verified company memberships,
+        # but do not display unrelated sectors / factors / companies.
+        visible_sources = chosen_sources if chosen_sources else (
+            allowed_sources if rotation_filter and not selected_companies else set())
         focus = {"mode": "matched", "companies": matched,
                  "sources": visible_sources}
-        show_every = st.checkbox(
-            "Show all matching companies (can be large)", value=False,
-            key=f"kg_all_matches_{region}_{view}")
-        max_companies = None if show_every else 100
+        if not matched:
+            st.info("No verified company memberships match these filters.")
         st.caption(f"{len(matched):,} matching companies · "
-                   f"{len(selected_sectors)} sectors selected · "
-                   f"{len(selected_factors)} factors selected · "
-                   f"{len(selected_companies)} companies selected. "
-                   "All verified cross-connections are retained for visible companies.")
+                   f"{len(selected_sectors)} selected sectors · "
+                   f"{len(selected_factors)} selected factors · "
+                   f"{len(selected_companies)} selected companies")
     sectors, companies, factors = _draw(nodes, links, focus, max_companies, match_mode)
     st.caption(f"Visible: {len(sectors)} sectors · {len(companies)} companies · "
                f"{len(factors)} factors. Overall graph: {len(nodes)} nodes / "

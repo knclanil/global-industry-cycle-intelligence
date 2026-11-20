@@ -1,4 +1,4 @@
-"""Capital membership network: GLOBAL -> COUNTRY -> SECTOR -> COMPANY -> FACTOR.
+"""Capital membership network: GLOBAL -> ROTATION -> COUNTRY -> SECTOR -> COMPANY -> FACTOR.
 
 The GLOBAL root ALSO has its own direct connections to global-scoped sectors,
 companies and factors (independent of the country-specific branches).
@@ -68,16 +68,39 @@ def _graph_data(period: str, directory: Path = CACHE_DIR):
     nodes = {"root": {"label": "GLOBAL", "kind": "root", "country": None}}
     edges = set()
     diagnostics = {}
+    # Country-level rotations are based on ETF / ACWI relative strength and
+    # momentum. Do not infer a country's rotation from its constituent sectors.
+    rotation_file = directory / f"country_{period}_rotations.csv"
+    country_rotations = {}
+    if rotation_file.is_file():
+        frame = _csv(str(rotation_file), rotation_file.stat().st_mtime_ns)
+        if {"ETF", "Quadrant"}.issubset(frame.columns):
+            country_rotations = {str(r["ETF"]): str(r["Quadrant"])
+                                 for r in frame.to_dict("records")
+                                 if str(r["Quadrant"]) in QUADRANTS}
+    diagnostics["country_rotations"] = {"classified": len(country_rotations),
+                                        "tracked": len(COUNTRY_MARKETS),
+                                        "snapshot_found": rotation_file.is_file()}
+    for quadrant in QUADRANTS:
+        rid = f"rotation:{quadrant}"
+        nodes[rid] = {"label": quadrant, "kind": "rotation", "quadrant": quadrant}
+        edges.add(("root", rid))
+    # Unclassified is an explicit data gap, not a fifth market rotation.
+    if len(country_rotations) != len(COUNTRY_MARKETS):
+        nodes["rotation:Unclassified"] = {"label": "Unclassified (missing data)",
+                                          "kind": "rotation"}
+        edges.add(("root", "rotation:Unclassified"))
     # Preserve every supported country as a visible node, even when that
     # market has no country-level constituent dataset yet.
     for ticker, country_name in COUNTRY_MARKETS.items():
         scope = COUNTRY_KEYS.get(country_name, ticker)
         cid = f"country:{scope}"
+        quadrant = country_rotations.get(ticker, "Unclassified")
         nodes[cid] = {"label": country_name, "kind": "country",
-                      "country": scope, "ticker": ticker,
+                      "country": scope, "ticker": ticker, "quadrant": quadrant,
                       "coverage": "Constituents available" if country_name in COUNTRY_KEYS else
                                   "Country market tracked; constituent data unavailable"}
-        edges.add(("root", cid))
+        edges.add((f"rotation:{quadrant}", cid))
 
     def put(nid, **properties):
         nodes.setdefault(nid, properties)
@@ -103,7 +126,7 @@ def _graph_data(period: str, directory: Path = CACHE_DIR):
             country_label = {"USA": "United States", "India": "India"}[region]
             country_id = f"country:{region}"
             put(country_id, label=country_label, kind="country", country=region)
-            link("root", country_id)
+            link(f"rotation:{nodes[country_id].get('quadrant', 'Unclassified')}", country_id)
 
         lookup = {}
         for row in signals.to_dict("records"):
@@ -187,9 +210,15 @@ def _select(nodes, edges, chosen_countries=(), chosen_sectors=(), chosen_compani
         if chosen_companies:
             categories.append(set(chosen_companies) & all_companies)
         if chosen_rotations:
-            categories.append({c for c in all_companies if any(
-                nodes[s].get("quadrant") in chosen_rotations
-                for s in comp_sectors.get(c, set()) | comp_factors.get(c, set()))})
+            # Country ETF rotation takes precedence for country-scoped branches;
+            # the direct Global branch has no country ETF and uses its own
+            # sector/factor signals instead.
+            categories.append({c for c in all_companies if (
+                nodes.get(f"country:{nodes[c].get('country')}", {}).get("quadrant")
+                    in chosen_rotations
+                if nodes[c].get("country") != "Global" else
+                any(nodes[s].get("quadrant") in chosen_rotations
+                    for s in comp_sectors.get(c, set()) | comp_factors.get(c, set())))})
         selected_source_sets = [set(sectors.get(s, ())) for s in chosen_sectors]
         selected_source_sets.extend(
             {c for c, fs in comp_factors.items() if f in fs}
@@ -208,7 +237,7 @@ def _select(nodes, edges, chosen_countries=(), chosen_sectors=(), chosen_compani
     visible = {"root"}
     if not active and show_context:
         visible.update(nid for nid, n in nodes.items()
-                       if n["kind"] in ("country", "sector", "factor"))
+                       if n["kind"] in ("rotation", "country", "sector", "factor"))
     else:
         # Explicit source choices remain visible even if there are no companies.
         visible.update(s for s in chosen_sectors if s in nodes)
@@ -218,8 +247,13 @@ def _select(nodes, edges, chosen_countries=(), chosen_sectors=(), chosen_compani
         if chosen_countries:
             visible.update(nid for nid, n in nodes.items()
                            if n["kind"] == "country" and
-                           n.get("country") in chosen_countries)
+                           n.get("country") in chosen_countries and
+                           (not chosen_rotations or n.get("quadrant") in chosen_rotations))
         if chosen_rotations and not (chosen_sectors or chosen_factors or chosen_companies):
+            visible.update(nid for nid, n in nodes.items()
+                           if n["kind"] == "country" and
+                           n.get("quadrant") in chosen_rotations and
+                           (not chosen_countries or n.get("country") in chosen_countries))
             visible.update(nid for nid, n in nodes.items()
                            if n["kind"] in ("sector", "factor") and
                            n.get("quadrant") in chosen_rotations and
@@ -237,16 +271,22 @@ def _select(nodes, edges, chosen_countries=(), chosen_sectors=(), chosen_compani
     scopes = {nodes[n].get("country") for n in visible if n in nodes}
     visible.update(nid for nid, n in nodes.items()
                    if n["kind"] == "country" and n.get("country") in scopes)
-    if "Global" in scopes:
-        visible.add("root")
+    for nid in list(visible):
+        if nodes[nid]["kind"] == "country":
+            q = nodes[nid].get("quadrant", "Unclassified")
+            visible.add(f"rotation:{q}")
+    if not active:
+        visible.update(f"rotation:{q}" for q in QUADRANTS)
+    visible.add("root")
     visible &= set(nodes)
     kept_edges = [(a, b) for a, b in edges if a in visible and b in visible]
     return visible, kept_edges, matched, len(matched_full)
 
 
 def _plot(nodes, edges, matched, visible, height=680):
-    groups = [[], [], [], [], []]
-    rank = {"root": 0, "country": 1, "sector": 2, "company": 3, "factor": 4}
+    groups = [[], [], [], [], [], []]
+    rank = {"root": 0, "rotation": 1, "country": 2,
+            "sector": 3, "company": 4, "factor": 5}
     for nid in visible:
         groups[rank[nodes[nid]["kind"]]].append(nid)
     for group in groups:
@@ -274,7 +314,7 @@ def _plot(nodes, edges, matched, visible, height=680):
                           if active else ("#9171aa" if direct_global else "#63718a"),
                           "width": 1.4 if direct_global else 1.65 if active else .9},
                     opacity=.52 if direct_global else .65 if active else .24, showlegend=False))
-    for index, kind in enumerate(("root", "country", "sector", "company", "factor")):
+    for index, kind in enumerate(("root", "rotation", "country", "sector", "company", "factor")):
         ids = groups[index]
         if not ids:
             continue
@@ -293,18 +333,18 @@ def _plot(nodes, edges, matched, visible, height=680):
             y=[positions[n][1] for n in ids], mode="markers+text",
             marker={"size": [16 if kind in ("root", "country") else 10 if n in matched else 7 for n in ids],
                     "color": [("#52e0c4" if n in matched else COLORS.get(nodes[n].get("quadrant"),
-                               {"root": "#75e4cf", "country": "#cdd7e6", "sector": "#81b8f8",
+                               {"root": "#75e4cf", "rotation": "#b9b8ec", "country": "#cdd7e6", "sector": "#81b8f8",
                                 "company": "#9aa8bd", "factor": "#bdaaf2"}[kind])) for n in ids]},
             text=[nodes[n]["label"] if kind != "company" or n in matched and len(ids) <= 35 else "" for n in ids],
             textposition="middle right" if kind != "root" else "top center",
             textfont={"size": 10, "color": "#e5edf7"}, hovertext=tooltips,
             hovertemplate="%{hovertext}<extra></extra>", showlegend=False))
-    for i, caption in enumerate(("GLOBAL", "COUNTRY", "SECTORS", "COMPANIES", "FACTORS")):
+    for i, caption in enumerate(("GLOBAL", "ROTATION", "COUNTRIES", "SECTORS", "COMPANIES", "FACTORS")):
         fig.add_annotation(x=i, y=1.05, text=f"<b>{caption}</b>", showarrow=False,
                            font={"size": 13, "color": "#f2f6ff"})
     fig.update_layout(height=height, paper_bgcolor=BG, plot_bgcolor=BG,
         margin={"l": 85, "r": 110, "t": 65, "b": 30},
-        xaxis={"visible": False, "range": [-.35, 4.45], "fixedrange": True},
+        xaxis={"visible": False, "range": [-.35, 5.45], "fixedrange": True},
         yaxis={"visible": False, "range": [-.04, 1.1]},
         dragmode="pan", hovermode="closest", font={"color": "#e5edf7"})
     return fig
@@ -317,20 +357,24 @@ def _selector(label, options, selected=(), key=""):
 def render_capital_network():
     """Streamlit entrypoint used by app.py's existing capital-network route."""
     st.title("Global Capital Intelligence Network")
-    st.caption("GLOBAL → COUNTRY → SECTORS → COMPANIES → FACTORS · Plus GLOBAL direct links to its own sectors, companies and factors · Memberships, not measured fund flows")
+    st.caption("GLOBAL → ROTATION → COUNTRY → SECTORS → COMPANIES → FACTORS · Global direct sector/company/factor branches are also preserved · Memberships, not measured fund flows")
     period = st.radio("Lookback", PERIODS, index=1, horizontal=True, key="cap_period")
     nodes, edges, diagnostics = _graph_data(period)
     if not any(n["kind"] == "company" for n in nodes.values()):
         st.warning("No verified company memberships available. Country nodes remain visible. "
                    "Run Refresh Knowledge Graphs and confirm the *_edges.csv files are deployed.")
         st.json(diagnostics)
-    missing = [region for region, stats in diagnostics.items() if not stats["signals_valid"] or not stats["edges_valid"]]
+    missing = [region for region, stats in diagnostics.items() if region in REGIONS and (not stats["signals_valid"] or not stats["edges_valid"])]
     if missing:
         st.warning("Some datasets are missing or incomplete: " + ", ".join(missing) + ". Country relationships will be incomplete.")
-    st.info("All 20 countries from the project's country-ETF universe appear. "
-            "Only USA and India currently have verified country-scoped sector/company/factor "
-            "membership snapshots. Other country nodes show market coverage but no invented "
-            "company links. Global-scoped relationships connect directly to GLOBAL (purple).")
+    status = diagnostics["country_rotations"]
+    if status["classified"] < status["tracked"]:
+        st.warning(f"Country rotation data: {status['classified']}/{status['tracked']} ETFs classified. "
+                   "Run the country rotation snapshot builder; unclassified markets remain visible "
+                   "without an invented quadrant.")
+    st.info("All 20 country ETF markets are tracked. Only USA and India currently have verified "
+            "country-scoped company-membership datasets; other countries may have no downstream "
+            "company connections. Global-scoped sectors/companies/factors link directly to GLOBAL.")
     tabs = ("Overview", "Sector / Factor", "Individual Companies")
     mode = st.radio("View", tabs, horizontal=True, key="cap_view")
     listing = lambda kind: sorted((n for n, x in nodes.items() if x["kind"] == kind),
@@ -364,7 +408,7 @@ def render_capital_network():
         [company_opts[c] for c in chosen_companies],
         [factor_opts[f] for f in chosen_factors], chosen_rotations,
         match, limit, show_context=(mode == "Overview" or not filters_active))
-    st.caption(f"{sum(nodes[n]["kind"] == "country" for n in visible)} visible countries (20 tracked) · {full_count:,} matching companies · "
+    st.caption(f"{sum(nodes[n]['kind'] == 'country' for n in visible)} visible countries (20 tracked) · {full_count:,} matching companies · "
                f"{len(highlighted):,} shown · {len(graph_edges):,} visible connections")
     unsupported = [c for c in chosen_countries if country_opts[c] not in ("USA", "India", "Global")]
     if unsupported:
