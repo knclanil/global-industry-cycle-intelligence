@@ -1,12 +1,12 @@
-"""Readable Global/USA/India rotation knowledge graph.
+"""Global / USA / India: rotation -> sector -> company -> factor graph.
 
-All verified memberships are retained.  The default overview summarizes company
-counts to fit a screen; Focus and All connections expose individual companies.
-Requires existing rotation_graph_evidence.py and generated *_signals.csv/*_edges.csv.
+Requires existing rotation_graph_evidence.py and generated *_signals.csv / *_edges.csv.
+Sector and factor rotation classes describe the *index*, not the company price.
 """
 from __future__ import annotations
 
 import json
+from collections import defaultdict
 from pathlib import Path
 
 import pandas as pd
@@ -17,25 +17,23 @@ from rotation_graph_evidence import QUADRANTS, graph_elements
 
 ROOT = Path(__file__).resolve().parent
 STORE = ROOT / "data" / "dashboard_cache" / "rotation_graphs"
-COLORS = {
-    "Leading": "#38d9a9", "Improving": "#60a5fa",
-    "Weakening": "#fbbf24", "Lagging": "#fb7185",
-    "sector": "#b3e5fc", "factor": "#c4b5fd", "company": "#e5e7eb",
-}
-BACKGROUND = "#101827"
+PALETTE = {"Leading": "#34d399", "Improving": "#60a5fa",
+           "Weakening": "#fbbf24", "Lagging": "#fb7185"}
+NODE_COLOR = {"sector": "#7dd3fc", "company": "#e5e7eb", "factor": "#c4b5fd"}
+BG = "#101827"
 
 
 @st.cache_data(show_spinner=False, max_entries=48)
-def _read_csv(filename: str, mtime: int) -> pd.DataFrame:
+def _read_csv(path: str, mtime: int) -> pd.DataFrame:
     try:
-        return pd.read_csv(filename, keep_default_na=False)
+        return pd.read_csv(path, keep_default_na=False)
     except (OSError, ValueError, pd.errors.EmptyDataError):
         return pd.DataFrame()
 
 
 def _load(region: str, period: str, kind: str) -> pd.DataFrame:
-    path = STORE / f"{region.lower()}_{period}_{kind}.csv"
-    return _read_csv(str(path), path.stat().st_mtime_ns if path.is_file() else -1)
+    p = STORE / f"{region.lower()}_{period}_{kind}.csv"
+    return _read_csv(str(p), p.stat().st_mtime_ns if p.exists() else -1)
 
 
 def _manifest() -> dict:
@@ -45,153 +43,146 @@ def _manifest() -> dict:
         return {}
 
 
-def _available_index_nodes(nodes: list[dict]) -> list[dict]:
-    rank = {q: i for i, q in enumerate(QUADRANTS)}
-    return sorted(
-        (n for n in nodes if n["type"] in ("sector", "factor")),
-        key=lambda n: (rank.get(n["quadrant"], 99), n["type"], n["label"].lower()),
-    )
-
-
-def _node_hover(n: dict, member_count: int = 0) -> str:
-    if n["type"] == "rotation":
-        return f"<b>{n['label']}</b>"
-    if n["type"] == "company":
-        return f"<b>{n.get('name') or n['label']}</b><br>ID: {n['company_key']}"
-    return (f"<b>{n['label']}</b><br>{n['type'].title()} · {n['quadrant']}"
-            f"<br>Relative strength: {n.get('rs', 'N/A')}"
-            f"<br>RS momentum: {n.get('momentum', 'N/A')}"
-            f"<br>Connected companies: {member_count:,}")
-
-
-def _connections(nodes: list[dict], links: list[tuple[str, str]]):
+def _indexed(nodes, links):
     by_id = {n["id"]: n for n in nodes}
-    members = {n["id"]: set() for n in nodes if n["type"] in ("sector", "factor")}
+    linked = defaultdict(set)  # index id -> company ids
+    company_sources = defaultdict(set)
     for source, target in links:
-        if source in members and target.startswith("c:"):
-            members[source].add(target)
-    return by_id, members
+        if source.startswith("i:") and target.startswith("c:"):
+            linked[source].add(target)
+            company_sources[target].add(source)
+    return by_id, linked, company_sources
 
 
-def _draw(nodes: list[dict], links: list[tuple[str, str]], mode: str,
-          focus_id: str | None = None, show_labels: bool = True):
-    by_id, members = _connections(nodes, links)
-    indices = _available_index_nodes(nodes)
-    companies = sorted((n for n in nodes if n["type"] == "company"),
-                       key=lambda n: n["label"].lower())
-    if mode == "Focus on a sector / factor" and focus_id:
-        chosen = {focus_id}
-        visible_companies = [n for n in companies if n["id"] in members.get(focus_id, ())]
-    elif mode == "All individual companies":
-        chosen = {n["id"] for n in indices}
-        visible_companies = companies
-    else:  # Complete four-quadrant overview, each source retains its member count.
-        chosen = {n["id"] for n in indices}
-        visible_companies = []
+def _sorted(nodes):
+    order = {q: i for i, q in enumerate(QUADRANTS)}
+    return sorted(nodes, key=lambda n: (order.get(n.get("quadrant"), 99),
+                                        n.get("label", "").casefold(), n["id"]))
 
-    positions = {f"q:{q}": (0., 1 - (i + .5) / 4) for i, q in enumerate(QUADRANTS)}
-    for i, n in enumerate(indices):
-        positions[n["id"]] = (1.25, 1 - (i + .5) / max(1, len(indices)))
 
-    # Each index has a visible summary node on the right in overview mode.
-    summary_nodes = []
-    if mode == "Overview (fits screen)":
-        for i, n in enumerate(indices):
-            sid = "summary:" + n["id"]
-            summary_nodes.append({"id": sid, "label": f"{len(members[n['id']]):,} companies",
-                                  "type": "summary", "quadrant": n["quadrant"],
-                                  "source": n["id"]})
-            positions[sid] = (2.55, 1 - (i + .5) / max(1, len(indices)))
+def _choose_visible(nodes, links, selection: str, max_companies: int | None):
+    """Return source nodes and company nodes; preserve every evidenced edge.
+
+    In focused mode, include all other sector/factor sources connected to selected
+    companies so that a company's dual sector/factor membership is visible.
+    """
+    by_id, linked, company_sources = _indexed(nodes, links)
+    source_ids = {n["id"] for n in nodes if n["type"] in ("sector", "factor")}
+    if selection == "all":
+        company_ids = {n["id"] for n in nodes if n["type"] == "company"}
+        chosen_sources = source_ids
+    elif selection.startswith("c:"):
+        # Individual-company mode: show its entire evidenced sector/factor network.
+        company_ids = {selection} if selection in by_id else set()
+        chosen_sources = set(company_sources.get(selection, ()))
     else:
-        for i, n in enumerate(visible_companies):
-            positions[n["id"]] = (2.55, 1 - (i + .5) / max(1, len(visible_companies)))
+        # Sector/Factor mode: show all companies attached to the chosen index,
+        # and all other evidenced index memberships for those same companies.
+        company_ids = set(linked.get(selection, ()))
+        chosen_sources = {selection}
+        for company_id in company_ids:
+            chosen_sources.update(company_sources[company_id])
+    if max_companies is not None and len(company_ids) > max_companies:
+        company_ids = set(sorted(company_ids, key=lambda cid: (
+            by_id[cid].get("label", "").casefold(), cid))[:max_companies])
+        if selection != "all":
+            chosen_sources = {selection} if selection.startswith("i:") else set()
+            for company_id in company_ids:
+                chosen_sources.update(company_sources[company_id])
+    return (_sorted([by_id[s] for s in chosen_sources if s in by_id and by_id[s]["type"] == "sector"]),
+            _sorted([by_id[s] for s in chosen_sources if s in by_id and by_id[s]["type"] == "factor"]),
+            sorted([by_id[c] for c in company_ids], key=lambda n: (n.get("label", "").casefold(), n["id"])),
+            linked, company_sources)
 
+
+def _draw(nodes, links, selection: str, max_companies: int | None):
+    by_id = {n["id"]: n for n in nodes}
+    sectors, factors, companies, members, company_sources = _choose_visible(
+        nodes, links, selection, max_companies)
+    selected_ids = {n["id"] for n in sectors + factors + companies}
+    positions = {f"q:{q}": (0., 1 - (i + 0.5) / len(QUADRANTS))
+                 for i, q in enumerate(QUADRANTS)}
+    for x, group in ((1., sectors), (2.15, companies), (3.3, factors)):
+        for i, node in enumerate(group):
+            positions[node["id"]] = (x, 1 - (i + .5) / max(1, len(group)))
     fig = go.Figure()
-    # Keep all index signals visible, including those with zero company memberships.
+
+    # Sector path: rotation -> sector -> company.
+    # Factor path: rotation -> company -> factor (only when a mapped factor exists).
+    # A factor-only company still shows a valid rotation -> company connection.
     for quadrant in QUADRANTS:
+        segments = set()
+        for source in sectors:
+            if source["quadrant"] == quadrant:
+                segments.add((f"q:{quadrant}", source["id"]))
+                segments.update((source["id"], cid) for cid in members[source["id"]]
+                                if cid in selected_ids)
+        for factor in factors:
+            if factor["quadrant"] == quadrant:
+                for cid in members[factor["id"]]:
+                    if cid in selected_ids:
+                        segments.add((cid, factor["id"]))
+                        # Connect rotation directly to a factor-only company;
+                        # otherwise the factor's own rotation would be invisible.
+                        if not any(by_id[s]["type"] == "sector" and
+                                   by_id[s]["quadrant"] == quadrant
+                                   for s in company_sources[cid] if s in selected_ids):
+                            segments.add((f"q:{quadrant}", cid))
+                if not members[factor["id"]].intersection(selected_ids):
+                    # Keep unconnected factor signals visible with their rotation.
+                    segments.add((f"q:{quadrant}", factor["id"]))
         xs, ys = [], []
-        for n in indices:
-            if n["quadrant"] != quadrant:
+        for start, end in sorted(segments):
+            if start not in positions or end not in positions:
                 continue
-            a, b = positions[f"q:{quadrant}"], positions[n["id"]]
-            xs += [a[0], b[0], None]
-            ys += [a[1], b[1], None]
+            a, b = positions[start], positions[end]
+            xs.extend((a[0], b[0], None))
+            ys.extend((a[1], b[1], None))
         if xs:
             fig.add_trace(go.Scattergl(x=xs, y=ys, mode="lines",
-                    line=dict(color=COLORS[quadrant], width=1.5),
-                    opacity=.35, hoverinfo="skip", showlegend=False))
+                                      line=dict(color=PALETTE[quadrant], width=1.2),
+                                      opacity=.36, hoverinfo="skip", showlegend=False))
 
-        xs, ys = [], []
-        if mode == "Overview (fits screen)":
-            for n in indices:
-                if n["quadrant"] != quadrant:
-                    continue
-                a, b = positions[n["id"]], positions["summary:" + n["id"]]
-                xs += [a[0], b[0], None]
-                ys += [a[1], b[1], None]
-        else:
-            for source, target in links:
-                if source not in chosen or target not in positions:
-                    continue
-                if by_id.get(source, {}).get("quadrant") != quadrant:
-                    continue
-                a, b = positions[source], positions[target]
-                xs += [a[0], b[0], None]
-                ys += [a[1], b[1], None]
-        if xs:
-            fig.add_trace(go.Scattergl(x=xs, y=ys, mode="lines",
-                    line=dict(color=COLORS[quadrant], width=1),
-                    opacity=.28 if mode != "Overview (fits screen)" else .45,
-                    hoverinfo="skip", showlegend=False))
-
-    def add_group(group, name, color, size, label_mode="text", symbol="circle"):
+    def add_nodes(group, title, color, size, symbol="circle", display_text=True):
         if not group:
             return
         fig.add_trace(go.Scattergl(
             x=[positions[n["id"]][0] for n in group],
             y=[positions[n["id"]][1] for n in group],
-            mode="markers+text" if label_mode == "text" else "markers",
-            marker=dict(color=color, size=size, symbol=symbol),
+            mode="markers+text" if display_text else "markers",
+            marker=dict(size=size, color=color, symbol=symbol),
             text=[n["label"] for n in group],
-            textposition="middle right" if name != "Rotations" else "middle left",
-            textfont=dict(size=11 if name != "Companies" else 10, color="#edf2f7"),
-            hovertext=[_node_hover(n, len(members.get(n["id"], ()))) for n in group],
-            hovertemplate="%{hovertext}<extra></extra>", name=name,
-        ))
+            textposition="middle left" if title == "Rotations" else "middle right",
+            textfont=dict(size=11, color="#e5e7eb"),
+            hovertext=[(f"<b>{n.get('name') or n['label']}</b>"
+                        + (f"<br>Quadrant: {n['quadrant']}"
+                           f"<br>RS: {n.get('rs', 'N/A')}"
+                           f"<br>Momentum: {n.get('momentum', 'N/A')}"
+                           f"<br>Company memberships: {len(members[n['id']])}"
+                           if n["type"] in ("sector", "factor") else "")) for n in group],
+            hovertemplate="%{hovertext}<extra></extra>", name=title))
 
-    rotations = [by_id[f"q:{q}"] for q in QUADRANTS]
-    add_group(rotations, "Rotations", [COLORS[q] for q in QUADRANTS], 21)
-    add_group([n for n in indices if n["type"] == "sector"], "Sectors", COLORS["sector"], 10)
-    add_group([n for n in indices if n["type"] == "factor"], "Factors", COLORS["factor"], 10, symbol="diamond")
-    if summary_nodes:
-        fig.add_trace(go.Scattergl(
-            x=[positions[n["id"]][0] for n in summary_nodes],
-            y=[positions[n["id"]][1] for n in summary_nodes],
-            mode="markers+text", marker=dict(size=8, color="#94a3b8"),
-            text=[n["label"] for n in summary_nodes], textposition="middle right",
-            textfont=dict(size=10, color="#e5e7eb"),
-            hovertext=[f"{n['label']}<br>Select Focus mode to see every company" for n in summary_nodes],
-            hovertemplate="%{hovertext}<extra></extra>", name="Company counts"))
-    else:
-        show_company_text = show_labels and len(visible_companies) <= 45
-        add_group(visible_companies, "Companies", COLORS["company"], 7,
-                  label_mode="text" if show_company_text else "hover")
-
-    for x, caption in ((0, "ROTATIONS"), (1.25, "SECTORS / FACTORS"),
-                       (2.55, "COMPANIES" if not summary_nodes else "COMPANY MEMBERSHIPS")):
-        fig.add_annotation(x=x, y=1.065, text=f"<b>{caption}</b>",
-                           showarrow=False, font=dict(size=12, color="#e5edf7"))
-    graph_height = 720 if mode != "All individual companies" else max(720, min(3800, len(companies) * 12))
+    add_nodes([by_id[f"q:{q}"] for q in QUADRANTS], "Rotations",
+              [PALETTE[q] for q in QUADRANTS], 19)
+    add_nodes(sectors, "Sectors", NODE_COLOR["sector"], 10)
+    add_nodes(companies, "Companies", NODE_COLOR["company"], 7,
+              display_text=len(companies) <= 35)
+    add_nodes(factors, "Factors", NODE_COLOR["factor"], 10, symbol="diamond")
+    for x, label in ((0, "ROTATIONS"), (1., "SECTORS"),
+                     (2.15, "COMPANIES"), (3.3, "FACTORS")):
+        fig.add_annotation(x=x, y=1.08, text=f"<b>{label}</b>", showarrow=False,
+                           font=dict(size=12, color="#e5edf7"))
     fig.update_layout(
-        height=graph_height, paper_bgcolor=BACKGROUND, plot_bgcolor=BACKGROUND,
-        margin=dict(l=110, r=120, t=75, b=25),
-        xaxis=dict(visible=False, range=[-.38, 3.03], fixedrange=True),
-        yaxis=dict(visible=False, range=[-.035, 1.12], fixedrange=True),
-        font=dict(color="#e5edf7"), hovermode="closest", showlegend=True,
-        legend=dict(orientation="h", y=-.02, x=.02),
-    )
+        height=730 if len(companies) <= 80 else min(2400, 730 + 8 * (len(companies)-80)),
+        paper_bgcolor=BG, plot_bgcolor=BG,
+        margin=dict(l=105, r=100, t=80, b=35),
+        xaxis=dict(visible=False, range=[-.4, 3.8], fixedrange=True),
+        yaxis=dict(visible=False, range=[-.04, 1.14], fixedrange=True),
+        font=dict(color="#e5edf7"), showlegend=True,
+        legend=dict(orientation="h", y=-.02, x=0), hovermode="closest")
     st.plotly_chart(fig, use_container_width=True,
                     config={"displaylogo": False, "scrollZoom": False})
+    return sectors, companies, factors
 
 
 def render_graph(region: str):
@@ -199,64 +190,89 @@ def render_graph(region: str):
         st.error("Unsupported region")
         return
     st.title(f"{region} Rotation Knowledge Graph")
-    st.caption("One network · Four rotations → Sectors & Factors → Companies")
+    st.caption("Four rotations → Sector → Company → Factor. "
+               "Sectors and factors have their own rotation signals.")
     period = st.selectbox("Lookback", ["1m", "3m", "6m"], index=1,
                           key=f"kg_period_{region}")
-    signals = _load(region, period, "signals")
-    edges = _load(region, period, "edges")
+    signals, edges = _load(region, period, "signals"), _load(region, period, "edges")
     status = _manifest().get("regions", {}).get(f"{region.lower()}_{period}", {})
     if signals.empty:
-        st.warning("No rotation signals available. Run the automatic refresh workflow.")
-        if status.get("error"):
-            st.error(str(status["error"]))
+        st.warning("No rotation signals. Run Refresh Knowledge Graphs in GitHub Actions.")
         return
     if not (STORE / f"{region.lower()}_{period}_edges.csv").is_file():
-        st.error("Graph membership snapshot missing. Run the Refresh Knowledge Graphs workflow.")
+        st.error("Membership snapshot missing. Run Refresh Knowledge Graphs in GitHub Actions.")
         return
     if status.get("error"):
-        st.warning(f"Latest build issue: {status['error']}")
+        st.warning(f"Latest builder reported: {status['error']}")
     nodes, links = graph_elements(signals, edges)
+    by_id, memberships, _ = _indexed(nodes, links)
     cols = st.columns(4)
     for col, quadrant in zip(cols, QUADRANTS):
-        signals_count = int(signals["quadrant"].eq(quadrant).sum()) if "quadrant" in signals else 0
-        company_count = (int(edges.loc[edges["quadrant"].eq(quadrant), "company_key"].nunique())
-                         if not edges.empty and {"quadrant", "company_key"}.issubset(edges.columns) else 0)
-        col.metric(quadrant, f"{signals_count} indices", f"{company_count} companies", delta_color="off")
-    st.caption(f"{len(nodes):,} nodes · {len(links):,} relationships · "
-               "All memberships retained in the data")
-
-    mode = st.radio("Graph display", ["Overview (fits screen)",
-                      "Focus on a sector / factor", "All individual companies"],
-                    horizontal=True, key=f"kg_mode_{region}")
-    index_nodes = _available_index_nodes(nodes)
-    focus_id = None
-    if mode == "Focus on a sector / factor":
-        if not index_nodes:
-            st.info("No sector or factor signals to select.")
-        else:
-            options = {n["id"]: f"{n['quadrant']} · {n['type'].title()} · {n['label']}" for n in index_nodes}
-            focus_id = st.selectbox("Choose a sector or factor", options,
-                                    format_func=lambda key: options[key], key=f"kg_focus_{region}")
-            st.caption("All four rotations and all sector/factor signals remain visible. "
-                       "Only the selected source's company links are expanded.")
-    elif mode == "Overview (fits screen)":
-        st.info("To keep everything readable on one screen, the right column shows company counts "
-                "for every sector/factor. Choose Focus to see individual companies or "
-                "All individual companies for the complete network.")
+        indices = sum(n["type"] in ("sector", "factor") and n["quadrant"] == quadrant for n in nodes)
+        col.metric(quadrant, indices)
+    # All three views share exactly the same four-column renderer.
+    view = st.radio(
+        "Graph view",
+        ["Overview", "Sector / Factor", "Individual Companies"],
+        horizontal=True, key=f"kg_view_{region}",
+    )
+    sources = _sorted([n for n in nodes if n["type"] in ("sector", "factor")])
+    companies_all = sorted(
+        (n for n in nodes if n["type"] == "company"),
+        key=lambda n: (n.get("label", "").casefold(), n["id"]),
+    )
+    if view == "Overview":
+        focus = "all"
+        show_all = st.checkbox(
+            "Show every company (dense graph)", value=False,
+            key=f"kg_overview_all_{region}",
+        )
+        max_companies = None if show_all else 60
+        if not show_all:
+            st.caption(
+                "Overview shows all sector and factor signals and up to 60 "
+                "companies alphabetically. All other relationships remain in "
+                "the data tables below. Enable the checkbox for the full network."
+            )
+    elif view == "Sector / Factor":
+        if not sources:
+            st.warning("No classified sectors or factors in this snapshot.")
+            return
+        options = {n["id"]: (
+            f"{n['quadrant']} · {n['type'].title()} · {n['label']}"
+        ) for n in sources}
+        focus = st.selectbox(
+            "Select a sector or factor", list(options),
+            format_func=lambda value: options[value], key=f"kg_source_{region}",
+        )
+        max_companies = None
+        st.caption("Shows all verified companies for the selected index and "
+                   "their other sector/factor memberships.")
     else:
-        st.caption("Full network: all company nodes and verified links. "
-                   "Large networks need scrolling; hover over company dots for names.")
-    _draw(nodes, links, mode, focus_id)
-
-    if status.get("signal_asof"):
-        st.caption(f"Signals as of: {status['signal_asof']}")
-    if any(not signals["quadrant"].eq(q).any() for q in QUADRANTS) if "quadrant" in signals else True:
-        st.warning("Some rotations have no valid index signals in this snapshot; no signals were invented.")
-    with st.expander("All sector and factor signals"):
+        if not companies_all:
+            st.warning("No mapped companies in this snapshot. Check graph memberships.")
+            return
+        options = {n["id"]: (
+            f"{n.get('name') or n['label']} · {n['label']}"
+        ) for n in companies_all}
+        focus = st.selectbox(
+            "Select an individual company", list(options),
+            format_func=lambda value: options[value],
+            key=f"kg_company_{region}",
+        )
+        max_companies = None
+        st.caption("Shows the selected company, all its verified sectors and "
+                   "factors, and the associated rotation classifications.")
+    sectors, companies, factors = _draw(nodes, links, focus, max_companies)
+    st.caption(f"Visible: {len(sectors)} sectors · {len(companies)} companies · "
+               f"{len(factors)} factors. Overall graph: {len(nodes)} nodes / "
+               f"{len(links)} relationships. No membership data is discarded.")
+    st.info("Rotation labels describe sector/factor index signals, not independent "
+            "company price classifications. Factor-only companies connect to their "
+            "rotation directly when no same-quadrant sector link exists.")
+    with st.expander("All sector & factor signals"):
         st.dataframe(signals, use_container_width=True, hide_index=True)
-    with st.expander("All company memberships (search and sort)"):
+    with st.expander("All verified company memberships"):
         st.dataframe(edges, use_container_width=True, hide_index=True)
-    with st.expander("Unmapped holdings sources"):
+    with st.expander("Unmapped source records"):
         st.dataframe(_load(region, period, "unmapped"), use_container_width=True, hide_index=True)
-    st.caption("Rotation applies to sector/factor indices. A company link represents "
-               "verified holdings membership, not independent company price rotation.")
