@@ -170,7 +170,7 @@ def _collapse_sources(nodes: list[dict]):
         origin_to_group[n["id"]] = g["id"]
     result = []
     for g in grouped.values():
-        g["quadrants"] = tuple(q for q in QUADRANTS if q in g["quadrants"])
+        g["quadrants"] = tuple(q for q in (*QUADRANTS, "Unavailable") if q in g["quadrants"])
         g["quadrant"] = g["quadrants"][0] if len(g["quadrants"]) == 1 else "Mixed"
         g["source_labels"] = sorted(set(g["source_labels"]))
         result.append(g)
@@ -192,7 +192,7 @@ def _draw(nodes, links, selection: str | list[str] | dict, max_companies: int | 
         for i, node in enumerate(group):
             positions[node["id"]] = (x, 1 - (i + .5) / max(1, len(group)))
     fig = go.Figure()
-    paths = {q: set() for q in QUADRANTS}
+    paths = {q: set() for q in (*QUADRANTS, 'Unavailable')}
     # Every original source is processed separately. Multiple Nifty indexes
     # mapped to the same factor share one displayed node and unique edge.
     for source in raw_sectors:
@@ -207,13 +207,15 @@ def _draw(nodes, links, selection: str | list[str] | dict, max_companies: int | 
         matched = set(members.get(sid, ())) & visible_company_ids
         for cid in matched:
             paths[q].add((cid, gid))
-            if not any((s in raw_source_ids and by_id[s]["type"] == "sector"
+            if q != "Unavailable" and not any((s in raw_source_ids and by_id[s]["type"] == "sector"
                         and by_id[s]["quadrant"] == q)
                        for s in company_sources.get(cid, ())):
                 paths[q].add((f"q:{q}", cid))
-        if not matched:
+        if not matched and q in QUADRANTS:
             paths[q].add((f"q:{q}", gid))
-    for quadrant in QUADRANTS:
+    # Factor memberships without a valid rotation are drawn in neutral gray.
+    # They must never be represented as Leading/Improving/Weakening/Lagging.
+    for quadrant in (*QUADRANTS, 'Unavailable'):
         xs, ys = [], []
         for start, end in sorted(paths[quadrant]):
             if start not in positions or end not in positions:
@@ -223,7 +225,7 @@ def _draw(nodes, links, selection: str | list[str] | dict, max_companies: int | 
             ys.extend((a[1], b[1], None))
         if xs:
             fig.add_trace(go.Scattergl(x=xs, y=ys, mode="lines",
-                                      line=dict(color=PALETTE[quadrant], width=1.2),
+                                      line=dict(color=PALETTE.get(quadrant, "#94a3b8"), width=1.2),
                                       opacity=.36, hoverinfo="skip", showlegend=False))
 
     def add_nodes(group, title, color, size, symbol="circle", display_text=True):
@@ -403,7 +405,8 @@ def render_graph(region: str):
                f"{len(factors)} unique factor families. Overall graph: {len(nodes)} nodes / "
                f"{len(links)} relationships. No membership data is discarded.")
     st.caption("Repeated factor indexes share one visual family node; original index-level signals and memberships remain in the tables below.")
-    st.info("Rotation labels describe sector/factor index signals, not independent "
+    st.info("Gray company-to-factor links represent verified factor membership with unavailable rotation. "
+            "Rotation labels describe sector/factor index signals, not independent "
             "company price classifications. Factor-only companies connect to their "
             "rotation directly when no same-quadrant sector link exists.")
     with st.expander("All sector & factor signals"):

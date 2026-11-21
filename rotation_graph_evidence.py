@@ -23,14 +23,30 @@ def build_membership_edges(region: str, holdings: pd.DataFrame,
     from `signals`, so valid unconnected sector/factor signals remain visible.
     """
     from leading_lagging_engine import source_signal_mapping
-    if holdings.empty or signals.empty:
+    if holdings.empty:
         return pd.DataFrame(columns=EDGE_COLUMNS), pd.DataFrame()
-    mapping, unmapped = source_signal_mapping(region, holdings, signals)
+    mapping, unmapped = source_signal_mapping(region, holdings, signals) if not signals.empty else ({}, [])
+    # An official index constituent can establish FACTOR MEMBERSHIP even when
+    # its market-price history cannot establish rotation. Never invent a quadrant.
+    if region == 'India':
+        from india_index_rotation_expansion import SOURCE_TICKERS
+        growth_slug = 'nifty500_growth_50'
+        if growth_slug not in mapping:
+            mapping[growth_slug] = {
+                'quadrant': 'Unavailable', 'kind': 'factor',
+                'source_id': SOURCE_TICKERS[growth_slug], 'label': 'Growth',
+                'mapping_method': 'official_constituent_membership',
+                'mapping_note': 'Constituents verified; index rotation unavailable. No price signal inferred.',
+            }
+            # This is a missing rotation, not a missing category or membership.
+            unmapped = [r for r in unmapped if
+                        str(r.get('Source', '')).casefold().replace(' ', '') not in
+                        ('nifty500growth50',)]
     records = []
     for item in holdings.to_dict('records'):
         pid = str(item.get('index_slug' if region == 'India' else 'portfolio_id', '')).strip()
         signal = mapping.get(pid)
-        if not signal or signal.get('quadrant') not in QUADRANTS:
+        if not signal or signal.get('quadrant') not in (*QUADRANTS, 'Unavailable'):
             continue
         kind = str(signal.get('kind', '')).strip().lower()
         if kind not in ('sector', 'factor'):
@@ -88,8 +104,19 @@ def graph_elements(signals: pd.DataFrame, edges: pd.DataFrame):
         if expected.issubset(edges.columns):
             for e in edges.to_dict('records'):
                 index_id = f"i:{e['quadrant']}:{e['kind']}:{e['source_id']}"
-                if index_id not in by_id:  # no inferred or stale market signal
-                    continue
+                if index_id not in by_id:
+                    if (str(e['quadrant']) == 'Unavailable' and str(e['kind']) == 'factor'
+                            and str(e.get('mapping_method', '')) == 'official_constituent_membership'):
+                        # The factor index itself is known; only its ROTATION is unavailable.
+                        # Do not connect this node to a rotation quadrant.
+                        by_id[index_id] = {'id': index_id, 'type': 'factor',
+                                           'label': str(e.get('label', 'Growth')),
+                                           'quadrant': 'Unavailable',
+                                           'source_id': str(e['source_id']),
+                                           'rs': None, 'momentum': None}
+                        nodes.append(by_id[index_id])
+                    else:
+                        continue
                 company_id = f"c:{e['company_key']}"
                 if company_id not in by_id:
                     by_id[company_id] = {'id': company_id, 'type': 'company',

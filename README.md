@@ -1,15 +1,23 @@
-# Knowledge Graph visual deduplication
+# Company → Factor mapping (India Growth)
 
-## Install with GitHub Desktop
-Copy `regional_rotation_graph.py` into your repository root, beside `app.py`, replacing the old version. Commit and **Push origin** in GitHub Desktop. The app should redeploy automatically. No cache rebuild is needed because this only changes presentation and filter aggregation.
+This update makes an important distinction:
 
-## Changes
-- For **Global**, **USA**, and **India** graphs, indexes labeled `Nifty500 Value 50`, `Nifty200 Value 30`, etc. render as **one Value factor node**. Same for Momentum, Quality, Low Volatility, Alpha, Growth, Dividend Yield, Equal Weight, Small Cap, and Size.
-- Exact duplicates of sector labels also share one visual sector node.
-- Underlying index-level signals, source IDs, company memberships, and rotation classifications **remain unchanged**.
-- A merged family may include original indexes in different rotations; it displays a union of verified company memberships while keeping original index/rotation details in the hover tooltip and data tables.
-- Factor filter choices are by family, not duplicated index labels. `ALL` means match each selected family or sector, **not every index within a family**.
-- No fabricated links or market classifications are created.
+- **Membership:** A company appears in a stored Nifty500 Growth 50 constituent snapshot. Its connection to the **Growth** factor can be drawn.
+- **Rotation:** If Nifty500 Growth 50 lacks a valid price-history signal, the membership is shown as **Rotation unavailable**, not artificially assigned Leading/Improving/Weakening/Lagging.
+
+The Graph uses `Rotation → Sector → Company → Factor` wherever validated rotation/sector connections exist. For Growth-only membership without a validated rotation, it draws **Company → Growth** using a neutral gray edge. The existing Growth family visual deduplication is preserved.
+
+## GitHub Desktop installation
+
+1. Copy `rotation_graph_evidence.py` and `regional_rotation_graph.py` next to `app.py`, replacing the existing versions.
+2. Commit and Push origin in GitHub Desktop.
+3. In GitHub, run **Actions → Refresh Knowledge Graphs → Run workflow** to rebuild the `india_{1m,3m,6m}_edges.csv` snapshots.
+4. After its successful publish and Streamlit redeployment, open **India → Individual Companies**, filter by Growth, or view the full graph.
+
+**Requires** the existing `india_index_rotation_expansion.py` file and a current constituent snapshot with rows whose `index_slug` is `nifty500_growth_50`. If the source has no constituent rows, there is no valid company relationship to draw.
 
 ## Validation
-`python -m pytest test_dedup.py` (2 local unit tests). Syntax compilation also passed. Live Streamlit deployment has not been run here. The replacement is based on the latest locally available graph module from the earlier package; if you changed the graph code in GitHub afterward, compare before overwriting.
+
+`python -m pytest -q test_company_factor.py`
+
+This is a targeted patch against the available deduplicated graph module. Compare local differences before overwriting if your main branch has changed further. It has not been tested in a live Streamlit deployment.
