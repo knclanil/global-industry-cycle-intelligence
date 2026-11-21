@@ -1,33 +1,84 @@
 name: Refresh India Asset Flow Diagnostics
+
 on:
   workflow_dispatch:
   schedule:
     - cron: '45 12 * * 1-5'
+
 permissions:
   contents: write
+
+# Avoid simultaneous runs of this specific workflow publishing the same CSV.
+concurrency:
+  group: india-asset-flow-refresh-main
+  cancel-in-progress: false
+
 jobs:
   refresh:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Check out latest main
+        uses: actions/checkout@v4
         with:
+          ref: main
+          fetch-depth: 0
           persist-credentials: true
-      - uses: actions/setup-python@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: python -m pip install -r requirements.txt
+
       - name: Install recovery wrapper
         run: python scripts/install_india_asset_fix.py
+
       - name: Refresh source coverage diagnostics
         run: python scripts/refresh_india_asset_data.py
-      - name: Publish updated module and coverage
+
+      - name: Verify coverage CSV was produced
         run: |
+          test -s data/dashboard_cache/india_asset_flow_coverage.csv || {
+            echo 'Coverage CSV is missing or empty'; exit 1;
+          }
+
+      - name: Publish updated module and coverage (retry if main advances)
+        shell: bash
+        run: |
+          set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
           git add india_asset_market_data.py
           git add -f data/dashboard_cache/india_asset_flow_coverage.csv
-          if ! git diff --cached --quiet; then
-            git commit -m 'Refresh India asset history validation'
-            git push
+
+          if git diff --cached --quiet; then
+            echo 'No changes to publish.'
+            exit 0
           fi
+
+          git commit -m 'Refresh India asset history validation [skip ci]'
+
+          # A concurrent GitHub Desktop or other workflow push can move main.
+          # Replay only this generated-data commit on top of current main.
+          # Never force push or silently discard conflicting changes.
+          for attempt in 1 2 3 4 5; do
+            echo "Publishing attempt ${attempt}/5"
+            git fetch origin main
+            if ! git rebase origin/main; then
+              git rebase --abort || true
+              echo 'Rebase conflict: resolve conflicting changes manually. No force push attempted.'
+              exit 1
+            fi
+            if git push origin HEAD:main; then
+              echo 'Published refreshed India Asset Flow data.'
+              exit 0
+            fi
+            echo 'Remote main changed during publication. Retrying.'
+            sleep $((attempt * 3))
+          done
+
+          echo 'Could not publish after 5 attempts. Re-run the workflow.'
+          exit 1
