@@ -1,0 +1,7 @@
+ticker,observations,last_date,source,status
+NIFTYBEES.NS,338,2026-11-20,Yahoo Finance (ETF price proxy),Available
+GOLDBEES.NS,338,2026-11-20,Yahoo Finance (ETF price proxy),Available
+SILVERBEES.NS,338,2026-11-20,Yahoo Finance (ETF price proxy),Available
+LIQUIDBEES.NS,338,2026-11-20,Yahoo Finance (ETF price proxy),Available
+NIFTY_GSEC_10Y,340,2026-11-20,NSEPythonServer · NIFTY 10 YR BENCHMARK G-SEC,Available
+^NSEI,340,2026-11-20,NSEPythonServer (Nifty 50),Available

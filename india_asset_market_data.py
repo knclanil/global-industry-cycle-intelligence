@@ -214,3 +214,12 @@ def relative_trend_from_zero(frames, chosen, first, last):
     trend = cumulative[chosen].sub(cumulative[BENCHMARK], axis=0)
     trend.iloc[0] = 0.0
     return trend
+
+# BEGIN INDIA ASSET HISTORY RECOVERY V1
+# Keep original NSE government-bond and benchmark precedence unchanged.
+from india_asset_recovery import recover as _recover_india_asset_history
+_original_india_asset_download = download
+
+def download(start, end):
+    return _recover_india_asset_history(_original_india_asset_download, start, end)
+# END INDIA ASSET HISTORY RECOVERY V1
