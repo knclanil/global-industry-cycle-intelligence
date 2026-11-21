@@ -1,37 +1,20 @@
-# USA Company Financials — automatic end-to-end refresh
+# Fix missing USA and India Investment Research pages
 
-This package replaces the *USA company fundamentals workflow* and its associated collectors with one scheduled pipeline. It uses existing verified iShares US issuer memberships, **SEC EDGAR CompanyFacts for filings**, and existing **Yahoo Finance** as a *price/valuation metadata source* (not Alpha Vantage). India, Global, the Knowledge Graph, and Streamlit navigation are not modified.
+## Diagnosis (verified against public GitHub main/app.py on 2026-11-21)
+The deployed main/app.py lists USA Asset Flow, USA Sector, USA Factors and USA Analysis; it has NO USA Investment Opportunity Screener or USA Company Deep Dive route. India research routes are also absent. The latest *USA financial pipeline* ZIP contains only workflows, scripts, and tests — it does **not** include app.py, the Streamlit research pages, or navigation integration. Its successful deployment cannot create visible pages.
 
-## Install once (GitHub Desktop)
+## Do this once in GitHub Desktop (Windows)
+1. Extract this ZIP, open the extracted folder and **copy all contents** (including Python files, `scripts`, `.github`, and `INSTALL_WINDOWS.bat`) into your actual local global-industry-cycle-intelligence repository root where app.py lives.
+2. Double-click `INSTALL_WINDOWS.bat` **inside the repository root**, not inside the extracted folder. It updates the current app.py safely and confirms four page routes exist. If it fails, do not commit; share the displayed error.
+3. In GitHub Desktop, verify Changes includes `app.py` and `usa_opportunity_ui.py`, `usa_company_deep_dive_ui.py`, `usa_research_data.py` (plus three India files). If `app.py` does not appear changed, check if those routes are already present.
+4. Commit ALL changes, then **Push origin** to the branch used by Streamlit Cloud (typically main). GitHub.com main/app.py must contain `USA Investment Opportunity Screener` and `USA Company Deep Dive` afterwards.
+5. Restart/reload Streamlit app. Its USA nav now shows Asset Flow -> Sector -> Factors -> Investment Opportunity Screener -> Company Deep Dive; India shows the same ordered journey.
 
-Extract ZIP; copy the enclosed `.github`, `scripts`, and `tests` directories into the project root, preserving structure. Commit and **Push origin**. Do not replace `app.py`. The USA Company Fundamentals and Valuations Refresh workflow then runs automatically every weekday at 14:40 UTC. It can also be run manually, without input changes.
+## Notes
+- This fixes page visibility; it does not guarantee data availability. USA financial figures depend on published `data/usa_research/company_research.csv` from the scheduled USA fundamentals workflow.
+- Graph functionality and other market calculations are not edited by the installer.
+- Neither deployment nor live data refresh has been run from this environment.
+- The included automated USA pipeline is the same prior package, combined here to avoid having to track two different ZIPs.
 
-**Required existing prerequisite:** the repo's GitHub Actions secret `SEC_USER_AGENT` must be an identifying name and contact email for SEC EDGAR access. If already set from the prior USA pipeline, do not change it.
-
-## Pipeline
-
-1. Use **only verified USA iShares company holdings**, rather than unrelated Global funds.
-2. Collect up to 125 new/stale SEC CompanyFacts records per weekday; reuse existing facts. Official SEC ticker-to-CIK registry is cached, and missing/ambiguous CIK matches are never guessed. SEC requests have backoff and failure cooldown.
-3. Produce a full company research table **offline from cached SEC facts**. This avoids triggering thousands of SEC requests from the dashboard and avoids `sec_financials.load_company()` performing unbounded web fetches when data is absent.
-4. Prioritize fundamental-ready USA issuers for price/valuation collection (up to 125 per weekday). Skip malformed identifiers such as `-` and `2200964D`, and preserve previous valid quotes on provider failures.
-5. Rebuild company research with latest quotes. For each issuer, both a current financial statement and a fresh USD quote with P/E or P/B are required for `research_ready=Yes`. Reports explain missing intersection.
-6. Publish refreshed SEC caches, quotes, issuer research, and USA coverage reports to `main` from a clean temporary Git worktree with push retries.
-
-### Generated datasets
-
-- `data/usa_research/company_research.csv`: Company Deep Dive and Opportunity Screener inputs.
-- `data/usa_research/quotes.csv`: dated source-tagged USD prices and available market multiples.
-- `data/usa_research/completion_report.json`: full current coverage, overlap, data gaps.
-- `data/usa_research/financial_gaps.csv`: **every company** with missing metrics and readiness reasons.
-- `data/usa_research/quote_pilot_report.json`: per-run quote results and malformed symbol exclusions.
-- `data/usa_research/collection_report.json`: per-run SEC results and errors.
-- `data/research_coverage/fundamental_coverage.json`: combined coverage display, India counts unchanged.
-
-## Integrity / limitations
-
-- `research_ready` means inputs available, **not** an investment recommendation or numeric investment score. Model scores remain missing rather than fabricate peer-comparable valuations.
-- Industry-peer ranking and valuations such as EV/EBITDA need additional *verified comparable inputs*. The current pipeline supplies available SEC financials, Yahoo price / market-cap and reported P/E / P/B. Missing metrics stay missing.
-- SEC EDGAR returns statements only for eligible US reporting issuers. Some of the 2,931 verified ETF constituents may be foreign issuers, funds, preferred securities, or otherwise outside CompanyFacts coverage. Full 2,931-company fundamental coverage cannot be guaranteed.
-- Yahoo Finance is an unofficial data channel; rate limits and terms may restrict bulk availability. A finished automated collection workflow does **not** guarantee that all quotes or ratios will be populated. The automated reports make gaps explicit.
-- This is a **local integration package**. The repository's current live branch was not available for full checkout here; the code was compiled and offline regression tested against the previously shared source packages, but the live hosted workflow has not run in this environment.
-- The scheduled workflow increments coverage in batches, rather than making thousands of requests at once. Its total time to populate the eligible universe depends on provider responses, GitHub Actions limits and existing caches.
+## Installer sanity check
+`python scripts/install_research_navigation.py --check`
