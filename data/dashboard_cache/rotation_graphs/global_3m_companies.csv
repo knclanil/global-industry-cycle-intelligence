@@ -1,253 +1,286 @@
 Company,Ticker,company_key,Category,Score,Sector indices,Factor indices,Sector RS magnitude,Factor RS magnitude,Sector sources,Factor sources,Signal basis,Avg ETF % weight,Exposure,Rank
-CONSTELLATION SOFTWARE INC,2299955D,TICKER_COUNTRY:2299955D|CA,Lagging,9.542,1,1,12.66,7.19,Technology,Momentum,Category ETF proxy,0.0,0.0,1
-KIOXIA HOLDINGS,285A,TICKER_COUNTRY:285A|JP,Lagging,9.542,1,1,12.66,7.19,Technology,Momentum,Category ETF proxy,0.61,1.22,1
-IBIDEN LTD,4062,TICKER_COUNTRY:4062|JP,Lagging,9.542,1,1,12.66,7.19,Technology,Momentum,Category ETF proxy,0.165,0.33,1
-FUJIFILM HOLDINGS,4901,TICKER_COUNTRY:4901|JP,Lagging,9.542,1,1,12.66,7.19,Technology,Momentum,Category ETF proxy,0.11,0.22,1
-RENESAS ELECTRONICS CORP,6723,TICKER_COUNTRY:6723|JP,Lagging,9.542,1,1,12.66,7.19,Technology,Momentum,Category ETF proxy,0.16,0.32,1
-TDK,6762,TICKER_COUNTRY:6762|JP,Lagging,9.542,1,1,12.66,7.19,Technology,Momentum,Category ETF proxy,0.125,0.25,1
-ADVANTEST,6857,TICKER_COUNTRY:6857|JP,Lagging,9.542,1,1,12.66,7.19,Technology,Momentum,Category ETF proxy,0.94,1.88,1
-KEYENCE,6861,TICKER_COUNTRY:6861|JP,Lagging,9.542,1,1,12.66,7.19,Technology,Momentum,Category ETF proxy,0.415,0.83,1
-LASERTEC,6920,TICKER_COUNTRY:6920|JP,Lagging,9.542,1,1,12.66,7.19,Technology,Momentum,Category ETF proxy,0.1,0.2,1
-KYOCERA,6971,TICKER_COUNTRY:6971|JP,Lagging,9.542,1,1,12.66,7.19,Technology,Momentum,Category ETF proxy,0.185,0.37,1
-MURATA MANUFACTURING,6981,TICKER_COUNTRY:6981|JP,Lagging,9.542,1,1,12.66,7.19,Technology,Momentum,Category ETF proxy,0.515,1.03,1
-SCREEN HOLDINGS LTD,7735,TICKER_COUNTRY:7735|JP,Lagging,9.542,1,1,12.66,7.19,Technology,Momentum,Category ETF proxy,0.05,0.1,1
-TOKYO ELECTRON,8035,TICKER_COUNTRY:8035|JP,Lagging,9.542,1,1,12.66,7.19,Technology,Momentum,Category ETF proxy,0.815,1.63,1
-ASM INTERNATIONAL NV,ASM,TICKER_COUNTRY:ASM|NL,Lagging,9.542,1,1,12.66,7.19,Technology,Momentum,Category ETF proxy,0.205,0.41,1
-ASML HOLDING,ASML,TICKER_COUNTRY:ASML|NL,Lagging,9.542,1,1,12.66,7.19,Technology,Momentum,Category ETF proxy,3.42,6.84,1
-BE SEMICONDUCTOR INDUSTRIES NV,BESI,TICKER_COUNTRY:BESI|NL,Lagging,9.542,1,1,12.66,7.19,Technology,Momentum,Category ETF proxy,0.07,0.14,1
-CELESTICA,CLS,TICKER_COUNTRY:CLS|CA,Lagging,9.542,1,1,12.66,7.19,Technology,Momentum,Category ETF proxy,0.19,0.38,1
-ERICSSON B,ERIC B,TICKER_COUNTRY:ERIC B|SE,Lagging,9.542,1,1,12.66,7.19,Technology,Momentum,Category ETF proxy,0.135,0.27,1
-INFINEON TECHNOLOGIES AG,IFX,TICKER_COUNTRY:IFX|DE,Lagging,9.542,1,1,12.66,7.19,Technology,Momentum,Category ETF proxy,0.43,0.86,1
-NOKIA,NOKIA,TICKER_COUNTRY:NOKIA|FI,Lagging,9.542,1,1,12.66,7.19,Technology,Momentum,Category ETF proxy,0.355,0.71,1
-TORAY INDUSTRIES,3402,TICKER_COUNTRY:3402|JP,Lagging,9.272,1,1,11.95,7.19,Materials,Momentum,Category ETF proxy,0.26,0.52,21
-ASAHI KASEI,3407,TICKER_COUNTRY:3407|JP,Lagging,9.272,1,1,11.95,7.19,Materials,Momentum,Category ETF proxy,0.29,0.58,21
-RESONAC HOLDINGS,4004,TICKER_COUNTRY:4004|JP,Lagging,9.272,1,1,11.95,7.19,Materials,Momentum,Category ETF proxy,0.355,0.71,21
-SHIN ETSU CHEMICAL,4063,TICKER_COUNTRY:4063|JP,Lagging,9.272,1,1,11.95,7.19,Materials,Momentum,Category ETF proxy,1.36,2.72,21
-MITSUBISHI CHEMICAL GROUP,4188,TICKER_COUNTRY:4188|JP,Lagging,9.272,1,1,11.95,7.19,Materials,Momentum,Category ETF proxy,0.17,0.34,21
-JX ADVANCED METALS CORP,5016,TICKER_COUNTRY:5016|JP,Lagging,9.272,1,1,11.95,7.19,Materials,Momentum,Category ETF proxy,0.215,0.43,21
-MITSUI KINZOKU LIMITED LTD,5706,TICKER_COUNTRY:5706|JP,Lagging,9.272,1,1,11.95,7.19,Materials,Momentum,Category ETF proxy,0.115,0.23,21
-SUMITOMO METAL MINING,5713,TICKER_COUNTRY:5713|JP,Lagging,9.272,1,1,11.95,7.19,Materials,Momentum,Category ETF proxy,0.23,0.46,21
-ANGLO AMERICAN PLC,AAL,TICKER_COUNTRY:AAL|GB,Lagging,9.272,1,1,11.95,7.19,Materials,Momentum,Category ETF proxy,1.06,2.12,21
-LAIR LIQUIDE SOCIETE ANONYME POUR,AI,TICKER_COUNTRY:AI|FR,Lagging,9.272,1,1,11.95,7.19,Materials,Momentum,Category ETF proxy,2.6,5.2,21
-ANTOFAGASTA PLC,ANTO,TICKER_COUNTRY:ANTO|GB,Lagging,9.272,1,1,11.95,7.19,Materials,Momentum,Category ETF proxy,0.275,0.55,21
-BASF N,BAS,TICKER_COUNTRY:BAS|DE,Lagging,9.272,1,1,11.95,7.19,Materials,Momentum,Category ETF proxy,1.02,2.04,21
-BHP GROUP LTD,BHP,TICKER_COUNTRY:BHP|AU,Lagging,9.272,1,1,11.95,7.19,Materials,Momentum,Category ETF proxy,3.895,7.79,21
-DSM FIRMENICH AG,DSFIR,TICKER_COUNTRY:DSFIR|NL,Lagging,9.272,1,1,11.95,7.19,Materials,Momentum,Category ETF proxy,0.53,1.06,21
-FIRST QUANTUM MINERALS,FM,TICKER_COUNTRY:FM|CA,Lagging,9.272,1,1,11.95,7.19,Materials,Momentum,Category ETF proxy,0.27,0.54,21
-GLENCORE PLC,GLEN,TICKER_COUNTRY:GLEN|GB,Lagging,9.272,1,1,11.95,7.19,Materials,Momentum,Category ETF proxy,1.295,2.59,21
-ARCELORMITTAL SA,MT,TICKER_COUNTRY:MT|FR,Lagging,9.272,1,1,11.95,7.19,Materials,Momentum,Category ETF proxy,0.59,1.18,21
-NORSK HYDRO,NHY,TICKER_COUNTRY:NHY|NO,Lagging,9.272,1,1,11.95,7.19,Materials,Momentum,Category ETF proxy,0.185,0.37,21
-NUTRIEN LTD,NTR,TICKER_COUNTRY:NTR|CA,Lagging,9.272,1,1,11.95,7.19,Materials,Momentum,Category ETF proxy,0.65,1.3,21
-PLS GROUP LTD,PLS,TICKER_COUNTRY:PLS|AU,Lagging,9.272,1,1,11.95,7.19,Materials,Momentum,Category ETF proxy,0.115,0.23,21
-RIO TINTO,RIO-AU,TICKER_COUNTRY:RIO|AU,Lagging,9.272,1,1,11.95,7.19,Materials,Momentum,Category ETF proxy,0.735,1.47,21
-RIO TINTO,RIO-GB,TICKER_COUNTRY:RIO|GB,Lagging,9.272,1,1,11.95,7.19,Materials,Momentum,Category ETF proxy,1.795,3.59,21
-SOUTH32,S32,TICKER_COUNTRY:S32|AU,Lagging,9.272,1,1,11.95,7.19,Materials,Momentum,Category ETF proxy,0.255,0.51,21
-SYMRISE AG,SY1,TICKER_COUNTRY:SY1|DE,Lagging,9.272,1,1,11.95,7.19,Materials,Momentum,Category ETF proxy,0.275,0.55,21
-TECK RESOURCES SUBORDINATE VOTING,TECK.B,TICKER_COUNTRY:TECK.B|CA,Lagging,9.272,1,1,11.95,7.19,Materials,Momentum,Category ETF proxy,0.53,1.06,21
-KIRIN HOLDINGS,2503,TICKER_COUNTRY:2503|JP,Leading,16.817,1,1,21.71,13.03,Consumer Staples,Minimum Volatility,Category ETF proxy,0.27,0.54,1
-JAPAN TOBACCO,2914,TICKER_COUNTRY:2914|JP,Leading,16.817,1,1,21.71,13.03,Consumer Staples,Minimum Volatility,Category ETF proxy,0.615,1.23,1
-AEON,8267,TICKER_COUNTRY:8267|JP,Leading,16.817,1,1,21.71,13.03,Consumer Staples,Minimum Volatility,Category ETF proxy,0.295,0.59,1
-KONINKLIJKE AHOLD DELHAIZE,AD,TICKER_COUNTRY:AD|NL,Leading,16.817,1,1,21.71,13.03,Consumer Staples,Minimum Volatility,Category ETF proxy,0.52,1.04,1
-DANONE SA,BN,TICKER_COUNTRY:BN|FR,Leading,16.817,1,1,21.71,13.03,Consumer Staples,Minimum Volatility,Category ETF proxy,0.655,1.31,1
-CHURCH AND DWIGHT INC,CHD,TICKER_COUNTRY:CHD|US,Leading,16.817,1,1,21.71,13.03,Consumer Staples,Minimum Volatility,Category ETF proxy,0.595,1.19,1
-COLGATE-PALMOLIVE,CL,TICKER_COUNTRY:CL|US,Leading,16.817,1,1,21.71,13.03,Consumer Staples,Minimum Volatility,Category ETF proxy,1.26,2.52,1
-COSTCO WHOLESALE CORP,COST,TICKER_COUNTRY:COST|US,Leading,16.817,1,1,21.71,13.03,Consumer Staples,Minimum Volatility,Category ETF proxy,3.525,7.05,1
-DOLLAR GENERAL CORP,DG,TICKER_COUNTRY:DG|US,Leading,16.817,1,1,21.71,13.03,Consumer Staples,Minimum Volatility,Category ETF proxy,0.48,0.96,1
-GENERAL MILLS INC,GIS,TICKER_COUNTRY:GIS|US,Leading,16.817,1,1,21.71,13.03,Consumer Staples,Minimum Volatility,Category ETF proxy,0.32,0.64,1
-HERSHEY FOODS,HSY,TICKER_COUNTRY:HSY|US,Leading,16.817,1,1,21.71,13.03,Consumer Staples,Minimum Volatility,Category ETF proxy,0.495,0.99,1
-KEURIG DR PEPPER INC,KDP,TICKER_COUNTRY:KDP|US,Leading,16.817,1,1,21.71,13.03,Consumer Staples,Minimum Volatility,Category ETF proxy,0.815,1.63,1
-COCA-COLA,KO,TICKER_COUNTRY:KO|US,Leading,16.817,1,1,21.71,13.03,Consumer Staples,Minimum Volatility,Category ETF proxy,2.955,5.91,1
-KROGER,KR,TICKER_COUNTRY:KR|US,Leading,16.817,1,1,21.71,13.03,Consumer Staples,Minimum Volatility,Category ETF proxy,0.87,1.74,1
-MONDELEZ INTERNATIONAL CLASS A,MDLZ,TICKER_COUNTRY:MDLZ|US,Leading,16.817,1,1,21.71,13.03,Consumer Staples,Minimum Volatility,Category ETF proxy,1.41,2.82,1
-MONSTER BEVERAGE,MNST,TICKER_COUNTRY:MNST|US,Leading,16.817,1,1,21.71,13.03,Consumer Staples,Minimum Volatility,Category ETF proxy,1.125,2.25,1
-ALTRIA GROUP INC,MO,TICKER_COUNTRY:MO|US,Leading,16.817,1,1,21.71,13.03,Consumer Staples,Minimum Volatility,Category ETF proxy,1.675,3.35,1
-PEPSICO,PEP,TICKER_COUNTRY:PEP|US,Leading,16.817,1,1,21.71,13.03,Consumer Staples,Minimum Volatility,Category ETF proxy,2.515,5.03,1
-PROCTER & GAMBLE,PG,TICKER_COUNTRY:PG|US,Leading,16.817,1,1,21.71,13.03,Consumer Staples,Minimum Volatility,Category ETF proxy,3.085,6.17,1
-PHILIP MORRIS INTERNATIONAL,PM,TICKER_COUNTRY:PM|US,Leading,16.817,1,1,21.71,13.03,Consumer Staples,Minimum Volatility,Category ETF proxy,2.175,4.35,1
-SYSCO,SYY,TICKER_COUNTRY:SYY|US,Leading,16.817,1,1,21.71,13.03,Consumer Staples,Minimum Volatility,Category ETF proxy,0.525,1.05,1
-TYSON FOODS INC CLASS A,TSN,TICKER_COUNTRY:TSN|US,Leading,16.817,1,1,21.71,13.03,Consumer Staples,Minimum Volatility,Category ETF proxy,0.4,0.8,1
-VYLOR,VYLR,TICKER_COUNTRY:VYLR|US,Leading,16.817,1,1,21.71,13.03,Consumer Staples,Minimum Volatility,Category ETF proxy,0.66,1.32,1
-WALMART,WMT,TICKER_COUNTRY:WMT|US,Leading,16.817,1,1,21.71,13.03,Consumer Staples,Minimum Volatility,Category ETF proxy,4.12,8.24,1
-CHUBU ELECTRIC POWER INC,9502,TICKER_COUNTRY:9502|JP,Leading,15.512,1,1,18.47,13.03,Utilities,Minimum Volatility,Category ETF proxy,0.35,0.7,25
-TOKYO GAS LTD,9531,TICKER_COUNTRY:9531|JP,Leading,15.512,1,1,18.47,13.03,Utilities,Minimum Volatility,Category ETF proxy,0.36,0.72,25
-AMEREN,AEE,TICKER_COUNTRY:AEE|US,Leading,15.512,1,1,18.47,13.03,Utilities,Minimum Volatility,Category ETF proxy,0.77,1.54,25
-AMERICAN ELECTRIC POWER INC,AEP,TICKER_COUNTRY:AEP|US,Leading,15.512,1,1,18.47,13.03,Utilities,Minimum Volatility,Category ETF proxy,1.625,3.25,25
-APA GROUP UNITS,APA,TICKER_COUNTRY:APA|AU,Leading,15.512,1,1,18.47,13.03,Utilities,Minimum Volatility,Category ETF proxy,0.3,0.6,25
-ATMOS ENERGY,ATO,TICKER_COUNTRY:ATO|US,Leading,15.512,1,1,18.47,13.03,Utilities,Minimum Volatility,Category ETF proxy,0.82,1.64,25
-AMERICAN WATER WORKS,AWK,TICKER_COUNTRY:AWK|US,Leading,15.512,1,1,18.47,13.03,Utilities,Minimum Volatility,Category ETF proxy,0.85,1.7,25
-CMS ENERGY,CMS,TICKER_COUNTRY:CMS|US,Leading,15.512,1,1,18.47,13.03,Utilities,Minimum Volatility,Category ETF proxy,0.59,1.18,25
-CENTERPOINT ENERGY,CNP,TICKER_COUNTRY:CNP|US,Leading,15.512,1,1,18.47,13.03,Utilities,Minimum Volatility,Category ETF proxy,0.615,1.23,25
-DUKE ENERGY CORP,DUK,TICKER_COUNTRY:DUK|US,Leading,15.512,1,1,18.47,13.03,Utilities,Minimum Volatility,Category ETF proxy,2.895,5.79,25
-CONSOLIDATED EDISON,ED,TICKER_COUNTRY:ED|US,Leading,15.512,1,1,18.47,13.03,Utilities,Minimum Volatility,Category ETF proxy,1.41,2.82,25
-EXELON CORP,EXC,TICKER_COUNTRY:EXC|US,Leading,15.512,1,1,18.47,13.03,Utilities,Minimum Volatility,Category ETF proxy,1.095,2.19,25
-FIRSTENERGY CORP,FE,TICKER_COUNTRY:FE|US,Leading,15.512,1,1,18.47,13.03,Utilities,Minimum Volatility,Category ETF proxy,0.61,1.22,25
-PG&E CORP,PCG,TICKER_COUNTRY:PCG|US,Leading,15.512,1,1,18.47,13.03,Utilities,Minimum Volatility,Category ETF proxy,0.7,1.4,25
-PPL CORP,PPL,TICKER_COUNTRY:PPL|US,Leading,15.512,1,1,18.47,13.03,Utilities,Minimum Volatility,Category ETF proxy,0.665,1.33,25
-SOUTHERN,SO,TICKER_COUNTRY:SO|US,Leading,15.512,1,1,18.47,13.03,Utilities,Minimum Volatility,Category ETF proxy,2.97,5.94,25
-WEC ENERGY GROUP,WEC,TICKER_COUNTRY:WEC|US,Leading,15.512,1,1,18.47,13.03,Utilities,Minimum Volatility,Category ETF proxy,1.225,2.45,25
-XCEL ENERGY INC,XEL,TICKER_COUNTRY:XEL|US,Leading,15.512,1,1,18.47,13.03,Utilities,Minimum Volatility,Category ETF proxy,1.195,2.39,25
-TAKEDA PHARMACEUTICAL,4502,TICKER_COUNTRY:4502|JP,Leading,14.452,1,1,16.03,13.03,Healthcare,Minimum Volatility,Category ETF proxy,0.93,1.86,43
-SHIONOGI,4507,TICKER_COUNTRY:4507|JP,Leading,14.452,1,1,16.03,13.03,Healthcare,Minimum Volatility,Category ETF proxy,0.2,0.4,43
-OTSUKA HOLDINGS,4578,TICKER_COUNTRY:4578|JP,Leading,14.452,1,1,16.03,13.03,Healthcare,Minimum Volatility,Category ETF proxy,0.42,0.84,43
-BEONE MEDICINES AG,6160,TICKER_COUNTRY:6160|CN,Leading,14.452,1,1,16.03,13.03,Healthcare,Minimum Volatility,Category ETF proxy,0.39,0.78,43
-ABBVIE,ABBV,TICKER_COUNTRY:ABBV|US,Leading,14.452,1,1,16.03,13.03,Healthcare,Minimum Volatility,Category ETF proxy,2.925,5.85,43
-ABBOTT LABORATORIES,ABT,TICKER_COUNTRY:ABT|US,Leading,14.452,1,1,16.03,13.03,Healthcare,Minimum Volatility,Category ETF proxy,1.265,2.53,43
-AMGEN INC,AMGN,TICKER_COUNTRY:AMGN|US,Leading,14.452,1,1,16.03,13.03,Healthcare,Minimum Volatility,Category ETF proxy,1.57,3.14,43
-ARGENX,ARGX,TICKER_COUNTRY:ARGX|BE,Leading,14.452,1,1,16.03,13.03,Healthcare,Minimum Volatility,Category ETF proxy,0.57,1.14,43
-BRISTOL MYERS SQUIBB,BMY,TICKER_COUNTRY:BMY|US,Leading,14.452,1,1,16.03,13.03,Healthcare,Minimum Volatility,Category ETF proxy,0.72,1.44,43
-CARDINAL HEALTH,CAH,TICKER_COUNTRY:CAH|US,Leading,14.452,1,1,16.03,13.03,Healthcare,Minimum Volatility,Category ETF proxy,0.555,1.11,43
-CIGNA,CI,TICKER_COUNTRY:CI|US,Leading,14.452,1,1,16.03,13.03,Healthcare,Minimum Volatility,Category ETF proxy,0.515,1.03,43
-CENTENE CORP,CNC,TICKER_COUNTRY:CNC|US,Leading,14.452,1,1,16.03,13.03,Healthcare,Minimum Volatility,Category ETF proxy,0.285,0.57,43
-CENCORA,COR,TICKER_COUNTRY:COR|US,Leading,14.452,1,1,16.03,13.03,Healthcare,Minimum Volatility,Category ETF proxy,0.915,1.83,43
-QUEST DIAGNOSTICS INC,DGX,TICKER_COUNTRY:DGX|US,Leading,14.452,1,1,16.03,13.03,Healthcare,Minimum Volatility,Category ETF proxy,0.275,0.55,43
-ELEVANCE HEALTH INC,ELV,TICKER_COUNTRY:ELV|US,Leading,14.452,1,1,16.03,13.03,Healthcare,Minimum Volatility,Category ETF proxy,0.695,1.39,43
-EDWARDS LIFESCIENCES,EW,TICKER_COUNTRY:EW|US,Leading,14.452,1,1,16.03,13.03,Healthcare,Minimum Volatility,Category ETF proxy,0.43,0.86,43
-GILEAD SCIENCES,GILD,TICKER_COUNTRY:GILD|US,Leading,14.452,1,1,16.03,13.03,Healthcare,Minimum Volatility,Category ETF proxy,1.385,2.77,43
-HCA HEALTHCARE,HCA,TICKER_COUNTRY:HCA|US,Leading,14.452,1,1,16.03,13.03,Healthcare,Minimum Volatility,Category ETF proxy,0.475,0.95,43
-HOLOGIC INC,HOLX,TICKER_COUNTRY:HOLX|US,Leading,14.452,1,1,16.03,13.03,Healthcare,Minimum Volatility,Category ETF proxy,0.0,0.0,43
-INCYTE CORP,INCY,TICKER_COUNTRY:INCY|US,Leading,14.452,1,1,16.03,13.03,Healthcare,Minimum Volatility,Category ETF proxy,0.305,0.61,43
-JOHNSON & JOHNSON,JNJ,TICKER_COUNTRY:JNJ|US,Leading,14.452,1,1,16.03,13.03,Healthcare,Minimum Volatility,Category ETF proxy,4.145,8.29,43
-ELI LILLY,LLY,TICKER_COUNTRY:LLY|US,Leading,14.452,1,1,16.03,13.03,Healthcare,Minimum Volatility,Category ETF proxy,5.85,11.7,43
-MCKESSON CORP,MCK,TICKER_COUNTRY:MCK|US,Leading,14.452,1,1,16.03,13.03,Healthcare,Minimum Volatility,Category ETF proxy,1.24,2.48,43
-MERCK & CO INC,MRK-US,TICKER_COUNTRY:MRK|US,Leading,14.452,1,1,16.03,13.03,Healthcare,Minimum Volatility,Category ETF proxy,2.18,4.36,43
-REDE DOR SAO LUIZ SA,RDOR3,TICKER_COUNTRY:RDOR3|BR,Leading,14.452,1,1,16.03,13.03,Healthcare,Minimum Volatility,Category ETF proxy,0.06,0.12,43
-REGENERON PHARMACEUTICALS,REGN,TICKER_COUNTRY:REGN|US,Leading,14.452,1,1,16.03,13.03,Healthcare,Minimum Volatility,Category ETF proxy,0.63,1.26,43
-UNITEDHEALTH GROUP,UNH,TICKER_COUNTRY:UNH|US,Leading,14.452,1,1,16.03,13.03,Healthcare,Minimum Volatility,Category ETF proxy,1.795,3.59,43
-VERTEX PHARMACEUTICALS,VRTX,TICKER_COUNTRY:VRTX|US,Leading,14.452,1,1,16.03,13.03,Healthcare,Minimum Volatility,Category ETF proxy,1.045,2.09,43
-JERONIMO MARTINS SA,JMT,TICKER_COUNTRY:JMT|PT,Leading,12.732,1,2,21.71,7.29,Consumer Staples,Minimum Volatility · Quality,Category ETF proxy,0.08,0.24,71
-LOBLAW COMPANIES LTD,L,TICKER_COUNTRY:L|CA,Leading,12.732,1,2,21.71,7.29,Consumer Staples,Minimum Volatility · Quality,Category ETF proxy,0.397,1.19,71
-CHOCOLADEFABRIKEN LINDT & SPRUENGL,LISN,TICKER_COUNTRY:LISN|CH,Leading,12.732,1,2,21.71,7.29,Consumer Staples,Minimum Volatility · Quality,Category ETF proxy,0.177,0.53,71
-NESTLE SA,NESN,TICKER_COUNTRY:NESN|CH,Leading,12.732,1,2,21.71,7.29,Consumer Staples,Minimum Volatility · Quality,Category ETF proxy,2.14,6.42,71
-OSAKA GAS,9532,TICKER_COUNTRY:9532|JP,Leading,11.756,1,2,18.47,7.29,Utilities,Minimum Volatility · Quality,Category ETF proxy,0.317,0.95,75
-IBERDROLA,IBE,TICKER_COUNTRY:IBE|ES,Leading,11.756,1,2,18.47,7.29,Utilities,Minimum Volatility · Quality,Category ETF proxy,2.757,8.27,75
-VERBUND AG,VER,TICKER_COUNTRY:VER|AT,Leading,11.756,1,2,18.47,7.29,Utilities,Minimum Volatility · Quality,Category ETF proxy,0.12,0.36,75
-NOVARTIS AG,NOVN,TICKER_COUNTRY:NOVN|CH,Leading,10.963,1,2,16.03,7.29,Healthcare,Minimum Volatility · Quality,Category ETF proxy,1.963,5.89,78
-ORIENTAL LAND,4661,TICKER_COUNTRY:4661|JP,Leading,10.934,1,1,9.18,13.03,Consumer Discretionary,Minimum Volatility,Category ETF proxy,0.435,0.87,79
-HONDA MOTOR,7267,TICKER_COUNTRY:7267|JP,Leading,10.934,1,1,9.18,13.03,Consumer Discretionary,Minimum Volatility,Category ETF proxy,0.38,0.76,79
-AUTOZONE,AZO,TICKER_COUNTRY:AZO|US,Leading,10.934,1,1,9.18,13.03,Consumer Discretionary,Minimum Volatility,Category ETF proxy,0.655,1.31,79
-MCDONALDS CORP,MCD,TICKER_COUNTRY:MCD|US,Leading,10.934,1,1,9.18,13.03,Consumer Discretionary,Minimum Volatility,Category ETF proxy,1.98,3.96,79
-OREILLY AUTOMOTIVE INC,ORLY,TICKER_COUNTRY:ORLY|US,Leading,10.934,1,1,9.18,13.03,Consumer Discretionary,Minimum Volatility,Category ETF proxy,0.925,1.85,79
-TJX,TJX,TICKER_COUNTRY:TJX|US,Leading,10.934,1,1,9.18,13.03,Consumer Discretionary,Minimum Volatility,Category ETF proxy,1.57,3.14,79
-YUM BRANDS,YUM,TICKER_COUNTRY:YUM|US,Leading,10.934,1,1,9.18,13.03,Consumer Discretionary,Minimum Volatility,Category ETF proxy,0.59,1.18,79
-INDUSTRIAL AND COMMERCIAL BANK OF,1398,TICKER_COUNTRY:1398|CN,Leading,8.974,1,1,6.18,13.03,Financials,Minimum Volatility,Category ETF proxy,0.44,0.88,86
-BANK OF CHINA LTD H,3988,TICKER_COUNTRY:3988|CN,Leading,8.974,1,1,6.18,13.03,Financials,Minimum Volatility,Category ETF proxy,0.64,1.28,86
-SOMPO HOLDINGS,8630,TICKER_COUNTRY:8630|JP,Leading,8.974,1,1,6.18,13.03,Financials,Minimum Volatility,Category ETF proxy,0.15,0.3,86
-CHINA CONSTRUCTION BANK CORP H,939,TICKER_COUNTRY:939|CN,Leading,8.974,1,1,6.18,13.03,Financials,Minimum Volatility,Category ETF proxy,0.66,1.32,86
-ARCH CAPITAL GROUP,ACGL,TICKER_COUNTRY:ACGL|US,Leading,8.974,1,1,6.18,13.03,Financials,Minimum Volatility,Category ETF proxy,0.37,0.74,86
-ALLSTATE CORP,ALL,TICKER_COUNTRY:ALL|US,Leading,8.974,1,1,6.18,13.03,Financials,Minimum Volatility,Category ETF proxy,0.275,0.55,86
-AON PLC CLASS A,AON,TICKER_COUNTRY:AON|US,Leading,8.974,1,1,6.18,13.03,Financials,Minimum Volatility,Category ETF proxy,0.375,0.75,86
-CREDICORP LTD,BAP,TICKER_COUNTRY:BAP|PERU,Leading,8.974,1,1,6.18,13.03,Financials,Minimum Volatility,Category ETF proxy,0.1,0.2,86
-BERKSHIRE HATHAWAY INC CLASS B,BRK B,TICKER_COUNTRY:BRK B|US,Leading,8.974,1,1,6.18,13.03,Financials,Minimum Volatility,Category ETF proxy,4.1,8.2,86
-BROWN & BROWN INC,BRO,TICKER_COUNTRY:BRO|US,Leading,8.974,1,1,6.18,13.03,Financials,Minimum Volatility,Category ETF proxy,0.15,0.3,86
-CHUBB,CB,TICKER_COUNTRY:CB|US,Leading,8.974,1,1,6.18,13.03,Financials,Minimum Volatility,Category ETF proxy,0.935,1.87,86
-CBOE GLOBAL MARKETS,CBOE,TICKER_COUNTRY:CBOE|US,Leading,8.974,1,1,6.18,13.03,Financials,Minimum Volatility,Category ETF proxy,0.36,0.72,86
-CME GROUP CLASS A,CME,TICKER_COUNTRY:CME|US,Leading,8.974,1,1,6.18,13.03,Financials,Minimum Volatility,Category ETF proxy,0.675,1.35,86
-LOEWS,L,TICKER_COUNTRY:L|US,Leading,8.974,1,1,6.18,13.03,Financials,Minimum Volatility,Category ETF proxy,0.235,0.47,86
-MASTERCARD CLASS A,MA,TICKER_COUNTRY:MA|US,Leading,8.974,1,1,6.18,13.03,Financials,Minimum Volatility,Category ETF proxy,1.805,3.61,86
-MARSH,MRSH,TICKER_COUNTRY:MRSH|US,Leading,8.974,1,1,6.18,13.03,Financials,Minimum Volatility,Category ETF proxy,0.62,1.24,86
-NU HOLDINGS CLASS A,NU,TICKER_COUNTRY:NU|BR,Leading,8.974,1,1,6.18,13.03,Financials,Minimum Volatility,Category ETF proxy,0.22,0.44,86
-PROGRESSIVE,PGR,TICKER_COUNTRY:PGR|US,Leading,8.974,1,1,6.18,13.03,Financials,Minimum Volatility,Category ETF proxy,0.69,1.38,86
-TRAVELERS COMPANIES,TRV,TICKER_COUNTRY:TRV|US,Leading,8.974,1,1,6.18,13.03,Financials,Minimum Volatility,Category ETF proxy,0.48,0.96,86
-VISA CLASS A,V,TICKER_COUNTRY:V|US,Leading,8.974,1,1,6.18,13.03,Financials,Minimum Volatility,Category ETF proxy,2.65,5.3,86
-WR BERKLEY,WRB,TICKER_COUNTRY:WRB|US,Leading,8.974,1,1,6.18,13.03,Financials,Minimum Volatility,Category ETF proxy,0.215,0.43,86
-WILLIS TOWERS WATSON,WTW,TICKER_COUNTRY:WTW|US,Leading,8.974,1,1,6.18,13.03,Financials,Minimum Volatility,Category ETF proxy,0.21,0.42,86
-PAN PACIFIC INTERNATIONAL HOLDINGS,7532,TICKER_COUNTRY:7532|JP,Leading,8.331,1,2,9.18,7.29,Consumer Discretionary,Minimum Volatility · Quality,Category ETF proxy,0.123,0.37,108
-COMPASS GROUP PLC,CPG,TICKER_COUNTRY:CPG|GB,Leading,8.331,1,2,9.18,7.29,Consumer Discretionary,Minimum Volatility · Quality,Category ETF proxy,0.523,1.57,108
-DOLLARAMA,DOL,TICKER_COUNTRY:DOL|CA,Leading,8.331,1,2,9.18,7.29,Consumer Discretionary,Minimum Volatility · Quality,Category ETF proxy,0.357,1.07,108
-DBS GROUP HOLDINGS LTD,D05,TICKER_COUNTRY:D05|SG,Leading,6.864,1,2,6.18,7.29,Financials,Minimum Volatility · Quality,Category ETF proxy,0.65,1.95,111
-SAMPO CLASS A,SAMPO,TICKER_COUNTRY:SAMPO|FI,Leading,6.864,1,2,6.18,7.29,Financials,Minimum Volatility · Quality,Category ETF proxy,0.25,0.75,111
-KIKKOMAN CORP,2801,TICKER_COUNTRY:2801|JP,Leading,5.817,1,1,21.71,1.56,Consumer Staples,Quality,Category ETF proxy,0.165,0.33,113
-ALIMENTATION COUCHE TARD INC,ATD,TICKER_COUNTRY:ATD|CA,Leading,5.817,1,1,21.71,1.56,Consumer Staples,Quality,Category ETF proxy,0.64,1.28,113
-BRITISH AMERICAN TOBACCO,BATS,TICKER_COUNTRY:BATS|GB,Leading,5.817,1,1,21.71,1.56,Consumer Staples,Quality,Category ETF proxy,1.89,3.78,113
-BEIERSDORF AG,BEI,TICKER_COUNTRY:BEI|DE,Leading,5.817,1,1,21.71,1.56,Consumer Staples,Quality,Category ETF proxy,0.125,0.25,113
-CARLSBERG AS CL B,CARL B,TICKER_COUNTRY:CARL B|DK,Leading,5.817,1,1,21.71,1.56,Consumer Staples,Quality,Category ETF proxy,0.205,0.41,113
-COCA COLA HBC AG,CCH,TICKER_COUNTRY:CCH|GB,Leading,5.817,1,1,21.71,1.56,Consumer Staples,Quality,Category ETF proxy,0.185,0.37,113
-DIAGEO PLC,DGE,TICKER_COUNTRY:DGE|GB,Leading,5.817,1,1,21.71,1.56,Consumer Staples,Quality,Category ETF proxy,0.875,1.75,113
-ESSITY CLASS B,ESSITY B,TICKER_COUNTRY:ESSITY B|SE,Leading,5.817,1,1,21.71,1.56,Consumer Staples,Quality,Category ETF proxy,0.25,0.5,113
-HENKEL AG,HEN,TICKER_COUNTRY:HEN|DE,Leading,5.817,1,1,21.71,1.56,Consumer Staples,Quality,Category ETF proxy,0.12,0.24,113
-HENKEL & KGAA PREF AG,HEN3,TICKER_COUNTRY:HEN3|DE,Leading,5.817,1,1,21.71,1.56,Consumer Staples,Quality,Category ETF proxy,0.22,0.44,113
-IMPERIAL BRANDS PLC,IMB,TICKER_COUNTRY:IMB|GB,Leading,5.817,1,1,21.71,1.56,Consumer Staples,Quality,Category ETF proxy,0.49,0.98,113
-CHOCOLADEFABRIKEN LINDT & SPRUENGL,LISP,TICKER_COUNTRY:LISP|CH,Leading,5.817,1,1,21.71,1.56,Consumer Staples,Quality,Category ETF proxy,0.15,0.3,113
-LOREAL SA,OR,TICKER_COUNTRY:OR|FR,Leading,5.817,1,1,21.71,1.56,Consumer Staples,Quality,Category ETF proxy,1.82,3.64,113
-ORKLA,ORK,TICKER_COUNTRY:ORK|NO,Leading,5.817,1,1,21.71,1.56,Consumer Staples,Quality,Category ETF proxy,0.12,0.24,113
-RECKITT BENCKISER GROUP PLC,RKT,TICKER_COUNTRY:RKT|GB,Leading,5.817,1,1,21.71,1.56,Consumer Staples,Quality,Category ETF proxy,0.83,1.66,113
-UNILEVER PLC,ULVR,TICKER_COUNTRY:ULVR|GB,Leading,5.817,1,1,21.71,1.56,Consumer Staples,Quality,Category ETF proxy,2.475,4.95,113
-ENDESA SA,ELE,TICKER_COUNTRY:ELE|ES,Leading,5.366,1,1,18.47,1.56,Utilities,Quality,Category ETF proxy,0.425,0.85,129
-FORTUM,FORTUM,TICKER_COUNTRY:FORTUM|FI,Leading,5.366,1,1,18.47,1.56,Utilities,Quality,Category ETF proxy,0.295,0.59,129
-HYDRO ONE,H,TICKER_COUNTRY:H|CA,Leading,5.366,1,1,18.47,1.56,Utilities,Quality,Category ETF proxy,0.335,0.67,129
-NATIONAL GRID PLC,NG.,TICKER_COUNTRY:NG.|GB,Leading,5.366,1,1,18.47,1.56,Utilities,Quality,Category ETF proxy,2.195,4.39,129
-NATURGY ENERGY GROUP SA,NTGY,TICKER_COUNTRY:NTGY|ES,Leading,5.366,1,1,18.47,1.56,Utilities,Quality,Category ETF proxy,0.445,0.89,129
-REDEIA CORPORACION SA,RED,TICKER_COUNTRY:RED|ES,Leading,5.366,1,1,18.47,1.56,Utilities,Quality,Category ETF proxy,0.12,0.24,129
-SSE PLC,SSE,TICKER_COUNTRY:SSE|GB,Leading,5.366,1,1,18.47,1.56,Utilities,Quality,Category ETF proxy,1.13,2.26,129
-TERNA RETE ELETTRICA NAZIONALE,TRN,TICKER_COUNTRY:TRN|IT,Leading,5.366,1,1,18.47,1.56,Utilities,Quality,Category ETF proxy,0.38,0.76,129
-ASTELLAS PHARMA,4503,TICKER_COUNTRY:4503|JP,Leading,4.999,1,1,16.03,1.56,Healthcare,Quality,Category ETF proxy,0.25,0.5,137
-CHUGAI PHARMACEUTICAL LTD,4519,TICKER_COUNTRY:4519|JP,Leading,4.999,1,1,16.03,1.56,Healthcare,Quality,Category ETF proxy,0.25,0.5,137
-HOYA,7741,TICKER_COUNTRY:7741|JP,Leading,4.999,1,1,16.03,1.56,Healthcare,Quality,Category ETF proxy,0.44,0.88,137
-ASTRAZENECA PLC,AZN,TICKER_COUNTRY:AZN|GB,Leading,4.999,1,1,16.03,1.56,Healthcare,Quality,Category ETF proxy,2.485,4.97,137
-COLOPLAST B,COLO B,TICKER_COUNTRY:COLO B|DK,Leading,4.999,1,1,16.03,1.56,Healthcare,Quality,Category ETF proxy,0.08,0.16,137
-GLAXOSMITHKLINE,GSK,TICKER_COUNTRY:GSK|GB,Leading,4.999,1,1,16.03,1.56,Healthcare,Quality,Category ETF proxy,0.92,1.84,137
-NOVO NORDISK CLASS B,NOVO B,TICKER_COUNTRY:NOVO B|DK,Leading,4.999,1,1,16.03,1.56,Healthcare,Quality,Category ETF proxy,1.21,2.42,137
-ROCHE HOLDING AG,RO,TICKER_COUNTRY:RO|CH,Leading,4.999,1,1,16.03,1.56,Healthcare,Quality,Category ETF proxy,0.135,0.27,137
-ROCHE PS PAR AG,ROP,TICKER_COUNTRY:ROP|CH,Leading,4.999,1,1,16.03,1.56,Healthcare,Quality,Category ETF proxy,3.195,6.39,137
-SONOVA HOLDING AG,SOON,TICKER_COUNTRY:SOON|CH,Leading,4.999,1,1,16.03,1.56,Healthcare,Quality,Category ETF proxy,0.135,0.27,137
-STRAUMANN HOLDING AG,STMN,TICKER_COUNTRY:STMN|CH,Leading,4.999,1,1,16.03,1.56,Healthcare,Quality,Category ETF proxy,0.12,0.24,137
-SUZUKI MOTOR,7269,TICKER_COUNTRY:7269|JP,Leading,3.782,1,1,9.18,1.56,Consumer Discretionary,Quality,Category ETF proxy,0.295,0.59,148
-BANDAI NAMCO HOLDINGS INC,7832,TICKER_COUNTRY:7832|JP,Leading,3.782,1,1,9.18,1.56,Consumer Discretionary,Quality,Category ETF proxy,0.32,0.64,148
-ASICS,7936,TICKER_COUNTRY:7936|JP,Leading,3.782,1,1,9.18,1.56,Consumer Discretionary,Quality,Category ETF proxy,0.295,0.59,148
-FAST RETAILING,9983,TICKER_COUNTRY:9983|JP,Leading,3.782,1,1,9.18,1.56,Consumer Discretionary,Quality,Category ETF proxy,1.315,2.63,148
-ARISTOCRAT LEISURE,ALL,TICKER_COUNTRY:ALL|AU,Leading,3.782,1,1,9.18,1.56,Consumer Discretionary,Quality,Category ETF proxy,0.325,0.65,148
-COMPAGNIE FINANCIERE RICHEMONT SA,CFR,TICKER_COUNTRY:CFR|CH,Leading,3.782,1,1,9.18,1.56,Consumer Discretionary,Quality,Category ETF proxy,1.305,2.61,148
-CONTINENTAL AG,CON,TICKER_COUNTRY:CON|DE,Leading,3.782,1,1,9.18,1.56,Consumer Discretionary,Quality,Category ETF proxy,0.105,0.21,148
-EVOLUTION,EVO,TICKER_COUNTRY:EVO|SE,Leading,3.782,1,1,9.18,1.56,Consumer Discretionary,Quality,Category ETF proxy,0.135,0.27,148
-HENNES & MAURITZ,HM B,TICKER_COUNTRY:HM B|SE,Leading,3.782,1,1,9.18,1.56,Consumer Discretionary,Quality,Category ETF proxy,0.085,0.17,148
-INDUSTRIA DE DISENO TEXTIL SA,ITX,TICKER_COUNTRY:ITX|ES,Leading,3.782,1,1,9.18,1.56,Consumer Discretionary,Quality,Category ETF proxy,1.04,2.08,148
-LVMH,MC,TICKER_COUNTRY:MC|FR,Leading,3.782,1,1,9.18,1.56,Consumer Discretionary,Quality,Category ETF proxy,1.29,2.58,148
-MONCLER,MONC,TICKER_COUNTRY:MONC|IT,Leading,3.782,1,1,9.18,1.56,Consumer Discretionary,Quality,Category ETF proxy,0.125,0.25,148
-NEXT PLC,NXT,TICKER_COUNTRY:NXT|GB,Leading,3.782,1,1,9.18,1.56,Consumer Discretionary,Quality,Category ETF proxy,0.34,0.68,148
-PANDORA,PNDORA,TICKER_COUNTRY:PNDORA|DK,Leading,3.782,1,1,9.18,1.56,Consumer Discretionary,Quality,Category ETF proxy,0.125,0.25,148
-FERRARI,RACE,TICKER_COUNTRY:RACE|IT,Leading,3.782,1,1,9.18,1.56,Consumer Discretionary,Quality,Category ETF proxy,0.74,1.48,148
-HERMES INTERNATIONAL,RMS,TICKER_COUNTRY:RMS|FR,Leading,3.782,1,1,9.18,1.56,Consumer Discretionary,Quality,Category ETF proxy,0.595,1.19,148
-WESFARMERS,WES,TICKER_COUNTRY:WES|AU,Leading,3.782,1,1,9.18,1.56,Consumer Discretionary,Quality,Category ETF proxy,0.86,1.72,148
-HONG KONG EXCHANGES AND CLEARING,388,TICKER_COUNTRY:388|HK,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.71,1.42,165
-JAPAN EXCHANGE GROUP,8697,TICKER_COUNTRY:8697|JP,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.16,0.32,165
-MS&AD INSURANCE GROUP HOLDINGS,8725,TICKER_COUNTRY:8725|JP,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.455,0.91,165
-DAIICHI LIFE GROUP,8750,TICKER_COUNTRY:8750|JP,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.35,0.7,165
-TOKIO MARINE HOLDINGS,8766,TICKER_COUNTRY:8766|JP,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,1.16,2.32,165
-AIB GROUP PLC,A5G,TICKER_COUNTRY:A5G|IE,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.22,0.44,165
-ADMIRAL GROUP PLC,ADM,TICKER_COUNTRY:ADM|GB,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.175,0.35,165
-ADYEN,ADYEN,TICKER_COUNTRY:ADYEN|NL,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.29,0.58,165
-AGEAS,AGS,TICKER_COUNTRY:AGS|BE,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.13,0.26,165
-ALLIANZ,ALV,TICKER_COUNTRY:ALV|DE,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,2.05,4.1,165
-ASX LTD,ASX,TICKER_COUNTRY:ASX|AU,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.095,0.19,165
-CAIXABANK SA,CABK,TICKER_COUNTRY:CABK|ES,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.38,0.76,165
-AXA SA,CS,TICKER_COUNTRY:CS|FR,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.66,1.32,165
-DEUTSCHE BOERSE AG,DB1,TICKER_COUNTRY:DB1|DE,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.69,1.38,165
-EURONEXT NV,ENX,TICKER_COUNTRY:ENX|FR,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.145,0.29,165
-EQT,EQT,TICKER_COUNTRY:EQT|SE,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.13,0.26,165
-FINECOBANK BANCA FINECO,FBK,TICKER_COUNTRY:FBK|IT,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.17,0.34,165
-ASSICURAZIONI GENERALI,G,TICKER_COUNTRY:G|IT,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.365,0.73,165
-HELVETIA BALOISE HOLDING N AG,HBAN-CH,TICKER_COUNTRY:HBAN|CH,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.16,0.32,165
-HANNOVER RUECK,HNR1,TICKER_COUNTRY:HNR1|DE,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.215,0.43,165
-INSURANCE AUSTRALIA GROUP,IAG,TICKER_COUNTRY:IAG|AU,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.115,0.23,165
-INTACT FINANCIAL CORP,IFC,TICKER_COUNTRY:IFC|CA,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.375,0.75,165
-3I GROUP FUND PLC,III,TICKER_COUNTRY:III|GB,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.385,0.77,165
-INDUSTRIVARDEN A,INDU A,TICKER_COUNTRY:INDU A|SE,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.045,0.09,165
-INDUSTRIVARDEN SERIES,INDU C,TICKER_COUNTRY:INDU C|SE,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.08,0.16,165
-INVESTOR CLASS B,INVE B,TICKER_COUNTRY:INVE B|SE,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.665,1.33,165
-LONDON STOCK EXCHANGE GROUP PLC,LSEG,TICKER_COUNTRY:LSEG|GB,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.53,1.06,165
-MANULIFE FINANCIAL,MFC,TICKER_COUNTRY:MFC|CA,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.66,1.32,165
-MEDIBANK PRIVATE,MPL,TICKER_COUNTRY:MPL|AU,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.115,0.23,165
-MUENCHENER RUECKVERSICHERUNGS-GESE,MUV2,TICKER_COUNTRY:MUV2|DE,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.87,1.74,165
-OVERSEA-CHINESE BANKING,O39,TICKER_COUNTRY:O39|SG,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.685,1.37,165
-PARTNERS GROUP HOLDING AG,PGHN,TICKER_COUNTRY:PGHN|CH,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.23,0.46,165
-POWER CORPORATION OF CANADA,POW,TICKER_COUNTRY:POW|CA,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.28,0.56,165
-PRUDENTIAL PLC,PRU-GB,TICKER_COUNTRY:PRU|GB,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.345,0.69,165
-QBE INSURANCE GROUP,QBE,TICKER_COUNTRY:QBE|AU,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.29,0.58,165
-SUN LIFE FINANCIAL INC,SLF,TICKER_COUNTRY:SLF|CA,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.37,0.74,165
-SWISS RE AG,SREN,TICKER_COUNTRY:SREN|CH,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.465,0.93,165
-SUNCORP GROUP,SUN,TICKER_COUNTRY:SUN|AU,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.135,0.27,165
-TRYG,TRYG,TICKER_COUNTRY:TRYG|DK,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.075,0.15,165
-UNITED OVERSEAS BANK,U11,TICKER_COUNTRY:U11|SG,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.28,0.56,165
-UNIPOL ASSICURAZIONI SPA,UNI,TICKER_COUNTRY:UNI|IT,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.12,0.24,165
-WISE PLC CLASS A,WISE,TICKER_COUNTRY:WISE|GB,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,0.105,0.21,165
-ZURICH INSURANCE GROUP AG,ZURN,TICKER_COUNTRY:ZURN|CH,Leading,3.104,1,1,6.18,1.56,Financials,Quality,Category ETF proxy,1.325,2.65,165
+CONSTELLATION SOFTWARE INC,2299955D,TICKER_COUNTRY:2299955D|CA,Lagging,10.13,1,1,16.16,6.35,Technology,Momentum,Category ETF proxy,0.0,0.0,1
+KIOXIA HOLDINGS,285A,TICKER_COUNTRY:285A|JP,Lagging,10.13,1,1,16.16,6.35,Technology,Momentum,Category ETF proxy,0.63,1.26,1
+IBIDEN LTD,4062,TICKER_COUNTRY:4062|JP,Lagging,10.13,1,1,16.16,6.35,Technology,Momentum,Category ETF proxy,0.165,0.33,1
+FUJIFILM HOLDINGS,4901,TICKER_COUNTRY:4901|JP,Lagging,10.13,1,1,16.16,6.35,Technology,Momentum,Category ETF proxy,0.11,0.22,1
+RENESAS ELECTRONICS CORP,6723,TICKER_COUNTRY:6723|JP,Lagging,10.13,1,1,16.16,6.35,Technology,Momentum,Category ETF proxy,0.16,0.32,1
+TDK,6762,TICKER_COUNTRY:6762|JP,Lagging,10.13,1,1,16.16,6.35,Technology,Momentum,Category ETF proxy,0.125,0.25,1
+ADVANTEST,6857,TICKER_COUNTRY:6857|JP,Lagging,10.13,1,1,16.16,6.35,Technology,Momentum,Category ETF proxy,0.935,1.87,1
+KEYENCE,6861,TICKER_COUNTRY:6861|JP,Lagging,10.13,1,1,16.16,6.35,Technology,Momentum,Category ETF proxy,0.415,0.83,1
+LASERTEC,6920,TICKER_COUNTRY:6920|JP,Lagging,10.13,1,1,16.16,6.35,Technology,Momentum,Category ETF proxy,0.105,0.21,1
+KYOCERA,6971,TICKER_COUNTRY:6971|JP,Lagging,10.13,1,1,16.16,6.35,Technology,Momentum,Category ETF proxy,0.185,0.37,1
+MURATA MANUFACTURING,6981,TICKER_COUNTRY:6981|JP,Lagging,10.13,1,1,16.16,6.35,Technology,Momentum,Category ETF proxy,0.525,1.05,1
+SCREEN HOLDINGS LTD,7735,TICKER_COUNTRY:7735|JP,Lagging,10.13,1,1,16.16,6.35,Technology,Momentum,Category ETF proxy,0.05,0.1,1
+TOKYO ELECTRON,8035,TICKER_COUNTRY:8035|JP,Lagging,10.13,1,1,16.16,6.35,Technology,Momentum,Category ETF proxy,0.83,1.66,1
+ASM INTERNATIONAL NV,ASM,TICKER_COUNTRY:ASM|NL,Lagging,10.13,1,1,16.16,6.35,Technology,Momentum,Category ETF proxy,0.21,0.42,1
+ASML HOLDING,ASML,TICKER_COUNTRY:ASML|NL,Lagging,10.13,1,1,16.16,6.35,Technology,Momentum,Category ETF proxy,3.485,6.97,1
+BE SEMICONDUCTOR INDUSTRIES NV,BESI,TICKER_COUNTRY:BESI|NL,Lagging,10.13,1,1,16.16,6.35,Technology,Momentum,Category ETF proxy,0.075,0.15,1
+CELESTICA,CLS,TICKER_COUNTRY:CLS|CA,Lagging,10.13,1,1,16.16,6.35,Technology,Momentum,Category ETF proxy,0.19,0.38,1
+ERICSSON B,ERIC B,TICKER_COUNTRY:ERIC B|SE,Lagging,10.13,1,1,16.16,6.35,Technology,Momentum,Category ETF proxy,0.135,0.27,1
+INFINEON TECHNOLOGIES AG,IFX,TICKER_COUNTRY:IFX|DE,Lagging,10.13,1,1,16.16,6.35,Technology,Momentum,Category ETF proxy,0.43,0.86,1
+NOKIA,NOKIA,TICKER_COUNTRY:NOKIA|FI,Lagging,10.13,1,1,16.16,6.35,Technology,Momentum,Category ETF proxy,0.36,0.72,1
+TORAY INDUSTRIES,3402,TICKER_COUNTRY:3402|JP,Lagging,8.875,1,1,12.4,6.35,Materials,Momentum,Category ETF proxy,0.26,0.52,21
+ASAHI KASEI,3407,TICKER_COUNTRY:3407|JP,Lagging,8.875,1,1,12.4,6.35,Materials,Momentum,Category ETF proxy,0.29,0.58,21
+RESONAC HOLDINGS,4004,TICKER_COUNTRY:4004|JP,Lagging,8.875,1,1,12.4,6.35,Materials,Momentum,Category ETF proxy,0.355,0.71,21
+SHIN ETSU CHEMICAL,4063,TICKER_COUNTRY:4063|JP,Lagging,8.875,1,1,12.4,6.35,Materials,Momentum,Category ETF proxy,1.36,2.72,21
+MITSUBISHI CHEMICAL GROUP,4188,TICKER_COUNTRY:4188|JP,Lagging,8.875,1,1,12.4,6.35,Materials,Momentum,Category ETF proxy,0.17,0.34,21
+JX ADVANCED METALS CORP,5016,TICKER_COUNTRY:5016|JP,Lagging,8.875,1,1,12.4,6.35,Materials,Momentum,Category ETF proxy,0.21,0.42,21
+MITSUI KINZOKU LIMITED LTD,5706,TICKER_COUNTRY:5706|JP,Lagging,8.875,1,1,12.4,6.35,Materials,Momentum,Category ETF proxy,0.115,0.23,21
+SUMITOMO METAL MINING,5713,TICKER_COUNTRY:5713|JP,Lagging,8.875,1,1,12.4,6.35,Materials,Momentum,Category ETF proxy,0.225,0.45,21
+ANGLO AMERICAN PLC,AAL,TICKER_COUNTRY:AAL|GB,Lagging,8.875,1,1,12.4,6.35,Materials,Momentum,Category ETF proxy,1.06,2.12,21
+LAIR LIQUIDE SOCIETE ANONYME POUR,AI,TICKER_COUNTRY:AI|FR,Lagging,8.875,1,1,12.4,6.35,Materials,Momentum,Category ETF proxy,2.605,5.21,21
+ANTOFAGASTA PLC,ANTO,TICKER_COUNTRY:ANTO|GB,Lagging,8.875,1,1,12.4,6.35,Materials,Momentum,Category ETF proxy,0.275,0.55,21
+BASF N,BAS,TICKER_COUNTRY:BAS|DE,Lagging,8.875,1,1,12.4,6.35,Materials,Momentum,Category ETF proxy,1.02,2.04,21
+BHP GROUP LTD,BHP,TICKER_COUNTRY:BHP|AU,Lagging,8.875,1,1,12.4,6.35,Materials,Momentum,Category ETF proxy,3.87,7.74,21
+DSM FIRMENICH AG,DSFIR,TICKER_COUNTRY:DSFIR|NL,Lagging,8.875,1,1,12.4,6.35,Materials,Momentum,Category ETF proxy,0.53,1.06,21
+FIRST QUANTUM MINERALS,FM,TICKER_COUNTRY:FM|CA,Lagging,8.875,1,1,12.4,6.35,Materials,Momentum,Category ETF proxy,0.27,0.54,21
+GLENCORE PLC,GLEN,TICKER_COUNTRY:GLEN|GB,Lagging,8.875,1,1,12.4,6.35,Materials,Momentum,Category ETF proxy,1.295,2.59,21
+ARCELORMITTAL SA,MT,TICKER_COUNTRY:MT|FR,Lagging,8.875,1,1,12.4,6.35,Materials,Momentum,Category ETF proxy,0.59,1.18,21
+NORSK HYDRO,NHY,TICKER_COUNTRY:NHY|NO,Lagging,8.875,1,1,12.4,6.35,Materials,Momentum,Category ETF proxy,0.185,0.37,21
+NUTRIEN LTD,NTR,TICKER_COUNTRY:NTR|CA,Lagging,8.875,1,1,12.4,6.35,Materials,Momentum,Category ETF proxy,0.65,1.3,21
+PLS GROUP LTD,PLS,TICKER_COUNTRY:PLS|AU,Lagging,8.875,1,1,12.4,6.35,Materials,Momentum,Category ETF proxy,0.115,0.23,21
+RIO TINTO,RIO-AU,TICKER_COUNTRY:RIO|AU,Lagging,8.875,1,1,12.4,6.35,Materials,Momentum,Category ETF proxy,0.73,1.46,21
+RIO TINTO,RIO-GB,TICKER_COUNTRY:RIO|GB,Lagging,8.875,1,1,12.4,6.35,Materials,Momentum,Category ETF proxy,1.8,3.6,21
+SOUTH32,S32,TICKER_COUNTRY:S32|AU,Lagging,8.875,1,1,12.4,6.35,Materials,Momentum,Category ETF proxy,0.255,0.51,21
+SYMRISE AG,SY1,TICKER_COUNTRY:SY1|DE,Lagging,8.875,1,1,12.4,6.35,Materials,Momentum,Category ETF proxy,0.275,0.55,21
+TECK RESOURCES SUBORDINATE VOTING,TECK.B,TICKER_COUNTRY:TECK.B|CA,Lagging,8.875,1,1,12.4,6.35,Materials,Momentum,Category ETF proxy,0.53,1.06,21
+ORANGE SA,ORA,TICKER_COUNTRY:ORA|FR,Lagging,2.573,1,1,1.04,6.35,Communication Services,Momentum,Category ETF proxy,0.565,1.13,46
+TELIA COMPANY,TELIA,TICKER_COUNTRY:TELIA|SE,Lagging,2.573,1,1,1.04,6.35,Communication Services,Momentum,Category ETF proxy,0.2,0.4,46
+MILLICOM INTERNATIONAL CELLULAR,TIGO,TICKER_COUNTRY:TIGO|SE,Lagging,2.573,1,1,1.04,6.35,Communication Services,Momentum,Category ETF proxy,0.135,0.27,46
+VODAFONE GROUP PLC,VOD,TICKER_COUNTRY:VOD|GB,Lagging,2.573,1,1,1.04,6.35,Communication Services,Momentum,Category ETF proxy,0.475,0.95,46
+KIRIN HOLDINGS,2503,TICKER_COUNTRY:2503|JP,Leading,19.62,1,1,24.9,15.46,Consumer Staples,Minimum Volatility,Category ETF proxy,0.27,0.54,1
+JAPAN TOBACCO,2914,TICKER_COUNTRY:2914|JP,Leading,19.62,1,1,24.9,15.46,Consumer Staples,Minimum Volatility,Category ETF proxy,0.615,1.23,1
+AEON,8267,TICKER_COUNTRY:8267|JP,Leading,19.62,1,1,24.9,15.46,Consumer Staples,Minimum Volatility,Category ETF proxy,0.295,0.59,1
+KONINKLIJKE AHOLD DELHAIZE,AD,TICKER_COUNTRY:AD|NL,Leading,19.62,1,1,24.9,15.46,Consumer Staples,Minimum Volatility,Category ETF proxy,0.52,1.04,1
+DANONE SA,BN,TICKER_COUNTRY:BN|FR,Leading,19.62,1,1,24.9,15.46,Consumer Staples,Minimum Volatility,Category ETF proxy,0.655,1.31,1
+CHURCH AND DWIGHT INC,CHD,TICKER_COUNTRY:CHD|US,Leading,19.62,1,1,24.9,15.46,Consumer Staples,Minimum Volatility,Category ETF proxy,0.595,1.19,1
+COLGATE-PALMOLIVE,CL,TICKER_COUNTRY:CL|US,Leading,19.62,1,1,24.9,15.46,Consumer Staples,Minimum Volatility,Category ETF proxy,1.26,2.52,1
+COSTCO WHOLESALE CORP,COST,TICKER_COUNTRY:COST|US,Leading,19.62,1,1,24.9,15.46,Consumer Staples,Minimum Volatility,Category ETF proxy,3.525,7.05,1
+DOLLAR GENERAL CORP,DG,TICKER_COUNTRY:DG|US,Leading,19.62,1,1,24.9,15.46,Consumer Staples,Minimum Volatility,Category ETF proxy,0.48,0.96,1
+GENERAL MILLS INC,GIS,TICKER_COUNTRY:GIS|US,Leading,19.62,1,1,24.9,15.46,Consumer Staples,Minimum Volatility,Category ETF proxy,0.32,0.64,1
+HERSHEY FOODS,HSY,TICKER_COUNTRY:HSY|US,Leading,19.62,1,1,24.9,15.46,Consumer Staples,Minimum Volatility,Category ETF proxy,0.495,0.99,1
+KEURIG DR PEPPER INC,KDP,TICKER_COUNTRY:KDP|US,Leading,19.62,1,1,24.9,15.46,Consumer Staples,Minimum Volatility,Category ETF proxy,0.815,1.63,1
+COCA-COLA,KO,TICKER_COUNTRY:KO|US,Leading,19.62,1,1,24.9,15.46,Consumer Staples,Minimum Volatility,Category ETF proxy,2.955,5.91,1
+KROGER,KR,TICKER_COUNTRY:KR|US,Leading,19.62,1,1,24.9,15.46,Consumer Staples,Minimum Volatility,Category ETF proxy,0.87,1.74,1
+MONDELEZ INTERNATIONAL CLASS A,MDLZ,TICKER_COUNTRY:MDLZ|US,Leading,19.62,1,1,24.9,15.46,Consumer Staples,Minimum Volatility,Category ETF proxy,1.41,2.82,1
+MONSTER BEVERAGE,MNST,TICKER_COUNTRY:MNST|US,Leading,19.62,1,1,24.9,15.46,Consumer Staples,Minimum Volatility,Category ETF proxy,1.125,2.25,1
+ALTRIA GROUP INC,MO,TICKER_COUNTRY:MO|US,Leading,19.62,1,1,24.9,15.46,Consumer Staples,Minimum Volatility,Category ETF proxy,1.675,3.35,1
+PEPSICO,PEP,TICKER_COUNTRY:PEP|US,Leading,19.62,1,1,24.9,15.46,Consumer Staples,Minimum Volatility,Category ETF proxy,2.515,5.03,1
+PROCTER & GAMBLE,PG,TICKER_COUNTRY:PG|US,Leading,19.62,1,1,24.9,15.46,Consumer Staples,Minimum Volatility,Category ETF proxy,3.085,6.17,1
+PHILIP MORRIS INTERNATIONAL,PM,TICKER_COUNTRY:PM|US,Leading,19.62,1,1,24.9,15.46,Consumer Staples,Minimum Volatility,Category ETF proxy,2.175,4.35,1
+SYSCO,SYY,TICKER_COUNTRY:SYY|US,Leading,19.62,1,1,24.9,15.46,Consumer Staples,Minimum Volatility,Category ETF proxy,0.525,1.05,1
+TYSON FOODS INC CLASS A,TSN,TICKER_COUNTRY:TSN|US,Leading,19.62,1,1,24.9,15.46,Consumer Staples,Minimum Volatility,Category ETF proxy,0.4,0.8,1
+VYLOR,VYLR,TICKER_COUNTRY:VYLR|US,Leading,19.62,1,1,24.9,15.46,Consumer Staples,Minimum Volatility,Category ETF proxy,0.66,1.32,1
+WALMART,WMT,TICKER_COUNTRY:WMT|US,Leading,19.62,1,1,24.9,15.46,Consumer Staples,Minimum Volatility,Category ETF proxy,4.12,8.24,1
+CHUBU ELECTRIC POWER INC,9502,TICKER_COUNTRY:9502|JP,Leading,17.985,1,1,20.92,15.46,Utilities,Minimum Volatility,Category ETF proxy,0.345,0.69,25
+TOKYO GAS LTD,9531,TICKER_COUNTRY:9531|JP,Leading,17.985,1,1,20.92,15.46,Utilities,Minimum Volatility,Category ETF proxy,0.36,0.72,25
+AMEREN,AEE,TICKER_COUNTRY:AEE|US,Leading,17.985,1,1,20.92,15.46,Utilities,Minimum Volatility,Category ETF proxy,0.77,1.54,25
+AMERICAN ELECTRIC POWER INC,AEP,TICKER_COUNTRY:AEP|US,Leading,17.985,1,1,20.92,15.46,Utilities,Minimum Volatility,Category ETF proxy,1.625,3.25,25
+ATMOS ENERGY,ATO,TICKER_COUNTRY:ATO|US,Leading,17.985,1,1,20.92,15.46,Utilities,Minimum Volatility,Category ETF proxy,0.815,1.63,25
+AMERICAN WATER WORKS,AWK,TICKER_COUNTRY:AWK|US,Leading,17.985,1,1,20.92,15.46,Utilities,Minimum Volatility,Category ETF proxy,0.85,1.7,25
+CMS ENERGY,CMS,TICKER_COUNTRY:CMS|US,Leading,17.985,1,1,20.92,15.46,Utilities,Minimum Volatility,Category ETF proxy,0.595,1.19,25
+CENTERPOINT ENERGY,CNP,TICKER_COUNTRY:CNP|US,Leading,17.985,1,1,20.92,15.46,Utilities,Minimum Volatility,Category ETF proxy,0.61,1.22,25
+DUKE ENERGY CORP,DUK,TICKER_COUNTRY:DUK|US,Leading,17.985,1,1,20.92,15.46,Utilities,Minimum Volatility,Category ETF proxy,2.905,5.81,25
+CONSOLIDATED EDISON,ED,TICKER_COUNTRY:ED|US,Leading,17.985,1,1,20.92,15.46,Utilities,Minimum Volatility,Category ETF proxy,1.425,2.85,25
+EXELON CORP,EXC,TICKER_COUNTRY:EXC|US,Leading,17.985,1,1,20.92,15.46,Utilities,Minimum Volatility,Category ETF proxy,1.095,2.19,25
+FIRSTENERGY CORP,FE,TICKER_COUNTRY:FE|US,Leading,17.985,1,1,20.92,15.46,Utilities,Minimum Volatility,Category ETF proxy,0.61,1.22,25
+PG&E CORP,PCG,TICKER_COUNTRY:PCG|US,Leading,17.985,1,1,20.92,15.46,Utilities,Minimum Volatility,Category ETF proxy,0.72,1.44,25
+PPL CORP,PPL,TICKER_COUNTRY:PPL|US,Leading,17.985,1,1,20.92,15.46,Utilities,Minimum Volatility,Category ETF proxy,0.665,1.33,25
+SOUTHERN,SO,TICKER_COUNTRY:SO|US,Leading,17.985,1,1,20.92,15.46,Utilities,Minimum Volatility,Category ETF proxy,2.975,5.95,25
+WEC ENERGY GROUP,WEC,TICKER_COUNTRY:WEC|US,Leading,17.985,1,1,20.92,15.46,Utilities,Minimum Volatility,Category ETF proxy,1.225,2.45,25
+XCEL ENERGY INC,XEL,TICKER_COUNTRY:XEL|US,Leading,17.985,1,1,20.92,15.46,Utilities,Minimum Volatility,Category ETF proxy,1.19,2.38,25
+TAKEDA PHARMACEUTICAL,4502,TICKER_COUNTRY:4502|JP,Leading,17.587,1,1,20.01,15.46,Healthcare,Minimum Volatility,Category ETF proxy,0.93,1.86,42
+SHIONOGI,4507,TICKER_COUNTRY:4507|JP,Leading,17.587,1,1,20.01,15.46,Healthcare,Minimum Volatility,Category ETF proxy,0.2,0.4,42
+OTSUKA HOLDINGS,4578,TICKER_COUNTRY:4578|JP,Leading,17.587,1,1,20.01,15.46,Healthcare,Minimum Volatility,Category ETF proxy,0.42,0.84,42
+BEONE MEDICINES AG,6160,TICKER_COUNTRY:6160|CN,Leading,17.587,1,1,20.01,15.46,Healthcare,Minimum Volatility,Category ETF proxy,0.39,0.78,42
+ABBVIE,ABBV,TICKER_COUNTRY:ABBV|US,Leading,17.587,1,1,20.01,15.46,Healthcare,Minimum Volatility,Category ETF proxy,2.925,5.85,42
+ABBOTT LABORATORIES,ABT,TICKER_COUNTRY:ABT|US,Leading,17.587,1,1,20.01,15.46,Healthcare,Minimum Volatility,Category ETF proxy,1.265,2.53,42
+AMGEN INC,AMGN,TICKER_COUNTRY:AMGN|US,Leading,17.587,1,1,20.01,15.46,Healthcare,Minimum Volatility,Category ETF proxy,1.57,3.14,42
+ARGENX,ARGX,TICKER_COUNTRY:ARGX|BE,Leading,17.587,1,1,20.01,15.46,Healthcare,Minimum Volatility,Category ETF proxy,0.57,1.14,42
+BRISTOL MYERS SQUIBB,BMY,TICKER_COUNTRY:BMY|US,Leading,17.587,1,1,20.01,15.46,Healthcare,Minimum Volatility,Category ETF proxy,0.72,1.44,42
+CARDINAL HEALTH,CAH,TICKER_COUNTRY:CAH|US,Leading,17.587,1,1,20.01,15.46,Healthcare,Minimum Volatility,Category ETF proxy,0.555,1.11,42
+CIGNA,CI,TICKER_COUNTRY:CI|US,Leading,17.587,1,1,20.01,15.46,Healthcare,Minimum Volatility,Category ETF proxy,0.515,1.03,42
+CENTENE CORP,CNC,TICKER_COUNTRY:CNC|US,Leading,17.587,1,1,20.01,15.46,Healthcare,Minimum Volatility,Category ETF proxy,0.285,0.57,42
+CENCORA,COR,TICKER_COUNTRY:COR|US,Leading,17.587,1,1,20.01,15.46,Healthcare,Minimum Volatility,Category ETF proxy,0.915,1.83,42
+QUEST DIAGNOSTICS INC,DGX,TICKER_COUNTRY:DGX|US,Leading,17.587,1,1,20.01,15.46,Healthcare,Minimum Volatility,Category ETF proxy,0.275,0.55,42
+ELEVANCE HEALTH INC,ELV,TICKER_COUNTRY:ELV|US,Leading,17.587,1,1,20.01,15.46,Healthcare,Minimum Volatility,Category ETF proxy,0.695,1.39,42
+EDWARDS LIFESCIENCES,EW,TICKER_COUNTRY:EW|US,Leading,17.587,1,1,20.01,15.46,Healthcare,Minimum Volatility,Category ETF proxy,0.43,0.86,42
+GILEAD SCIENCES,GILD,TICKER_COUNTRY:GILD|US,Leading,17.587,1,1,20.01,15.46,Healthcare,Minimum Volatility,Category ETF proxy,1.385,2.77,42
+HCA HEALTHCARE,HCA,TICKER_COUNTRY:HCA|US,Leading,17.587,1,1,20.01,15.46,Healthcare,Minimum Volatility,Category ETF proxy,0.475,0.95,42
+HOLOGIC INC,HOLX,TICKER_COUNTRY:HOLX|US,Leading,17.587,1,1,20.01,15.46,Healthcare,Minimum Volatility,Category ETF proxy,0.0,0.0,42
+INCYTE CORP,INCY,TICKER_COUNTRY:INCY|US,Leading,17.587,1,1,20.01,15.46,Healthcare,Minimum Volatility,Category ETF proxy,0.305,0.61,42
+JOHNSON & JOHNSON,JNJ,TICKER_COUNTRY:JNJ|US,Leading,17.587,1,1,20.01,15.46,Healthcare,Minimum Volatility,Category ETF proxy,4.145,8.29,42
+ELI LILLY,LLY,TICKER_COUNTRY:LLY|US,Leading,17.587,1,1,20.01,15.46,Healthcare,Minimum Volatility,Category ETF proxy,5.85,11.7,42
+MCKESSON CORP,MCK,TICKER_COUNTRY:MCK|US,Leading,17.587,1,1,20.01,15.46,Healthcare,Minimum Volatility,Category ETF proxy,1.24,2.48,42
+MERCK & CO INC,MRK-US,TICKER_COUNTRY:MRK|US,Leading,17.587,1,1,20.01,15.46,Healthcare,Minimum Volatility,Category ETF proxy,2.18,4.36,42
+REDE DOR SAO LUIZ SA,RDOR3,TICKER_COUNTRY:RDOR3|BR,Leading,17.587,1,1,20.01,15.46,Healthcare,Minimum Volatility,Category ETF proxy,0.06,0.12,42
+REGENERON PHARMACEUTICALS,REGN,TICKER_COUNTRY:REGN|US,Leading,17.587,1,1,20.01,15.46,Healthcare,Minimum Volatility,Category ETF proxy,0.63,1.26,42
+UNITEDHEALTH GROUP,UNH,TICKER_COUNTRY:UNH|US,Leading,17.587,1,1,20.01,15.46,Healthcare,Minimum Volatility,Category ETF proxy,1.795,3.59,42
+VERTEX PHARMACEUTICALS,VRTX,TICKER_COUNTRY:VRTX|US,Leading,17.587,1,1,20.01,15.46,Healthcare,Minimum Volatility,Category ETF proxy,1.045,2.09,42
+JERONIMO MARTINS SA,JMT,TICKER_COUNTRY:JMT|PT,Leading,15.144,1,2,24.9,9.03,Consumer Staples,Minimum Volatility · Quality,Category ETF proxy,0.08,0.24,70
+LOBLAW COMPANIES LTD,L,TICKER_COUNTRY:L|CA,Leading,15.144,1,2,24.9,9.03,Consumer Staples,Minimum Volatility · Quality,Category ETF proxy,0.397,1.19,70
+CHOCOLADEFABRIKEN LINDT & SPRUENGL,LISN,TICKER_COUNTRY:LISN|CH,Leading,15.144,1,2,24.9,9.03,Consumer Staples,Minimum Volatility · Quality,Category ETF proxy,0.177,0.53,70
+NESTLE SA,NESN,TICKER_COUNTRY:NESN|CH,Leading,15.144,1,2,24.9,9.03,Consumer Staples,Minimum Volatility · Quality,Category ETF proxy,2.14,6.42,70
+OSAKA GAS,9532,TICKER_COUNTRY:9532|JP,Leading,13.895,1,2,20.92,9.03,Utilities,Minimum Volatility · Quality,Category ETF proxy,0.317,0.95,74
+IBERDROLA,IBE,TICKER_COUNTRY:IBE|ES,Leading,13.895,1,2,20.92,9.03,Utilities,Minimum Volatility · Quality,Category ETF proxy,2.77,8.31,74
+VERBUND AG,VER,TICKER_COUNTRY:VER|AT,Leading,13.895,1,2,20.92,9.03,Utilities,Minimum Volatility · Quality,Category ETF proxy,0.12,0.36,74
+APA GROUP UNITS,APA,TICKER_COUNTRY:APA|AU,Leading,13.875,1,2,20.92,9.0,Utilities,Dividend Yield · Minimum Volatility,Category ETF proxy,0.683,2.05,77
+NOVARTIS AG,NOVN,TICKER_COUNTRY:NOVN|CH,Leading,13.59,1,2,20.01,9.03,Healthcare,Minimum Volatility · Quality,Category ETF proxy,1.963,5.89,78
+ORIENTAL LAND,4661,TICKER_COUNTRY:4661|JP,Leading,11.771,1,1,8.96,15.46,Consumer Discretionary,Minimum Volatility,Category ETF proxy,0.435,0.87,79
+HONDA MOTOR,7267,TICKER_COUNTRY:7267|JP,Leading,11.771,1,1,8.96,15.46,Consumer Discretionary,Minimum Volatility,Category ETF proxy,0.38,0.76,79
+AUTOZONE,AZO,TICKER_COUNTRY:AZO|US,Leading,11.771,1,1,8.96,15.46,Consumer Discretionary,Minimum Volatility,Category ETF proxy,0.655,1.31,79
+MCDONALDS CORP,MCD,TICKER_COUNTRY:MCD|US,Leading,11.771,1,1,8.96,15.46,Consumer Discretionary,Minimum Volatility,Category ETF proxy,1.98,3.96,79
+OREILLY AUTOMOTIVE INC,ORLY,TICKER_COUNTRY:ORLY|US,Leading,11.771,1,1,8.96,15.46,Consumer Discretionary,Minimum Volatility,Category ETF proxy,0.925,1.85,79
+TJX,TJX,TICKER_COUNTRY:TJX|US,Leading,11.771,1,1,8.96,15.46,Consumer Discretionary,Minimum Volatility,Category ETF proxy,1.57,3.14,79
+YUM BRANDS,YUM,TICKER_COUNTRY:YUM|US,Leading,11.771,1,1,8.96,15.46,Consumer Discretionary,Minimum Volatility,Category ETF proxy,0.59,1.18,79
+INDUSTRIAL AND COMMERCIAL BANK OF,1398,TICKER_COUNTRY:1398|CN,Leading,9.937,1,1,6.39,15.46,Financials,Minimum Volatility,Category ETF proxy,0.44,0.88,86
+BANK OF CHINA LTD H,3988,TICKER_COUNTRY:3988|CN,Leading,9.937,1,1,6.39,15.46,Financials,Minimum Volatility,Category ETF proxy,0.64,1.28,86
+SOMPO HOLDINGS,8630,TICKER_COUNTRY:8630|JP,Leading,9.937,1,1,6.39,15.46,Financials,Minimum Volatility,Category ETF proxy,0.145,0.29,86
+CHINA CONSTRUCTION BANK CORP H,939,TICKER_COUNTRY:939|CN,Leading,9.937,1,1,6.39,15.46,Financials,Minimum Volatility,Category ETF proxy,0.665,1.33,86
+ARCH CAPITAL GROUP,ACGL,TICKER_COUNTRY:ACGL|US,Leading,9.937,1,1,6.39,15.46,Financials,Minimum Volatility,Category ETF proxy,0.37,0.74,86
+ALLSTATE CORP,ALL,TICKER_COUNTRY:ALL|US,Leading,9.937,1,1,6.39,15.46,Financials,Minimum Volatility,Category ETF proxy,0.28,0.56,86
+AON PLC CLASS A,AON,TICKER_COUNTRY:AON|US,Leading,9.937,1,1,6.39,15.46,Financials,Minimum Volatility,Category ETF proxy,0.38,0.76,86
+CREDICORP LTD,BAP,TICKER_COUNTRY:BAP|PERU,Leading,9.937,1,1,6.39,15.46,Financials,Minimum Volatility,Category ETF proxy,0.1,0.2,86
+BERKSHIRE HATHAWAY INC CLASS B,BRK B,TICKER_COUNTRY:BRK B|US,Leading,9.937,1,1,6.39,15.46,Financials,Minimum Volatility,Category ETF proxy,4.125,8.25,86
+BROWN & BROWN INC,BRO,TICKER_COUNTRY:BRO|US,Leading,9.937,1,1,6.39,15.46,Financials,Minimum Volatility,Category ETF proxy,0.15,0.3,86
+CHUBB,CB,TICKER_COUNTRY:CB|US,Leading,9.937,1,1,6.39,15.46,Financials,Minimum Volatility,Category ETF proxy,0.94,1.88,86
+CBOE GLOBAL MARKETS,CBOE,TICKER_COUNTRY:CBOE|US,Leading,9.937,1,1,6.39,15.46,Financials,Minimum Volatility,Category ETF proxy,0.36,0.72,86
+CME GROUP CLASS A,CME,TICKER_COUNTRY:CME|US,Leading,9.937,1,1,6.39,15.46,Financials,Minimum Volatility,Category ETF proxy,0.675,1.35,86
+LOEWS,L,TICKER_COUNTRY:L|US,Leading,9.937,1,1,6.39,15.46,Financials,Minimum Volatility,Category ETF proxy,0.235,0.47,86
+MASTERCARD CLASS A,MA,TICKER_COUNTRY:MA|US,Leading,9.937,1,1,6.39,15.46,Financials,Minimum Volatility,Category ETF proxy,1.78,3.56,86
+MARSH,MRSH,TICKER_COUNTRY:MRSH|US,Leading,9.937,1,1,6.39,15.46,Financials,Minimum Volatility,Category ETF proxy,0.625,1.25,86
+NU HOLDINGS CLASS A,NU,TICKER_COUNTRY:NU|BR,Leading,9.937,1,1,6.39,15.46,Financials,Minimum Volatility,Category ETF proxy,0.22,0.44,86
+PROGRESSIVE,PGR,TICKER_COUNTRY:PGR|US,Leading,9.937,1,1,6.39,15.46,Financials,Minimum Volatility,Category ETF proxy,0.7,1.4,86
+TRAVELERS COMPANIES,TRV,TICKER_COUNTRY:TRV|US,Leading,9.937,1,1,6.39,15.46,Financials,Minimum Volatility,Category ETF proxy,0.485,0.97,86
+VISA CLASS A,V,TICKER_COUNTRY:V|US,Leading,9.937,1,1,6.39,15.46,Financials,Minimum Volatility,Category ETF proxy,2.605,5.21,86
+WR BERKLEY,WRB,TICKER_COUNTRY:WRB|US,Leading,9.937,1,1,6.39,15.46,Financials,Minimum Volatility,Category ETF proxy,0.22,0.44,86
+WILLIS TOWERS WATSON,WTW,TICKER_COUNTRY:WTW|US,Leading,9.937,1,1,6.39,15.46,Financials,Minimum Volatility,Category ETF proxy,0.21,0.42,86
+PAN PACIFIC INTERNATIONAL HOLDINGS,7532,TICKER_COUNTRY:7532|JP,Leading,9.146,1,2,8.96,9.03,Consumer Discretionary,Minimum Volatility · Quality,Category ETF proxy,0.123,0.37,108
+COMPASS GROUP PLC,CPG,TICKER_COUNTRY:CPG|GB,Leading,9.146,1,2,8.96,9.03,Consumer Discretionary,Minimum Volatility · Quality,Category ETF proxy,0.523,1.57,108
+DOLLARAMA,DOL,TICKER_COUNTRY:DOL|CA,Leading,9.146,1,2,8.96,9.03,Consumer Discretionary,Minimum Volatility · Quality,Category ETF proxy,0.357,1.07,108
+BRITISH AMERICAN TOBACCO,BATS,TICKER_COUNTRY:BATS|GB,Leading,8.153,1,2,24.9,2.57,Consumer Staples,Dividend Yield · Quality,Category ETF proxy,2.53,7.59,111
+IMPERIAL BRANDS PLC,IMB,TICKER_COUNTRY:IMB|GB,Leading,8.153,1,2,24.9,2.57,Consumer Staples,Dividend Yield · Quality,Category ETF proxy,0.863,2.59,111
+KIKKOMAN CORP,2801,TICKER_COUNTRY:2801|JP,Leading,8.044,1,1,24.9,2.6,Consumer Staples,Quality,Category ETF proxy,0.165,0.33,113
+ALIMENTATION COUCHE TARD INC,ATD,TICKER_COUNTRY:ATD|CA,Leading,8.044,1,1,24.9,2.6,Consumer Staples,Quality,Category ETF proxy,0.64,1.28,113
+BEIERSDORF AG,BEI,TICKER_COUNTRY:BEI|DE,Leading,8.044,1,1,24.9,2.6,Consumer Staples,Quality,Category ETF proxy,0.125,0.25,113
+CARLSBERG AS CL B,CARL B,TICKER_COUNTRY:CARL B|DK,Leading,8.044,1,1,24.9,2.6,Consumer Staples,Quality,Category ETF proxy,0.205,0.41,113
+COCA COLA HBC AG,CCH,TICKER_COUNTRY:CCH|GB,Leading,8.044,1,1,24.9,2.6,Consumer Staples,Quality,Category ETF proxy,0.185,0.37,113
+DIAGEO PLC,DGE,TICKER_COUNTRY:DGE|GB,Leading,8.044,1,1,24.9,2.6,Consumer Staples,Quality,Category ETF proxy,0.875,1.75,113
+ESSITY CLASS B,ESSITY B,TICKER_COUNTRY:ESSITY B|SE,Leading,8.044,1,1,24.9,2.6,Consumer Staples,Quality,Category ETF proxy,0.25,0.5,113
+HENKEL AG,HEN,TICKER_COUNTRY:HEN|DE,Leading,8.044,1,1,24.9,2.6,Consumer Staples,Quality,Category ETF proxy,0.12,0.24,113
+HENKEL & KGAA PREF AG,HEN3,TICKER_COUNTRY:HEN3|DE,Leading,8.044,1,1,24.9,2.6,Consumer Staples,Quality,Category ETF proxy,0.22,0.44,113
+CHOCOLADEFABRIKEN LINDT & SPRUENGL,LISP,TICKER_COUNTRY:LISP|CH,Leading,8.044,1,1,24.9,2.6,Consumer Staples,Quality,Category ETF proxy,0.15,0.3,113
+LOREAL SA,OR,TICKER_COUNTRY:OR|FR,Leading,8.044,1,1,24.9,2.6,Consumer Staples,Quality,Category ETF proxy,1.82,3.64,113
+ORKLA,ORK,TICKER_COUNTRY:ORK|NO,Leading,8.044,1,1,24.9,2.6,Consumer Staples,Quality,Category ETF proxy,0.12,0.24,113
+RECKITT BENCKISER GROUP PLC,RKT,TICKER_COUNTRY:RKT|GB,Leading,8.044,1,1,24.9,2.6,Consumer Staples,Quality,Category ETF proxy,0.83,1.66,113
+UNILEVER PLC,ULVR,TICKER_COUNTRY:ULVR|GB,Leading,8.044,1,1,24.9,2.6,Consumer Staples,Quality,Category ETF proxy,2.475,4.95,113
+CARREFOUR SA,CA,TICKER_COUNTRY:CA|FR,Leading,7.962,1,1,24.9,2.55,Consumer Staples,Dividend Yield,Category ETF proxy,0.695,1.39,127
+DBS GROUP HOLDINGS LTD,D05,TICKER_COUNTRY:D05|SG,Leading,7.744,1,2,6.39,9.03,Financials,Minimum Volatility · Quality,Category ETF proxy,0.653,1.96,128
+SAMPO CLASS A,SAMPO,TICKER_COUNTRY:SAMPO|FI,Leading,7.744,1,2,6.39,9.03,Financials,Minimum Volatility · Quality,Category ETF proxy,0.253,0.76,128
+NATURGY ENERGY GROUP SA,NTGY,TICKER_COUNTRY:NTGY|ES,Leading,7.486,1,2,20.92,2.57,Utilities,Dividend Yield · Quality,Category ETF proxy,0.81,2.43,130
+REDEIA CORPORACION SA,RED,TICKER_COUNTRY:RED|ES,Leading,7.486,1,2,20.92,2.57,Utilities,Dividend Yield · Quality,Category ETF proxy,0.397,1.19,130
+ENDESA SA,ELE,TICKER_COUNTRY:ELE|ES,Leading,7.374,1,1,20.92,2.6,Utilities,Quality,Category ETF proxy,0.425,0.85,132
+FORTUM,FORTUM,TICKER_COUNTRY:FORTUM|FI,Leading,7.374,1,1,20.92,2.6,Utilities,Quality,Category ETF proxy,0.295,0.59,132
+HYDRO ONE,H,TICKER_COUNTRY:H|CA,Leading,7.374,1,1,20.92,2.6,Utilities,Quality,Category ETF proxy,0.34,0.68,132
+NATIONAL GRID PLC,NG.,TICKER_COUNTRY:NG.|GB,Leading,7.374,1,1,20.92,2.6,Utilities,Quality,Category ETF proxy,2.165,4.33,132
+SSE PLC,SSE,TICKER_COUNTRY:SSE|GB,Leading,7.374,1,1,20.92,2.6,Utilities,Quality,Category ETF proxy,1.125,2.25,132
+TERNA RETE ELETTRICA NAZIONALE,TRN,TICKER_COUNTRY:TRN|IT,Leading,7.374,1,1,20.92,2.6,Utilities,Quality,Category ETF proxy,0.38,0.76,132
+EMERA INC,EMA,TICKER_COUNTRY:EMA|CA,Leading,7.299,1,1,20.92,2.55,Utilities,Dividend Yield,Category ETF proxy,0.915,1.83,138
+ENEL,ENEL,TICKER_COUNTRY:ENEL|IT,Leading,7.299,1,1,20.92,2.55,Utilities,Dividend Yield,Category ETF proxy,3.27,6.54,138
+ENAGAS SA,ENG,TICKER_COUNTRY:ENG|ES,Leading,7.299,1,1,20.92,2.55,Utilities,Dividend Yield,Category ETF proxy,0.615,1.23,138
+SNAM,SRG,TICKER_COUNTRY:SRG|IT,Leading,7.299,1,1,20.92,2.55,Utilities,Dividend Yield,Category ETF proxy,0.855,1.71,138
+ASTELLAS PHARMA,4503,TICKER_COUNTRY:4503|JP,Leading,7.211,1,1,20.01,2.6,Healthcare,Quality,Category ETF proxy,0.25,0.5,142
+CHUGAI PHARMACEUTICAL LTD,4519,TICKER_COUNTRY:4519|JP,Leading,7.211,1,1,20.01,2.6,Healthcare,Quality,Category ETF proxy,0.25,0.5,142
+HOYA,7741,TICKER_COUNTRY:7741|JP,Leading,7.211,1,1,20.01,2.6,Healthcare,Quality,Category ETF proxy,0.44,0.88,142
+ASTRAZENECA PLC,AZN,TICKER_COUNTRY:AZN|GB,Leading,7.211,1,1,20.01,2.6,Healthcare,Quality,Category ETF proxy,2.485,4.97,142
+COLOPLAST B,COLO B,TICKER_COUNTRY:COLO B|DK,Leading,7.211,1,1,20.01,2.6,Healthcare,Quality,Category ETF proxy,0.08,0.16,142
+GLAXOSMITHKLINE,GSK,TICKER_COUNTRY:GSK|GB,Leading,7.211,1,1,20.01,2.6,Healthcare,Quality,Category ETF proxy,0.92,1.84,142
+NOVO NORDISK CLASS B,NOVO B,TICKER_COUNTRY:NOVO B|DK,Leading,7.211,1,1,20.01,2.6,Healthcare,Quality,Category ETF proxy,1.21,2.42,142
+ROCHE HOLDING AG,RO,TICKER_COUNTRY:RO|CH,Leading,7.211,1,1,20.01,2.6,Healthcare,Quality,Category ETF proxy,0.135,0.27,142
+ROCHE PS PAR AG,ROP,TICKER_COUNTRY:ROP|CH,Leading,7.211,1,1,20.01,2.6,Healthcare,Quality,Category ETF proxy,3.195,6.39,142
+SONOVA HOLDING AG,SOON,TICKER_COUNTRY:SOON|CH,Leading,7.211,1,1,20.01,2.6,Healthcare,Quality,Category ETF proxy,0.135,0.27,142
+STRAUMANN HOLDING AG,STMN,TICKER_COUNTRY:STMN|CH,Leading,7.211,1,1,20.01,2.6,Healthcare,Quality,Category ETF proxy,0.12,0.24,142
+SUZUKI MOTOR,7269,TICKER_COUNTRY:7269|JP,Leading,4.826,1,1,8.96,2.6,Consumer Discretionary,Quality,Category ETF proxy,0.295,0.59,153
+BANDAI NAMCO HOLDINGS INC,7832,TICKER_COUNTRY:7832|JP,Leading,4.826,1,1,8.96,2.6,Consumer Discretionary,Quality,Category ETF proxy,0.32,0.64,153
+ASICS,7936,TICKER_COUNTRY:7936|JP,Leading,4.826,1,1,8.96,2.6,Consumer Discretionary,Quality,Category ETF proxy,0.295,0.59,153
+FAST RETAILING,9983,TICKER_COUNTRY:9983|JP,Leading,4.826,1,1,8.96,2.6,Consumer Discretionary,Quality,Category ETF proxy,1.315,2.63,153
+ARISTOCRAT LEISURE,ALL,TICKER_COUNTRY:ALL|AU,Leading,4.826,1,1,8.96,2.6,Consumer Discretionary,Quality,Category ETF proxy,0.325,0.65,153
+COMPAGNIE FINANCIERE RICHEMONT SA,CFR,TICKER_COUNTRY:CFR|CH,Leading,4.826,1,1,8.96,2.6,Consumer Discretionary,Quality,Category ETF proxy,1.305,2.61,153
+CONTINENTAL AG,CON,TICKER_COUNTRY:CON|DE,Leading,4.826,1,1,8.96,2.6,Consumer Discretionary,Quality,Category ETF proxy,0.105,0.21,153
+EVOLUTION,EVO,TICKER_COUNTRY:EVO|SE,Leading,4.826,1,1,8.96,2.6,Consumer Discretionary,Quality,Category ETF proxy,0.135,0.27,153
+HENNES & MAURITZ,HM B,TICKER_COUNTRY:HM B|SE,Leading,4.826,1,1,8.96,2.6,Consumer Discretionary,Quality,Category ETF proxy,0.085,0.17,153
+INDUSTRIA DE DISENO TEXTIL SA,ITX,TICKER_COUNTRY:ITX|ES,Leading,4.826,1,1,8.96,2.6,Consumer Discretionary,Quality,Category ETF proxy,1.04,2.08,153
+LVMH,MC,TICKER_COUNTRY:MC|FR,Leading,4.826,1,1,8.96,2.6,Consumer Discretionary,Quality,Category ETF proxy,1.29,2.58,153
+MONCLER,MONC,TICKER_COUNTRY:MONC|IT,Leading,4.826,1,1,8.96,2.6,Consumer Discretionary,Quality,Category ETF proxy,0.125,0.25,153
+NEXT PLC,NXT,TICKER_COUNTRY:NXT|GB,Leading,4.826,1,1,8.96,2.6,Consumer Discretionary,Quality,Category ETF proxy,0.34,0.68,153
+PANDORA,PNDORA,TICKER_COUNTRY:PNDORA|DK,Leading,4.826,1,1,8.96,2.6,Consumer Discretionary,Quality,Category ETF proxy,0.125,0.25,153
+FERRARI,RACE,TICKER_COUNTRY:RACE|IT,Leading,4.826,1,1,8.96,2.6,Consumer Discretionary,Quality,Category ETF proxy,0.74,1.48,153
+HERMES INTERNATIONAL,RMS,TICKER_COUNTRY:RMS|FR,Leading,4.826,1,1,8.96,2.6,Consumer Discretionary,Quality,Category ETF proxy,0.595,1.19,153
+WESFARMERS,WES,TICKER_COUNTRY:WES|AU,Leading,4.826,1,1,8.96,2.6,Consumer Discretionary,Quality,Category ETF proxy,0.86,1.72,153
+KIA CORPORATION,000270,TICKER_COUNTRY:000270|KOREA (SOUTH),Leading,4.777,1,1,8.96,2.55,Consumer Discretionary,Dividend Yield,Category ETF proxy,0.6,1.2,170
+BMW,BMW,TICKER_COUNTRY:BMW|DE,Leading,4.777,1,1,8.96,2.55,Consumer Discretionary,Dividend Yield,Category ETF proxy,0.395,0.79,170
+MERCEDES-BENZ GROUP N AG,MBG,TICKER_COUNTRY:MBG|DE,Leading,4.777,1,1,8.96,2.55,Consumer Discretionary,Dividend Yield,Category ETF proxy,1.15,2.3,170
+PORSCHE AUTOMOBIL HOLDING PREF,PAH3,TICKER_COUNTRY:PAH3|DE,Leading,4.777,1,1,8.96,2.55,Consumer Discretionary,Dividend Yield,Category ETF proxy,0.32,0.64,170
+PERSIMMON PLC,PSN,TICKER_COUNTRY:PSN|GB,Leading,4.777,1,1,8.96,2.55,Consumer Discretionary,Dividend Yield,Category ETF proxy,0.355,0.71,170
+VOLKSWAGEN NON-VOTING PREF AG,VOW3,TICKER_COUNTRY:VOW3|DE,Leading,4.777,1,1,8.96,2.55,Consumer Discretionary,Dividend Yield,Category ETF proxy,0.8,1.6,170
+ADMIRAL GROUP PLC,ADM,TICKER_COUNTRY:ADM|GB,Leading,4.204,1,2,6.39,2.57,Financials,Dividend Yield · Quality,Category ETF proxy,0.44,1.32,176
+AGEAS,AGS,TICKER_COUNTRY:AGS|BE,Leading,4.204,1,2,6.39,2.57,Financials,Dividend Yield · Quality,Category ETF proxy,0.377,1.13,176
+CAIXABANK SA,CABK,TICKER_COUNTRY:CABK|ES,Leading,4.204,1,2,6.39,2.57,Financials,Dividend Yield · Quality,Category ETF proxy,0.64,1.92,176
+SWISS RE AG,SREN,TICKER_COUNTRY:SREN|CH,Leading,4.204,1,2,6.39,2.57,Financials,Dividend Yield · Quality,Category ETF proxy,0.73,2.19,176
+ZURICH INSURANCE GROUP AG,ZURN,TICKER_COUNTRY:ZURN|CH,Leading,4.204,1,2,6.39,2.57,Financials,Dividend Yield · Quality,Category ETF proxy,1.607,4.82,176
+HONG KONG EXCHANGES AND CLEARING,388,TICKER_COUNTRY:388|HK,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.71,1.42,181
+JAPAN EXCHANGE GROUP,8697,TICKER_COUNTRY:8697|JP,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.16,0.32,181
+MS&AD INSURANCE GROUP HOLDINGS,8725,TICKER_COUNTRY:8725|JP,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.45,0.9,181
+DAIICHI LIFE GROUP,8750,TICKER_COUNTRY:8750|JP,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.35,0.7,181
+TOKIO MARINE HOLDINGS,8766,TICKER_COUNTRY:8766|JP,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,1.155,2.31,181
+AIB GROUP PLC,A5G,TICKER_COUNTRY:A5G|IE,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.22,0.44,181
+ADYEN,ADYEN,TICKER_COUNTRY:ADYEN|NL,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.285,0.57,181
+ALLIANZ,ALV,TICKER_COUNTRY:ALV|DE,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,2.05,4.1,181
+ASX LTD,ASX,TICKER_COUNTRY:ASX|AU,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.095,0.19,181
+AXA SA,CS,TICKER_COUNTRY:CS|FR,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.665,1.33,181
+DEUTSCHE BOERSE AG,DB1,TICKER_COUNTRY:DB1|DE,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.69,1.38,181
+EURONEXT NV,ENX,TICKER_COUNTRY:ENX|FR,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.145,0.29,181
+EQT,EQT,TICKER_COUNTRY:EQT|SE,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.13,0.26,181
+FINECOBANK BANCA FINECO,FBK,TICKER_COUNTRY:FBK|IT,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.17,0.34,181
+ASSICURAZIONI GENERALI,G,TICKER_COUNTRY:G|IT,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.365,0.73,181
+HELVETIA BALOISE HOLDING N AG,HBAN-CH,TICKER_COUNTRY:HBAN|CH,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.16,0.32,181
+HANNOVER RUECK,HNR1,TICKER_COUNTRY:HNR1|DE,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.215,0.43,181
+INSURANCE AUSTRALIA GROUP,IAG,TICKER_COUNTRY:IAG|AU,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.115,0.23,181
+INTACT FINANCIAL CORP,IFC,TICKER_COUNTRY:IFC|CA,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.375,0.75,181
+3I GROUP FUND PLC,III,TICKER_COUNTRY:III|GB,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.385,0.77,181
+INDUSTRIVARDEN A,INDU A,TICKER_COUNTRY:INDU A|SE,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.045,0.09,181
+INDUSTRIVARDEN SERIES,INDU C,TICKER_COUNTRY:INDU C|SE,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.085,0.17,181
+INVESTOR CLASS B,INVE B,TICKER_COUNTRY:INVE B|SE,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.665,1.33,181
+LONDON STOCK EXCHANGE GROUP PLC,LSEG,TICKER_COUNTRY:LSEG|GB,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.53,1.06,181
+MANULIFE FINANCIAL,MFC,TICKER_COUNTRY:MFC|CA,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.66,1.32,181
+MEDIBANK PRIVATE,MPL,TICKER_COUNTRY:MPL|AU,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.115,0.23,181
+MUENCHENER RUECKVERSICHERUNGS-GESE,MUV2,TICKER_COUNTRY:MUV2|DE,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.87,1.74,181
+OVERSEA-CHINESE BANKING,O39,TICKER_COUNTRY:O39|SG,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.69,1.38,181
+PARTNERS GROUP HOLDING AG,PGHN,TICKER_COUNTRY:PGHN|CH,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.23,0.46,181
+POWER CORPORATION OF CANADA,POW,TICKER_COUNTRY:POW|CA,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.28,0.56,181
+PRUDENTIAL PLC,PRU-GB,TICKER_COUNTRY:PRU|GB,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.345,0.69,181
+QBE INSURANCE GROUP,QBE,TICKER_COUNTRY:QBE|AU,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.29,0.58,181
+SUN LIFE FINANCIAL INC,SLF,TICKER_COUNTRY:SLF|CA,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.37,0.74,181
+SUNCORP GROUP,SUN,TICKER_COUNTRY:SUN|AU,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.135,0.27,181
+TRYG,TRYG,TICKER_COUNTRY:TRYG|DK,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.075,0.15,181
+UNITED OVERSEAS BANK,U11,TICKER_COUNTRY:U11|SG,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.285,0.57,181
+UNIPOL ASSICURAZIONI SPA,UNI,TICKER_COUNTRY:UNI|IT,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.12,0.24,181
+WISE PLC CLASS A,WISE,TICKER_COUNTRY:WISE|GB,Leading,4.074,1,1,6.39,2.6,Financials,Quality,Category ETF proxy,0.105,0.21,181
+ABERDEEN GROUP PLC,ABDN,TICKER_COUNTRY:ABDN|GB,Leading,4.033,1,1,6.39,2.55,Financials,Dividend Yield,Category ETF proxy,0.315,0.63,219
+CREDIT AGRICOLE SA,ACA,TICKER_COUNTRY:ACA|FR,Leading,4.033,1,1,6.39,2.55,Financials,Dividend Yield,Category ETF proxy,0.505,1.01,219
+AEGON,AGN,TICKER_COUNTRY:AGN|NL,Leading,4.033,1,1,6.39,2.55,Financials,Dividend Yield,Category ETF proxy,0.415,0.83,219
+BANCO BPM,BAMI,TICKER_COUNTRY:BAMI|IT,Leading,4.033,1,1,6.39,2.55,Financials,Dividend Yield,Category ETF proxy,0.84,1.68,219
+BANK OF NOVA SCOTIA,BNS,TICKER_COUNTRY:BNS|CA,Leading,4.033,1,1,6.39,2.55,Financials,Dividend Yield,Category ETF proxy,1.21,2.42,219
+BPER BANCA,BPE,TICKER_COUNTRY:BPE|IT,Leading,4.033,1,1,6.39,2.55,Financials,Dividend Yield,Category ETF proxy,0.52,1.04,219
+DANSKE BANK,DANSKE,TICKER_COUNTRY:DANSKE|DK,Leading,4.033,1,1,6.39,2.55,Financials,Dividend Yield,Category ETF proxy,0.675,1.35,219
+DNB BANK,DNB,TICKER_COUNTRY:DNB|NO,Leading,4.033,1,1,6.39,2.55,Financials,Dividend Yield,Category ETF proxy,0.695,1.39,219
+EDENRED,EDEN,TICKER_COUNTRY:EDEN|FR,Leading,4.033,1,1,6.39,2.55,Financials,Dividend Yield,Category ETF proxy,0.345,0.69,219
+ING GROEP,INGA,TICKER_COUNTRY:INGA|NL,Leading,4.033,1,1,6.39,2.55,Financials,Dividend Yield,Category ETF proxy,1.255,2.51,219
+LEGAL AND GENERAL GROUP PLC,LGEN,TICKER_COUNTRY:LGEN|GB,Leading,4.033,1,1,6.39,2.55,Financials,Dividend Yield,Category ETF proxy,0.8,1.6,219
+NORDEA BANK,NDA SE,TICKER_COUNTRY:NDA SE|FI,Leading,4.033,1,1,6.39,2.55,Financials,Dividend Yield,Category ETF proxy,1.055,2.11,219
+NN GROUP,NN,TICKER_COUNTRY:NN|NL,Leading,4.033,1,1,6.39,2.55,Financials,Dividend Yield,Category ETF proxy,0.595,1.19,219
+NATWEST GROUP PLC,NWG,TICKER_COUNTRY:NWG|GB,Leading,4.033,1,1,6.39,2.55,Financials,Dividend Yield,Category ETF proxy,0.97,1.94,219
+BANCO DE SABADELL,SAB,TICKER_COUNTRY:SAB|ES,Leading,4.033,1,1,6.39,2.55,Financials,Dividend Yield,Category ETF proxy,0.79,1.58,219
+STANDARD LIFE PLC,SDLF,TICKER_COUNTRY:SDLF|GB,Leading,4.033,1,1,6.39,2.55,Financials,Dividend Yield,Category ETF proxy,0.485,0.97,219
+SVENSKA HANDELSBANKEN-A SHS,SHB A,TICKER_COUNTRY:SHB A|SE,Leading,4.033,1,1,6.39,2.55,Financials,Dividend Yield,Category ETF proxy,0.59,1.18,219
+SWEDBANK,SWED A,TICKER_COUNTRY:SWED A|SE,Leading,4.033,1,1,6.39,2.55,Financials,Dividend Yield,Category ETF proxy,0.815,1.63,219
