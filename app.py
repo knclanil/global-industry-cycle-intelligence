@@ -12,7 +12,7 @@ NAV_GROUPS = {
     '🕸️ KNOWLEDGE GRAPHS': ['Global Knowledge Graph', 'USA Knowledge Graph', 'India Knowledge Graph',
                             'Global Capital Intelligence Network'],
     '🌍 GLOBAL': ['Global Countries', 'Global Asset Flow', 'Global Sectors', 'Global Factors', 'Global Analysis'],
-    '🇺🇸 USA': ['USA Asset Flow', 'USA Sector', 'USA Factors', 'USA Analysis'],
+    '🇺🇸 USA': ['USA Asset Flow', 'USA Sector', 'USA Factors', 'USA Investment Opportunity Screener', 'USA Company Deep Dive'],
     '🇮🇳 INDIA': ['India Asset Flow', 'India Sector', 'India Factors', 'India Investment Opportunity Screener', 'India Company Deep Dive'],
     '💼 COMPANY FINANCIALS': ['Fundamental Quality Rankings', 'Company Financial Research',
                               'USA Company Financial KPI Intelligence', 'India Company Financial KPI Intelligence',
@@ -20,6 +20,8 @@ NAV_GROUPS = {
     '📋 OTHER RESEARCH': ['Company Holdings Leadership', 'Data Table', 'Wiki'],
 }
 PAGE_LABELS = {
+ 'USA Investment Opportunity Screener': 'Investment Opportunity Screener',
+ 'USA Company Deep Dive': 'Company Deep Dive',
  'Global Capital Intelligence Network': 'Capital Network',
  'Global Countries': 'Countries',
  'Fundamental Quality Rankings': 'Quality Rankings',
@@ -44,6 +46,7 @@ PAGE_ICONS = {
     'Global Factors': '🌍', 'USA Factors': '🇺🇸', 'India Factors': '🇮🇳',
     'India Sector & Factor Holdings': '🇮🇳', 'India Overlap & Leadership': '🏆',
     'India Sector & Factor Financials': '📈',
+    'USA Investment Opportunity Screener': '🎯', 'USA Company Deep Dive': '🔎',
     'India Investment Opportunity Screener': '🎯', 'India Company Deep Dive': '🔎',
     'Fundamental Quality Rankings': '🏅', 'Company Holdings Leadership': '🏆',
     'Company Financial Research': '📑', 'USA Company Financial KPI Intelligence': '📊',
@@ -124,6 +127,12 @@ elif page == 'India Company Financial KPI Intelligence':
 elif page == 'India Fundamental Valuation':
     from india_valuation_ui import render_india_valuation
     render_india_valuation()
+elif page == 'USA Investment Opportunity Screener':
+    from usa_opportunity_ui import render_usa_opportunities
+    render_usa_opportunities()
+elif page == 'USA Company Deep Dive':
+    from usa_company_deep_dive_ui import render_usa_company_deep_dive
+    render_usa_company_deep_dive()
 elif page == 'India Investment Opportunity Screener':
     from india_opportunity_ui import render_india_opportunities
     render_india_opportunities()
