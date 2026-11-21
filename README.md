@@ -1,11 +1,17 @@
-# India Asset Flow: persist actual prices (not only coverage)
+# Fix: GitHub Actions cannot rebase because of unstaged changes
 
-## Root cause
-The old job generated `india_asset_flow_coverage.csv`, which contains only ticker, count, dates, and status. The Streamlit dashboard instead uses `stored_market_data.read_market()` to load `.parquet` files from `data/market/IndiaAssets/`. The old refresh job did **not** publish those parquet files. Also, the India government bond's canonical key (`NIFTY_GSEC_10Y`) is absent from `india_asset_market_data.TICKERS`, the list the dashboard used to read snapshots.
+Replace `.github/workflows/refresh-india-asset-flow.yml` with the file in this package.
 
-## Install with GitHub Desktop
-Copy the **contents** of this package into the root of the repository (merge `scripts/` and `.github/workflows/`, preserving paths). The included workflow automatically applies the targeted fix to `dashboard.py` during its run and publishes that change together with the price snapshots. **You do not need to run Python locally or edit dashboard.py yourself.**
+The job's recovery installer edits `india_asset_market_data.py`. Other generated or modified files may remain unstaged. The old publication step committed only two paths and then rebased the dirty build checkout, which caused `cannot rebase: You have unstaged changes`.
 
-Commit, push, then **Actions → Refresh India Asset Flow Diagnostics → Run workflow**. Confirm all six canonical parquet datasets appear under `data/market/IndiaAssets/` and coverage shows available series. Streamlit redeploys on the workflow's resulting commit. Click `Refresh now` to reset Streamlit's in-process price cache.
+The replacement publishes only the intended application module and coverage CSV from a clean temporary Git worktree. It retries on non-fast-forward pushes and does not force-push. If someone edits the application module concurrently, it stops instead of overwriting their work.
 
-The report is a data-coverage check, not proof that actual capital inflows/outflows occurred. The dashboard uses price-rotation proxies, not measured capital flows.
+## GitHub Desktop
+
+1. Extract this ZIP.
+2. Open Repository > Show in Explorer.
+3. Copy `.github/workflows/refresh-india-asset-flow.yml` from ZIP into the identical path in your repository.
+4. Commit and Push origin in GitHub Desktop.
+5. Open GitHub Actions > Refresh India Asset Flow Diagnostics > Run workflow.
+
+**Important:** This workflow currently generates/publishes a coverage CSV and updates the recovery wrapper. Its `scripts/refresh_india_asset_data.py` does **not** persist daily price data for Streamlit. If your India Asset Flow dashboard still reports insufficient history, a separate actual-price snapshot writer/reader integration is needed.

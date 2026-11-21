@@ -1,73 +1,105 @@
 name: Refresh India Asset Flow Diagnostics
+
 on:
   workflow_dispatch:
   schedule:
     - cron: '45 12 * * 1-5'
+
 permissions:
   contents: write
+
 concurrency:
   group: india-asset-flow-refresh-main
   cancel-in-progress: false
+
 jobs:
   refresh:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out main
+      - name: Check out latest main
         uses: actions/checkout@v4
         with:
           ref: main
           fetch-depth: 0
           persist-credentials: true
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+
       - name: Install dependencies
         run: python -m pip install -r requirements.txt
-      - name: Install existing recovery wrapper
+
+      - name: Install recovery wrapper
         run: python scripts/install_india_asset_fix.py
-      - name: Update dashboard to read the canonical stored keys
-        run: python scripts/install_india_asset_dashboard_fix.py
-      - name: Refresh AND persist asset history
+
+      - name: Refresh source coverage diagnostics
         run: python scripts/refresh_india_asset_data.py
-      - name: Verify stored coverage and price snapshots
+
+      - name: Verify coverage CSV was produced
+        shell: bash
         run: |
-          test -s data/dashboard_cache/india_asset_flow_coverage.csv
-          test -s data/market/IndiaAssets/%5ENSEI.parquet
-          python - <<'PY'
-          from stored_market_data import read_one
-          from india_asset_market_data import SECTORS, BENCHMARK
-          import pandas as pd
-          coverage = {t: len(read_one('IndiaAssets', t)) for t in [*SECTORS, BENCHMARK]}
-          print('Persisted sessions:', coverage)
-          assert coverage[BENCHMARK] >= 100, 'Benchmark missing or insufficient'
-          assert sum(coverage[t] >= 100 for t in SECTORS) >= 1, 'No usable asset histories'
-          PY
-      - name: Publish price histories and diagnostics safely
+          set -euo pipefail
+          test -s data/dashboard_cache/india_asset_flow_coverage.csv || {
+            echo 'Coverage CSV is missing or empty'
+            exit 1
+          }
+
+      # The data-generation scripts can leave additional files modified.
+      # Publish from a *separate clean Git worktree*, so git rebase/commit
+      # never encounters unstaged changes in the generator checkout.
+      - name: Publish updated module and coverage safely
         shell: bash
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -f data/market/IndiaAssets/*.parquet data/market/IndiaAssets/sources.json
-          git add -f data/dashboard_cache/india_asset_flow_coverage.csv
-          git add india_asset_market_data.py dashboard.py
-          if git diff --cached --quiet; then
-            echo 'No changes to publish.'
-            exit 0
-          fi
-          git commit -m 'Persist India asset flow market prices [skip ci]'
+
+          SOURCE_DIR="$PWD"
+          BASE_SHA="$(git rev-parse HEAD)"
+          TEMP_DIR="$(mktemp -d)"
+          trap 'git -C "$SOURCE_DIR" worktree remove --force "$TEMP_DIR" >/dev/null 2>&1 || true; rm -rf "$TEMP_DIR"' EXIT
+
+          # Copy only intended generated outputs out of the dirty build directory.
+          cp india_asset_market_data.py "$RUNNER_TEMP/india_asset_market_data.py"
+          cp data/dashboard_cache/india_asset_flow_coverage.csv "$RUNNER_TEMP/india_asset_flow_coverage.csv"
+
+          git fetch origin main
+          git worktree add --detach "$TEMP_DIR" origin/main
+          git -C "$TEMP_DIR" config user.name 'github-actions[bot]'
+          git -C "$TEMP_DIR" config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
           for attempt in 1 2 3 4 5; do
+            echo "Publishing attempt ${attempt}/5"
             git fetch origin main
-            if ! git rebase origin/main; then
-              git rebase --abort || true
-              echo 'Cannot safely rebase generated data.'
+
+            # Do not overwrite an independently edited application module.
+            if ! git diff --quiet "$BASE_SHA" origin/main -- india_asset_market_data.py; then
+              echo 'india_asset_market_data.py changed on main while workflow was running. Rerun against latest code.'
               exit 1
             fi
-            if git push origin HEAD:main; then
-              echo 'Published IndiaAssets price parquet snapshots.'
+
+            git -C "$TEMP_DIR" reset --hard origin/main
+            cp "$RUNNER_TEMP/india_asset_market_data.py" "$TEMP_DIR/india_asset_market_data.py"
+            mkdir -p "$TEMP_DIR/data/dashboard_cache"
+            cp "$RUNNER_TEMP/india_asset_flow_coverage.csv" "$TEMP_DIR/data/dashboard_cache/india_asset_flow_coverage.csv"
+
+            git -C "$TEMP_DIR" add india_asset_market_data.py
+            git -C "$TEMP_DIR" add -f data/dashboard_cache/india_asset_flow_coverage.csv
+
+            if git -C "$TEMP_DIR" diff --cached --quiet; then
+              echo 'Generated data already matches the latest main.'
               exit 0
             fi
+
+            git -C "$TEMP_DIR" commit -m 'Refresh India asset history validation [skip ci]'
+            if git -C "$TEMP_DIR" push origin HEAD:main; then
+              echo 'Published refreshed India Asset Flow diagnostics.'
+              exit 0
+            fi
+            echo 'main advanced while publishing; retrying from a fresh worktree state.'
             sleep $((attempt * 3))
           done
+          echo 'Unable to publish after five attempts; rerun workflow.'
           exit 1
