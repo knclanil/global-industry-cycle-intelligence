@@ -1,36 +1,32 @@
-# USA Research Workspace — matches the India research journey
+# Repair: USA and India research pages missing from sidebar
 
-Adds **USA Investment Opportunity Screener** and **USA Company Deep Dive** after USA Asset Flow, USA Sector, and USA Factors, without changing the existing graph, India pages, or company financial screens.
+## Root cause established
 
-## Install (GitHub Desktop)
+The published GitHub `main/app.py` (inspected November 21, 2026) still contains the old USA and India sidebar definitions; it has no `USA Investment Opportunity Screener` / `USA Company Deep Dive` or equivalent India routes. The earlier ZIP **did not automatically modify your repo**. In particular, the earlier install scripts only change `app.py` if run in the local repository and the resulting `app.py` is committed/pushed. The earlier India installer also requires a specific sidebar layout and can fail if older pages remain.
 
-1. Extract the ZIP.
-2. Copy `usa_research_data.py`, `usa_opportunity_ui.py`, and `usa_company_deep_dive_ui.py` into the repository root.
-3. Copy `scripts/install_usa_research_pages.py` and `scripts/build_usa_research.py` into the repository `scripts` folder. Optionally copy the unit test into `tests`.
-4. In **Repository → Open in Terminal**, run `python scripts/install_usa_research_pages.py`. This patches your existing `app.py` rather than replacing it. Run again safely if needed.
-5. Commit and push from GitHub Desktop.
+## INSTALL — Windows / GitHub Desktop
 
-### Refresh cached SEC facts and the USA research summary
+1. Open **GitHub Desktop → Repository → Show in Explorer**. This is your real local repo (has `app.py`, `.github`, etc.).
+2. Extract this ZIP and **copy everything inside it** into that repository folder, preserving the `scripts/` folder. **Do not replace `app.py` manually.**
+3. In the repository folder double-click **`INSTALL_WINDOWS.bat`**. You should see `SUCCESS: updated app.py` (or `ALREADY INSTALLED`). The installer edits only the local `app.py` sidebar lists, page icons and dispatch routes, and validates syntax and that required UI modules exist.
+4. In GitHub Desktop verify the **Changes** tab includes `app.py` and the six `*_research_*` / `*_opportunity_ui.py` / `*_deep_dive_ui.py` files.
+5. **Commit to main**, then **Push origin**. **Commit alone is not enough** for the deployed app.
+6. Open GitHub.com `main/app.py`, confirm it contains `USA Investment Opportunity Screener`, then refresh/reboot the Streamlit app. Confirm the sidebar has both regions' new pages.
 
-- Your existing **Verified iShares holdings refresh** must publish `data/holdings/latest_holdings.parquet`.
-- Your existing **SEC fundamentals refresh** must publish the SEC company directory plus individual companyfacts JSON files in `data/fundamentals/` or `data/sec_cache/`.
-- To generate a saved US research snapshot from already-cached SEC facts, run `python scripts/build_usa_research.py` from your repository root, then commit/push `data/usa_research/company_research.csv` and `data/usa_research/build_report.json`. This script makes **no HTTP requests**.
-- If financial snapshot is not yet generated, the screener still shows your verified U.S. issuer memberships; financial values remain blank.
+Expected navigation:
 
-**USA pages**: USA Asset Flow → USA Sector → USA Factors → USA Investment Opportunity Screener → USA Company Deep Dive.
+- India: Asset Flow → Sector → Factors → Investment Opportunity Screener → Company Deep Dive (old overlapping India analysis pages removed from India navigation only; their modules remain).
+- USA: Asset Flow → Sector → Factors → Investment Opportunity Screener → Company Deep Dive (preserves other existing USA pages).
+- All Knowledge Graphs stay unchanged.
 
-## Data integrity
+For terminal usage: `python scripts/install_research_navigation.py` then `python scripts/install_research_navigation.py --check`.
 
-- **Only USA** `sector` and `factor` iShares sources (not `global_sector` or `global_factor`) are eligible; only source rows explicitly locating issuer in the United States are included. This is narrower than “USA strategy funds contain multinational holdings.”
-- One row per country-qualified issuer identity, not one row per ETF position.
-- Source ETF memberships, factor families, sector families, source count and average weight preserved.
-- Sector, factor and fund multiselect support ANY/ALL *within each group*, AND *across groups*.
-- **No score is made up.** SEC facts provide annual fundamentals and growth, but raw SEC filings do not supply current stock quotes. P/E, P/B, price, quality/growth/valuation/research scores remain missing until a vetted quote, peer-comparison and scoring pipeline has been connected. This package does **not** claim to have valuation or opportunity scoring operational for the US.
-- Company Deep Dive links to your already-existing `Company Financial Research` and `USA Company Financial KPI Intelligence` pages for more complete SEC-backed detail.
-- The graph, existing Global/USA/India data and workflows are not modified.
+If you still see no changes after push, check: (a) GitHub Desktop correct repository/branch, (b) `app.py` appears in the **committed** files, (c) `main/app.py` online includes both page labels, (d) Streamlit app is configured for this repo/branch and entrypoint `app.py`, (e) Streamlit deployment logs show no import error.
 
-## Local checks
+## Data and research readiness
 
-`python -m unittest discover -s tests -p 'test_usa_research_pages.py' -v`
+Pages appear with the navigation fix, even if financial CSVs have not been generated. They will show missing financial fields honestly. To generate snapshots from previously cached data, run `python scripts/build_usa_research.py` and `python scripts/build_india_opportunity_dataset.py` in the repo as appropriate. Real company valuations and comparison scores require populated financial data and suitable quote coverage.
 
-Python syntax and fixture tests were checked in the package build environment. No live Streamlit/GitHub workflow deployment was performed.
+## Safety
+
+No edits to knowledge graphs, price and factor calculations, workflows or saved market data. Installer is idempotent and fails without writing if baseline cannot be parsed/validated. The ZIP bundles the previously prepared pages and data loaders. No live deployment has been executed by this assistant.
