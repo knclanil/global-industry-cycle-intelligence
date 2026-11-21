@@ -36,7 +36,9 @@ def refresh(region: str, bootstrap_years: int = 5, overlap_days: int = 10, today
     status = {'region': region, 'refreshed_utc': datetime.now(timezone.utc).isoformat(), 'markets': {}, 'errors': []}
     for market in REGIONS[region]:
         module = importlib.import_module(MODULES[market])
-        tickers = list(module.TICKERS)
+        # INDIA_ASSET_PIPELINE_CANONICAL_REFRESH
+        tickers = ([*module.SECTORS, module.BENCHMARK]
+                   if market == 'IndiaAssets' else list(module.TICKERS))
         existing = {t: store.read_one(market, t) for t in tickers}
         # One provider request per market; fetch missing tickers via a full bootstrap window.
         missing = [t for t in tickers if existing[t].empty]
