@@ -1,5 +1,5 @@
 {
-  "built_utc": "2026-11-21T22:46:44.388637+00:00",
+  "built_utc": "2026-11-21T22:52:57.684043+00:00",
   "verified_issuers": 2931,
   "verified_tickers": 2921,
   "selected": 25,
@@ -9,7 +9,7 @@
     "-": "Yahoo returned no recent price history",
     "2200964D": "Yahoo returned no recent price history"
   },
-  "prices_before": 2,
-  "prices_after": 25,
-  "valuations_after": 24
+  "prices_before": 25,
+  "prices_after": 48,
+  "valuations_after": 46
 }

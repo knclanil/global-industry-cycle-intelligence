@@ -1,5 +1,5 @@
 {
-  "built_utc": "2026-11-21T22:47:54+00:00",
+  "built_utc": "2026-11-21T22:54:25+00:00",
   "markets": {
     "India": {
       "status": "available",
@@ -37,15 +37,15 @@
         "operating_cash_flow": 489,
         "free_cash_flow": 325,
         "debt_to_equity": 233,
-        "price": 25,
-        "market_cap": 25,
-        "pe": 17,
-        "pb": 23,
+        "price": 48,
+        "market_cap": 48,
+        "pe": 31,
+        "pb": 45,
         "research_score": 0
       },
       "readiness": {
         "fundamental_ready": 404,
-        "valuation_ready": 24,
+        "valuation_ready": 46,
         "research_ready": 0
       }
     }
