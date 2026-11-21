@@ -1,25 +1,13 @@
-# One-row-per-company membership table
+# Knowledge Graph company membership count columns
 
-This replaces **only** the *All verified company memberships* table display in `regional_rotation_graph.py`. It preserves Knowledge Graph rendering, its controls, matching cohorts, and the independent company-table filter modes.
+Replace `regional_rotation_graph.py` in the root of your GitHub Desktop repository with the file in this ZIP. Do not replace `app.py` or any data caches. Commit and push with GitHub Desktop.
 
-The table shows the columns, in order:
+In the **All verified company memberships** table, the existing one-row-per-company presentation now includes:
 
-**Company | Ticker | Quadrant | Sector | Factor | Mapping | Weight | Avg Weight**
+`Company | Ticker | Quadrant | # Quadrant | Sector | # Sector | Factor | # Factor | Mapping | Weight | Avg Weight`
 
-Each `company_key` produces one row. Multiple distinct quadrant/sector/factor/mapping values are joined into a single cell using ` · `; factor source indexes are normalized into factor families (Value, Quality, etc.). Company identities are **not** collapsed merely because their names or tickers look similar. The underlying index/ETF membership evidence remains available in an expandable source-level table and as a CSV download.
+Counts are the number of **distinct displayed** quadrant classifications, sector labels, and normalized factor families for each company, calculated only from the membership records in the table's currently selected mode and filters. Multiple underlying indexes in the same factor family count once; duplicated source records do not inflate counts. No extra graph filtering or cache rebuild is introduced. If some memberships are excluded by the chosen table mode, counts reflect the visible membership evidence, not necessarily all the company's memberships.
 
-**Weight** is a list of recorded per-source holding weights (one per distinct source/portfolio membership with a usable weight), not their sum. **Avg Weight** is the arithmetic mean of those reported weights, excluding missing values; it is not the weighted-average portfolio exposure or a recommended investment allocation. India source snapshots without constituent weights show `N/A` for Weight and an empty Avg Weight.
+`# Quadrant` counts distinct labels in the Quadrant cell, `# Sector` counts distinct sector labels, and `# Factor` counts normalized factor families. Blank/missing values do not contribute to counts. The underlying detailed membership evidence remains accessible in the existing expander.
 
-## Install through GitHub Desktop
-
-1. Extract this ZIP.
-2. In GitHub Desktop select `global-industry-cycle-intelligence` → Repository → Show in Explorer.
-3. Copy `regional_rotation_graph.py` into the root of the repository, alongside `app.py`, replacing the existing file.
-4. Commit (`Show company memberships one row per company`) and Push origin.
-5. Open Global, USA, or India Knowledge Graph, expand *All verified company memberships*, and select your preferred table source.
-
-No cache regeneration is required. If your local `regional_rotation_graph.py` has newer custom changes, review the diff before replacing it.
-
-## Validation
-
-Syntax compilation passed; two isolated aggregation tests passed. Full Streamlit deployment has **not** been tested. This file is based on the last graph/table sync package provided in the conversation.
+Validation: Python syntax and three targeted aggregation tests passed. Live Streamlit deployment not tested.

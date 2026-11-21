@@ -263,8 +263,8 @@ def summarize_company_memberships(edges: pd.DataFrame) -> pd.DataFrame:
     not a sum of exposure. Avg Weight is the arithmetic mean of those observed
     weights only. Missing weights remain N/A rather than becoming zero.
     """
-    display_columns = ["Company", "Ticker", "Quadrant", "Sector", "Factor",
-                       "Mapping", "Weight", "Avg Weight"]
+    display_columns = ["Company", "Ticker", "Quadrant", "# Quadrant", "Sector", "# Sector",
+                       "Factor", "# Factor", "Mapping", "Weight", "Avg Weight"]
     if edges.empty or "company_key" not in edges:
         return pd.DataFrame(columns=display_columns)
 
@@ -281,8 +281,17 @@ def summarize_company_memberships(edges: pd.DataFrame) -> pd.DataFrame:
     df["__factor"] = [(_factor_family(label) if kind.casefold() == "factor" else "")
                       for kind, label in zip(df["kind"], df["label"])]
 
+    def unique_values(series):
+        """Distinct nonempty, normalized display values, case-insensitive."""
+        values = {}
+        for raw in series:
+            value = str(raw).strip() if pd.notna(raw) else ""
+            if value and value not in ("—", "N/A"):
+                values.setdefault(value.casefold(), value)
+        return sorted(values.values(), key=str.casefold)
+
     def unique_strings(series):
-        return " · ".join(sorted({v for v in series if v}, key=str.casefold)) or "—"
+        return " · ".join(unique_values(series)) or "—"
 
     results = []
     for company_key, group in df.groupby("company_key", sort=False, dropna=False):
@@ -293,12 +302,16 @@ def summarize_company_memberships(edges: pd.DataFrame) -> pd.DataFrame:
         vals = weighted["__weight"].tolist()
         sectors = memberships.loc[memberships["kind"].str.casefold() == "sector", "label"]
         factors = memberships.loc[memberships["kind"].str.casefold() == "factor", "__factor"]
+        quadrants = memberships["quadrant"]
         results.append({
             "Company": next((v for v in group["Company"] if v), str(company_key)),
             "Ticker": next((v for v in group["Ticker"] if v), "—"),
-            "Quadrant": unique_strings(memberships["quadrant"]),
+            "Quadrant": unique_strings(quadrants),
+            "# Quadrant": len(unique_values(quadrants)),
             "Sector": unique_strings(sectors),
+            "# Sector": len(unique_values(sectors)),
             "Factor": unique_strings(factors),
+            "# Factor": len(unique_values(factors)),
             "Mapping": unique_strings(memberships["mapping_method"]),
             "Weight": " · ".join(f"{v:.2f}%" for v in vals) if vals else "N/A",
             "Avg Weight": round(sum(vals) / len(vals), 4) if vals else None,

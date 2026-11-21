@@ -24,15 +24,21 @@ def test_one_row_preserves_multiple_quadrants_and_families():
         {'company_key':'b', 'Company':'BETA LTD', 'Ticker':'BET', 'quadrant':'Weakening','kind':'factor','label':'Momentum','mapping_method':'official','source_id':'MOM','portfolio_id':'4','weight':None},
     ])
     got = summarize(rows)
-    assert list(got.columns) == ['Company', 'Ticker', 'Quadrant', 'Sector', 'Factor', 'Mapping', 'Weight', 'Avg Weight']
+    assert list(got.columns) == ['Company', 'Ticker', 'Quadrant', '# Quadrant', 'Sector', '# Sector', 'Factor', '# Factor', 'Mapping', 'Weight', 'Avg Weight']
     assert len(got) == 2
     a = got[got['Ticker']=='ALP'].iloc[0]
     assert a['Quadrant'] == 'Improving · Lagging · Leading'
+    assert a['# Quadrant'] == 3
     assert a['Sector'] == 'Technology'
+    assert a['# Sector'] == 1
     assert a['Factor'] == 'Value'
+    assert a['# Factor'] == 1
     assert a['Avg Weight'] == 4
     assert a['Weight'] == '2.00% · 4.00% · 6.00%'
     b = got[got['Ticker']=='BET'].iloc[0]
+    assert b['# Quadrant'] == 1
+    assert b['# Sector'] == 0
+    assert b['# Factor'] == 1
     assert b['Weight'] == 'N/A'
     assert pd.isna(b['Avg Weight'])
 
@@ -41,3 +47,17 @@ def test_missing_weight_and_empty():
     assert summarize(pd.DataFrame()).empty
     rows = pd.DataFrame([{'company_key':'c','Company':'C','Ticker':'C','kind':'factor','label':'Quality','weight':-1}])
     assert summarize(rows)['Weight'][0] == 'N/A'
+
+
+def test_counts_use_distinct_families_not_index_memberships():
+    rows = pd.DataFrame([
+        {'company_key':'a','Company':'A','Ticker':'A','quadrant':'Leading','kind':'sector','label':'Technology','source_id':'x','portfolio_id':'1'},
+        {'company_key':'a','Company':'A','Ticker':'A','quadrant':'Leading','kind':'sector','label':'technology','source_id':'y','portfolio_id':'2'},
+        {'company_key':'a','Company':'A','Ticker':'A','quadrant':'Improving','kind':'factor','label':'Nifty500 Value 50','source_id':'z','portfolio_id':'3'},
+        {'company_key':'a','Company':'A','Ticker':'A','quadrant':'Improving','kind':'factor','label':'Nifty200 Value 30','source_id':'q','portfolio_id':'4'},
+        {'company_key':'a','Company':'A','Ticker':'A','quadrant':'Lagging','kind':'factor','label':'Momentum','source_id':'m','portfolio_id':'5'},
+    ])
+    result = summarize(rows).iloc[0]
+    assert (result['# Quadrant'], result['# Sector'], result['# Factor']) == (3, 1, 2)
+    assert result['Sector'] == 'Technology'
+    assert result['Factor'] == 'Momentum · Value'
