@@ -1,30 +1,15 @@
-# Sector · Factor · Holdings — redesigned workspace
+# India Asset Flow — recovery package for GitHub Desktop
 
-## Purpose
-This is a holdings research page, not another market-rotation Knowledge Graph. It answers which companies are members of each verified sector ETF/index and factor ETF/index; where sector and factor exposures overlap; which memberships are shared; and whether underlying financial data exists.
+This package is based on the repository's `india_asset_market_data.py` contract observed November 21, 2026. That module uses Yahoo ETF prices, the NSE Nifty 50 benchmark and an official government-bond index with a bond ETF fallback. The reported failure is five unavailable histories; its exact runtime cause isn't proved by a screenshot.
 
-## Installation (GitHub Desktop)
-1. Extract this ZIP.
-2. Open GitHub Desktop → Repository → Show in Explorer/Finder.
-3. Replace the root-level `regional_workspace.py` with the included replacement. **Keep a backup** of your existing file before replacing because your branch may contain later additions.
-4. Commit and Push origin. Streamlit redeploys the code. No cache rebuild is required if the existing dashboard CSVs contain data.
+## Install with GitHub Desktop
 
-## Views
-- **Overview:** unique-company exposure counts across sector sources and factor families.
-- **Company explorer:** multiselect filters, search, and CSV export.
-- **Sector × Factor overlap:** live counts derived from company membership lists (works even when the old `*_sector_factor_matrix.csv` is empty).
-- **Index / ETF directory:** saved index names and constituent totals.
-- **Financial coverage:** actual observed company-level metrics; missing data stays missing.
+1. Extract ZIP and copy its `india_asset_recovery.py`, `scripts/`, `tests/` and `.github/` folders into the repository root (merge folders).
+2. Commit and **Push origin** in GitHub Desktop.
+3. On GitHub, open Actions → **Refresh India Asset Flow Diagnostics** → Run workflow (main).
+4. The workflow installs the wrapper into the existing `india_asset_market_data.py`, checks individual Yahoo histories, creates `data/dashboard_cache/india_asset_flow_coverage.csv`, and commits these changes. Then Streamlit can deploy the refreshed module.
+5. If `git push` fails in Actions, enable repository Settings → Actions → General → Workflow permissions → Read and write permissions. If branch protection is enabled, a PR may be needed instead.
 
-## Key behavior
-- Safe CSV reads handle missing, empty, or malformed snapshots without crashing.
-- Unique Streamlit widget keys per region.
-- Multiple selections **within** a filter are ANY or ALL; **between** different filter groups are AND.
-- No fabricated sector/factor membership, price history, or fundamentals.
-- Consistent across Global, USA, India.
+The original module remains intact except a small, idempotent appended wrapper. Existing index priority is retained. This does **not** fabricate pricing, use return series as capital inflows, or guarantee provider access. It also does not regenerate all of the repository's pre-existing dashboards' snapshots; those may require their own daily data-refresh workflow.
 
-## Testing
-`python -m pytest tests/test_holdings_workspace.py`
-
-## Compatibility
-Retains `render_analysis(region)` and `render_graph(region)` entry points. The older `render_graph` function is now a lightweight delegate to the research workspace, so if you actively use that legacy radial graph, preserve a copy before installing.
+Look for `status` and `last_date` for each ticker in the coverage file. If no valid histories are available, the page should continue displaying its existing warning. A true partial-data layout improvement requires the existing Streamlit dashboard renderer to be modified separately.

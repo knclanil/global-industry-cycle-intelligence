@@ -1,0 +1,33 @@
+name: Refresh India Asset Flow Diagnostics
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '45 12 * * 1-5'
+permissions:
+  contents: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Install recovery wrapper
+        run: python scripts/install_india_asset_fix.py
+      - name: Refresh source coverage diagnostics
+        run: python scripts/refresh_india_asset_data.py
+      - name: Publish updated module and coverage
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add india_asset_market_data.py
+          git add -f data/dashboard_cache/india_asset_flow_coverage.csv
+          if ! git diff --cached --quiet; then
+            git commit -m 'Refresh India asset history validation'
+            git push
+          fi
