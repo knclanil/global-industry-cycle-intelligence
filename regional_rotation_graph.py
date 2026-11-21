@@ -180,47 +180,80 @@ def _collapse_sources(nodes: list[dict]):
 def filter_company_memberships(edges: pd.DataFrame, rotations=(), sectors=(),
                                factors=(), companies=(), match_mode="Any selected",
                                include_other_memberships=False) -> pd.DataFrame:
-    """Filter the RAW verified membership rows, independent of graph state.
+    """Find companies matching independent criteria, then display their evidence.
 
-    A sector/factor choice selects a company cohort (ANY or ALL selected
-    categories). Rows for the chosen categories are shown by default. With
-    include_other_memberships=True, show all evidence for companies in cohort.
-    No graph node caps or visual selections are applied here.
+    Rotation is an *independent company-cohort* condition: a company must have
+    at least one source membership in a selected rotation. Sector and factor
+    membership can be in different rotations, since quadrant describes an
+    index signal rather than a company classification.
+
+    ANY/ALL applies to the chosen distinct sector/factor families. Multiple
+    indexes within one factor family count as the *same* criterion.
+    By default display records for selected sectors/factors across ANY rotation;
+    optional expanded evidence displays every source membership for the cohort.
+    If no sector/factor is selected, rotation-only filtering shows records in
+    those rotations, preserving the original rotation-only table behavior.
     """
     if edges.empty:
         return edges.copy()
     required = {"company_key", "quadrant", "kind", "label"}
     if not required.issubset(edges.columns):
         return edges.iloc[0:0].copy()
+
     df = edges.copy()
-    # CSVs can contain blank/mixed values. Group factor index variants together
-    # without losing their original source_id/portfolio_id in the output.
-    for col in ("company_key", "quadrant", "kind", "label"):
+    for col in required:
         df[col] = df[col].fillna("").astype(str)
-    df["__family"] = [(_factor_family(label) if kind == "factor" else label.strip())
+    df["__family"] = [(_factor_family(label) if kind.casefold() == "factor"
+                        else label.strip())
                        for kind, label in zip(df["kind"], df["label"])]
+    df["__family_key"] = df["__family"].str.casefold()
+    df["__kind_key"] = df["kind"].str.casefold()
+
+    company_ids = set(df["company_key"])
     if rotations:
-        df = df.loc[df["quadrant"].isin(rotations)]
+        # Do NOT trim rows first: that would erase other selected factor
+        # families with non-Lagging/non-Leading rotation signals.
+        company_ids &= set(df.loc[df["quadrant"].isin(rotations), "company_key"])
     if companies:
-        df = df.loc[df["company_key"].isin(companies)]
-    if df.empty:
-        return df.drop(columns="__family").reset_index(drop=True)
-    criteria = [("sector", value) for value in sectors] + [("factor", value) for value in factors]
+        company_ids &= set(str(c) for c in companies)
+
+    criteria = [("sector", str(v).strip().casefold()) for v in sectors]
+    criteria += [("factor", str(v).strip().casefold()) for v in factors]
+    criteria = list(dict.fromkeys(criteria))
     if criteria:
-        key_sets = [set(df.loc[(df["kind"] == kind) &
-                               (df["__family"].str.casefold() == value.casefold()),
-                               "company_key"])
-                    for kind, value in criteria]
+        matching_groups = [set(df.loc[
+            (df["__kind_key"] == kind) & (df["__family_key"] == label),
+            "company_key"
+        ]) for kind, label in criteria]
         if match_mode == "All selected":
-            matched = set.intersection(*key_sets)
+            company_ids &= set.intersection(*matching_groups)
         else:
-            matched = set.union(*key_sets)
-        df = df[df["company_key"].isin(matched)]
-        if not include_other_memberships:
-            selected = {(kind, value.casefold()) for kind, value in criteria}
-            df = df.loc[[ (kind, family.casefold()) in selected
-                          for kind, family in zip(df["kind"], df["__family"]) ]]
-    return df.drop(columns="__family").drop_duplicates().reset_index(drop=True)
+            company_ids &= set.union(*matching_groups)
+
+    result = df.loc[df["company_key"].isin(company_ids)].copy()
+    if criteria and not include_other_memberships:
+        chosen = set(criteria)
+        result = result.loc[[pair in chosen for pair in
+                             zip(result["__kind_key"], result["__family_key"])]]
+    elif rotations and not criteria and not include_other_memberships:
+        result = result.loc[result["quadrant"].isin(rotations)]
+
+    return (result.drop(columns=["__family", "__family_key", "__kind_key"])
+                  .drop_duplicates().reset_index(drop=True))
+
+
+
+def memberships_for_graph_companies(edges: pd.DataFrame, company_keys) -> pd.DataFrame:
+    """Return ALL verified evidence for exactly these company identities.
+
+    Filtering on a company key (rather than edge quadrant/factor) ensures that
+    users see the same company cohort as the graph without hiding the company's
+    other independently verified sector and factor memberships.
+    """
+    if "company_key" not in edges.columns:
+        return edges.iloc[0:0].copy()
+    keys = {str(key) for key in company_keys}
+    return edges.loc[edges["company_key"].astype(str).isin(keys)].copy()
 
 
 def _draw(nodes, links, selection: str | list[str] | dict, max_companies: int | None,
@@ -447,6 +480,14 @@ def render_graph(region: str):
                    f"{len(selected_factors)} selected factors · "
                    f"{len(selected_companies)} selected companies")
     sectors, companies, factors = _draw(nodes, links, focus, max_companies, match_mode)
+    # Capture *exactly* the companies rendered after the graph's display cap.
+    # These IDs are not the number of edges and must not be inferred from labels.
+    visible_graph_company_keys = {str(n.get("company_key", n["id"][2:]))
+                                  for n in companies}
+    matched_graph_company_keys = (
+        {str(by_id[cid].get("company_key", cid[2:])) for cid in matched if cid in by_id}
+        if active else {str(n.get("company_key", n["id"][2:])) for n in companies_all}
+    )
     st.caption(f"Visible: {len(sectors)} sectors · {len(companies)} companies · "
                f"{len(factors)} unique factor families. Overall graph: {len(nodes)} nodes / "
                f"{len(links)} relationships. No membership data is discarded.")
@@ -460,8 +501,21 @@ def render_graph(region: str):
     # Independent evidence-table controls. The graph and its own filters above
     # are intentionally untouched; changing these controls does not redraw it.
     with st.expander("All verified company memberships · table filters", expanded=False):
-        st.caption("These filters apply ONLY to this membership table, not to the Knowledge Graph above.")
-        if not edges.empty and {"company_key", "quadrant", "kind", "label"}.issubset(edges.columns):
+        st.caption("Choose whether to list the same companies currently visible in the graph, "
+                   "all companies matching the graph selections (including hidden-by-cap), "
+                   "or independently search the full membership snapshot. "
+                   "These controls never change the graph.")
+        table_scope = st.radio(
+            "Company table source",
+            ["Companies displayed in graph", "All companies matching graph filters",
+             "Independent company search"],
+            index=0, horizontal=False, key=f"kg_table_scope_{region}_{period}",
+        )
+        refine_table = (table_scope == "Independent company search" or st.checkbox(
+            "Further narrow the graph companies using table filters",
+            value=False, key=f"kg_table_refine_{region}_{period}",
+        ))
+        if refine_table and not edges.empty and {"company_key", "quadrant", "kind", "label"}.issubset(edges.columns):
             sector_names = sorted({str(v).strip() for v in edges.loc[
                 edges["kind"].astype(str) == "sector", "label"] if str(v).strip()}, key=str.casefold)
             factor_names = sorted({_factor_family(v) for v in edges.loc[
@@ -489,16 +543,25 @@ def render_graph(region: str):
                                        ["Any selected", "All selected"], horizontal=True,
                                        key=f"kg_table_match_{region}_{period}")
             with scope_col:
-                all_evidence = st.checkbox("Show other memberships of matching companies",
+                all_evidence = st.checkbox("Show all source memberships of matching companies",
                                            value=False, key=f"kg_table_all_evidence_{region}_{period}")
             table_rows = filter_company_memberships(
                 edges, table_rotations, table_sectors, table_factors,
                 table_companies, table_match, all_evidence)
         else:
             table_rows = edges.copy()
+        # A graph cohort is a set of distinct company identities, not an edge
+        # filter. Apply it AFTER independent table criteria so evidence from
+        # other quadrants, sectors and factor families stays available.
+        if table_scope == "Companies displayed in graph":
+            table_rows = memberships_for_graph_companies(table_rows, visible_graph_company_keys)
+        elif table_scope == "All companies matching graph filters":
+            table_rows = memberships_for_graph_companies(table_rows, matched_graph_company_keys)
         st.caption(f"{len(table_rows):,} verified membership records · "
                    f"{table_rows['company_key'].nunique() if 'company_key' in table_rows else 0:,} companies. "
-                   "Graph selection and company display limits do not affect this table.")
+                   f"Graph currently displays {len(visible_graph_company_keys):,} companies; "
+                   f"{len(matched_graph_company_keys):,} match its filters before the display limit. "
+                   "Choose Independent company search to ignore the graph selection.")
         st.dataframe(table_rows, use_container_width=True, hide_index=True)
         st.download_button("Download table memberships CSV",
                            data=table_rows.to_csv(index=False).encode("utf-8"),

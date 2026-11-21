@@ -1,16 +1,29 @@
-# Independent company-membership table filtering
+# Knowledge Graph → Verified Membership Table synchronization
 
-This update **preserves the previous Knowledge Graph implementation**, including the graph's own Overview / Sector-Factor / Individual Companies views, rotation/sector/factor/company filtering, factor-family deduplication, links and company display caps.
+## What this fixes
 
-The **All verified company memberships** expander now has *separate* multiselect controls for rotations, sectors, factor families, and companies, with ANY/ALL matching. Those controls only affect the evidence table and CSV export: they do NOT change the Knowledge Graph. Likewise, interacting with the graph filters does not change the table's result.
+The **All verified company memberships** table can now use the **exact same company cohort** as the graph above without changing how the graph works.
 
-Select factor `Value` to match all original Value source indexes while preserving their separate source IDs. The optional “Show other memberships of matching companies” checkbox expands the table to all memberships for matched companies after applying rotation constraints. The default only displays matching selected source evidence. Empty selections show the entire original table. This does not modify or regenerate cached data.
+Inside that section, choose **Company table source**:
 
-## Install using GitHub Desktop
+1. **Companies displayed in graph** (default): exactly the company nodes drawn after the 60/100-company display limit. All of their verified sector/factor memberships appear in the table, including source memberships with other rotations.
+2. **All companies matching graph filters**: includes the entire matching company cohort before the graph's display limit.
+3. **Independent company search**: the original standalone table filters, ignoring graph selections.
 
-1. Extract the ZIP.
-2. Copy `regional_rotation_graph.py` to your repository root, replacing the existing version. Copy `app.py` too **only if** your local app has not yet received the Assets → Sectors → Factors navigation reorder.
-3. In GitHub Desktop, commit and push.
-4. Optional: run `python -m unittest discover -s tests -v` for the six standalone membership-filter tests.
+For either graph-based option, enable **Further narrow the graph companies using table filters** only if you want to apply additional table-only criteria. Otherwise the table lists all verified evidence for those companies; the graph is unaffected.
 
-This package is tested with sample data and syntax checks; it has not been deployed to your Streamlit Cloud app. Back up local changes before overwriting files.
+The graph's selections and chart rendering logic are unchanged. The new behavior only chooses which **company identities** are included in the table. It does not reduce the graph or change underlying membership snapshots.
+
+## Installation using GitHub Desktop
+
+Copy `regional_rotation_graph.py` beside `app.py` in the repository root, replacing the old file. Commit and push via GitHub Desktop. No cache rebuild is required. Existing `rotation_graph_evidence.py`, data snapshots, and GitHub Actions workflows are unchanged.
+
+## Verification
+
+- Select the graph's Lagging rotation plus Growth, Quality and Value factors; choose Any or All.
+- Open **All verified company memberships · table filters**.
+- Leave **Companies displayed in graph** selected. The table must contain the exact **distinct company identities** displayed in the graph; each company can have several evidence rows.
+- Switch to **All companies matching graph filters** to see companies omitted from the graph only because of its 60/100-company visual limit.
+- Choose **Independent company search** for separate company membership queries.
+
+Synthetic unit tests passed (3/3), and Python syntax compilation passed. This patch has not been deployed or tested in the live Streamlit Cloud application. If `regional_rotation_graph.py` has been edited more recently in your repository, compare the diff before replacing it.
