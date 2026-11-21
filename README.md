@@ -1,51 +1,36 @@
-# India Investment Research — two integrated pages
+# USA Research Workspace — matches the India research journey
 
-This patch adds two India sidebar pages after **India Asset Flow → India Sector → India Factors**:
-
-1. **Investment Opportunity Screener** — one row per verified company, sector/factor/source-index multi-select filters with ANY or ALL *within each category*, search, data-readiness gates, transparent scores (when available), CSV export.
-2. **Company Deep Dive** — company selection from screener, sector/factor/index evidence, cached financials, valuation indicators, peer comparison, source dates, coverage gaps, independent company reference.
-
-The original India assets, sector, factors, Knowledge Graph, membership table and financial collection workflows are **not modified**. The old duplicate research pages remain hidden, not deleted.
+Adds **USA Investment Opportunity Screener** and **USA Company Deep Dive** after USA Asset Flow, USA Sector, and USA Factors, without changing the existing graph, India pages, or company financial screens.
 
 ## Install (GitHub Desktop)
 
-1. Extract this ZIP and open your repository via GitHub Desktop → Repository → Show in Explorer.
-2. Copy **india_research_data.py**, **india_opportunity_ui.py**, and **india_company_deep_dive_ui.py** to the **root** of the repository.
-3. Copy `scripts/install_india_research_pages.py` to `scripts/`.
-4. Ensure that `scripts/build_india_opportunity_dataset.py` exists. If not, copy the supplied version from `scripts/`. It is the dataset builder from the prior financial pipeline package.
-5. Open **Repository → Open in Terminal**, then run:
+1. Extract the ZIP.
+2. Copy `usa_research_data.py`, `usa_opportunity_ui.py`, and `usa_company_deep_dive_ui.py` into the repository root.
+3. Copy `scripts/install_usa_research_pages.py` and `scripts/build_usa_research.py` into the repository `scripts` folder. Optionally copy the unit test into `tests`.
+4. In **Repository → Open in Terminal**, run `python scripts/install_usa_research_pages.py`. This patches your existing `app.py` rather than replacing it. Run again safely if needed.
+5. Commit and push from GitHub Desktop.
 
-   ```bash
-   python scripts/install_india_research_pages.py
-   ```
+### Refresh cached SEC facts and the USA research summary
 
-   The installer only updates `app.py` navigation and routing. It is idempotent and refuses to edit an unexpected sidebar layout. If it refuses, do **not** overwrite your latest `app.py` blindly; review the differences with the included `app.py` reference and adapt the two navigation entries.
-6. Commit and push changes with GitHub Desktop. Streamlit Cloud will redeploy.
+- Your existing **Verified iShares holdings refresh** must publish `data/holdings/latest_holdings.parquet`.
+- Your existing **SEC fundamentals refresh** must publish the SEC company directory plus individual companyfacts JSON files in `data/fundamentals/` or `data/sec_cache/`.
+- To generate a saved US research snapshot from already-cached SEC facts, run `python scripts/build_usa_research.py` from your repository root, then commit/push `data/usa_research/company_research.csv` and `data/usa_research/build_report.json`. This script makes **no HTTP requests**.
+- If financial snapshot is not yet generated, the screener still shows your verified U.S. issuer memberships; financial values remain blank.
 
-### Optional alternate install
+**USA pages**: USA Asset Flow → USA Sector → USA Factors → USA Investment Opportunity Screener → USA Company Deep Dive.
 
-The included `app.py` is a **complete reference** derived from the previously delivered India navigation cleanup package, with the two new entries added. You may copy it directly **only if** it matches your latest app changes. Otherwise use the installer to preserve subsequent edits.
+## Data integrity
 
-## Data prerequisites
+- **Only USA** `sector` and `factor` iShares sources (not `global_sector` or `global_factor`) are eligible; only source rows explicitly locating issuer in the United States are included. This is narrower than “USA strategy funds contain multinational holdings.”
+- One row per country-qualified issuer identity, not one row per ETF position.
+- Source ETF memberships, factor families, sector families, source count and average weight preserved.
+- Sector, factor and fund multiselect support ANY/ALL *within each group*, AND *across groups*.
+- **No score is made up.** SEC facts provide annual fundamentals and growth, but raw SEC filings do not supply current stock quotes. P/E, P/B, price, quality/growth/valuation/research scores remain missing until a vetted quote, peer-comparison and scoring pipeline has been connected. This package does **not** claim to have valuation or opportunity scoring operational for the US.
+- Company Deep Dive links to your already-existing `Company Financial Research` and `USA Company Financial KPI Intelligence` pages for more complete SEC-backed detail.
+- The graph, existing Global/USA/India data and workflows are not modified.
 
-The pages read `data/india_financials/opportunity_research.csv`, created by the existing automated financial pipeline. When that file is missing, the pages build an **in-memory, read-only** view from:
+## Local checks
 
-- `data/india_holdings/companies.csv`
-- `data/india_holdings/constituents.csv`
-- `data/india_financials/company_financial_summary.csv` (optional, missing financials show N/A)
+`python -m unittest discover -s tests -p 'test_usa_research_pages.py' -v`
 
-No Yahoo Finance/NSE requests occur on page load. The company universe is available even when financial values are missing, provided the verified holdings dataset exists. This patch does not increase financial-data coverage and **does not** validate investment predictions.
-
-## Correctness/limitations
-
-- Cross-category filters combine with AND; within a filter's selected items ANY/ALL is user-selectable.
-- Scoring only uses existing cached comparable KPIs; missing scores remain blank rather than zero.
-- Financial values can have unverified standalone-vs-consolidated scope or unspecified units. No inferred weights or rotation quadrants are introduced.
-- Sector memberships are **verified NSE sector-index labels**, not necessarily the same canonical sector categories as the Knowledge Graph. They are not automatically equated.
-- This provides a usable research interface, not yet a backtested end-to-end model of asset → sector → factor rotations. The Assets/Sector/Factor pages themselves are preserved.
-
-## Tests
-
-Run `python -m unittest discover -s tests -p test_india_research_pages.py -v`.
-
-These targeted tests cover ANY/ALL filtering, cross-category matching, readiness, score display, and idempotent navigation patching. No live Streamlit or GitHub Actions deployment has been executed in this environment.
+Python syntax and fixture tests were checked in the package build environment. No live Streamlit/GitHub workflow deployment was performed.
