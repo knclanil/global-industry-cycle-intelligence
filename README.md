@@ -1,20 +1,16 @@
-# Fix missing USA and India Investment Research pages
+# USA research page visibility fix — verified against the public `main/app.py` on 2026-11-21
 
-## Diagnosis (verified against public GitHub main/app.py on 2026-11-21)
-The deployed main/app.py lists USA Asset Flow, USA Sector, USA Factors and USA Analysis; it has NO USA Investment Opportunity Screener or USA Company Deep Dive route. India research routes are also absent. The latest *USA financial pipeline* ZIP contains only workflows, scripts, and tests — it does **not** include app.py, the Streamlit research pages, or navigation integration. Its successful deployment cannot create visible pages.
+The public `app.py` already registers **India** Investment Opportunity Screener and Company Deep Dive. The three USA modules (`usa_opportunity_ui.py`, `usa_company_deep_dive_ui.py`, `usa_research_data.py`) are present, but the USA navigation currently lists only Asset Flow, Sector, Factors, and USA Analysis. The USA pages also lack page icons and render branches.
 
-## Do this once in GitHub Desktop (Windows)
-1. Extract this ZIP, open the extracted folder and **copy all contents** (including Python files, `scripts`, `.github`, and `INSTALL_WINDOWS.bat`) into your actual local global-industry-cycle-intelligence repository root where app.py lives.
-2. Double-click `INSTALL_WINDOWS.bat` **inside the repository root**, not inside the extracted folder. It updates the current app.py safely and confirms four page routes exist. If it fails, do not commit; share the displayed error.
-3. In GitHub Desktop, verify Changes includes `app.py` and `usa_opportunity_ui.py`, `usa_company_deep_dive_ui.py`, `usa_research_data.py` (plus three India files). If `app.py` does not appear changed, check if those routes are already present.
-4. Commit ALL changes, then **Push origin** to the branch used by Streamlit Cloud (typically main). GitHub.com main/app.py must contain `USA Investment Opportunity Screener` and `USA Company Deep Dive` afterwards.
-5. Restart/reload Streamlit app. Its USA nav now shows Asset Flow -> Sector -> Factors -> Investment Opportunity Screener -> Company Deep Dive; India shows the same ordered journey.
+## Installation
 
-## Notes
-- This fixes page visibility; it does not guarantee data availability. USA financial figures depend on published `data/usa_research/company_research.csv` from the scheduled USA fundamentals workflow.
-- Graph functionality and other market calculations are not edited by the installer.
-- Neither deployment nor live data refresh has been run from this environment.
-- The included automated USA pipeline is the same prior package, combined here to avoid having to track two different ZIPs.
+1. Extract this ZIP. Copy **`scripts/enable_usa_research_navigation.py`** into the matching `scripts` folder in your repository, and copy `INSTALL_WINDOWS.bat` into the repository root.
+2. In the repository root, double-click `INSTALL_WINDOWS.bat` (or run `python scripts/enable_usa_research_navigation.py`).
+3. Confirm `SUCCESS: app.py updated`. In GitHub Desktop, verify **`app.py` is changed**, then commit and **Push origin**.
+4. Refresh Streamlit. Open the USA sidebar group. The items will be **USA Asset Flow → USA Sector → USA Factors → USA Investment Opportunity Screener → USA Company Deep Dive**.
 
-## Installer sanity check
-`python scripts/install_research_navigation.py --check`
+Only `app.py` is modified by the script. The old USA Analysis navigation entry is hidden, but the analysis code remains in the repository. India, Global, all Knowledge Graphs, and financial workflows are unchanged.
+
+If your local `app.py` has changed materially since the public version inspected, the installer fails without overwriting it. Existing USA page modules must be present; the installer checks this before making changes.
+
+The update has been checked statically; live Streamlit deployment is not verified.
