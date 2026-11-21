@@ -1,6 +1,7 @@
 """Unified read-only Global/USA/India views backed by Git materialized snapshots."""
 from __future__ import annotations
 import json
+from pandas.errors import EmptyDataError, ParserError
 from pathlib import Path
 import pandas as pd
 import plotly.graph_objects as go
@@ -13,10 +14,24 @@ THEME = {'background':'#0B1220','panel':'#142137','line':'#2A3C55','text':'#E7EE
 
 def _mtime(path:Path):return path.stat().st_mtime_ns if path.exists() else 0
 
-@st.cache_data(show_spinner=False,max_entries=45)
-def _csv(path:str,stamp:int):
-    if not Path(path).exists():return pd.DataFrame()
-    return pd.read_csv(path,keep_default_na=False)
+@st.cache_data(show_spinner=False, max_entries=45)
+def _csv(path: str, stamp: int) -> pd.DataFrame:
+    """Load a generated snapshot without crashing if it is empty or malformed.
+
+    The modification-time cache key ensures new Git snapshots refresh the view.
+    Missing/empty files are represented as empty DataFrames; this NEVER
+    substitutes inferred or synthetic observations.
+    """
+    source = Path(path)
+    if not source.is_file() or source.stat().st_size == 0:
+        return pd.DataFrame()
+    try:
+        return pd.read_csv(source, keep_default_na=False)
+    except EmptyDataError:
+        return pd.DataFrame()
+    except (ParserError, UnicodeDecodeError, OSError) as exc:
+        st.warning(f"Unable to read snapshot {source.name}: {type(exc).__name__}. Check the cache builder.")
+        return pd.DataFrame()
 
 
 def load(region,table):
@@ -93,7 +108,8 @@ def _index_financial_summary(region):
 
 def _matrix(region):
     frame=load(region,'sector_factor_matrix')
-    if frame.empty:return st.info('No verified sector–factor intersections in the saved dataset.')
+    if frame.empty:
+        return st.info(f'No sector–factor intersection data for {region}. The cache file may be missing or empty: {region.lower()}_sector_factor_matrix.csv. Refresh the dashboard cache workflow to populate it.')
     if not {'sector_index','factor_family','companies'}.issubset(frame):return st.info('Sector–factor snapshot schema needs rebuilding.')
     grid=frame.pivot_table(index='sector_index',columns='factor_family',values='companies',aggfunc='sum',fill_value=0)
     if grid.empty:return
