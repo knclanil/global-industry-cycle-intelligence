@@ -1,5 +1,5 @@
 {
-  "built_utc": "2026-11-21T12:39:32.113871+00:00",
+  "built_utc": "2026-11-21T12:47:58.108132+00:00",
   "regions": {
     "global_1m": {
       "holdings_records": 2570,
@@ -106,9 +106,9 @@
     "india_1m": {
       "holdings_records": 975,
       "rotation_signals": 30,
-      "membership_edges": 925,
-      "companies": 312,
-      "unmapped_sources": 1,
+      "membership_edges": 975,
+      "companies": 328,
+      "unmapped_sources": 0,
       "error": null,
       "leading_signals": 5,
       "leading_companies": 61,
@@ -123,9 +123,9 @@
     "india_3m": {
       "holdings_records": 975,
       "rotation_signals": 30,
-      "membership_edges": 925,
-      "companies": 312,
-      "unmapped_sources": 1,
+      "membership_edges": 975,
+      "companies": 328,
+      "unmapped_sources": 0,
       "error": null,
       "leading_signals": 4,
       "leading_companies": 50,
@@ -140,9 +140,9 @@
     "india_6m": {
       "holdings_records": 975,
       "rotation_signals": 30,
-      "membership_edges": 925,
-      "companies": 312,
-      "unmapped_sources": 1,
+      "membership_edges": 975,
+      "companies": 328,
+      "unmapped_sources": 0,
       "error": null,
       "leading_signals": 3,
       "leading_companies": 36,
