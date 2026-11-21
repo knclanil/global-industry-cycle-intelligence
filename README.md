@@ -1,23 +1,30 @@
-# Company → Factor mapping (India Growth)
+# Sector · Factor · Holdings — redesigned workspace
 
-This update makes an important distinction:
+## Purpose
+This is a holdings research page, not another market-rotation Knowledge Graph. It answers which companies are members of each verified sector ETF/index and factor ETF/index; where sector and factor exposures overlap; which memberships are shared; and whether underlying financial data exists.
 
-- **Membership:** A company appears in a stored Nifty500 Growth 50 constituent snapshot. Its connection to the **Growth** factor can be drawn.
-- **Rotation:** If Nifty500 Growth 50 lacks a valid price-history signal, the membership is shown as **Rotation unavailable**, not artificially assigned Leading/Improving/Weakening/Lagging.
+## Installation (GitHub Desktop)
+1. Extract this ZIP.
+2. Open GitHub Desktop → Repository → Show in Explorer/Finder.
+3. Replace the root-level `regional_workspace.py` with the included replacement. **Keep a backup** of your existing file before replacing because your branch may contain later additions.
+4. Commit and Push origin. Streamlit redeploys the code. No cache rebuild is required if the existing dashboard CSVs contain data.
 
-The Graph uses `Rotation → Sector → Company → Factor` wherever validated rotation/sector connections exist. For Growth-only membership without a validated rotation, it draws **Company → Growth** using a neutral gray edge. The existing Growth family visual deduplication is preserved.
+## Views
+- **Overview:** unique-company exposure counts across sector sources and factor families.
+- **Company explorer:** multiselect filters, search, and CSV export.
+- **Sector × Factor overlap:** live counts derived from company membership lists (works even when the old `*_sector_factor_matrix.csv` is empty).
+- **Index / ETF directory:** saved index names and constituent totals.
+- **Financial coverage:** actual observed company-level metrics; missing data stays missing.
 
-## GitHub Desktop installation
+## Key behavior
+- Safe CSV reads handle missing, empty, or malformed snapshots without crashing.
+- Unique Streamlit widget keys per region.
+- Multiple selections **within** a filter are ANY or ALL; **between** different filter groups are AND.
+- No fabricated sector/factor membership, price history, or fundamentals.
+- Consistent across Global, USA, India.
 
-1. Copy `rotation_graph_evidence.py` and `regional_rotation_graph.py` next to `app.py`, replacing the existing versions.
-2. Commit and Push origin in GitHub Desktop.
-3. In GitHub, run **Actions → Refresh Knowledge Graphs → Run workflow** to rebuild the `india_{1m,3m,6m}_edges.csv` snapshots.
-4. After its successful publish and Streamlit redeployment, open **India → Individual Companies**, filter by Growth, or view the full graph.
+## Testing
+`python -m pytest tests/test_holdings_workspace.py`
 
-**Requires** the existing `india_index_rotation_expansion.py` file and a current constituent snapshot with rows whose `index_slug` is `nifty500_growth_50`. If the source has no constituent rows, there is no valid company relationship to draw.
-
-## Validation
-
-`python -m pytest -q test_company_factor.py`
-
-This is a targeted patch against the available deduplicated graph module. Compare local differences before overwriting if your main branch has changed further. It has not been tested in a live Streamlit deployment.
+## Compatibility
+Retains `render_analysis(region)` and `render_graph(region)` entry points. The older `render_graph` function is now a lightweight delegate to the research workspace, so if you actively use that legacy radial graph, preserve a copy before installing.

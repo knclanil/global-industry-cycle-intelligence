@@ -1,222 +1,290 @@
-"""Unified read-only Global/USA/India views backed by Git materialized snapshots."""
+"""Sector / Factor / Holdings research workspace for Global, USA and India.
+
+Read-only: uses the materialized `data/dashboard_cache/{region}_*.csv` snapshots.
+No inferred ETF membership, price rotation, or financial observations.
+"""
 from __future__ import annotations
+
 import json
-from pandas.errors import EmptyDataError, ParserError
 from pathlib import Path
+from collections import defaultdict
+
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
 ROOT = Path(__file__).resolve().parent
-CACHE = ROOT / 'data' / 'dashboard_cache'
-THEME = {'background':'#0B1220','panel':'#142137','line':'#2A3C55','text':'#E7EEF9',
-         'sector':'#51B7E8','factor':'#F6BA64','company':'#92E0B9'}
+CACHE = ROOT / "data" / "dashboard_cache"
+COLORS = {"background": "#0B1220", "panel": "#142137", "text": "#E7EEF9",
+          "sector": "#5AC8FA", "factor": "#C4A1FF", "company": "#59D6B1"}
+METRICS = {"revenue": "Revenue", "net_income": "Net income", "roe": "ROE",
+           "operating_margin": "Operating margin", "net_margin": "Net margin", "pe": "P/E"}
 
-def _mtime(path:Path):return path.stat().st_mtime_ns if path.exists() else 0
 
-@st.cache_data(show_spinner=False, max_entries=45)
-def _csv(path: str, stamp: int) -> pd.DataFrame:
-    """Load a generated snapshot without crashing if it is empty or malformed.
+def _stamp(path: Path) -> int:
+    return path.stat().st_mtime_ns if path.is_file() else 0
 
-    The modification-time cache key ensures new Git snapshots refresh the view.
-    Missing/empty files are represented as empty DataFrames; this NEVER
-    substitutes inferred or synthetic observations.
-    """
-    source = Path(path)
-    if not source.is_file() or source.stat().st_size == 0:
+
+@st.cache_data(show_spinner=False, max_entries=60)
+def _read_csv(path: str, timestamp: int) -> pd.DataFrame:
+    if not timestamp:
         return pd.DataFrame()
     try:
-        return pd.read_csv(source, keep_default_na=False)
-    except EmptyDataError:
-        return pd.DataFrame()
-    except (ParserError, UnicodeDecodeError, OSError) as exc:
-        st.warning(f"Unable to read snapshot {source.name}: {type(exc).__name__}. Check the cache builder.")
+        return pd.read_csv(path, dtype=str, keep_default_na=False)
+    except (pd.errors.EmptyDataError, pd.errors.ParserError, OSError, UnicodeError, ValueError):
         return pd.DataFrame()
 
 
-def load(region,table):
-    path=CACHE/f'{region.lower()}_{table}.csv'
-    return _csv(str(path),_mtime(path))
+def load(region: str, table: str) -> pd.DataFrame:
+    if region not in {"Global", "USA", "India"}:
+        raise ValueError(f"Unknown region: {region}")
+    path = CACHE / f"{region.lower()}_{table}.csv"
+    return _read_csv(str(path), _stamp(path)).copy()
 
-def _header(region,subtitle):
-    st.markdown(f'## {"🌍" if region=="Global" else "🇺🇸" if region=="USA" else "🇮🇳"} {region} Intelligence')
-    st.caption(subtitle)
 
-def _summary(region):
-    company=load(region,'companies'); indices=load(region,'indices')
-    a,b,c,d=st.columns(4)
-    a.metric('Verified companies',f'{len(company):,}')
-    b.metric('Source indices / ETFs',f'{len(indices):,}')
-    c.metric('Constituent memberships',f'{pd.to_numeric(company.get("index_memberships",pd.Series(dtype=float)),errors="coerce").sum():,.0f}')
-    d.metric('Financial statement coverage',f'{int(company.financial_status.eq("Available").sum()):,}' if 'financial_status' in company else 'N/A')
-    return company,indices
+def _split(value: object) -> list[str]:
+    if value is None or pd.isna(value):
+        return []
+    return list(dict.fromkeys(x.strip() for x in str(value).split(" | ") if x.strip()))
 
-def _source_table(indices):
-    if indices.empty:return st.info('No index snapshots collected. Run the relevant scheduled data refresh and cache build.')
-    filt=st.text_input('Find a sector, factor or ETF',key='ws_indices_filter')
-    if filt:indices=indices[indices.index_name.astype(str).str.contains(filt,case=False,regex=False)]
-    cols=[x for x in ['index_name','category','factor_family','constituents','snapshot_utc'] if x in indices]
-    st.dataframe(indices[cols].rename(columns={'index_name':'Index / ETF','category':'Type','factor_family':'Factor','constituents':'Companies','snapshot_utc':'As of'}),hide_index=True,use_container_width=True,height=420)
 
-def _company_table(region,company,view='holdings'):
-    if company.empty:return st.info('No verified constituent data in the materialized cache yet.')
-    query=st.text_input('Search company or ticker',key=f'ws_company_{region}_{view}',placeholder='Name or symbol')
-    df=company.copy()
-    if query:
-        df=df[df.symbol.astype(str).str.contains(query,case=False,regex=False) | df.company_name.astype(str).str.contains(query,case=False,regex=False)]
-    cols=[x for x in ['symbol','company_name','country','industry','index_memberships','avg_etf_weight_pct','sector_indices','factor_families','factor_indices'] if x in df]
-    st.dataframe(df[cols].rename(columns={'symbol':'Ticker','company_name':'Company','industry':'Sector / industry',
-        'country':'Country', 'index_memberships':'Index memberships','avg_etf_weight_pct':'Avg ETF wt (%)',
-        'sector_indices':'Sector sources','factor_indices':'Factor sources','factor_families':'Factor families'}),hide_index=True,use_container_width=True,height=460)
-    st.download_button('Export filtered companies',df.to_csv(index=False),file_name=f'{region.lower()}_companies.csv',mime='text/csv',key=f'ws_export_{region}_{view}')
+def _col(df: pd.DataFrame, name: str, default: str = "") -> pd.Series:
+    return df[name].fillna("").astype(str) if name in df else pd.Series(default, index=df.index, dtype=str)
 
-def _financials(region,company):
-    if company.empty:return st.info('Financial coverage will appear after the scheduled company-data build.')
-    fields={'revenue':'Revenue','net_income':'Net income','roe':'ROE','operating_margin':'Operating margin','net_margin':'Net margin','pe':'P/E'}
-    avail=[k for k in fields if k in company]
-    if not avail:
-        st.info('Company financial snapshots have not been materialized for this market. Financials are not inferred from ETF membership.')
-        return
-    df=company[['symbol','company_name','industry']+avail].copy()
-    for col in avail:df[col]=pd.to_numeric(df[col],errors='coerce')
-    score=df[avail].notna().sum(axis=1)
-    valid=df.loc[score.gt(0)].copy()
-    st.metric('Companies with any of these financial observations',f'{len(valid):,} / {len(df):,}')
-    if valid.empty:
-        st.info('No usable financial numbers yet. The collected quote snapshot may not contain annual statement values.')
+
+def _matching(series: pd.Series, selected: list[str]) -> pd.Series:
+    if not selected:
+        return pd.Series(True, index=series.index)
+    wanted = set(selected)
+    return series.apply(lambda s: bool(wanted.intersection(_split(s))))
+
+
+def filter_companies(df: pd.DataFrame, countries=(), sectors=(), factors=(), source_indices=(),
+                     query="", mode="ANY") -> pd.DataFrame:
+    """Within each filter group selected values mean OR; across groups they mean AND.
+
+    `mode='ALL'` requires every chosen sector/factor/source membership within its own group.
+    Country and text filtering always narrow the result.
+    """
+    if df.empty:
+        return df.copy()
+    mask = pd.Series(True, index=df.index)
+    if countries:
+        mask &= _col(df, "country").isin(countries)
+    for column, selected in (("sector_indices", sectors), ("factor_families", factors),
+                             ("factor_indices", source_indices)):
+        if selected:
+            wanted = set(selected)
+            values = _col(df, column).apply(lambda s: set(_split(s)))
+            if mode == "ALL":
+                mask &= values.apply(lambda v: wanted.issubset(v))
+            else:
+                mask &= values.apply(lambda v: bool(wanted & v))
+    if query.strip():
+        needle = query.strip().casefold()
+        mask &= (_col(df, "symbol") + " " + _col(df, "company_name")).str.casefold().str.contains(
+            needle, regex=False, na=False)
+    return df.loc[mask].copy()
+
+
+def company_intersections(df: pd.DataFrame) -> pd.DataFrame:
+    """Distinct-company sector × factor overlaps built from verified membership strings.
+
+    Missing memberships are not assigned. Duplicate index memberships do not double-count.
+    """
+    rows = []
+    for number, row in df.reset_index(drop=True).iterrows():
+        ident = str(row.get("company_key") or row.get("isin") or row.get("symbol") or number)
+        for sector in _split(row.get("sector_indices", "")):
+            for factor in _split(row.get("factor_families", "")):
+                rows.append((ident, sector, factor))
+    if not rows:
+        return pd.DataFrame(columns=["sector_index", "factor_family", "companies"])
+    pairs = pd.DataFrame(rows, columns=["company", "sector_index", "factor_family"]).drop_duplicates()
+    return (pairs.groupby(["sector_index", "factor_family"], as_index=False)
+            .agg(companies=("company", "nunique")))
+
+
+def _options(df: pd.DataFrame, name: str) -> list[str]:
+    options = set()
+    for value in _col(df, name):
+        options.update(_split(value))
+    return sorted(options, key=str.casefold)
+
+
+def _show_table(df: pd.DataFrame, columns: dict[str, str], *, height=430) -> None:
+    names = [c for c in columns if c in df]
+    if names:
+        st.dataframe(df[names].rename(columns=columns), hide_index=True,
+                     use_container_width=True, height=height)
     else:
-        shown=valid.rename(columns={'symbol':'Ticker','company_name':'Company','industry':'Industry',**fields})
-        st.dataframe(shown,hide_index=True,use_container_width=True,height=410)
-        st.caption('Reported / derived financial figures · Check each source period and currency before comparing companies.')
+        st.info("The saved snapshot does not contain the expected columns.")
 
-def _index_financial_summary(region):
-    frame=load(region,'index_financial_summary')
-    if frame.empty:
-        st.info('Index-level financial summary awaits verified company financial statements.')
+
+def _download(region: str, label: str, df: pd.DataFrame, key: str) -> None:
+    st.download_button("Download CSV", df.to_csv(index=False).encode("utf-8"),
+                       file_name=f"{region.lower()}_{label}.csv", mime="text/csv", key=key)
+
+
+def _heatmap(matrix: pd.DataFrame, region: str) -> None:
+    if matrix.empty:
+        st.info("No verified Sector × Factor intersections in this selection."
+                " Try clearing the filters or refreshing constituent snapshots.")
         return
-    usable=frame.copy()
-    cols=['index_name','category','constituents','financial_records','median_revenue',
-          'median_net_income','median_roe','median_operating_margin','median_net_margin','median_pe']
-    keep=[x for x in cols if x in usable]
-    shown=usable[keep].rename(columns={'index_name':'Sector / factor ETF','category':'Type',
-          'constituents':'Constituents','financial_records':'Revenue observations',
-          'median_revenue':'Median revenue','median_net_income':'Median income',
-          'median_roe':'Median ROE','median_operating_margin':'Median operating margin',
-          'median_net_margin':'Median net margin','median_pe':'Median P/E'})
-    st.dataframe(shown,hide_index=True,use_container_width=True,height=420)
-    st.caption('Unweighted medians of observed constituent fundamentals. Incomplete source coverage is shown explicitly.')
+    grid = matrix.pivot_table(index="sector_index", columns="factor_family", values="companies",
+                              aggfunc="sum", fill_value=0)
+    fig = go.Figure(go.Heatmap(z=grid.to_numpy(), x=grid.columns.tolist(), y=grid.index.tolist(),
+                               colorscale=[[0, "#142137"], [.5, "#236C88"], [1, "#5AD0EA"]],
+                               hovertemplate="Sector: %{y}<br>Factor: %{x}<br>Companies: %{z}<extra></extra>"))
+    fig.update_layout(height=max(420, min(850, len(grid)*36+110)),
+                      margin=dict(l=15,r=15,t=36,b=15), paper_bgcolor=COLORS["background"],
+                      plot_bgcolor=COLORS["background"], font_color=COLORS["text"], xaxis_side="top")
+    st.plotly_chart(fig, use_container_width=True, key=f"ws_heatmap_{region}")
 
-def _matrix(region):
-    frame=load(region,'sector_factor_matrix')
-    if frame.empty:
-        return st.info(f'No sector–factor intersection data for {region}. The cache file may be missing or empty: {region.lower()}_sector_factor_matrix.csv. Refresh the dashboard cache workflow to populate it.')
-    if not {'sector_index','factor_family','companies'}.issubset(frame):return st.info('Sector–factor snapshot schema needs rebuilding.')
-    grid=frame.pivot_table(index='sector_index',columns='factor_family',values='companies',aggfunc='sum',fill_value=0)
-    if grid.empty:return
-    graph=go.Figure(go.Heatmap(z=grid.to_numpy(),x=list(grid.columns),y=list(grid.index),
-                             colorscale=[[0,'#15243A'],[0.4,'#245F82'],[1,'#52CBEA']],
-                             hovertemplate='%{y} × %{x}: %{z} securities<extra></extra>'))
-    graph.update_layout(paper_bgcolor=THEME['background'],plot_bgcolor=THEME['background'],font_color=THEME['text'],
-                        margin=dict(l=10,r=10,t=15,b=10),height=max(380,32*len(grid)),xaxis_side='top')
-    st.plotly_chart(graph,use_container_width=True)
-    with st.expander('Detailed intersection counts'):
-        st.dataframe(grid,use_container_width=True)
 
-def render_analysis(region):
-    _header(region,'Sector → Factor → Constituents → Verified financial data · Saved Git snapshots')
-    company,indices=_summary(region)
-    if region == 'Global' and not company.empty and 'country' in company:
-        countries=sorted({str(x).strip() for x in company['country'].dropna() if str(x).strip()})
-        if countries:
-            selected=st.selectbox('Company domicile', ['All countries']+countries, key='global_country_filter',
-                                  help='Filters company-level views by the source holdings country. Index totals remain global.')
-            if selected!='All countries':
-                company=company[company['country'].astype(str).str.strip().eq(selected)].copy()
-    overview, members, sources, overlap, finance = st.tabs(['Overview','Company holdings','All source indices','Sector × Factor','Financial coverage'])
+def _coverage(df: pd.DataFrame, region: str) -> None:
+    available = [c for c in METRICS if c in df]
+    if not available:
+        st.info("Financial statements are not present in these company snapshots."
+                " Holdings membership does not establish financial statement coverage.")
+        return
+    numbers = df[available].apply(pd.to_numeric, errors="coerce")
+    counts = numbers.notna().sum()
+    if counts.empty or int(counts.max()) == 0:
+        st.info("No verified financial numbers in this selection.")
+        return
+    a,b = st.columns([1,2])
+    with a:
+        st.metric("Companies with any financial metric", f"{numbers.notna().any(axis=1).sum():,}")
+    with b:
+        st.bar_chart(counts.rename(index=METRICS), horizontal=True)
+    shown = df.loc[numbers.notna().any(axis=1)].copy()
+    _show_table(shown, {"symbol":"Ticker", "company_name":"Company", **METRICS})
+
+
+def render_analysis(region: str) -> None:
+    """Main redesigned Sector / Factor / Holdings research page."""
+    icon = {"Global":"🌍", "USA":"🇺🇸", "India":"🇮🇳"}.get(region, "🌐")
+    st.title(f"{icon} {region} Sector · Factor · Holdings")
+    st.caption("Discover which verified companies overlap sectors and factors, where ETFs hold the same"
+               " companies, and how complete their financial-data coverage is."
+               " Data is loaded from saved repository snapshots—not live price classifications.")
+    companies, indices = load(region, "companies"), load(region, "indices")
+    if companies.empty and indices.empty:
+        st.warning("No materialized source snapshots found. Run the dashboard cache refresh workflow.")
+        return
+
+    with st.expander("Filters · select multiple values", expanded=True):
+        x,y,z = st.columns(3)
+        countries = x.multiselect("Company country", sorted(x for x in _col(companies,"country").unique() if x),
+                                  key=f"hw_country_{region}")
+        sector = y.multiselect("Sector source(s)", _options(companies,"sector_indices"),
+                               key=f"hw_sector_{region}")
+        factor = z.multiselect("Factor family/families", _options(companies,"factor_families"),
+                               key=f"hw_factor_{region}")
+        a,b,c = st.columns([2,1,1])
+        query = a.text_input("Find company / ticker", key=f"hw_find_{region}")
+        match = b.radio("Within selected groups", ["ANY", "ALL"], horizontal=True,
+                        help="Selected groups combine with AND. ANY/ALL applies within each sector and factor group.",
+                        key=f"hw_match_{region}")
+        # No source-level filter in the default interface: families and sectors avoid duplicate index names.
+        only_overlap = c.checkbox("Sector & factor members only", key=f"hw_both_{region}")
+
+    selected = filter_companies(companies, countries, sector, factor, query=query, mode=match)
+    if only_overlap and not selected.empty:
+        selected = selected[_col(selected,"sector_indices").ne("") & _col(selected,"factor_families").ne("")]
+    verified = len(selected)
+    matched_memberships = pd.to_numeric(selected.get("index_memberships",pd.Series(dtype=float)),errors="coerce").sum()
+    sector_count = len(_options(selected,"sector_indices"))
+    factor_count = len(_options(selected,"factor_families"))
+    m1,m2,m3,m4 = st.columns(4)
+    m1.metric("Matching companies", f"{verified:,}")
+    m2.metric("Sector sources represented", f"{sector_count:,}")
+    m3.metric("Factor families represented", f"{factor_count:,}")
+    m4.metric("Total source memberships", f"{matched_memberships:,.0f}")
+
+    overview, holdings, intersections, sources, financial = st.tabs([
+        "Overview", "Company explorer", "Sector × Factor overlap", "Index / ETF directory", "Financial coverage"])
     with overview:
-        st.markdown('#### Sector and factor coverage')
-        if not indices.empty:
-            counts=indices.groupby('category',dropna=False).agg(Indices=('index_name','nunique'),Companies=('constituents','sum')).reset_index()
-            st.bar_chart(counts.set_index('category')[['Indices']],horizontal=True,color=THEME['sector'])
-            st.caption('Sum of index constituent counts may include companies present in multiple indices.')
-        _company_table(region,company.head(60).copy(),view='overview')
-    with members:_company_table(region,company,view='holdings')
-    with sources:_source_table(indices)
-    with overlap:_matrix(region)
-    with finance:
-        _index_financial_summary(region)
-        _financials(region,company)
-    with st.expander('Data refresh and methodology'):
-        path=CACHE/'manifest.json'
-        if path.exists():
+        st.subheader("What is connected?")
+        if selected.empty:
+            st.info("No companies match these filters. Clear some selections to see relationships.")
+        else:
+            counts = defaultdict(set)
+            for _, row in selected.iterrows():
+                ident = str(row.get("company_key") or row.get("isin") or row.get("symbol") or _)
+                for s in _split(row.get("sector_indices", "")):
+                    counts[("Sector",s)].add(ident)
+                for f in _split(row.get("factor_families", "")):
+                    counts[("Factor",f)].add(ident)
+            chart = pd.DataFrame([{"Type":kind,"Group":name,"Companies":len(people)}
+                                  for (kind,name),people in counts.items()])
+            if not chart.empty:
+                chart = chart.sort_values("Companies", ascending=False).head(25)
+                fig = go.Figure()
+                for kind,color in (("Sector",COLORS["sector"]),("Factor",COLORS["factor"])):
+                    part=chart.loc[chart.Type.eq(kind)]
+                    fig.add_trace(go.Bar(y=[f"{kind} · {n}" for n in part.Group], x=part.Companies,
+                                         orientation="h",name=kind,marker_color=color))
+                fig.update_layout(height=max(380,len(chart)*27+100),barmode="group",margin=dict(l=10,r=10,t=20,b=10),
+                                  paper_bgcolor=COLORS["background"],plot_bgcolor=COLORS["background"],
+                                  font_color=COLORS["text"],yaxis=dict(autorange="reversed"),
+                                  xaxis_title="Distinct companies")
+                st.plotly_chart(fig,use_container_width=True,key=f"hw_overview_{region}")
+            st.caption("Counts represent distinct companies within each sector source or factor family."
+                       " A company may appear in multiple groups.")
+    with holdings:
+        st.subheader("Company membership explorer")
+        if selected.empty:
+            st.info("No matching holdings records.")
+        else:
+            _show_table(selected, {"symbol":"Ticker", "company_name":"Company", "country":"Country",
+              "industry":"Reported industry", "sector_indices":"Sector indices / ETFs",
+              "factor_families":"Factor families", "factor_indices":"Factor source indices / ETFs",
+              "index_memberships":"Membership count", "avg_etf_weight_pct":"Mean ETF weight (%)"}, height=550)
+            _download(region,"filtered_holdings",selected,f"hw_export_{region}")
+    with intersections:
+        st.subheader("Sector × Factor overlap")
+        st.caption("Number of DISTINCT matching companies with both a given sector-source membership"
+                   " and a verified factor-family membership. No inferred company links.")
+        matrix = company_intersections(selected)
+        _heatmap(matrix,region)
+        with st.expander("Overlap counts as a table"):
+            _show_table(matrix,{"sector_index":"Sector source","factor_family":"Factor family",
+                                "companies":"Distinct companies"})
+            if not matrix.empty:
+                _download(region,"sector_factor_overlap",matrix,f"hw_matrix_export_{region}")
+    with sources:
+        st.subheader("Index and ETF sources")
+        st.caption("Source inventory is regional; holdings filters above apply to companies, not to"
+                   " the total constituent counts stored for each source.")
+        if indices.empty:
+            st.info("No source index records available.")
+        else:
+            search=st.text_input("Find an index or ETF",key=f"hw_index_find_{region}")
+            src=indices.copy()
+            if search:
+                src=src[_col(src,"index_name").str.contains(search,case=False,regex=False)]
+            _show_table(src,{"index_name":"Source","category":"Category","factor_family":"Factor family",
+                             "constituents":"Total constituents","snapshot_utc":"Snapshot date"})
+            _download(region,"source_indices",src,f"hw_sources_export_{region}")
+    with financial:
+        st.subheader("Financial statement coverage")
+        _coverage(selected,region)
+        st.caption("Unavailable financial values remain missing. Never interpret blank data as zero.")
+    with st.expander("Data quality & methodology"):
+        manifest=CACHE/"manifest.json"
+        if manifest.exists():
             try:
-                meta=json.loads(path.read_text());st.caption(f"Cache built: {meta.get('built_utc','Unknown')}")
-            except (OSError,ValueError):pass
-        st.caption('Market prices refresh daily when providers succeed. ETF and NSE holdings update when source constituents change; company financial reports update on their own schedules. No failed request deletes verified history.')
+                st.caption(f"Dashboard cache built: {json.loads(manifest.read_text()).get('built_utc','Unknown')}")
+            except (OSError,ValueError):
+                pass
+        st.caption("Sector/source overlap is derived from membership lists in the company snapshot."
+                   " It is not a rotation ranking, trading signal, or financial forecast.")
 
-def _link_rows(region,company,indices):
-    """Create a bounded 2D graph from actual saved source relationships."""
-    if company.empty or indices.empty:return [],[],[]
-    available=set(indices.index_name.astype(str))
-    chosen=company.sort_values('index_memberships',ascending=False).head(38)
-    edges=[];names=set()
-    for row in chosen.itertuples(index=False):
-        person=str(row.symbol)
-        for text in [row.sector_indices,row.factor_indices]:
-            for src in (str(text).split(' | ') if pd.notna(text) else []):
-                if src and src in available:
-                    edges.append((person,src));names.add(src)
-    return chosen.to_dict('records'),sorted(names),edges
 
-def render_graph(region):
-    _header(region,'2D holdings network · Sector and factor source connections')
-    company,indices=_summary(region)
-    companies,sources,edges=_link_rows(region,company,indices)
-    if not edges:
-        st.info('No verified index–company connections to render. Run the holdings refresh and build the dashboard cache.')
-        return
-    import math
-    # Fixed deterministic polar positions: no force simulation, no 3D, and stable node order.
-    sectors=set(indices.loc[indices.category.astype(str).str.contains('Sector|Thematic',case=False,regex=True),'index_name'])
-    positions={}
-    for n,name in enumerate(sources):
-        angle=2*math.pi*n/max(1,len(sources));positions[name]=(1.0*math.cos(angle),1.0*math.sin(angle))
-    for n,row in enumerate(companies):
-        angle=2*math.pi*n/max(1,len(companies));positions[str(row['symbol'])]=(.47*math.cos(angle),.47*math.sin(angle))
-    ex,ey=[],[]
-    for a,b in edges:
-        x1,y1=positions[a];x2,y2=positions[b];ex += [x1,x2,None];ey += [y1,y2,None]
-    fig=go.Figure()
-    fig.add_trace(go.Scatter(x=ex,y=ey,mode='lines',line=dict(color='#314967',width=0.7),hoverinfo='skip',showlegend=False))
-    for kind,nodes,color,size in [('Sector', [s for s in sources if s in sectors],THEME['sector'],13),
-                                  ('Factor', [s for s in sources if s not in sectors],THEME['factor'],12),
-                                  ('Company',[str(r['symbol']) for r in companies],THEME['company'],8)]:
-        if not nodes:continue
-        fig.add_trace(go.Scatter(x=[positions[n][0] for n in nodes],y=[positions[n][1] for n in nodes],mode='markers+text',
-            marker=dict(size=size,color=color,line=dict(color='#15253B',width=1)),text=[n if kind=='Company' else (n[:20]+'…' if len(n)>20 else n) for n in nodes],
-            textposition='top center',textfont=dict(size=9,color=THEME['text']),name=kind,
-            customdata=nodes,hovertemplate='%{customdata}<extra>'+kind+'</extra>'))
-    if region == 'Global' and any('country' in row and str(row.get('country','')).strip() for row in companies):
-        # Country links use only explicit holdings country assignments, never guesses from symbols.
-        country_names=sorted({str(row.get('country','')).strip() for row in companies if str(row.get('country','')).strip()})
-        for n,country in enumerate(country_names):
-            angle=2*math.pi*n/max(1,len(country_names))
-            positions['country:'+country]=(1.40*math.cos(angle),1.40*math.sin(angle))
-        cx,cy=[],[]
-        for row in companies:
-            country=str(row.get('country','')).strip()
-            ticker=str(row['symbol'])
-            if country and ticker in positions:
-                x1,y1=positions[ticker];x2,y2=positions['country:'+country]
-                cx.extend([x1,x2,None]);cy.extend([y1,y2,None])
-        fig.add_trace(go.Scatter(x=cx,y=cy,mode='lines',line=dict(color='#566a82',width=0.8,dash='dot'),hoverinfo='skip',showlegend=False))
-        fig.add_trace(go.Scatter(x=[positions['country:'+c][0] for c in country_names],
-                                 y=[positions['country:'+c][1] for c in country_names],mode='markers+text',
-                                 marker=dict(size=16,color='#b79cf8',line=dict(color='#15253B',width=1)),
-                                 text=country_names,textposition='top center',textfont=dict(size=10,color=THEME['text']),
-                                 name='Country',hovertemplate='%{text}<extra>Country</extra>'))
-    fig.update_layout(height=740,margin=dict(l=5,r=5,t=30,b=5),paper_bgcolor=THEME['background'],plot_bgcolor=THEME['background'],
-        font_color=THEME['text'],xaxis=dict(visible=False,range=[-1.75,1.75],scaleanchor='y'),
-        yaxis=dict(visible=False,range=[-1.75,1.75]),dragmode='pan')
-    st.plotly_chart(fig,use_container_width=True)
-    st.caption('Shows up to 38 high-membership companies. Global country links appear when verified country metadata is saved. This is a coverage graph, not a performance ranking.')
+def render_graph(region: str) -> None:
+    """Backwards-compatible holdings graph entry point for older routes."""
+    st.title(f"{region} Holdings Network")
+    st.caption("Explore verified sector and factor memberships in the redesigned research workspace.")
+    render_analysis(region)
