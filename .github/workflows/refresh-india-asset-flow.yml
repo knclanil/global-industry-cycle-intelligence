@@ -1,84 +1,73 @@
 name: Refresh India Asset Flow Diagnostics
-
 on:
   workflow_dispatch:
   schedule:
     - cron: '45 12 * * 1-5'
-
 permissions:
   contents: write
-
-# Avoid simultaneous runs of this specific workflow publishing the same CSV.
 concurrency:
   group: india-asset-flow-refresh-main
   cancel-in-progress: false
-
 jobs:
   refresh:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out latest main
+      - name: Check out main
         uses: actions/checkout@v4
         with:
           ref: main
           fetch-depth: 0
           persist-credentials: true
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-
       - name: Install dependencies
         run: python -m pip install -r requirements.txt
-
-      - name: Install recovery wrapper
+      - name: Install existing recovery wrapper
         run: python scripts/install_india_asset_fix.py
-
-      - name: Refresh source coverage diagnostics
+      - name: Update dashboard to read the canonical stored keys
+        run: python scripts/install_india_asset_dashboard_fix.py
+      - name: Refresh AND persist asset history
         run: python scripts/refresh_india_asset_data.py
-
-      - name: Verify coverage CSV was produced
+      - name: Verify stored coverage and price snapshots
         run: |
-          test -s data/dashboard_cache/india_asset_flow_coverage.csv || {
-            echo 'Coverage CSV is missing or empty'; exit 1;
-          }
-
-      - name: Publish updated module and coverage (retry if main advances)
+          test -s data/dashboard_cache/india_asset_flow_coverage.csv
+          test -s data/market/IndiaAssets/%5ENSEI.parquet
+          python - <<'PY'
+          from stored_market_data import read_one
+          from india_asset_market_data import SECTORS, BENCHMARK
+          import pandas as pd
+          coverage = {t: len(read_one('IndiaAssets', t)) for t in [*SECTORS, BENCHMARK]}
+          print('Persisted sessions:', coverage)
+          assert coverage[BENCHMARK] >= 100, 'Benchmark missing or insufficient'
+          assert sum(coverage[t] >= 100 for t in SECTORS) >= 1, 'No usable asset histories'
+          PY
+      - name: Publish price histories and diagnostics safely
         shell: bash
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-
-          git add india_asset_market_data.py
+          git add -f data/market/IndiaAssets/*.parquet data/market/IndiaAssets/sources.json
           git add -f data/dashboard_cache/india_asset_flow_coverage.csv
-
+          git add india_asset_market_data.py dashboard.py
           if git diff --cached --quiet; then
             echo 'No changes to publish.'
             exit 0
           fi
-
-          git commit -m 'Refresh India asset history validation [skip ci]'
-
-          # A concurrent GitHub Desktop or other workflow push can move main.
-          # Replay only this generated-data commit on top of current main.
-          # Never force push or silently discard conflicting changes.
+          git commit -m 'Persist India asset flow market prices [skip ci]'
           for attempt in 1 2 3 4 5; do
-            echo "Publishing attempt ${attempt}/5"
             git fetch origin main
             if ! git rebase origin/main; then
               git rebase --abort || true
-              echo 'Rebase conflict: resolve conflicting changes manually. No force push attempted.'
+              echo 'Cannot safely rebase generated data.'
               exit 1
             fi
             if git push origin HEAD:main; then
-              echo 'Published refreshed India Asset Flow data.'
+              echo 'Published IndiaAssets price parquet snapshots.'
               exit 0
             fi
-            echo 'Remote main changed during publication. Retrying.'
             sleep $((attempt * 3))
           done
-
-          echo 'Could not publish after 5 attempts. Re-run the workflow.'
           exit 1

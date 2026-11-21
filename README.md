@@ -1,24 +1,11 @@
-# India Asset Flow GitHub Actions publication fix
+# India Asset Flow: persist actual prices (not only coverage)
 
-This fixes the specific `main -> main (fetch first)` rejection after the diagnostics step succeeds. It replaces only `.github/workflows/refresh-india-asset-flow.yml` from the earlier India Asset Flow package. Keep `india_asset_recovery.py`, `scripts/install_india_asset_fix.py`, and `scripts/refresh_india_asset_data.py` already in the repository.
+## Root cause
+The old job generated `india_asset_flow_coverage.csv`, which contains only ticker, count, dates, and status. The Streamlit dashboard instead uses `stored_market_data.read_market()` to load `.parquet` files from `data/market/IndiaAssets/`. The old refresh job did **not** publish those parquet files. Also, the India government bond's canonical key (`NIFTY_GSEC_10Y`) is absent from `india_asset_market_data.TICKERS`, the list the dashboard used to read snapshots.
 
-## GitHub Desktop
+## Install with GitHub Desktop
+Copy the **contents** of this package into the root of the repository (merge `scripts/` and `.github/workflows/`, preserving paths). The included workflow automatically applies the targeted fix to `dashboard.py` during its run and publishes that change together with the price snapshots. **You do not need to run Python locally or edit dashboard.py yourself.**
 
-1. Download and unzip this package.
-2. In GitHub Desktop, choose **Repository > Show in Explorer/Finder**.
-3. Copy the package's `.github` folder into the repository, merging folders and replacing the existing `.github/workflows/refresh-india-asset-flow.yml`.
-4. In GitHub Desktop, **Fetch origin** and **Pull origin** when offered, then commit and **Push origin**. If there is a conflict, resolve it rather than force pushing.
-5. In GitHub **Actions**, run **Refresh India Asset Flow Diagnostics** on `main`.
-6. Confirm the workflow is green and that `data/dashboard_cache/india_asset_flow_coverage.csv` exists and is nonempty.
+Commit, push, then **Actions → Refresh India Asset Flow Diagnostics → Run workflow**. Confirm all six canonical parquet datasets appear under `data/market/IndiaAssets/` and coverage shows available series. Streamlit redeploys on the workflow's resulting commit. Click `Refresh now` to reset Streamlit's in-process price cache.
 
-## Why the workflow changed
-
-- Checks out the latest `main` with full history.
-- Validates that the expected output CSV is present and nonempty.
-- Commits generated files only when changed.
-- Fetches and rebases onto latest `main` before publishing.
-- Retries ordinary push races up to five times, without force-pushing.
-- Stops on a true merge/rebase conflict instead of overwriting anyone's changes.
-- Serializes runs of this workflow; other workflows can still race, which is why publish retries remain.
-
-This fixes the Git publish failure only. It does not guarantee Yahoo Finance price coverage or that the dashboard is populated. Review the resulting CSV for coverage statuses.
+The report is a data-coverage check, not proof that actual capital inflows/outflows occurred. The dashboard uses price-rotation proxies, not measured capital flows.
