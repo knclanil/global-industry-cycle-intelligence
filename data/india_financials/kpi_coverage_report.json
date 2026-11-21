@@ -1,0 +1,38 @@
+{
+  "built_utc": "2026-11-21T17:59:59+00:00",
+  "universe": 328,
+  "coverage": {
+    "snapshot": 25,
+    "income": 24,
+    "balance": 23,
+    "cashflow": 0,
+    "quote": 25,
+    "fundamental_ready": 0,
+    "valuation_ready": 0
+  },
+  "metric_coverage": {
+    "revenue": 0,
+    "net_income": 0,
+    "operating_margin": 0,
+    "roe": 0,
+    "roa": 0,
+    "revenue_yoy": 0,
+    "earnings_yoy": 0,
+    "operating_cash_flow": 0,
+    "free_cash_flow": 0,
+    "total_debt": 0,
+    "debt_to_equity": 0,
+    "market_cap": 24,
+    "price": 25,
+    "pe": 0,
+    "pb": 0,
+    "ev_to_ebitda": 0,
+    "fcf_yield": 0
+  },
+  "collection_status_counts": {
+    "ok": 25,
+    "failed": 303
+  },
+  "quality_policy": "Missing is unknown (never zero). Fundamental readiness requires revenue, net_income, roe; valuation also requires price and PE or PB. No rankings until coverage adequate.",
+  "source": "NSE verified constituents + cached Yahoo Finance snapshots; no Screener scraping"
+}
