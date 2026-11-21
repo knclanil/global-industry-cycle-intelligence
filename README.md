@@ -1,29 +1,51 @@
-# India dashboard navigation cleanup
+# India Investment Research — two integrated pages
 
-This package contains only `app.py`, preserving the existing Knowledge Graph and financial pipeline code.
+This patch adds two India sidebar pages after **India Asset Flow → India Sector → India Factors**:
 
-## India sidebar after update
-1. India Asset Flow
-2. India Sector
-3. India Factors
+1. **Investment Opportunity Screener** — one row per verified company, sector/factor/source-index multi-select filters with ANY or ALL *within each category*, search, data-readiness gates, transparent scores (when available), CSV export.
+2. **Company Deep Dive** — company selection from screener, sector/factor/index evidence, cached financials, valuation indicators, peer comparison, source dates, coverage gaps, independent company reference.
 
-The following *sidebar entries* are removed from INDIA only:
-- India Analysis (Sector · Factor · Holdings)
-- India Sector & Factor Holdings (India Holdings Explorer)
-- India Overlap & Leadership
-- India Sector & Factor Financials
+The original India assets, sector, factors, Knowledge Graph, membership table and financial collection workflows are **not modified**. The old duplicate research pages remain hidden, not deleted.
 
-No data, refresh workflows or analytical modules are deleted. The Company Financials section, Knowledge Graphs, Global, USA, and other research sections remain unchanged. India financial research and any Investment Opportunities tab added to `india_financial_ui.py` is not removed from source code, but its old navigation entry is hidden. The user can choose later where to expose the consolidated opportunity screener.
+## Install (GitHub Desktop)
 
-## Installation
-1. Extract ZIP.
-2. In GitHub Desktop, Repository > Show in Explorer.
-3. Back up existing root `app.py` if desired.
-4. Replace root `app.py` with this file.
-5. Commit and Push origin.
+1. Extract this ZIP and open your repository via GitHub Desktop → Repository → Show in Explorer.
+2. Copy **india_research_data.py**, **india_opportunity_ui.py**, and **india_company_deep_dive_ui.py** to the **root** of the repository.
+3. Copy `scripts/install_india_research_pages.py` to `scripts/`.
+4. Ensure that `scripts/build_india_opportunity_dataset.py` exists. If not, copy the supplied version from `scripts/`. It is the dataset builder from the prior financial pipeline package.
+5. Open **Repository → Open in Terminal**, then run:
 
-## Test
-`python -m py_compile app.py` succeeds. Live Streamlit navigation not tested.
+   ```bash
+   python scripts/install_india_research_pages.py
+   ```
 
-## Important
-This patch assumes that `app.py` matches the previously inspected app navigation structure. Before replacement, check GitHub Desktop's diff to ensure any newer custom changes in the original app.py are not overwritten. It does not overwrite `regional_rotation_graph.py` or financial modules.
+   The installer only updates `app.py` navigation and routing. It is idempotent and refuses to edit an unexpected sidebar layout. If it refuses, do **not** overwrite your latest `app.py` blindly; review the differences with the included `app.py` reference and adapt the two navigation entries.
+6. Commit and push changes with GitHub Desktop. Streamlit Cloud will redeploy.
+
+### Optional alternate install
+
+The included `app.py` is a **complete reference** derived from the previously delivered India navigation cleanup package, with the two new entries added. You may copy it directly **only if** it matches your latest app changes. Otherwise use the installer to preserve subsequent edits.
+
+## Data prerequisites
+
+The pages read `data/india_financials/opportunity_research.csv`, created by the existing automated financial pipeline. When that file is missing, the pages build an **in-memory, read-only** view from:
+
+- `data/india_holdings/companies.csv`
+- `data/india_holdings/constituents.csv`
+- `data/india_financials/company_financial_summary.csv` (optional, missing financials show N/A)
+
+No Yahoo Finance/NSE requests occur on page load. The company universe is available even when financial values are missing, provided the verified holdings dataset exists. This patch does not increase financial-data coverage and **does not** validate investment predictions.
+
+## Correctness/limitations
+
+- Cross-category filters combine with AND; within a filter's selected items ANY/ALL is user-selectable.
+- Scoring only uses existing cached comparable KPIs; missing scores remain blank rather than zero.
+- Financial values can have unverified standalone-vs-consolidated scope or unspecified units. No inferred weights or rotation quadrants are introduced.
+- Sector memberships are **verified NSE sector-index labels**, not necessarily the same canonical sector categories as the Knowledge Graph. They are not automatically equated.
+- This provides a usable research interface, not yet a backtested end-to-end model of asset → sector → factor rotations. The Assets/Sector/Factor pages themselves are preserved.
+
+## Tests
+
+Run `python -m unittest discover -s tests -p test_india_research_pages.py -v`.
+
+These targeted tests cover ANY/ALL filtering, cross-category matching, readiness, score display, and idempotent navigation patching. No live Streamlit or GitHub Actions deployment has been executed in this environment.

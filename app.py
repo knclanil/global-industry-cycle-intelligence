@@ -13,7 +13,7 @@ NAV_GROUPS = {
                             'Global Capital Intelligence Network'],
     '🌍 GLOBAL': ['Global Countries', 'Global Asset Flow', 'Global Sectors', 'Global Factors', 'Global Analysis'],
     '🇺🇸 USA': ['USA Asset Flow', 'USA Sector', 'USA Factors', 'USA Analysis'],
-    '🇮🇳 INDIA': ['India Asset Flow', 'India Sector', 'India Factors'],
+    '🇮🇳 INDIA': ['India Asset Flow', 'India Sector', 'India Factors', 'India Investment Opportunity Screener', 'India Company Deep Dive'],
     '💼 COMPANY FINANCIALS': ['Fundamental Quality Rankings', 'Company Financial Research',
                               'USA Company Financial KPI Intelligence', 'India Company Financial KPI Intelligence',
                               'India Fundamental Valuation'],
@@ -44,6 +44,7 @@ PAGE_ICONS = {
     'Global Factors': '🌍', 'USA Factors': '🇺🇸', 'India Factors': '🇮🇳',
     'India Sector & Factor Holdings': '🇮🇳', 'India Overlap & Leadership': '🏆',
     'India Sector & Factor Financials': '📈',
+    'India Investment Opportunity Screener': '🎯', 'India Company Deep Dive': '🔎',
     'Fundamental Quality Rankings': '🏅', 'Company Holdings Leadership': '🏆',
     'Company Financial Research': '📑', 'USA Company Financial KPI Intelligence': '📊',
     'India Company Financial KPI Intelligence': '🇮🇳', 'India Fundamental Valuation': '💠',
@@ -123,6 +124,12 @@ elif page == 'India Company Financial KPI Intelligence':
 elif page == 'India Fundamental Valuation':
     from india_valuation_ui import render_india_valuation
     render_india_valuation()
+elif page == 'India Investment Opportunity Screener':
+    from india_opportunity_ui import render_india_opportunities
+    render_india_opportunities()
+elif page == 'India Company Deep Dive':
+    from india_company_deep_dive_ui import render_india_company_deep_dive
+    render_india_company_deep_dive()
 elif page == 'India Sector & Factor Financials':
     from india_financial_ui import render_india_sector_factor_financials
     render_india_sector_factor_financials()
