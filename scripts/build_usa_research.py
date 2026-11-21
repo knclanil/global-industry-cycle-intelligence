@@ -16,6 +16,8 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 from usa_research_data import build_memberships
 from usa_research_data import STORE, OUT, ROOT as DATA_ROOT
+from usa_sec_cache_reader import ticker_directory, cached_companyfacts
+_SEC_DIRECTORY = None
 
 
 def num(table,label,period):
@@ -28,8 +30,9 @@ def div(a,b):return a/b if a is not None and b is not None and b!=0 else None
 
 
 def financials_for(ticker):
-    from sec_financials import load_company,statements,is_bank
-    raw,cik,_=load_company(ticker)
+    from sec_financials import statements,is_bank
+    directory = _SEC_DIRECTORY if _SEC_DIRECTORY is not None else ticker_directory(ROOT)
+    raw,cik=cached_companyfacts(ROOT,ticker,directory)
     tables=statements(raw,'annual',6,ticker=ticker)
     inc,bal,cf=(tables[k][0] for k in ['Income Statement','Balance Sheet','Cash Flow'])
     common=set(inc.columns)&set(bal.columns)
@@ -80,6 +83,8 @@ def quote_snapshot(ticker, quote_by_ticker, max_age_days=7):
 
 
 def build():
+    global _SEC_DIRECTORY
+    _SEC_DIRECTORY = ticker_directory(ROOT)
     holdings=STORE/'latest_holdings.parquet'
     if not holdings.exists():raise SystemExit('Missing verified ETF holdings Parquet. Refresh iShares holdings first.')
     frame=build_memberships(pd.read_parquet(holdings))
@@ -93,7 +98,7 @@ def build():
     rows=[]
     for row in frame.itertuples(index=False):
         ticker=str(row.ticker).strip().upper()
-        record=dict(company_key=row.company_key)
+        record=dict(company_key=row.company_key,ticker=ticker)
         # SEC directory matches strictly by ticker, and SEC facts must already be cached.
         try:record.update(financials_for(ticker))
         except (ValueError,RuntimeError,KeyError,OSError,TypeError) as exc:
@@ -113,14 +118,26 @@ def build():
         if not 0<=age<=540:
             record['fundamental_ready']='No'
             record['readiness_reason']='SEC financial period is stale or missing'
-        if record.get('fundamental_ready')=='Yes' and record.get('valuation_ready')=='Yes':
-            record['readiness_reason']='Comparable scores not calculated (peer/sector validation required)'
+        # Research data readiness is an intersection; it is NOT an investment score.
+        # The independently validated peer model must still supply research_score.
+        both = record.get('fundamental_ready')=='Yes' and record.get('valuation_ready')=='Yes'
+        record['research_ready']='Yes' if both else 'No'
+        if both:
+            record['readiness_reason']='Both source types available; peer/sector scoring not validated'
+        elif record.get('fundamental_ready')=='Yes':
+            record['readiness_reason']='Financials ready; fresh USD quote and valuation required'
+        elif record.get('valuation_ready')=='Yes' and 'stale' not in str(record.get('readiness_reason','')).lower():
+            record['readiness_reason']='Quote ready; validated current SEC fundamentals required'
         rows.append(record)
     OUT.parent.mkdir(parents=True,exist_ok=True)
     pd.DataFrame(rows).to_csv(OUT,index=False)
     usable=sum(r.get('fundamental_ready')=='Yes' for r in rows)
     report={'total_verified_usa_issuers':len(rows),'fundamental_ready':usable,
-            'valuation_ready':sum(r.get('valuation_ready')=='Yes' for r in rows),'fully_scored':0,
+            'valuation_ready':sum(r.get('valuation_ready')=='Yes' for r in rows),
+            'research_ready':sum(r.get('research_ready')=='Yes' for r in rows),
+            'quote_without_fundamentals':sum(r.get('valuation_ready')=='Yes' and r.get('fundamental_ready')!='Yes' for r in rows),
+            'fundamentals_without_quotes':sum(r.get('fundamental_ready')=='Yes' and r.get('valuation_ready')!='Yes' for r in rows),
+            'fully_scored':0,
             'method':'cached SEC company facts + dated optional Yahoo quote metadata + verified USA iShares memberships; no fabricated values or peer scores'}
     (OUT.parent/'build_report.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
     print(json.dumps(report,indent=2))

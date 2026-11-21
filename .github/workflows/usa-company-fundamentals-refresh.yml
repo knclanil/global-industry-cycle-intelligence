@@ -1,22 +1,17 @@
 name: USA Company Fundamentals and Valuations Refresh
-on:
+'on':
   workflow_dispatch:
     inputs:
-      limit:
-        description: 'Max stale SEC companies to attempt; 0 for all'
-        default: '25'
+      sec_limit:
+        description: 'Max new/stale SEC CompanyFacts downloads'
         required: false
-      tickers:
-        description: 'Optional verified USA symbols, e.g. AAPL,MSFT'
-        default: ''
+        default: '125'
+      quotes_limit:
+        description: 'Max stale equity quote downloads'
         required: false
-      audit_only:
-        description: 'Skip provider calls, rebuild from existing cache'
-        type: boolean
-        default: false
-        required: false
+        default: '125'
   schedule:
-    - cron: '30 15 * * 1-5'
+    - cron: '40 14 * * 1-5'
 permissions:
   contents: write
 concurrency:
@@ -25,64 +20,57 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 100
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
         with:
           ref: main
+          fetch-depth: 1
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: pip
           cache-dependency-path: requirements.txt
-      - name: Install dependencies
+      - name: Dependencies
         run: |
           python -m pip install -r requirements.txt
-          python -m pip install yfinance pyarrow
-      - name: Validate parser and matching behavior
-        run: python -m unittest discover -s tests -p 'test_dual_market_fundamentals.py' -v
-      - name: Collect and refresh SEC financial facts and quotes
+          python -m pip install yfinance pyarrow requests pandas
+      - name: Verify offline parsing and joins
+        run: python -m unittest discover -s tests -p 'test_usa_financial_autopilot.py' -v
+      - name: Refresh SEC CompanyFacts for verified issuers
         env:
           SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
-          BATCH_LIMIT: ${{ inputs.limit || '25' }}
-          SYMBOLS: ${{ inputs.tickers || '' }}
-          AUDIT_ONLY: ${{ inputs.audit_only || 'false' }}
-          PYTHONUNBUFFERED: '1'
-        shell: bash
+          SEC_LIMIT: ${{ inputs.sec_limit || '125' }}
         run: |
-          set -euo pipefail
-          if [ "$AUDIT_ONLY" = 'true' ]; then
-            python scripts/refresh_usa_company_fundamentals.py --audit-only
-          else
-            python scripts/refresh_usa_company_fundamentals.py --limit "$BATCH_LIMIT" --tickers "$SYMBOLS" --quotes --quotes-limit 25
-          fi
-      - name: Build USA company research fundamentals
+          python scripts/refresh_usa_company_fundamentals.py --limit "$SEC_LIMIT" --stale-days 90 --pause 0.3
+      - name: Build company research from locally cached SEC filings
+        run: python scripts/build_usa_research.py
+      - name: Enrich fundamentally ready issuers with dated market prices
+        env:
+          QUOTES_LIMIT: ${{ inputs.quotes_limit || '125' }}
+        run: |
+          python scripts/usa_quote_coverage_pilot.py --limit "$QUOTES_LIMIT" --pause 1.0
+      - name: Rebuild research, quantify missing metrics, update both-market coverage
         run: |
           python scripts/build_usa_research.py
+          python scripts/usa_financial_gap_report.py
           python scripts/unified_fundamental_coverage.py
-      - name: Validate output integrity
+      - name: Enforce identity and output integrity
         run: |
           python - <<'PY'
+          import json
           import pandas as pd
-          p='data/usa_research/company_research.csv'
-          df=pd.read_csv(p)
-          assert len(df)>0
-          assert df.company_key.notna().all() and df.company_key.is_unique
-          print('Validated USA company rows:',len(df))
+          from pathlib import Path
+          p=Path('data/usa_research/company_research.csv')
+          assert p.exists()
+          df=pd.read_csv(p,low_memory=False)
+          assert len(df)>0 and df.company_key.notna().all() and df.company_key.is_unique
+          report=json.loads(Path('data/usa_research/completion_report.json').read_text())
+          assert report['universe']==len(df)
+          assert report['both_ready']<=min(report['fundamental_ready'],report['valuation_ready'])
+          print('USA company financial coverage:',json.dumps(report,indent=2))
           PY
-      - name: Report readiness
-        if: always()
-        shell: bash
-        run: |
-          for f in data/usa_research/build_report.json data/usa_research/collection_report.json data/research_coverage/fundamental_coverage.json; do
-            if [ -f "$f" ]; then
-              echo "### $(basename "$f")" >> "$GITHUB_STEP_SUMMARY"
-              echo '```json' >> "$GITHUB_STEP_SUMMARY"
-              cat "$f" >> "$GITHUB_STEP_SUMMARY"
-              echo '```' >> "$GITHUB_STEP_SUMMARY"
-            fi
-          done
-      - name: Publish financial facts, quotes and coverage safely
+      - name: Publish USA cache, quotes and research results with clean worktree
         shell: bash
         run: |
           set -euo pipefail
@@ -90,30 +78,44 @@ jobs:
           export GIT_AUTHOR_EMAIL='41898282+github-actions[bot]@users.noreply.github.com'
           export GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
           export GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
-          source_dir="$PWD"
+          src="$PWD"
           temp="$(mktemp -d)"
           trap 'git worktree remove --force "$temp/pub" 2>/dev/null || true; rm -rf "$temp"' EXIT
           for attempt in 1 2 3 4 5; do
             git fetch origin main
             git worktree remove --force "$temp/pub" 2>/dev/null || true
             git worktree add --detach "$temp/pub" origin/main
-            for directory in data/fundamentals data/usa_research data/research_coverage; do
-              if [ -d "$source_dir/$directory" ]; then
-                mkdir -p "$temp/pub/$directory"
-                cp -a "$source_dir/$directory/." "$temp/pub/$directory/"
+            for dir in data/fundamentals data/sec_cache data/usa_research; do
+              if [ -d "$src/$dir" ]; then
+                mkdir -p "$temp/pub/$dir"
+                cp -a "$src/$dir/." "$temp/pub/$dir/"
+                git -C "$temp/pub" add -f -- "$dir"
               fi
             done
-            if [ -d "$source_dir/data/sec_cache" ]; then
-              mkdir -p "$temp/pub/data/sec_cache"
-              cp -a "$source_dir/data/sec_cache/." "$temp/pub/data/sec_cache/"
+            file='data/research_coverage/fundamental_coverage.json'
+            if [ -f "$src/$file" ]; then
+              mkdir -p "$temp/pub/$(dirname "$file")"
+              cp "$src/$file" "$temp/pub/$file"
+              git -C "$temp/pub" add -f -- "$file"
             fi
-            git -C "$temp/pub" add data/fundamentals data/sec_cache data/usa_research data/research_coverage 2>/dev/null || \
-              git -C "$temp/pub" add data/fundamentals data/usa_research data/research_coverage
-            if git -C "$temp/pub" diff --cached --quiet; then echo 'No dataset changes'; exit 0; fi
-            git -C "$temp/pub" commit -m 'data: refresh USA company fundamentals [skip ci]'
+            if git -C "$temp/pub" diff --cached --quiet; then
+              echo 'Financial datasets already current'; exit 0
+            fi
+            git -C "$temp/pub" commit -m 'data: USA SEC fundamentals and market valuations [skip ci]'
             if git -C "$temp/pub" push origin HEAD:main; then exit 0; fi
-            echo "Concurrent upstream push, retry $attempt"
-            sleep 3
+            sleep 4
           done
-          echo 'Could not publish data after five retries' >&2
+          echo 'USA financial dataset publication failed after five attempts' >&2
           exit 1
+      - name: Summary
+        if: always()
+        shell: bash
+        run: |
+          for f in data/usa_research/collection_report.json data/usa_research/quote_pilot_report.json data/usa_research/completion_report.json; do
+            if [ -f "$f" ]; then
+              echo "### $f" >> "$GITHUB_STEP_SUMMARY"
+              echo '```json' >> "$GITHUB_STEP_SUMMARY"
+              cat "$f" >> "$GITHUB_STEP_SUMMARY"
+              echo '```' >> "$GITHUB_STEP_SUMMARY"
+            fi
+          done

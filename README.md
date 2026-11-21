@@ -1,22 +1,37 @@
-# USA-first fundamentals and valuation coverage trial
+# USA Company Financials — automatic end-to-end refresh
 
-## Purpose
-Keep India unchanged. Enrich **verified USA ETF issuers only** using Yahoo historical close and available Yahoo price/valuation metadata. Reuse the existing SEC financial summaries. Missing valuations remain null. The pilot is deliberately manual and small before scaling.
+This package replaces the *USA company fundamentals workflow* and its associated collectors with one scheduled pipeline. It uses existing verified iShares US issuer memberships, **SEC EDGAR CompanyFacts for filings**, and existing **Yahoo Finance** as a *price/valuation metadata source* (not Alpha Vantage). India, Global, the Knowledge Graph, and Streamlit navigation are not modified.
 
-## Install
-Copy `.github/workflows/usa-quote-coverage-pilot.yml`, `scripts/usa_quote_coverage_pilot.py`, and `tests/test_usa_quote_coverage_pilot.py` into the matching folders of the main repository. Commit and push via GitHub Desktop. Do not replace existing USA/India financial workflows or the Streamlit `app.py`.
+## Install once (GitHub Desktop)
 
-## Run
-GitHub Actions → **USA Quote and Valuation Coverage Pilot** → Run workflow.
-- First trial: `tickers=AAPL,MSFT` and `limit=2` (only if both are verified ETF holdings).
-- Next trial: blank tickers, `limit=25`; prioritizes existing SEC `fundamental_ready=Yes` companies and skips quotes younger than 7 days.
+Extract ZIP; copy the enclosed `.github`, `scripts`, and `tests` directories into the project root, preserving structure. Commit and **Push origin**. Do not replace `app.py`. The USA Company Fundamentals and Valuations Refresh workflow then runs automatically every weekday at 14:40 UTC. It can also be run manually, without input changes.
 
-## Output
-- `data/usa_research/quotes.csv` (dated prices and available Yahoo P/E, P/B, market cap)
-- `data/usa_research/quote_pilot_report.json` (fetched/failed/price/valuation coverage)
-- `data/usa_research/company_research.csv` (existing SEC + quote integration)
-- `data/research_coverage/fundamental_coverage.json` (both-market readout; India untouched)
+**Required existing prerequisite:** the repo's GitHub Actions secret `SEC_USER_AGENT` must be an identifying name and contact email for SEC EDGAR access. If already set from the prior USA pipeline, do not change it.
 
-**How to assess:** A green workflow only demonstrates it executed. Compare `USA.metrics.price`, `.pe`, `.pb`, `USA.readiness.valuation_ready` and `USA.readiness.research_ready` in the refreshed coverage file. Missing P/E and P/B can be legitimate for companies with losses or Yahoo missing metadata. Do not manufacture these numbers.
+## Pipeline
 
-**Boundaries:** Yahoo Finance is unofficial and may throttle. Market prices can be delayed. `quote_asof` represents fetch time; `quote_source` includes the exchange trade date. The trial does not create composite scores, alter India, or modify Knowledge Graph. Existing `build_usa_research.py` freshness/peer validation rules still apply. Only publish after confirming acceptable use of provider data in a public repository.
+1. Use **only verified USA iShares company holdings**, rather than unrelated Global funds.
+2. Collect up to 125 new/stale SEC CompanyFacts records per weekday; reuse existing facts. Official SEC ticker-to-CIK registry is cached, and missing/ambiguous CIK matches are never guessed. SEC requests have backoff and failure cooldown.
+3. Produce a full company research table **offline from cached SEC facts**. This avoids triggering thousands of SEC requests from the dashboard and avoids `sec_financials.load_company()` performing unbounded web fetches when data is absent.
+4. Prioritize fundamental-ready USA issuers for price/valuation collection (up to 125 per weekday). Skip malformed identifiers such as `-` and `2200964D`, and preserve previous valid quotes on provider failures.
+5. Rebuild company research with latest quotes. For each issuer, both a current financial statement and a fresh USD quote with P/E or P/B are required for `research_ready=Yes`. Reports explain missing intersection.
+6. Publish refreshed SEC caches, quotes, issuer research, and USA coverage reports to `main` from a clean temporary Git worktree with push retries.
+
+### Generated datasets
+
+- `data/usa_research/company_research.csv`: Company Deep Dive and Opportunity Screener inputs.
+- `data/usa_research/quotes.csv`: dated source-tagged USD prices and available market multiples.
+- `data/usa_research/completion_report.json`: full current coverage, overlap, data gaps.
+- `data/usa_research/financial_gaps.csv`: **every company** with missing metrics and readiness reasons.
+- `data/usa_research/quote_pilot_report.json`: per-run quote results and malformed symbol exclusions.
+- `data/usa_research/collection_report.json`: per-run SEC results and errors.
+- `data/research_coverage/fundamental_coverage.json`: combined coverage display, India counts unchanged.
+
+## Integrity / limitations
+
+- `research_ready` means inputs available, **not** an investment recommendation or numeric investment score. Model scores remain missing rather than fabricate peer-comparable valuations.
+- Industry-peer ranking and valuations such as EV/EBITDA need additional *verified comparable inputs*. The current pipeline supplies available SEC financials, Yahoo price / market-cap and reported P/E / P/B. Missing metrics stay missing.
+- SEC EDGAR returns statements only for eligible US reporting issuers. Some of the 2,931 verified ETF constituents may be foreign issuers, funds, preferred securities, or otherwise outside CompanyFacts coverage. Full 2,931-company fundamental coverage cannot be guaranteed.
+- Yahoo Finance is an unofficial data channel; rate limits and terms may restrict bulk availability. A finished automated collection workflow does **not** guarantee that all quotes or ratios will be populated. The automated reports make gaps explicit.
+- This is a **local integration package**. The repository's current live branch was not available for full checkout here; the code was compiled and offline regression tested against the previously shared source packages, but the live hosted workflow has not run in this environment.
+- The scheduled workflow increments coverage in batches, rather than making thousands of requests at once. Its total time to populate the eligible universe depends on provider responses, GitHub Actions limits and existing caches.

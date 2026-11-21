@@ -9,6 +9,7 @@ import argparse
 import json
 import math
 import os
+import re
 import sys
 import time
 from datetime import datetime, timezone, date
@@ -76,25 +77,61 @@ def quote_from_yahoo(ticker):
     if currency!='USD':
         raise ValueError('Currency not verified as USD; discarding quote')
     return {'ticker':ticker,'price':price,'market_cap':market_cap,'pe':pe,'pb':pb,
-            'quote_asof':datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
+            'quote_asof':trade_date.isoformat(),
             'quote_source':f'yahoo_finance_close_{trade_date.isoformat()}', 'currency':'USD'}
 
 
-def select_targets(universe,existing,financial,requested=(),limit=25):
-    universe=set(universe)
-    requested=set(requested)
-    if requested:
-        invalid=requested-universe
-        if invalid:raise ValueError('Not verified USA ETF tickers: '+', '.join(sorted(invalid)))
-        candidates=sorted(requested)
-    else:
-        eligible=set()
-        if isinstance(financial,pd.DataFrame) and {'ticker','fundamental_ready'}.issubset(financial.columns):
-            eligible=set(financial.loc[financial.fundamental_ready.eq('Yes'),'ticker'].dropna().astype(str).str.upper())
-        candidates=sorted(universe,key=lambda t:(t not in eligible,t))
-    stale=[t for t in candidates if not quote_recent(existing.get(t,{}))]
-    return stale[:limit] if limit else stale
+# Exclude placeholders, numeric instrument codes, and malformed quote identifiers.
+# A dot is accepted for share classes (BRK.B); Yahoo also supports a dash.
+SYMBOL = re.compile(r"^[A-Z][A-Z0-9]{0,8}(?:[.-][A-Z0-9]{1,3})?$")
 
+
+def valid_quote_ticker(symbol):
+    t = str(symbol or '').strip().upper()
+    return bool(SYMBOL.fullmatch(t)) and t not in {'NAN', 'NONE', 'NULL', 'NA'}
+
+
+def ready_tickers(financial, membership=None):
+    """Resolve readiness by stable issuer company_key, NOT a nonexistent CSV ticker.
+
+    The previous build_usa_research.py persisted only company_key in its CSV.
+    Support that older output and the new explicit ticker column.
+    """
+    if not isinstance(financial, pd.DataFrame) or financial.empty or 'fundamental_ready' not in financial:
+        return set()
+    ready = financial.loc[financial['fundamental_ready'].astype(str).str.casefold().eq('yes')]
+    found = set()
+    if 'ticker' in ready:
+        found.update(ready['ticker'].dropna().astype(str).str.upper().str.strip())
+    if (membership is not None and 'company_key' in ready and
+            {'company_key', 'ticker'}.issubset(membership.columns)):
+        key_to_ticker = membership[['company_key', 'ticker']].dropna().copy()
+        key_to_ticker['company_key'] = key_to_ticker['company_key'].astype(str)
+        key_to_ticker = key_to_ticker.drop_duplicates('company_key')
+        matched = ready[['company_key']].copy()
+        matched['company_key'] = matched['company_key'].astype(str)
+        found.update(matched.merge(key_to_ticker, on='company_key', how='inner')['ticker']
+                     .astype(str).str.upper().str.strip())
+    return {t for t in found if valid_quote_ticker(t)}
+
+
+def select_targets(universe, existing, financial, requested=(), limit=25, membership=None):
+    universe = {str(t).strip().upper() for t in universe}
+    requested = {str(t).strip().upper() for t in requested}
+    if requested:
+        invalid = requested - universe
+        if invalid:
+            raise ValueError('Not verified USA ETF tickers: ' + ', '.join(sorted(invalid)))
+        malformed = {t for t in requested if not valid_quote_ticker(t)}
+        if malformed:
+            raise ValueError('Not valid stock ticker identifiers: ' + ', '.join(sorted(malformed)))
+        candidates = sorted(requested)
+    else:
+        eligible = ready_tickers(financial, membership)
+        candidates = sorted((t for t in universe if valid_quote_ticker(t)),
+                            key=lambda t: (t not in eligible, t))
+    stale = [t for t in candidates if not quote_recent(existing.get(t, {}))]
+    return stale[:limit] if limit else stale
 
 def write_csv_atomic(path,rows):
     path.parent.mkdir(parents=True,exist_ok=True)
@@ -128,10 +165,13 @@ def main():
     financial_path=ROOT/'data/usa_research/company_research.csv'
     financial=pd.read_csv(financial_path,low_memory=False) if financial_path.exists() else pd.DataFrame()
     requested={t.strip().upper() for t in args.tickers.split(',') if t.strip()}
-    targets=select_targets(universe,existing,financial,requested,args.limit)
+    targets=select_targets(universe,existing,financial,requested,args.limit,memberships)
     result={'built_utc':datetime.now(timezone.utc).isoformat(),'verified_issuers':len(memberships),
             'verified_tickers':len(universe),'selected':len(targets),'fetched':0,'failed':0,'failures':{},
-            'prices_before':sum(quote_recent(v) for v in existing.values())}
+            'prices_before':sum(quote_recent(v) for v in existing.values()),
+            'fundamental_ready_candidates':len(ready_tickers(financial,memberships) & universe),
+            'selected_fundamental_ready':len(set(targets) & ready_tickers(financial,memberships)),
+            'invalid_quote_identifiers_skipped':sorted(t for t in universe if not valid_quote_ticker(t))}
     for ticker in targets:
         try:
             row=quote_from_yahoo(ticker)
@@ -150,6 +190,7 @@ def main():
     REPORT.parent.mkdir(parents=True,exist_ok=True)
     REPORT.write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8')
     print(json.dumps(result,indent=2))
-    if targets and result['fetched']==0:raise SystemExit('All USA quote trial requests failed; check failure report, no India changes')
+    if targets and result['fetched']==0:
+        print('WARNING: All quote requests failed; preserving existing quotes and publishing failure diagnostics')
 
 if __name__=='__main__':main()
