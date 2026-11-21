@@ -11,9 +11,9 @@ apply_global_design()
 NAV_GROUPS = {
     '🕸️ KNOWLEDGE GRAPHS': ['Global Knowledge Graph', 'USA Knowledge Graph', 'India Knowledge Graph',
                             'Global Capital Intelligence Network'],
-    '🌍 GLOBAL': ['Global Countries', 'Global Sectors', 'Global Factors', 'Global Asset Flow', 'Global Analysis'],
-    '🇺🇸 USA': ['USA Sector', 'USA Factors', 'USA Asset Flow', 'USA Analysis'],
-    '🇮🇳 INDIA': ['India Sector', 'India Factors', 'India Asset Flow', 'India Analysis',
+    '🌍 GLOBAL': ['Global Countries', 'Global Asset Flow', 'Global Sectors', 'Global Factors', 'Global Analysis'],
+    '🇺🇸 USA': ['USA Asset Flow', 'USA Sector', 'USA Factors', 'USA Analysis'],
+    '🇮🇳 INDIA': ['India Asset Flow', 'India Sector', 'India Factors', 'India Analysis',
                   'India Sector & Factor Holdings', 'India Overlap & Leadership', 'India Sector & Factor Financials'],
     '💼 COMPANY FINANCIALS': ['Fundamental Quality Rankings', 'Company Financial Research',
                               'USA Company Financial KPI Intelligence', 'India Company Financial KPI Intelligence',

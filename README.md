@@ -1,43 +1,27 @@
-# India Asset Flow — integrated data pipeline
+# Assets → Sectors → Factors + matching verified company memberships
 
-This package replaces the fragmented India Asset Flow diagnostics-only job.
-It uses the existing NSE-first market source logic and Yahoo fallback, saves actual
-Parquet price snapshots, validates the **same** snapshots used in Streamlit,
-then publishes the histories, `sources.json`, and coverage report together.
+## Installation with GitHub Desktop
 
-## Install with GitHub Desktop
+1. Open GitHub Desktop and choose `global-industry-cycle-intelligence`.
+2. Use **Repository → Show in Explorer/Finder**.
+3. Copy **app.py** and **regional_rotation_graph.py** from this package to the repository root (beside the existing app.py), replacing the old copies. **Do not copy build_patch.py**.
+4. Commit `Reorder market pages and sync graph membership filters`, then **Push origin**.
+5. Streamlit Cloud should redeploy automatically. No data cache regeneration is needed for this presentation/filtering-only change.
 
-1. Extract ZIP. Open GitHub Desktop → Repository → Show in Explorer/Finder.
-2. Copy the `scripts` and `.github` folders from the ZIP into the repository;
-   merge folders and replace only matching files. **Do not delete other files.**
-3. Commit the new files and push `main`.
-4. In GitHub → Actions choose **Refresh India Asset Flow (prices and validation)**
-   → Run workflow on main. Wait until the run completes successfully.
-5. Check `data/market/IndiaAssets/` for six Parquet files and `sources.json`.
-   Check `data/dashboard_cache/india_asset_flow_coverage.csv` for diagnostics.
-   Then open Streamlit → India Asset Flow → Refresh now.
+## Changes
 
-## What the one-time integration does
+- Reorders Global, USA and India navigation so **Asset Flow → Sector → Factors** occur in that sequence (Global Countries remains first).
+- Changes the **Verified company memberships** table on the knowledge graph page to use **the identical filters and evidence graph node selection** as the graph above it.
+- Supports the existing multi-select controls: rotations, sector sources, factor families and companies, plus ANY / ALL matching and lookback.
+- Enforces rotation selection consistently: unrelated source nodes and their rows do not appear merely because a company is also in another quadrant.
+- Every membership row still retains its original index source, company key, rotation and evidence. It does **not** merge away raw source-level data.
+- The graph may cap displayed company dots to 60/100 for speed; the filtered membership table displays **all matching membership rows** and has CSV export. It may therefore contain more companies than are rendered as dots.
+- Changes are shared by **Global / USA / India** knowledge graph pages.
 
-`scripts/install_india_asset_pipeline.py` applies **two small and idempotent**
-source fixes in the GitHub Actions checkout and the workflow publishes them:
-- `dashboard.py`: loads canonical `NIFTY_GSEC_10Y` from stored Parquet instead
-  of trying to read the raw ETF fallback `SETF10GILT.NS`.
-- `scripts/incremental_refresh.py`: writes canonical bond key during other
-  scheduled market refreshes, avoiding the old mismatch.
+## Caveats
 
-If the corresponding source lines have changed upstream, the job fails clearly
-rather than overwriting unrelated code. Later runs do not change these files.
+This table is driven by `data/dashboard_cache/rotation_graphs/{region}_{period}_edges.csv`, exactly as the graph. It is **not** the separate summary table at `data/dashboard_cache/{region}_companies.csv`. If an index has no valid rotation signal and no eligible membership edge, neither the graph nor this table can display it as a mapped index without an upstream data update.
 
-## Important caveats
+## Validation
 
-- India Asset Flow is **relative price rotation**, not actual capital inflows.
-- If official government-bond index history is unavailable, the bond ETF can
-  be used as a *different price proxy*, with its source disclosed. The code does
-  not splice index and ETF observations during a single provider request.
-- Existing `india_asset_market_data.py` includes the recovery wrapper. The
-  scheduled job calls its `download` only once.
-- A green job means saved history loads and at least one 3M rotation computes.
-  It does NOT guarantee every asset is available; consult coverage CSV.
-- Changes are not automatically deployed by this ZIP; GitHub Desktop push and
-  a successful GitHub Actions run are required.
+Python syntax checks and five targeted unit tests passed using fixture nodes, signals and edges. The update is not yet verified in the live Streamlit deployment. Run `python -m unittest discover -s tests -v` from the repository root to test against the repository's `rotation_graph_evidence.py` module.
