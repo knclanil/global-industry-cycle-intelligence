@@ -1,14 +1,14 @@
 {
-  "built_utc": "2026-11-21T17:59:58+00:00",
+  "built_utc": "2026-11-21T19:06:27+00:00",
   "tracked_companies": 328,
-  "cached_company_snapshots": 25,
-  "annual_income_coverage": 24,
-  "annual_balance_coverage": 23,
-  "annual_cashflow_coverage": 0,
-  "price_coverage": 25,
+  "cached_company_snapshots": 28,
+  "annual_income_coverage": 27,
+  "annual_balance_coverage": 26,
+  "annual_cashflow_coverage": 3,
+  "price_coverage": 28,
   "note": "Yahoo quotes and statements may be unavailable, stale or of unverified consolidated scope; NSE provides membership, not financials or constituent weights. Screener is linked but not scraped.",
-  "attempted_this_run": 0,
+  "attempted_this_run": 3,
   "failed_this_run": 0,
-  "successful_this_run": 0,
+  "successful_this_run": 3,
   "universe_in_source": 328
 }

@@ -1,0 +1,54 @@
+{
+  "built_utc": "2026-11-21T19:05:02+00:00",
+  "markets": {
+    "India": {
+      "status": "available",
+      "companies": 328,
+      "metrics": {
+        "revenue": 0,
+        "net_income": 0,
+        "revenue_yoy": 0,
+        "roe": 0,
+        "operating_margin": 0,
+        "operating_cash_flow": 0,
+        "free_cash_flow": 0,
+        "debt_to_equity": 0,
+        "price": 25,
+        "market_cap": 24,
+        "pe": 0,
+        "pb": 0,
+        "research_score": 0
+      },
+      "readiness": {
+        "fundamental_ready": 0,
+        "valuation_ready": 0,
+        "research_ready": 0
+      }
+    },
+    "USA": {
+      "status": "available",
+      "companies": 2931,
+      "metrics": {
+        "revenue": 495,
+        "net_income": 460,
+        "revenue_yoy": 495,
+        "roe": 412,
+        "operating_margin": 378,
+        "operating_cash_flow": 489,
+        "free_cash_flow": 325,
+        "debt_to_equity": 233,
+        "price": 2,
+        "market_cap": 2,
+        "pe": 2,
+        "pb": 2,
+        "research_score": 0
+      },
+      "readiness": {
+        "fundamental_ready": 404,
+        "valuation_ready": 2,
+        "research_ready": 0
+      }
+    }
+  },
+  "notes": "Availability is not accuracy; missing data is never zero. Scores require suitable source periods, adequate peers and controls."
+}

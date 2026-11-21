@@ -155,7 +155,7 @@ ISIN:INE562A01011,INDIANB,Indian Bank,failed,"RuntimeError: Yahoo returned no co
 ISIN:INE646L01027,INDIGO,InterGlobe Aviation Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:38:10+00:00,
 ISIN:INE095A01012,INDUSINDBK,IndusInd Bank Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:38:13+00:00,
 ISIN:INE121J01017,INDUSTOWER,Indus Towers Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:38:15+00:00,
-ISIN:INE009A01021,INFY,Infosys Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:38:18+00:00,
+ISIN:INE009A01021,INFY,Infosys Ltd.,ok,,2026-11-21T19:06:19+00:00,2026-11-21T19:06:19+00:00
 ISIN:INE066P01011,INOXWIND,Inox Wind Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:38:20+00:00,
 ISIN:INE565A01014,IOB,Indian Overseas Bank,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:38:22+00:00,
 ISIN:INE242A01010,IOC,Indian Oil Corporation Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:38:25+00:00,
@@ -259,7 +259,7 @@ ISIN:INE944F01028,RADICO,Radico Khaitan Ltd,failed,"RuntimeError: Yahoo returned
 ISIN:INE976G01028,RBLBANK,RBL Bank Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:42:11+00:00,
 ISIN:INE020B01018,RECLTD,REC Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:42:13+00:00,
 ISIN:INE891D01026,REDINGTON,Redington Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:42:16+00:00,
-ISIN:INE002A01018,RELIANCE,Reliance Industries Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:42:18+00:00,
+ISIN:INE002A01018,RELIANCE,Reliance Industries Ltd.,ok,,2026-11-21T19:06:22+00:00,2026-11-21T19:06:22+00:00
 ISIN:INE614G01033,RPOWER,Reliance Power Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:42:20+00:00,
 ISIN:INE777K01022,RRKABEL,R R Kabel Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:42:23+00:00,
 ISIN:INE0W2G01015,SAGILITY,Sagility Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:42:25+00:00,
@@ -292,7 +292,7 @@ ISIN:INE670A01012,TATAELXSI,Tata Elxsi Ltd.,failed,"RuntimeError: Yahoo returned
 ISIN:INE245A01021,TATAPOWER,Tata Power Co. Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:43:29+00:00,
 ISIN:INE081A01020,TATASTEEL,Tata Steel Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:43:31+00:00,
 ISIN:INE142M01025,TATATECH,Tata Technologies Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:43:33+00:00,
-ISIN:INE467B01029,TCS,Tata Consultancy Services Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:43:36+00:00,
+ISIN:INE467B01029,TCS,Tata Consultancy Services Ltd.,ok,,2026-11-21T19:06:25+00:00,2026-11-21T19:06:25+00:00
 ISIN:INE419M01035,TDPOWERSYS,TD Power Systems Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:43:38+00:00,
 ISIN:INE669C01036,TECHM,Tech Mahindra Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:43:40+00:00,
 ISIN:INE152A01029,THERMAX,Thermax Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:43:42+00:00,
