@@ -72,10 +72,9 @@ def _choose_visible(nodes, links, selection: str | list[str] | dict, max_compani
     source_ids = {n["id"] for n in nodes if n["type"] in ("sector", "factor")}
     if isinstance(selection, dict) and selection.get("mode") == "matched":
         company_ids = set(selection.get("companies", ())) & {n["id"] for n in nodes if n["type"] == "company"}
-        allowed_sources = set(selection.get("allowed_sources", source_ids)) & source_ids
-        chosen_sources = set(selection.get("sources", ())) & allowed_sources
+        chosen_sources = set(selection.get("sources", ())) & source_ids
         for company_id in company_ids:
-            chosen_sources.update(company_sources[company_id] & allowed_sources)
+            chosen_sources.update(company_sources[company_id])
     elif selection == "all":
         company_ids = {n["id"] for n in nodes if n["type"] == "company"}
         chosen_sources = source_ids
@@ -108,11 +107,8 @@ def _choose_visible(nodes, links, selection: str | list[str] | dict, max_compani
             else:
                 chosen_sources = (set(selection) if isinstance(selection, list) else
                                   {selection} if selection.startswith("i:") else set())
-            allowed_sources = (set(selection.get("allowed_sources", source_ids)) & source_ids
-                               if isinstance(selection, dict) else source_ids)
-            chosen_sources &= allowed_sources
             for company_id in company_ids:
-                chosen_sources.update(company_sources[company_id] & allowed_sources)
+                chosen_sources.update(company_sources[company_id])
     return (_sorted([by_id[s] for s in chosen_sources if s in by_id and by_id[s]["type"] == "sector"]),
             _sorted([by_id[s] for s in chosen_sources if s in by_id and by_id[s]["type"] == "factor"]),
             sorted([by_id[c] for c in company_ids], key=lambda n: (n.get("label", "").casefold(), n["id"])),
@@ -181,30 +177,50 @@ def _collapse_sources(nodes: list[dict]):
     return sorted(result, key=lambda n: (n["label"].casefold(), n["id"])), origin_to_group
 
 
-def filtered_membership_rows(nodes: list[dict], links: list[tuple],
-                             edges: pd.DataFrame, selection,
-                             match_mode: str = "Any selected") -> pd.DataFrame:
-    """Rows matching the graph's *uncapped* membership paths.
+def filter_company_memberships(edges: pd.DataFrame, rotations=(), sectors=(),
+                               factors=(), companies=(), match_mode="Any selected",
+                               include_other_memberships=False) -> pd.DataFrame:
+    """Filter the RAW verified membership rows, independent of graph state.
 
-    The graph limits rendered company dots for performance; the evidence table
-    must include every company matching the same selections, and retain raw
-    source/index records. Edges without graph nodes are not silently included.
+    A sector/factor choice selects a company cohort (ANY or ALL selected
+    categories). Rows for the chosen categories are shown by default. With
+    include_other_memberships=True, show all evidence for companies in cohort.
+    No graph node caps or visual selections are applied here.
     """
     if edges.empty:
         return edges.copy()
-    sectors, factors, companies, _, _ = _choose_visible(
-        nodes, links, selection, max_companies=None, match_mode=match_mode)
-    company_keys = {str(node.get("company_key", "")) for node in companies}
-    source_keys = {(str(node.get("quadrant", "")), str(node.get("type", "")),
-                    str(node.get("source_id", ""))) for node in sectors + factors}
-    required = {"company_key", "quadrant", "kind", "source_id"}
+    required = {"company_key", "quadrant", "kind", "label"}
     if not required.issubset(edges.columns):
         return edges.iloc[0:0].copy()
-    mask = edges.apply(lambda row: (
-        str(row["company_key"]) in company_keys and
-        (str(row["quadrant"]), str(row["kind"]), str(row["source_id"])) in source_keys
-    ), axis=1)
-    return edges.loc[mask].drop_duplicates().reset_index(drop=True)
+    df = edges.copy()
+    # CSVs can contain blank/mixed values. Group factor index variants together
+    # without losing their original source_id/portfolio_id in the output.
+    for col in ("company_key", "quadrant", "kind", "label"):
+        df[col] = df[col].fillna("").astype(str)
+    df["__family"] = [(_factor_family(label) if kind == "factor" else label.strip())
+                       for kind, label in zip(df["kind"], df["label"])]
+    if rotations:
+        df = df.loc[df["quadrant"].isin(rotations)]
+    if companies:
+        df = df.loc[df["company_key"].isin(companies)]
+    if df.empty:
+        return df.drop(columns="__family").reset_index(drop=True)
+    criteria = [("sector", value) for value in sectors] + [("factor", value) for value in factors]
+    if criteria:
+        key_sets = [set(df.loc[(df["kind"] == kind) &
+                               (df["__family"].str.casefold() == value.casefold()),
+                               "company_key"])
+                    for kind, value in criteria]
+        if match_mode == "All selected":
+            matched = set.intersection(*key_sets)
+        else:
+            matched = set.union(*key_sets)
+        df = df[df["company_key"].isin(matched)]
+        if not include_other_memberships:
+            selected = {(kind, value.casefold()) for kind, value in criteria}
+            df = df.loc[[ (kind, family.casefold()) in selected
+                          for kind, family in zip(df["kind"], df["__family"]) ]]
+    return df.drop(columns="__family").drop_duplicates().reset_index(drop=True)
 
 
 def _draw(nodes, links, selection: str | list[str] | dict, max_companies: int | None,
@@ -405,11 +421,8 @@ def render_graph(region: str):
             # A factor family is one criterion even if it has many index ETFs.
             # Membership within each family is OR; ALL intersects criteria,
             # not the individual indices within a family.
-            criteria = [set(memberships.get(sid, ())) if sid in allowed_sources else set()
-                        for sid in selected_sectors]
-            criteria.extend(set().union(*(memberships.get(sid, set())
-                                            for sid in factor_groups[family]
-                                            if sid in allowed_sources))
+            criteria = [set(memberships.get(sid, ())) for sid in selected_sectors]
+            criteria.extend(set().union(*(memberships.get(sid, set()) for sid in factor_groups[family]))
                             for family in selected_factor_families)
             matched = (set.intersection(*criteria) if match_mode == "All selected"
                        else set.union(*criteria))
@@ -423,10 +436,10 @@ def render_graph(region: str):
             matched &= set(selected_companies)
         # Show selected sources even if they lack verified company memberships,
         # but do not display unrelated sectors / factors / companies.
-        visible_sources = (chosen_sources & allowed_sources) if chosen_sources else (
+        visible_sources = chosen_sources if chosen_sources else (
             allowed_sources if rotation_filter and not selected_companies else set())
         focus = {"mode": "matched", "companies": matched,
-                 "sources": visible_sources, "allowed_sources": allowed_sources}
+                 "sources": visible_sources}
         if not matched:
             st.info("No verified company memberships match these filters.")
         st.caption(f"{len(matched):,} matching companies · "
@@ -444,16 +457,52 @@ def render_graph(region: str):
             "rotation directly when no same-quadrant sector link exists.")
     with st.expander("All sector & factor signals"):
         st.dataframe(signals, use_container_width=True, hide_index=True)
-    with st.expander("Verified company memberships · current graph filters"):
-        # Uses the same node/edge selection as the plot, *before* the 60/100
-        # company drawing cap. All verified raw index memberships are retained.
-        filtered_edges = filtered_membership_rows(nodes, links, edges, focus, match_mode)
-        st.caption(f"{len(filtered_edges):,} verified membership rows matching the current graph filters. "
-                   "The visual may show fewer company dots for readability; this table is not capped.")
-        st.dataframe(filtered_edges, use_container_width=True, hide_index=True)
-        st.download_button("Download filtered memberships CSV",
-                           data=filtered_edges.to_csv(index=False).encode("utf-8"),
-                           file_name=f"{region.lower()}_{period}_filtered_memberships.csv",
-                           mime="text/csv", key=f"kg_filtered_export_{region}_{period}")
+    # Independent evidence-table controls. The graph and its own filters above
+    # are intentionally untouched; changing these controls does not redraw it.
+    with st.expander("All verified company memberships · table filters", expanded=False):
+        st.caption("These filters apply ONLY to this membership table, not to the Knowledge Graph above.")
+        if not edges.empty and {"company_key", "quadrant", "kind", "label"}.issubset(edges.columns):
+            sector_names = sorted({str(v).strip() for v in edges.loc[
+                edges["kind"].astype(str) == "sector", "label"] if str(v).strip()}, key=str.casefold)
+            factor_names = sorted({_factor_family(v) for v in edges.loc[
+                edges["kind"].astype(str) == "factor", "label"]}, key=str.casefold)
+            company_labels = {}
+            for _, row in edges.iterrows():
+                key = str(row["company_key"])
+                if key not in company_labels:
+                    company_labels[key] = f"{row.get('Company', '')} · {row.get('Ticker', '')} ({key})"
+            a, b = st.columns(2)
+            with a:
+                table_rotations = st.multiselect("Table rotations", list(QUADRANTS) + ["Unavailable"],
+                                                 key=f"kg_table_rot_{region}_{period}")
+                table_sectors = st.multiselect("Table sectors", sector_names,
+                                               key=f"kg_table_sectors_{region}_{period}")
+            with b:
+                table_factors = st.multiselect("Table factors", factor_names,
+                                               key=f"kg_table_factors_{region}_{period}")
+                table_companies = st.multiselect("Table companies", sorted(company_labels),
+                                                 format_func=lambda k: company_labels[k],
+                                                 key=f"kg_table_companies_{region}_{period}")
+            mode_col, scope_col = st.columns(2)
+            with mode_col:
+                table_match = st.radio("Table sector/factor matching",
+                                       ["Any selected", "All selected"], horizontal=True,
+                                       key=f"kg_table_match_{region}_{period}")
+            with scope_col:
+                all_evidence = st.checkbox("Show other memberships of matching companies",
+                                           value=False, key=f"kg_table_all_evidence_{region}_{period}")
+            table_rows = filter_company_memberships(
+                edges, table_rotations, table_sectors, table_factors,
+                table_companies, table_match, all_evidence)
+        else:
+            table_rows = edges.copy()
+        st.caption(f"{len(table_rows):,} verified membership records · "
+                   f"{table_rows['company_key'].nunique() if 'company_key' in table_rows else 0:,} companies. "
+                   "Graph selection and company display limits do not affect this table.")
+        st.dataframe(table_rows, use_container_width=True, hide_index=True)
+        st.download_button("Download table memberships CSV",
+                           data=table_rows.to_csv(index=False).encode("utf-8"),
+                           file_name=f"{region.lower()}_{period}_table_memberships.csv",
+                           mime="text/csv", key=f"kg_table_export_{region}_{period}")
     with st.expander("Unmapped source records"):
         st.dataframe(_load(region, period, "unmapped"), use_container_width=True, hide_index=True)
