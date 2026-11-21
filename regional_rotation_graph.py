@@ -6,6 +6,7 @@ Sector and factor rotation classes describe the *index*, not the company price.
 from __future__ import annotations
 
 import json
+import re
 from collections import defaultdict
 from pathlib import Path
 
@@ -114,45 +115,107 @@ def _choose_visible(nodes, links, selection: str | list[str] | dict, max_compani
             linked, company_sources)
 
 
+
+# Presentation identity only: never alter index-level membership CSVs or rotation signals.
+# Prefer canonical family names over broad substring matches ("Growth" != "Value").
+FACTOR_RULES = (
+    (r"(?:low|min(?:imum)?)\s*volatility", "Low Volatility"),
+    (r"(?:dividend|yield)", "Dividend Yield"),
+    (r"equal\s*weight", "Equal Weight"),
+    (r"small\s*cap|russell\s*2000", "Small Cap"),
+    (r"\bmomentum\b", "Momentum"),
+    (r"\bquality\b", "Quality"),
+    (r"\bvalue\b", "Value"),
+    (r"\bgrowth\b", "Growth"),
+    (r"\balpha\b", "Alpha"),
+    (r"\bsize\b", "Size"),
+)
+
+
+def _factor_family(label: str) -> str:
+    value = re.sub(r"[()_\-]+", " ", str(label)).strip()
+    for pattern, canonical in FACTOR_RULES:
+        if re.search(pattern, value, flags=re.IGNORECASE):
+            return canonical
+    return re.sub(r"\s+", " ", value) or "Unclassified factor"
+
+
+def _display_group(node: dict) -> tuple[str, str]:
+    # Do not deduplicate sectors with different economic meanings. Only
+    # identical normalized sector labels share a visual node.
+    if node["type"] == "factor":
+        value = _factor_family(node["label"])
+    else:
+        value = re.sub(r"\s+", " ", str(node["label"]).strip())
+    return node["type"], value.casefold()
+
+
+def _collapse_sources(nodes: list[dict]):
+    """Merge visual nodes but preserve raw source ids, quadrant evidence and metrics."""
+    grouped = {}
+    origin_to_group = {}
+    for n in nodes:
+        key = _display_group(n)
+        if key not in grouped:
+            group_id = f"g:{n['type']}:{key[1]}"
+            grouped[key] = {"id": group_id,
+                            "label": _factor_family(n['label']) if n['type'] == 'factor' else n['label'],
+                            "name": _factor_family(n['label']) if n['type'] == 'factor' else n['label'],
+                            "type": n['type'], "quadrant": n['quadrant'],
+                            "raw_sources": [], "quadrants": set(), "source_labels": []}
+        g = grouped[key]
+        g["raw_sources"].append(n["id"])
+        g["quadrants"].add(n["quadrant"])
+        g["source_labels"].append(f"{n['label']} [{n['quadrant']}]")
+        origin_to_group[n["id"]] = g["id"]
+    result = []
+    for g in grouped.values():
+        g["quadrants"] = tuple(q for q in QUADRANTS if q in g["quadrants"])
+        g["quadrant"] = g["quadrants"][0] if len(g["quadrants"]) == 1 else "Mixed"
+        g["source_labels"] = sorted(set(g["source_labels"]))
+        result.append(g)
+    return sorted(result, key=lambda n: (n["label"].casefold(), n["id"])), origin_to_group
+
+
 def _draw(nodes, links, selection: str | list[str] | dict, max_companies: int | None,
           match_mode: str = "Any selected"):
     by_id = {n["id"]: n for n in nodes}
-    sectors, factors, companies, members, company_sources = _choose_visible(
+    raw_sectors, raw_factors, companies, members, company_sources = _choose_visible(
         nodes, links, selection, max_companies, match_mode)
-    selected_ids = {n["id"] for n in sectors + factors + companies}
-    positions = {f"q:{q}": (0., 1 - (i + 0.5) / len(QUADRANTS))
+    sectors, sector_map = _collapse_sources(raw_sectors)
+    factors, factor_map = _collapse_sources(raw_factors)
+    visible_company_ids = {n["id"] for n in companies}
+    raw_source_ids = {n["id"] for n in raw_sectors + raw_factors}
+    positions = {f"q:{q}": (0., 1 - (i + .5) / len(QUADRANTS))
                  for i, q in enumerate(QUADRANTS)}
     for x, group in ((1., sectors), (2.15, companies), (3.3, factors)):
         for i, node in enumerate(group):
             positions[node["id"]] = (x, 1 - (i + .5) / max(1, len(group)))
     fig = go.Figure()
-
-    # Sector path: rotation -> sector -> company.
-    # Factor path: rotation -> company -> factor (only when a mapped factor exists).
-    # A factor-only company still shows a valid rotation -> company connection.
+    paths = {q: set() for q in QUADRANTS}
+    # Every original source is processed separately. Multiple Nifty indexes
+    # mapped to the same factor share one displayed node and unique edge.
+    for source in raw_sectors:
+        q, sid = source["quadrant"], source["id"]
+        gid = sector_map[sid]
+        paths[q].add((f"q:{q}", gid))
+        paths[q].update((gid, cid) for cid in members.get(sid, ())
+                        if cid in visible_company_ids)
+    for source in raw_factors:
+        q, sid = source["quadrant"], source["id"]
+        gid = factor_map[sid]
+        matched = set(members.get(sid, ())) & visible_company_ids
+        for cid in matched:
+            paths[q].add((cid, gid))
+            if not any((s in raw_source_ids and by_id[s]["type"] == "sector"
+                        and by_id[s]["quadrant"] == q)
+                       for s in company_sources.get(cid, ())):
+                paths[q].add((f"q:{q}", cid))
+        if not matched:
+            paths[q].add((f"q:{q}", gid))
     for quadrant in QUADRANTS:
-        segments = set()
-        for source in sectors:
-            if source["quadrant"] == quadrant:
-                segments.add((f"q:{quadrant}", source["id"]))
-                segments.update((source["id"], cid) for cid in members[source["id"]]
-                                if cid in selected_ids)
-        for factor in factors:
-            if factor["quadrant"] == quadrant:
-                for cid in members[factor["id"]]:
-                    if cid in selected_ids:
-                        segments.add((cid, factor["id"]))
-                        # Connect rotation directly to a factor-only company;
-                        # otherwise the factor's own rotation would be invisible.
-                        if not any(by_id[s]["type"] == "sector" and
-                                   by_id[s]["quadrant"] == quadrant
-                                   for s in company_sources[cid] if s in selected_ids):
-                            segments.add((f"q:{quadrant}", cid))
-                if not members[factor["id"]].intersection(selected_ids):
-                    # Keep unconnected factor signals visible with their rotation.
-                    segments.add((f"q:{quadrant}", factor["id"]))
         xs, ys = [], []
-        for start, end in sorted(segments):
+        for start, end in sorted(paths[quadrant]):
             if start not in positions or end not in positions:
                 continue
             a, b = positions[start], positions[end]
@@ -166,6 +229,18 @@ def _draw(nodes, links, selection: str | list[str] | dict, max_companies: int | 
     def add_nodes(group, title, color, size, symbol="circle", display_text=True):
         if not group:
             return
+        hover = []
+        for n in group:
+            detail = f"<b>{n.get('name') or n['label']}</b>"
+            if n.get("raw_sources"):
+                detail += "<br>Original index signals: " + str(len(n["raw_sources"]))
+                detail += "<br>Rotations: " + ", ".join(n["quadrants"])
+                detail += "<br>Indexes: " + "<br>".join(n["source_labels"][:30])
+                if len(n["source_labels"]) > 30:
+                    detail += "<br>… more indexes in source table"
+                related = set().union(*(members.get(s, set()) for s in n["raw_sources"]))
+                detail += f"<br>Verified companies: {len(related)}"
+            hover.append(detail)
         fig.add_trace(go.Scattergl(
             x=[positions[n["id"]][0] for n in group],
             y=[positions[n["id"]][1] for n in group],
@@ -174,18 +249,11 @@ def _draw(nodes, links, selection: str | list[str] | dict, max_companies: int | 
             text=[n["label"] for n in group],
             textposition="middle left" if title == "Rotations" else "middle right",
             textfont=dict(size=11, color="#e5e7eb"),
-            hovertext=[(f"<b>{n.get('name') or n['label']}</b>"
-                        + (f"<br>Quadrant: {n['quadrant']}"
-                           f"<br>RS: {n.get('rs', 'N/A')}"
-                           f"<br>Momentum: {n.get('momentum', 'N/A')}"
-                           f"<br>Company memberships: {len(members[n['id']])}"
-                           if n["type"] in ("sector", "factor") else "")) for n in group],
-            hovertemplate="%{hovertext}<extra></extra>", name=title))
+            hovertext=hover, hovertemplate="%{hovertext}<extra></extra>", name=title))
 
-    # With active filters, hide rotation nodes that have no visible connection.
     filtered = isinstance(selection, dict) and selection.get("mode") == "matched"
     displayed_quadrants = ([q for q in QUADRANTS if any(
-        n.get("quadrant") == q for n in sectors + factors)] if filtered
+        q in n["quadrants"] for n in sectors + factors)] if filtered
         else list(QUADRANTS))
     add_nodes([by_id[f"q:{q}"] for q in displayed_quadrants], "Rotations",
               [PALETTE[q] for q in displayed_quadrants], 19)
@@ -263,8 +331,13 @@ def render_graph(region: str):
                 horizontal=True, key=f"kg_match_{region}")
         sector_options = {n["id"]: f"{n['label']} · {n['quadrant']}" for n in sources
                           if n["type"] == "sector"}
-        factor_options = {n["id"]: f"{n['label']} · {n['quadrant']}" for n in sources
-                          if n["type"] == "factor"}
+        # Filters show each factor family once; selecting a family expands to
+        # every underlying verified index signal for consistent ANY/ALL logic.
+        factor_groups = defaultdict(list)
+        for node in sources:
+            if node["type"] == "factor":
+                factor_groups[_factor_family(node["label"])].append(node["id"])
+        factor_options = sorted(factor_groups, key=str.casefold)
         company_options = {n["id"]: f"{n.get('name') or n['label']} · {n['label']}"
                            for n in companies_all}
         left, right = st.columns(2)
@@ -274,10 +347,11 @@ def render_graph(region: str):
                 format_func=lambda sid: sector_options.get(sid, sid),
                 key=f"kg_sectors_{region}")
         with right:
-            selected_factors = st.multiselect(
-                "Factors (multiple)", list(factor_options),
-                format_func=lambda sid: factor_options.get(sid, sid),
+            selected_factor_families = st.multiselect(
+                "Factors (multiple)", factor_options,
                 key=f"kg_factors_{region}")
+            selected_factors = [sid for family in selected_factor_families
+                                for sid in factor_groups[family]]
         selected_companies = st.multiselect(
             "Individual companies (multiple)", list(company_options),
             format_func=lambda cid: company_options.get(cid, cid),
@@ -296,9 +370,14 @@ def render_graph(region: str):
                            if not rotation_filter or n["quadrant"] in rotation_filter}
         chosen_sources = set(selected_sectors) | set(selected_factors)
         if chosen_sources:
-            source_sets = [set(memberships.get(sid, ())) for sid in chosen_sources]
-            matched = (set.intersection(*source_sets) if match_mode == "All selected"
-                       else set.union(*source_sets))
+            # A factor family is one criterion even if it has many index ETFs.
+            # Membership within each family is OR; ALL intersects criteria,
+            # not the individual indices within a family.
+            criteria = [set(memberships.get(sid, ())) for sid in selected_sectors]
+            criteria.extend(set().union(*(memberships.get(sid, set()) for sid in factor_groups[family]))
+                            for family in selected_factor_families)
+            matched = (set.intersection(*criteria) if match_mode == "All selected"
+                       else set.union(*criteria))
         else:
             matched = {n["id"] for n in companies_all}
         if rotation_filter:
@@ -321,8 +400,9 @@ def render_graph(region: str):
                    f"{len(selected_companies)} selected companies")
     sectors, companies, factors = _draw(nodes, links, focus, max_companies, match_mode)
     st.caption(f"Visible: {len(sectors)} sectors · {len(companies)} companies · "
-               f"{len(factors)} factors. Overall graph: {len(nodes)} nodes / "
+               f"{len(factors)} unique factor families. Overall graph: {len(nodes)} nodes / "
                f"{len(links)} relationships. No membership data is discarded.")
+    st.caption("Repeated factor indexes share one visual family node; original index-level signals and memberships remain in the tables below.")
     st.info("Rotation labels describe sector/factor index signals, not independent "
             "company price classifications. Factor-only companies connect to their "
             "rotation directly when no same-quadrant sector link exists.")
