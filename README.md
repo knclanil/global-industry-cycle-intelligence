@@ -1,16 +1,35 @@
-# Source taxonomy grouping — Global Industry Cycle Intelligence
+# Automatic Yahoo Finance sectors for all discovered companies
 
-Copy `source_taxonomy.py` to repository root; copy `scripts/build_source_taxonomy.py` to `scripts/` and the test to `tests/`.
+This is an **add-on**, not a replacement for your app or existing ETF taxonomy.
 
-Run `python scripts/build_source_taxonomy.py`, then publish the generated CSV with GitHub Desktop. No changes to existing graph code are made by this package.
+## Install using GitHub Desktop
 
-This groups all **31** registered NSE index/constituent sources into sector/factor families. It explicitly treats Nifty Oil & Gas, Nifty India Defence, and Nifty India Manufacturing as **sector groups** for graph taxonomy, despite the latter two being marked *Thematic* by the NSE source catalogue. All Value-named Factor indexes become family **Value**, etc.
+1. Copy `scripts/refresh_company_sectors.py` into your repository's `scripts` folder.
+2. Copy `.github/workflows/refresh-company-sectors.yml` into `.github/workflows` in the repository.
+3. Commit and Push in GitHub Desktop.
+4. In GitHub: **Actions → Refresh Company Sectors (Yahoo Finance) → Run workflow**.
+5. After success, look for `data/dashboard_cache/company_sectors/company_sector_mapping.csv` and `summary.json`.
 
-**Important:** Taxonomy mapping is not the same as verified rotation mapping. The CSV intentionally keeps `rotation` blank until you attach a validated price series for each unique source. It also does not change or fabricate memberships; your existing constituent snapshots must exist. The current graph only renders classified signals from `rotation_signals`, so publishing this CSV by itself will not display newly grouped factors/sectors in the graph. A follow-up integration needs to join this taxonomy to membership sources and separately join price-derived rotation by source identity.
+The script discovers unique underlying company ticker symbols from:
 
+- `data/holdings/latest_holdings.parquet` (`ticker`)
+- `data/india_holdings/constituents.csv` (`symbol`, normalized to `.NS` where appropriate)
+- `data/dashboard_cache/rotation_graphs/*_edges.csv` (`Ticker`)
 
-## Added US/global ETF classifications
-- **iShares Russell 2000 ETF** → **Factor / Small Cap** (requested analytical taxonomy; the ETF tracks small-cap equities).
-- **iShares Global Comm Services ETF** → **Sector / Communications** (also supports spelled-out “Communication Services” name).
+The union is fetched, deduplicated, with retries, progress checkpointing, and a 7-day cache.
+Most Yahoo company sectors are in English (e.g. `Technology`, `Financial Services`).
+`quoteType=ETF` is **not** treated as a sector. Existing ETF/index taxonomy still determines
+categories such as Small Cap or Communications.
 
-These exact-name overrides work even when the source category is `ETF`. To use them for global/USA feeds, call `classify_source(source_name, category=source_category)` when building the graph source taxonomy; `build_india_taxonomy()` only exports the registered India indices. **This package does not automatically update your Global/USA graph snapshots or their renderers**; they require the taxonomy join in the data builder and refresh. Original tickers, prices, company memberships, and rotation values remain unchanged.
+## Key limitations
+
+- No Yahoo lookups have been executed in this development environment (external network is unavailable).
+- This generates a **lookup CSV** only. It does **not** yet overwrite company-sector edges or
+  make unverified ETF constituent memberships. Yahoo sector mapping can be incorporated later
+  as a *separate, provenance-labeled classification edge*.
+- Yahoo may throttle or block bulk requests. Increase `--delay` or run in smaller batches if needed.
+- `.NS` normalization assumes India constituent `symbol` values are NSE-listed stocks. Verify
+  that symbols are not already internationally suffixed or index identifiers.
+- The stock universe is the union of **available cached holdings and graph edges**. It is not
+  automatically every publicly listed company in all 20 countries.
+- If your repository uses large git-tracked snapshots, changes may be substantial.
