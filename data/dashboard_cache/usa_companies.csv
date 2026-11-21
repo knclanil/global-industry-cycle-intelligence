@@ -1963,18 +1963,18 @@ TICKER:ZYME,ZYME,ZYMEWORKS,Health Care,United States,,,iShares Russell 2000 ETF,
 TICKER_COUNTRY:AAL|US,AAL,AMERICAN AIRLINES GROUP,Industrials,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.14,Not matched
 TICKER_COUNTRY:AAOI|US,AAOI,APPLIED OPTOELECTRONICS,Information Technology,United States,,iShares U.S. Telecommunications ETF,,,1,1.14,Not matched
 TICKER_COUNTRY:AAON|US,AAON,AAON,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.07,Not matched
-TICKER_COUNTRY:AAPL|US,AAPL,APPLE,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,8.902,Not matched
-TICKER_COUNTRY:AA|US,AA,ALCOA CORP,Materials,United States,,iShares U.S. Basic Materials ETF,,,1,1.05,Not matched
-TICKER_COUNTRY:ABBV|US,ABBV,ABBVIE,Health Care,United States,,iShares U.S. Healthcare ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,3.382,Not matched
-TICKER_COUNTRY:ABNB|US,ABNB,AIRBNB CLASS A,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,0.49,Not matched
+TICKER_COUNTRY:AAPL|US,AAPL,APPLE,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,8.968,Not matched
+TICKER_COUNTRY:AA|US,AA,ALCOA CORP,Materials,United States,,iShares U.S. Basic Materials ETF,,,1,1.03,Not matched
+TICKER_COUNTRY:ABBV|US,ABBV,ABBVIE,Health Care,United States,,iShares U.S. Healthcare ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,3.384,Not matched
+TICKER_COUNTRY:ABNB|US,ABNB,AIRBNB CLASS A,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,0.4867,Not matched
 TICKER_COUNTRY:ABT|US,ABT,ABBOTT LABORATORIES,Health Care,United States,,iShares U.S. Healthcare ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,4,1.5475,Not matched
 TICKER_COUNTRY:ACGL|US,ACGL,ARCH CAPITAL GROUP,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,0.215,Not matched
 TICKER_COUNTRY:ACI|US,ACI,ALBERTSONS COMPANY CLASS A,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,,,1,0.17,Not matched
 TICKER_COUNTRY:ACM|US,ACM,AECOM,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.13,Not matched
 TICKER_COUNTRY:ACN|US,ACN,ACCENTURE PLC CLASS A,Information Technology,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,0.99,Not matched
 TICKER_COUNTRY:ADBE|US,ADBE,ADOBE INC,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,0.5475,Not matched
-TICKER_COUNTRY:ADC|US,ADC,AGREE REALTY REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,,,1,0.66,Not matched
-TICKER_COUNTRY:ADI|US,ADI,ANALOG DEVICES,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,4,0.85,Not matched
+TICKER_COUNTRY:ADC|US,ADC,AGREE REALTY REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,,,1,0.68,Not matched
+TICKER_COUNTRY:ADI|US,ADI,ANALOG DEVICES,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,4,0.855,Not matched
 TICKER_COUNTRY:ADM|US,ADM,ARCHER DANIELS MIDLAND,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.56,Not matched
 TICKER_COUNTRY:ADP|US,ADP,AUTOMATIC DATA PROCESSING INC,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,0.855,Not matched
 TICKER_COUNTRY:ADSK|US,ADSK,AUTODESK,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,0.3,Not matched
@@ -1982,57 +1982,57 @@ TICKER_COUNTRY:ADT|US,ADT,ADT INC,Consumer Discretionary,United States,,iShares 
 TICKER_COUNTRY:AEE|US,AEE,AMEREN,Utilities,United States,,iShares U.S. Utilities ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,5,0.622,Not matched
 TICKER_COUNTRY:AEIS|US,AEIS,ADVANCED ENERGY INDUSTRIES,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.05,Not matched
 TICKER_COUNTRY:AEP|US,AEP,AMERICAN ELECTRIC POWER INC,Utilities,United States,,iShares U.S. Utilities ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,1.66,Not matched
-TICKER_COUNTRY:AES|US,AES,AES,Utilities,United States,,iShares U.S. Utilities ETF,iShares S&P 500 Value ETF,,2,0.35,Not matched
+TICKER_COUNTRY:AES|US,AES,AES,Utilities,United States,,iShares U.S. Utilities ETF,iShares S&P 500 Value ETF,,2,0.355,Not matched
 TICKER_COUNTRY:AFG|US,AFG,AMERICAN FINANCIAL GROUP,Financials,United States,,iShares U.S. Financials ETF,iShares Core High Dividend ETF,,2,0.155,Not matched
-TICKER_COUNTRY:AFL|US,AFL,AFLAC,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,0.4167,Not matched
+TICKER_COUNTRY:AFL|US,AFL,AFLAC,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,0.42,Not matched
 TICKER_COUNTRY:AFRM|US,AFRM,AFFIRM HOLDINGS CLASS A,Financials,United States,,iShares U.S. Industrials ETF,,,1,0.2,Not matched
 TICKER_COUNTRY:AGCO|US,AGCO,AGCO,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.08,Not matched
-TICKER_COUNTRY:AGNC|US,AGNC,AGNC INVESTMENT REIT,Financials,United States,,iShares U.S. Financials ETF | iShares U.S. Real Estate ETF,,,2,0.425,Not matched
+TICKER_COUNTRY:AGNC|US,AGNC,AGNC INVESTMENT REIT,Financials,United States,,iShares U.S. Financials ETF | iShares U.S. Real Estate ETF,,,2,0.435,Not matched
 TICKER_COUNTRY:AGO|US,AGO,ASSURED GUARANTY LTD,Financials,United States,,iShares U.S. Financials ETF,,,1,0.05,Not matched
 TICKER_COUNTRY:AHR|US,AHR,AMERICAN HEALTHCARE REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,,,1,0.97,Not matched
 TICKER_COUNTRY:AIG|US,AIG,AMERICAN INTERNATIONAL GROUP,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Value ETF,,2,0.41,Not matched
 TICKER_COUNTRY:AIT|US,AIT,APPLIED INDUSTRIAL TECHNOLOGIES,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.13,Not matched
 TICKER_COUNTRY:AIZ|US,AIZ,ASSURANT INC,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Value ETF,,2,0.15,Not matched
 TICKER_COUNTRY:AJG|US,AJG,ARTHUR J GALLAGHER,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,0.58,Not matched
-TICKER_COUNTRY:AKAM|US,AKAM,AKAMAI TECHNOLOGIES INC,Information Technology,United States,,iShares U.S. Technology ETF,iShares S&P 500 Value ETF,,2,0.06,Not matched
+TICKER_COUNTRY:AKAM|US,AKAM,AKAMAI TECHNOLOGIES INC,Information Technology,United States,,iShares U.S. Technology ETF,iShares S&P 500 Value ETF,,2,0.065,Not matched
 TICKER_COUNTRY:ALAB|US,ALAB,ASTERA LABS,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF,,3,0.21,Not matched
-TICKER_COUNTRY:ALB|US,ALB,ALBEMARLE CORP,Materials,United States,,iShares U.S. Basic Materials ETF,iShares S&P 500 Value ETF,,2,0.57,Not matched
+TICKER_COUNTRY:ALB|US,ALB,ALBEMARLE CORP,Materials,United States,,iShares U.S. Basic Materials ETF,iShares S&P 500 Value ETF,,2,0.56,Not matched
 TICKER_COUNTRY:ALGM|US,ALGM,ALLEGRO MICROSYSTEMS INC,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.02,Not matched
 TICKER_COUNTRY:ALGN|US,ALGN,ALIGN TECHNOLOGY,Health Care,United States,,iShares U.S. Healthcare ETF,iShares S&P 500 Value ETF,,2,0.1,Not matched
 TICKER_COUNTRY:ALK|US,ALK,ALASKA AIR GROUP INC,Industrials,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.07,Not matched
 TICKER_COUNTRY:ALLE|US,ALLE,ALLEGION PLC,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,0.0833,Not matched
 TICKER_COUNTRY:ALLY|US,ALLY,ALLY FINANCIAL INC,Financials,United States,,iShares U.S. Financials ETF,,,1,0.16,Not matched
-TICKER_COUNTRY:ALL|US,ALL,ALLSTATE CORP,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,4,0.605,Not matched
+TICKER_COUNTRY:ALL|US,ALL,ALLSTATE CORP,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,4,0.61,Not matched
 TICKER_COUNTRY:ALM|CA,ALM,ALMONTY INDUSTRIES,Materials,Canada,,iShares U.S. Basic Materials ETF,,,1,0.19,Not matched
 TICKER_COUNTRY:ALNY|US,ALNY,ALNYLAM PHARMACEUTICALS,Health Care,United States,,iShares U.S. Healthcare ETF,iShares MSCI USA Min Vol Factor ETF,,2,0.32,Not matched
 TICKER_COUNTRY:ALSN|US,ALSN,ALLISON TRANSMISSION HOLDINGS,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.13,Not matched
-TICKER_COUNTRY:AMAT|US,AMAT,APPLIED MATERIAL INC,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF,,5,1.518,Not matched
+TICKER_COUNTRY:AMAT|US,AMAT,APPLIED MATERIAL INC,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF,,5,1.5,Not matched
 TICKER_COUNTRY:AMCR|US,AMCR,AMCOR PLC,Materials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.16,Not matched
-TICKER_COUNTRY:AMD|US,AMD,ADVANCED MICRO DEVICES,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,4,3.3,Not matched
+TICKER_COUNTRY:AMD|US,AMD,ADVANCED MICRO DEVICES,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,4,3.12,Not matched
 TICKER_COUNTRY:AME|US,AME,AMETEK INC,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.425,Not matched
 TICKER_COUNTRY:AMGN|US,AMGN,AMGEN INC,Health Care,United States,,iShares U.S. Healthcare ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,1.5,Not matched
-TICKER_COUNTRY:AMG|US,AMG,AFFILIATED MANAGERS GROUP,Financials,United States,,iShares U.S. Financials ETF,,,1,0.16,Not matched
-TICKER_COUNTRY:AMH|US,AMH,AMERICAN HOMES RENT REIT CLASS A,Real Estate,United States,,iShares U.S. Real Estate ETF,,,1,0.77,Not matched
-TICKER_COUNTRY:AMKR|US,AMKR,AMKOR TECHNOLOGY,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.03,Not matched
-TICKER_COUNTRY:AMP|US,AMP,AMERIPRISE FINANCE INC,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,0.3567,Not matched
+TICKER_COUNTRY:AMG|US,AMG,AFFILIATED MANAGERS GROUP,Financials,United States,,iShares U.S. Financials ETF,,,1,0.15,Not matched
+TICKER_COUNTRY:AMH|US,AMH,AMERICAN HOMES RENT REIT CLASS A,Real Estate,United States,,iShares U.S. Real Estate ETF,,,1,0.78,Not matched
+TICKER_COUNTRY:AMKR|US,AMKR,AMKOR TECHNOLOGY,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.02,Not matched
+TICKER_COUNTRY:AMP|US,AMP,AMERIPRISE FINANCE INC,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,0.3533,Not matched
 TICKER_COUNTRY:AMTM|US,AMTM,AMENTUM HOLDINGS,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.04,Not matched
-TICKER_COUNTRY:AMT|US,AMT,AMERICAN TOWER REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares S&P 500 Value ETF,,2,2.58,Not matched
-TICKER_COUNTRY:AMZN|US,AMZN,AMAZON.COM INC,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,5.8225,Not matched
+TICKER_COUNTRY:AMT|US,AMT,AMERICAN TOWER REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares S&P 500 Value ETF,,2,2.57,Not matched
+TICKER_COUNTRY:AMZN|US,AMZN,AMAZON.COM INC,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,5.805,Not matched
 TICKER_COUNTRY:AM|US,AM,ANTERO MIDSTREAM,Energy,United States,,iShares U.S. Energy ETF,iShares Core High Dividend ETF,,2,0.215,Not matched
 TICKER_COUNTRY:ANET|US,ANET,ARISTA NETWORKS,Information Technology,United States,,iShares U.S. Telecommunications ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF,,5,3.252,Not matched
 TICKER_COUNTRY:AN|US,AN,AUTONATION,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.07,Not matched
-TICKER_COUNTRY:AON|US,AON,AON PLC CLASS A,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,0.59,Not matched
+TICKER_COUNTRY:AON|US,AON,AON PLC CLASS A,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,0.5933,Not matched
 TICKER_COUNTRY:AOS|US,AOS,A O SMITH,Industrials,United States,,iShares U.S. Industrials ETF,iShares Core High Dividend ETF | iShares S&P 500 Value ETF,,3,0.0633,Not matched
-TICKER_COUNTRY:APA|US,APA,APA,Energy,United States,,iShares U.S. Energy ETF,iShares S&P 500 Value ETF,,2,0.38,Not matched
-TICKER_COUNTRY:APD|US,APD,AIR PRODUCTS AND CHEMICALS,Materials,United States,,iShares U.S. Basic Materials ETF,iShares Core High Dividend ETF | iShares S&P 500 Value ETF,,3,2.0667,Not matched
+TICKER_COUNTRY:APA|US,APA,APA,Energy,United States,,iShares U.S. Energy ETF,iShares S&P 500 Value ETF,,2,0.375,Not matched
+TICKER_COUNTRY:APD|US,APD,AIR PRODUCTS AND CHEMICALS,Materials,United States,,iShares U.S. Basic Materials ETF,iShares Core High Dividend ETF | iShares S&P 500 Value ETF,,3,2.0767,Not matched
 TICKER_COUNTRY:APG|US,APG,API GROUP,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.2,Not matched
-TICKER_COUNTRY:APH|US,APH,AMPHENOL CORP CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,4,0.9825,Not matched
+TICKER_COUNTRY:APH|US,APH,AMPHENOL CORP CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,4,0.99,Not matched
 TICKER_COUNTRY:APLD|US,APLD,APPLIED DIGITAL,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.02,Not matched
 TICKER_COUNTRY:APO|US,APO,APOLLO GLOBAL MANAGEMENT,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,0.32,Not matched
 TICKER_COUNTRY:APPF|US,APPF,APPFOLIO CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.03,Not matched
 TICKER_COUNTRY:APP|US,APP,APPLOVIN CLASS A,Communication,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF,,4,0.46,Not matched
 TICKER_COUNTRY:APTV|US,APTV,APTIV PLC,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares S&P 500 Value ETF,,2,0.085,Not matched
-TICKER_COUNTRY:ARES|US,ARES,ARES MANAGEMENT CLASS A,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Value ETF,,2,0.245,Not matched
+TICKER_COUNTRY:ARES|US,ARES,ARES MANAGEMENT CLASS A,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Value ETF,,2,0.24,Not matched
 TICKER_COUNTRY:ARE|US,ARE,ALEXANDRIA REAL ESTATE EQUITIES RE,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares S&P 500 Value ETF,,2,0.265,Not matched
 TICKER_COUNTRY:ARMK|US,ARMK,ARAMARK,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.25,Not matched
 TICKER_COUNTRY:ARWR|US,ARWR,ARROWHEAD PHARMACEUTICALS,Health Care,United States,,iShares U.S. Healthcare ETF,,,1,0.09,Not matched
@@ -2042,16 +2042,16 @@ TICKER_COUNTRY:ASND|US,ASND,ASCENDIS PHARMA,Health Care,United States,,iShares U
 TICKER_COUNTRY:ASTS|US,ASTS,AST SPACEMOBILE CLASS A,Communication,United States,,iShares U.S. Telecommunications ETF,,,1,1.32,Not matched
 TICKER_COUNTRY:AS|US,AS,AMER SPORTS INC,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.09,Not matched
 TICKER_COUNTRY:ATI|US,ATI,ATI,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Momentum Factor ETF,,2,0.255,Not matched
-TICKER_COUNTRY:ATO|US,ATO,ATMOS ENERGY,Utilities,United States,,iShares U.S. Utilities ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,0.5875,Not matched
+TICKER_COUNTRY:ATO|US,ATO,ATMOS ENERGY,Utilities,United States,,iShares U.S. Utilities ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,0.585,Not matched
 TICKER_COUNTRY:ATR|US,ATR,APTARGROUP,Materials,United States,,iShares U.S. Industrials ETF,,,1,0.11,Not matched
-TICKER_COUNTRY:AUGO|BR,AUGO,AURA MINERALS INC,Materials,Brazil,,iShares U.S. Basic Materials ETF,,,1,0.29,Not matched
+TICKER_COUNTRY:AUGO|BR,AUGO,AURA MINERALS INC,Materials,Brazil,,iShares U.S. Basic Materials ETF,,,1,0.28,Not matched
 TICKER_COUNTRY:AUR|US,AUR,AURORA INNOVATION CLASS A,Information Technology,United States,,iShares U.S. Industrials ETF,,,1,0.06,Not matched
-TICKER_COUNTRY:AU|ZA,AU,ANGLOGOLD ASHANTI PLC,Materials,South Africa,,iShares U.S. Basic Materials ETF,,,1,3.23,Not matched
+TICKER_COUNTRY:AU|ZA,AU,ANGLOGOLD ASHANTI PLC,Materials,South Africa,,iShares U.S. Basic Materials ETF,,,1,3.19,Not matched
 TICKER_COUNTRY:AVAV|US,AVAV,AEROVIRONMENT,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.05,Not matched
 TICKER_COUNTRY:AVGO|US,AVGO,BROADCOM INC,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF,,3,3.2367,Not matched
 TICKER_COUNTRY:AVTR|US,AVTR,AVANTOR,Health Care,United States,,iShares U.S. Healthcare ETF,,,1,0.15,Not matched
 TICKER_COUNTRY:AVT|US,AVT,AVNET,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.04,Not matched
-TICKER_COUNTRY:AVY|US,AVY,AVERY DENNISON CORP,Materials,United States,,iShares U.S. Basic Materials ETF,iShares S&P 500 Value ETF,,2,0.81,Not matched
+TICKER_COUNTRY:AVY|US,AVY,AVERY DENNISON CORP,Materials,United States,,iShares U.S. Basic Materials ETF,iShares S&P 500 Value ETF,,2,0.805,Not matched
 TICKER_COUNTRY:AWI|US,AWI,ARMSTRONG WORLD INDUSTRIES,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.09,Not matched
 TICKER_COUNTRY:AWK|US,AWK,AMERICAN WATER WORKS,Utilities,United States,,iShares U.S. Utilities ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,0.5825,Not matched
 TICKER_COUNTRY:AXON|US,AXON,AXON ENTERPRISE,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,0.1267,Not matched
@@ -2062,10 +2062,10 @@ TICKER_COUNTRY:AXTA|US,AXTA,AXALTA COATING SYSTEMS,Materials,United States,,iSha
 TICKER_COUNTRY:AYI|US,AYI,ACUITY,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.12,Not matched
 TICKER_COUNTRY:AZO|US,AZO,AUTOZONE,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,0.475,Not matched
 TICKER_COUNTRY:A|US,A,AGILENT TECHNOLOGIES INC,Health Care,United States,,iShares U.S. Healthcare ETF,iShares S&P 500 Value ETF,,2,0.46,Not matched
-TICKER_COUNTRY:BAC|US,BAC,BANK OF AMERICA,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Value ETF,,2,2.78,Not matched
+TICKER_COUNTRY:BAC|US,BAC,BANK OF AMERICA,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Value ETF,,2,2.795,Not matched
 TICKER_COUNTRY:BAH|US,BAH,BOOZ ALLEN HAMILTON HOLDING CLASS,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.13,Not matched
 TICKER_COUNTRY:BALL|US,BALL,BALL CORP,Materials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.14,Not matched
-TICKER_COUNTRY:BAM|CA,BAM,BROOKFIELD ASSET MANAGEMENT VOTING,Financials,Canada,,iShares U.S. Financials ETF,,,1,0.29,Not matched
+TICKER_COUNTRY:BAM|CA,BAM,BROOKFIELD ASSET MANAGEMENT VOTING,Financials,Canada,,iShares U.S. Financials ETF,,,1,0.3,Not matched
 TICKER_COUNTRY:BAX|US,BAX,BAXTER INTERNATIONAL,Health Care,United States,,iShares U.S. Healthcare ETF,iShares S&P 500 Value ETF,,2,0.12,Not matched
 TICKER_COUNTRY:BA|US,BA,BOEING,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,0.6533,Not matched
 TICKER_COUNTRY:BBIO|US,BBIO,BRIDGEBIO PHARMA,Health Care,United States,,iShares U.S. Healthcare ETF,,,1,0.2,Not matched
@@ -2073,7 +2073,7 @@ TICKER_COUNTRY:BBWI|US,BBWI,BATH AND BODY WORKS,Consumer Discretionary,United St
 TICKER_COUNTRY:BBY|US,BBY,BEST BUY,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,0.2733,Not matched
 TICKER_COUNTRY:BC|US,BC,BRUNSWICK CORP,Consumer Discretionary,United States,,iShares U.S. Industrials ETF,,,1,0.06,Not matched
 TICKER_COUNTRY:BDX|US,BDX,BECTON DICKINSON,Health Care,United States,,iShares U.S. Healthcare ETF,iShares S&P 500 Value ETF,,2,0.545,Not matched
-TICKER_COUNTRY:BEN|US,BEN,FRANKLIN TEMPLETON,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Value ETF,,2,0.09,Not matched
+TICKER_COUNTRY:BEN|US,BEN,FRANKLIN TEMPLETON,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Value ETF,,2,0.085,Not matched
 TICKER_COUNTRY:BEPC|CA,BEPC,BROOKFIELD RENEWABLE SUBORDINATE V,Utilities,Canada,,iShares U.S. Utilities ETF,,,1,0.26,Not matched
 TICKER_COUNTRY:BE|US,BE,BLOOM ENERGY CLASS A,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,3,0.37,Not matched
 TICKER_COUNTRY:BF A|US,BF A,BROWN FORMAN CLASS A,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,,,1,0.06,Not matched
@@ -2086,30 +2086,30 @@ TICKER_COUNTRY:BILL|US,BILL,BILL HOLDINGS,Information Technology,United States,,
 TICKER_COUNTRY:BIO|US,BIO,BIO RAD LABORATORIES CLASS A,Health Care,United States,,iShares U.S. Healthcare ETF,,,1,0.1,Not matched
 TICKER_COUNTRY:BIRK|US,BIRK,BIRKENSTOCK HOLDING PLC,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.03,Not matched
 TICKER_COUNTRY:BJ|US,BJ,BJS WHOLESALE CLUB HOLDINGS,Consumer Staples,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.24,Not matched
-TICKER_COUNTRY:BKNG|US,BKNG,BOOKING HOLDINGS,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares S&P 500 Growth ETF,,2,1.155,Not matched
-TICKER_COUNTRY:BKR|US,BKR,BAKER HUGHES CLASS A,Energy,United States,,iShares U.S. Energy ETF,iShares S&P 500 Value ETF,,2,1.105,Not matched
+TICKER_COUNTRY:BKNG|US,BKNG,BOOKING HOLDINGS,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares S&P 500 Growth ETF,,2,1.15,Not matched
+TICKER_COUNTRY:BKR|US,BKR,BAKER HUGHES CLASS A,Energy,United States,,iShares U.S. Energy ETF,iShares S&P 500 Value ETF,,2,1.095,Not matched
 TICKER_COUNTRY:BLDR|US,BLDR,BUILDERS FIRSTSOURCE INC,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.07,Not matched
-TICKER_COUNTRY:BLK|US,BLK,BLACKROCK,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,1.29,Not matched
+TICKER_COUNTRY:BLK|US,BLK,BLACKROCK,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,1.2767,Not matched
 TICKER_COUNTRY:BLSH|US,BLSH,BULLISH,Financials,United States,,iShares U.S. Financials ETF,,,1,0.01,Not matched
 TICKER_COUNTRY:BMNR|US,BMNR,BITMINE IMMERSION TECHNOLOGIES,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.05,Not matched
 TICKER_COUNTRY:BMRN|US,BMRN,BIOMARIN PHARMACEUTICAL,Health Care,United States,,iShares U.S. Healthcare ETF,,,1,0.18,Not matched
 TICKER_COUNTRY:BMY|US,BMY,BRISTOL MYERS SQUIBB,Health Care,United States,,iShares U.S. Healthcare ETF,iShares S&P 500 Value ETF,,2,1.105,Not matched
-TICKER_COUNTRY:BNY|US,BNY,BANK OF NEW YORK MELLON CORP,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,0.73,Not matched
+TICKER_COUNTRY:BNY|US,BNY,BANK OF NEW YORK MELLON CORP,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,0.728,Not matched
 TICKER_COUNTRY:BOKF|US,BOKF,BOK FINANCIAL CORP,Financials,United States,,iShares U.S. Financials ETF,,,1,0.04,Not matched
 TICKER_COUNTRY:BPOP|US,BPOP,POPULAR,Financials,United States,,iShares U.S. Financials ETF,,,1,0.15,Not matched
-TICKER_COUNTRY:BRK B|US,BRK B,BERKSHIRE HATHAWAY INC CLASS B,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF,,4,4.795,Not matched
+TICKER_COUNTRY:BRK B|US,BRK B,BERKSHIRE HATHAWAY INC CLASS B,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF,,4,4.835,Not matched
 TICKER_COUNTRY:BRKR|US,BRKR,BRUKER,Health Care,United States,,iShares U.S. Healthcare ETF,,,1,0.1,Not matched
 TICKER_COUNTRY:BROS|US,BROS,DUTCH BROS CLASS A,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.07,Not matched
-TICKER_COUNTRY:BRO|US,BRO,BROWN & BROWN INC,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Value ETF,,2,0.2,Not matched
+TICKER_COUNTRY:BRO|US,BRO,BROWN & BROWN INC,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Value ETF,,2,0.205,Not matched
 TICKER_COUNTRY:BRX|US,BRX,BRIXMOR PROPERTY GROUP REIT INC,Real Estate,United States,,iShares U.S. Real Estate ETF,,,1,0.72,Not matched
-TICKER_COUNTRY:BR|US,BR,BROADRIDGE FINANCIAL SOLUTIONS INC,Industrials,United States,,iShares U.S. Financials ETF,iShares Core High Dividend ETF | iShares S&P 500 Value ETF,,3,0.2167,Not matched
+TICKER_COUNTRY:BR|US,BR,BROADRIDGE FINANCIAL SOLUTIONS INC,Industrials,United States,,iShares U.S. Financials ETF,iShares Core High Dividend ETF | iShares S&P 500 Value ETF,,3,0.2133,Not matched
 TICKER_COUNTRY:BSX|US,BSX,BOSTON SCIENTIFIC,Health Care,United States,,iShares U.S. Healthcare ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,0.315,Not matched
 TICKER_COUNTRY:BSY|US,BSY,BENTLEY SYSTEMS CLASS B,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.04,Not matched
 TICKER_COUNTRY:BURL|US,BURL,BURLINGTON STORES,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.27,Not matched
 TICKER_COUNTRY:BWA|US,BWA,BORGWARNER,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.17,Not matched
 TICKER_COUNTRY:BWXT|US,BWXT,BWX TECHNOLOGIES INC,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.14,Not matched
-TICKER_COUNTRY:BXP|US,BXP,BXP,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares S&P 500 Value ETF,,2,0.405,Not matched
-TICKER_COUNTRY:BX|US,BX,BLACKSTONE,Financials,United States,,iShares U.S. Financials ETF,iShares Core High Dividend ETF | iShares S&P 500 Value ETF,,3,1.11,Not matched
+TICKER_COUNTRY:BXP|US,BXP,BXP,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares S&P 500 Value ETF,,2,0.4,Not matched
+TICKER_COUNTRY:BX|US,BX,BLACKSTONE,Financials,United States,,iShares U.S. Financials ETF,iShares Core High Dividend ETF | iShares S&P 500 Value ETF,,3,1.1167,Not matched
 TICKER_COUNTRY:BYD|US,BYD,BOYD GAMING,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.07,Not matched
 TICKER_COUNTRY:CACC|US,CACC,CREDIT ACCEPTANCE CORP,Financials,United States,,iShares U.S. Financials ETF,,,1,0.03,Not matched
 TICKER_COUNTRY:CACI|US,CACI,CACI INTERNATIONAL INC CLASS A,Industrials,United States,,iShares U.S. Technology ETF,,,1,0.08,Not matched
@@ -2120,26 +2120,26 @@ TICKER_COUNTRY:CARR|US,CARR,CARRIER GLOBAL,Industrials,United States,,iShares U.
 TICKER_COUNTRY:CART|US,CART,MAPLEBEAR,Consumer Staples,United States,,iShares U.S. Technology ETF,,,1,0.05,Not matched
 TICKER_COUNTRY:CAR|US,CAR,AVIS BUDGET GROUP INC,Industrials,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.04,Not matched
 TICKER_COUNTRY:CASY|US,CASY,CASEYS GENERAL STORES INC,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,3,0.4667,Not matched
-TICKER_COUNTRY:CAT|US,CAT,CATERPILLAR INC,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,3,1.87,Not matched
+TICKER_COUNTRY:CAT|US,CAT,CATERPILLAR INC,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,3,1.8567,Not matched
 TICKER_COUNTRY:CAVA|US,CAVA,CAVA GROUP,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.09,Not matched
 TICKER_COUNTRY:CBC|US,CBC,CENTRAL BANCOMPANY CLASS A,Financials,United States,,iShares U.S. Financials ETF,,,1,0.02,Not matched
 TICKER_COUNTRY:CBOE|US,CBOE,CBOE GLOBAL MARKETS,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,6,0.2933,Not matched
 TICKER_COUNTRY:CBRE|US,CBRE,CBRE GROUP CLASS A,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,1.0633,Not matched
 TICKER_COUNTRY:CBSH|US,CBSH,COMMERCE BANCSHARES,Financials,United States,,iShares U.S. Financials ETF,,,1,0.11,Not matched
-TICKER_COUNTRY:CB|US,CB,CHUBB,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,1.1225,Not matched
+TICKER_COUNTRY:CB|US,CB,CHUBB,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,1.1275,Not matched
 TICKER_COUNTRY:CCC|US,CCC,CCC INTELLIGENT SOLUTIONS HOLDINGS,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.02,Not matched
-TICKER_COUNTRY:CCI|US,CCI,CROWN CASTLE INC,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares S&P 500 Value ETF,,2,1.42,Not matched
+TICKER_COUNTRY:CCI|US,CCI,CROWN CASTLE INC,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares S&P 500 Value ETF,,2,1.41,Not matched
 TICKER_COUNTRY:CCK|US,CCK,CROWN HOLDINGS INC,Materials,United States,,iShares U.S. Industrials ETF,,,1,0.16,Not matched
 TICKER_COUNTRY:CCL|US,CCL,CARNIVAL CORP LTD,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares S&P 500 Growth ETF,,2,0.36,Not matched
-TICKER_COUNTRY:CDE|US,CDE,COEUR MINING,Materials,United States,,iShares U.S. Basic Materials ETF,iShares MSCI USA Quality Factor ETF,,2,0.72,Not matched
-TICKER_COUNTRY:CDNS|US,CDNS,CADENCE DESIGN SYSTEMS,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,0.29,Not matched
+TICKER_COUNTRY:CDE|US,CDE,COEUR MINING,Materials,United States,,iShares U.S. Basic Materials ETF,iShares MSCI USA Quality Factor ETF,,2,0.695,Not matched
+TICKER_COUNTRY:CDNS|US,CDNS,CADENCE DESIGN SYSTEMS,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,0.292,Not matched
 TICKER_COUNTRY:CDW|US,CDW,CDW,Information Technology,United States,,iShares U.S. Technology ETF,iShares S&P 500 Value ETF,,2,0.095,Not matched
-TICKER_COUNTRY:CEG|US,CEG,CONSTELLATION ENERGY CORP,Utilities,United States,,iShares U.S. Utilities ETF,iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,1.8267,Not matched
+TICKER_COUNTRY:CEG|US,CEG,CONSTELLATION ENERGY CORP,Utilities,United States,,iShares U.S. Utilities ETF,iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,1.7767,Not matched
 TICKER_COUNTRY:CELH|US,CELH,CELSIUS HOLDINGS,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,,,1,0.23,Not matched
 TICKER_COUNTRY:CE|US,CE,CELANESE CORP,Materials,United States,,iShares U.S. Basic Materials ETF,,,1,0.58,Not matched
 TICKER_COUNTRY:CFG|US,CFG,CITIZENS FINANCIAL GROUP INC,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.2067,Not matched
 TICKER_COUNTRY:CFR|US,CFR,CULLEN FROST BANKERS,Financials,United States,,iShares U.S. Financials ETF,iShares Core High Dividend ETF,,2,0.13,Not matched
-TICKER_COUNTRY:CF|US,CF,CF INDUSTRIES HOLDINGS INC,Materials,United States,,iShares U.S. Basic Materials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.69,Not matched
+TICKER_COUNTRY:CF|US,CF,CF INDUSTRIES HOLDINGS INC,Materials,United States,,iShares U.S. Basic Materials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.7167,Not matched
 TICKER_COUNTRY:CGNX|US,CGNX,COGNEX,Information Technology,United States,,iShares U.S. Industrials ETF,,,1,0.1,Not matched
 TICKER_COUNTRY:CG|US,CG,CARLYLE GROUP INC,Financials,United States,,iShares U.S. Financials ETF,iShares Core High Dividend ETF,,2,0.14,Not matched
 TICKER_COUNTRY:CHDN|US,CHDN,CHURCHILL DOWNS,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.11,Not matched
@@ -2151,31 +2151,31 @@ TICKER_COUNTRY:CHRW|US,CHRW,CH ROBINSON WORLDWIDE,Industrials,United States,,iSh
 TICKER_COUNTRY:CHTR|US,CHTR,CHARTER COMMUNICATIONS CLASS A,Communication,United States,,iShares U.S. Telecommunications ETF,iShares S&P 500 Value ETF,,2,1.615,Not matched
 TICKER_COUNTRY:CHWY|US,CHWY,CHEWY INC CLASS A,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.08,Not matched
 TICKER_COUNTRY:CHYM|US,CHYM,CHIME FINANCIAL CLASS A,Financials,United States,,iShares U.S. Financials ETF,,,1,0.13,Not matched
-TICKER_COUNTRY:CIEN|US,CIEN,CIENA,Information Technology,United States,,iShares U.S. Telecommunications ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,4,0.8725,Not matched
-TICKER_COUNTRY:CINF|US,CINF,CINCINNATI FINANCIAL,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,0.18,Not matched
+TICKER_COUNTRY:CIEN|US,CIEN,CIENA,Information Technology,United States,,iShares U.S. Telecommunications ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,4,0.875,Not matched
+TICKER_COUNTRY:CINF|US,CINF,CINCINNATI FINANCIAL,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,0.1833,Not matched
 TICKER_COUNTRY:CI|US,CI,CIGNA,Health Care,United States,,iShares U.S. Healthcare ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,0.4967,Not matched
-TICKER_COUNTRY:CLF|US,CLF,CLEVELAND CLIFFS INC,Materials,United States,,iShares U.S. Basic Materials ETF,,,1,0.73,Not matched
-TICKER_COUNTRY:CLH|US,CLH,CLEAN HARBORS INC,Industrials,United States,,iShares U.S. Utilities ETF,,,1,0.9,Not matched
+TICKER_COUNTRY:CLF|US,CLF,CLEVELAND CLIFFS INC,Materials,United States,,iShares U.S. Basic Materials ETF,,,1,0.74,Not matched
+TICKER_COUNTRY:CLH|US,CLH,CLEAN HARBORS INC,Industrials,United States,,iShares U.S. Utilities ETF,,,1,0.91,Not matched
 TICKER_COUNTRY:CLX|US,CLX,CLOROX,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,iShares S&P 500 Value ETF,,2,0.295,Not matched
 TICKER_COUNTRY:CL|US,CL,COLGATE-PALMOLIVE,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,1.4633,Not matched
 TICKER_COUNTRY:CMCSA|US,CMCSA,COMCAST CLASS A,Communication,United States,,iShares U.S. Telecommunications ETF,iShares S&P 500 Value ETF,,2,2.25,Not matched
 TICKER_COUNTRY:CME|US,CME,CME GROUP CLASS A,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,0.69,Not matched
 TICKER_COUNTRY:CMG|US,CMG,CHIPOTLE MEXICAN GRILL,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,0.6467,Not matched
-TICKER_COUNTRY:CMI|US,CMI,CUMMINS INC,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,0.3075,Not matched
-TICKER_COUNTRY:CMS|US,CMS,CMS ENERGY,Utilities,United States,,iShares U.S. Utilities ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,4,0.4925,Not matched
+TICKER_COUNTRY:CMI|US,CMI,CUMMINS INC,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,0.31,Not matched
+TICKER_COUNTRY:CMS|US,CMS,CMS ENERGY,Utilities,United States,,iShares U.S. Utilities ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,4,0.495,Not matched
 TICKER_COUNTRY:CNA|US,CNA,CNA FINANCIAL CORP,Financials,United States,,iShares U.S. Financials ETF,,,1,0.02,Not matched
 TICKER_COUNTRY:CNC|US,CNC,CENTENE CORP,Health Care,United States,,iShares U.S. Healthcare ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,4,0.3275,Not matched
 TICKER_COUNTRY:CNH|US,CNH,CNH INDUSTRIAL N.V.,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.12,Not matched
 TICKER_COUNTRY:CNM|US,CNM,CORE & MAIN INC CLASS A,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.1,Not matched
-TICKER_COUNTRY:CNP|US,CNP,CENTERPOINT ENERGY,Utilities,United States,,iShares U.S. Utilities ETF,iShares S&P 500 Value ETF,,2,0.855,Not matched
+TICKER_COUNTRY:CNP|US,CNP,CENTERPOINT ENERGY,Utilities,United States,,iShares U.S. Utilities ETF,iShares S&P 500 Value ETF,,2,0.845,Not matched
 TICKER_COUNTRY:COF|US,COF,CAPITAL ONE FINANCIAL CORP,Financials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.89,Not matched
-TICKER_COUNTRY:COHR|US,COHR,COHERENT,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,3,0.19,Not matched
+TICKER_COUNTRY:COHR|US,COHR,COHERENT,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,3,0.1933,Not matched
 TICKER_COUNTRY:COIN|US,COIN,COINBASE GLOBAL CLASS A,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Value ETF,,2,0.23,Not matched
 TICKER_COUNTRY:COKE|US,COKE,COCA COLA CONSOLIDATED,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,,,1,0.5,Not matched
 TICKER_COUNTRY:COLB|US,COLB,COLUMBIA BANKING SYSTEM INC,Financials,United States,,iShares U.S. Financials ETF,,,1,0.13,Not matched
 TICKER_COUNTRY:COLM|US,COLM,COLUMBIA SPORTSWEAR,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.03,Not matched
 TICKER_COUNTRY:COO|US,COO,COOPER,Health Care,United States,,iShares U.S. Healthcare ETF,iShares S&P 500 Value ETF,,2,0.11,Not matched
-TICKER_COUNTRY:COP|US,COP,CONOCOPHILLIPS,Energy,United States,,iShares U.S. Energy ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,5,2.158,Not matched
+TICKER_COUNTRY:COP|US,COP,CONOCOPHILLIPS,Energy,United States,,iShares U.S. Energy ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,5,2.178,Not matched
 TICKER_COUNTRY:CORT|US,CORT,CORCEPT THERAPEUTICS,Health Care,United States,,iShares U.S. Healthcare ETF,,,1,0.09,Not matched
 TICKER_COUNTRY:COR|US,COR,CENCORA,Health Care,United States,,iShares U.S. Consumer Staples ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,1.44,Not matched
 TICKER_COUNTRY:COST|US,COST,COSTCO WHOLESALE CORP,Consumer Staples,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,2.015,Not matched
@@ -2186,20 +2186,20 @@ TICKER_COUNTRY:CPRT|US,CPRT,COPART INC,Industrials,United States,,iShares U.S. C
 TICKER_COUNTRY:CPT|US,CPT,CAMDEN PROPERTY TRUST REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares S&P 500 Value ETF,,2,0.39,Not matched
 TICKER_COUNTRY:CRBG|US,CRBG,COREBRIDGE FINANCIAL INC,Financials,United States,,iShares U.S. Financials ETF,,,1,0.14,Not matched
 TICKER_COUNTRY:CRCL|US,CRCL,CIRCLE INTERNET GROUP INC CLASS A,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Min Vol Factor ETF,,2,0.09,Not matched
-TICKER_COUNTRY:CRDO|US,CRDO,CREDO TECHNOLOGY GROUP HOLDING LTD,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF,,3,0.11,Not matched
+TICKER_COUNTRY:CRDO|US,CRDO,CREDO TECHNOLOGY GROUP HOLDING LTD,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF,,3,0.1067,Not matched
 TICKER_COUNTRY:CRH|US,CRH,CRH PUBLIC LIMITED PLC,Materials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.485,Not matched
 TICKER_COUNTRY:CRL|US,CRL,CHARLES RIVER LABORATORIES INTERNA,Health Care,United States,,iShares U.S. Healthcare ETF,iShares S&P 500 Value ETF,,2,0.145,Not matched
-TICKER_COUNTRY:CRM|US,CRM,SALESFORCE,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,0.7467,Not matched
+TICKER_COUNTRY:CRM|US,CRM,SALESFORCE,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,0.74,Not matched
 TICKER_COUNTRY:CROX|US,CROX,CROCS,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.13,Not matched
-TICKER_COUNTRY:CRS|US,CRS,CARPENTER TECHNOLOGY,Industrials,United States,,iShares U.S. Basic Materials ETF,iShares MSCI USA Momentum Factor ETF,,2,0.77,Not matched
+TICKER_COUNTRY:CRS|US,CRS,CARPENTER TECHNOLOGY,Industrials,United States,,iShares U.S. Basic Materials ETF,iShares MSCI USA Momentum Factor ETF,,2,0.775,Not matched
 TICKER_COUNTRY:CRUS|US,CRUS,CIRRUS LOGIC,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.03,Not matched
-TICKER_COUNTRY:CRWD|US,CRWD,CROWDSTRIKE HOLDINGS CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,4,1.065,Not matched
+TICKER_COUNTRY:CRWD|US,CRWD,CROWDSTRIKE HOLDINGS CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,4,1.11,Not matched
 TICKER_COUNTRY:CRWV|US,CRWV,COREWEAVE CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.08,Not matched
 TICKER_COUNTRY:CR|US,CR,CRANE,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.13,Not matched
-TICKER_COUNTRY:CSCO|US,CSCO,CISCO SYSTEMS INC,Information Technology,United States,,iShares U.S. Telecommunications ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,5.72,Not matched
-TICKER_COUNTRY:CSGP|US,CSGP,COSTAR GROUP,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares S&P 500 Value ETF,,2,0.48,Not matched
+TICKER_COUNTRY:CSCO|US,CSCO,CISCO SYSTEMS INC,Information Technology,United States,,iShares U.S. Telecommunications ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,5.716,Not matched
+TICKER_COUNTRY:CSGP|US,CSGP,COSTAR GROUP,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares S&P 500 Value ETF,,2,0.47,Not matched
 TICKER_COUNTRY:CSL|US,CSL,CARLISLE COMPANIES,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.19,Not matched
-TICKER_COUNTRY:CSX|US,CSX,CSX,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.77,Not matched
+TICKER_COUNTRY:CSX|US,CSX,CSX,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.7667,Not matched
 TICKER_COUNTRY:CTAS|US,CTAS,CINTAS,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,0.64,Not matched
 TICKER_COUNTRY:CTSH|US,CTSH,COGNIZANT TECHNOLOGY SOLUTIONS CLA,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,0.2,Not matched
 TICKER_COUNTRY:CTVA|US,CTVA,CORTEVA,Materials,United States,,iShares U.S. Basic Materials ETF,iShares MSCI USA Min Vol Factor ETF,,2,0.32,Not matched
@@ -2207,21 +2207,21 @@ TICKER_COUNTRY:CUBE|US,CUBE,CUBESMART REIT,Real Estate,United States,,iShares U.
 TICKER_COUNTRY:CUZ|US,CUZ,COUSINS PROPERTIES REIT INC,Real Estate,United States,,iShares U.S. Real Estate ETF,,,1,0.37,Not matched
 TICKER_COUNTRY:CVNA|US,CVNA,CARVANA CLASS A,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,0.3233,Not matched
 TICKER_COUNTRY:CVS|US,CVS,CVS HEALTH,Health Care,United States,,iShares U.S. Consumer Staples ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,1.56,Not matched
-TICKER_COUNTRY:CVX|US,CVX,CHEVRON,Energy,United States,,iShares U.S. Energy ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,5,5.34,Not matched
-TICKER_COUNTRY:CWEN|US,CWEN,CLEARWAY ENERGY INC CLASS C,Utilities,United States,,iShares U.S. Utilities ETF,,,1,0.24,Not matched
+TICKER_COUNTRY:CVX|US,CVX,CHEVRON,Energy,United States,,iShares U.S. Energy ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,5,5.382,Not matched
+TICKER_COUNTRY:CWEN|US,CWEN,CLEARWAY ENERGY INC CLASS C,Utilities,United States,,iShares U.S. Utilities ETF,,,1,0.23,Not matched
 TICKER_COUNTRY:CW|US,CW,CURTISS WRIGHT,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Momentum Factor ETF,,2,0.145,Not matched
 TICKER_COUNTRY:CZR|US,CZR,CAESARS ENTERTAINMENT INC,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.1,Not matched
-TICKER_COUNTRY:C|US,C,CITIGROUP,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,1.5667,Not matched
+TICKER_COUNTRY:C|US,C,CITIGROUP,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,1.56,Not matched
 TICKER_COUNTRY:DAL|US,DAL,DELTA AIR LINES,Industrials,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.38,Not matched
 TICKER_COUNTRY:DAR|US,DAR,DARLING INGREDIENTS,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,,,1,0.35,Not matched
-TICKER_COUNTRY:DASH|US,DASH,DOORDASH CLASS A,Consumer Discretionary,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF,,3,0.2433,Not matched
+TICKER_COUNTRY:DASH|US,DASH,DOORDASH CLASS A,Consumer Discretionary,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF,,3,0.2333,Not matched
 TICKER_COUNTRY:DBX|US,DBX,DROPBOX INC CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.03,Not matched
 TICKER_COUNTRY:DCI|US,DCI,DONALDSON,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.12,Not matched
-TICKER_COUNTRY:DDOG|US,DDOG,DATADOG INC CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,4,0.2625,Not matched
+TICKER_COUNTRY:DDOG|US,DDOG,DATADOG INC CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,4,0.265,Not matched
 TICKER_COUNTRY:DDS|US,DDS,DILLARDS CLASS A,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.03,Not matched
 TICKER_COUNTRY:DD|US,DD,DUPONT DE NEMOURS,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.165,Not matched
 TICKER_COUNTRY:DECK|US,DECK,DECKERS OUTDOOR,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,0.17,Not matched
-TICKER_COUNTRY:DELL|US,DELL,DELL TECHNOLOGIES INC CLASS C,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.7367,Not matched
+TICKER_COUNTRY:DELL|US,DELL,DELL TECHNOLOGIES INC CLASS C,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.75,Not matched
 TICKER_COUNTRY:DE|US,DE,DEERE,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,1.25,Not matched
 TICKER_COUNTRY:DGX|US,DGX,QUEST DIAGNOSTICS INC,Health Care,United States,,iShares U.S. Healthcare ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.2467,Not matched
 TICKER_COUNTRY:DG|US,DG,DOLLAR GENERAL CORP,Consumer Staples,United States,,iShares U.S. Consumer Discretionary ETF,iShares S&P 500 Value ETF,,2,0.305,Not matched
@@ -2232,12 +2232,12 @@ TICKER_COUNTRY:DIS|US,DIS,WALT DISNEY,Communication,United States,,iShares U.S. 
 TICKER_COUNTRY:DKNG|US,DKNG,DRAFTKINGS CLASS A,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.14,Not matched
 TICKER_COUNTRY:DKS|US,DKS,DICKS SPORTING,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.15,Not matched
 TICKER_COUNTRY:DLB|US,DLB,DOLBY LABORATORIES CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.02,Not matched
-TICKER_COUNTRY:DLR|US,DLR,DIGITAL REALTY TRUST REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares S&P 500 Value ETF,,2,2.315,Not matched
+TICKER_COUNTRY:DLR|US,DLR,DIGITAL REALTY TRUST REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares S&P 500 Value ETF,,2,2.3,Not matched
 TICKER_COUNTRY:DLTR|US,DLTR,DOLLAR TREE INC,Consumer Staples,United States,,iShares U.S. Consumer Discretionary ETF,iShares S&P 500 Value ETF,,2,0.275,Not matched
 TICKER_COUNTRY:DOCN|US,DOCN,DIGITALOCEAN HOLDINGS,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.04,Not matched
 TICKER_COUNTRY:DOCS|US,DOCS,DOXIMITY CLASS A,Health Care,United States,,iShares U.S. Healthcare ETF,,,1,0.06,Not matched
 TICKER_COUNTRY:DOCU|US,DOCU,DOCUSIGN,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.08,Not matched
-TICKER_COUNTRY:DOC|US,DOC,HEALTHPEAK PROPERTIES INC,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares S&P 500 Value ETF,,2,0.53,Not matched
+TICKER_COUNTRY:DOC|US,DOC,HEALTHPEAK PROPERTIES INC,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares S&P 500 Value ETF,,2,0.535,Not matched
 TICKER_COUNTRY:DOV|US,DOV,DOVER,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.215,Not matched
 TICKER_COUNTRY:DOW|US,DOW,DOW,Materials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.175,Not matched
 TICKER_COUNTRY:DOX|US,DOX,AMDOCS,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.03,Not matched
@@ -2245,43 +2245,43 @@ TICKER_COUNTRY:DPC|US,DPC,DPC HOLDINGS PLC,Industrials,United States,,iShares U.
 TICKER_COUNTRY:DPZ|US,DPZ,DOMINOS PIZZA,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares Core High Dividend ETF | iShares S&P 500 Value ETF,,3,0.1233,Not matched
 TICKER_COUNTRY:DRI|US,DRI,DARDEN RESTAURANTS INC,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares Core High Dividend ETF | iShares S&P 500 Value ETF,,3,0.3167,Not matched
 TICKER_COUNTRY:DRS|US,DRS,LEONARDO DRS INC,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.03,Not matched
-TICKER_COUNTRY:DTE|US,DTE,DTE ENERGY,Utilities,United States,,iShares U.S. Utilities ETF,iShares Core High Dividend ETF | iShares S&P 500 Value ETF,,3,0.7833,Not matched
-TICKER_COUNTRY:DTM|US,DTM,DT MIDSTREAM,Energy,United States,,iShares U.S. Energy ETF,iShares Core High Dividend ETF,,2,0.345,Not matched
-TICKER_COUNTRY:DT|US,DT,DYNATRACE INC,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.07,Not matched
-TICKER_COUNTRY:DUK|US,DUK,DUKE ENERGY CORP,Utilities,United States,,iShares U.S. Utilities ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,2.6967,Not matched
+TICKER_COUNTRY:DTE|US,DTE,DTE ENERGY,Utilities,United States,,iShares U.S. Utilities ETF,iShares Core High Dividend ETF | iShares S&P 500 Value ETF,,3,0.7867,Not matched
+TICKER_COUNTRY:DTM|US,DTM,DT MIDSTREAM,Energy,United States,,iShares U.S. Energy ETF,iShares Core High Dividend ETF,,2,0.34,Not matched
+TICKER_COUNTRY:DT|US,DT,DYNATRACE INC,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.08,Not matched
+TICKER_COUNTRY:DUK|US,DUK,DUKE ENERGY CORP,Utilities,United States,,iShares U.S. Utilities ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,2.7,Not matched
 TICKER_COUNTRY:DUOL|US,DUOL,DUOLINGO CLASS A,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.1,Not matched
 TICKER_COUNTRY:DVA|US,DVA,DAVITA INC,Health Care,United States,,iShares U.S. Healthcare ETF,iShares S&P 500 Value ETF,,2,0.05,Not matched
-TICKER_COUNTRY:DVN|US,DVN,DEVON ENERGY,Energy,United States,,iShares U.S. Energy ETF,iShares Core High Dividend ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,0.76,Not matched
+TICKER_COUNTRY:DVN|US,DVN,DEVON ENERGY,Energy,United States,,iShares U.S. Energy ETF,iShares Core High Dividend ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,0.765,Not matched
 TICKER_COUNTRY:DXCM|US,DXCM,DEXCOM INC,Health Care,United States,,iShares U.S. Healthcare ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,0.17,Not matched
 TICKER_COUNTRY:DY|US,DY,DYCOM INDUSTRIES INC,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.08,Not matched
-TICKER_COUNTRY:D|US,D,DOMINION ENERGY,Utilities,United States,,iShares U.S. Utilities ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,4,1.3175,Not matched
+TICKER_COUNTRY:D|US,D,DOMINION ENERGY,Utilities,United States,,iShares U.S. Utilities ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,4,1.32,Not matched
 TICKER_COUNTRY:EBAY|US,EBAY,EBAY,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,0.3025,Not matched
 TICKER_COUNTRY:ECG|US,ECG,EVERUS CONSTRUCTION GROUP,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.05,Not matched
 TICKER_COUNTRY:ECHO|US,ECHO,ECHOSTAR CLASS A,Communication,United States,,iShares U.S. Telecommunications ETF,iShares S&P 500 Growth ETF,,2,1.62,Not matched
-TICKER_COUNTRY:ECL|US,ECL,ECOLAB,Materials,United States,,iShares U.S. Basic Materials ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,2.55,Not matched
-TICKER_COUNTRY:ED|US,ED,CONSOLIDATED EDISON,Utilities,United States,,iShares U.S. Utilities ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,1.19,Not matched
+TICKER_COUNTRY:ECL|US,ECL,ECOLAB,Materials,United States,,iShares U.S. Basic Materials ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,2.57,Not matched
+TICKER_COUNTRY:ED|US,ED,CONSOLIDATED EDISON,Utilities,United States,,iShares U.S. Utilities ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,1.1975,Not matched
 TICKER_COUNTRY:EEFT|US,EEFT,EURONET WORLDWIDE,Financials,United States,,iShares U.S. Industrials ETF,,,1,0.03,Not matched
 TICKER_COUNTRY:EFX|US,EFX,EQUIFAX,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.165,Not matched
 TICKER_COUNTRY:EGP|US,EGP,EASTGROUP PROPERTIES REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,,,1,0.8,Not matched
-TICKER_COUNTRY:EG|US,EG,EVEREST GROUP,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Value ETF,,2,0.15,Not matched
+TICKER_COUNTRY:EG|US,EG,EVEREST GROUP,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Value ETF,,2,0.155,Not matched
 TICKER_COUNTRY:EHC|US,EHC,ENCOMPASS HEALTH,Health Care,United States,,iShares U.S. Healthcare ETF,,,1,0.2,Not matched
-TICKER_COUNTRY:EIX|US,EIX,EDISON INTERNATIONAL,Utilities,United States,,iShares U.S. Utilities ETF,iShares S&P 500 Value ETF,,2,0.785,Not matched
+TICKER_COUNTRY:EIX|US,EIX,EDISON INTERNATIONAL,Utilities,United States,,iShares U.S. Utilities ETF,iShares S&P 500 Value ETF,,2,0.79,Not matched
 TICKER_COUNTRY:ELAN|US,ELAN,ELANCO ANIMAL HEALTH,Health Care,United States,,iShares U.S. Healthcare ETF,,,1,0.2,Not matched
 TICKER_COUNTRY:ELF|US,ELF,ELF BEAUTY,Consumer Staples,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.11,Not matched
 TICKER_COUNTRY:ELS|US,ELS,EQUITY LIFESTYLE PROPERTIES REIT I,Real Estate,United States,,iShares U.S. Real Estate ETF,,,1,0.91,Not matched
 TICKER_COUNTRY:ELV|US,ELV,ELEVANCE HEALTH INC,Health Care,United States,,iShares U.S. Healthcare ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,0.6267,Not matched
 TICKER_COUNTRY:EL|US,EL,ESTEE LAUDER INC CLASS A,Consumer Staples,United States,,iShares U.S. Consumer Discretionary ETF,iShares S&P 500 Value ETF,,2,0.26,Not matched
 TICKER_COUNTRY:EME|US,EME,EMCOR GROUP,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF,,3,0.2333,Not matched
-TICKER_COUNTRY:EMN|US,EMN,EASTMAN CHEMICAL,Materials,United States,,iShares U.S. Basic Materials ETF,,,1,0.77,Not matched
+TICKER_COUNTRY:EMN|US,EMN,EASTMAN CHEMICAL,Materials,United States,,iShares U.S. Basic Materials ETF,,,1,0.78,Not matched
 TICKER_COUNTRY:EMR|US,EMR,EMERSON ELECTRIC,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.715,Not matched
 TICKER_COUNTRY:ENPH|US,ENPH,ENPHASE ENERGY,Information Technology,United States,,iShares U.S. Energy ETF,,,1,0.13,Not matched
 TICKER_COUNTRY:ENSG|US,ENSG,ENSIGN GROUP,Health Care,United States,,iShares U.S. Healthcare ETF,,,1,0.15,Not matched
 TICKER_COUNTRY:ENTG|US,ENTG,ENTEGRIS INC,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.12,Not matched
-TICKER_COUNTRY:EOG|US,EOG,EOG RESOURCES,Energy,United States,,iShares U.S. Energy ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,6,0.9667,Not matched
-TICKER_COUNTRY:EPAM|US,EPAM,EPAM SYSTEMS,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.05,Not matched
-TICKER_COUNTRY:EQH|US,EQH,EQUITABLE HOLDINGS,Financials,United States,,iShares U.S. Financials ETF,,,1,0.23,Not matched
+TICKER_COUNTRY:EOG|US,EOG,EOG RESOURCES,Energy,United States,,iShares U.S. Energy ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,6,0.9717,Not matched
+TICKER_COUNTRY:EPAM|US,EPAM,EPAM SYSTEMS,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.04,Not matched
+TICKER_COUNTRY:EQH|US,EQH,EQUITABLE HOLDINGS,Financials,United States,,iShares U.S. Financials ETF,,,1,0.22,Not matched
 TICKER_COUNTRY:EQIX|US,EQIX,EQUINIX REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,1.86,Not matched
-TICKER_COUNTRY:EQT|US,EQT,EQT,Energy,United States,,iShares U.S. Energy ETF,iShares S&P 500 Value ETF,,2,0.725,Not matched
+TICKER_COUNTRY:EQT|US,EQT,EQT,Energy,United States,,iShares U.S. Energy ETF,iShares S&P 500 Value ETF,,2,0.715,Not matched
 TICKER_COUNTRY:ERIE|US,ERIE,ERIE INDEMNITY CLASS A,Financials,United States,,,iShares S&P 500 Value ETF,,1,0.02,Not matched
 TICKER_COUNTRY:ESAB|US,ESAB,ESAB CORP,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.06,Not matched
 TICKER_COUNTRY:ESI|US,ESI,ELEMENT SOLUTIONS INC,Materials,United States,,iShares U.S. Basic Materials ETF,,,1,0.81,Not matched
@@ -2289,32 +2289,32 @@ TICKER_COUNTRY:ESS|US,ESS,ESSEX PROPERTY TRUST REIT,Real Estate,United States,,i
 TICKER_COUNTRY:ESTC|US,ESTC,ELASTIC,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.04,Not matched
 TICKER_COUNTRY:ES|US,ES,EVERSOURCE ENERGY,Utilities,United States,,iShares U.S. Utilities ETF,iShares S&P 500 Value ETF,,2,0.88,Not matched
 TICKER_COUNTRY:ETN|US,ETN,EATON PLC,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,1.04,Not matched
-TICKER_COUNTRY:ETR|US,ETR,ENTERGY CORP,Utilities,United States,,iShares U.S. Utilities ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,1.1733,Not matched
+TICKER_COUNTRY:ETR|US,ETR,ENTERGY CORP,Utilities,United States,,iShares U.S. Utilities ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,1.1667,Not matched
 TICKER_COUNTRY:ETSY|US,ETSY,ETSY,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.13,Not matched
-TICKER_COUNTRY:EVRG|US,EVRG,EVERGY,Utilities,United States,,iShares U.S. Utilities ETF,iShares Core High Dividend ETF | iShares S&P 500 Value ETF,,3,0.55,Not matched
+TICKER_COUNTRY:EVRG|US,EVRG,EVERGY,Utilities,United States,,iShares U.S. Utilities ETF,iShares Core High Dividend ETF | iShares S&P 500 Value ETF,,3,0.5533,Not matched
 TICKER_COUNTRY:EVR|US,EVR,EVERCORE CLASS A,Financials,United States,,iShares U.S. Financials ETF,,,1,0.17,Not matched
 TICKER_COUNTRY:EWBC|US,EWBC,EAST WEST BANCORP,Financials,United States,,iShares U.S. Financials ETF,,,1,0.27,Not matched
 TICKER_COUNTRY:EW|US,EW,EDWARDS LIFESCIENCES,Health Care,United States,,iShares U.S. Healthcare ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,0.3175,Not matched
 TICKER_COUNTRY:EXC|US,EXC,EXELON CORP,Utilities,United States,,iShares U.S. Utilities ETF,iShares S&P 500 Value ETF,,2,1.54,Not matched
 TICKER_COUNTRY:EXEL|US,EXEL,EXELIXIS INC,Health Care,United States,,iShares U.S. Healthcare ETF,,,1,0.25,Not matched
-TICKER_COUNTRY:EXE|US,EXE,EXPAND ENERGY,Energy,United States,,iShares U.S. Energy ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,0.2925,Not matched
+TICKER_COUNTRY:EXE|US,EXE,EXPAND ENERGY,Energy,United States,,iShares U.S. Energy ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,0.29,Not matched
 TICKER_COUNTRY:EXLS|US,EXLS,EXLSERVICE HOLDINGS,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.08,Not matched
 TICKER_COUNTRY:EXPD|US,EXPD,EXPEDITORS INTERNATIONAL OF WASHIN,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,0.2133,Not matched
 TICKER_COUNTRY:EXPE|US,EXPE,EXPEDIA GROUP,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares S&P 500 Growth ETF,,2,0.275,Not matched
 TICKER_COUNTRY:EXP|US,EXP,EAGLE MATERIALS INC,Materials,United States,,iShares U.S. Industrials ETF,,,1,0.07,Not matched
-TICKER_COUNTRY:EXR|US,EXR,EXTRA SPACE STORAGE REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares S&P 500 Value ETF,,2,1.32,Not matched
+TICKER_COUNTRY:EXR|US,EXR,EXTRA SPACE STORAGE REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares S&P 500 Value ETF,,2,1.33,Not matched
 TICKER_COUNTRY:FAF|US,FAF,FIRST AMERICAN FINANCIAL CORP,Financials,United States,,iShares U.S. Financials ETF,,,1,0.1,Not matched
-TICKER_COUNTRY:FANG|US,FANG,DIAMONDBACK ENERGY,Energy,United States,,iShares U.S. Energy ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.6333,Not matched
-TICKER_COUNTRY:FAST|US,FAST,FASTENAL,Industrials,United States,,iShares U.S. Basic Materials ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,1.91,Not matched
+TICKER_COUNTRY:FANG|US,FANG,DIAMONDBACK ENERGY,Energy,United States,,iShares U.S. Energy ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.6433,Not matched
+TICKER_COUNTRY:FAST|US,FAST,FASTENAL,Industrials,United States,,iShares U.S. Basic Materials ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,1.9033,Not matched
 TICKER_COUNTRY:FBIN|US,FBIN,FORTUNE BRANDS INNOVATIONS,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.07,Not matched
 TICKER_COUNTRY:FCNCA|US,FCNCA,FIRST CITIZENS BANCSHARES CLASS A,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Min Vol Factor ETF,,2,0.385,Not matched
 TICKER_COUNTRY:FCN|US,FCN,FTI CONSULTING,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.07,Not matched
-TICKER_COUNTRY:FCX|US,FCX,FREEPORT MCMORAN INC,Materials,United States,,iShares U.S. Basic Materials ETF,iShares S&P 500 Value ETF,,2,3.575,Not matched
-TICKER_COUNTRY:FDS|US,FDS,FACTSET RESEARCH SYSTEMS,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Value ETF,,2,0.11,Not matched
+TICKER_COUNTRY:FCX|US,FCX,FREEPORT MCMORAN INC,Materials,United States,,iShares U.S. Basic Materials ETF,iShares S&P 500 Value ETF,,2,3.48,Not matched
+TICKER_COUNTRY:FDS|US,FDS,FACTSET RESEARCH SYSTEMS,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Value ETF,,2,0.105,Not matched
 TICKER_COUNTRY:FDXF|US,FDXF,FEDEX FREIGHT HOLDING COMPANY INC,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.135,Not matched
 TICKER_COUNTRY:FDX|US,FDX,FEDEX CORP,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.4967,Not matched
 TICKER_COUNTRY:FERG|US,FERG,FERGUSON ENTERPRISES,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,0.25,Not matched
-TICKER_COUNTRY:FE|US,FE,FIRSTENERGY CORP,Utilities,United States,,iShares U.S. Utilities ETF,iShares Core High Dividend ETF | iShares S&P 500 Value ETF,,3,0.74,Not matched
+TICKER_COUNTRY:FE|US,FE,FIRSTENERGY CORP,Utilities,United States,,iShares U.S. Utilities ETF,iShares Core High Dividend ETF | iShares S&P 500 Value ETF,,3,0.7433,Not matched
 TICKER_COUNTRY:FFIV|US,FFIV,F5,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,5,0.174,Not matched
 TICKER_COUNTRY:FHB|US,FHB,FIRST HAWAIIAN,Financials,United States,,iShares U.S. Financials ETF,,,1,0.05,Not matched
 TICKER_COUNTRY:FHN|US,FHN,FIRST HORIZON,Financials,United States,,iShares U.S. Financials ETF,,,1,0.17,Not matched
@@ -2323,7 +2323,7 @@ TICKER_COUNTRY:FIGR|US,FIGR,FIGURE TECHNOLOGY SOLUTIONS CLASS,Financials,United 
 TICKER_COUNTRY:FIG|US,FIG,FIGMA CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.02,Not matched
 TICKER_COUNTRY:FISV|US,FISV,FISERV INC,Financials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.24,Not matched
 TICKER_COUNTRY:FIS|US,FIS,FIDELITY NATIONAL INFORMATION SERV,Financials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.11,Not matched
-TICKER_COUNTRY:FITB|US,FITB,FIFTH THIRD BANCORP,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Value ETF,,2,0.45,Not matched
+TICKER_COUNTRY:FITB|US,FITB,FIFTH THIRD BANCORP,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Value ETF,,2,0.445,Not matched
 TICKER_COUNTRY:FIVE|US,FIVE,FIVE BELOW,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.21,Not matched
 TICKER_COUNTRY:FIX|US,FIX,COMFORT SYSTEMS USA,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF,,4,0.3325,Not matched
 TICKER_COUNTRY:FLEX|US,FLEX,FLEX LTD,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,3,0.1633,Not matched
@@ -2332,21 +2332,21 @@ TICKER_COUNTRY:FLUT|US,FLUT,FLUTTER ENTERTAINMENT PLC,Consumer Discretionary,Uni
 TICKER_COUNTRY:FNB|US,FNB,FNB CORP,Financials,United States,,iShares U.S. Financials ETF,,,1,0.1,Not matched
 TICKER_COUNTRY:FND|US,FND,FLOOR DECOR HOLDINGS CLASS A,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.08,Not matched
 TICKER_COUNTRY:FNF|US,FNF,FIDELITY NATIONAL FINANCIAL INC,Financials,United States,,iShares U.S. Financials ETF,,,1,0.17,Not matched
-TICKER_COUNTRY:FN|US,FN,FABRINET,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Quality Factor ETF,,2,0.07,Not matched
+TICKER_COUNTRY:FN|US,FN,FABRINET,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Quality Factor ETF,,2,0.065,Not matched
 TICKER_COUNTRY:FORM|US,FORM,FORMFACTOR INC,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.04,Not matched
 TICKER_COUNTRY:FOUR|US,FOUR,SHIFT4 PAYMENTS CLASS A,Financials,United States,,iShares U.S. Industrials ETF,,,1,0.03,Not matched
 TICKER_COUNTRY:FOXA|US,FOXA,FOX CLASS A,Communication,United States,,iShares U.S. Consumer Discretionary ETF,iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,0.14,Not matched
 TICKER_COUNTRY:FOX|US,FOX,FOX CLASS B,Communication,United States,,iShares U.S. Consumer Discretionary ETF,iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,0.0533,Not matched
 TICKER_COUNTRY:FPS|US,FPS,FORGENT POWER SOLUTIONS CLASS A,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.05,Not matched
-TICKER_COUNTRY:FRHC|US,FRHC,FREEDOM HOLDING CORP,Financials,United States,,iShares U.S. Financials ETF,,,1,0.04,Not matched
+TICKER_COUNTRY:FRHC|US,FRHC,FREEDOM HOLDING CORP,Financials,United States,,iShares U.S. Financials ETF,,,1,0.05,Not matched
 TICKER_COUNTRY:FRPT|US,FRPT,FRESHPET,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,,,1,0.14,Not matched
 TICKER_COUNTRY:FRT|US,FRT,FEDERAL REALTY INVESTMENT TRUST RE,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares S&P 500 Value ETF,,2,0.355,Not matched
 TICKER_COUNTRY:FRVO|US,FRVO,FERVO ENERGY CLASS A,Utilities,United States,,iShares U.S. Utilities ETF,,,1,0.05,Not matched
 TICKER_COUNTRY:FR|US,FR,FIRST INDUSTRIAL REALTY TRUST,Real Estate,United States,,iShares U.S. Real Estate ETF,,,1,0.55,Not matched
-TICKER_COUNTRY:FSLR|US,FSLR,FIRST SOLAR,Information Technology,United States,,iShares U.S. Energy ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF,,3,0.3333,Not matched
+TICKER_COUNTRY:FSLR|US,FSLR,FIRST SOLAR,Information Technology,United States,,iShares U.S. Energy ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF,,3,0.3367,Not matched
 TICKER_COUNTRY:FTAI|US,FTAI,FTAI AVIATION,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.22,Not matched
-TICKER_COUNTRY:FTI|US,FTI,TECHNIPFMC PLC,Energy,United States,,iShares U.S. Energy ETF,iShares MSCI USA Momentum Factor ETF,,2,0.615,Not matched
-TICKER_COUNTRY:FTNT|US,FTNT,FORTINET,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,6,0.53,Not matched
+TICKER_COUNTRY:FTI|US,FTI,TECHNIPFMC PLC,Energy,United States,,iShares U.S. Energy ETF,iShares MSCI USA Momentum Factor ETF,,2,0.61,Not matched
+TICKER_COUNTRY:FTNT|US,FTNT,FORTINET,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,6,0.535,Not matched
 TICKER_COUNTRY:FTV|US,FTV,FORTIVE,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.16,Not matched
 TICKER_COUNTRY:FWONA|US,FWONA,LIBERTY MEDIA SERIES A,Communication,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.04,Not matched
 TICKER_COUNTRY:FWONK|US,FWONK,LIBERTY MEDIA SERIES C,Communication,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Min Vol Factor ETF,,2,0.47,Not matched
@@ -2373,22 +2373,22 @@ TICKER_COUNTRY:GME|US,GME,GAMESTOP CLASS A,Consumer Discretionary,United States,
 TICKER_COUNTRY:GM|US,GM,GENERAL MOTORS,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.5967,Not matched
 TICKER_COUNTRY:GNRC|US,GNRC,GENERAC HOLDINGS,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.095,Not matched
 TICKER_COUNTRY:GNTX|US,GNTX,GENTEX,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.07,Not matched
-TICKER_COUNTRY:GOOGL|US,GOOGL,ALPHABET CLASS A,Communication,United States,,iShares U.S. Technology ETF,iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF,,4,2.915,Not matched
-TICKER_COUNTRY:GOOG|US,GOOG,ALPHABET CLASS C,Communication,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF,,5,1.922,Not matched
+TICKER_COUNTRY:GOOGL|US,GOOGL,ALPHABET CLASS A,Communication,United States,,iShares U.S. Technology ETF,iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF,,4,2.8825,Not matched
+TICKER_COUNTRY:GOOG|US,GOOG,ALPHABET CLASS C,Communication,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF,,5,1.91,Not matched
 TICKER_COUNTRY:GPC|US,GPC,GENUINE PARTS,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares S&P 500 Value ETF,,2,0.175,Not matched
 TICKER_COUNTRY:GPK|US,GPK,GRAPHIC PACKAGING HOLDING,Materials,United States,,iShares U.S. Industrials ETF,,,1,0.04,Not matched
 TICKER_COUNTRY:GPN|US,GPN,GLOBAL PAYMENTS INC,Financials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.15,Not matched
 TICKER_COUNTRY:GRMN|US,GRMN,GARMIN,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,0.5275,Not matched
 TICKER_COUNTRY:GSAT|US,GSAT,GLOBALSTAR VOTING,Communication,United States,,iShares U.S. Telecommunications ETF,,,1,3.23,Not matched
-TICKER_COUNTRY:GS|US,GS,GOLDMAN SACHS GROUP,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,1.44,Not matched
+TICKER_COUNTRY:GS|US,GS,GOLDMAN SACHS GROUP,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,1.4175,Not matched
 TICKER_COUNTRY:GTES|US,GTES,GATES INDUSTRIAL PLC,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.08,Not matched
 TICKER_COUNTRY:GTLB|US,GTLB,GITLAB CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.04,Not matched
-TICKER_COUNTRY:GWRE|US,GWRE,GUIDEWIRE SOFTWARE,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.07,Not matched
+TICKER_COUNTRY:GWRE|US,GWRE,GUIDEWIRE SOFTWARE,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.06,Not matched
 TICKER_COUNTRY:GWW|US,GWW,WW GRAINGER INC,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,0.5025,Not matched
 TICKER_COUNTRY:GXO|US,GXO,GXO LOGISTICS,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.08,Not matched
 TICKER_COUNTRY:G|US,G,GENPACT,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.08,Not matched
 TICKER_COUNTRY:HALO|US,HALO,HALOZYME THERAPEUTICS,Health Care,United States,,iShares U.S. Healthcare ETF,,,1,0.17,Not matched
-TICKER_COUNTRY:HAL|US,HAL,HALLIBURTON,Energy,United States,,iShares U.S. Energy ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,0.4467,Not matched
+TICKER_COUNTRY:HAL|US,HAL,HALLIBURTON,Energy,United States,,iShares U.S. Energy ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,0.4533,Not matched
 TICKER_COUNTRY:HAS|US,HAS,HASBRO,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares Core High Dividend ETF | iShares S&P 500 Value ETF,,3,0.1967,Not matched
 TICKER_COUNTRY:HAYW|US,HAYW,HAYWARD HOLDINGS,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.04,Not matched
 TICKER_COUNTRY:HBAN|US,HBAN,HUNTINGTON BANCSHARES INC,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Value ETF,,2,0.285,Not matched
@@ -2396,75 +2396,75 @@ TICKER_COUNTRY:HCA|US,HCA,HCA HEALTHCARE,Health Care,United States,,iShares U.S.
 TICKER_COUNTRY:HD|US,HD,HOME DEPOT,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,4,2.54,Not matched
 TICKER_COUNTRY:HEI A|US,HEI A,HEICO CLASS A,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.24,Not matched
 TICKER_COUNTRY:HEI|US,HEI,HEICO,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.18,Not matched
-TICKER_COUNTRY:HIG|US,HIG,HARTFORD INSURANCE GROUP,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,0.24,Not matched
+TICKER_COUNTRY:HIG|US,HIG,HARTFORD INSURANCE GROUP,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,0.2425,Not matched
 TICKER_COUNTRY:HII|US,HII,HUNTINGTON INGALLS INDUSTRIES,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.09,Not matched
 TICKER_COUNTRY:HLI|US,HLI,HOULIHAN LOKEY CLASS A,Financials,United States,,iShares U.S. Financials ETF,,,1,0.12,Not matched
-TICKER_COUNTRY:HLNE|US,HLNE,HAMILTON LANE CLASS A,Financials,United States,,iShares U.S. Financials ETF,,,1,0.06,Not matched
+TICKER_COUNTRY:HLNE|US,HLNE,HAMILTON LANE CLASS A,Financials,United States,,iShares U.S. Financials ETF,,,1,0.05,Not matched
 TICKER_COUNTRY:HLT|US,HLT,HILTON WORLDWIDE HOLDINGS,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares S&P 500 Growth ETF,,2,0.815,Not matched
-TICKER_COUNTRY:HL|US,HL,HECLA MINING,Materials,United States,,iShares U.S. Basic Materials ETF,,,1,0.81,Not matched
+TICKER_COUNTRY:HL|US,HL,HECLA MINING,Materials,United States,,iShares U.S. Basic Materials ETF,,,1,0.79,Not matched
 TICKER_COUNTRY:HOLX|US,HOLX,HOLOGIC INC,Health Care,United States,,iShares U.S. Healthcare ETF,,,1,0.0,Not matched
 TICKER_COUNTRY:HOMB|US,HOMB,HOME BANCSHARES INC,Financials,United States,,,iShares Core High Dividend ETF,,1,0.08,Not matched
 TICKER_COUNTRY:HONA|US,HONA,HONEYWELL AEROSPACE INC,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.4,Not matched
 TICKER_COUNTRY:HON|US,HON,HONEYWELL INTERNATIONAL INC,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.555,Not matched
-TICKER_COUNTRY:HOOD|US,HOOD,ROBINHOOD MARKETS CLASS A,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Growth ETF,,2,0.5,Not matched
-TICKER_COUNTRY:HPE|US,HPE,HEWLETT PACKARD ENTERPRISE,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.4433,Not matched
+TICKER_COUNTRY:HOOD|US,HOOD,ROBINHOOD MARKETS CLASS A,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Growth ETF,,2,0.505,Not matched
+TICKER_COUNTRY:HPE|US,HPE,HEWLETT PACKARD ENTERPRISE,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.45,Not matched
 TICKER_COUNTRY:HPQ|US,HPQ,HP INC,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.1333,Not matched
 TICKER_COUNTRY:HRB|US,HRB,H&R BLOCK INC,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.1,Not matched
 TICKER_COUNTRY:HRL|US,HRL,HORMEL FOODS CORP,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,iShares S&P 500 Value ETF,,2,0.155,Not matched
 TICKER_COUNTRY:HR|US,HR,HEALTHCARE REALTY TRUST INC CLASS,Real Estate,United States,,iShares U.S. Real Estate ETF,,,1,0.51,Not matched
 TICKER_COUNTRY:HSIC|US,HSIC,HENRY SCHEIN,Health Care,United States,,iShares U.S. Healthcare ETF,iShares S&P 500 Value ETF,,2,0.08,Not matched
-TICKER_COUNTRY:HST|US,HST,HOST HOTELS & RESORTS REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares S&P 500 Value ETF,,2,0.69,Not matched
+TICKER_COUNTRY:HST|US,HST,HOST HOTELS & RESORTS REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares S&P 500 Value ETF,,2,0.68,Not matched
 TICKER_COUNTRY:HSY|US,HSY,HERSHEY FOODS,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,5,0.372,Not matched
 TICKER_COUNTRY:HUBB|US,HUBB,HUBBELL INC,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.175,Not matched
 TICKER_COUNTRY:HUBS|US,HUBS,HUBSPOT,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.06,Not matched
 TICKER_COUNTRY:HUM|US,HUM,HUMANA,Health Care,United States,,iShares U.S. Healthcare ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.42,Not matched
 TICKER_COUNTRY:HWM|US,HWM,HOWMET AEROSPACE,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF,,4,0.6625,Not matched
-TICKER_COUNTRY:HXL|US,HXL,HEXCEL,Industrials,United States,,iShares U.S. Basic Materials ETF,,,1,0.63,Not matched
+TICKER_COUNTRY:HXL|US,HXL,HEXCEL,Industrials,United States,,iShares U.S. Basic Materials ETF,,,1,0.6,Not matched
 TICKER_COUNTRY:H|US,H,HYATT HOTELS CORP CLASS A,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.13,Not matched
-TICKER_COUNTRY:IBKR|US,IBKR,INTERACTIVE BROKERS GROUP INC CLAS,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,3,0.26,Not matched
+TICKER_COUNTRY:IBKR|US,IBKR,INTERACTIVE BROKERS GROUP INC CLAS,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,3,0.2633,Not matched
 TICKER_COUNTRY:IBM|US,IBM,INTERNATIONAL BUSINESS MACHINES CO,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,0.5725,Not matched
-TICKER_COUNTRY:ICE|US,ICE,INTERCONTINENTAL EXCHANGE INC,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,0.7133,Not matched
+TICKER_COUNTRY:ICE|US,ICE,INTERCONTINENTAL EXCHANGE INC,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,0.7167,Not matched
 TICKER_COUNTRY:IDA|US,IDA,IDACORP,Utilities,United States,,iShares U.S. Utilities ETF,iShares Core High Dividend ETF,,2,0.305,Not matched
 TICKER_COUNTRY:IDXX|US,IDXX,IDEXX LABORATORIES,Health Care,United States,,iShares U.S. Healthcare ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF,,3,0.4567,Not matched
 TICKER_COUNTRY:IESC|US,IESC,IES INC,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.04,Not matched
 TICKER_COUNTRY:IEX|US,IEX,IDEX,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.135,Not matched
 TICKER_COUNTRY:IFF|US,IFF,INTERNATIONAL FLAVORS & FRAGRANCES,Materials,United States,,iShares U.S. Basic Materials ETF,iShares S&P 500 Value ETF,,2,1.155,Not matched
-TICKER_COUNTRY:ILMN|US,ILMN,ILLUMINA INC,Health Care,United States,,iShares U.S. Healthcare ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,0.1925,Not matched
+TICKER_COUNTRY:ILMN|US,ILMN,ILLUMINA INC,Health Care,United States,,iShares U.S. Healthcare ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,0.19,Not matched
 TICKER_COUNTRY:INCY|US,INCY,INCYTE CORP,Health Care,United States,,iShares U.S. Healthcare ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF,,3,0.2667,Not matched
 TICKER_COUNTRY:INGM|US,INGM,INGRAM MICRO HOLDING,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.01,Not matched
 TICKER_COUNTRY:INGR|US,INGR,INGREDION INC,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,iShares Core High Dividend ETF,,2,0.165,Not matched
 TICKER_COUNTRY:INIO|DE,INIO,INNIO N V NV,Industrials,Germany,,iShares U.S. Industrials ETF,,,1,0.02,Not matched
 TICKER_COUNTRY:INSM|US,INSM,INSMED,Health Care,United States,,iShares U.S. Healthcare ETF,,,1,0.47,Not matched
-TICKER_COUNTRY:INTC|US,INTC,INTEL CORPORATION,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,1.6633,Not matched
-TICKER_COUNTRY:INTU|US,INTU,INTUIT,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,0.364,Not matched
-TICKER_COUNTRY:INVH|US,INVH,INVITATION HOMES,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares S&P 500 Value ETF,,2,0.565,Not matched
+TICKER_COUNTRY:INTC|US,INTC,INTEL CORPORATION,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,1.7167,Not matched
+TICKER_COUNTRY:INTU|US,INTU,INTUIT,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,0.366,Not matched
+TICKER_COUNTRY:INVH|US,INVH,INVITATION HOMES,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares S&P 500 Value ETF,,2,0.57,Not matched
 TICKER_COUNTRY:IONQ|US,IONQ,IONQ,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.05,Not matched
 TICKER_COUNTRY:IONS|US,IONS,IONIS PHARMACEUTICALS,Health Care,United States,,iShares U.S. Healthcare ETF,,,1,0.07,Not matched
 TICKER_COUNTRY:IOT|US,IOT,SAMSARA CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF,,2,0.09,Not matched
 TICKER_COUNTRY:IPGP|US,IPGP,IPG PHOTONICS CORP,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.01,Not matched
-TICKER_COUNTRY:IP|US,IP,INTERNATIONAL PAPER,Materials,United States,,iShares U.S. Basic Materials ETF,iShares S&P 500 Value ETF,,2,0.96,Not matched
+TICKER_COUNTRY:IP|US,IP,INTERNATIONAL PAPER,Materials,United States,,iShares U.S. Basic Materials ETF,iShares S&P 500 Value ETF,,2,0.94,Not matched
 TICKER_COUNTRY:IQV|US,IQV,IQVIA HOLDINGS INC,Health Care,United States,,iShares U.S. Healthcare ETF,iShares S&P 500 Value ETF,,2,0.38,Not matched
 TICKER_COUNTRY:IRDM|US,IRDM,IRIDIUM COMMUNICATIONS,Communication,United States,,iShares U.S. Telecommunications ETF,,,1,2.84,Not matched
 TICKER_COUNTRY:IREN|US,IREN,IREN,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.03,Not matched
-TICKER_COUNTRY:IRM|US,IRM,IRON MOUNTAIN INC,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.9467,Not matched
+TICKER_COUNTRY:IRM|US,IRM,IRON MOUNTAIN INC,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.94,Not matched
 TICKER_COUNTRY:IR|US,IR,INGERSOLL RAND,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.245,Not matched
-TICKER_COUNTRY:ISRG|US,ISRG,INTUITIVE SURGICAL,Health Care,United States,,iShares U.S. Healthcare ETF,iShares S&P 500 Growth ETF,,2,1.315,Not matched
+TICKER_COUNTRY:ISRG|US,ISRG,INTUITIVE SURGICAL,Health Care,United States,,iShares U.S. Healthcare ETF,iShares S&P 500 Growth ETF,,2,1.31,Not matched
 TICKER_COUNTRY:ITT|US,ITT,ITT INC,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.23,Not matched
 TICKER_COUNTRY:ITW|US,ITW,ILLINOIS TOOL INC,Industrials,United States,,iShares U.S. Industrials ETF,iShares Core High Dividend ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,0.7425,Not matched
 TICKER_COUNTRY:IT|US,IT,GARTNER,Information Technology,United States,,iShares U.S. Technology ETF,iShares S&P 500 Value ETF,,2,0.055,Not matched
 TICKER_COUNTRY:IVZ|US,IVZ,INVESCO LTD,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Value ETF,,2,0.1,Not matched
 TICKER_COUNTRY:JAZZ|US,JAZZ,JAZZ PHARMACEUTICALS PLC,Health Care,United States,,iShares U.S. Healthcare ETF,,,1,0.21,Not matched
 TICKER_COUNTRY:JBHT|US,JBHT,JB HUNT TRANSPORT SERVICES,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.1367,Not matched
-TICKER_COUNTRY:JBL|US,JBL,JABIL,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,0.114,Not matched
+TICKER_COUNTRY:JBL|US,JBL,JABIL,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,0.116,Not matched
 TICKER_COUNTRY:JBS|BR,JBS,JBS N V NV CLASS A,Consumer Staples,Brazil,,iShares U.S. Consumer Staples ETF,,,1,0.18,Not matched
 TICKER_COUNTRY:JCI|US,JCI,JOHNSON CONTROLS INTERNATIONAL PLC,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,0.45,Not matched
 TICKER_COUNTRY:JEF|US,JEF,JEFFERIES FINANCIAL GROUP INC,Financials,United States,,iShares U.S. Financials ETF,,,1,0.09,Not matched
 TICKER_COUNTRY:JHX|AU,JHX,JAMES HARDIE INDUSTRIES PLC,Materials,Australia,,iShares U.S. Industrials ETF,,,1,0.09,Not matched
 TICKER_COUNTRY:JKHY|US,JKHY,JACK HENRY AND ASSOCIATES INC,Financials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.095,Not matched
-TICKER_COUNTRY:JLL|US,JLL,JONES LANG LASALLE,Real Estate,United States,,iShares U.S. Real Estate ETF,,,1,1.27,Not matched
+TICKER_COUNTRY:JLL|US,JLL,JONES LANG LASALLE,Real Estate,United States,,iShares U.S. Real Estate ETF,,,1,1.25,Not matched
 TICKER_COUNTRY:JMKE|US,JMKE,JERSEY MIKES SUBS INC CLASS A,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.01,Not matched
 TICKER_COUNTRY:JNJ|US,JNJ,JOHNSON & JOHNSON,Health Care,United States,,iShares U.S. Healthcare ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,6,3.2583,Not matched
-TICKER_COUNTRY:JPM|US,JPM,JPMORGAN CHASE & CO,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,4.26,Not matched
+TICKER_COUNTRY:JPM|US,JPM,JPMORGAN CHASE & CO,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,4.2667,Not matched
 TICKER_COUNTRY:J|US,J,JACOBS SOLUTIONS INC,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.145,Not matched
 TICKER_COUNTRY:KBR|US,KBR,KBR INC,Industrials,United States,,iShares U.S. Technology ETF,,,1,0.02,Not matched
 TICKER_COUNTRY:KDP|US,KDP,KEURIG DR PEPPER INC,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,0.9333,Not matched
@@ -2473,9 +2473,9 @@ TICKER_COUNTRY:KEX|US,KEX,KIRBY CORP,Industrials,United States,,iShares U.S. Ind
 TICKER_COUNTRY:KEYS|US,KEYS,KEYSIGHT TECHNOLOGIES,Information Technology,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,4,0.3,Not matched
 TICKER_COUNTRY:KEY|US,KEY,KEYCORP,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Value ETF,,2,0.175,Not matched
 TICKER_COUNTRY:KHC|US,KHC,KRAFT HEINZ,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,iShares S&P 500 Value ETF,,2,0.5,Not matched
-TICKER_COUNTRY:KIM|US,KIM,KIMCO REALTY REIT CORP,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares S&P 500 Value ETF,,2,0.685,Not matched
-TICKER_COUNTRY:KKR|US,KKR,KKR AND CO INC,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,0.4033,Not matched
-TICKER_COUNTRY:KLAC|US,KLAC,KLA,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF,,4,1.19,Not matched
+TICKER_COUNTRY:KIM|US,KIM,KIMCO REALTY REIT CORP,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares S&P 500 Value ETF,,2,0.69,Not matched
+TICKER_COUNTRY:KKR|US,KKR,KKR AND CO INC,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,0.4067,Not matched
+TICKER_COUNTRY:KLAC|US,KLAC,KLA,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF,,4,1.185,Not matched
 TICKER_COUNTRY:KMB|US,KMB,KIMBERLY CLARK,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,iShares Core High Dividend ETF | iShares S&P 500 Value ETF,,3,1.29,Not matched
 TICKER_COUNTRY:KMI|US,KMI,KINDER MORGAN,Energy,United States,,iShares U.S. Energy ETF,iShares Core High Dividend ETF | iShares S&P 500 Value ETF,,3,1.3533,Not matched
 TICKER_COUNTRY:KMX|US,KMX,CARMAX INC,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.12,Not matched
@@ -2487,8 +2487,8 @@ TICKER_COUNTRY:KR|US,KR,KROGER,Consumer Staples,United States,,iShares U.S. Cons
 TICKER_COUNTRY:KTOS|US,KTOS,KRATOS DEFENSE AND SECURITY SOLUTI,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.07,Not matched
 TICKER_COUNTRY:KVYO|US,KVYO,KLAVIYO SERIES A,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.02,Not matched
 TICKER_COUNTRY:LAD|US,LAD,LITHIA MOTORS INC CLASS A,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.11,Not matched
-TICKER_COUNTRY:LAMR|US,LAMR,LAMAR ADVERTISING COMPANY CLAS,Real Estate,United States,,iShares U.S. Real Estate ETF,,,1,1.05,Not matched
-TICKER_COUNTRY:LAZ|US,LAZ,LAZARD,Financials,United States,,iShares U.S. Financials ETF,,,1,0.06,Not matched
+TICKER_COUNTRY:LAMR|US,LAMR,LAMAR ADVERTISING COMPANY CLAS,Real Estate,United States,,iShares U.S. Real Estate ETF,,,1,1.03,Not matched
+TICKER_COUNTRY:LAZ|US,LAZ,LAZARD,Financials,United States,,iShares U.S. Financials ETF,,,1,0.05,Not matched
 TICKER_COUNTRY:LBTYA|US,LBTYA,LIBERTY GLOBAL LTD CLASS A,Communication,United States,,iShares U.S. Telecommunications ETF,,,1,1.67,Not matched
 TICKER_COUNTRY:LBTYK|US,LBTYK,LIBERTY GLOBAL LTD CLASS C,Communication,United States,,iShares U.S. Telecommunications ETF,,,1,1.26,Not matched
 TICKER_COUNTRY:LDOS|US,LDOS,LEIDOS HOLDINGS,Industrials,United States,,iShares U.S. Technology ETF,iShares S&P 500 Value ETF,,2,0.07,Not matched
@@ -2500,36 +2500,36 @@ TICKER_COUNTRY:LFUS|US,LFUS,LITTELFUSE,Information Technology,United States,,iSh
 TICKER_COUNTRY:LHX|US,LHX,L3HARRIS TECHNOLOGIES,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.385,Not matched
 TICKER_COUNTRY:LH|US,LH,LABCORP HOLDINGS,Health Care,United States,,iShares U.S. Healthcare ETF,iShares S&P 500 Value ETF,,2,0.28,Not matched
 TICKER_COUNTRY:LII|US,LII,LENNOX INTERNATIONAL,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,0.1,Not matched
-TICKER_COUNTRY:LINE|US,LINE,LINEAGE,Real Estate,United States,,iShares U.S. Real Estate ETF,,,1,0.15,Not matched
-TICKER_COUNTRY:LIN|US,LIN,LINDE PLC,Materials,United States,,iShares U.S. Basic Materials ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,6.14,Not matched
-TICKER_COUNTRY:LITE|US,LITE,LUMENTUM HOLDINGS,Information Technology,United States,,iShares U.S. Telecommunications ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,3,0.95,Not matched
+TICKER_COUNTRY:LINE|US,LINE,LINEAGE,Real Estate,United States,,iShares U.S. Real Estate ETF,,,1,0.14,Not matched
+TICKER_COUNTRY:LIN|US,LIN,LINDE PLC,Materials,United States,,iShares U.S. Basic Materials ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,6.2275,Not matched
+TICKER_COUNTRY:LITE|US,LITE,LUMENTUM HOLDINGS,Information Technology,United States,,iShares U.S. Telecommunications ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,3,0.9467,Not matched
 TICKER_COUNTRY:LKQ|US,LKQ,LKQ CORP,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.08,Not matched
 TICKER_COUNTRY:LLYVA|US,LLYVA,LIBERTY LIVE HOLDINGS INC SERIES A,Communication,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.03,Not matched
 TICKER_COUNTRY:LLYVK|US,LLYVK,LIBERTY LIVE HOLDINGS INC SERIES C,Communication,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.09,Not matched
 TICKER_COUNTRY:LLY|US,LLY,ELI LILLY,Health Care,United States,,iShares U.S. Healthcare ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF,,4,6.27,Not matched
 TICKER_COUNTRY:LMT|US,LMT,LOCKHEED MARTIN,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,0.9175,Not matched
 TICKER_COUNTRY:LNC|US,LNC,LINCOLN NATIONAL CORP,Financials,United States,,iShares U.S. Financials ETF,,,1,0.09,Not matched
-TICKER_COUNTRY:LNG|US,LNG,CHENIERE ENERGY,Energy,United States,,iShares U.S. Energy ETF,iShares MSCI USA Min Vol Factor ETF,,2,1.48,Not matched
-TICKER_COUNTRY:LNT|US,LNT,ALLIANT ENERGY CORP,Utilities,United States,,iShares U.S. Utilities ETF,iShares Core High Dividend ETF | iShares S&P 500 Value ETF,,3,0.5033,Not matched
+TICKER_COUNTRY:LNG|US,LNG,CHENIERE ENERGY,Energy,United States,,iShares U.S. Energy ETF,iShares MSCI USA Min Vol Factor ETF,,2,1.485,Not matched
+TICKER_COUNTRY:LNT|US,LNT,ALLIANT ENERGY CORP,Utilities,United States,,iShares U.S. Utilities ETF,iShares Core High Dividend ETF | iShares S&P 500 Value ETF,,3,0.5067,Not matched
 TICKER_COUNTRY:LOAR|US,LOAR,LOAR HOLDINGS,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.04,Not matched
 TICKER_COUNTRY:LOPE|US,LOPE,GRAND CANYON EDUCATION INC,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.05,Not matched
 TICKER_COUNTRY:LOW|US,LOW,LOWES COMPANIES INC,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares S&P 500 Value ETF,,2,1.27,Not matched
-TICKER_COUNTRY:LPLA|US,LPLA,LPL FINANCIAL HOLDINGS,Financials,United States,,iShares U.S. Financials ETF,,,1,0.35,Not matched
+TICKER_COUNTRY:LPLA|US,LPLA,LPL FINANCIAL HOLDINGS,Financials,United States,,iShares U.S. Financials ETF,,,1,0.34,Not matched
 TICKER_COUNTRY:LPX|US,LPX,LOUISIANA PACIFIC,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.06,Not matched
-TICKER_COUNTRY:LRCX|US,LRCX,LAM RESEARCH,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF,,5,1.364,Not matched
+TICKER_COUNTRY:LRCX|US,LRCX,LAM RESEARCH,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF,,5,1.348,Not matched
 TICKER_COUNTRY:LSCC|US,LSCC,LATTICE SEMICONDUCTOR,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.09,Not matched
 TICKER_COUNTRY:LSTR|US,LSTR,LANDSTAR SYSTEM,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.07,Not matched
 TICKER_COUNTRY:LULU|US,LULU,LULULEMON ATHLETICA,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares S&P 500 Value ETF,,2,0.11,Not matched
 TICKER_COUNTRY:LUV|US,LUV,SOUTHWEST AIRLINES,Industrials,United States,,iShares U.S. Consumer Discretionary ETF,iShares S&P 500 Value ETF,,2,0.22,Not matched
 TICKER_COUNTRY:LVS|US,LVS,LAS VEGAS SANDS,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares Core High Dividend ETF | iShares S&P 500 Growth ETF,,3,0.12,Not matched
 TICKER_COUNTRY:LW|US,LW,LAMB WESTON HOLDINGS,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,,,1,0.3,Not matched
-TICKER_COUNTRY:LYB|US,LYB,LYONDELLBASELL INDUSTRIES CLASS A,Materials,United States,,iShares U.S. Basic Materials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.59,Not matched
+TICKER_COUNTRY:LYB|US,LYB,LYONDELLBASELL INDUSTRIES CLASS A,Materials,United States,,iShares U.S. Basic Materials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.5967,Not matched
 TICKER_COUNTRY:LYFT|US,LYFT,LYFT CLASS A,Industrials,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.11,Not matched
 TICKER_COUNTRY:LYV|US,LYV,LIVE NATION ENTERTAINMENT,Communication,United States,,iShares U.S. Consumer Discretionary ETF,iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,0.1967,Not matched
 TICKER_COUNTRY:L|US,L,LOEWS,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,0.2333,Not matched
 TICKER_COUNTRY:MAA|US,MAA,MID AMERICA APARTMENT COMMUNITIES,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares S&P 500 Value ETF,,2,0.53,Not matched
 TICKER_COUNTRY:MANH|US,MANH,MANHATTAN ASSOCIATES,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.08,Not matched
-TICKER_COUNTRY:MAR|US,MAR,MARRIOTT INTERNATIONAL CLASS A,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,3,0.78,Not matched
+TICKER_COUNTRY:MAR|US,MAR,MARRIOTT INTERNATIONAL CLASS A,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,3,0.7767,Not matched
 TICKER_COUNTRY:MAS|US,MAS,MASCO,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.135,Not matched
 TICKER_COUNTRY:MAT|US,MAT,MATTEL INC,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.07,Not matched
 TICKER_COUNTRY:MA|US,MA,MASTERCARD CLASS A,Financials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,2.402,Not matched
@@ -2537,8 +2537,8 @@ TICKER_COUNTRY:MBGL|US,MBGL,MOBILITY GLOBAL INC,Industrials,United States,,iShar
 TICKER_COUNTRY:MCD|US,MCD,MCDONALDS CORP,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,1.582,Not matched
 TICKER_COUNTRY:MCHP|US,MCHP,MICROCHIP TECHNOLOGY INC,Information Technology,United States,,iShares U.S. Technology ETF,iShares Core High Dividend ETF | iShares S&P 500 Value ETF,,3,0.2267,Not matched
 TICKER_COUNTRY:MCK|US,MCK,MCKESSON CORP,Health Care,United States,,iShares U.S. Consumer Staples ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,2.1867,Not matched
-TICKER_COUNTRY:MCO|US,MCO,MOODYS CORP,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,0.4175,Not matched
-TICKER_COUNTRY:MDB|US,MDB,MONGODB CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.14,Not matched
+TICKER_COUNTRY:MCO|US,MCO,MOODYS CORP,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,0.415,Not matched
+TICKER_COUNTRY:MDB|US,MDB,MONGODB CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.13,Not matched
 TICKER_COUNTRY:MDGL|US,MDGL,MADRIGAL PHARMACEUTICALS,Health Care,United States,,iShares U.S. Healthcare ETF,,,1,0.11,Not matched
 TICKER_COUNTRY:MDLN|US,MDLN,MEDLINE CLASS A,Health Care,United States,,iShares U.S. Healthcare ETF,,,1,0.26,Not matched
 TICKER_COUNTRY:MDLZ|US,MDLZ,MONDELEZ INTERNATIONAL CLASS A,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,4,1.435,Not matched
@@ -2546,41 +2546,41 @@ TICKER_COUNTRY:MDT|US,MDT,MEDTRONIC PLC,Health Care,United States,,iShares U.S. 
 TICKER_COUNTRY:MDU|US,MDU,MDU RESOURCES GROUP,Utilities,United States,,iShares U.S. Utilities ETF,,,1,0.25,Not matched
 TICKER_COUNTRY:MEDP|US,MEDP,MEDPACE HOLDINGS,Health Care,United States,,iShares U.S. Healthcare ETF,,,1,0.22,Not matched
 TICKER_COUNTRY:MELI|US,MELI,MERCADOLIBRE,Consumer Discretionary,United States,,,iShares MSCI USA Min Vol Factor ETF,,1,0.27,Not matched
-TICKER_COUNTRY:META|US,META,META PLATFORMS CLASS A,Communication,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF,,4,2.93,Not matched
-TICKER_COUNTRY:MET|US,MET,METLIFE,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Value ETF,,2,0.515,Not matched
+TICKER_COUNTRY:META|US,META,META PLATFORMS CLASS A,Communication,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF,,4,2.9075,Not matched
+TICKER_COUNTRY:MET|US,MET,METLIFE,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Value ETF,,2,0.51,Not matched
 TICKER_COUNTRY:MFP|US,MFP,MIDERA FOOD PROCESSING INC,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.03,Not matched
 TICKER_COUNTRY:MGM|US,MGM,MGM RESORTS INTERNATIONAL,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares S&P 500 Value ETF,,2,0.065,Not matched
 TICKER_COUNTRY:MHK|US,MHK,MOHAWK INDUSTRIES,Consumer Discretionary,United States,,iShares U.S. Industrials ETF,,,1,0.1,Not matched
 TICKER_COUNTRY:MIDD|US,MIDD,MIDDLEBY,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.07,Not matched
 TICKER_COUNTRY:MKC|US,MKC,MCCORMICK & CO NON-VOTING,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,0.19,Not matched
-TICKER_COUNTRY:MKL|US,MKL,MARKEL GROUP,Financials,United States,,iShares U.S. Financials ETF,,,1,0.38,Not matched
+TICKER_COUNTRY:MKL|US,MKL,MARKEL GROUP,Financials,United States,,iShares U.S. Financials ETF,,,1,0.39,Not matched
 TICKER_COUNTRY:MKSI|US,MKSI,MKS,Information Technology,United States,,iShares U.S. Industrials ETF,,,1,0.18,Not matched
 TICKER_COUNTRY:MKTX|US,MKTX,MARKETAXESS HOLDINGS,Financials,United States,,iShares U.S. Financials ETF,,,1,0.09,Not matched
-TICKER_COUNTRY:MLI|US,MLI,MUELLER INDUSTRIES INC,Industrials,United States,,iShares U.S. Basic Materials ETF,,,1,1.27,Not matched
+TICKER_COUNTRY:MLI|US,MLI,MUELLER INDUSTRIES INC,Industrials,United States,,iShares U.S. Basic Materials ETF,,,1,1.3,Not matched
 TICKER_COUNTRY:MLM|US,MLM,MARTIN MARIETTA MATERIALS,Materials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.245,Not matched
 TICKER_COUNTRY:MMM|US,MMM,3M,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,0.8167,Not matched
 TICKER_COUNTRY:MNST|US,MNST,MONSTER BEVERAGE,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF,,5,0.846,Not matched
 TICKER_COUNTRY:MOD|US,MOD,MODINE MANUFACTURING,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.09,Not matched
 TICKER_COUNTRY:MOH|US,MOH,MOLINA HEALTHCARE INC,Health Care,United States,,iShares U.S. Healthcare ETF,,,1,0.16,Not matched
 TICKER_COUNTRY:MORN|US,MORN,MORNINGSTAR,Financials,United States,,iShares U.S. Financials ETF,,,1,0.07,Not matched
-TICKER_COUNTRY:MOS|US,MOS,MOSAIC,Materials,United States,,iShares U.S. Basic Materials ETF,iShares S&P 500 Value ETF,,2,0.355,Not matched
+TICKER_COUNTRY:MOS|US,MOS,MOSAIC,Materials,United States,,iShares U.S. Basic Materials ETF,iShares S&P 500 Value ETF,,2,0.36,Not matched
 TICKER_COUNTRY:MO|US,MO,ALTRIA GROUP INC,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,iShares Core High Dividend ETF | iShares S&P 500 Value ETF,,3,2.92,Not matched
-TICKER_COUNTRY:MPC|US,MPC,MARATHON PETROLEUM,Energy,United States,,iShares U.S. Energy ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,4,1.54,Not matched
-TICKER_COUNTRY:MPWR|US,MPWR,MONOLITHIC POWER SYSTEMS INC,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,4,0.28,Not matched
-TICKER_COUNTRY:MP|US,MP,MP MATERIALS CLASS A,Materials,United States,,iShares U.S. Basic Materials ETF,,,1,0.56,Not matched
-TICKER_COUNTRY:MRK|US,MRK,MERCK & CO INC,Health Care,United States,,iShares U.S. Healthcare ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,5,2.154,Not matched
+TICKER_COUNTRY:MPC|US,MPC,MARATHON PETROLEUM,Energy,United States,,iShares U.S. Energy ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,4,1.5325,Not matched
+TICKER_COUNTRY:MPWR|US,MPWR,MONOLITHIC POWER SYSTEMS INC,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,4,0.285,Not matched
+TICKER_COUNTRY:MP|US,MP,MP MATERIALS CLASS A,Materials,United States,,iShares U.S. Basic Materials ETF,,,1,0.59,Not matched
+TICKER_COUNTRY:MRK|US,MRK,MERCK & CO INC,Health Care,United States,,iShares U.S. Healthcare ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,5,2.148,Not matched
 TICKER_COUNTRY:MRNA|US,MRNA,MODERNA,Health Care,United States,,iShares U.S. Healthcare ETF,iShares S&P 500 Value ETF,,2,0.675,Not matched
-TICKER_COUNTRY:MRSH|US,MRSH,MARSH,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,0.7925,Not matched
-TICKER_COUNTRY:MRVL|US,MRVL,MARVELL TECHNOLOGY,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,0.554,Not matched
+TICKER_COUNTRY:MRSH|US,MRSH,MARSH,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,0.7975,Not matched
+TICKER_COUNTRY:MRVL|US,MRVL,MARVELL TECHNOLOGY,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,0.542,Not matched
 TICKER_COUNTRY:MSA|US,MSA,MSA SAFETY INC,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.08,Not matched
-TICKER_COUNTRY:MSCI|US,MSCI,MSCI,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,0.2833,Not matched
-TICKER_COUNTRY:MSFT|US,MSFT,MICROSOFT,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF,,4,8.8,Not matched
+TICKER_COUNTRY:MSCI|US,MSCI,MSCI,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,0.28,Not matched
+TICKER_COUNTRY:MSFT|US,MSFT,MICROSOFT,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF,,4,8.8175,Not matched
 TICKER_COUNTRY:MSGK|US,MSGK,MSG KNICKERBOCKERS CLASS A,Communication,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.09,Not matched
 TICKER_COUNTRY:MSGR|US,MSGR,MSG RANGERS CLASS A,Communication,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.03,Not matched
 TICKER_COUNTRY:MSI|US,MSI,MOTOROLA SOLUTIONS INC,Information Technology,United States,,iShares U.S. Telecommunications ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,1.7475,Not matched
 TICKER_COUNTRY:MSM|US,MSM,MSC INDUSTRIAL CLASS A,Industrials,United States,,iShares U.S. Industrials ETF,iShares Core High Dividend ETF,,2,0.065,Not matched
 TICKER_COUNTRY:MSTR|US,MSTR,STRATEGY INC CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.18,Not matched
-TICKER_COUNTRY:MS|US,MS,MORGAN STANLEY,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,1.2375,Not matched
+TICKER_COUNTRY:MS|US,MS,MORGAN STANLEY,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,1.215,Not matched
 TICKER_COUNTRY:MTB|US,MTB,M&T BANK,Financials,United States,,iShares U.S. Financials ETF,iShares Core High Dividend ETF | iShares S&P 500 Value ETF,,3,0.3267,Not matched
 TICKER_COUNTRY:MTCH|US,MTCH,MATCH GROUP INC,Communication,United States,,iShares U.S. Technology ETF,,,1,0.05,Not matched
 TICKER_COUNTRY:MTDR|US,MTDR,MATADOR RESOURCES,Energy,United States,,iShares U.S. Energy ETF,,,1,0.25,Not matched
@@ -2590,36 +2590,36 @@ TICKER_COUNTRY:MTN|US,MTN,VAIL RESORTS,Consumer Discretionary,United States,,iSh
 TICKER_COUNTRY:MTSI|US,MTSI,MACOM TECHNOLOGY SOLUTIONS,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.09,Not matched
 TICKER_COUNTRY:MTZ|US,MTZ,MASTEC,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.13,Not matched
 TICKER_COUNTRY:MUSA|US,MUSA,MURPHY USA,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.15,Not matched
-TICKER_COUNTRY:MU|US,MU,MICRON TECHNOLOGY,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,4,2.42,Not matched
+TICKER_COUNTRY:MU|US,MU,MICRON TECHNOLOGY,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,4,2.4175,Not matched
 TICKER_COUNTRY:MWH|US,MWH,SOLV ENERGY CLASS A INC,Industrials,United States,,iShares U.S. Energy ETF,,,1,0.05,Not matched
 TICKER_COUNTRY:M|US,M,MACYS,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.11,Not matched
 TICKER_COUNTRY:NBIX|US,NBIX,NEUROCRINE BIOSCIENCES,Health Care,United States,,iShares U.S. Healthcare ETF,iShares MSCI USA Min Vol Factor ETF,,2,0.35,Not matched
 TICKER_COUNTRY:NCLH|US,NCLH,NORWEGIAN CRUISE LINE HOLDINGS,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,0.05,Not matched
-TICKER_COUNTRY:NDAQ|US,NDAQ,NASDAQ INC,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Value ETF,,2,0.45,Not matched
+TICKER_COUNTRY:NDAQ|US,NDAQ,NASDAQ INC,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Value ETF,,2,0.445,Not matched
 TICKER_COUNTRY:NDSN|US,NDSN,NORDSON,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.1133,Not matched
-TICKER_COUNTRY:NEE|US,NEE,NEXTERA ENERGY,Utilities,United States,,iShares U.S. Utilities ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,4,3.5775,Not matched
-TICKER_COUNTRY:NEM|US,NEM,NEWMONT,Materials,United States,,iShares U.S. Basic Materials ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF,,3,3.66,Not matched
-TICKER_COUNTRY:NET|US,NET,CLOUDFLARE CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF,,3,0.55,Not matched
-TICKER_COUNTRY:NEU|US,NEU,NEWMARKET,Materials,United States,,iShares U.S. Basic Materials ETF,,,1,0.47,Not matched
+TICKER_COUNTRY:NEE|US,NEE,NEXTERA ENERGY,Utilities,United States,,iShares U.S. Utilities ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,4,3.58,Not matched
+TICKER_COUNTRY:NEM|US,NEM,NEWMONT,Materials,United States,,iShares U.S. Basic Materials ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF,,3,3.5733,Not matched
+TICKER_COUNTRY:NET|US,NET,CLOUDFLARE CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF,,3,0.56,Not matched
+TICKER_COUNTRY:NEU|US,NEU,NEWMARKET,Materials,United States,,iShares U.S. Basic Materials ETF,,,1,0.49,Not matched
 TICKER_COUNTRY:NFG|US,NFG,NATIONAL FUEL GAS,Utilities,United States,,iShares U.S. Utilities ETF,iShares Core High Dividend ETF,,2,0.27,Not matched
 TICKER_COUNTRY:NFLX|US,NFLX,NETFLIX,Communication,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF,,4,1.49,Not matched
 TICKER_COUNTRY:NIQ|US,NIQ,NIQ GLOBAL INTELLIGENCE PLC,Communication,United States,,iShares U.S. Technology ETF,,,1,0.01,Not matched
-TICKER_COUNTRY:NI|US,NI,NISOURCE,Utilities,United States,,iShares U.S. Utilities ETF,iShares S&P 500 Value ETF,,2,0.7,Not matched
+TICKER_COUNTRY:NI|US,NI,NISOURCE,Utilities,United States,,iShares U.S. Utilities ETF,iShares S&P 500 Value ETF,,2,0.705,Not matched
 TICKER_COUNTRY:NKE|US,NKE,NIKE CLASS B,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares S&P 500 Value ETF,,2,0.42,Not matched
-TICKER_COUNTRY:NLY|US,NLY,ANNALY CAPITAL MANAGEMENT REIT,Financials,United States,,iShares U.S. Financials ETF | iShares U.S. Real Estate ETF,,,2,0.585,Not matched
-TICKER_COUNTRY:NNN|US,NNN,NNN REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,,,1,0.59,Not matched
+TICKER_COUNTRY:NLY|US,NLY,ANNALY CAPITAL MANAGEMENT REIT,Financials,United States,,iShares U.S. Financials ETF | iShares U.S. Real Estate ETF,,,2,0.595,Not matched
+TICKER_COUNTRY:NNN|US,NNN,NNN REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,,,1,0.6,Not matched
 TICKER_COUNTRY:NOC|US,NOC,NORTHROP GRUMMAN CORP,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,0.5633,Not matched
-TICKER_COUNTRY:NOV|US,NOV,NOV,Energy,United States,,iShares U.S. Energy ETF,,,1,0.27,Not matched
+TICKER_COUNTRY:NOV|US,NOV,NOV,Energy,United States,,iShares U.S. Energy ETF,,,1,0.26,Not matched
 TICKER_COUNTRY:NOW|US,NOW,SERVICENOW,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,0.3725,Not matched
-TICKER_COUNTRY:NRG|US,NRG,NRG ENERGY INC,Utilities,United States,,iShares U.S. Utilities ETF,iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,0.4133,Not matched
+TICKER_COUNTRY:NRG|US,NRG,NRG ENERGY INC,Utilities,United States,,iShares U.S. Utilities ETF,iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,0.4233,Not matched
 TICKER_COUNTRY:NSC|US,NSC,NORFOLK SOUTHERN CORP,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.575,Not matched
-TICKER_COUNTRY:NTAP|US,NTAP,NETAPP INC,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,0.22,Not matched
+TICKER_COUNTRY:NTAP|US,NTAP,NETAPP INC,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,0.2225,Not matched
 TICKER_COUNTRY:NTNX|US,NTNX,NUTANIX CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.09,Not matched
 TICKER_COUNTRY:NTRA|US,NTRA,NATERA,Health Care,United States,,iShares U.S. Healthcare ETF,,,1,0.6,Not matched
-TICKER_COUNTRY:NTRS|US,NTRS,NORTHERN TRUST,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.2567,Not matched
-TICKER_COUNTRY:NUE|US,NUE,NUCOR,Materials,United States,,iShares U.S. Basic Materials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,1.6767,Not matched
-TICKER_COUNTRY:NU|BR,NU,NU HOLDINGS CLASS A,Financials,Brazil,,iShares U.S. Financials ETF,,,1,0.66,Not matched
-TICKER_COUNTRY:NVDA|US,NVDA,NVIDIA,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF,,4,7.4475,Not matched
+TICKER_COUNTRY:NTRS|US,NTRS,NORTHERN TRUST,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.2533,Not matched
+TICKER_COUNTRY:NUE|US,NUE,NUCOR,Materials,United States,,iShares U.S. Basic Materials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,1.6867,Not matched
+TICKER_COUNTRY:NU|BR,NU,NU HOLDINGS CLASS A,Financials,Brazil,,iShares U.S. Financials ETF,,,1,0.65,Not matched
+TICKER_COUNTRY:NVDA|US,NVDA,NVIDIA,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF,,4,7.375,Not matched
 TICKER_COUNTRY:NVR|US,NVR,NVR,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,0.2067,Not matched
 TICKER_COUNTRY:NVST|US,NVST,ENVISTA HOLDINGS,Health Care,United States,,iShares U.S. Healthcare ETF,,,1,0.06,Not matched
 TICKER_COUNTRY:NVT|US,NVT,NVENT ELECTRIC PLC,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Momentum Factor ETF,,2,0.175,Not matched
@@ -2627,66 +2627,66 @@ TICKER_COUNTRY:NWSA|US,NWSA,NEWS CLASS A,Communication,United States,,iShares U.
 TICKER_COUNTRY:NWS|US,NWS,NEWS CLASS B,Communication,United States,,iShares U.S. Consumer Discretionary ETF,iShares S&P 500 Value ETF,,2,0.035,Not matched
 TICKER_COUNTRY:NXPI|US,NXPI,NXP SEMICONDUCTORS NV,Information Technology,United States,,,iShares S&P 500 Value ETF,,1,0.22,Not matched
 TICKER_COUNTRY:NXST|US,NXST,NEXSTAR MEDIA GROUP INC,Communication,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.1,Not matched
-TICKER_COUNTRY:NXT|US,NXT,NEXTPOWER INC,Industrials,United States,,iShares U.S. Energy ETF,,,1,0.52,Not matched
+TICKER_COUNTRY:NXT|US,NXT,NEXTPOWER INC,Industrials,United States,,iShares U.S. Energy ETF,,,1,0.51,Not matched
 TICKER_COUNTRY:NYT|US,NYT,NEW YORK TIMES CLASS A,Communication,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.17,Not matched
 TICKER_COUNTRY:OC|US,OC,OWENS CORNING,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.11,Not matched
 TICKER_COUNTRY:ODFL|US,ODFL,OLD DOMINION FREIGHT LINE,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,0.235,Not matched
-TICKER_COUNTRY:OGE|US,OGE,OGE ENERGY,Utilities,United States,,iShares U.S. Utilities ETF,iShares Core High Dividend ETF,,2,0.42,Not matched
+TICKER_COUNTRY:OGE|US,OGE,OGE ENERGY,Utilities,United States,,iShares U.S. Utilities ETF,iShares Core High Dividend ETF,,2,0.425,Not matched
 TICKER_COUNTRY:OGN|US,OGN,ORGANON,Health Care,United States,,iShares U.S. Healthcare ETF,,,1,0.05,Not matched
-TICKER_COUNTRY:OHI|US,OHI,OMEGA HEALTHCARE INVESTORS REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,,,1,1.09,Not matched
-TICKER_COUNTRY:OKE|US,OKE,ONEOK,Energy,United States,,iShares U.S. Energy ETF,iShares Core High Dividend ETF | iShares S&P 500 Value ETF,,3,1.2833,Not matched
-TICKER_COUNTRY:OKLO|US,OKLO,OKLO CLASS A,Utilities,United States,,iShares U.S. Utilities ETF,,,1,0.19,Not matched
-TICKER_COUNTRY:OKTA|US,OKTA,OKTA CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,3,0.1667,Not matched
+TICKER_COUNTRY:OHI|US,OHI,OMEGA HEALTHCARE INVESTORS REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,,,1,1.08,Not matched
+TICKER_COUNTRY:OKE|US,OKE,ONEOK,Energy,United States,,iShares U.S. Energy ETF,iShares Core High Dividend ETF | iShares S&P 500 Value ETF,,3,1.2767,Not matched
+TICKER_COUNTRY:OKLO|US,OKLO,OKLO CLASS A,Utilities,United States,,iShares U.S. Utilities ETF,,,1,0.18,Not matched
+TICKER_COUNTRY:OKTA|US,OKTA,OKTA CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,3,0.1833,Not matched
 TICKER_COUNTRY:OLED|US,OLED,UNIVERSAL DISPLAY CORP,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.02,Not matched
 TICKER_COUNTRY:OLLI|US,OLLI,OLLIES BARGAIN OUTLET HOLDINGS,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.1,Not matched
-TICKER_COUNTRY:OLN|US,OLN,OLIN CORP,Materials,United States,,iShares U.S. Basic Materials ETF,,,1,0.2,Not matched
+TICKER_COUNTRY:OLN|US,OLN,OLIN CORP,Materials,United States,,iShares U.S. Basic Materials ETF,,,1,0.21,Not matched
 TICKER_COUNTRY:OMC|US,OMC,OMNICOM GROUP INC,Communication,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,0.19,Not matched
 TICKER_COUNTRY:OMF|US,OMF,ONEMAIN HOLDINGS,Financials,United States,,iShares U.S. Financials ETF,,,1,0.1,Not matched
 TICKER_COUNTRY:ONON|US,ONON,ON HOLDING AG CLASS A,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.12,Not matched
 TICKER_COUNTRY:ONTO|US,ONTO,ONTO INNOVATION,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.06,Not matched
 TICKER_COUNTRY:ON|US,ON,ON SEMICONDUCTOR CORP,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.1267,Not matched
-TICKER_COUNTRY:ORCL|US,ORCL,ORACLE,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,0.5075,Not matched
+TICKER_COUNTRY:ORCL|US,ORCL,ORACLE,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,0.505,Not matched
 TICKER_COUNTRY:ORI|US,ORI,OLD REPUBLIC INTERNATIONAL,Financials,United States,,iShares U.S. Financials ETF,,,1,0.14,Not matched
 TICKER_COUNTRY:ORLY|US,ORLY,OREILLY AUTOMOTIVE INC,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF,,3,0.7567,Not matched
 TICKER_COUNTRY:OSK|US,OSK,OSHKOSH CORP,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.11,Not matched
 TICKER_COUNTRY:OTIS|US,OTIS,OTIS WORLDWIDE,Industrials,United States,,iShares U.S. Industrials ETF,iShares Core High Dividend ETF | iShares S&P 500 Value ETF,,3,0.28,Not matched
-TICKER_COUNTRY:OVV|US,OVV,OVINTIV,Energy,United States,,iShares U.S. Energy ETF,,,1,0.75,Not matched
+TICKER_COUNTRY:OVV|US,OVV,OVINTIV,Energy,United States,,iShares U.S. Energy ETF,,,1,0.76,Not matched
 TICKER_COUNTRY:OWL|US,OWL,BLUE OWL CAPITAL CLASS A,Financials,United States,,iShares U.S. Financials ETF,,,1,0.1,Not matched
-TICKER_COUNTRY:OXY|US,OXY,OCCIDENTAL PETROLEUM CORP,Energy,United States,,iShares U.S. Energy ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.6933,Not matched
+TICKER_COUNTRY:OXY|US,OXY,OCCIDENTAL PETROLEUM CORP,Energy,United States,,iShares U.S. Energy ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.6967,Not matched
 TICKER_COUNTRY:OZK|US,OZK,BANK OZK,Financials,United States,,iShares U.S. Financials ETF,,,1,0.08,Not matched
-TICKER_COUNTRY:O|US,O,REALTY INCOME REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,1.6667,Not matched
+TICKER_COUNTRY:O|US,O,REALTY INCOME REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,1.6767,Not matched
 TICKER_COUNTRY:PAG|US,PAG,PENSKE AUTOMOTIVE GROUP VOTING INC,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.06,Not matched
-TICKER_COUNTRY:PANW|US,PANW,PALO ALTO NETWORKS,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,1.19,Not matched
+TICKER_COUNTRY:PANW|US,PANW,PALO ALTO NETWORKS,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,1.272,Not matched
 TICKER_COUNTRY:PATH|US,PATH,UIPATH INC CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.03,Not matched
 TICKER_COUNTRY:PAYC|US,PAYC,PAYCOM SOFTWARE,Industrials,United States,,iShares U.S. Technology ETF,,,1,0.06,Not matched
 TICKER_COUNTRY:PAYX|US,PAYX,PAYCHEX,Industrials,United States,,iShares U.S. Industrials ETF,iShares Core High Dividend ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,0.395,Not matched
 TICKER_COUNTRY:PB|US,PB,PROSPERITY BANCSHARES,Financials,United States,,iShares U.S. Financials ETF,iShares Core High Dividend ETF,,2,0.135,Not matched
 TICKER_COUNTRY:PCAR|US,PCAR,PACCAR INC,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.44,Not matched
-TICKER_COUNTRY:PCG|US,PCG,PG&E CORP,Utilities,United States,,iShares U.S. Utilities ETF,iShares S&P 500 Value ETF,,2,0.98,Not matched
+TICKER_COUNTRY:PCG|US,PCG,PG&E CORP,Utilities,United States,,iShares U.S. Utilities ETF,iShares S&P 500 Value ETF,,2,1.01,Not matched
 TICKER_COUNTRY:PCOR|US,PCOR,PROCORE TECHNOLOGIES INC,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.05,Not matched
 TICKER_COUNTRY:PCTY|US,PCTY,PAYLOCITY HOLDING CORP,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.1,Not matched
 TICKER_COUNTRY:PEGA|US,PEGA,PEGASYSTEMS,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.01,Not matched
-TICKER_COUNTRY:PEG|US,PEG,PUBLIC SERVICE ENTERPRISE GROUP,Utilities,United States,,iShares U.S. Utilities ETF,iShares Core High Dividend ETF | iShares S&P 500 Value ETF,,3,1.0367,Not matched
+TICKER_COUNTRY:PEG|US,PEG,PUBLIC SERVICE ENTERPRISE GROUP,Utilities,United States,,iShares U.S. Utilities ETF,iShares Core High Dividend ETF | iShares S&P 500 Value ETF,,3,1.0433,Not matched
 TICKER_COUNTRY:PEN|US,PEN,PENUMBRA,Health Care,United States,,iShares U.S. Healthcare ETF,,,1,0.19,Not matched
 TICKER_COUNTRY:PEP|US,PEP,PEPSICO,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,5,2.638,Not matched
 TICKER_COUNTRY:PFE|US,PFE,PFIZER,Health Care,United States,,iShares U.S. Healthcare ETF,iShares S&P 500 Value ETF,,2,1.455,Not matched
 TICKER_COUNTRY:PFGC|US,PFGC,PERFORMANCE FOOD GROUP,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,,,1,0.71,Not matched
-TICKER_COUNTRY:PFG|US,PFG,PRINCIPAL FINANCIAL GROUP INC,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.1967,Not matched
-TICKER_COUNTRY:PGR|US,PGR,PROGRESSIVE,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,0.74,Not matched
+TICKER_COUNTRY:PFG|US,PFG,PRINCIPAL FINANCIAL GROUP INC,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.1933,Not matched
+TICKER_COUNTRY:PGR|US,PGR,PROGRESSIVE,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,0.75,Not matched
 TICKER_COUNTRY:PG|US,PG,PROCTER & GAMBLE,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,5,4.78,Not matched
 TICKER_COUNTRY:PHM|US,PHM,PULTEGROUP,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,0.2967,Not matched
 TICKER_COUNTRY:PH|US,PH,PARKER-HANNIFIN,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,0.61,Not matched
 TICKER_COUNTRY:PINS|US,PINS,PINTEREST CLASS A,Communication,United States,,iShares U.S. Technology ETF,,,1,0.05,Not matched
 TICKER_COUNTRY:PKG|US,PKG,PACKAGING CORP OF AMERICA,Materials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.165,Not matched
-TICKER_COUNTRY:PLD|US,PLD,PROLOGIS REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,3.2033,Not matched
+TICKER_COUNTRY:PLD|US,PLD,PROLOGIS REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,3.21,Not matched
 TICKER_COUNTRY:PLNT|US,PLNT,PLANET FITNESS INC CLASS A,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.08,Not matched
-TICKER_COUNTRY:PLTR|US,PLTR,PALANTIR TECHNOLOGIES CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF,,3,1.3067,Not matched
+TICKER_COUNTRY:PLTR|US,PLTR,PALANTIR TECHNOLOGIES CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF,,3,1.31,Not matched
 TICKER_COUNTRY:PL|US,PL,PLANET LABS CLASS A,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.04,Not matched
-TICKER_COUNTRY:PM|US,PM,PHILIP MORRIS INTERNATIONAL,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,3.414,Not matched
+TICKER_COUNTRY:PM|US,PM,PHILIP MORRIS INTERNATIONAL,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,3.412,Not matched
 TICKER_COUNTRY:PNC|US,PNC,PNC FINANCIAL SERVICES GROUP,Financials,United States,,iShares U.S. Financials ETF,iShares Core High Dividend ETF | iShares S&P 500 Value ETF,,3,1.0433,Not matched
 TICKER_COUNTRY:PNFP|US,PNFP,PINNACLE FINANCIAL PARTNERS,Financials,United States,,iShares U.S. Financials ETF,,,1,0.23,Not matched
 TICKER_COUNTRY:PNR|US,PNR,PENTAIR,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.09,Not matched
-TICKER_COUNTRY:PNW|US,PNW,PINNACLE WEST,Utilities,United States,,iShares U.S. Utilities ETF,iShares S&P 500 Value ETF,,2,0.41,Not matched
+TICKER_COUNTRY:PNW|US,PNW,PINNACLE WEST,Utilities,United States,,iShares U.S. Utilities ETF,iShares S&P 500 Value ETF,,2,0.405,Not matched
 TICKER_COUNTRY:PODD|US,PODD,INSULET,Health Care,United States,,iShares U.S. Healthcare ETF,iShares S&P 500 Growth ETF,,2,0.085,Not matched
 TICKER_COUNTRY:POOL|US,POOL,POOL,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.13,Not matched
 TICKER_COUNTRY:POST|US,POST,POST HOLDINGS,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,,,1,0.13,Not matched
@@ -2696,19 +2696,19 @@ TICKER_COUNTRY:PPG|US,PPG,PPG INDUSTRIES,Materials,United States,,iShares U.S. I
 TICKER_COUNTRY:PPLI|US,PPLI,PEOPLE,Communication,United States,,iShares U.S. Technology ETF,,,1,0.02,Not matched
 TICKER_COUNTRY:PPL|US,PPL,PPL CORP,Utilities,United States,,iShares U.S. Utilities ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,4,0.5475,Not matched
 TICKER_COUNTRY:PRIM|US,PRIM,PRIMORIS SERVICES,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.04,Not matched
-TICKER_COUNTRY:PRI|US,PRI,PRIMERICA,Financials,United States,,iShares U.S. Financials ETF,,,1,0.15,Not matched
+TICKER_COUNTRY:PRI|US,PRI,PRIMERICA,Financials,United States,,iShares U.S. Financials ETF,,,1,0.14,Not matched
 TICKER_COUNTRY:PRMB|US,PRMB,PRIMO BRANDS CLASS A CORP,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,,,1,0.27,Not matched
 TICKER_COUNTRY:PRU|US,PRU,PRUDENTIAL FINANCIAL INC,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Value ETF,,2,0.405,Not matched
 TICKER_COUNTRY:PR|US,PR,PERMIAN RESOURCES CLASS A,Energy,United States,,iShares U.S. Energy ETF,,,1,0.75,Not matched
-TICKER_COUNTRY:PSA|US,PSA,PUBLIC STORAGE REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,1.59,Not matched
+TICKER_COUNTRY:PSA|US,PSA,PUBLIC STORAGE REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,1.5967,Not matched
 TICKER_COUNTRY:PSN|US,PSN,PARSONS CORP,Industrials,United States,,iShares U.S. Technology ETF,,,1,0.02,Not matched
-TICKER_COUNTRY:PSX|US,PSX,PHILLIPS 66,Energy,United States,,iShares U.S. Energy ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,4,1.3175,Not matched
+TICKER_COUNTRY:PSX|US,PSX,PHILLIPS 66,Energy,United States,,iShares U.S. Energy ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,4,1.32,Not matched
 TICKER_COUNTRY:PTC|US,PTC,PTC,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,0.2933,Not matched
 TICKER_COUNTRY:PVH|US,PVH,PVH,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.07,Not matched
-TICKER_COUNTRY:PWR|US,PWR,QUANTA SERVICES INC,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,3,0.6833,Not matched
+TICKER_COUNTRY:PWR|US,PWR,QUANTA SERVICES INC,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,3,0.68,Not matched
 TICKER_COUNTRY:PYPL|US,PYPL,PAYPAL HOLDINGS,Financials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,0.31,Not matched
-TICKER_COUNTRY:P|US,P,EVERPURE INC CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,iShares S&P 500 Growth ETF,,2,0.14,Not matched
-TICKER_COUNTRY:QCOM|US,QCOM,QUALCOMM,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,0.5333,Not matched
+TICKER_COUNTRY:P|US,P,EVERPURE INC CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,iShares S&P 500 Growth ETF,,2,0.15,Not matched
+TICKER_COUNTRY:QCOM|US,QCOM,QUALCOMM,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,0.5433,Not matched
 TICKER_COUNTRY:QGEN|DE,QGEN,QIAGEN,Health Care,Germany,,iShares U.S. Healthcare ETF,,,1,0.15,Not matched
 TICKER_COUNTRY:QNT|US,QNT,QUANTINUUM INC CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.0,Not matched
 TICKER_COUNTRY:QSR|CA,QSR,RESTAURANTS BRANDS INTERNATIONAL,Consumer Discretionary,Canada,,iShares U.S. Consumer Discretionary ETF,,,1,0.43,Not matched
@@ -2717,25 +2717,25 @@ TICKER_COUNTRY:QXO|US,QXO,QXO,Industrials,United States,,iShares U.S. Industrial
 TICKER_COUNTRY:Q|US,Q,QNITY ELECTRONICS,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.13,Not matched
 TICKER_COUNTRY:RAL|US,RAL,RALLIANT,Information Technology,United States,,iShares U.S. Industrials ETF,,,1,0.09,Not matched
 TICKER_COUNTRY:RBA|CA,RBA,RB GLOBAL,Industrials,Canada,,iShares U.S. Consumer Discretionary ETF,,,1,0.29,Not matched
-TICKER_COUNTRY:RBC|US,RBC,RBC BEARINGS,Industrials,United States,,iShares U.S. Basic Materials ETF,,,1,1.61,Not matched
+TICKER_COUNTRY:RBC|US,RBC,RBC BEARINGS,Industrials,United States,,iShares U.S. Basic Materials ETF,,,1,1.64,Not matched
 TICKER_COUNTRY:RBLX|US,RBLX,ROBLOX CLASS A,Communication,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.51,Not matched
 TICKER_COUNTRY:RBRK|US,RBRK,RUBRIK CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.1,Not matched
-TICKER_COUNTRY:RCL|US,RCL,ROYAL CARIBBEAN GROUP,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares S&P 500 Growth ETF,,2,0.775,Not matched
+TICKER_COUNTRY:RCL|US,RCL,ROYAL CARIBBEAN GROUP,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares S&P 500 Growth ETF,,2,0.77,Not matched
 TICKER_COUNTRY:RDDT|US,RDDT,REDDIT CLASS A,Communication,United States,,iShares U.S. Technology ETF,iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,0.04,Not matched
 TICKER_COUNTRY:REGN|US,REGN,REGENERON PHARMACEUTICALS,Health Care,United States,,iShares U.S. Healthcare ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,0.5967,Not matched
-TICKER_COUNTRY:REG|US,REG,REGENCY CENTERS REIT CORP,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares S&P 500 Value ETF,,2,0.495,Not matched
-TICKER_COUNTRY:REXR|US,REXR,REXFORD INDUSTRIAL REALTY REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,,,1,0.61,Not matched
+TICKER_COUNTRY:REG|US,REG,REGENCY CENTERS REIT CORP,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares S&P 500 Value ETF,,2,0.5,Not matched
+TICKER_COUNTRY:REXR|US,REXR,REXFORD INDUSTRIAL REALTY REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,,,1,0.6,Not matched
 TICKER_COUNTRY:REYN|US,REYN,REYNOLDS CONSUMER PRODUCTS INC,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,iShares Core High Dividend ETF,,2,0.045,Not matched
-TICKER_COUNTRY:RF|US,RF,REGIONS FINANCIAL,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,0.1767,Not matched
-TICKER_COUNTRY:RGA|US,RGA,REINSURANCE GROUP OF AMERICA,Financials,United States,,iShares U.S. Financials ETF,,,1,0.27,Not matched
+TICKER_COUNTRY:RF|US,RF,REGIONS FINANCIAL,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,0.1733,Not matched
+TICKER_COUNTRY:RGA|US,RGA,REINSURANCE GROUP OF AMERICA,Financials,United States,,iShares U.S. Financials ETF,,,1,0.28,Not matched
 TICKER_COUNTRY:RGEN|US,RGEN,REPLIGEN,Health Care,United States,,iShares U.S. Healthcare ETF,,,1,0.15,Not matched
-TICKER_COUNTRY:RGLD|US,RGLD,ROYAL GOLD,Materials,United States,,iShares U.S. Basic Materials ETF,,,1,2.24,Not matched
+TICKER_COUNTRY:RGLD|US,RGLD,ROYAL GOLD,Materials,United States,,iShares U.S. Basic Materials ETF,,,1,2.19,Not matched
 TICKER_COUNTRY:RHI|US,RHI,ROBERT HALF,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.05,Not matched
-TICKER_COUNTRY:RITM|US,RITM,RITHM CAPITAL,Financials,United States,,iShares U.S. Financials ETF | iShares U.S. Real Estate ETF,,,2,0.21,Not matched
+TICKER_COUNTRY:RITM|US,RITM,RITHM CAPITAL,Financials,United States,,iShares U.S. Financials ETF | iShares U.S. Real Estate ETF,,,2,0.215,Not matched
 TICKER_COUNTRY:RIVN|US,RIVN,RIVIAN AUTOMOTIVE CLASS A,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.19,Not matched
 TICKER_COUNTRY:RJF|US,RJF,RAYMOND JAMES,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,0.2067,Not matched
 TICKER_COUNTRY:RKLB|US,RKLB,ROCKET LAB CORP,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.36,Not matched
-TICKER_COUNTRY:RKT|US,RKT,ROCKET COMPANIES INC CLASS A,Financials,United States,,iShares U.S. Financials ETF,,,1,0.21,Not matched
+TICKER_COUNTRY:RKT|US,RKT,ROCKET COMPANIES INC CLASS A,Financials,United States,,iShares U.S. Financials ETF,,,1,0.2,Not matched
 TICKER_COUNTRY:RLI|US,RLI,RLI CORP,Financials,United States,,iShares U.S. Financials ETF,,,1,0.09,Not matched
 TICKER_COUNTRY:RL|US,RL,RALPH LAUREN CLASS A,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares S&P 500 Growth ETF,,2,0.135,Not matched
 TICKER_COUNTRY:RMBS|US,RMBS,RAMBUS,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.05,Not matched
@@ -2743,31 +2743,31 @@ TICKER_COUNTRY:RMD|US,RMD,RESMED,Health Care,United States,,iShares U.S. Healthc
 TICKER_COUNTRY:RNG|US,RNG,RINGCENTRAL CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.03,Not matched
 TICKER_COUNTRY:RNR|US,RNR,RENAISSANCERE HOLDING,Financials,United States,,iShares U.S. Financials ETF,,,1,0.22,Not matched
 TICKER_COUNTRY:ROIV|US,ROIV,ROIVANT SCIENCES LTD,Health Care,United States,,iShares U.S. Healthcare ETF,iShares MSCI USA Momentum Factor ETF,,2,0.265,Not matched
-TICKER_COUNTRY:ROK|US,ROK,ROCKWELL AUTOMATION INC,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,0.2225,Not matched
+TICKER_COUNTRY:ROK|US,ROK,ROCKWELL AUTOMATION INC,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,0.22,Not matched
 TICKER_COUNTRY:ROL|US,ROL,ROLLINS INC,Industrials,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF,,4,0.145,Not matched
 TICKER_COUNTRY:ROP|US,ROP,ROPER TECHNOLOGIES,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,0.55,Not matched
-TICKER_COUNTRY:ROST|US,ROST,ROSS STORES INC,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,0.692,Not matched
+TICKER_COUNTRY:ROST|US,ROST,ROSS STORES INC,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,0.688,Not matched
 TICKER_COUNTRY:RPM|US,RPM,RPM INTERNATIONAL INC,Materials,United States,,iShares U.S. Industrials ETF,,,1,0.17,Not matched
 TICKER_COUNTRY:RPRX|US,RPRX,ROYALTY PHARMA PLC CLASS A,Health Care,United States,,iShares U.S. Healthcare ETF,iShares MSCI USA Momentum Factor ETF,,2,0.35,Not matched
-TICKER_COUNTRY:RRC|US,RRC,RANGE RESOURCES,Energy,United States,,iShares U.S. Energy ETF,,,1,0.52,Not matched
+TICKER_COUNTRY:RRC|US,RRC,RANGE RESOURCES,Energy,United States,,iShares U.S. Energy ETF,,,1,0.5,Not matched
 TICKER_COUNTRY:RRX|US,RRX,REGAL REXNORD,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.14,Not matched
-TICKER_COUNTRY:RSG|US,RSG,REPUBLIC SERVICES INC,Industrials,United States,,iShares U.S. Utilities ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,1.55,Not matched
-TICKER_COUNTRY:RS|US,RS,RELIANCE STEEL & ALUMINUM,Materials,United States,,iShares U.S. Basic Materials ETF,iShares MSCI USA Momentum Factor ETF,,2,1.235,Not matched
+TICKER_COUNTRY:RSG|US,RSG,REPUBLIC SERVICES INC,Industrials,United States,,iShares U.S. Utilities ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,1.5533,Not matched
+TICKER_COUNTRY:RS|US,RS,RELIANCE STEEL & ALUMINUM,Materials,United States,,iShares U.S. Basic Materials ETF,iShares MSCI USA Momentum Factor ETF,,2,1.24,Not matched
 TICKER_COUNTRY:RTX|US,RTX,RTX,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF,,3,1.42,Not matched
-TICKER_COUNTRY:RVMD|US,RVMD,REVOLUTION MEDICINES,Health Care,United States,,iShares U.S. Healthcare ETF,iShares MSCI USA Momentum Factor ETF,,2,0.38,Not matched
+TICKER_COUNTRY:RVMD|US,RVMD,REVOLUTION MEDICINES,Health Care,United States,,iShares U.S. Healthcare ETF,iShares MSCI USA Momentum Factor ETF,,2,0.385,Not matched
 TICKER_COUNTRY:RVTY|US,RVTY,REVVITY,Health Care,United States,,iShares U.S. Healthcare ETF,iShares S&P 500 Value ETF,,2,0.16,Not matched
 TICKER_COUNTRY:RYAN|US,RYAN,RYAN SPECIALTY HOLDINGS CLASS A,Financials,United States,,iShares U.S. Financials ETF,,,1,0.08,Not matched
 TICKER_COUNTRY:R|US,R,RYDER SYSTEM,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.14,Not matched
 TICKER_COUNTRY:SAIA|US,SAIA,SAIA INC,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.11,Not matched
-TICKER_COUNTRY:SAIC|US,SAIC,SCIENCE APPLICATIONS INTERNATIONAL,Industrials,United States,,iShares U.S. Technology ETF,,,1,0.04,Not matched
+TICKER_COUNTRY:SAIC|US,SAIC,SCIENCE APPLICATIONS INTERNATIONAL,Industrials,United States,,iShares U.S. Technology ETF,,,1,0.03,Not matched
 TICKER_COUNTRY:SAIL|US,SAIL,SAILPOINT,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.01,Not matched
 TICKER_COUNTRY:SANM|US,SANM,SANMINA,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.05,Not matched
 TICKER_COUNTRY:SARO|US,SARO,STANDARDAERO,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.08,Not matched
-TICKER_COUNTRY:SBAC|US,SBAC,SBA COMMUNICATIONS REIT CORP CLASS,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares S&P 500 Value ETF,,2,0.73,Not matched
+TICKER_COUNTRY:SBAC|US,SBAC,SBA COMMUNICATIONS REIT CORP CLASS,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares S&P 500 Value ETF,,2,0.725,Not matched
 TICKER_COUNTRY:SBRA|US,SBRA,SABRA HEALTH CARE REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,,,1,0.4,Not matched
 TICKER_COUNTRY:SBUX|US,SBUX,STARBUCKS CORP,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares Core High Dividend ETF | iShares S&P 500 Value ETF,,3,1.2933,Not matched
-TICKER_COUNTRY:SCCO|PERU,SCCO,SOUTHERN COPPER CORP,Materials,Peru,,iShares U.S. Basic Materials ETF,,,1,1.5,Not matched
-TICKER_COUNTRY:SCHW|US,SCHW,CHARLES SCHWAB,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,1.11,Not matched
+TICKER_COUNTRY:SCCO|PERU,SCCO,SOUTHERN COPPER CORP,Materials,Peru,,iShares U.S. Basic Materials ETF,,,1,1.48,Not matched
+TICKER_COUNTRY:SCHW|US,SCHW,CHARLES SCHWAB,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,1.1167,Not matched
 TICKER_COUNTRY:SCI|US,SCI,SERVICE,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.16,Not matched
 TICKER_COUNTRY:SEB|US,SEB,SEABOARD,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,,,1,0.04,Not matched
 TICKER_COUNTRY:SEIC|US,SEIC,SEI INVESTMENTS,Financials,United States,,iShares U.S. Financials ETF,,,1,0.17,Not matched
@@ -2782,46 +2782,46 @@ TICKER_COUNTRY:SITE|US,SITE,SITEONE LANDSCAPE SUPPLY INC,Industrials,United Stat
 TICKER_COUNTRY:SITM|US,SITM,SITIME,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.05,Not matched
 TICKER_COUNTRY:SJM|US,SJM,JM SMUCKER,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,iShares S&P 500 Value ETF,,2,0.325,Not matched
 TICKER_COUNTRY:SKYD|US,SKYD,SKYDANCE SHS CLASS B,Communication,United States,,,iShares S&P 500 Value ETF,,1,0.01,Not matched
-TICKER_COUNTRY:SLB|US,SLB,SLB,Energy,United States,,iShares U.S. Energy ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,1.19,Not matched
+TICKER_COUNTRY:SLB|US,SLB,SLB,Energy,United States,,iShares U.S. Energy ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,1.1833,Not matched
 TICKER_COUNTRY:SLGN|US,SLGN,SILGAN HOLDINGS,Materials,United States,,iShares U.S. Industrials ETF,,,1,0.05,Not matched
 TICKER_COUNTRY:SLM|US,SLM,SLM CORP,Financials,United States,,iShares U.S. Financials ETF,,,1,0.05,Not matched
 TICKER_COUNTRY:SMCI|US,SMCI,SUPER MICRO COMPUTER INC,Information Technology,United States,,iShares U.S. Technology ETF,iShares S&P 500 Value ETF,,2,0.065,Not matched
-TICKER_COUNTRY:SMG|US,SMG,SCOTTS MIRACLE GRO,Materials,United States,,iShares U.S. Basic Materials ETF,,,1,0.31,Not matched
+TICKER_COUNTRY:SMG|US,SMG,SCOTTS MIRACLE GRO,Materials,United States,,iShares U.S. Basic Materials ETF,,,1,0.3,Not matched
 TICKER_COUNTRY:SMMT|US,SMMT,SUMMIT THERAPEUTICS,Health Care,United States,,iShares U.S. Healthcare ETF,,,1,0.02,Not matched
 TICKER_COUNTRY:SMTC|US,SMTC,SEMTECH,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.05,Not matched
 TICKER_COUNTRY:SNA|US,SNA,SNAP ON INC,Industrials,United States,,iShares U.S. Industrials ETF,iShares Core High Dividend ETF | iShares S&P 500 Value ETF,,3,0.1733,Not matched
-TICKER_COUNTRY:SNDK|US,SNDK,SANDISK,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,4,0.675,Not matched
+TICKER_COUNTRY:SNDK|US,SNDK,SANDISK,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,4,0.6725,Not matched
 TICKER_COUNTRY:SNDR|US,SNDR,SCHNEIDER NATIONAL CLASS B,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.02,Not matched
-TICKER_COUNTRY:SNOW|US,SNOW,SNOWFLAKE,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF,,2,0.495,Not matched
+TICKER_COUNTRY:SNOW|US,SNOW,SNOWFLAKE,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF,,2,0.49,Not matched
 TICKER_COUNTRY:SNPS|US,SNPS,SYNOPSYS,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,0.36,Not matched
 TICKER_COUNTRY:SNX|US,SNX,TD SYNNEX,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.1,Not matched
 TICKER_COUNTRY:SN|US,SN,SHARKNINJA,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Momentum Factor ETF,,2,0.215,Not matched
-TICKER_COUNTRY:SOFI|US,SOFI,SOFI TECHNOLOGIES,Financials,United States,,iShares U.S. Financials ETF,,,1,0.28,Not matched
+TICKER_COUNTRY:SOFI|US,SOFI,SOFI TECHNOLOGIES,Financials,United States,,iShares U.S. Financials ETF,,,1,0.27,Not matched
 TICKER_COUNTRY:SOLS|US,SOLS,SOLSTICE ADVANCED MATERIALS INC,Materials,United States,,iShares U.S. Basic Materials ETF,,,1,1.14,Not matched
 TICKER_COUNTRY:SOLV|US,SOLV,SOLVENTUM,Health Care,United States,,iShares U.S. Healthcare ETF,iShares S&P 500 Value ETF,,2,0.115,Not matched
 TICKER_COUNTRY:SON|US,SON,SONOCO PRODUCTS,Materials,United States,,iShares U.S. Industrials ETF,,,1,0.06,Not matched
-TICKER_COUNTRY:SO|US,SO,SOUTHERN,Utilities,United States,,iShares U.S. Utilities ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,4,2.595,Not matched
+TICKER_COUNTRY:SO|US,SO,SOUTHERN,Utilities,United States,,iShares U.S. Utilities ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,4,2.5975,Not matched
 TICKER_COUNTRY:SPCX|US,SPCX,SPACE EXPLORATION TECHNOLOGIES COR,Communication,United States,,iShares U.S. Telecommunications ETF,,,1,3.93,Not matched
-TICKER_COUNTRY:SPGI|US,SPGI,S&P GLOBAL,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,0.7275,Not matched
-TICKER_COUNTRY:SPG|US,SPG,SIMON PROPERTY GROUP REIT INC,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,1.75,Not matched
+TICKER_COUNTRY:SPGI|US,SPGI,S&P GLOBAL,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,0.73,Not matched
+TICKER_COUNTRY:SPG|US,SPG,SIMON PROPERTY GROUP REIT INC,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,1.7333,Not matched
 TICKER_COUNTRY:SPOT|SE,SPOT,SPOTIFY TECHNOLOGY,Communication,Sweden,,iShares U.S. Consumer Discretionary ETF,,,1,1.59,Not matched
 TICKER_COUNTRY:SPXC|US,SPXC,SPX TECHNOLOGIES INC,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.09,Not matched
-TICKER_COUNTRY:SRE|US,SRE,SEMPRA,Utilities,United States,,iShares U.S. Utilities ETF,iShares S&P 500 Value ETF,,2,1.655,Not matched
+TICKER_COUNTRY:SRE|US,SRE,SEMPRA,Utilities,United States,,iShares U.S. Utilities ETF,iShares S&P 500 Value ETF,,2,1.65,Not matched
 TICKER_COUNTRY:SSB|US,SSB,SOUTHSTATE BANK CORP,Financials,United States,,iShares U.S. Financials ETF,,,1,0.15,Not matched
 TICKER_COUNTRY:SSD|US,SSD,SIMPSON MANUFACTURING,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.1,Not matched
 TICKER_COUNTRY:SSNC|US,SSNC,SS AND C TECHNOLOGIES HOLDINGS,Industrials,United States,,iShares U.S. Technology ETF,,,1,0.09,Not matched
 TICKER_COUNTRY:STAG|US,STAG,STAG INDUSTRIAL REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,,,1,0.54,Not matched
 TICKER_COUNTRY:STE|US,STE,STERIS,Health Care,United States,,iShares U.S. Healthcare ETF,iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,0.1533,Not matched
-TICKER_COUNTRY:STLD|US,STLD,STEEL DYNAMICS INC,Materials,United States,,iShares U.S. Basic Materials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,1.11,Not matched
+TICKER_COUNTRY:STLD|US,STLD,STEEL DYNAMICS INC,Materials,United States,,iShares U.S. Basic Materials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,1.1067,Not matched
 TICKER_COUNTRY:STRL|US,STRL,STERLING INFRASTRUCTURE,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.1,Not matched
-TICKER_COUNTRY:STT|US,STT,STATE STREET,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.4233,Not matched
+TICKER_COUNTRY:STT|US,STT,STATE STREET,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.42,Not matched
 TICKER_COUNTRY:STWD|US,STWD,STARWOOD PROPERTY TRUST REIT INC,Financials,United States,,iShares U.S. Financials ETF | iShares U.S. Real Estate ETF,,,2,0.18,Not matched
-TICKER_COUNTRY:STX|US,STX,SEAGATE TECHNOLOGY HOLDINGS PLC,Information Technology,United States,,,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,0.56,Not matched
+TICKER_COUNTRY:STX|US,STX,SEAGATE TECHNOLOGY HOLDINGS PLC,Information Technology,United States,,,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,0.5725,Not matched
 TICKER_COUNTRY:STZ|US,STZ,CONSTELLATION BRANDS CLASS A,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,iShares Core High Dividend ETF | iShares S&P 500 Value ETF,,3,0.4467,Not matched
 TICKER_COUNTRY:ST|US,ST,SENSATA TECHNOLOGIES HOLDING PLC,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.07,Not matched
 TICKER_COUNTRY:SUI|US,SUI,SUN COMMUNITIES REIT INC,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares MSCI USA Min Vol Factor ETF,,2,0.64,Not matched
 TICKER_COUNTRY:SUNB|US,SUNB,SUNBELT RENTALS HOLDINGS INC,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.41,Not matched
-TICKER_COUNTRY:SWKS|US,SWKS,SKYWORKS SOLUTIONS,Information Technology,United States,,iShares U.S. Technology ETF,iShares S&P 500 Value ETF,,2,0.085,Not matched
+TICKER_COUNTRY:SWKS|US,SWKS,SKYWORKS SOLUTIONS,Information Technology,United States,,iShares U.S. Technology ETF,iShares S&P 500 Value ETF,,2,0.08,Not matched
 TICKER_COUNTRY:SWK|US,SWK,STANLEY BLACK & DECKER,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.13,Not matched
 TICKER_COUNTRY:SWX|US,SWX,SOUTHWEST GAS HOLDINGS,Utilities,United States,,,iShares Core High Dividend ETF,,1,0.09,Not matched
 TICKER_COUNTRY:SW|US,SW,SMURFIT WESTROCK PLC,Materials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.165,Not matched
@@ -2837,17 +2837,17 @@ TICKER_COUNTRY:TECH|US,TECH,BIO TECHNE,Health Care,United States,,iShares U.S. H
 TICKER_COUNTRY:TEL|US,TEL,TE CONNECTIVITY PLC,Information Technology,United States,,,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,0.25,Not matched
 TICKER_COUNTRY:TEM|US,TEM,TEMPUS AI CLASS A,Health Care,United States,,iShares U.S. Healthcare ETF,,,1,0.1,Not matched
 TICKER_COUNTRY:TER|US,TER,TERADYNE,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,6,0.16,Not matched
-TICKER_COUNTRY:TFC|US,TFC,TRUIST FINANCIAL,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Value ETF,,2,0.555,Not matched
+TICKER_COUNTRY:TFC|US,TFC,TRUIST FINANCIAL,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Value ETF,,2,0.55,Not matched
 TICKER_COUNTRY:TFSL|US,TFSL,TFS FINANCIAL CORP,Financials,United States,,iShares U.S. Financials ETF,,,1,0.01,Not matched
 TICKER_COUNTRY:TFX|US,TFX,TELEFLEX,Health Care,United States,,iShares U.S. Healthcare ETF,,,1,0.11,Not matched
-TICKER_COUNTRY:TGT|US,TGT,TARGET CORP,Consumer Staples,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.6933,Not matched
+TICKER_COUNTRY:TGT|US,TGT,TARGET CORP,Consumer Staples,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.6967,Not matched
 TICKER_COUNTRY:THC|US,THC,TENET HEALTHCARE CORP,Health Care,United States,,iShares U.S. Healthcare ETF,,,1,0.32,Not matched
-TICKER_COUNTRY:THG|US,THG,HANOVER INSURANCE GROUP,Financials,United States,,iShares U.S. Financials ETF,,,1,0.13,Not matched
+TICKER_COUNTRY:THG|US,THG,HANOVER INSURANCE GROUP,Financials,United States,,iShares U.S. Financials ETF,,,1,0.14,Not matched
 TICKER_COUNTRY:THO|US,THO,THOR INDUSTRIES,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.07,Not matched
 TICKER_COUNTRY:TIGO|SE,TIGO,MILLICOM INTERNATIONAL CELLULAR,Communication,Sweden,,iShares U.S. Telecommunications ETF,,,1,2.61,Not matched
 TICKER_COUNTRY:TJX|US,TJX,TJX,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,1.554,Not matched
 TICKER_COUNTRY:TKO|US,TKO,TKO GROUP HOLDINGS INC CLASS A,Communication,United States,,iShares U.S. Consumer Discretionary ETF,iShares S&P 500 Growth ETF,,2,0.11,Not matched
-TICKER_COUNTRY:TKR|US,TKR,TIMKEN,Industrials,United States,,iShares U.S. Basic Materials ETF,,,1,0.73,Not matched
+TICKER_COUNTRY:TKR|US,TKR,TIMKEN,Industrials,United States,,iShares U.S. Basic Materials ETF,,,1,0.74,Not matched
 TICKER_COUNTRY:TLN|US,TLN,TALEN ENERGY,Utilities,United States,,iShares U.S. Utilities ETF,,,1,1.0,Not matched
 TICKER_COUNTRY:TMO|US,TMO,THERMO FISHER SCIENTIFIC,Health Care,United States,,iShares U.S. Healthcare ETF,iShares S&P 500 Value ETF,,2,2.375,Not matched
 TICKER_COUNTRY:TMUS|US,TMUS,T MOBILE US INC,Communication,United States,,iShares U.S. Telecommunications ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,1.6633,Not matched
@@ -2855,14 +2855,14 @@ TICKER_COUNTRY:TNL|US,TNL,TRAVEL LEISURE,Consumer Discretionary,United States,,i
 TICKER_COUNTRY:TOL|US,TOL,TOLL BROTHERS INC,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.23,Not matched
 TICKER_COUNTRY:TOST|US,TOST,TOAST CLASS A,Financials,United States,,iShares U.S. Technology ETF,,,1,0.09,Not matched
 TICKER_COUNTRY:TPG|US,TPG,TPG INC CLASS A,Financials,United States,,iShares U.S. Financials ETF,,,1,0.11,Not matched
-TICKER_COUNTRY:TPL|US,TPL,TEXAS PACIFIC LAND,Energy,United States,,iShares U.S. Energy ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,0.3,Not matched
+TICKER_COUNTRY:TPL|US,TPL,TEXAS PACIFIC LAND,Energy,United States,,iShares U.S. Energy ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,0.2933,Not matched
 TICKER_COUNTRY:TPR|US,TPR,TAPESTRY,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,3,0.21,Not matched
 TICKER_COUNTRY:TREX|US,TREX,TREX,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.07,Not matched
-TICKER_COUNTRY:TRGP|US,TRGP,TARGA RESOURCES,Energy,United States,,iShares U.S. Energy ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,1.11,Not matched
+TICKER_COUNTRY:TRGP|US,TRGP,TARGA RESOURCES,Energy,United States,,iShares U.S. Energy ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,1.1033,Not matched
 TICKER_COUNTRY:TRMB|US,TRMB,TRIMBLE INC,Information Technology,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.095,Not matched
-TICKER_COUNTRY:TROW|US,TROW,T ROWE PRICE GROUP,Financials,United States,,iShares U.S. Financials ETF,iShares Core High Dividend ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,0.265,Not matched
+TICKER_COUNTRY:TROW|US,TROW,T ROWE PRICE GROUP,Financials,United States,,iShares U.S. Financials ETF,iShares Core High Dividend ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,0.2625,Not matched
 TICKER_COUNTRY:TRU|US,TRU,TRANSUNION,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.18,Not matched
-TICKER_COUNTRY:TRV|US,TRV,TRAVELERS COMPANIES,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,5,0.668,Not matched
+TICKER_COUNTRY:TRV|US,TRV,TRAVELERS COMPANIES,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,5,0.674,Not matched
 TICKER_COUNTRY:TSCO|US,TSCO,TRACTOR SUPPLY,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares Core High Dividend ETF | iShares S&P 500 Value ETF,,3,0.2267,Not matched
 TICKER_COUNTRY:TSLA|US,TSLA,TESLA INC,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,3.7167,Not matched
 TICKER_COUNTRY:TSN|US,TSN,TYSON FOODS INC CLASS A,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,0.3367,Not matched
@@ -2872,30 +2872,30 @@ TICKER_COUNTRY:TTEK|US,TTEK,TETRA TECH,Industrials,United States,,iShares U.S. I
 TICKER_COUNTRY:TTMI|US,TTMI,TTM TECHNOLOGIES INC,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.04,Not matched
 TICKER_COUNTRY:TTWO|US,TTWO,TAKE TWO INTERACTIVE SOFTWARE,Communication,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,0.26,Not matched
 TICKER_COUNTRY:TT|US,TT,TRANE TECHNOLOGIES PLC,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,0.5325,Not matched
-TICKER_COUNTRY:TWLO|US,TWLO,TWILIO CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,3,0.15,Not matched
+TICKER_COUNTRY:TWLO|US,TWLO,TWILIO CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,3,0.1367,Not matched
 TICKER_COUNTRY:TW|US,TW,TRADEWEB MARKETS INC CLASS A,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF,,3,0.15,Not matched
 TICKER_COUNTRY:TXNM|US,TXNM,TXNM ENERGY INC,Utilities,United States,,,iShares Core High Dividend ETF,,1,0.08,Not matched
-TICKER_COUNTRY:TXN|US,TXN,TEXAS INSTRUMENT,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,4,1.175,Not matched
+TICKER_COUNTRY:TXN|US,TXN,TEXAS INSTRUMENT,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,4,1.1725,Not matched
 TICKER_COUNTRY:TXRH|US,TXRH,TEXAS ROADHOUSE INC,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.21,Not matched
 TICKER_COUNTRY:TXT|US,TXT,TEXTRON INC,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.115,Not matched
 TICKER_COUNTRY:TYL|US,TYL,TYLER TECHNOLOGIES,Information Technology,United States,,iShares U.S. Technology ETF,iShares S&P 500 Value ETF,,2,0.075,Not matched
 TICKER_COUNTRY:T|US,T,AT&T,Communication,United States,,iShares U.S. Telecommunications ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,1.9433,Not matched
 TICKER_COUNTRY:UAL|US,UAL,UNITED AIRLINES HOLDINGS,Industrials,United States,,iShares U.S. Consumer Discretionary ETF,iShares S&P 500 Value ETF,,2,0.355,Not matched
-TICKER_COUNTRY:UBER|US,UBER,UBER TECHNOLOGIES,Industrials,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF,,3,0.8967,Not matched
+TICKER_COUNTRY:UBER|US,UBER,UBER TECHNOLOGIES,Industrials,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF,,3,0.8933,Not matched
 TICKER_COUNTRY:UDR|US,UDR,UDR REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares S&P 500 Value ETF,,2,0.42,Not matched
-TICKER_COUNTRY:UGI|US,UGI,UGI,Utilities,United States,,iShares U.S. Utilities ETF,,,1,0.51,Not matched
+TICKER_COUNTRY:UGI|US,UGI,UGI,Utilities,United States,,iShares U.S. Utilities ETF,,,1,0.47,Not matched
 TICKER_COUNTRY:UHAL B|US,UHAL B,U HAUL NON VOTING SERIES N,Industrials,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.08,Not matched
 TICKER_COUNTRY:UHAL|US,UHAL,U HAUL HOLDING,Industrials,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.01,Not matched
 TICKER_COUNTRY:UHS|US,UHS,UNIVERSAL HEALTH SERVICES CLASS B,Health Care,United States,,iShares U.S. Healthcare ETF,iShares S&P 500 Value ETF,,2,0.085,Not matched
 TICKER_COUNTRY:UI|US,UI,UBIQUITI,Information Technology,United States,,iShares U.S. Telecommunications ETF,,,1,3.86,Not matched
 TICKER_COUNTRY:ULS|US,ULS,UL SOLUTIONS INC CLASS A,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.07,Not matched
 TICKER_COUNTRY:ULTA|US,ULTA,ULTA BEAUTY INC,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF,,3,0.3867,Not matched
-TICKER_COUNTRY:UNH|US,UNH,UNITEDHEALTH GROUP,Health Care,United States,,iShares U.S. Healthcare ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,4,2.0125,Not matched
+TICKER_COUNTRY:UNH|US,UNH,UNITEDHEALTH GROUP,Health Care,United States,,iShares U.S. Healthcare ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,4,1.9925,Not matched
 TICKER_COUNTRY:UNM|US,UNM,UNUM,Financials,United States,,iShares U.S. Financials ETF,,,1,0.19,Not matched
-TICKER_COUNTRY:UNP|US,UNP,UNION PACIFIC,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,1.3267,Not matched
+TICKER_COUNTRY:UNP|US,UNP,UNION PACIFIC,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,1.32,Not matched
 TICKER_COUNTRY:UPS|US,UPS,UNITED PARCEL SERVICE INC CLASS B,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.66,Not matched
 TICKER_COUNTRY:URI|US,URI,UNITED RENTALS,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,0.35,Not matched
-TICKER_COUNTRY:USB|US,USB,US BANCORP,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Value ETF,,2,0.865,Not matched
+TICKER_COUNTRY:USB|US,USB,US BANCORP,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Value ETF,,2,0.86,Not matched
 TICKER_COUNTRY:USFD|US,USFD,US FOODS HOLDING,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,,,1,1.02,Not matched
 TICKER_COUNTRY:UTHR|US,UTHR,UNITED THERAPEUTICS,Health Care,United States,,iShares U.S. Healthcare ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF,,4,0.2425,Not matched
 TICKER_COUNTRY:UWMC|US,UWMC,UWM HOLDINGS CLASS A,Financials,United States,,iShares U.S. Financials ETF,,,1,0.01,Not matched
@@ -2903,54 +2903,54 @@ TICKER_COUNTRY:U|US,U,UNITY SOFTWARE,Information Technology,United States,,iShar
 TICKER_COUNTRY:VEEV|US,VEEV,VEEVA SYSTEMS CLASS A,Health Care,United States,,iShares U.S. Healthcare ETF,iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,0.2433,Not matched
 TICKER_COUNTRY:VFC|US,VFC,VF CORP,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.12,Not matched
 TICKER_COUNTRY:VIAV|US,VIAV,VIAVI SOLUTIONS,Information Technology,United States,,iShares U.S. Telecommunications ETF,,,1,2.35,Not matched
-TICKER_COUNTRY:VICI|US,VICI,VICI PPTYS INC,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares S&P 500 Value ETF,,2,1.065,Not matched
+TICKER_COUNTRY:VICI|US,VICI,VICI PPTYS INC,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares S&P 500 Value ETF,,2,1.075,Not matched
 TICKER_COUNTRY:VICR|US,VICR,VICOR,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.04,Not matched
 TICKER_COUNTRY:VIK|US,VIK,VIKING HOLDINGS LTD,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.29,Not matched
-TICKER_COUNTRY:VIRT|US,VIRT,VIRTU FINANCIAL INC CLASS A,Financials,United States,,iShares U.S. Financials ETF,,,1,0.07,Not matched
+TICKER_COUNTRY:VIRT|US,VIRT,VIRTU FINANCIAL INC CLASS A,Financials,United States,,iShares U.S. Financials ETF,,,1,0.08,Not matched
 TICKER_COUNTRY:VKTX|US,VKTX,VIKING THERAPEUTICS,Health Care,United States,,iShares U.S. Healthcare ETF,,,1,0.05,Not matched
-TICKER_COUNTRY:VLO|US,VLO,VALERO ENERGY CORP,Energy,United States,,iShares U.S. Energy ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,1.8333,Not matched
+TICKER_COUNTRY:VLO|US,VLO,VALERO ENERGY CORP,Energy,United States,,iShares U.S. Energy ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,1.82,Not matched
 TICKER_COUNTRY:VLTO|US,VLTO,VERALTO,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.23,Not matched
 TICKER_COUNTRY:VMC|US,VMC,VULCAN MATERIALS,Materials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.285,Not matched
 TICKER_COUNTRY:VMI|US,VMI,VALMONT INDS,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.1,Not matched
-TICKER_COUNTRY:VMRK|US,VMRK,VIVMARK RESIDENTIAL,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,1.3067,Not matched
+TICKER_COUNTRY:VMRK|US,VMRK,VIVMARK RESIDENTIAL,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,1.31,Not matched
 TICKER_COUNTRY:VNOM|US,VNOM,VIPER ENERGY INC CLASS A,Energy,United States,,iShares U.S. Energy ETF,iShares Core High Dividend ETF,,2,0.285,Not matched
-TICKER_COUNTRY:VNO|US,VNO,VORNADO REALTY TRUST REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,,,1,0.42,Not matched
+TICKER_COUNTRY:VNO|US,VNO,VORNADO REALTY TRUST REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,,,1,0.41,Not matched
 TICKER_COUNTRY:VNT|US,VNT,VONTIER,Information Technology,United States,,iShares U.S. Industrials ETF,,,1,0.08,Not matched
 TICKER_COUNTRY:VOYA|US,VOYA,VOYA FINANCIAL,Financials,United States,,iShares U.S. Financials ETF,,,1,0.14,Not matched
 TICKER_COUNTRY:VRSK|US,VRSK,VERISK ANALYTICS,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,3,0.1367,Not matched
 TICKER_COUNTRY:VRSN|US,VRSN,VERISIGN,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF,,3,0.33,Not matched
 TICKER_COUNTRY:VRTX|US,VRTX,VERTEX PHARMACEUTICALS,Health Care,United States,,iShares U.S. Healthcare ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,1.08,Not matched
-TICKER_COUNTRY:VRT|US,VRT,VERTIV HOLDINGS CLASS A,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,3,0.4933,Not matched
+TICKER_COUNTRY:VRT|US,VRT,VERTIV HOLDINGS CLASS A,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,3,0.4867,Not matched
 TICKER_COUNTRY:VSNT|US,VSNT,VERSANT MEDIA GROUP INC CLASS A,Communication,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.09,Not matched
 TICKER_COUNTRY:VST|US,VST,VISTRA,Utilities,United States,,iShares U.S. Utilities ETF,iShares S&P 500 Growth ETF,,2,1.37,Not matched
 TICKER_COUNTRY:VTRS|US,VTRS,VIATRIS,Health Care,United States,,iShares U.S. Healthcare ETF,iShares S&P 500 Value ETF,,2,0.215,Not matched
-TICKER_COUNTRY:VTR|US,VTR,VENTAS REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,0.8,Not matched
+TICKER_COUNTRY:VTR|US,VTR,VENTAS REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,0.806,Not matched
 TICKER_COUNTRY:VVV|US,VVV,VALVOLINE,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.08,Not matched
 TICKER_COUNTRY:VYLR|US,VYLR,VYLOR,Consumer Staples,United States,,iShares U.S. Consumer Staples ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,0.7867,Not matched
 TICKER_COUNTRY:VZ|US,VZ,VERIZON COMMUNICATIONS INC,Communication,United States,,iShares U.S. Telecommunications ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,4,4.9025,Not matched
-TICKER_COUNTRY:V|US,V,VISA CLASS A,Financials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,3.12,Not matched
+TICKER_COUNTRY:V|US,V,VISA CLASS A,Financials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,5,3.118,Not matched
 TICKER_COUNTRY:WAB|US,WAB,WESTINGHOUSE AIR BRAKE TECHNOLOGIE,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,3,0.3633,Not matched
 TICKER_COUNTRY:WAL|US,WAL,WESTERN ALLIANCE,Financials,United States,,iShares U.S. Financials ETF,,,1,0.12,Not matched
 TICKER_COUNTRY:WAT|US,WAT,WATERS CORP,Health Care,United States,,iShares U.S. Healthcare ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,0.33,Not matched
 TICKER_COUNTRY:WCC|US,WCC,WESCO INTERNATIONAL,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.19,Not matched
 TICKER_COUNTRY:WCN|US,WCN,WASTE CONNECTIONS,Industrials,United States,,,iShares MSCI USA Min Vol Factor ETF,,1,1.34,Not matched
 TICKER_COUNTRY:WDAY|US,WDAY,WORKDAY CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,0.2075,Not matched
-TICKER_COUNTRY:WDC|US,WDC,WESTERN DIGITAL CORP,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,4,0.62,Not matched
+TICKER_COUNTRY:WDC|US,WDC,WESTERN DIGITAL CORP,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Value ETF,,4,0.645,Not matched
 TICKER_COUNTRY:WEC|US,WEC,WEC ENERGY GROUP,Utilities,United States,,iShares U.S. Utilities ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,4,1.0125,Not matched
-TICKER_COUNTRY:WELL|US,WELL,WELLTOWER,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,4,3.4475,Not matched
+TICKER_COUNTRY:WELL|US,WELL,WELLTOWER,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares S&P 500 Growth ETF,,4,3.45,Not matched
 TICKER_COUNTRY:WEX|US,WEX,WEX,Financials,United States,,iShares U.S. Industrials ETF,,,1,0.07,Not matched
-TICKER_COUNTRY:WFC|US,WFC,WELLS FARGO,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Value ETF,,2,2.31,Not matched
-TICKER_COUNTRY:WFRD|US,WFRD,WEATHERFORD INTERNATIONAL CORP,Energy,United States,,iShares U.S. Energy ETF,,,1,0.26,Not matched
+TICKER_COUNTRY:WFC|US,WFC,WELLS FARGO,Financials,United States,,iShares U.S. Financials ETF,iShares S&P 500 Value ETF,,2,2.325,Not matched
+TICKER_COUNTRY:WFRD|US,WFRD,WEATHERFORD INTERNATIONAL CORP,Energy,United States,,iShares U.S. Energy ETF,,,1,0.25,Not matched
 TICKER_COUNTRY:WHR|US,WHR,WHIRLPOOL,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.03,Not matched
 TICKER_COUNTRY:WH|US,WH,WYNDHAM HOTELS RESORTS,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.1,Not matched
 TICKER_COUNTRY:WING|US,WING,WINGSTOP,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.07,Not matched
-TICKER_COUNTRY:WLK|US,WLK,WESTLAKE CORP,Materials,United States,,iShares U.S. Basic Materials ETF,,,1,0.21,Not matched
-TICKER_COUNTRY:WMB|US,WMB,WILLIAMS,Energy,United States,,iShares U.S. Energy ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,4,1.31,Not matched
+TICKER_COUNTRY:WLK|US,WLK,WESTLAKE CORP,Materials,United States,,iShares U.S. Basic Materials ETF,,,1,0.22,Not matched
+TICKER_COUNTRY:WMB|US,WMB,WILLIAMS,Energy,United States,,iShares U.S. Energy ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,4,1.3025,Not matched
 TICKER_COUNTRY:WMS|US,WMS,ADVANCED DRAINAGE SYSTEMS INC,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.11,Not matched
 TICKER_COUNTRY:WMT|US,WMT,WALMART,Consumer Staples,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,4,2.08,Not matched
-TICKER_COUNTRY:WM|US,WM,WASTE MANAGEMENT INC,Industrials,United States,,iShares U.S. Utilities ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,2.4333,Not matched
+TICKER_COUNTRY:WM|US,WM,WASTE MANAGEMENT INC,Industrials,United States,,iShares U.S. Utilities ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,2.4367,Not matched
 TICKER_COUNTRY:WPC|US,WPC,W. P. CAREY REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,,,1,1.15,Not matched
-TICKER_COUNTRY:WRB|US,WRB,WR BERKLEY,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,0.095,Not matched
+TICKER_COUNTRY:WRB|US,WRB,WR BERKLEY,Financials,United States,,iShares U.S. Financials ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,0.0975,Not matched
 TICKER_COUNTRY:WSC|US,WSC,WILLSCOT HOLDINGS CLASS A,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.04,Not matched
 TICKER_COUNTRY:WSM|US,WSM,WILLIAMS SONOMA INC,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,0.4067,Not matched
 TICKER_COUNTRY:WSO|US,WSO,WATSCO,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.13,Not matched
@@ -2964,22 +2964,22 @@ TICKER_COUNTRY:WULF|US,WULF,TERAWULF,Information Technology,United States,,iShar
 TICKER_COUNTRY:WU|US,WU,WESTERN UNION,Financials,United States,,iShares U.S. Industrials ETF,,,1,0.02,Not matched
 TICKER_COUNTRY:WWD|US,WWD,WOODWARD,Industrials,United States,,iShares U.S. Industrials ETF,,,1,0.25,Not matched
 TICKER_COUNTRY:WYNN|US,WYNN,WYNN RESORTS,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares S&P 500 Growth ETF,,2,0.065,Not matched
-TICKER_COUNTRY:WY|US,WY,WEYERHAEUSER REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,0.42,Not matched
+TICKER_COUNTRY:WY|US,WY,WEYERHAEUSER REIT,Real Estate,United States,,iShares U.S. Real Estate ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Value ETF,,3,0.4167,Not matched
 TICKER_COUNTRY:W|US,W,WAYFAIR CLASS A,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.18,Not matched
-TICKER_COUNTRY:XEL|US,XEL,XCEL ENERGY INC,Utilities,United States,,iShares U.S. Utilities ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,5,1.026,Not matched
+TICKER_COUNTRY:XEL|US,XEL,XCEL ENERGY INC,Utilities,United States,,iShares U.S. Utilities ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,5,1.024,Not matched
 TICKER_COUNTRY:XE|US,XE,X-ENERGY INC CLASS A,Industrials,United States,,iShares U.S. Energy ETF,,,1,0.02,Not matched
-TICKER_COUNTRY:XOM|US,XOM,EXXONMOBIL HOLDINGS CORP,Energy,United States,,iShares U.S. Energy ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,6,6.8167,Not matched
+TICKER_COUNTRY:XOM|US,XOM,EXXONMOBIL HOLDINGS CORP,Energy,United States,,iShares U.S. Energy ETF,iShares Core High Dividend ETF | iShares MSCI USA Min Vol Factor ETF | iShares MSCI USA Momentum Factor ETF | iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,6,6.8083,Not matched
 TICKER_COUNTRY:XPO|US,XPO,XPO,Industrials,United States,,iShares U.S. Industrials ETF,iShares MSCI USA Momentum Factor ETF,,2,0.19,Not matched
 TICKER_COUNTRY:XP|BR,XP,XP CLASS A INC,Financials,Brazil,,iShares U.S. Financials ETF,,,1,0.09,Not matched
 TICKER_COUNTRY:XYL|US,XYL,XYLEM INC,Industrials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.18,Not matched
 TICKER_COUNTRY:XYZ|US,XYZ,BLOCK CLASS A,Financials,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.315,Not matched
 TICKER_COUNTRY:YETI|US,YETI,YETI HOLDINGS,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,,,1,0.05,Not matched
-TICKER_COUNTRY:YUM|US,YUM,YUM BRANDS,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,0.4575,Not matched
+TICKER_COUNTRY:YUM|US,YUM,YUM BRANDS,Consumer Discretionary,United States,,iShares U.S. Consumer Discretionary ETF,iShares MSCI USA Min Vol Factor ETF | iShares S&P 500 Growth ETF | iShares S&P 500 Value ETF,,4,0.46,Not matched
 TICKER_COUNTRY:ZBH|US,ZBH,ZIMMER BIOMET HOLDINGS,Health Care,United States,,iShares U.S. Healthcare ETF,iShares S&P 500 Value ETF,,2,0.185,Not matched
 TICKER_COUNTRY:ZBRA|US,ZBRA,ZEBRA TECHNOLOGIES CORP CLASS A,Information Technology,United States,,iShares U.S. Industrials ETF,iShares S&P 500 Value ETF,,2,0.12,Not matched
 TICKER_COUNTRY:ZG|US,ZG,ZILLOW GROUP CLASS A,Real Estate,United States,,iShares U.S. Real Estate ETF,,,1,0.09,Not matched
 TICKER_COUNTRY:ZION|US,ZION,ZIONS BANCORPORATION,Financials,United States,,iShares U.S. Financials ETF,,,1,0.15,Not matched
-TICKER_COUNTRY:ZM|US,ZM,ZOOM COMMUNICATIONS CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF,,2,0.175,Not matched
+TICKER_COUNTRY:ZM|US,ZM,ZOOM COMMUNICATIONS CLASS A,Information Technology,United States,,iShares U.S. Technology ETF,iShares MSCI USA Min Vol Factor ETF,,2,0.17,Not matched
 TICKER_COUNTRY:ZS|US,ZS,ZSCALER,Information Technology,United States,,iShares U.S. Technology ETF,,,1,0.12,Not matched
 TICKER_COUNTRY:ZTS|US,ZTS,ZOETIS INC CLASS A,Health Care,United States,,iShares U.S. Healthcare ETF,iShares MSCI USA Quality Factor ETF | iShares S&P 500 Value ETF,,3,0.2633,Not matched
 TICKER_COUNTRY:Z|US,Z,ZILLOW GROUP CLASS C,Real Estate,United States,,iShares U.S. Real Estate ETF,,,1,0.34,Not matched
