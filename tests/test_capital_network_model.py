@@ -56,3 +56,23 @@ def test_filtering_removes_unrelated_paths(tmp_path):
     assert set(out.Company)=={'AAA'}
     out=filter_model(table,rotations=['Leading'])
     assert set(out.Rotation)=={'Leading'}
+
+
+def test_all_quadrants_visible_without_fake_country_links(tmp_path):
+    seed(tmp_path)
+    table, _ = build_model('3m', tmp_path)
+    nodes, edges = to_graph(table)
+    assert all(f'rotation:{q}' in nodes for q in ('Leading', 'Improving', 'Weakening', 'Lagging'))
+    assert nodes['rotation:Weakening']['empty'] is True
+    assert not any(e['source'] == 'rotation:Weakening' for e in edges)
+    assert not validate_model(table, nodes, edges)
+
+def test_selected_rotation_hides_others(tmp_path):
+    seed(tmp_path)
+    table, _ = build_model('3m', tmp_path)
+    selected = filter_model(table, rotations=['Improving'])
+    nodes, edges = to_graph(selected, show_empty_rotations=False)
+    assert 'rotation:Improving' in nodes
+    assert 'rotation:Weakening' not in nodes
+    assert 'rotation:Leading' not in nodes
+    assert not validate_model(selected, nodes, edges)

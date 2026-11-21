@@ -182,13 +182,22 @@ def filter_model(table, rotations=(), countries=(), sectors=(), companies=(),
     return df
 
 
-def to_graph(table: pd.DataFrame, *, include_gaps: bool = True):
+def to_graph(table: pd.DataFrame, *, include_gaps: bool = True,
+             show_empty_rotations: bool = True):
     """Build adjacency only. Evidence gaps are explicit, never fabricated.
 
     Returns nodes, edges. Edges have an `evidence` flag; missing-sector
     bridges are UI-only, dashed, and labelled 'No verified sector'.
     """
     nodes = {'global': {'layer':0, 'label':'GLOBAL', 'kind':'Global', 'rotation':''}}
+    # Display missing quadrants without inventing a country or relationship.
+    # When filters are active, callers disable this to hide unrelated nodes.
+    if show_empty_rotations:
+        for quadrant in ROTATIONS:
+            nodes[f'rotation:{quadrant}'] = {
+                'layer': 1, 'label': quadrant, 'kind': 'Rotation',
+                'rotation': quadrant, 'empty': True,
+            }
     edges = {}
     def node(key, layer, label, kind, rotation='', **meta):
         nodes[key] = {'layer':layer, 'label':label, 'kind':kind,
@@ -202,7 +211,7 @@ def to_graph(table: pd.DataFrame, *, include_gaps: bool = True):
             continue
         rot = f'rotation:{q}'
         cid = f'country:{scope}'
-        node(rot, 1, q, 'Rotation', q)
+        node(rot, 1, q, 'Rotation', q, empty=False)
         node(cid, 2, country, 'Country', q,
              rs=r['relative_strength'], momentum=r['momentum'],
              as_of=r['as_of'])

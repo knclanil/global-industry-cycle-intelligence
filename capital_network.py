@@ -21,8 +21,12 @@ def plot_model(nodes, edges, height=690):
     for nid, n in nodes.items():
         layers[n['layer']].append(nid)
     for i in layers:
-        layers[i].sort(key=lambda nid:(nodes[nid].get('scope',''),
-                                        nodes[nid]['label'].casefold(),nid))
+        if i == 1:
+            order = {q: n for n, q in enumerate(ROTATIONS)}
+            layers[i].sort(key=lambda nid: (order.get(nodes[nid]['label'],99), nid))
+        else:
+            layers[i].sort(key=lambda nid:(nodes[nid].get('scope',''),
+                                            nodes[nid]['label'].casefold(),nid))
     positions = {nid:(i, 1-(index+.5)/max(1,len(group)))
                  for i,group in layers.items() for index,nid in enumerate(group)}
     fig = go.Figure()
@@ -60,6 +64,7 @@ def plot_model(nodes, edges, height=690):
             for k,label in [('full_name','Company name'),('rs','Relative strength (%)'),
                             ('momentum','Momentum (pp)'),('as_of','As of')]:
                 if n.get(k): pieces.append(f'{label}: {n[k]}')
+            if n.get('empty'): pieces.append('No countries in this rotation for the selected lookback')
             if n['kind']=='Gap': pieces.append('Dashed edges are NOT verified memberships')
             hover.append('<br>'.join(pieces))
         fig.add_trace(go.Scattergl(x=[positions[n][0] for n in ids],
@@ -141,11 +146,18 @@ def render_capital_network():
         rendered=filtered[(filtered.company_id.isin(keep)) |
             ((filtered.company_id=='') & (filtered.evidence.isin(
                 ('country-rotation-only','global-scope'))))]
-    nodes,edges=to_graph(rendered)
+    has_active_filters = any((q, countries, sectors, factors, companies))
+    nodes,edges=to_graph(rendered, show_empty_rotations=not has_active_filters)
     warnings=validate_model(rendered,nodes,edges)
     if warnings:
         st.error('Graph validation failed: '+'; '.join(warnings))
         return
+    if not has_active_filters:
+        classified = table.loc[table.country_etf.ne(''), ['country_etf', 'Rotation']].drop_duplicates('country_etf')
+        counts = classified.Rotation.value_counts()
+        st.caption('Country rotations: ' + ' · '.join(
+            f'{rotation}: {int(counts.get(rotation,0))}' for rotation in ROTATIONS
+        ) + ' (0 means no countries currently classified there)')
     st.caption(f'{len(nodes):,} nodes · {len(edges):,} adjacent links · '
                f'{len(unique_companies):,} matching companies '
                f'({min(len(unique_companies),max_companies) if max_companies else len(unique_companies)} displayed)')

@@ -41,3 +41,9 @@ python -m pytest tests/test_capital_network_model.py -q
 ```
 
 **Not deployed or end-to-end tested against your live Streamlit environment.** Verify after pushing and monitor deployment logs.
+
+## Weakening quadrant visibility patch
+
+All four rotation nodes now appear in the unfiltered Capital Network, even if the country-rotation snapshot contains no countries classified as Weakening. An empty rotation node has **no fabricated links**. Hovering explains why it has no countries. A country-count caption displays each quadrant's count. When the user selects filters, unrelated rotation nodes disappear as requested.
+
+**Important:** The country rotation file determines actual country membership. A Weakening *sector* or *factor* does not make the enclosing country Weakening. No country classifications have been changed by this patch.
