@@ -1,62 +1,95 @@
-"""Persist real India asset histories as well as their diagnostic coverage.
+"""Authoritative India Asset Flow refresh: persist real prices then report coverage.
 
-Run from GitHub Actions after installing dependencies. No fabricated values.
+The dashboard and CI validator read the same canonical snapshots. Never write
+fake values, forward-fill missing sessions, or merge bond index with ETF fallback.
 """
+from __future__ import annotations
 from datetime import date, timedelta
 from pathlib import Path
 import json
 import sys
+import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 import india_asset_market_data as asset
 from india_asset_recovery import coverage
-from stored_market_data import normalize, read_one, merge, path_for
+from stored_market_data import merge, normalize, path_for, read_one, read_market
 
 MARKET = 'IndiaAssets'
-TICKERS = [*asset.SECTORS, asset.BENCHMARK]
+SYMBOLS = [*asset.SECTORS, asset.BENCHMARK]
+PRICE_DIR = ROOT / 'data' / 'market' / MARKET
+COVERAGE = ROOT / 'data' / 'dashboard_cache' / 'india_asset_flow_coverage.csv'
 
 
-def main():
-    end = date.today()
-    # Warm-up for 12M relative-strength plus momentum; keep ~3y historical data.
-    start = end - timedelta(days=1200)
-    frames = asset.download(start, end)
-    output = ROOT / 'data' / 'dashboard_cache' / 'india_asset_flow_coverage.csv'
-    output.parent.mkdir(parents=True, exist_ok=True)
-    sources_path = ROOT / 'data' / 'market' / MARKET / 'sources.json'
+def main(today: date | None = None) -> int:
+    today = today or date.today()
+    stored_before = {t: read_one(MARKET, t) for t in SYMBOLS}
+    # Bootstrap missing series with enough sessions for 12M RS and momentum.
+    start = today - timedelta(days=1200 if any(f.empty for f in stored_before.values()) else 60)
+    # Repository module already wraps its original download in recovery on main.
+    # Do not double-wrap and perform twice the network requests.
+    incoming = asset.download(start, today)
+    if not isinstance(incoming, dict):
+        raise RuntimeError('India asset downloader did not return symbol frames')
+
+    sources_path = PRICE_DIR / 'sources.json'
     try:
-        sources = json.loads(sources_path.read_text()) if sources_path.exists() else {}
-    except (ValueError, OSError):
+        sources = json.loads(sources_path.read_text(encoding='utf-8')) if sources_path.exists() else {}
+    except (OSError, ValueError):
         sources = {}
-    for ticker in TICKERS:
-        frame = frames.get(ticker)
+    if not isinstance(sources, dict):
+        sources = {}
+
+    changed = []
+    for ticker in SYMBOLS:
+        frame = incoming.get(ticker)
         if frame is None or frame.empty:
-            print(f'WARNING: {ticker}: no fresh data; retaining previous stored history')
+            print(f'WARNING: {ticker}: download unavailable, retaining historical snapshot')
             continue
-        try:
-            clean = normalize(frame)
-            if clean.empty:
+        cleaned = normalize(frame)
+        if cleaned.empty:
+            print(f'WARNING: {ticker}: no valid observations')
+            continue
+        # Never splice a bond price index and an ETF proxy across refreshes.
+        # Preserve the existing series until a separate, explicit backfill
+        # migration establishes a single consistent source for all dates.
+        previous_source = str(sources.get(ticker, ''))
+        fresh_source = str(frame.attrs.get('source', ''))
+        if ticker == asset.GSEC_KEY and not stored_before[ticker].empty and previous_source:
+            previous_is_etf = 'ETF' in previous_source.upper()
+            fresh_is_etf = 'ETF' in fresh_source.upper()
+            if previous_is_etf != fresh_is_etf:
+                print(f'WARNING: {ticker}: provider basis changed; refusing to splice index and ETF history')
                 continue
-            older = read_one(MARKET, ticker)
-            final = merge(older, clean)
-            target = path_for(MARKET, ticker)
-            target.parent.mkdir(parents=True, exist_ok=True)
-            final.to_parquet(target)
-            sources[ticker] = frame.attrs.get('source', 'Verified market data provider')
-            print(f'Persisted {ticker}: {len(final)} sessions -> {target}')
-        except (ValueError, TypeError, KeyError) as exc:
-            print(f'WARNING: {ticker}: unable to persist: {exc}')
-    sources_path.parent.mkdir(parents=True, exist_ok=True)
-    sources_path.write_text(json.dumps(sources, indent=2, sort_keys=True) + '\n')
-    # Diagnose the exact same persisted source the Streamlit dashboard now uses.
-    persisted = {t: f for t in TICKERS if not (f := read_one(MARKET, t)).empty}
-    result = coverage(persisted, end, lookback=63)
-    result.to_csv(output, index=False)
-    print(result.to_string(index=False))
+        combined = merge(stored_before[ticker], cleaned)
+        target = path_for(MARKET, ticker)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        # Atomic replacement: never leave a partially written parquet on failure.
+        temporary = target.with_suffix('.parquet.tmp')
+        try:
+            combined.to_parquet(temporary, engine='pyarrow', index=True)
+            temporary.replace(target)
+        finally:
+            temporary.unlink(missing_ok=True)
+        sources[ticker] = str(frame.attrs.get('source', sources.get(ticker, 'Market data provider')))
+        changed.append(ticker)
+        print(f'{ticker}: saved {len(combined)} sessions through {combined.index.max().date()}')
+
+    PRICE_DIR.mkdir(parents=True, exist_ok=True)
+    sources_path.write_text(json.dumps(sources, indent=2, sort_keys=True) + '\n', encoding='utf-8')
+    # Inspect precisely what Streamlit reads, not just what downloader returned.
+    persisted = read_market(MARKET, SYMBOLS, today - timedelta(days=1200), today)
+    report = coverage(persisted, today, lookback=63)
+    COVERAGE.parent.mkdir(parents=True, exist_ok=True)
+    report.to_csv(COVERAGE, index=False)
+    print(report.to_string(index=False))
+
     if asset.BENCHMARK not in persisted:
-        raise SystemExit('ERROR: Nifty benchmark has no stored history; refusing to publish a misleading PASS')
-    # Do not fail if only some assets are available; the dashboard can show those.
+        raise RuntimeError('Nifty 50 benchmark missing from persisted snapshot')
+    if not any(t in persisted for t in asset.SECTORS):
+        raise RuntimeError('No India asset class in persisted snapshots')
+    print(f'India Asset Flow snapshots ready: {len(persisted)}/{len(SYMBOLS)} series; updated={changed}')
     return 0
 
 

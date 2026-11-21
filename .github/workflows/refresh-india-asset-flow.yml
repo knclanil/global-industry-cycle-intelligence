@@ -1,4 +1,4 @@
-name: Refresh India Asset Flow Diagnostics
+name: Refresh India Asset Flow (prices and validation)
 
 on:
   workflow_dispatch:
@@ -8,90 +8,95 @@ on:
 permissions:
   contents: write
 
+# Share lock with the main nightly updater that writes data/market.
 concurrency:
-  group: india-asset-flow-refresh-main
+  group: market-data-writer
   cancel-in-progress: false
 
 jobs:
   refresh:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     steps:
-      - name: Check out latest main
+      - name: Checkout main
         uses: actions/checkout@v4
         with:
           ref: main
           fetch-depth: 0
           persist-credentials: true
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-
+          cache: pip
       - name: Install dependencies
         run: python -m pip install -r requirements.txt
 
-      - name: Install recovery wrapper for this run
-        run: python scripts/install_india_asset_fix.py
+      # One-time migration: idempotently fix two mismatched canonical symbol lists.
+      # Once committed by this workflow, future runs make no source edits.
+      - name: Align India Asset Flow stored symbol identifiers
+        run: python scripts/install_india_asset_pipeline.py
 
-      - name: Refresh source coverage diagnostics
+      - name: Generate persisted India Asset Flow histories and diagnostics
         run: python scripts/refresh_india_asset_data.py
+      - name: Validate actual stored prices and 3M calculations
+        run: python scripts/validate_india_asset_pipeline.py
 
-      - name: Validate coverage output
+      - name: Publish price snapshots, metadata, coverage and one-time integration
         shell: bash
         run: |
           set -euo pipefail
-          test -s data/dashboard_cache/india_asset_flow_coverage.csv
-          python - <<'PY'
-          import pandas as pd
-          p = 'data/dashboard_cache/india_asset_flow_coverage.csv'
-          data = pd.read_csv(p)
-          needed = {'ticker', 'observations', 'last_date', 'source', 'status'}
-          missing = needed - set(data.columns)
-          if missing:
-              raise SystemExit(f'Coverage report missing columns: {sorted(missing)}')
-          print(data.to_string(index=False))
-          PY
+          SNAPSHOT_DIR="$GITHUB_WORKSPACE/data/market/IndiaAssets"
+          REPORT="$GITHUB_WORKSPACE/data/dashboard_cache/india_asset_flow_coverage.csv"
+          DASHBOARD="$GITHUB_WORKSPACE/dashboard.py"
+          INCREMENTAL="$GITHUB_WORKSPACE/scripts/incremental_refresh.py"
+          test -s "$REPORT"
+          test -s "$SNAPSHOT_DIR/sources.json"
 
-      # The install script edits india_asset_market_data.py in the original
-      # checkout. Never rebase that dirty checkout. Publish only the generated
-      # coverage CSV from a separate clean worktree built from current main.
-      - name: Publish coverage from clean worktree (safe retries)
-        shell: bash
-        run: |
-          set -euo pipefail
-          SOURCE_CSV="$GITHUB_WORKSPACE/data/dashboard_cache/india_asset_flow_coverage.csv"
-          TARGET_CSV='data/dashboard_cache/india_asset_flow_coverage.csv'
+          # Use a clean worktree: do not rebase the modified generating checkout.
           WORKTREE="$(mktemp -d)"
           cleanup() {
             git worktree remove --force "$WORKTREE" 2>/dev/null || true
             rm -rf "$WORKTREE"
           }
           trap cleanup EXIT
-
           git fetch origin main
           git worktree add --detach "$WORKTREE" origin/main
           git -C "$WORKTREE" config user.name 'github-actions[bot]'
           git -C "$WORKTREE" config user.email '41898282+github-actions[bot]@users.noreply.github.com'
 
           for attempt in 1 2 3 4 5; do
-            echo "Publish attempt ${attempt}/5"
+            echo "Publish attempt $attempt/5"
             git -C "$WORKTREE" fetch origin main
             git -C "$WORKTREE" reset --hard origin/main
-            mkdir -p "$WORKTREE/data/dashboard_cache"
-            cp "$SOURCE_CSV" "$WORKTREE/$TARGET_CSV"
-            git -C "$WORKTREE" add -f "$TARGET_CSV"
+            mkdir -p "$WORKTREE/data/market/IndiaAssets" "$WORKTREE/data/dashboard_cache"
+            # Copy generated data (including all canonical parquet files).
+            cp -a "$SNAPSHOT_DIR/." "$WORKTREE/data/market/IndiaAssets/"
+            cp "$REPORT" "$WORKTREE/data/dashboard_cache/india_asset_flow_coverage.csv"
+            # Publish migration only if the target file is still the version
+            # we started from. Do not overwrite another contributor's edits.
+            for file in dashboard.py scripts/incremental_refresh.py; do
+              original="$(git show "${GITHUB_SHA}:$file" | git hash-object --stdin)"
+              remote="$(git -C "$WORKTREE" rev-parse "HEAD:$file")"
+              if [ "$original" != "$remote" ]; then
+                echo "ERROR: $file changed upstream during refresh; not overwriting." >&2
+                exit 1
+              fi
+            done
+            cp "$DASHBOARD" "$WORKTREE/dashboard.py"
+            cp "$INCREMENTAL" "$WORKTREE/scripts/incremental_refresh.py"
+            git -C "$WORKTREE" add -f data/market/IndiaAssets/ data/dashboard_cache/india_asset_flow_coverage.csv
+            git -C "$WORKTREE" add dashboard.py scripts/incremental_refresh.py
             if git -C "$WORKTREE" diff --cached --quiet; then
-              echo 'Coverage CSV already up to date; no push needed.'
+              echo 'Already up to date: no commit needed.'
               exit 0
             fi
-            git -C "$WORKTREE" commit -m 'Refresh India asset history coverage [skip ci]'
+            git -C "$WORKTREE" commit -m 'data: persist validated India Asset Flow snapshots [skip ci]'
             if git -C "$WORKTREE" push origin HEAD:main; then
-              echo 'Coverage CSV published successfully.'
+              echo 'India Asset Flow snapshots published.'
               exit 0
             fi
-            echo 'main advanced during publication; retrying safely.'
-            sleep $((attempt * 3))
+            sleep $((3 * attempt))
           done
-          echo 'Could not publish after 5 attempts; no force push attempted.' >&2
+          echo 'Remote branch advanced too often; no force push attempted.' >&2
           exit 1
