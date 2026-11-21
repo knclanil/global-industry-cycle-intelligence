@@ -11,7 +11,6 @@ CACHE = ROOT / 'data' / 'dashboard_cache'
 THEME = {'background':'#0B1220','panel':'#142137','line':'#2A3C55','text':'#E7EEF9',
          'sector':'#51B7E8','factor':'#F6BA64','company':'#92E0B9'}
 
-
 def _mtime(path:Path):return path.stat().st_mtime_ns if path.exists() else 0
 
 @st.cache_data(show_spinner=False,max_entries=45)
@@ -24,11 +23,9 @@ def load(region,table):
     path=CACHE/f'{region.lower()}_{table}.csv'
     return _csv(str(path),_mtime(path))
 
-
 def _header(region,subtitle):
     st.markdown(f'## {"🌍" if region=="Global" else "🇺🇸" if region=="USA" else "🇮🇳"} {region} Intelligence')
     st.caption(subtitle)
-
 
 def _summary(region):
     company=load(region,'companies'); indices=load(region,'indices')
@@ -39,7 +36,6 @@ def _summary(region):
     d.metric('Financial statement coverage',f'{int(company.financial_status.eq("Available").sum()):,}' if 'financial_status' in company else 'N/A')
     return company,indices
 
-
 def _source_table(indices):
     if indices.empty:return st.info('No index snapshots collected. Run the relevant scheduled data refresh and cache build.')
     filt=st.text_input('Find a sector, factor or ETF',key='ws_indices_filter')
@@ -47,10 +43,9 @@ def _source_table(indices):
     cols=[x for x in ['index_name','category','factor_family','constituents','snapshot_utc'] if x in indices]
     st.dataframe(indices[cols].rename(columns={'index_name':'Index / ETF','category':'Type','factor_family':'Factor','constituents':'Companies','snapshot_utc':'As of'}),hide_index=True,use_container_width=True,height=420)
 
-
-def _company_table(region,company):
+def _company_table(region,company,view='holdings'):
     if company.empty:return st.info('No verified constituent data in the materialized cache yet.')
-    query=st.text_input('Search company or ticker',key=f'ws_company_{region}',placeholder='Name or symbol')
+    query=st.text_input('Search company or ticker',key=f'ws_company_{region}_{view}',placeholder='Name or symbol')
     df=company.copy()
     if query:
         df=df[df.symbol.astype(str).str.contains(query,case=False,regex=False) | df.company_name.astype(str).str.contains(query,case=False,regex=False)]
@@ -58,8 +53,7 @@ def _company_table(region,company):
     st.dataframe(df[cols].rename(columns={'symbol':'Ticker','company_name':'Company','industry':'Sector / industry',
         'country':'Country', 'index_memberships':'Index memberships','avg_etf_weight_pct':'Avg ETF wt (%)',
         'sector_indices':'Sector sources','factor_indices':'Factor sources','factor_families':'Factor families'}),hide_index=True,use_container_width=True,height=460)
-    st.download_button('Export filtered companies',df.to_csv(index=False),file_name=f'{region.lower()}_companies.csv',mime='text/csv')
-
+    st.download_button('Export filtered companies',df.to_csv(index=False),file_name=f'{region.lower()}_companies.csv',mime='text/csv',key=f'ws_export_{region}_{view}')
 
 def _financials(region,company):
     if company.empty:return st.info('Financial coverage will appear after the scheduled company-data build.')
@@ -80,7 +74,6 @@ def _financials(region,company):
         st.dataframe(shown,hide_index=True,use_container_width=True,height=410)
         st.caption('Reported / derived financial figures · Check each source period and currency before comparing companies.')
 
-
 def _index_financial_summary(region):
     frame=load(region,'index_financial_summary')
     if frame.empty:
@@ -98,7 +91,6 @@ def _index_financial_summary(region):
     st.dataframe(shown,hide_index=True,use_container_width=True,height=420)
     st.caption('Unweighted medians of observed constituent fundamentals. Incomplete source coverage is shown explicitly.')
 
-
 def _matrix(region):
     frame=load(region,'sector_factor_matrix')
     if frame.empty:return st.info('No verified sector–factor intersections in the saved dataset.')
@@ -114,7 +106,6 @@ def _matrix(region):
     with st.expander('Detailed intersection counts'):
         st.dataframe(grid,use_container_width=True)
 
-
 def render_analysis(region):
     _header(region,'Sector → Factor → Constituents → Verified financial data · Saved Git snapshots')
     company,indices=_summary(region)
@@ -125,7 +116,6 @@ def render_analysis(region):
                                   help='Filters company-level views by the source holdings country. Index totals remain global.')
             if selected!='All countries':
                 company=company[company['country'].astype(str).str.strip().eq(selected)].copy()
-
     overview, members, sources, overlap, finance = st.tabs(['Overview','Company holdings','All source indices','Sector × Factor','Financial coverage'])
     with overview:
         st.markdown('#### Sector and factor coverage')
@@ -133,8 +123,8 @@ def render_analysis(region):
             counts=indices.groupby('category',dropna=False).agg(Indices=('index_name','nunique'),Companies=('constituents','sum')).reset_index()
             st.bar_chart(counts.set_index('category')[['Indices']],horizontal=True,color=THEME['sector'])
             st.caption('Sum of index constituent counts may include companies present in multiple indices.')
-        _company_table(region,company.head(60).copy())
-    with members:_company_table(region,company)
+        _company_table(region,company.head(60).copy(),view='overview')
+    with members:_company_table(region,company,view='holdings')
     with sources:_source_table(indices)
     with overlap:_matrix(region)
     with finance:
@@ -147,7 +137,6 @@ def render_analysis(region):
                 meta=json.loads(path.read_text());st.caption(f"Cache built: {meta.get('built_utc','Unknown')}")
             except (OSError,ValueError):pass
         st.caption('Market prices refresh daily when providers succeed. ETF and NSE holdings update when source constituents change; company financial reports update on their own schedules. No failed request deletes verified history.')
-
 
 def _link_rows(region,company,indices):
     """Create a bounded 2D graph from actual saved source relationships."""
@@ -162,7 +151,6 @@ def _link_rows(region,company,indices):
                 if src and src in available:
                     edges.append((person,src));names.add(src)
     return chosen.to_dict('records'),sorted(names),edges
-
 
 def render_graph(region):
     _header(region,'2D holdings network · Sector and factor source connections')
