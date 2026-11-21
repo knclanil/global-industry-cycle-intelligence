@@ -1,67 +1,127 @@
 name: India Company Financials Refresh
+
 on:
   workflow_dispatch:
     inputs:
       limit:
-        description: 'Max companies to attempt; 0 means entire eligible NSE universe'
+        description: 'Max company fetch attempts (25 default, 0 all eligible)'
+        default: '25'
         required: false
-        default: '0'
       symbols:
-        description: 'Optional comma-separated NSE symbols (for example RELIANCE,TCS,INFY)'
-        required: false
+        description: 'Optional NSE symbols: RELIANCE,TCS,INFY'
         default: ''
+        required: false
+      audit_only:
+        description: 'Skip provider fetch, rebuild audit and research datasets only'
+        default: false
+        required: false
+        type: boolean
   schedule:
-    # Weekdays, after NSE constituent refresh. Yahoo statements update less often.
     - cron: '45 13 * * 1-5'
+
 permissions:
   contents: write
 concurrency:
   group: market-data-writer
   cancel-in-progress: false
+
 jobs:
   financials:
     runs-on: ubuntu-latest
     timeout-minutes: 180
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: pip
           cache-dependency-path: requirements.txt
-      - name: Install financial refresh dependencies
+      - name: Install dependencies
         run: python -m pip install -r requirements.txt
-      - name: Refresh Indian company financial snapshots
+      - name: Validate offline pipeline logic
+        run: |
+          python -m unittest discover -s tests -p 'test_india_financial_pipeline_v2.py' -v
+          python -m unittest discover -s tests -p 'test_india_opportunity_pipeline.py' -v
+      - name: Collect company statements and audit KPI readiness
         env:
+          BATCH_LIMIT: ${{ inputs.limit || '25' }}
+          NSE_SYMBOLS: ${{ inputs.symbols || '' }}
+          AUDIT_ONLY: ${{ inputs.audit_only || 'false' }}
           PYTHONUNBUFFERED: '1'
-          BATCH_LIMIT: ${{ github.event.inputs.limit || '0' }}
-          NSE_SYMBOLS: ${{ github.event.inputs.symbols || '' }}
+        shell: bash
         run: |
-          # Stop collection before the job hard timeout, leaving time to commit checkpoints.
-          timeout --signal=TERM --kill-after=30s 160m python scripts/refresh_india_financials.py --limit "$BATCH_LIMIT" --symbols "$NSE_SYMBOLS" || status=$?
-          if [ "${status:-0}" -eq 124 ]; then
-            echo "Collection time budget reached; committing all saved checkpoints."
-          elif [ "${status:-0}" -ne 0 ]; then
-            echo "Financial collection exited with status ${status}; see logs and committed diagnostics."
-            exit "$status"
+          set -euo pipefail
+          if [ "$AUDIT_ONLY" = 'true' ]; then
+            python scripts/india_financial_pipeline_v2.py --audit-only
+          else
+            # 150-minute grace for successful publishing, even if Yahoo hangs.
+            set +e
+            timeout --signal=TERM --kill-after=30s 150m python scripts/india_financial_pipeline_v2.py --limit "$BATCH_LIMIT" --symbols "$NSE_SYMBOLS"
+            rc=$?
+            set -e
+            if [ "$rc" -ne 0 ] && [ "$rc" -ne 124 ]; then
+              echo "Collector returned $rc; preserving checkpoint data for diagnostics."
+            fi
+            # Existing script checkpoints snapshots/status every 20 attempts and at end.
+            # Audit independently to ensure outputs describe committed snapshots.
+            python scripts/india_financial_pipeline_v2.py --audit-only
           fi
-      - name: Financial collection report
-        if: always()
+      - name: Build company research dataset (no external calls)
+        run: python scripts/build_india_opportunity_dataset.py
+      - name: Validate generated outputs
         run: |
-          if [ -f data/india_financials/build_summary.json ]; then
-            echo '## NSE-universe Yahoo Finance coverage' >> "$GITHUB_STEP_SUMMARY"
-            echo '```json' >> "$GITHUB_STEP_SUMMARY"
-            cat data/india_financials/build_summary.json >> "$GITHUB_STEP_SUMMARY"
-            echo '```' >> "$GITHUB_STEP_SUMMARY"
-          fi
-      - name: Commit validated financial snapshots and summary
+          python - <<'PY'
+          import csv,json
+          from pathlib import Path
+          d=Path('data/india_financials')
+          with (d/'opportunity_research.csv').open(encoding='utf-8') as f: rows=list(csv.DictReader(f))
+          report=json.loads((d/'opportunity_build_report.json').read_text())
+          audit=json.loads((d/'kpi_coverage_report.json').read_text())
+          assert rows and len(rows)==report['companies']==audit['universe'], (len(rows),report,audit)
+          assert len({r['company_key'] for r in rows})==len(rows),'Duplicate company keys'
+          print(f"Validated {len(rows)} unique companies; research-ready {report['research_ready']}; scored {report['research_scored']}")
+          PY
+      - name: Report coverage and completeness
         if: always()
+        shell: bash
         run: |
+          for f in data/india_financials/kpi_coverage_report.json data/india_financials/opportunity_build_report.json; do
+            if [ -f "$f" ]; then
+              echo "### $(basename "$f")" >> "$GITHUB_STEP_SUMMARY"
+              echo '```json' >> "$GITHUB_STEP_SUMMARY"
+              cat "$f" >> "$GITHUB_STEP_SUMMARY"
+              echo '```' >> "$GITHUB_STEP_SUMMARY"
+            fi
+          done
+      - name: Publish cached financial data and research outputs
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          if [ -d data/india_financials ]; then git add data/india_financials/; fi
-          if ! git diff --cached --quiet; then
-            git commit -m 'data: refresh India financial statements and coverage [skip ci]'
-            git pull --rebase origin "${GITHUB_REF_NAME}"
-            git push origin HEAD:"${GITHUB_REF_NAME}"
-          fi
+          export GIT_AUTHOR_NAME='github-actions[bot]'
+          export GIT_AUTHOR_EMAIL='41898282+github-actions[bot]@users.noreply.github.com'
+          export GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
+          export GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
+          src="$PWD/data/india_financials"
+          tmp="$(mktemp -d)"
+          trap 'git worktree remove --force "$tmp/publish" 2>/dev/null || true; rm -rf "$tmp"' EXIT
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            if [ -d "$tmp/publish" ]; then git worktree remove --force "$tmp/publish"; fi
+            git worktree add --detach "$tmp/publish" origin/main
+            mkdir -p "$tmp/publish/data/india_financials"
+            cp -a "$src/." "$tmp/publish/data/india_financials/"
+            git -C "$tmp/publish" add data/india_financials
+            if git -C "$tmp/publish" diff --cached --quiet; then
+              echo 'No changed financial datasets.';exit 0
+            fi
+            git -C "$tmp/publish" commit -m 'data: India fundamentals, coverage, and opportunity research [skip ci]'
+            if git -C "$tmp/publish" push origin HEAD:main; then exit 0; fi
+            sleep 5
+          done
+          echo 'Publishing failed after 5 push attempts.' >&2
+          exit 1
