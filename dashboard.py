@@ -21,7 +21,10 @@ COLORS = {'Leading': '#22c58b', 'Improving': '#4b9cff', 'Weakening': '#f4aa4b', 
 def prices_cached(market: str, start: date, end: date):
     module = {"India": india_market_data, "Global": global_market_data, "Countries": country_market_data, "GlobalFactors": global_factor_market_data, "USAFactors": usa_factor_market_data, "IndiaFactors": india_factor_market_data, "GlobalAssets": global_asset_market_data, "USAAssets": usa_asset_market_data, "IndiaAssets": india_asset_market_data}.get(market, market_data)
     from stored_market_data import read_market
-    frames = read_market(market, list(module.TICKERS), start, end)
+    # INDIA_ASSET_PIPELINE_CANONICAL_READ
+    storage_symbols = ([*module.SECTORS, module.BENCHMARK]
+                       if market == 'IndiaAssets' else list(module.TICKERS))
+    frames = read_market(market, storage_symbols, start, end)
     # Compatibility fallback before first successful scheduled bootstrap.
     # Once snapshots exist, never fetch missing symbols during a user interaction.
     if not frames:
