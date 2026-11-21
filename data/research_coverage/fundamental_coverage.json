@@ -1,28 +1,28 @@
 {
-  "built_utc": "2026-11-21T19:05:02+00:00",
+  "built_utc": "2026-11-21T22:40:55+00:00",
   "markets": {
     "India": {
       "status": "available",
       "companies": 328,
       "metrics": {
-        "revenue": 0,
-        "net_income": 0,
-        "revenue_yoy": 0,
-        "roe": 0,
-        "operating_margin": 0,
-        "operating_cash_flow": 0,
-        "free_cash_flow": 0,
-        "debt_to_equity": 0,
-        "price": 25,
-        "market_cap": 24,
-        "pe": 0,
-        "pb": 0,
+        "revenue": 3,
+        "net_income": 3,
+        "revenue_yoy": 3,
+        "roe": 3,
+        "operating_margin": 3,
+        "operating_cash_flow": 3,
+        "free_cash_flow": 3,
+        "debt_to_equity": 3,
+        "price": 28,
+        "market_cap": 27,
+        "pe": 2,
+        "pb": 2,
         "research_score": 0
       },
       "readiness": {
-        "fundamental_ready": 0,
-        "valuation_ready": 0,
-        "research_ready": 0
+        "fundamental_ready": 3,
+        "valuation_ready": 2,
+        "research_ready": 2
       }
     },
     "USA": {

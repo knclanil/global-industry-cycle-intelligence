@@ -1,0 +1,12 @@
+{
+  "built_utc": "2026-11-21T22:40:06.096508+00:00",
+  "verified_issuers": 2931,
+  "verified_tickers": 2921,
+  "selected": 0,
+  "fetched": 0,
+  "failed": 0,
+  "failures": {},
+  "prices_before": 2,
+  "prices_after": 2,
+  "valuations_after": 2
+}
