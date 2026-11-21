@@ -83,7 +83,7 @@ def rotation_signals(region: str, lookback: int = 63) -> pd.DataFrame:
 # iShares ETF used for holdings. Matching is based on issuer-provided fund title;
 # ambiguous names are deliberately left unmapped. Explicit mappings take priority.
 SECTOR_KEYWORDS = [
-    ('Communication Services', ('communication services', 'communications sector', 'telecommunication')),
+    ('Communication Services', ('communication services', 'communications sector', 'comm services', 'telecommunication')),
     ('Consumer Discretionary', ('consumer discretionary',)),
     ('Consumer Staples', ('consumer staples',)),
     ('Financials', ('financials', 'financial sector', 'financial services')),
@@ -101,10 +101,46 @@ FACTOR_KEYWORDS = [
     ('Quality', ('quality',)),
     ('Value', ('value factor', 'value etf', 'value index', 'msci value', 's&p 500 value', 'russell 1000 value')),
     ('Growth', ('growth factor', 'growth etf', 'growth index', 'msci growth', 's&p 500 growth', 'russell 1000 growth')),
-    ('Dividend Yield', ('dividend yield', 'high dividend', 'dividend select', 'dividend growth')),
+    ('Dividend Yield', ('dividend yield', 'high dividend', 'dividend select', 'select dividend', 'dividend growth')),
     ('Small Cap', ('small cap', 'small-cap', 'size factor')),
     ('Size', ('size factor', 'small cap', 'small-cap')),
 ]
+# Explicit source-fund -> benchmark-price proxy links. These are NOT identical ETFs.
+# An edge is created only if a valid corresponding signal is present in this period.
+# Portfolio IDs are from holdings_intelligence.GLOBAL_SECTORS/GLOBAL_FACTORS.
+USA_SOURCE_PRICE_PROXIES = {
+    '239710': ('factor', 'IWM', 'Small Cap'),
+}
+
+GLOBAL_SOURCE_PRICE_PROXIES = {
+    '239751': ('sector', 'IXP', 'Communication Services'),
+    '275382': ('factor', 'IWVL', 'Value'),
+    '239499': ('factor', 'IDV', 'Dividend Yield'),
+}
+
+
+def _explicit_source_proxy(region: str, pid: str, expected_kind: str, signals: pd.DataFrame):
+    mappings = GLOBAL_SOURCE_PRICE_PROXIES if region == 'Global' else USA_SOURCE_PRICE_PROXIES if region == 'USA' else {}
+    if pid not in mappings:
+        return None
+    kind, ticker, label = mappings[pid]
+    if kind != expected_kind:
+        return None
+    required = {'kind', 'source_id', 'label', 'quadrant'}
+    if not required.issubset(signals.columns):
+        return None
+    candidates = signals.loc[(signals['kind'] == kind) & (signals['source_id'] == ticker)]
+    if len(candidates) != 1 or str(candidates.iloc[0]['quadrant']) not in ('Leading', 'Improving', 'Weakening', 'Lagging'):
+        return None
+    row = candidates.iloc[0].to_dict()
+    row['mapping_method'] = 'explicit_category_proxy'
+    row['mapping_note'] = (
+        f'Holdings fund {pid} grouped as {label}; rotation is based on {ticker} ' 
+        'price series, NOT price performance of the holdings fund.'
+    )
+    return row
+
+
 def _title_proxy(title: str, kind: str, signals: pd.DataFrame):
     """A transparent category *proxy*; never implies portfolio-price identity."""
     title = re.sub(r'\s+', ' ', str(title).lower()).strip()
@@ -172,9 +208,16 @@ def source_signal_mapping(region: str, holdings: pd.DataFrame, signals: pd.DataF
                 if len(titles) != 1:
                     skipped.append({'Source':pid,'Fund': ' / '.join(titles[:2]), 'Reason':'Missing or ambiguous issuer fund title'})
                     continue
-                proxy = _title_proxy(titles[0], expected_kind, signals)
+                # For known global funds, prioritize the audited ETF proxy ticker.
+                # Never silently attach a fund to the wrong kind of signal.
+                proxy = _explicit_source_proxy(region, pid, expected_kind, signals)
                 if proxy is None:
-                    skipped.append({'Source':pid,'Fund':titles[0], 'Reason':'No unambiguous category proxy with valid price history'})
+                    proxy = _title_proxy(titles[0], expected_kind, signals)
+                if proxy is None:
+                    known = (GLOBAL_SOURCE_PRICE_PROXIES if region == 'Global' else USA_SOURCE_PRICE_PROXIES if region == 'USA' else {}).get(pid)
+                    reason = (f'Category recognized, but no valid rotation price signal for {known[1]}'
+                              if known else 'No unambiguous category proxy with valid price history')
+                    skipped.append({'Source':pid,'Fund':titles[0], 'Reason':reason})
                 else:
                     matches[pid] = proxy
         for pid in sorted(holdings.portfolio_id.astype(str).unique()) if not holdings.empty else []:

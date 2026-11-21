@@ -1,35 +1,35 @@
-# Automatic Yahoo Finance sectors for all discovered companies
+# India Nifty unmapped-source expansion
 
-This is an **add-on**, not a replacement for your app or existing ETF taxonomy.
+This package adds the 13 requested India constituent indexes to the knowledge graph *when valid, independently retrieved index price histories are available*.
 
-## Install using GitHub Desktop
+## Files to copy (GitHub Desktop)
 
-1. Copy `scripts/refresh_company_sectors.py` into your repository's `scripts` folder.
-2. Copy `.github/workflows/refresh-company-sectors.yml` into `.github/workflows` in the repository.
-3. Commit and Push in GitHub Desktop.
-4. In GitHub: **Actions → Refresh Company Sectors (Yahoo Finance) → Run workflow**.
-5. After success, look for `data/dashboard_cache/company_sectors/company_sector_mapping.csv` and `summary.json`.
+1. `india_index_rotation_expansion.py` → repository root, alongside `app.py`.
+2. `scripts/build_regional_rotation_graphs.py` → replace the matching file in the repository's `scripts` folder.
+3. `tests/test_india_index_rotation_expansion.py` → optional tests.
 
-The script discovers unique underlying company ticker symbols from:
+Commit and push using GitHub Desktop. Then rerun **Refresh Knowledge Graphs** in GitHub Actions, after the India holdings refresh. It should run the updated `scripts/build_regional_rotation_graphs.py` in the repository root.
 
-- `data/holdings/latest_holdings.parquet` (`ticker`)
-- `data/india_holdings/constituents.csv` (`symbol`, normalized to `.NS` where appropriate)
-- `data/dashboard_cache/rotation_graphs/*_edges.csv` (`Ticker`)
+## What this does
 
-The union is fetched, deduplicated, with retries, progress checkpointing, and a 7-day cache.
-Most Yahoo company sectors are in English (e.g. `Technology`, `Financial Services`).
-`quoteType=ETF` is **not** treated as a sector. Existing ETF/index taxonomy still determines
-categories such as Small Cap or Communications.
+- Registers three sectors: Nifty Oil & Gas, Nifty India Defence, Nifty India Manufacturing.
+- Registers ten factor indexes and their correct factor families (Value, Momentum, Quality, Alpha, Low Volatility, Growth, Dividend).
+- Fetches official NSE-index histories from the existing repository NSE readers when they work. No unofficial Yahoo ticker is invented.
+- Calculates verified 1M/3M/6M quadrant signals against the stored Nifty 50 benchmark, using the repository's relative-strength/momentum formula.
+- Augments `_signals.csv`, generates verified membership `_edges.csv`, and rebuilds `_unmapped.csv`.
+- Writes `data/dashboard_cache/rotation_graphs/india_extra_index_history_status.csv` to explain *every missing index*, including network/provider failures, stale histories and insufficient dates.
 
-## Key limitations
+## Important limitation
 
-- No Yahoo lookups have been executed in this development environment (external network is unavailable).
-- This generates a **lookup CSV** only. It does **not** yet overwrite company-sector edges or
-  make unverified ETF constituent memberships. Yahoo sector mapping can be incorporated later
-  as a *separate, provenance-labeled classification edge*.
-- Yahoo may throttle or block bulk requests. Increase `--delay` or run in smaller batches if needed.
-- `.NS` normalization assumes India constituent `symbol` values are NSE-listed stocks. Verify
-  that symbols are not already internationally suffixed or index identifiers.
-- The stock universe is the union of **available cached holdings and graph edges**. It is not
-  automatically every publicly listed company in all 20 countries.
-- If your repository uses large git-tracked snapshots, changes may be substantial.
+Classification (factor vs sector) is **not** the same as a rotation signal. NSE sometimes restricts automated history; if there is no usable price series, the record remains unmapped with an honest reason. Company memberships are not invented.
+
+## Check results
+
+After the workflow finishes, review:
+
+- `data/dashboard_cache/rotation_graphs/india_extra_index_history_status.csv`
+- `data/dashboard_cache/rotation_graphs/india_3m_signals.csv`
+- `data/dashboard_cache/rotation_graphs/india_3m_edges.csv`
+- `data/dashboard_cache/rotation_graphs/india_3m_unmapped.csv`
+
+If all 13 have `status=unavailable`, investigate NSE API/network access or supply validated historical index closes in your existing market-history store. Do **not** force them into a rotation bucket without price history.
