@@ -1,29 +1,25 @@
-# Knowledge Graph → Verified Membership Table synchronization
+# One-row-per-company membership table
 
-## What this fixes
+This replaces **only** the *All verified company memberships* table display in `regional_rotation_graph.py`. It preserves Knowledge Graph rendering, its controls, matching cohorts, and the independent company-table filter modes.
 
-The **All verified company memberships** table can now use the **exact same company cohort** as the graph above without changing how the graph works.
+The table shows the columns, in order:
 
-Inside that section, choose **Company table source**:
+**Company | Ticker | Quadrant | Sector | Factor | Mapping | Weight | Avg Weight**
 
-1. **Companies displayed in graph** (default): exactly the company nodes drawn after the 60/100-company display limit. All of their verified sector/factor memberships appear in the table, including source memberships with other rotations.
-2. **All companies matching graph filters**: includes the entire matching company cohort before the graph's display limit.
-3. **Independent company search**: the original standalone table filters, ignoring graph selections.
+Each `company_key` produces one row. Multiple distinct quadrant/sector/factor/mapping values are joined into a single cell using ` · `; factor source indexes are normalized into factor families (Value, Quality, etc.). Company identities are **not** collapsed merely because their names or tickers look similar. The underlying index/ETF membership evidence remains available in an expandable source-level table and as a CSV download.
 
-For either graph-based option, enable **Further narrow the graph companies using table filters** only if you want to apply additional table-only criteria. Otherwise the table lists all verified evidence for those companies; the graph is unaffected.
+**Weight** is a list of recorded per-source holding weights (one per distinct source/portfolio membership with a usable weight), not their sum. **Avg Weight** is the arithmetic mean of those reported weights, excluding missing values; it is not the weighted-average portfolio exposure or a recommended investment allocation. India source snapshots without constituent weights show `N/A` for Weight and an empty Avg Weight.
 
-The graph's selections and chart rendering logic are unchanged. The new behavior only chooses which **company identities** are included in the table. It does not reduce the graph or change underlying membership snapshots.
+## Install through GitHub Desktop
 
-## Installation using GitHub Desktop
+1. Extract this ZIP.
+2. In GitHub Desktop select `global-industry-cycle-intelligence` → Repository → Show in Explorer.
+3. Copy `regional_rotation_graph.py` into the root of the repository, alongside `app.py`, replacing the existing file.
+4. Commit (`Show company memberships one row per company`) and Push origin.
+5. Open Global, USA, or India Knowledge Graph, expand *All verified company memberships*, and select your preferred table source.
 
-Copy `regional_rotation_graph.py` beside `app.py` in the repository root, replacing the old file. Commit and push via GitHub Desktop. No cache rebuild is required. Existing `rotation_graph_evidence.py`, data snapshots, and GitHub Actions workflows are unchanged.
+No cache regeneration is required. If your local `regional_rotation_graph.py` has newer custom changes, review the diff before replacing it.
 
-## Verification
+## Validation
 
-- Select the graph's Lagging rotation plus Growth, Quality and Value factors; choose Any or All.
-- Open **All verified company memberships · table filters**.
-- Leave **Companies displayed in graph** selected. The table must contain the exact **distinct company identities** displayed in the graph; each company can have several evidence rows.
-- Switch to **All companies matching graph filters** to see companies omitted from the graph only because of its 60/100-company visual limit.
-- Choose **Independent company search** for separate company membership queries.
-
-Synthetic unit tests passed (3/3), and Python syntax compilation passed. This patch has not been deployed or tested in the live Streamlit Cloud application. If `regional_rotation_graph.py` has been edited more recently in your repository, compare the diff before replacing it.
+Syntax compilation passed; two isolated aggregation tests passed. Full Streamlit deployment has **not** been tested. This file is based on the last graph/table sync package provided in the conversation.

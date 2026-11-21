@@ -256,6 +256,58 @@ def memberships_for_graph_companies(edges: pd.DataFrame, company_keys) -> pd.Dat
     return edges.loc[edges["company_key"].astype(str).isin(keys)].copy()
 
 
+def summarize_company_memberships(edges: pd.DataFrame) -> pd.DataFrame:
+    """One display row per verified company identity; preserve source-level evidence.
+
+    Weight lists the observed weights from distinct index/portfolio memberships,
+    not a sum of exposure. Avg Weight is the arithmetic mean of those observed
+    weights only. Missing weights remain N/A rather than becoming zero.
+    """
+    display_columns = ["Company", "Ticker", "Quadrant", "Sector", "Factor",
+                       "Mapping", "Weight", "Avg Weight"]
+    if edges.empty or "company_key" not in edges:
+        return pd.DataFrame(columns=display_columns)
+
+    df = edges.copy()
+    for col in ("Company", "Ticker", "quadrant", "kind", "label",
+                "mapping_method", "source_id", "portfolio_id"):
+        if col not in df.columns:
+            df[col] = ""
+        df[col] = df[col].fillna("").astype(str).str.strip()
+    if "weight" not in df.columns:
+        df["weight"] = float("nan")
+    df["__weight"] = pd.to_numeric(df["weight"], errors="coerce")
+    df.loc[~df["__weight"].between(0, 100), "__weight"] = float("nan")
+    df["__factor"] = [(_factor_family(label) if kind.casefold() == "factor" else "")
+                      for kind, label in zip(df["kind"], df["label"])]
+
+    def unique_strings(series):
+        return " · ".join(sorted({v for v in series if v}, key=str.casefold)) or "—"
+
+    results = []
+    for company_key, group in df.groupby("company_key", sort=False, dropna=False):
+        # Duplicate source records should not inflate the average weight.
+        memberships = group.drop_duplicates(
+            subset=["kind", "source_id", "portfolio_id"], keep="first")
+        weighted = memberships.loc[memberships["__weight"].notna()]
+        vals = weighted["__weight"].tolist()
+        sectors = memberships.loc[memberships["kind"].str.casefold() == "sector", "label"]
+        factors = memberships.loc[memberships["kind"].str.casefold() == "factor", "__factor"]
+        results.append({
+            "Company": next((v for v in group["Company"] if v), str(company_key)),
+            "Ticker": next((v for v in group["Ticker"] if v), "—"),
+            "Quadrant": unique_strings(memberships["quadrant"]),
+            "Sector": unique_strings(sectors),
+            "Factor": unique_strings(factors),
+            "Mapping": unique_strings(memberships["mapping_method"]),
+            "Weight": " · ".join(f"{v:.2f}%" for v in vals) if vals else "N/A",
+            "Avg Weight": round(sum(vals) / len(vals), 4) if vals else None,
+        })
+    return (pd.DataFrame(results, columns=display_columns)
+              .sort_values(["Company", "Ticker"], key=lambda c: c.str.casefold())
+              .reset_index(drop=True))
+
+
 def _draw(nodes, links, selection: str | list[str] | dict, max_companies: int | None,
           match_mode: str = "Any selected"):
     by_id = {n["id"]: n for n in nodes}
@@ -557,15 +609,30 @@ def render_graph(region: str):
             table_rows = memberships_for_graph_companies(table_rows, visible_graph_company_keys)
         elif table_scope == "All companies matching graph filters":
             table_rows = memberships_for_graph_companies(table_rows, matched_graph_company_keys)
-        st.caption(f"{len(table_rows):,} verified membership records · "
-                   f"{table_rows['company_key'].nunique() if 'company_key' in table_rows else 0:,} companies. "
+        company_summary = summarize_company_memberships(table_rows)
+        st.caption(f"{len(company_summary):,} unique companies · "
+                   f"{len(table_rows):,} underlying verified membership records. "
                    f"Graph currently displays {len(visible_graph_company_keys):,} companies; "
-                   f"{len(matched_graph_company_keys):,} match its filters before the display limit. "
-                   "Choose Independent company search to ignore the graph selection.")
-        st.dataframe(table_rows, use_container_width=True, hide_index=True)
-        st.download_button("Download table memberships CSV",
-                           data=table_rows.to_csv(index=False).encode("utf-8"),
-                           file_name=f"{region.lower()}_{period}_table_memberships.csv",
+                   f"{len(matched_graph_company_keys):,} match graph filters before the display limit. "
+                   "One row per company; sector, factor, quadrant and mapping evidence is combined.")
+        st.dataframe(
+            company_summary, use_container_width=True, hide_index=True,
+            column_config={"Avg Weight": st.column_config.NumberColumn(
+                "Avg Weight", help="Arithmetic mean of available index/fund weights. "
+                "Missing weights are excluded, not treated as zero.", format="%.2f%%")},
+        )
+        st.caption("Weight lists the available weights for distinct source memberships; "
+                   "Avg Weight averages only those reported weights. 'N/A' means no "
+                   "verified weights were provided, not a zero allocation.")
+        st.download_button("Download company summary CSV",
+                           data=company_summary.to_csv(index=False).encode("utf-8"),
+                           file_name=f"{region.lower()}_{period}_company_summary.csv",
                            mime="text/csv", key=f"kg_table_export_{region}_{period}")
+        with st.expander("Show individual source membership evidence"):
+            st.dataframe(table_rows, use_container_width=True, hide_index=True)
+            st.download_button("Download source-level evidence CSV",
+                               data=table_rows.to_csv(index=False).encode("utf-8"),
+                               file_name=f"{region.lower()}_{period}_source_evidence.csv",
+                               mime="text/csv", key=f"kg_source_export_{region}_{period}")
     with st.expander("Unmapped source records"):
         st.dataframe(_load(region, period, "unmapped"), use_container_width=True, hide_index=True)
