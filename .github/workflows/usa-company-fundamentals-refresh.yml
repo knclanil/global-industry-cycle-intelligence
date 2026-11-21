@@ -1,0 +1,119 @@
+name: USA Company Fundamentals and Valuations Refresh
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: 'Max stale SEC companies to attempt; 0 for all'
+        default: '25'
+        required: false
+      tickers:
+        description: 'Optional verified USA symbols, e.g. AAPL,MSFT'
+        default: ''
+        required: false
+      audit_only:
+        description: 'Skip provider calls, rebuild from existing cache'
+        type: boolean
+        default: false
+        required: false
+  schedule:
+    - cron: '30 15 * * 1-5'
+permissions:
+  contents: write
+concurrency:
+  group: market-data-writer
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 100
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: requirements.txt
+      - name: Install dependencies
+        run: |
+          python -m pip install -r requirements.txt
+          python -m pip install yfinance pyarrow
+      - name: Validate parser and matching behavior
+        run: python -m unittest discover -s tests -p 'test_dual_market_fundamentals.py' -v
+      - name: Collect and refresh SEC financial facts and quotes
+        env:
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+          BATCH_LIMIT: ${{ inputs.limit || '25' }}
+          SYMBOLS: ${{ inputs.tickers || '' }}
+          AUDIT_ONLY: ${{ inputs.audit_only || 'false' }}
+          PYTHONUNBUFFERED: '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "$AUDIT_ONLY" = 'true' ]; then
+            python scripts/refresh_usa_company_fundamentals.py --audit-only
+          else
+            python scripts/refresh_usa_company_fundamentals.py --limit "$BATCH_LIMIT" --tickers "$SYMBOLS" --quotes --quotes-limit 25
+          fi
+      - name: Build USA company research fundamentals
+        run: |
+          python scripts/build_usa_research.py
+          python scripts/unified_fundamental_coverage.py
+      - name: Validate output integrity
+        run: |
+          python - <<'PY'
+          import pandas as pd
+          p='data/usa_research/company_research.csv'
+          df=pd.read_csv(p)
+          assert len(df)>0
+          assert df.company_key.notna().all() and df.company_key.is_unique
+          print('Validated USA company rows:',len(df))
+          PY
+      - name: Report readiness
+        if: always()
+        shell: bash
+        run: |
+          for f in data/usa_research/build_report.json data/usa_research/collection_report.json data/research_coverage/fundamental_coverage.json; do
+            if [ -f "$f" ]; then
+              echo "### $(basename "$f")" >> "$GITHUB_STEP_SUMMARY"
+              echo '```json' >> "$GITHUB_STEP_SUMMARY"
+              cat "$f" >> "$GITHUB_STEP_SUMMARY"
+              echo '```' >> "$GITHUB_STEP_SUMMARY"
+            fi
+          done
+      - name: Publish financial facts, quotes and coverage safely
+        shell: bash
+        run: |
+          set -euo pipefail
+          export GIT_AUTHOR_NAME='github-actions[bot]'
+          export GIT_AUTHOR_EMAIL='41898282+github-actions[bot]@users.noreply.github.com'
+          export GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
+          export GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
+          source_dir="$PWD"
+          temp="$(mktemp -d)"
+          trap 'git worktree remove --force "$temp/pub" 2>/dev/null || true; rm -rf "$temp"' EXIT
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git worktree remove --force "$temp/pub" 2>/dev/null || true
+            git worktree add --detach "$temp/pub" origin/main
+            for directory in data/fundamentals data/usa_research data/research_coverage; do
+              if [ -d "$source_dir/$directory" ]; then
+                mkdir -p "$temp/pub/$directory"
+                cp -a "$source_dir/$directory/." "$temp/pub/$directory/"
+              fi
+            done
+            if [ -d "$source_dir/data/sec_cache" ]; then
+              mkdir -p "$temp/pub/data/sec_cache"
+              cp -a "$source_dir/data/sec_cache/." "$temp/pub/data/sec_cache/"
+            fi
+            git -C "$temp/pub" add data/fundamentals data/sec_cache data/usa_research data/research_coverage 2>/dev/null || \
+              git -C "$temp/pub" add data/fundamentals data/usa_research data/research_coverage
+            if git -C "$temp/pub" diff --cached --quiet; then echo 'No dataset changes'; exit 0; fi
+            git -C "$temp/pub" commit -m 'data: refresh USA company fundamentals [skip ci]'
+            if git -C "$temp/pub" push origin HEAD:main; then exit 0; fi
+            echo "Concurrent upstream push, retry $attempt"
+            sleep 3
+          done
+          echo 'Could not publish data after five retries' >&2
+          exit 1

@@ -1,32 +1,55 @@
-# Repair: USA and India research pages missing from sidebar
+# USA + India Company Fundamental Data — deployment package
 
-## Root cause established
+This package is designed to enrich the **existing India and USA Company Deep Dive pages** without changing navigation, the Knowledge Graph, or the verified membership datasets. It **does not contain pre-fetched financial values**; GitHub Actions will retrieve and publish values after installation. Financial provider coverage is not guaranteed.
 
-The published GitHub `main/app.py` (inspected November 21, 2026) still contains the old USA and India sidebar definitions; it has no `USA Investment Opportunity Screener` / `USA Company Deep Dive` or equivalent India routes. The earlier ZIP **did not automatically modify your repo**. In particular, the earlier install scripts only change `app.py` if run in the local repository and the resulting `app.py` is committed/pushed. The earlier India installer also requires a specific sidebar layout and can fail if older pages remain.
+## Copy into repository (GitHub Desktop)
 
-## INSTALL — Windows / GitHub Desktop
+Extract and merge the `scripts/`, `tests/` and `.github/` directories at the repository root. Replace the existing `scripts/build_usa_research.py` and `.github/workflows/india-financials-refresh.yml` files with the supplied versions; the other files are additions. Do **not** replace `app.py` or any research UI files. Commit and push.
 
-1. Open **GitHub Desktop → Repository → Show in Explorer**. This is your real local repo (has `app.py`, `.github`, etc.).
-2. Extract this ZIP and **copy everything inside it** into that repository folder, preserving the `scripts/` folder. **Do not replace `app.py` manually.**
-3. In the repository folder double-click **`INSTALL_WINDOWS.bat`**. You should see `SUCCESS: updated app.py` (or `ALREADY INSTALLED`). The installer edits only the local `app.py` sidebar lists, page icons and dispatch routes, and validates syntax and that required UI modules exist.
-4. In GitHub Desktop verify the **Changes** tab includes `app.py` and the six `*_research_*` / `*_opportunity_ui.py` / `*_deep_dive_ui.py` files.
-5. **Commit to main**, then **Push origin**. **Commit alone is not enough** for the deployed app.
-6. Open GitHub.com `main/app.py`, confirm it contains `USA Investment Opportunity Screener`, then refresh/reboot the Streamlit app. Confirm the sidebar has both regions' new pages.
+### One-time GitHub secret
 
-Expected navigation:
+In repository GitHub **Settings → Secrets and variables → Actions**, add `SEC_USER_AGENT` with a descriptive value containing a genuine email contact (for example `Research Application contact@example.com`). SEC requests need a valid identifying User-Agent. Do not commit the contact email as source code or share credentials.
 
-- India: Asset Flow → Sector → Factors → Investment Opportunity Screener → Company Deep Dive (old overlapping India analysis pages removed from India navigation only; their modules remain).
-- USA: Asset Flow → Sector → Factors → Investment Opportunity Screener → Company Deep Dive (preserves other existing USA pages).
-- All Knowledge Graphs stay unchanged.
+### Initial tests (GitHub → Actions)
 
-For terminal usage: `python scripts/install_research_navigation.py` then `python scripts/install_research_navigation.py --check`.
+1. Run **USA Company Fundamentals and Valuations Refresh** with `tickers=AAPL,MSFT`, `limit=2`, `audit_only=false`. These tickers must already be present in your verified USA holdings; otherwise choose two that are.
+2. Run **India Company Financials Refresh** with `symbols=RELIANCE,TCS,INFY`, `limit=3`, `audit_only=false`.
+3. Inspect action logs and committed `data/usa_research/build_report.json`, `data/usa_research/collection_report.json`, `data/india_financials/kpi_coverage_report.json`, and `data/india_financials/opportunity_build_report.json`.
+4. Run both without `tickers/symbols`, default `limit=25` for incremental expansion. The India workflow includes its existing opportunity dataset builder. The USA workflow will generate `data/usa_research/company_research.csv`.
+5. Both workflows use a clean detached Git worktree for publishing (no dirty-tree rebase). The USA publication includes `data/fundamentals/`, `data/usa_research/`, and the cross-market coverage report.
 
-If you still see no changes after push, check: (a) GitHub Desktop correct repository/branch, (b) `app.py` appears in the **committed** files, (c) `main/app.py` online includes both page labels, (d) Streamlit app is configured for this repo/branch and entrypoint `app.py`, (e) Streamlit deployment logs show no import error.
+### USA collection
 
-## Data and research readiness
+SEC CompanyFacts official JSON is downloaded by unique verified ticker ↔ CIK match, cached under `data/fundamentals/facts_<CIK>.json`. Financial metrics from your existing `sec_financials.py` statements include revenue, net income, ROE, operating margin, operating cash flow, FCF, and debt-to-equity when available. Bank financials are treated differently from non-bank financials. Yahoo Finance quotes/ratios are cached separately and accepted only if recent, USD denominated, and ticker-verified. `P/E` and `P/B` are explicitly **provider snapshot values**, not derived from stale annual filings. No valuation or investment composite score is fabricated.
 
-Pages appear with the navigation fix, even if financial CSVs have not been generated. They will show missing financial fields honestly. To generate snapshots from previously cached data, run `python scripts/build_usa_research.py` and `python scripts/build_india_opportunity_dataset.py` in the repo as appropriate. Real company valuations and comparison scores require populated financial data and suitable quote coverage.
+### India collection
 
-## Safety
+Existing Yahoo NSE ticker collection, annual/quarterly statement normalization, atomic cached company snapshots, financial KPI audit, verified NSE-membership join, industry-aware peer calculations and conservative readiness/score gates. Existing Screener.in reference links remain *links*, never scraped.
 
-No edits to knowledge graphs, price and factor calculations, workflows or saved market data. Installer is idempotent and fails without writing if baseline cannot be parsed/validated. The ZIP bundles the previously prepared pages and data loaders. No live deployment has been executed by this assistant.
+### Data flow
+
+```
+India verified NSE memberships → Yahoo company statements + quotes → summaries
+  → opportunity_research.csv → India Screener + India Company Deep Dive
+
+USA verified iShares holdings → SEC companyfacts cache → normalized SEC KPIs
+  + dated Yahoo price / P/E / P/B snapshots → company_research.csv
+  → USA Screener + USA Company Deep Dive
+
+Both → data/research_coverage/fundamental_coverage.json (metric-by-metric readiness)
+```
+
+### Limits and safety
+
+- **No market data is fetched inside Streamlit**; collectors run in GitHub Actions.
+- No fake zeros, estimates, imputed facts, or assumed index weights.
+- Available financial figures are not necessarily adequate or accurate; check **as-of dates, reporting scopes, currencies and source statements**.
+- USA SEC data often covers US-GAAP filers; foreign issuers or nonstandard disclosures may have missing fields.
+- India Yahoo statement availability was previously very low; this update does not guarantee improvement or provide a secondary licensed provider.
+- Large SEC JSON files can grow repository size. Monitor GitHub data limits and migrate to object storage for sustained high-volume collection.
+- USA quality/valuation composite **scores remain blank** pending validated peer, sector, fiscal period alignment. India scoring runs only when its existing data-readiness gates are satisfied.
+- GitHub repository **Actions → General → Workflow permissions** must allow read/write to commit data, and branch protection must permit bot commits.
+
+## Validation performed before packaging
+
+Python syntax checks, YAML parsing, 5 isolated USA quote/CIK tests. Full live provider and deployed Streamlit integration **not tested**.
