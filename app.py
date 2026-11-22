@@ -121,7 +121,10 @@ elif page == 'Company Financial Research':
     from company_financial_research import render_company_financial_research
     render_company_financial_research()
 elif page == 'USA Company Financial KPI Intelligence':
+    from usa_fundamental_rankings_ui import render_usa_fundamental_rankings
     from company_kpi_metrics import render_company_kpi_metrics
+    render_usa_fundamental_rankings()
+    st.divider()
     render_company_kpi_metrics()
 elif page == 'India Company Financial KPI Intelligence':
     from india_kpi_intelligence import render_india_kpi_intelligence
