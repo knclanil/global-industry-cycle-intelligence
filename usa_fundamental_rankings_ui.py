@@ -49,13 +49,11 @@ def render_usa_fundamental_rankings():
     c1.metric('Verified companies',f'{len(df):,}')
     c2.metric('Fully ranked',f'{ranked.sum():,}')
     c3.metric('Incomplete / ineligible',f'{(~ranked).sum():,}')
-    if not ranked.any():
-        st.warning('No companies currently qualify for all five individual ranks. The full verified-company table is shown so you can inspect available metrics and missing evidence.')
     with st.expander('Rankings filters',expanded=True):
         left,mid,right=st.columns([1,1,1])
         sectors=sorted({s for value in df.get('sectors',pd.Series(dtype=object)) for s in _split(value)})
         selected_sector=left.multiselect('Sector',sectors,key='usa_fr_sector')
-        show=mid.selectbox('Ranking status',['All verified companies','Ranked only','Incomplete only'],key='usa_fr_status')
+        show=mid.selectbox('Ranking status',['Ranked only','All verified companies','Incomplete only'],key='usa_fr_status')
         search=right.text_input('Search company / ticker',key='usa_fr_search').strip()
     view=df.copy()
     if selected_sector:view=view[view['sectors'].fillna('').map(lambda x:bool(set(_split(x))&set(selected_sector)))]

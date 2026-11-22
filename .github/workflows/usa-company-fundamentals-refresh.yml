@@ -5,11 +5,11 @@ name: USA Company Fundamentals, Quotes and Ranking Refresh
       sec_limit:
         description: 'Max new/stale SEC CompanyFacts downloads'
         required: false
-        default: '125'
+        default: '250'
       quotes_limit:
         description: 'Max stale equity quote downloads'
         required: false
-        default: '125'
+        default: '250'
   schedule:
     - cron: '40 14 * * 1-5'
 permissions:
@@ -35,11 +35,11 @@ jobs:
         run: |
           python -m pip install -r requirements.txt
           python -m pip install yfinance pyarrow requests pandas
-      - name: Test USA financial autopilot (separate step)
+      - name: Test USA financial autopilot
         run: python -m unittest discover -s tests -p 'test_usa_financial_autopilot.py' -v
-      - name: Test USA fundamental rankings (separate step)
+      - name: Test USA fundamental rankings
         run: python -m unittest discover -s tests -p 'test_usa_fundamental_rankings.py' -v
-      - name: Test USA ranking integration (separate step)
+      - name: Test USA ranking integration
         run: python -m unittest discover -s tests -p 'test_usa_complete_ranking_integration.py' -v
       - name: Refresh SEC CompanyFacts for verified issuers
         env:
@@ -60,6 +60,7 @@ jobs:
           python scripts/usa_financial_gap_report.py
           python scripts/unified_fundamental_coverage.py
           python scripts/build_usa_fundamental_rankings.py
+          python scripts/usa_all_ticker_coverage.py
       - name: Enforce identity and output integrity
         run: |
           python - <<'PY'
@@ -121,7 +122,7 @@ jobs:
         if: always()
         shell: bash
         run: |
-          for f in data/usa_research/collection_report.json data/usa_research/quote_pilot_report.json data/usa_research/completion_report.json; do
+          for f in data/usa_research/collection_report.json data/usa_research/quote_pilot_report.json data/usa_research/completion_report.json data/usa_research/all_ticker_financial_coverage.json; do
             if [ -f "$f" ]; then
               echo "### $f" >> "$GITHUB_STEP_SUMMARY"
               echo '```json' >> "$GITHUB_STEP_SUMMARY"
