@@ -1,23 +1,12 @@
-FIX: Global / USA / India Sector x Factor and Financial coverage EmptyDataError
+USA financial workflow — distinct test steps fix
 
-Replace regional_workspace.py at the repository root with this full file.
-The replacement is based on the preceding duplicate-key-fix version and preserves unique widget keys.
+Replaces only .github/workflows/usa-company-fundamentals-refresh.yml.
+Each unittest command is now its own named GitHub Actions step. No YAML multiline shell needed.
 
-Why it failed:
-  _matrix -> load(region, 'sector_factor_matrix') -> _csv -> pd.read_csv
-  If the CSV contains zero bytes or no columns, pandas raises EmptyDataError.
-
-What changed:
-  - Missing, 0-byte, or blank CSVs safely return an empty DataFrame.
-  - Bad CSV parsing reports a warning rather than crashing the whole Streamlit page.
-  - The Sector x Factor view explains how to rebuild missing data.
-  - No fabricated sector-factor relationships or financial metrics are added.
-
-Using GitHub Desktop:
-  1. Extract ZIP and copy regional_workspace.py into the repo root.
-  2. Commit and Push origin.
-  3. Check Global > Sector x Factor and Financial coverage.
-  4. To populate missing intersections, check data/dashboard_cache/global_sector_factor_matrix.csv
-     and run the repository's dashboard cache refresh workflow. Repeat for USA / India as needed.
-
-Important: This prevents the crash; it does not restore missing data.
+Copy the .github folder into the repository root; commit and PUSH to main.
+Verify GitHub main workflow includes names:
+  Test USA financial autopilot (separate step)
+  Test USA fundamental rankings (separate step)
+  Test USA ranking integration (separate step)
+Start a NEW workflow run (do not rerun an old run).
+If failure still shows 'Verify offline parsing and joins', the run is using a different/old workflow revision.
