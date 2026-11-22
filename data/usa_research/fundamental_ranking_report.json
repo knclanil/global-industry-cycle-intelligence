@@ -1,0 +1,139 @@
+{
+  "built_utc": "2026-11-22T21:11:03.677468+00:00",
+  "verified_companies": 2931,
+  "ranked": 307,
+  "unranked": 2624,
+  "metric_coverage": {
+    "roe": 585,
+    "current_ratio": 509,
+    "operating_margin": 472,
+    "net_margin": 589,
+    "eps_growth_pct": 480,
+    "market_cap": 173
+  },
+  "sec_mapping_failures": 2301,
+  "sample_failures": [
+    {
+      "ticker": "2200964D",
+      "reason": "Not uniquely mapped to SEC CIK"
+    },
+    {
+      "ticker": "AKE",
+      "reason": "Not uniquely mapped to SEC CIK"
+    },
+    {
+      "ticker": "AMRC",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "AMRX",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "AMSC",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "AMSF",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "AMTB",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "AMTX",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "ANAB",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "ANDE",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "ANF",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "ANGI",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "ANGO",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "ANIK",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "ANIP",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "ANNX",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "ANRO",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "ANTX",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "AOMR",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "AORT",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "AOSL",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "AP",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "APAM",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "APC",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "APEI",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "APLE",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "APMD",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "APOG",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "APPN",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "APPS",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    }
+  ],
+  "method": "5 SEC annual metric ranks (lower sum better); USD market cap used solely on ties; no web-page scraping",
+  "limitations": "Financial sector excluded; annual-only; verified records with missing metrics remain unranked; source links for manual verification"
+}
