@@ -32,7 +32,7 @@ def positive(value):
         return None
 
 
-def quote_recent(row, today=None, days=6):
+def quote_recent(row, today=None, days=40):
     today=today or datetime.now(timezone.utc).date()
     try:
         stamp=date.fromisoformat(str(row.get('quote_asof',''))[:10])
@@ -131,6 +131,10 @@ def select_targets(universe, existing, financial, requested=(), limit=25, member
         candidates = sorted((t for t in universe if valid_quote_ticker(t)),
                             key=lambda t: (t not in eligible, t))
     stale = [t for t in candidates if not quote_recent(existing.get(t, {}))]
+    # Prioritize never-collected symbols over merely stale symbols, while
+    # retaining fundamental-readiness priority. Prevents refresh starvation.
+    ready = ready_tickers(financial, membership)
+    stale.sort(key=lambda t: (t not in ready, bool(existing.get(t, {}).get('price')), t))
     return stale[:limit] if limit else stale
 
 def write_csv_atomic(path,rows):

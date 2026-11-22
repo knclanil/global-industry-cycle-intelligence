@@ -1,60 +1,57 @@
-# USA financial collection, storage and fundamental rankings
+# USA Company Financials + Fundamental Ranking — installation package
 
-This update extends (and **does not replace**) the existing USA SEC+quote collection workflow. It produces a separately auditable **fundamental ranking dataset** from existing verified USA memberships and locally cached official SEC CompanyFacts. It is intentionally **not a StockAnalysis, Finviz, or Yahoo Finance HTML scraper**.
+**Scope:** USA only. Retains all existing USA/India pages, graphs, holdings, Financial Research, Financial KPIs, and the opportunity screener. This package does **not** scrape StockAnalysis or Finviz and requires no Alpha Vantage or FMP key.
 
-## Sources and permissions
+## What this ZIP contains
 
-- **SEC** — automated collection already performed by `scripts/refresh_usa_company_fundamentals.py` under `SEC_USER_AGENT`. The new ranking script reads the cached raw CompanyFacts without making a network request.
-- **Yahoo** — this update reads **existing** `data/usa_research/quotes.csv` from the current pipeline for a dated USD market-capitalization tiebreak. It does not add new Yahoo webpage scraping.
-- **StockAnalysis.com** — verified reference URLs are generated for every ticker. Its terms prohibit automated bulk collection and it does not offer a public API; these are **manual research links only**.
-- **Finviz** — reference URL is generated per ticker. It is **not scraped**.
+- `scripts/refresh_usa_company_fundamentals.py`: SEC CompanyFacts incremental collection for the verified USA issuer universe.
+- `scripts/usa_quote_coverage_pilot.py`: Yahoo quote and market cap collection; invalid ticker protection, prioritizes fundamental-ready issuers, prioritizes never-collected quotes, and uses a 40-day quote refresh window to prevent forever refreshing the first symbols.
+- `scripts/usa_sec_cache_reader.py`: read cached SEC facts by verified SEC CIK.
+- `scripts/build_usa_research.py`, `scripts/usa_financial_gap_report.py`, `scripts/unified_fundamental_coverage.py`: reconstruct and audit existing USA research datasets.
+- `scripts/build_usa_fundamental_rankings.py`: extract annual SEC facts, calculate five ratios including EPS **YoY percentage growth**, assign ranks and emit source evidence.
+- `.github/workflows/usa-company-fundamentals-refresh.yml`: existing USA automated workflow *replacement*, with collection, quote enrichment, dataset build, ranking build, validation, and clean-worktree GitHub publishing.
+- `usa_fundamental_rankings_ui.py`: standalone Streamlit ranking component; placed inside existing USA Financial KPIs.
+- `scripts/install_usa_rankings_in_kpis.py` and `INSTALL_WINDOWS.bat`: one-time **safe, idempotent** integration with your existing `company_kpi_metrics.py`, preserving all existing KPI tabs. If the expected current code is different, it refuses to edit it.
+- Regression tests.
 
-Automated ingestion from the latter two websites would need appropriate permission or licensed data-access arrangements. A link is **not** evidence that a metric was collected from that site. This package never mislabels a SEC number as a Finviz/StockAnalysis/Yahoo value.
+## Installation with GitHub Desktop
 
-## What gets saved
+1. Extract the ZIP.
+2. GitHub Desktop → Repository → Show in Explorer.
+3. Copy **all contents** of the extracted package to the root of your repository, merging `scripts/`, `tests/` and `.github/` (do not create a second nested project folder).
+4. Double-click `INSTALL_WINDOWS.bat` from the **repository root**. It inserts the ranking panel in `company_kpi_metrics.py`. It does not overwrite your `app.py`.
+5. Return to GitHub Desktop, **do not commit** the optional `company_kpi_metrics.py.before_fundamental_rankings.bak` backup (you may move it outside the repo). Review the changes, commit, and Push origin.
+6. GitHub → Actions → `USA Company Fundamentals, Quotes and Ranking Refresh` → Run workflow. The workflow will also run weekdays if Actions are enabled.
+7. USA → USA Financial KPIs → **Fundamental Rankings**, above the existing company financial KPI form.
 
-All under `data/usa_research/`, auto-published using the existing workflow's clean-worktree publishing step:
+GitHub Actions must have `contents: write` permission and an existing `SEC_USER_AGENT` GitHub repository secret containing descriptive organization/name and contact email.
 
-1. `fundamental_rankings.csv`: one row per verified USA issuer with ticker, name, sector/factor membership, ROE (%), current ratio, operating margin (%), net margin (%), diluted EPS growth (%), raw financial values, per-metric ranks, rank sum, optional market-cap tiebreak and final rank.
-2. `fundamental_field_evidence.csv`: **per-field** original SEC concept, value, fiscal period end, filing date, accession number, source; dated quote provenance where available.
-3. `financial_source_links.csv`: all ten supplied StockAnalysis/Finviz/Yahoo reference URLs with `TICKER` replaced per company.
-4. `fundamental_ranking_report.json`: metric coverage, ranked/unranked counts and diagnostic sampling.
+## Data outputs
 
-## Ranking logic
+- `data/fundamentals/sec_company_directory.json` and `facts_<CIK>.json`: SEC issuer directory and cached financial filing facts.
+- `data/usa_research/quotes.csv`: dated Yahoo USD stock prices, market capitalizations and available quote multiples.
+- `data/usa_research/company_research.csv`: existing company research dataset.
+- `data/usa_research/fundamental_rankings.csv`: one verified company per row, all actual financial values, five individual ranks, sum, market cap (only for ties), and final rank.
+- `data/usa_research/fundamental_field_evidence.csv`: ticker, source financial statement field, filing date, period end, accession, and value.
+- `data/usa_research/financial_source_links.csv`: links to StockAnalysis, Finviz and Yahoo company pages with ticker inserted for **manual verification only**.
+- `data/usa_research/fundamental_ranking_report.json`: coverage diagnostics, eligible and ineligible counts.
 
-1. Among companies with **all five usable metrics**, rank ROE, Current Ratio, Operating Margin, Net Margin, and diluted EPS year-on-year growth, with high values ranking best.
-2. Sum five individual ranks; **smallest sum is best**.
-3. **Market cap only breaks ties in rank sum**; it is never added to fundamental rank sum. Highest known USD market cap wins. Equal or unavailable cap can leave a shared final rank.
-4. Missing metrics yield **unranked**, never 0 or an invented rank.
-5. For EPS growth, a positive prior-year EPS base and positive current EPS are required; loss-to-profit transitions need a different signal.
-6. Banks, insurers, REITs and other financial institutions are excluded from the five-metric general-company model because Current Ratio/margins have different meanings. They remain in the exported universe marked unranked. A specialized model can be added later.
-7. Only annual, filed SEC CompanyFacts are used. The evidence file retains periods and facts. The script rejects materially misaligned or stale observations.
+## Ranking policy
 
-**Interpretation:** These are *fundamental ranking numbers*, not valuation, investment suitability, or backtested predictions. Very high current ratios may be economically less favorable; the simple ordering follows the requested ranking convention.
+For companies with five available and comparable metrics:
 
-## Install using GitHub Desktop
+1. Rank **ROE %** descending.
+2. Rank **Current Ratio** descending.
+3. Rank **Operating Margin %** descending.
+4. Rank **Net Margin %** descending.
+5. Rank **EPS growth %**, calculated from consecutive, positive annual diluted EPS values, descending.
+6. **Total Fundamental Rank** = five metric ranks added together; smaller is better.
+7. Only if two or more companies share the same total, use the **higher USD market capitalization** to break that tie. Market cap never changes the sum. If two tied companies have the same market cap, they share rank (ticker determines display order).
 
-1. Extract this ZIP.
-2. Open your existing repository (`global-industry-cycle-intelligence`) in GitHub Desktop, then **Repository → Show in Explorer**.
-3. Copy **`scripts/build_usa_fundamental_rankings.py`** and **`tests/test_usa_fundamental_rankings.py`** into matching repo subfolders.
-4. Copy the supplied complete **`.github/workflows/usa-company-fundamentals-refresh.yml`** into the matching folder, replacing its previous version. This is the existing USA automatic pipeline with a new build step added immediately before publishing. **Do not overwrite a more recent customized workflow without reviewing the diff.**
-5. Commit and **Push origin**. The normal weekday USA workflow will generate the new files on its next successful run. You can also run the existing USA Company Fundamentals and Valuations Refresh workflow manually once.
-6. Ensure the existing `SEC_USER_AGENT` secret remains set. No new API keys are required.
+Financial companies (banks, insurers, REITs etc.) are omitted from this five-metric cross-industry ranking because liquidity and margins are not comparable. Their verified membership row remains in the output, marked unranked. Missing metric values remain NA; no scores are invented. Financial dates and original SEC concepts are preserved for audit. The liquidity convention currently ranks higher Current Ratio first; it may favor inefficient working capital and should be interpreted with context.
 
-For a local rebuild from already cached data:
+## Status and limitations
 
-```bash
-python scripts/build_usa_fundamental_rankings.py
-```
+Offline Python parsing and targeted ranking tests passed, and YAML parsed. **This workflow has not been executed in the live GitHub repository or Streamlit deployment**. A workflow success is not equivalent to complete data coverage; some verified securities do not publish comparable SEC CompanyFacts records. Yahoo quote availability, SEC tagging and reporting periods also differ. No public-site scraping and no provider guarantees. Scores are a fundamental-research ordering, **not a valuation or investment recommendation**.
 
-Tests:
-
-```bash
-python -m unittest discover -s tests -p 'test_usa_fundamental_rankings.py' -v
-```
-
-## Compatibility and limits
-
-This is a **data backend addition**. It does not hide/add USA pages or overwrite the Knowledge Graph, India, or Streamlit app. To visualize the new ranks, a subsequent USA Financial KPIs UI change can read `data/usa_research/fundamental_rankings.csv`. Unlike past patches, this package is not claimed to have fetched or populated your live financial values: it was validated offline only.
-
-The number of companies that receive a complete five-metric rank depends on cached SEC fact coverage. The source HTML websites are not bulk-ingested; that's deliberately disclosed rather than pretending they provide an unrestricted free data feed.
+The workflow publishes datasets using a clean Git worktree, avoiding dirty-tree rebases. Do not run competing writer workflows simultaneously without respecting `concurrency: market-data-writer`.

@@ -1,4 +1,4 @@
-name: USA Company Fundamentals and Valuations Refresh
+name: USA Company Fundamentals, Quotes and Ranking Refresh
 'on':
   workflow_dispatch:
     inputs:
@@ -37,6 +37,8 @@ jobs:
           python -m pip install yfinance pyarrow requests pandas
       - name: Verify offline parsing and joins
         run: python -m unittest discover -s tests -p 'test_usa_financial_autopilot.py' -v
+          python -m unittest discover -s tests -p 'test_usa_fundamental_rankings.py' -v
+          python -m unittest discover -s tests -p 'test_usa_complete_ranking_integration.py' -v
       - name: Refresh SEC CompanyFacts for verified issuers
         env:
           SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
@@ -55,9 +57,6 @@ jobs:
           python scripts/build_usa_research.py
           python scripts/usa_financial_gap_report.py
           python scripts/unified_fundamental_coverage.py
-      - name: Build SEC fundamental values and tie-broken rankings
-        run: |
-          python -m unittest discover -s tests -p 'test_usa_fundamental_rankings.py' -v
           python scripts/build_usa_fundamental_rankings.py
       - name: Enforce identity and output integrity
         run: |
@@ -69,6 +68,11 @@ jobs:
           assert p.exists()
           df=pd.read_csv(p,low_memory=False)
           assert len(df)>0 and df.company_key.notna().all() and df.company_key.is_unique
+          rank_path=Path('data/usa_research/fundamental_rankings.csv')
+          assert rank_path.exists(), 'Missing generated fundamental ranking table'
+          ranked=pd.read_csv(rank_path)
+          assert len(ranked)==len(df), 'Ranked table must preserve full verified issuer universe'
+          assert ranked['company_key'].astype(str).is_unique
           report=json.loads(Path('data/usa_research/completion_report.json').read_text())
           assert report['universe']==len(df)
           assert report['both_ready']<=min(report['fundamental_ready'],report['valuation_ready'])

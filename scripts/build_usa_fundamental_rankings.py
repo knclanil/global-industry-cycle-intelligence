@@ -167,8 +167,14 @@ def rank_frame(df:pd.DataFrame, *, group_by=None, exclude_financials=True):
         for f in FIELDS:
             out.loc[ids,f+'_rank']=out.loc[ids,f].rank(ascending=False,method='min').astype(int)
         out.loc[ids,'total_fundamental_rank']=out.loc[ids,[f+'_rank' for f in FIELDS]].astype(float).sum(axis=1).astype(int)
-        cap=out.loc[ids,'market_cap']
-        out.loc[ids,'market_cap_rank']=cap.rank(ascending=False,method='min').astype('Int64')
+        # Market-cap rank exists ONLY for companies tied on the primary five-rank sum.
+        # It is never added to or used to modify the total fundamental score.
+        totals=out.loc[ids,'total_fundamental_rank']
+        for total, tied in totals.groupby(totals).groups.items():
+            tied=list(tied)
+            if len(tied)>1:
+                caps=out.loc[tied,'market_cap']
+                out.loc[tied,'market_cap_rank']=caps.rank(ascending=False,method='min').astype('Int64')
         # Sort by total, cap only within ties, final key for deterministic display.
         subset=out.loc[ids].copy()
         subset['_c']=subset['market_cap'].fillna(float('-inf'))
@@ -224,7 +230,7 @@ def build(root:Path=ROOT, asof:date|None=None):
             try:
                 age=((asof or date.today())-date.fromisoformat(str(q.get('quote_asof',''))[:10])).days
             except (ValueError,TypeError):age=9999
-            if 0<=age<=14:
+            if 0<=age<=45:
                 row['market_cap']=cap
                 evidence.append(dict(company_key=m['company_key'],ticker=ticker,field='market_cap',value=cap,source=str(q.get('quote_source','quote cache')),period_end=str(q.get('quote_asof',''))[:10],filed=str(q.get('quote_asof',''))[:10],concept='market_cap',accession=''))
         rows.append(row)
