@@ -55,6 +55,10 @@ jobs:
           python scripts/build_usa_research.py
           python scripts/usa_financial_gap_report.py
           python scripts/unified_fundamental_coverage.py
+      - name: Build SEC fundamental values and tie-broken rankings
+        run: |
+          python -m unittest discover -s tests -p 'test_usa_fundamental_rankings.py' -v
+          python scripts/build_usa_fundamental_rankings.py
       - name: Enforce identity and output integrity
         run: |
           python - <<'PY'

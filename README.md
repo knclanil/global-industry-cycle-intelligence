@@ -1,31 +1,60 @@
-# USA and India Financial Research navigation — complete app.py
+# USA financial collection, storage and fundamental rankings
 
-This replaces **only `app.py`**. It is based on the full previously supplied USA research navigation `app.py`, checked against the public GitHub `main/app.py` navigation and rendering branches on November 21, 2026.
+This update extends (and **does not replace**) the existing USA SEC+quote collection workflow. It produces a separately auditable **fundamental ranking dataset** from existing verified USA memberships and locally cached official SEC CompanyFacts. It is intentionally **not a StockAnalysis, Finviz, or Yahoo Finance HTML scraper**.
 
-## USA sidebar
-1. USA Asset Flow
-2. USA Sector
-3. USA Factors
-4. Investment Opportunity Screener
-5. Company Deep Dive
-6. USA Financial Research (existing `company_financial_research.py`)
-7. USA Financial KPIs (existing `company_kpi_metrics.py`)
+## Sources and permissions
 
-## India sidebar
-1. India Asset Flow
-2. India Sector
-3. India Factors
-4. Investment Opportunity Screener
-5. Company Deep Dive
-6. India Financial Research (existing `india_financial_ui.py` previously titled India Sector & Factor Financials)
-7. India Financial KPIs (existing `india_kpi_intelligence.py`)
+- **SEC** — automated collection already performed by `scripts/refresh_usa_company_fundamentals.py` under `SEC_USER_AGENT`. The new ranking script reads the cached raw CompanyFacts without making a network request.
+- **Yahoo** — this update reads **existing** `data/usa_research/quotes.csv` from the current pipeline for a dated USD market-capitalization tiebreak. It does not add new Yahoo webpage scraping.
+- **StockAnalysis.com** — verified reference URLs are generated for every ticker. Its terms prohibit automated bulk collection and it does not offer a public API; these are **manual research links only**.
+- **Finviz** — reference URL is generated per ticker. It is **not scraped**.
 
-The old shared COMPANY FINANCIALS section retains Fundamental Quality Rankings and India Valuation. No financial collector, Knowledge Graph or dashboard data code is changed.
+Automated ingestion from the latter two websites would need appropriate permission or licensed data-access arrangements. A link is **not** evidence that a metric was collected from that site. This package never mislabels a SEC number as a Finviz/StockAnalysis/Yahoo value.
 
-## Install
-Extract the ZIP. Copy `app.py` into the ROOT of your `global-industry-cycle-intelligence` GitHub Desktop working folder and replace the old `app.py`. Commit and push. No installer scripts and no additional dependencies.
+## What gets saved
 
-**Note:** India Financial Research links to the existing *India Sector & Factor Financials* renderer; it does not create a new statement-by-statement UI. The USA page uses the existing detailed company financial renderer.
+All under `data/usa_research/`, auto-published using the existing workflow's clean-worktree publishing step:
 
-## Checks
-Python AST syntax passed. Unique navigation page keys, both regional financial page mappings, and expected render branches were checked. Not runtime-tested on Streamlit Cloud.
+1. `fundamental_rankings.csv`: one row per verified USA issuer with ticker, name, sector/factor membership, ROE (%), current ratio, operating margin (%), net margin (%), diluted EPS growth (%), raw financial values, per-metric ranks, rank sum, optional market-cap tiebreak and final rank.
+2. `fundamental_field_evidence.csv`: **per-field** original SEC concept, value, fiscal period end, filing date, accession number, source; dated quote provenance where available.
+3. `financial_source_links.csv`: all ten supplied StockAnalysis/Finviz/Yahoo reference URLs with `TICKER` replaced per company.
+4. `fundamental_ranking_report.json`: metric coverage, ranked/unranked counts and diagnostic sampling.
+
+## Ranking logic
+
+1. Among companies with **all five usable metrics**, rank ROE, Current Ratio, Operating Margin, Net Margin, and diluted EPS year-on-year growth, with high values ranking best.
+2. Sum five individual ranks; **smallest sum is best**.
+3. **Market cap only breaks ties in rank sum**; it is never added to fundamental rank sum. Highest known USD market cap wins. Equal or unavailable cap can leave a shared final rank.
+4. Missing metrics yield **unranked**, never 0 or an invented rank.
+5. For EPS growth, a positive prior-year EPS base and positive current EPS are required; loss-to-profit transitions need a different signal.
+6. Banks, insurers, REITs and other financial institutions are excluded from the five-metric general-company model because Current Ratio/margins have different meanings. They remain in the exported universe marked unranked. A specialized model can be added later.
+7. Only annual, filed SEC CompanyFacts are used. The evidence file retains periods and facts. The script rejects materially misaligned or stale observations.
+
+**Interpretation:** These are *fundamental ranking numbers*, not valuation, investment suitability, or backtested predictions. Very high current ratios may be economically less favorable; the simple ordering follows the requested ranking convention.
+
+## Install using GitHub Desktop
+
+1. Extract this ZIP.
+2. Open your existing repository (`global-industry-cycle-intelligence`) in GitHub Desktop, then **Repository → Show in Explorer**.
+3. Copy **`scripts/build_usa_fundamental_rankings.py`** and **`tests/test_usa_fundamental_rankings.py`** into matching repo subfolders.
+4. Copy the supplied complete **`.github/workflows/usa-company-fundamentals-refresh.yml`** into the matching folder, replacing its previous version. This is the existing USA automatic pipeline with a new build step added immediately before publishing. **Do not overwrite a more recent customized workflow without reviewing the diff.**
+5. Commit and **Push origin**. The normal weekday USA workflow will generate the new files on its next successful run. You can also run the existing USA Company Fundamentals and Valuations Refresh workflow manually once.
+6. Ensure the existing `SEC_USER_AGENT` secret remains set. No new API keys are required.
+
+For a local rebuild from already cached data:
+
+```bash
+python scripts/build_usa_fundamental_rankings.py
+```
+
+Tests:
+
+```bash
+python -m unittest discover -s tests -p 'test_usa_fundamental_rankings.py' -v
+```
+
+## Compatibility and limits
+
+This is a **data backend addition**. It does not hide/add USA pages or overwrite the Knowledge Graph, India, or Streamlit app. To visualize the new ranks, a subsequent USA Financial KPIs UI change can read `data/usa_research/fundamental_rankings.csv`. Unlike past patches, this package is not claimed to have fetched or populated your live financial values: it was validated offline only.
+
+The number of companies that receive a complete five-metric rank depends on cached SEC fact coverage. The source HTML websites are not bulk-ingested; that's deliberately disclosed rather than pretending they provide an unrestricted free data feed.
