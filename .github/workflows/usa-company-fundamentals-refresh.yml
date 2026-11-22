@@ -36,7 +36,9 @@ jobs:
           python -m pip install -r requirements.txt
           python -m pip install yfinance pyarrow requests pandas
       - name: Verify offline parsing and joins
-        run: python -m unittest discover -s tests -p 'test_usa_financial_autopilot.py' -v
+        run: |
+          set -e
+          python -m unittest discover -s tests -p 'test_usa_financial_autopilot.py' -v
           python -m unittest discover -s tests -p 'test_usa_fundamental_rankings.py' -v
           python -m unittest discover -s tests -p 'test_usa_complete_ranking_integration.py' -v
       - name: Refresh SEC CompanyFacts for verified issuers
