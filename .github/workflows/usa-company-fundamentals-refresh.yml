@@ -3,13 +3,13 @@ name: USA Company Fundamentals, Quotes and Ranking Refresh
   workflow_dispatch:
     inputs:
       sec_limit:
-        description: 'Max new/stale SEC CompanyFacts downloads'
+        description: 'Max new/stale SEC CompanyFacts downloads (0 = all missing/stale)'
         required: false
-        default: '250'
+        default: '0'
       quotes_limit:
         description: 'Max stale equity quote downloads'
         required: false
-        default: '250'
+        default: '300'
   schedule:
     - cron: '40 14 * * 1-5'
 permissions:
@@ -20,7 +20,7 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 300
     steps:
       - uses: actions/checkout@v4
         with:
@@ -44,14 +44,27 @@ jobs:
       - name: Refresh SEC CompanyFacts for verified issuers
         env:
           SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
-          SEC_LIMIT: ${{ inputs.sec_limit || '125' }}
+          SEC_LIMIT: ${{ inputs.sec_limit || '0' }}
         run: |
-          python scripts/refresh_usa_company_fundamentals.py --limit "$SEC_LIMIT" --stale-days 90 --pause 0.3
+          python scripts/refresh_usa_company_fundamentals.py --limit "$SEC_LIMIT" --stale-days 3650 --pause 0.35
+      - name: Audit SEC full-universe backfill
+        run: |
+          python - <<'PY_AUDIT'
+          import json
+          from pathlib import Path
+          report=json.loads(Path('data/usa_research/collection_report.json').read_text())
+          print('SEC verified tickers:', report['universe'])
+          print('SEC cached after backfill:', report['sec_cached_after'])
+          print('SEC fetched this run:', report['sec_fetched'])
+          print('SEC failures:', report['sec_failed'])
+          if report['sec_failed']:
+              print('WARNING: Some SEC requests failed. Details in collection_report.json.')
+          PY_AUDIT
       - name: Build company research from locally cached SEC filings
         run: python scripts/build_usa_research.py
       - name: Enrich fundamentally ready issuers with dated market prices
         env:
-          QUOTES_LIMIT: ${{ inputs.quotes_limit || '125' }}
+          QUOTES_LIMIT: ${{ inputs.quotes_limit || '300' }}
         run: |
           python scripts/usa_quote_coverage_pilot.py --limit "$QUOTES_LIMIT" --pause 1.0
       - name: Rebuild research, quantify missing metrics, update both-market coverage
