@@ -1,30 +1,31 @@
-# USA Research Pages — Complete Replacement Source Files
+# USA and India Financial Research navigation — complete app.py
 
-This is a **copy-and-replace** package. No installer or terminal command is required.
+This replaces **only `app.py`**. It is based on the full previously supplied USA research navigation `app.py`, checked against the public GitHub `main/app.py` navigation and rendering branches on November 21, 2026.
 
-## Contents
-- `app.py` — complete Streamlit entrypoint with USA and India research pages registered.
-- `usa_opportunity_ui.py` — complete USA Investment Opportunity Screener page.
-- `usa_company_deep_dive_ui.py` — complete USA Company Deep Dive page.
-- `usa_research_data.py` — complete shared USA research data loader and filters.
+## USA sidebar
+1. USA Asset Flow
+2. USA Sector
+3. USA Factors
+4. Investment Opportunity Screener
+5. Company Deep Dive
+6. USA Financial Research (existing `company_financial_research.py`)
+7. USA Financial KPIs (existing `company_kpi_metrics.py`)
 
-## Apply
-1. In GitHub Desktop choose **Repository → Show in Explorer**.
-2. Copy these four `.py` files into the **repository root** (same folder as the existing `app.py`), replacing files with identical names.
-3. In GitHub Desktop confirm that `app.py` appears under **Changes**. If it does not, compare with the file in GitHub main; the replacement may already be there or was copied into the wrong folder.
-4. Commit and **Push origin**. Verify the committed `app.py` in GitHub `main` includes `USA Investment Opportunity Screener` in `NAV_GROUPS` and `elif page == 'USA Investment Opportunity Screener'` in page routing.
-5. On Streamlit Cloud check the app's deployed branch and app entrypoint (`app.py`); allow a fresh rerun or restart if needed.
+## India sidebar
+1. India Asset Flow
+2. India Sector
+3. India Factors
+4. Investment Opportunity Screener
+5. Company Deep Dive
+6. India Financial Research (existing `india_financial_ui.py` previously titled India Sector & Factor Financials)
+7. India Financial KPIs (existing `india_kpi_intelligence.py`)
 
-## Scope
-- USA sidebar order: Asset Flow → Sector → Factors → Investment Opportunity Screener → Company Deep Dive.
-- India sidebar order remains intact.
-- USA old Sector · Factor · Holdings route remains in the file as legacy code, but is removed from USA navigation.
-- Global sidebar, Knowledge Graph, and financial-data workflows are not modified.
-- USA research pages read existing stored company research data; if that dataset is missing, data coverage may be incomplete. This ZIP does NOT claim to complete live SEC or quote ingestion.
+The old shared COMPANY FINANCIALS section retains Fundamental Quality Rankings and India Valuation. No financial collector, Knowledge Graph or dashboard data code is changed.
 
-## Validation
-- All four included Python files passed offline AST syntax validation.
-- The result has not been deployed into your own Streamlit Cloud account or live-tested against the repository's current runtime.
+## Install
+Extract the ZIP. Copy `app.py` into the ROOT of your `global-industry-cycle-intelligence` GitHub Desktop working folder and replace the old `app.py`. Commit and push. No installer scripts and no additional dependencies.
 
-## Source basis
-- Current GitHub `main/app.py` opened 2026-11-21. The included full `app.py` is based on the India research pages package's full copy, which has the same navigation/routing layout, with the USA pages added.
+**Note:** India Financial Research links to the existing *India Sector & Factor Financials* renderer; it does not create a new statement-by-statement UI. The USA page uses the existing detailed company financial renderer.
+
+## Checks
+Python AST syntax passed. Unique navigation page keys, both regional financial page mappings, and expected render branches were checked. Not runtime-tested on Streamlit Cloud.
