@@ -424,6 +424,75 @@ def _draw(nodes, links, selection: str | list[str] | dict, max_companies: int | 
     return sectors, companies, factors
 
 
+
+# USA membership-table financial rank enrichment (table-only; no graph changes).
+USA_FUNDAMENTAL_RANKINGS = ROOT / "data" / "usa_research" / "fundamental_rankings.csv"
+
+def _usa_rank_ticker(value):
+    if pd.isna(value):
+        return ""
+    value = str(value).strip().upper().replace(".", "-")
+    return "" if value in ("", "-", "N/A", "NAN", "NONE", "—") else value
+
+def _usa_rank_numeric(values, index):
+    return pd.to_numeric(values, errors="coerce").reindex(index)
+
+def _usa_membership_rank_table(summary: pd.DataFrame, rank_data: pd.DataFrame):
+    """Enrich one-row-per-company membership summary without altering its cohort.
+
+    Exact unique normalized tickers only. Ranking is precomputed on the USA
+    universe; NEVER recalculate ranks within selected graph companies.
+    """
+    out = summary.copy().reset_index(drop=True)
+    if not {"Company", "Ticker"}.issubset(out.columns):
+        raise ValueError("Company summary must include Company and Ticker")
+    necessary = {"ticker", "final_rank", "total_fundamental_rank", "ranking_eligible"}
+    if not necessary.issubset(rank_data.columns):
+        raise ValueError("Rank CSV is missing required fields: " + ", ".join(sorted(necessary - set(rank_data.columns))))
+    ref = rank_data.copy()
+    ref["_tk"] = ref["ticker"].map(_usa_rank_ticker)
+    ref = ref.loc[ref["_tk"].ne("")]
+    # Ambiguous tickers must not silently associate different issuers.
+    ref = ref.loc[~ref["_tk"].duplicated(keep=False)].set_index("_tk", drop=False)
+    matched = out["Ticker"].map(_usa_rank_ticker)
+    joined = ref.reindex(matched.tolist()).reset_index(drop=True)
+    joined.index = out.index
+
+    def val(col):
+        return joined[col] if col in joined else pd.Series(float("nan"), index=out.index)
+
+    eligible = val("ranking_eligible").astype(str).str.lower().isin(("true", "1", "yes"))
+    final = pd.to_numeric(val("final_rank"), errors="coerce").where(eligible).astype("Int64")
+    total = pd.to_numeric(val("total_fundamental_rank"), errors="coerce").where(eligible).astype("Int64")
+    reason = val("ranking_reason").fillna("").astype(str).str.strip()
+    status = pd.Series("Incomplete fundamentals", index=out.index, dtype=str)
+    status.loc[final.notna()] = "Ranked"
+    status.loc[final.isna() & reason.ne("")] = reason.loc[final.isna() & reason.ne("")]
+    out.insert(2, "Final Rank", final)
+    out.insert(3, "Total Rank", total)
+    out.insert(4, "Rank Status", status)
+
+    details = out[["Company", "Ticker", "Final Rank", "Total Rank", "Rank Status"]].copy()
+    fields = (
+        ("roe", "ROE %"), ("current_ratio", "Current Ratio"),
+        ("operating_margin", "Operating Margin %"),
+        ("net_margin", "Net Margin %"), ("eps_growth_pct", "EPS Growth %"),
+    )
+    for field, caption in fields:
+        details[caption] = pd.to_numeric(val(field), errors="coerce")
+        details[caption + " Rank"] = pd.to_numeric(val(field + "_rank"), errors="coerce").astype("Int64")
+    details["Market Cap"] = pd.to_numeric(val("market_cap"), errors="coerce")
+    details["Market Cap Tie Rank"] = pd.to_numeric(val("market_cap_rank"), errors="coerce").astype("Int64")
+    details["Financial Period"] = val("financial_period")
+
+    # Pandas nullable integer ensures real empty display, never fictional rank 0.
+    order = out.assign(_sort=out["Final Rank"].fillna(10**12))
+    sort_indices = order.sort_values(["_sort", "Company", "Ticker"], kind="stable").index
+    return (out.loc[sort_indices].reset_index(drop=True),
+            details.loc[sort_indices].reset_index(drop=True),
+            {"ranked": int(final.notna().sum()), "matched": int(joined["ticker"].notna().sum()) if "ticker" in joined else 0,
+             "total": len(out)})
+
 def render_graph(region: str):
     if region not in ("Global", "USA", "India"):
         st.error("Unsupported region")
@@ -623,6 +692,31 @@ def render_graph(region: str):
         elif table_scope == "All companies matching graph filters":
             table_rows = memberships_for_graph_companies(table_rows, matched_graph_company_keys)
         company_summary = summarize_company_memberships(table_rows)
+        # USA_TABLE_FINANCIAL_RANKS_DIRECT_V3: preserve exact graph-company set.
+        if region == "USA":
+            if not USA_FUNDAMENTAL_RANKINGS.is_file():
+                st.warning("USA ranking file not deployed: data/usa_research/fundamental_rankings.csv")
+                company_summary.insert(2, "Final Rank", pd.Series(pd.NA, index=company_summary.index, dtype="Int64"))
+                company_summary.insert(3, "Total Rank", pd.Series(pd.NA, index=company_summary.index, dtype="Int64"))
+                company_summary.insert(4, "Rank Status", "Ranking data missing")
+            else:
+                try:
+                    usa_financial_ranks = pd.read_csv(
+                        USA_FUNDAMENTAL_RANKINGS, low_memory=False,
+                        dtype={"ticker": str, "company_key": str})
+                    company_summary, rank_details, rank_counts = _usa_membership_rank_table(
+                        company_summary, usa_financial_ranks)
+                    st.caption(f"USA fundamental ranks: {rank_counts['ranked']:,} ranked / "
+                               f"{rank_counts['total']:,} selected companies; "
+                               f"{rank_counts['matched']:,} matched to financial records. "
+                               "Unranked companies remain visible below ranked ones.")
+                    with st.expander("USA fundamental KPI values and individual ranks"):
+                        st.dataframe(rank_details, use_container_width=True, hide_index=True)
+                except (ValueError, KeyError, TypeError, OSError, pd.errors.ParserError) as exc:
+                    st.error(f"USA rank join failed: {exc}")
+                    company_summary.insert(2, "Final Rank", pd.Series(pd.NA, index=company_summary.index, dtype="Int64"))
+                    company_summary.insert(3, "Total Rank", pd.Series(pd.NA, index=company_summary.index, dtype="Int64"))
+                    company_summary.insert(4, "Rank Status", "Rank join failed")
         st.caption(f"{len(company_summary):,} unique companies · "
                    f"{len(table_rows):,} underlying verified membership records. "
                    f"Graph currently displays {len(visible_graph_company_keys):,} companies; "

@@ -1,20 +1,12 @@
-# USA Knowledge Graph: display fundamental ranks in memberships table
+# USA Membership Rank — Direct Replacement
 
-## Why the last package did not show changes
-The public `main` branch version of `regional_rotation_graph.py` still has the unchanged table renderer, without an import/call to `usa_graph_membership_ranks.py`. Installing the helper file alone does nothing. A successful data workflow also does not modify the Streamlit table. This package explicitly patches the table renderer and verifies the edit.
+This package provides a **complete regional_rotation_graph.py** (not an installer).
+Replace the file of the same name in your repository ROOT, commit and push using GitHub Desktop.
 
-## Install (GitHub Desktop, Windows)
+It adds `Final Rank`, `Total Rank`, and `Rank Status` after Ticker **only for USA** in **Knowledge Graph → All verified company memberships**. Ranked rows appear first, and all companies matching the graph/table selection remain present. Open **USA fundamental KPI values and individual ranks** for the five values and their individual ranks.
 
-1. Extract the ZIP, **open the inner `usa_graph_rank_direct_fix` directory**.
-2. Copy everything inside that directory (including `scripts`, the `.py` file and the `.bat`) into the local root folder of `global-industry-cycle-intelligence` (same folder as `app.py` and `regional_rotation_graph.py`).
-3. Double-click `APPLY_UPDATE_WINDOWS.bat` **inside the repository root**. You must see `SUCCESS` or `ALREADY INSTALLED` and `VERIFIED`.
-4. Open GitHub Desktop. Confirm **`regional_rotation_graph.py` is modified** and **`usa_graph_membership_ranks.py` is new**. If `regional_rotation_graph.py` does not show a change and you have not previously installed it, the update has not been applied to the right repository.
-5. Commit and **Push origin**. Streamlit needs the new commit.
-6. Open `USA Knowledge Graph → All verified company memberships · table filters` on the deployed app. A new caption will report `USA fundamental ranking: X of Y displayed companies have a final rank`. `Final Rank`, `Total Rank`, and `Rank Status` should appear directly after `Ticker`.
+Ranking inputs: `data/usa_research/fundamental_rankings.csv` on the deployed branch. Missing data shows a warning and rank columns rather than silently hiding the feature.
 
-The chart, graph selections, company display limits, and non-USA tables are not modified. The rank comes from `data/usa_research/fundamental_rankings.csv`, which must be present in the deployed repository. Incomplete financial companies remain unranked and sorted last.
+The source code was built from the prior full Knowledge Graph file in this conversation and cross-checked against the current public `main` table anchor. Because a full live repo checkout and deployment were not possible, REVIEW the GitHub Desktop diff before committing, especially any graph-related changes beyond the new USA ranking block. Do not overwrite newer graph changes unless the diff is limited to the intended insertion.
 
-## Troubleshooting
-- No change in GitHub Desktop: you likely copied into the wrong directory or did not run the batch file.
-- Ranking columns not visible, but `regional_rotation_graph.py` changed: check that GitHub `main` has the marker `USA_GRAPH_RANKING_TABLE_V2`, and redeploy Streamlit.
-- Columns visible, but all ranks `N/A`: confirm `fundamental_rankings.csv` is published, and inspect the optional individual KPI section for ticker/coverage mismatches.
+No network calls, no new data collection, and no changes to India or Global ranking.
