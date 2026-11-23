@@ -20,13 +20,13 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / 'scripts'))
 FIELDS = ('roe', 'current_ratio', 'operating_margin', 'net_margin', 'eps_growth_pct')
 TAGS = {
- 'revenue': ('RevenueFromContractWithCustomerExcludingAssessedTax','Revenues','SalesRevenueNet','RevenueFromContractWithCustomerIncludingAssessedTax'),
+ 'revenue': ('RevenueFromContractWithCustomerExcludingAssessedTax','Revenues','SalesRevenueNet','RevenueFromContractWithCustomerIncludingAssessedTax','SalesRevenueGoodsNet','SalesRevenueServicesNet','RevenueFromContractWithCustomerIncludingAssessedTax'),
  'net_income': ('NetIncomeLoss','ProfitLoss'),
  'operating_income': ('OperatingIncomeLoss',),
  'current_assets': ('AssetsCurrent',),
  'current_liabilities': ('LiabilitiesCurrent',),
  'equity': ('StockholdersEquity','StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest'),
- 'eps_diluted': ('EarningsPerShareDiluted',),
+ 'eps_diluted': ('EarningsPerShareDiluted','EarningsPerShareBasic'),
  'assets': ('Assets',),
  'liabilities': ('Liabilities',),
  'cash': ('CashAndCashEquivalentsAtCarryingValue',),
@@ -52,8 +52,16 @@ def _annual_observation(facts:dict, field:str, fiscal_year:int, asof:date):
     for tag_priority, tag in enumerate(TAGS[field]):
         obs=namespace.get(tag,{}).get('units',{}).get(unit,[])
         for o in obs:
-            if o.get('form') not in ('10-K','10-K/A') or o.get('fp')!='FY': continue
-            if o.get('fy') != fiscal_year: continue
+            if o.get('form') not in ('10-K','10-K/A'): continue
+            # SEC 'fy' labels the filing's fiscal year, not necessarily the
+            # observation year: comparative FY2024 facts can appear in FY2025 filings.
+            # Prefer explicit CY#### frames, otherwise use the observation end date.
+            frame=str(o.get('frame') or '')
+            frame_year=int(frame[2:6]) if re.fullmatch(r'CY\d{4}',frame) else None
+            try: observation_year=date.fromisoformat(o['end']).year
+            except (ValueError,TypeError,KeyError): continue
+            if frame_year is not None and frame_year!=fiscal_year: continue
+            if frame_year is None and observation_year!=fiscal_year: continue
             try:
                 filed=date.fromisoformat(o['filed']); end=date.fromisoformat(o['end'])
                 if filed > asof: continue
@@ -65,9 +73,11 @@ def _annual_observation(facts:dict, field:str, fiscal_year:int, asof:date):
             if value is None: continue
             # Fiscal-year fact must not be absurdly distant from its labeled FY.
             if abs(end.year-fiscal_year)>1: continue
-            candidates.append((filed, -tag_priority, end, value, tag, o.get('accn','')))
+            # Concept precedence is more important than amendment recency:
+            # never substitute basic EPS for available diluted EPS.
+            candidates.append((-tag_priority, filed, end, value, tag, o.get('accn','')))
     if not candidates:return None
-    filed, _, end, value, tag, accession=max(candidates,key=lambda t:(t[0],t[1],t[2]))
+    _, filed, end, value, tag, accession=max(candidates,key=lambda t:(t[0],t[1],t[2]))
     return {'value':value,'period_end':end.isoformat(),'filed':filed.isoformat(),
             'concept':tag,'accession':accession,'source':'SEC CompanyFacts'}
 
@@ -87,6 +97,11 @@ def annual_fields(facts:dict, asof:date|None=None, max_age_days=540):
         primary=[n.get('revenue'),n.get('net_income'),n.get('equity')]
         anchors=[date.fromisoformat(x['period_end']) for x in primary if x]
         if anchors and (max(anchors)-min(anchors)).days>45:continue
+        # Never combine fields from different fiscal period ends; missing stays missing.
+        anchor = max(anchors) if anchors else max(ends)
+        n={key:(rec if rec and abs((date.fromisoformat(rec['period_end'])-anchor).days)<=45 else None)
+           for key,rec in n.items()}
+        # Select the most recent valid annual period, not a stale partial mixture.
         results=n;break
     if not results:return {}, {}
     vals={k:(v['value'] if v else None) for k,v in results.items()}
@@ -112,8 +127,10 @@ def annual_fields(facts:dict, asof:date|None=None, max_age_days=540):
     if ep:
         prev_fy=date.fromisoformat(ep['period_end']).year-1
         prev=_annual_observation(facts,'eps_diluted',prev_fy,asof)
-        if prev and prev['value']>0 and ep['value']>0:
-            metrics['eps_growth_pct'] = 100*(ep['value']-prev['value'])/prev['value']
+        if prev and prev['value'] != 0 and prev['concept']==ep['concept']:
+            # Absolute prior EPS denominator preserves meaningful turnaround
+            # direction for loss-making issuers; zero base is undefined.
+            metrics['eps_growth_pct'] = 100*(ep['value']-prev['value'])/abs(prev['value'])
             results['eps_diluted_previous']=prev
     # Report most recent material reporting period; individual field periods remain in evidence.
     relevant=[x['period_end'] for x in results.values() if x]
@@ -236,13 +253,28 @@ def build(root:Path=ROOT, asof:date|None=None):
         rows.append(row)
         urls.append(dict(company_key=m['company_key'],ticker=ticker,**reference_links(ticker)))
     d=rank_frame(pd.DataFrame(rows))
+    d['missing_kpis']=d.apply(lambda r: ','.join(f for f in FIELDS if pd.isna(r[f])),axis=1)
+    d['rank_status']=d['ranking_eligible'].map({True:'Complete',False:'Incomplete'})
+    d.loc[d['ranking_reason'].eq('Financial institution: metrics not comparable'),'rank_status']='Ineligible'
     out=root/'data/usa_research';out.mkdir(parents=True,exist_ok=True)
     d.to_csv(out/'fundamental_rankings.csv',index=False)
+    audit=d[['company_key','ticker','ranking_eligible','ranking_reason',*FIELDS]].copy()
+    for f in FIELDS:
+        audit['missing_'+f]=audit[f].isna()
+    audit['missing_metric_count']=audit[['missing_'+f for f in FIELDS]].sum(axis=1)
+    audit['stockanalysis_url']=audit['ticker'].map(lambda t: reference_links(t)['stockanalysis_ratios_url'])
+    audit['finviz_url']=audit['ticker'].map(lambda t: reference_links(t)['finviz_url'])
+    audit.to_csv(out/'fundamental_kpi_gap_audit.csv',index=False)
     pd.DataFrame(evidence,columns=['company_key','ticker','field','value','source','period_end','filed','concept','accession']).to_csv(out/'fundamental_field_evidence.csv',index=False)
     pd.DataFrame(urls).to_csv(out/'financial_source_links.csv',index=False)
+    gaps=d[['company_key','ticker','rank_status','ranking_reason','missing_kpis','sec_cik','financial_period']].copy()
+    gaps.to_csv(out/'fundamental_kpi_gap_audit.csv',index=False)
     report={'built_utc':datetime.now(timezone.utc).isoformat(),'verified_companies':len(d),
             'ranked':int(d['ranking_eligible'].sum()),'unranked':int((~d['ranking_eligible']).sum()),
             'metric_coverage':{f:int(d[f].notna().sum()) for f in (*FIELDS,'market_cap')},
+            'status_counts':{str(k):int(v) for k,v in d['rank_status'].value_counts().items()},
+            'missing_metric_counts':{f:int(d[f].isna().sum()) for f in FIELDS},
+            'gap_count_by_metric':{f:int(d[f].isna().sum()) for f in FIELDS},
             'sec_mapping_failures':len(failures),'sample_failures':failures[:30],
             'method':'5 SEC annual metric ranks (lower sum better); USD market cap used solely on ties; no web-page scraping',
             'limitations':'Financial sector excluded; annual-only; verified records with missing metrics remain unranked; source links for manual verification'}
