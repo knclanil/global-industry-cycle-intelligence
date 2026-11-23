@@ -1,13 +1,13 @@
 {
-  "built_utc": "2026-11-23T16:17:43.792964+00:00",
+  "built_utc": "2026-11-23T16:50:27.769658+00:00",
   "universe": 2931,
   "fundamental_ready": 2283,
-  "valuation_ready": 1952,
-  "both_ready": 1943,
-  "research_ready": 1943,
+  "valuation_ready": 2425,
+  "both_ready": 2260,
+  "research_ready": 2260,
   "research_score_populated": 0,
-  "fundamentals_without_valuation": 340,
-  "valuation_without_fundamentals": 9,
+  "fundamentals_without_valuation": 23,
+  "valuation_without_fundamentals": 165,
   "metric_counts": {
     "revenue": 2678,
     "net_income": 2681,
@@ -16,10 +16,10 @@
     "operating_cash_flow": 2762,
     "free_cash_flow": 2021,
     "debt_to_equity": 1044,
-    "price": 1975,
-    "market_cap": 1973,
-    "pe": 1457,
-    "pb": 1944
+    "price": 2473,
+    "market_cap": 2469,
+    "pe": 1768,
+    "pb": 2397
   },
   "note": "Research-ready means usable fundamental + valuation inputs, not a scored or recommended investment."
 }

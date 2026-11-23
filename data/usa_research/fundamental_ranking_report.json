@@ -1,33 +1,33 @@
 {
-  "built_utc": "2026-11-23T16:19:32.687076+00:00",
+  "built_utc": "2026-11-23T16:52:11.950549+00:00",
   "verified_companies": 2931,
-  "ranked": 1456,
-  "unranked": 1475,
+  "ranked": 1462,
+  "unranked": 1469,
   "metric_coverage": {
-    "roe": 2594,
+    "roe": 2597,
     "current_ratio": 2200,
-    "operating_margin": 1789,
-    "net_margin": 2183,
+    "operating_margin": 1796,
+    "net_margin": 2186,
     "eps_growth_pct": 2420,
-    "market_cap": 1973
+    "market_cap": 2469
   },
   "status_counts": {
-    "Complete": 1456,
-    "Incomplete": 1336,
+    "Complete": 1462,
+    "Incomplete": 1330,
     "Ineligible": 139
   },
   "missing_metric_counts": {
-    "roe": 337,
+    "roe": 334,
     "current_ratio": 731,
-    "operating_margin": 1142,
-    "net_margin": 748,
+    "operating_margin": 1135,
+    "net_margin": 745,
     "eps_growth_pct": 511
   },
   "gap_count_by_metric": {
-    "roe": 337,
+    "roe": 334,
     "current_ratio": 731,
-    "operating_margin": 1142,
-    "net_margin": 748,
+    "operating_margin": 1135,
+    "net_margin": 745,
     "eps_growth_pct": 511
   },
   "sec_mapping_failures": 26,
