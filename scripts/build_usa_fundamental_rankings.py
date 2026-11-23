@@ -269,6 +269,14 @@ def build(root:Path=ROOT, asof:date|None=None):
         if ticker and normalize_ticker(ticker) in directory:
             try:
                 facts,cik=cached_companyfacts(root,ticker,directory)
+                # Merge validated filing-level facts without modifying the official SEC cache.
+                filing_path=root/'data/usa_research/filing_xbrl_cache'/f'{int(cik):010d}.json'
+                if filing_path.exists():
+                    try:
+                        from usa_filing_xbrl_recovery import merge_into_companyfacts
+                        filing=json.loads(filing_path.read_text())
+                        if filing.get('status')=='ok':facts=merge_into_companyfacts(facts,filing)
+                    except (ValueError,KeyError,TypeError,OSError):pass
                 financial,fields=annual_fields(facts,asof)
                 row.update(financial);row['sec_cik']=cik
                 for field,rec in fields.items():

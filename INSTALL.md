@@ -1,9 +1,13 @@
-# USA comprehensive SEC recovery update
+# USA filing-level XBRL recovery — repository overlay
 
-Copy the `scripts`, `tests`, and `.github` directories into the repository root, preserving the directory hierarchy. Commit and push in GitHub Desktop, then run **USA Company Fundamentals, Quotes and Ranking Refresh**.
+Copy the **contents** of this ZIP into the root of `global-industry-cycle-intelligence` (merge `scripts/`, `tests/`, `.github/`). Commit and push once. Existing dashboard and rankings layout are unchanged.
 
-This patch adds conservative SEC-only derivations of operating income (gross profit less operating expenses) and current liabilities (total liabilities less noncurrent liabilities), with matching period-end requirements. It also adds selected GAAP concepts, audit evidence, regression tests, and ranking-report workflow summary.
+Run GitHub Actions > **USA Company Fundamentals, Quotes and Ranking Refresh**. Recommended first run: `sec_limit=0`, `quotes_limit=250`, `filing_limit=125`. Scheduled weekday runs automatically continue through the remaining eligible CIKs because successful and failed attempts are cached and published to the repository. Use `filing_limit=0` only if comfortable with a long run and SEC access limitations.
 
-**Do not expect every company to become rankable:** company-specific extension facts are not in SEC CompanyFacts, some periods are absent, and financial institutions remain ineligible under the existing ranking rules. No external website scraping or fabricated KPI values.
+New artifacts: `data/usa_research/filing_xbrl_cache/<CIK>.json` (per-filing extracted observations) and `data/usa_research/filing_xbrl_recovery_report.json`. Existing `fundamental_rankings.csv` and `fundamental_ranking_report.json` are rebuilt after extraction.
 
-Verify `data/usa_research/fundamental_ranking_report.json` and `fundamental_field_evidence.csv` after the run. Baseline: 1,456 ranked, 1,336 incomplete, 139 ineligible.
+SEC access requires the already configured `SEC_USER_AGENT` secret with a real contact email. SEC can block access to filing archives from GitHub-hosted runners; failures are recorded and retried after 14 days. This pipeline does not bypass restrictions.
+
+**Safety and limitations:** The extractor accepts consolidated annual facts from whitelisted US GAAP concepts, and never guesses company-specific taxonomy meanings. Optional reviewed custom mappings can be stored in `data/usa_research/xbrl_aliases.json` as `{ "companyprefix:CustomTag": "OperatingIncomeLoss" }`, but must be manually verified for semantics and unit. It processes the latest 10-K or 10-K/A listed in recent SEC submissions, not all historical annual filings. It cannot guarantee 100% KPI coverage. Existing SEC CompanyFacts are preserved. No StockAnalysis/Finviz scraping.
+
+Test locally: `python -m pip install beautifulsoup4 pandas` then `python -m unittest discover -s tests -p 'test_usa_filing_xbrl_recovery.py' -v`.
