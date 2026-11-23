@@ -100,7 +100,7 @@ TICKER:AMCX,AMCX,Complete,Ranked,,1514991.0,2025-12-31
 TICKER:AMLX,AMLX,Incomplete,"Missing: operating_margin, net_margin","operating_margin,net_margin",1658551.0,2025-12-31
 TICKER:AMN,AMN,Complete,Ranked,,1142750.0,2025-12-31
 TICKER:AMPH,AMPH,Complete,Ranked,,1297184.0,2025-12-31
-TICKER:AMPL,AMPL,Incomplete,Missing: operating_margin,operating_margin,1866692.0,2025-12-31
+TICKER:AMPL,AMPL,Complete,Ranked,,1866692.0,2025-12-31
 TICKER:AMPX,AMPX,Complete,Ranked,,1899287.0,2025-12-31
 TICKER:AMPY,AMPY,Complete,Ranked,,1533924.0,2025-12-31
 TICKER:AMR,AMR,Complete,Ranked,,1704715.0,2025-12-31
@@ -332,7 +332,7 @@ TICKER:CBNK,CBNK,Incomplete,"Missing: current_ratio, operating_margin, net_margi
 TICKER:CBRL,CBRL,Complete,Ranked,,1067294.0,2026-07-31
 TICKER:CBT,CBT,Complete,Ranked,,16040.0,2026-09-30
 TICKER:CBU,CBU,Incomplete,"Missing: current_ratio, operating_margin","current_ratio,operating_margin",723188.0,2025-12-31
-TICKER:CC,CC,Incomplete,Missing: operating_margin,operating_margin,1627223.0,2025-12-31
+TICKER:CC,CC,Complete,Ranked,,1627223.0,2025-12-31
 TICKER:CCB,CCB,Incomplete,"Missing: current_ratio, operating_margin, net_margin","current_ratio,operating_margin,net_margin",1437958.0,2025-12-31
 TICKER:CCBG,CCBG,Incomplete,"Missing: current_ratio, operating_margin, net_margin","current_ratio,operating_margin,net_margin",726601.0,2025-12-31
 TICKER:CCCC,CCCC,Complete,Ranked,,1662579.0,2025-12-31
@@ -553,7 +553,7 @@ TICKER:ECBK,ECBK,Incomplete,"Missing: current_ratio, operating_margin","current_
 TICKER:ECPG,ECPG,Incomplete,Missing: current_ratio,current_ratio,1084961.0,2025-12-31
 TICKER:ECVT,ECVT,Complete,Ranked,,1708035.0,2025-12-31
 TICKER:EDIT,EDIT,Complete,Ranked,,1650664.0,2025-12-31
-TICKER:EE,EE,Incomplete,"Missing: roe, net_margin","roe,net_margin",1888447.0,2025-12-31
+TICKER:EE,EE,Complete,Ranked,,1888447.0,2025-12-31
 TICKER:EFC,EFC,Incomplete,"Missing: current_ratio, operating_margin, net_margin","current_ratio,operating_margin,net_margin",1411342.0,2025-12-31
 TICKER:EFOR,EFOR,Complete,Ranked,,890564.0,2025-12-31
 TICKER:EFSC,EFSC,Incomplete,"Missing: current_ratio, operating_margin, net_margin","current_ratio,operating_margin,net_margin",1025835.0,2025-12-31
@@ -629,7 +629,7 @@ TICKER:FCBM,FCBM,Incomplete,"Missing: roe, current_ratio, operating_margin, net_
 TICKER:FCCO,FCCO,Incomplete,"Missing: current_ratio, operating_margin","current_ratio,operating_margin",932781.0,2025-12-31
 TICKER:FCEL,FCEL,Complete,Ranked,,886128.0,2025-10-31
 TICKER:FCF,FCF,Incomplete,"Missing: current_ratio, operating_margin, net_margin","current_ratio,operating_margin,net_margin",712537.0,2025-12-31
-TICKER:FCFS,FCFS,Incomplete,Missing: operating_margin,operating_margin,840489.0,2025-12-31
+TICKER:FCFS,FCFS,Complete,Ranked,,840489.0,2025-12-31
 TICKER:FCPT,FCPT,Incomplete,"Missing: current_ratio, operating_margin","current_ratio,operating_margin",1650132.0,2025-12-31
 TICKER:FDBC,FDBC,Incomplete,"Missing: current_ratio, operating_margin, net_margin","current_ratio,operating_margin,net_margin",1098151.0,2025-12-31
 TICKER:FDMT,FDMT,Complete,Ranked,,1650648.0,2025-12-31
@@ -812,7 +812,7 @@ TICKER:HOS,HOS,Complete,Ranked,,866829.0,2025-12-31
 TICKER:HOV,HOV,Incomplete,"Missing: current_ratio, operating_margin","current_ratio,operating_margin",357294.0,2025-10-31
 TICKER:HP,HP,Complete,Ranked,,46765.0,2026-09-30
 TICKER:HPK,HPK,Complete,Ranked,,1792849.0,2025-12-31
-TICKER:HPP,HPP,Incomplete,"Missing: current_ratio, operating_margin","current_ratio,operating_margin",1482512.0,2025-12-31
+TICKER:HPP,HPP,Incomplete,Missing: current_ratio,current_ratio,1482512.0,2025-12-31
 TICKER:HQI,HQI,Complete,Ranked,,1140102.0,2025-12-31
 TICKER:HQY,HQY,Incomplete,"Missing: operating_margin, net_margin, eps_growth_pct","operating_margin,net_margin,eps_growth_pct",1428336.0,2026-01-31
 TICKER:HRI,HRI,Incomplete,Missing: operating_margin,operating_margin,1364479.0,2025-12-31
@@ -832,7 +832,7 @@ TICKER:HUCK,HUCK,Incomplete,"Missing: roe, operating_margin, net_margin, eps_gro
 TICKER:HUN,HUN,Complete,Ranked,,1307954.0,2025-12-31
 TICKER:HURN,HURN,Complete,Ranked,,1289848.0,2025-12-31
 TICKER:HUT,HUT,Complete,Ranked,,1964789.0,2025-12-31
-TICKER:HVT,HVT,Incomplete,"Missing: operating_margin, eps_growth_pct","operating_margin,eps_growth_pct",216085.0,2025-12-31
+TICKER:HVT,HVT,Incomplete,Missing: eps_growth_pct,eps_growth_pct,216085.0,2025-12-31
 TICKER:HWBK,HWBK,Incomplete,"Missing: current_ratio, operating_margin, net_margin","current_ratio,operating_margin,net_margin",893847.0,2025-12-31
 TICKER:HWC,HWC,Incomplete,"Missing: current_ratio, operating_margin, net_margin","current_ratio,operating_margin,net_margin",750577.0,2025-12-31
 TICKER:HWKN,HWKN,Incomplete,"Missing: operating_margin, net_margin, eps_growth_pct","operating_margin,net_margin,eps_growth_pct",46250.0,2026-03-29
@@ -1193,7 +1193,7 @@ TICKER:NMRK,NMRK,Complete,Ranked,,1690680.0,2025-12-31
 TICKER:NN,NN,Incomplete,Missing: roe,roe,1865631.0,2025-12-31
 TICKER:NNE,NNE,Incomplete,"Missing: operating_margin, net_margin","operating_margin,net_margin",1923891.0,2025-09-30
 TICKER:NNI,NNI,Incomplete,"Missing: current_ratio, operating_margin, net_margin","current_ratio,operating_margin,net_margin",1258602.0,2025-12-31
-TICKER:NODK,NODK,Incomplete,"Missing: current_ratio, operating_margin","current_ratio,operating_margin",1681206.0,2025-12-31
+TICKER:NODK,NODK,Incomplete,Missing: current_ratio,current_ratio,1681206.0,2025-12-31
 TICKER:NOG,NOG,Complete,Ranked,,1104485.0,2025-12-31
 TICKER:NOVT,NOVT,Complete,Ranked,,1076930.0,2025-12-31
 TICKER:NP,NP,Incomplete,Missing: roe,roe,2067129.0,2025-12-31
@@ -1460,7 +1460,7 @@ TICKER:RENT,RENT,Incomplete,"Missing: roe, operating_margin, net_margin, eps_gro
 TICKER:REPL,REPL,Incomplete,"Missing: operating_margin, net_margin, eps_growth_pct","operating_margin,net_margin,eps_growth_pct",1737953.0,2026-03-31
 TICKER:REPX,REPX,Complete,Ranked,,1001614.0,2025-12-31
 TICKER:RES,RES,Complete,Ranked,,742278.0,2025-12-31
-TICKER:REX,REX,Incomplete,"Missing: roe, operating_margin, net_margin, eps_growth_pct","roe,operating_margin,net_margin,eps_growth_pct",744187.0,2026-01-31
+TICKER:REX,REX,Incomplete,"Missing: operating_margin, net_margin, eps_growth_pct","operating_margin,net_margin,eps_growth_pct",744187.0,2026-01-31
 TICKER:REZI,REZI,Complete,Ranked,,1740332.0,2025-12-31
 TICKER:RFIL,RFIL,Complete,Ranked,,740664.0,2025-10-31
 TICKER:RGCO,RGCO,Complete,Ranked,,1069533.0,2025-09-30
@@ -1730,7 +1730,7 @@ TICKER:TROX,TROX,Complete,Ranked,,1530804.0,2025-12-31
 TICKER:TRS,TRS,Complete,Ranked,,842633.0,2025-12-31
 TICKER:TRST,TRST,Incomplete,"Missing: current_ratio, operating_margin, net_margin","current_ratio,operating_margin,net_margin",357301.0,2025-12-31
 TICKER:TRTX,TRTX,Incomplete,"Missing: current_ratio, operating_margin, net_margin","current_ratio,operating_margin,net_margin",1630472.0,2025-12-31
-TICKER:TRUP,TRUP,Incomplete,"Missing: roe, net_margin","roe,net_margin",1371285.0,2025-12-31
+TICKER:TRUP,TRUP,Complete,Ranked,,1371285.0,2025-12-31
 TICKER:TRVI,TRVI,Incomplete,"Missing: operating_margin, net_margin","operating_margin,net_margin",1563880.0,2025-12-31
 TICKER:TSBK,TSBK,Incomplete,"Missing: current_ratio, operating_margin, net_margin","current_ratio,operating_margin,net_margin",1046050.0,2025-09-30
 TICKER:TSE,TSE,Incomplete,"Missing: roe, current_ratio, operating_margin, net_margin, eps_growth_pct","roe,current_ratio,operating_margin,net_margin,eps_growth_pct",,
@@ -2037,7 +2037,7 @@ TICKER_COUNTRY:BILL|US,BILL,Complete,Ranked,,1786352.0,2026-06-30
 TICKER_COUNTRY:BIO|US,BIO,Complete,Ranked,,12208.0,2025-12-31
 TICKER_COUNTRY:BIRK|US,BIRK,Incomplete,"Missing: roe, current_ratio, operating_margin, net_margin, eps_growth_pct","roe,current_ratio,operating_margin,net_margin,eps_growth_pct",1977102.0,
 TICKER_COUNTRY:BJ|US,BJ,Incomplete,"Missing: operating_margin, net_margin, eps_growth_pct","operating_margin,net_margin,eps_growth_pct",1531152.0,2026-01-31
-TICKER_COUNTRY:BKNG|US,BKNG,Incomplete,"Missing: roe, net_margin","roe,net_margin",1075531.0,2025-12-31
+TICKER_COUNTRY:BKNG|US,BKNG,Incomplete,Missing: roe,roe,1075531.0,2025-12-31
 TICKER_COUNTRY:BKR|US,BKR,Incomplete,"Missing: operating_margin, eps_growth_pct","operating_margin,eps_growth_pct",1701605.0,2025-12-31
 TICKER_COUNTRY:BLDR|US,BLDR,Complete,Ranked,,1316835.0,2025-12-31
 TICKER_COUNTRY:BLK|US,BLK,Ineligible,Financial institution: metrics not comparable,current_ratio,2012383.0,2025-12-31
@@ -2325,7 +2325,7 @@ TICKER_COUNTRY:GNRC|US,GNRC,Complete,Ranked,,1474735.0,2025-12-31
 TICKER_COUNTRY:GNTX|US,GNTX,Complete,Ranked,,355811.0,2025-12-31
 TICKER_COUNTRY:GOOGL|US,GOOGL,Complete,Ranked,,1652044.0,2025-12-31
 TICKER_COUNTRY:GOOG|US,GOOG,Complete,Ranked,,1652044.0,2025-12-31
-TICKER_COUNTRY:GPC|US,GPC,Incomplete,Missing: operating_margin,operating_margin,40987.0,2025-12-31
+TICKER_COUNTRY:GPC|US,GPC,Complete,Ranked,,40987.0,2025-12-31
 TICKER_COUNTRY:GPK|US,GPK,Complete,Ranked,,1408075.0,2025-12-31
 TICKER_COUNTRY:GPN|US,GPN,Complete,Ranked,,1123360.0,2025-12-31
 TICKER_COUNTRY:GRMN|US,GRMN,Complete,Ranked,,1121788.0,2025-12-27
