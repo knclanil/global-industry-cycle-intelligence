@@ -1,21 +1,21 @@
 ETF,Country,Quadrant,Relative strength (%),RS momentum (pp),As of
-SPY,United States,Leading,1.8164,0.4048,2026-11-20
-INDA,India,Leading,19.8218,28.6283,2026-11-20
-EWJ,Japan,Lagging,-1.1401,-2.7106,2026-11-20
-MCHI,China,Lagging,-6.3778,-1.7698,2026-11-20
-EWU,United Kingdom,Leading,1.9887,4.0927,2026-11-20
-EWG,Germany,Improving,-0.787,2.4838,2026-11-20
-EWQ,France,Improving,-2.4827,6.988,2026-11-20
-EWL,Switzerland,Leading,7.8122,14.9032,2026-11-20
-EWC,Canada,Improving,-0.7591,1.1166,2026-11-20
-EWA,Australia,Improving,-0.5667,1.5168,2026-11-20
-EWY,South Korea,Lagging,-19.9442,-14.7361,2026-11-20
-EWT,Taiwan,Lagging,-18.7232,-24.047,2026-11-20
-EWZ,Brazil,Lagging,-9.5406,-26.5113,2026-11-20
-EWW,Mexico,Leading,5.0025,10.7126,2026-11-20
-EZA,South Africa,Lagging,-11.2028,-8.0887,2026-11-20
-EIDO,Indonesia,Lagging,-10.4185,-7.5991,2026-11-20
-THD,Thailand,Improving,-1.8206,1.3235,2026-11-20
-EWM,Malaysia,Improving,-1.2849,3.813,2026-11-20
-KSA,Saudi Arabia,Leading,0.0259,4.4193,2026-11-20
-UAE,United Arab Emirates,Leading,18.1819,20.364,2026-11-20
+SPY,United States,Leading,2.2448,1.274,2026-11-23
+INDA,India,Leading,12.2634,20.8286,2026-11-23
+EWJ,Japan,Lagging,-1.7221,-4.0121,2026-11-23
+MCHI,China,Lagging,-7.6636,-4.6178,2026-11-23
+EWU,United Kingdom,Improving,-0.3233,2.4248,2026-11-23
+EWG,Germany,Improving,-2.4573,1.26,2026-11-23
+EWQ,France,Improving,-3.976,6.2625,2026-11-23
+EWL,Switzerland,Leading,5.092,12.3202,2026-11-23
+EWC,Canada,Lagging,-2.9508,-0.3632,2026-11-23
+EWA,Australia,Lagging,-3.2577,-1.0981,2026-11-23
+EWY,South Korea,Lagging,-18.5221,-20.7577,2026-11-23
+EWT,Taiwan,Lagging,-9.4877,-18.2296,2026-11-23
+EWZ,Brazil,Lagging,-11.8636,-31.1002,2026-11-23
+EWW,Mexico,Leading,1.052,7.0102,2026-11-23
+EZA,South Africa,Lagging,-11.9102,-10.4335,2026-11-23
+EIDO,Indonesia,Lagging,-10.1984,-6.3876,2026-11-23
+THD,Thailand,Improving,-2.512,1.5354,2026-11-23
+EWM,Malaysia,Improving,-3.8491,2.1939,2026-11-23
+KSA,Saudi Arabia,Improving,-3.722,2.1029,2026-11-23
+UAE,United Arab Emirates,Leading,18.9103,21.1326,2026-11-23
