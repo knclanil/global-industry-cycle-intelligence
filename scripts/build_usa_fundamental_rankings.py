@@ -21,11 +21,11 @@ sys.path.insert(0, str(ROOT / 'scripts'))
 FIELDS = ('roe', 'current_ratio', 'operating_margin', 'net_margin', 'eps_growth_pct')
 TAGS = {
  'revenue': ('RevenueFromContractWithCustomerExcludingAssessedTax','Revenues','SalesRevenueNet','RevenueFromContractWithCustomerIncludingAssessedTax','SalesRevenueGoodsNet','SalesRevenueServicesNet','RevenueFromContractWithCustomerIncludingAssessedTax'),
- 'net_income': ('NetIncomeLoss','ProfitLoss'),
+ 'net_income': ('NetIncomeLoss','ProfitLoss','NetIncomeLossAvailableToCommonStockholdersBasic'),
  'operating_income': ('OperatingIncomeLoss',),
  'current_assets': ('AssetsCurrent',),
  'current_liabilities': ('LiabilitiesCurrent',),
- 'equity': ('StockholdersEquity','StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest'),
+ 'equity': ('StockholdersEquity','StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest','CommonStockholdersEquity'),
  'eps_diluted': ('EarningsPerShareDiluted','EarningsPerShareBasic'),
  'assets': ('Assets',),
  'liabilities': ('Liabilities',),
@@ -33,6 +33,8 @@ TAGS = {
  'gross_profit': ('GrossProfit',),
  'operating_cash_flow': ('NetCashProvidedByUsedInOperatingActivities',),
  'capex': ('PaymentsToAcquirePropertyPlantAndEquipment',),
+ 'operating_expenses': ('OperatingExpenses',),
+ 'noncurrent_liabilities': ('LiabilitiesNoncurrent',),
 }
 UNITS = {'eps_diluted': 'USD/shares'}
 
@@ -67,7 +69,7 @@ def _annual_observation(facts:dict, field:str, fiscal_year:int, asof:date):
                 if filed > asof: continue
                 start=date.fromisoformat(o['start']) if 'start' in o else None
             except (ValueError,KeyError,TypeError): continue
-            if field in ('revenue','net_income','operating_income','eps_diluted','operating_cash_flow','capex'):
+            if field in ('revenue','net_income','operating_income','operating_expenses','eps_diluted','operating_cash_flow','capex'):
                 if start is None or not 300 <= (end-start).days <= 400: continue
             value=num(o.get('val'))
             if value is None: continue
@@ -104,6 +106,35 @@ def annual_fields(facts:dict, asof:date|None=None, max_age_days=540):
         # Select the most recent valid annual period, not a stale partial mixture.
         results=n;break
     if not results:return {}, {}
+    # Conservative derived operating income: gross profit minus operating expenses.
+    # Never substitute pretax earnings, EBITDA, or gross profit for operating income.
+    if results.get('operating_income') is None and results.get('gross_profit'):
+        anchor=results['gross_profit']['period_end']
+        year=int(anchor[:4])
+        expense=_annual_observation(facts,'operating_expenses',year,asof)
+        gp=results['gross_profit']
+        if expense and expense['period_end']==anchor and gp['value'] is not None:
+            results['operating_income']={
+                'value':gp['value']-expense['value'], 'period_end':anchor,
+                'filed':max(gp['filed'],expense['filed']),
+                'concept':'DERIVED:GrossProfit-OperatingExpenses',
+                'accession':gp['accession'] if gp['accession']==expense['accession'] else 'cross-filing-same-period',
+                'source':'SEC CompanyFacts derived',
+            }
+    # Current liabilities may be reconstructed from total liabilities and
+    # noncurrent liabilities only if all three balance-sheet dates coincide.
+    if results.get('current_liabilities') is None and results.get('liabilities'):
+        total=results['liabilities']; year=int(total['period_end'][:4])
+        noncurrent=_annual_observation(facts,'noncurrent_liabilities',year,asof)
+        if noncurrent and noncurrent['period_end']==total['period_end']:
+            residual=total['value']-noncurrent['value']
+            if residual>=0:
+                results['current_liabilities']={
+                    'value':residual,'period_end':total['period_end'],
+                    'filed':max(total['filed'],noncurrent['filed']),
+                    'concept':'DERIVED:Liabilities-LiabilitiesNoncurrent',
+                    'accession':'cross-filing-same-period', 'source':'SEC CompanyFacts derived',
+                }
     vals={k:(v['value'] if v else None) for k,v in results.items()}
     def ratio(a,b):
         return a/b if a is not None and b is not None and b>0 else None

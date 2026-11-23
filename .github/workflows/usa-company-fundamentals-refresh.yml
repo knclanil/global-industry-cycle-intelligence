@@ -45,6 +45,8 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_usa_recovery_followup.py' -v
       - name: Test USA ranking integration
         run: python -m unittest discover -s tests -p 'test_usa_complete_ranking_integration.py' -v
+      - name: Test comprehensive SEC recovery
+        run: python -m unittest discover -s tests -p 'test_usa_comprehensive_recovery.py' -v
       - name: Refresh SEC CompanyFacts for verified issuers
         env:
           SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
@@ -126,7 +128,7 @@ jobs:
         if: always()
         shell: bash
         run: |
-          for f in data/usa_research/collection_report.json data/usa_research/quote_pilot_report.json data/usa_research/completion_report.json data/usa_research/all_ticker_financial_coverage.json; do
+          for f in data/usa_research/collection_report.json data/usa_research/quote_pilot_report.json data/usa_research/completion_report.json data/usa_research/all_ticker_financial_coverage.json data/usa_research/fundamental_ranking_report.json; do
             if [ -f "$f" ]; then
               echo "### $f" >> "$GITHUB_STEP_SUMMARY"
               echo '```json' >> "$GITHUB_STEP_SUMMARY"
