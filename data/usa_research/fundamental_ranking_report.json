@@ -1,36 +1,36 @@
 {
-  "built_utc": "2026-11-23T15:19:19.529141+00:00",
+  "built_utc": "2026-11-23T16:19:32.687076+00:00",
   "verified_companies": 2931,
-  "ranked": 1455,
-  "unranked": 1476,
+  "ranked": 1456,
+  "unranked": 1475,
   "metric_coverage": {
-    "roe": 2586,
-    "current_ratio": 2195,
-    "operating_margin": 1787,
-    "net_margin": 2178,
-    "eps_growth_pct": 2418,
-    "market_cap": 972
+    "roe": 2594,
+    "current_ratio": 2200,
+    "operating_margin": 1789,
+    "net_margin": 2183,
+    "eps_growth_pct": 2420,
+    "market_cap": 1973
   },
   "status_counts": {
-    "Incomplete": 1460,
-    "Complete": 1455,
-    "Ineligible": 16
+    "Complete": 1456,
+    "Incomplete": 1336,
+    "Ineligible": 139
   },
   "missing_metric_counts": {
-    "roe": 345,
-    "current_ratio": 736,
-    "operating_margin": 1144,
-    "net_margin": 753,
-    "eps_growth_pct": 513
+    "roe": 337,
+    "current_ratio": 731,
+    "operating_margin": 1142,
+    "net_margin": 748,
+    "eps_growth_pct": 511
   },
   "gap_count_by_metric": {
-    "roe": 345,
-    "current_ratio": 736,
-    "operating_margin": 1144,
-    "net_margin": 753,
-    "eps_growth_pct": 513
+    "roe": 337,
+    "current_ratio": 731,
+    "operating_margin": 1142,
+    "net_margin": 748,
+    "eps_growth_pct": 511
   },
-  "sec_mapping_failures": 34,
+  "sec_mapping_failures": 26,
   "sample_failures": [
     {
       "ticker": "2200964D",
@@ -41,19 +41,11 @@
       "reason": "Not uniquely mapped to SEC CIK"
     },
     {
-      "ticker": "BH A",
-      "reason": "Not uniquely mapped to SEC CIK"
-    },
-    {
       "ticker": "CRD A",
-      "reason": "Not uniquely mapped to SEC CIK"
+      "reason": "SEC CompanyFacts not cached for verified CIK"
     },
     {
       "ticker": "FRBA",
-      "reason": "Not uniquely mapped to SEC CIK"
-    },
-    {
-      "ticker": "GEF B",
       "reason": "Not uniquely mapped to SEC CIK"
     },
     {
@@ -70,7 +62,7 @@
     },
     {
       "ticker": "MOG A",
-      "reason": "Not uniquely mapped to SEC CIK"
+      "reason": "SEC CompanyFacts not cached for verified CIK"
     },
     {
       "ticker": "NBN",
@@ -105,27 +97,7 @@
       "reason": "Not uniquely mapped to SEC CIK"
     },
     {
-      "ticker": "BF A",
-      "reason": "Not uniquely mapped to SEC CIK"
-    },
-    {
-      "ticker": "BF B",
-      "reason": "Not uniquely mapped to SEC CIK"
-    },
-    {
-      "ticker": "BRK B",
-      "reason": "Not uniquely mapped to SEC CIK"
-    },
-    {
-      "ticker": "HEI A",
-      "reason": "Not uniquely mapped to SEC CIK"
-    },
-    {
       "ticker": "HOLX",
-      "reason": "Not uniquely mapped to SEC CIK"
-    },
-    {
-      "ticker": "LEN B",
       "reason": "Not uniquely mapped to SEC CIK"
     },
     {
@@ -133,10 +105,6 @@
       "reason": "SEC CompanyFacts not cached for verified CIK"
     },
     {
-      "ticker": "UHAL B",
-      "reason": "Not uniquely mapped to SEC CIK"
-    },
-    {
       "ticker": "-",
       "reason": "Not uniquely mapped to SEC CIK"
     },
@@ -150,6 +118,22 @@
     },
     {
       "ticker": "ADRO",
+      "reason": "Not uniquely mapped to SEC CIK"
+    },
+    {
+      "ticker": "-",
+      "reason": "Not uniquely mapped to SEC CIK"
+    },
+    {
+      "ticker": "-",
+      "reason": "Not uniquely mapped to SEC CIK"
+    },
+    {
+      "ticker": "-",
+      "reason": "Not uniquely mapped to SEC CIK"
+    },
+    {
+      "ticker": "-",
       "reason": "Not uniquely mapped to SEC CIK"
     }
   ],

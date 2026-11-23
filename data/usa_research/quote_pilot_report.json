@@ -1,28 +1,18 @@
 {
-  "built_utc": "2026-11-23T15:09:51.836822+00:00",
+  "built_utc": "2026-11-23T16:04:00.118940+00:00",
   "verified_issuers": 2931,
   "verified_tickers": 2921,
-  "selected": 250,
-  "fetched": 250,
+  "selected": 500,
+  "fetched": 500,
   "failed": 0,
   "failures": {},
-  "prices_before": 723,
-  "fundamental_ready_candidates": 2273,
-  "selected_fundamental_ready": 250,
+  "prices_before": 1473,
+  "fundamental_ready_candidates": 2281,
+  "selected_fundamental_ready": 500,
   "invalid_quote_identifiers_skipped": [
     "-",
-    "2200964D",
-    "BF A",
-    "BF B",
-    "BH A",
-    "BRK B",
-    "CRD A",
-    "GEF B",
-    "HEI A",
-    "LEN B",
-    "MOG A",
-    "UHAL B"
+    "2200964D"
   ],
-  "prices_after": 973,
-  "valuations_after": 962
+  "prices_after": 1973,
+  "valuations_after": 1950
 }
