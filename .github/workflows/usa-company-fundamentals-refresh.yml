@@ -41,6 +41,8 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_usa_fundamental_rankings.py' -v
       - name: Test SEC KPI recovery
         run: python -m unittest discover -s tests -p 'test_usa_kpi_recovery.py' -v
+      - name: Test USA recovery follow-up
+        run: python -m unittest discover -s tests -p 'test_usa_recovery_followup.py' -v
       - name: Test USA ranking integration
         run: python -m unittest discover -s tests -p 'test_usa_complete_ranking_integration.py' -v
       - name: Refresh SEC CompanyFacts for verified issuers

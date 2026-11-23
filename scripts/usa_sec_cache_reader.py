@@ -4,6 +4,11 @@ import json
 from pathlib import Path
 
 
+def normalize_ticker(ticker: str) -> str:
+    """Normalize exchange share-class spelling without guessing CIKs."""
+    return str(ticker or '').strip().upper().replace(' ', '-').replace('.', '-')
+
+
 def ticker_directory(root: Path) -> dict[str, int]:
     """Map only unambiguous official SEC ticker -> CIK identifiers."""
     sources = [root / 'data/fundamentals/sec_company_directory.json',
@@ -22,7 +27,7 @@ def ticker_directory(root: Path) -> dict[str, int]:
             if not isinstance(item, dict):
                 continue
             try:
-                symbol = str(item['ticker']).strip().upper().replace('.', '-')
+                symbol = normalize_ticker(item['ticker'])
                 cik = int(item['cik_str'])
             except (KeyError, ValueError, TypeError):
                 continue
@@ -33,7 +38,7 @@ def ticker_directory(root: Path) -> dict[str, int]:
 
 def cached_companyfacts(root: Path, ticker: str, directory: dict[str, int]):
     """Read already-published CompanyFacts by official CIK; no ticker guesses."""
-    cik = directory.get(str(ticker).strip().upper().replace('.', '-'))
+    cik = directory.get(normalize_ticker(ticker))
     if cik is None:
         raise ValueError('No unique SEC CIK match in cached official ticker directory')
     for path in (root / f'data/fundamentals/facts_{cik:010d}.json',

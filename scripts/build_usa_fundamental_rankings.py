@@ -204,14 +204,18 @@ def rank_frame(df:pd.DataFrame, *, group_by=None, exclude_financials=True):
             out.at[ix,'final_rank']=winner_rank
             prev=key
     if exclude_financials:
-        excluded=~eligible & df[list(FIELDS)].notna().all(axis=1)
+        excluded=financial | sector_fin if 'sectors' in out and 'industry' in out else (
+            financial if 'industry' in out else sector_fin if 'sectors' in out else pd.Series(False,index=out.index))
         out.loc[excluded,'ranking_reason']='Financial institution: metrics not comparable'
+    missing_mask=~eligible & ~out['ranking_reason'].eq('Financial institution: metrics not comparable')
+    if missing_mask.any():
+        out.loc[missing_mask,'ranking_reason'] = 'Missing: ' + out.loc[missing_mask,list(FIELDS)].isna().apply(lambda row: ', '.join(row.index[row]),axis=1)
     return out
 
 
 def build(root:Path=ROOT, asof:date|None=None):
     from usa_research_data import build_memberships
-    from usa_sec_cache_reader import ticker_directory,cached_companyfacts
+    from usa_sec_cache_reader import ticker_directory,cached_companyfacts,normalize_ticker
     holdings=root/'data/holdings/latest_holdings.parquet'
     if not holdings.exists():raise RuntimeError('Verified USA holdings missing; run existing holdings refresh')
     members=build_memberships(pd.read_parquet(holdings))
@@ -231,7 +235,7 @@ def build(root:Path=ROOT, asof:date|None=None):
         row={k:m.get(k) for k in ('company_key','company','ticker','sectors','factors','industry')}
         row.update({f:None for f in (*FIELDS,'market_cap','revenue','net_income','eps_diluted','gross_profit','assets','liabilities','cash','operating_cash_flow','capital_expenditure','free_cash_flow')})
         row.update(financial_period=None,sec_cik=None)
-        if ticker and ticker in directory:
+        if ticker and normalize_ticker(ticker) in directory:
             try:
                 facts,cik=cached_companyfacts(root,ticker,directory)
                 financial,fields=annual_fields(facts,asof)
@@ -268,7 +272,7 @@ def build(root:Path=ROOT, asof:date|None=None):
     pd.DataFrame(evidence,columns=['company_key','ticker','field','value','source','period_end','filed','concept','accession']).to_csv(out/'fundamental_field_evidence.csv',index=False)
     pd.DataFrame(urls).to_csv(out/'financial_source_links.csv',index=False)
     gaps=d[['company_key','ticker','rank_status','ranking_reason','missing_kpis','sec_cik','financial_period']].copy()
-    gaps.to_csv(out/'fundamental_kpi_gap_audit.csv',index=False)
+    gaps.to_csv(out/'fundamental_kpi_status.csv',index=False)
     report={'built_utc':datetime.now(timezone.utc).isoformat(),'verified_companies':len(d),
             'ranked':int(d['ranking_eligible'].sum()),'unranked':int((~d['ranking_eligible']).sum()),
             'metric_coverage':{f:int(d[f].notna().sum()) for f in (*FIELDS,'market_cap')},
