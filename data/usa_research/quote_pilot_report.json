@@ -1,14 +1,14 @@
 {
-  "built_utc": "2026-11-23T00:23:42.618748+00:00",
+  "built_utc": "2026-11-23T15:09:51.836822+00:00",
   "verified_issuers": 2931,
   "verified_tickers": 2921,
-  "selected": 300,
-  "fetched": 300,
+  "selected": 250,
+  "fetched": 250,
   "failed": 0,
   "failures": {},
-  "prices_before": 423,
+  "prices_before": 723,
   "fundamental_ready_candidates": 2273,
-  "selected_fundamental_ready": 300,
+  "selected_fundamental_ready": 250,
   "invalid_quote_identifiers_skipped": [
     "-",
     "2200964D",
@@ -23,6 +23,6 @@
     "MOG A",
     "UHAL B"
   ],
-  "prices_after": 723,
-  "valuations_after": 716
+  "prices_after": 973,
+  "valuations_after": 962
 }
