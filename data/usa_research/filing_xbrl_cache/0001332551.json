@@ -1,0 +1,64 @@
+{
+  "cik": 1332551,
+  "checked_utc": "2026-11-23T17:27:41.838988+00:00",
+  "accession": "0001193125-26-197603",
+  "filing_url": "https://www.sec.gov/Archives/edgar/data/1332551/000119312526197603/acr-20251231.htm",
+  "facts": {
+    "NetIncomeLoss": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 27976000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-197603",
+          "filed": "2026-04-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1332551/000119312526197603/acr-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 28695000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-197603",
+          "filed": "2026-04-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1332551/000119312526197603/acr-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": 21848000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-197603",
+          "filed": "2026-04-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1332551/000119312526197603/acr-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2023-01-01"
+        },
+        {
+          "end": "2022-12-31",
+          "val": 10426000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-197603",
+          "filed": "2026-04-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1332551/000119312526197603/acr-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2022-01-01"
+        },
+        {
+          "end": "2021-12-31",
+          "val": 33923000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-197603",
+          "filed": "2026-04-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1332551/000119312526197603/acr-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2021-01-01"
+        }
+      ]
+    }
+  },
+  "unmapped_ix_facts": 37,
+  "status": "ok"
+}

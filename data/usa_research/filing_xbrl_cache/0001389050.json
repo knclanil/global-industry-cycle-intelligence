@@ -1,0 +1,562 @@
+{
+  "cik": 1389050,
+  "checked_utc": "2026-11-23T17:29:15.193562+00:00",
+  "accession": "0001389050-26-000009",
+  "filing_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+  "facts": {
+    "AssetsCurrent": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 304163000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:AssetsCurrent"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 233122000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:AssetsCurrent"
+        }
+      ]
+    },
+    "Assets": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 4349304000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:Assets"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 3824205000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:Assets"
+        },
+        {
+          "end": "2025-12-31",
+          "val": 4349304000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:Assets"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 3824205000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:Assets"
+        }
+      ]
+    },
+    "LiabilitiesCurrent": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 197146000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:LiabilitiesCurrent"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 188604000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:LiabilitiesCurrent"
+        }
+      ]
+    },
+    "Liabilities": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 2857825000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:Liabilities"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 2500674000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:Liabilities"
+        }
+      ]
+    },
+    "StockholdersEquity": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 1491479000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 1323531000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2022-12-31",
+          "val": 860693000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2023-12-31",
+          "val": 871021000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 1323531000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2025-12-31",
+          "val": 1491479000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        }
+      ]
+    },
+    "RevenueFromContractWithCustomerExcludingAssessedTax": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 1489818000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 1157591000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": 990337000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2023-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": 1489818000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 1157591000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": 990337000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2023-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": 1489818000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 1157591000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": 990337000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2023-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": 1489818000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 1157591000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": 990337000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2023-01-01"
+        }
+      ]
+    },
+    "NetIncomeLoss": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 322290000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 172231000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": 104998000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2023-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": 104998000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2023-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 172231000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": 322290000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": 322290000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 172231000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": 104998000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2023-01-01"
+        }
+      ]
+    },
+    "EarningsPerShareBasic": {
+      "USD/shares": [
+        {
+          "end": "2025-12-31",
+          "val": 1.83,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 1.05,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": 0.67,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2023-01-01"
+        }
+      ]
+    },
+    "EarningsPerShareDiluted": {
+      "USD/shares": [
+        {
+          "end": "2025-12-31",
+          "val": 1.83,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 1.05,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": 0.67,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2023-01-01"
+        }
+      ]
+    },
+    "ProfitLoss": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 322290000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 172231000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": 104998000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2023-01-01"
+        }
+      ]
+    },
+    "NetIncomeLossAvailableToCommonStockholdersBasic": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 318956000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 169952000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": 103120000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic",
+          "start": "2023-01-01"
+        }
+      ]
+    },
+    "GrossProfit": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 723632000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:GrossProfit",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 505896000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:GrossProfit",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": 375077000.0,
+          "form": "10-K",
+          "accn": "0001389050-26-000009",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1389050/000138905026000009/aroc-20251231x10k.htm",
+          "original_concept": "us-gaap:GrossProfit",
+          "start": "2023-01-01"
+        }
+      ]
+    }
+  },
+  "unmapped_ix_facts": 1316,
+  "status": "ok"
+}

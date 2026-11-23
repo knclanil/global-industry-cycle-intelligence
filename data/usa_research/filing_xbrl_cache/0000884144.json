@@ -1,0 +1,413 @@
+{
+  "cik": 884144,
+  "checked_utc": "2026-11-23T17:29:30.864179+00:00",
+  "accession": "0001628280-26-012270",
+  "filing_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+  "facts": {
+    "AssetsCurrent": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 278369000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:AssetsCurrent"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 237277000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:AssetsCurrent"
+        }
+      ]
+    },
+    "Assets": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 531419000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:Assets"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 436638000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:Assets"
+        }
+      ]
+    },
+    "LiabilitiesCurrent": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 259723000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:LiabilitiesCurrent"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 223636000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:LiabilitiesCurrent"
+        }
+      ]
+    },
+    "LiabilitiesNoncurrent": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 73900000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:LiabilitiesNoncurrent"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 15687000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:LiabilitiesNoncurrent"
+        }
+      ]
+    },
+    "Liabilities": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 333623000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:Liabilities"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 239323000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:Liabilities"
+        }
+      ]
+    },
+    "StockholdersEquity": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 197796000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 197315000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        }
+      ]
+    },
+    "GrossProfit": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 94874000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:GrossProfit",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 82107000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:GrossProfit",
+          "start": "2024-01-01"
+        }
+      ]
+    },
+    "OperatingIncomeLoss": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": -8408000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:OperatingIncomeLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -10737000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:OperatingIncomeLoss",
+          "start": "2024-01-01"
+        }
+      ]
+    },
+    "NetIncomeLoss": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": -13126000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -11773000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -11773000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": -13126000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": -13126000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -11773000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": -13126000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -11773000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": -13126000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -11773000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2024-01-01"
+        }
+      ]
+    },
+    "EarningsPerShareBasic": {
+      "USD/shares": [
+        {
+          "end": "2025-12-31",
+          "val": -0.48,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -0.45,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": -0.48,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -0.45,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2024-01-01"
+        }
+      ]
+    },
+    "EarningsPerShareDiluted": {
+      "USD/shares": [
+        {
+          "end": "2025-12-31",
+          "val": -0.48,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -0.45,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": -0.48,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -0.45,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2024-01-01"
+        }
+      ]
+    },
+    "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest": {
+      "USD": [
+        {
+          "end": "2023-12-31",
+          "val": 191655000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 197315000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        },
+        {
+          "end": "2025-12-31",
+          "val": 197796000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-012270",
+          "filed": "2026-02-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/884144/000162828026012270/asur-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        }
+      ]
+    }
+  },
+  "unmapped_ix_facts": 802,
+  "status": "ok"
+}

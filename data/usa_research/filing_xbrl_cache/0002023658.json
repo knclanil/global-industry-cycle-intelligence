@@ -1,0 +1,307 @@
+{
+  "cik": 2023658,
+  "checked_utc": "2026-11-23T17:30:07.998711+00:00",
+  "accession": "0001628280-26-022010",
+  "filing_url": "https://www.sec.gov/Archives/edgar/data/2023658/000162828026022010/bcax-20251231.htm",
+  "facts": {
+    "AssetsCurrent": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 422053000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-022010",
+          "filed": "2026-03-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2023658/000162828026022010/bcax-20251231.htm",
+          "original_concept": "us-gaap:AssetsCurrent"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 502533000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-022010",
+          "filed": "2026-03-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2023658/000162828026022010/bcax-20251231.htm",
+          "original_concept": "us-gaap:AssetsCurrent"
+        }
+      ]
+    },
+    "Assets": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 430994000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-022010",
+          "filed": "2026-03-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2023658/000162828026022010/bcax-20251231.htm",
+          "original_concept": "us-gaap:Assets"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 509996000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-022010",
+          "filed": "2026-03-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2023658/000162828026022010/bcax-20251231.htm",
+          "original_concept": "us-gaap:Assets"
+        }
+      ]
+    },
+    "LiabilitiesCurrent": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 28949000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-022010",
+          "filed": "2026-03-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2023658/000162828026022010/bcax-20251231.htm",
+          "original_concept": "us-gaap:LiabilitiesCurrent"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 17990000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-022010",
+          "filed": "2026-03-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2023658/000162828026022010/bcax-20251231.htm",
+          "original_concept": "us-gaap:LiabilitiesCurrent"
+        }
+      ]
+    },
+    "Liabilities": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 29542000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-022010",
+          "filed": "2026-03-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2023658/000162828026022010/bcax-20251231.htm",
+          "original_concept": "us-gaap:Liabilities"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 18121000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-022010",
+          "filed": "2026-03-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2023658/000162828026022010/bcax-20251231.htm",
+          "original_concept": "us-gaap:Liabilities"
+        }
+      ]
+    },
+    "StockholdersEquity": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 401452000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-022010",
+          "filed": "2026-03-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2023658/000162828026022010/bcax-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 491875000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-022010",
+          "filed": "2026-03-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2023658/000162828026022010/bcax-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2023-12-31",
+          "val": -148769000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-022010",
+          "filed": "2026-03-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2023658/000162828026022010/bcax-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 491875000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-022010",
+          "filed": "2026-03-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2023658/000162828026022010/bcax-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2025-12-31",
+          "val": 401452000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-022010",
+          "filed": "2026-03-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2023658/000162828026022010/bcax-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        }
+      ]
+    },
+    "OperatingExpenses": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 155604000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-022010",
+          "filed": "2026-03-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2023658/000162828026022010/bcax-20251231.htm",
+          "original_concept": "us-gaap:OperatingExpenses",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 82389000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-022010",
+          "filed": "2026-03-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2023658/000162828026022010/bcax-20251231.htm",
+          "original_concept": "us-gaap:OperatingExpenses",
+          "start": "2024-01-01"
+        }
+      ]
+    },
+    "OperatingIncomeLoss": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": -155604000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-022010",
+          "filed": "2026-03-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2023658/000162828026022010/bcax-20251231.htm",
+          "original_concept": "us-gaap:OperatingIncomeLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -82389000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-022010",
+          "filed": "2026-03-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2023658/000162828026022010/bcax-20251231.htm",
+          "original_concept": "us-gaap:OperatingIncomeLoss",
+          "start": "2024-01-01"
+        }
+      ]
+    },
+    "NetIncomeLoss": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": -137950000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-022010",
+          "filed": "2026-03-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2023658/000162828026022010/bcax-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -67995000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-022010",
+          "filed": "2026-03-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2023658/000162828026022010/bcax-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -67995000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-022010",
+          "filed": "2026-03-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2023658/000162828026022010/bcax-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": -137950000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-022010",
+          "filed": "2026-03-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2023658/000162828026022010/bcax-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": -137950000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-022010",
+          "filed": "2026-03-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2023658/000162828026022010/bcax-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -67995000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-022010",
+          "filed": "2026-03-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2023658/000162828026022010/bcax-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2024-01-01"
+        }
+      ]
+    },
+    "EarningsPerShareBasic": {
+      "USD/shares": [
+        {
+          "end": "2025-12-31",
+          "val": -2.52,
+          "form": "10-K",
+          "accn": "0001628280-26-022010",
+          "filed": "2026-03-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2023658/000162828026022010/bcax-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -4.05,
+          "form": "10-K",
+          "accn": "0001628280-26-022010",
+          "filed": "2026-03-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2023658/000162828026022010/bcax-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2024-01-01"
+        }
+      ]
+    },
+    "EarningsPerShareDiluted": {
+      "USD/shares": [
+        {
+          "end": "2025-12-31",
+          "val": -2.52,
+          "form": "10-K",
+          "accn": "0001628280-26-022010",
+          "filed": "2026-03-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2023658/000162828026022010/bcax-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -4.05,
+          "form": "10-K",
+          "accn": "0001628280-26-022010",
+          "filed": "2026-03-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2023658/000162828026022010/bcax-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2024-01-01"
+        }
+      ]
+    }
+  },
+  "unmapped_ix_facts": 487,
+  "status": "ok"
+}

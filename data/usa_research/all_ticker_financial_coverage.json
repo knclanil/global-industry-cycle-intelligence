@@ -1,5 +1,5 @@
 {
-  "built_utc": "2026-11-23T16:52:18.702744+00:00",
+  "built_utc": "2026-11-23T17:27:23.202171+00:00",
   "verified_company_records": 2931,
   "unique_tickers": 2921,
   "sec_cik_mapped": 2899,
@@ -7,8 +7,8 @@
   "all_five_kpis": 1478,
   "partial_kpis": 1332,
   "no_kpis": 121,
-  "has_price": 2473,
-  "has_market_cap": 2469,
+  "has_price": 2716,
+  "has_market_cap": 2710,
   "unmapped_tickers": [
     "-",
     "2200964D",

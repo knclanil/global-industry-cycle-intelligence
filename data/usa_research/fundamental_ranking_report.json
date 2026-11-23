@@ -1,5 +1,5 @@
 {
-  "built_utc": "2026-11-23T16:52:11.950549+00:00",
+  "built_utc": "2026-11-23T17:32:07.577472+00:00",
   "verified_companies": 2931,
   "ranked": 1462,
   "unranked": 1469,
@@ -9,7 +9,7 @@
     "operating_margin": 1796,
     "net_margin": 2186,
     "eps_growth_pct": 2420,
-    "market_cap": 2469
+    "market_cap": 2710
   },
   "status_counts": {
     "Complete": 1462,

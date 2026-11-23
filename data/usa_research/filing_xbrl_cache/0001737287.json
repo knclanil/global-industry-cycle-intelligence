@@ -1,0 +1,385 @@
+{
+  "cik": 1737287,
+  "checked_utc": "2026-11-23T17:28:20.732713+00:00",
+  "accession": "0001628280-26-017242",
+  "filing_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+  "facts": {
+    "AssetsCurrent": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 257749000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:AssetsCurrent"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 303386000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:AssetsCurrent"
+        }
+      ]
+    },
+    "Assets": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 415905000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:Assets"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 548710000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:Assets"
+        }
+      ]
+    },
+    "LiabilitiesCurrent": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 32514000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:LiabilitiesCurrent"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 35523000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:LiabilitiesCurrent"
+        }
+      ]
+    },
+    "Liabilities": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 123363000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:Liabilities"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 126531000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:Liabilities"
+        }
+      ]
+    },
+    "StockholdersEquity": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 292542000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 422179000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2023-12-31",
+          "val": 512233000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 422179000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2025-12-31",
+          "val": 292542000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        }
+      ]
+    },
+    "RevenueFromContractWithCustomerExcludingAssessedTax": {
+      "USD": [
+        {
+          "end": "2024-12-31",
+          "val": 22000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2024-01-01"
+        }
+      ]
+    },
+    "OperatingExpenses": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 209315000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:OperatingExpenses",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 273221000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:OperatingExpenses",
+          "start": "2024-01-01"
+        }
+      ]
+    },
+    "OperatingIncomeLoss": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": -209315000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:OperatingIncomeLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -273199000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:OperatingIncomeLoss",
+          "start": "2024-01-01"
+        }
+      ]
+    },
+    "NetIncomeLoss": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": -190886000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -257590000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -257590000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": -190886000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": -190886000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -257590000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2024-01-01"
+        }
+      ]
+    },
+    "EarningsPerShareDiluted": {
+      "USD/shares": [
+        {
+          "end": "2025-12-31",
+          "val": -0.87,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -1.32,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": -0.87,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -1.32,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2024-01-01"
+        }
+      ]
+    },
+    "EarningsPerShareBasic": {
+      "USD/shares": [
+        {
+          "end": "2025-12-31",
+          "val": -0.87,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -1.32,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": -0.87,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -1.32,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2024-01-01"
+        }
+      ]
+    },
+    "ProfitLoss": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": -190886000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -257590000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-017242",
+          "filed": "2026-03-12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1737287/000162828026017242/allo-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2024-01-01"
+        }
+      ]
+    }
+  },
+  "unmapped_ix_facts": 826,
+  "status": "ok"
+}

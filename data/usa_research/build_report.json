@@ -1,9 +1,9 @@
 {
   "total_verified_usa_issuers": 2931,
   "fundamental_ready": 2283,
-  "valuation_ready": 2425,
+  "valuation_ready": 2637,
   "research_ready": 2260,
-  "quote_without_fundamentals": 165,
+  "quote_without_fundamentals": 377,
   "fundamentals_without_quotes": 23,
   "fully_scored": 0,
   "method": "cached SEC company facts + dated optional Yahoo quote metadata + verified USA iShares memberships; no fabricated values or peer scores"
