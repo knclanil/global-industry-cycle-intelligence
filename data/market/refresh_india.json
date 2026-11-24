@@ -1,10 +1,11 @@
 {
   "region": "india",
-  "refreshed_utc": "2026-11-24T00:15:22.965526+00:00",
+  "refreshed_utc": "2026-11-24T22:43:47.862967+00:00",
   "markets": {
     "India": {
       "status": "OK",
-      "changed": [
+      "changed": [],
+      "unchanged": [
         "^NIFTYBANK",
         "^CNXIT",
         "^CNXAUTO",
@@ -19,9 +20,8 @@
         "^CNXPSUBANK",
         "^NSEI"
       ],
-      "unchanged": [],
       "unavailable_this_run": [],
-      "request_start": "2026-11-10",
+      "request_start": "2026-11-13",
       "latest_dates": {
         "^NIFTYBANK": "2026-11-23",
         "^CNXIT": "2026-11-23",
@@ -40,7 +40,8 @@
     },
     "IndiaFactors": {
       "status": "OK",
-      "changed": [
+      "changed": [],
+      "unchanged": [
         "NIFTY50_VALUE20",
         "NIFTY200_MOMENTUM30",
         "NIFTY200_QUALITY30",
@@ -49,9 +50,8 @@
         "NIFTY50_EQUALWEIGHT",
         "^NSEI"
       ],
-      "unchanged": [],
       "unavailable_this_run": [],
-      "request_start": "2026-11-10",
+      "request_start": "2026-11-13",
       "latest_dates": {
         "NIFTY50_VALUE20": "2026-11-23",
         "NIFTY200_MOMENTUM30": "2026-11-23",
@@ -65,21 +65,21 @@
     "IndiaAssets": {
       "status": "OK",
       "changed": [
-        "LIQUIDBEES.NS",
+        "NIFTYBEES.NS",
+        "GOLDBEES.NS",
+        "SILVERBEES.NS",
+        "LIQUIDBEES.NS"
+      ],
+      "unchanged": [
         "NIFTY_GSEC_10Y",
         "^NSEI"
       ],
-      "unchanged": [
-        "NIFTYBEES.NS",
-        "GOLDBEES.NS",
-        "SILVERBEES.NS"
-      ],
       "unavailable_this_run": [],
-      "request_start": "2026-10-25",
+      "request_start": "2026-11-10",
       "latest_dates": {
-        "NIFTYBEES.NS": "2026-11-20",
-        "GOLDBEES.NS": "2026-11-20",
-        "SILVERBEES.NS": "2026-11-20",
+        "NIFTYBEES.NS": "2026-11-23",
+        "GOLDBEES.NS": "2026-11-23",
+        "SILVERBEES.NS": "2026-11-23",
         "LIQUIDBEES.NS": "2026-11-23",
         "NIFTY_GSEC_10Y": "2026-11-23",
         "^NSEI": "2026-11-23"
