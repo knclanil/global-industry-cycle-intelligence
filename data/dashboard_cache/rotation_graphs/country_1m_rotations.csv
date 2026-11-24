@@ -1,21 +1,21 @@
 ETF,Country,Quadrant,Relative strength (%),RS momentum (pp),As of
-SPY,United States,Leading,0.0576,0.5682,2026-11-23
-INDA,India,Leading,18.148,3.2097,2026-11-23
-EWJ,Japan,Improving,-2.7779,1.0212,2026-11-23
-MCHI,China,Leading,1.1092,0.2161,2026-11-23
-EWU,United Kingdom,Weakening,0.8464,-6.0456,2026-11-23
-EWG,Germany,Weakening,3.0915,-4.9189,2026-11-23
-EWQ,France,Weakening,5.9898,-3.2902,2026-11-23
-EWL,Switzerland,Weakening,4.9767,-8.233,2026-11-23
-EWC,Canada,Lagging,-2.494,-8.8037,2026-11-23
-EWA,Australia,Lagging,-1.5918,-8.2774,2026-11-23
-EWY,South Korea,Improving,-5.5386,11.9545,2026-11-23
-EWT,Taiwan,Improving,-11.4727,2.4162,2026-11-23
-EWZ,Brazil,Lagging,-27.7223,-4.7985,2026-11-23
-EWW,Mexico,Weakening,1.7522,-9.1819,2026-11-23
-EZA,South Africa,Lagging,-1.5255,-13.1298,2026-11-23
-EIDO,Indonesia,Leading,5.4759,16.241,2026-11-23
-THD,Thailand,Improving,-1.9422,0.6804,2026-11-23
-EWM,Malaysia,Weakening,0.8579,-4.2911,2026-11-23
-KSA,Saudi Arabia,Leading,9.2147,8.0168,2026-11-23
-UAE,United Arab Emirates,Leading,17.8774,9.8005,2026-11-23
+SPY,United States,Improving,-0.1091,0.4097,2026-11-24
+INDA,India,Leading,20.4061,5.2528,2026-11-24
+EWJ,Japan,Improving,-2.2538,1.8769,2026-11-24
+MCHI,China,Weakening,0.9304,-0.2107,2026-11-24
+EWU,United Kingdom,Weakening,2.4783,-3.5261,2026-11-24
+EWG,Germany,Weakening,3.348,-4.8862,2026-11-24
+EWQ,France,Weakening,7.6724,-2.7803,2026-11-24
+EWL,Switzerland,Weakening,7.4306,-6.3883,2026-11-24
+EWC,Canada,Lagging,-1.4292,-6.107,2026-11-24
+EWA,Australia,Lagging,-0.4896,-6.3732,2026-11-24
+EWY,South Korea,Improving,-8.9708,6.5776,2026-11-24
+EWT,Taiwan,Lagging,-14.8451,-0.3689,2026-11-24
+EWZ,Brazil,Improving,-8.7405,15.0422,2026-11-24
+EWW,Mexico,Weakening,1.5488,-7.6039,2026-11-24
+EZA,South Africa,Lagging,-2.212,-11.9382,2026-11-24
+EIDO,Indonesia,Leading,7.2756,17.0581,2026-11-24
+THD,Thailand,Lagging,-3.246,-1.1569,2026-11-24
+EWM,Malaysia,Weakening,2.2854,-0.4331,2026-11-24
+KSA,Saudi Arabia,Leading,8.9309,5.9431,2026-11-24
+UAE,United Arab Emirates,Leading,20.0705,11.1316,2026-11-24
