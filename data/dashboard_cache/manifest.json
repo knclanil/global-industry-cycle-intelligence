@@ -1,5 +1,5 @@
 {
-  "built_utc": "2026-11-21T16:28:41.309139+00:00",
+  "built_utc": "2026-11-24T19:46:55.606377+00:00",
   "schema_version": 1,
   "regions": {
     "Global": {
@@ -20,7 +20,7 @@
       "companies": 328,
       "source_indices": 31,
       "index_memberships": 975,
-      "financial_snapshots": 0,
+      "financial_snapshots": 28,
       "source": "NSE constituent snapshots"
     }
   },
