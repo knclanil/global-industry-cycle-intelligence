@@ -509,7 +509,7 @@ TICKER:DFH,DREAM FINDERS HOMES INC CLASS A,DFH,1825088.0,True,3,False,True,True,
 TICKER:DFIN,DONNELLEY FINANCIAL SOLUTIONS,DFIN,1669811.0,True,5,True,True,True,860.0,complete,
 TICKER:DFTX,DEFINIUM THERAPEUTICS INC,DFTX,1813814.0,True,3,False,True,True,,partial,operating_margin; net_margin
 TICKER:DGICA,DONEGAL GROUP INC CLASS A,DGICA,800457.0,True,2,False,True,True,,partial,current_ratio; operating_margin; eps_growth_pct
-TICKER:DGII,DIGI INTERNATIONAL,DGII,854775.0,True,5,True,True,True,609.0,complete,
+TICKER:DGII,DIGI INTERNATIONAL,DGII,854775.0,True,5,True,True,True,610.0,complete,
 TICKER:DHC,DIVERSIFIED HEALTHCARE TRUST,DHC,1075415.0,True,3,False,True,True,,partial,current_ratio; operating_margin
 TICKER:DIBS,1STDIBS COM INC,DIBS,1600641.0,True,5,True,True,True,960.0,complete,
 TICKER:DIN,DINE BRANDS GLOBAL,DIN,49754.0,True,3,False,True,True,,partial,roe; operating_margin
@@ -743,7 +743,7 @@ TICKER:GNW,GENWORTH FINANCIAL INC,GNW,1276520.0,True,3,False,True,True,,partial,
 TICKER:GO,GROCERY OUTLET HOLDING,GO,1771515.0,True,2,False,True,True,,partial,operating_margin; net_margin; eps_growth_pct
 TICKER:GOGO,GOGO,GOGO,1537054.0,True,5,True,True,True,751.0,complete,
 TICKER:GOLD,GOLD INC,GOLD,1591588.0,True,4,False,True,True,,partial,operating_margin
-TICKER:GOLF,ACUSHNET HOLDINGS CORP,GOLF,1672013.0,True,5,True,True,True,421.0,complete,
+TICKER:GOLF,ACUSHNET HOLDINGS CORP,GOLF,1672013.0,True,5,True,True,True,422.0,complete,
 TICKER:GOOD,GLADSTONE COMMERCIAL REIT CORP,GOOD,1234006.0,True,3,False,True,True,,partial,current_ratio; operating_margin
 TICKER:GPGI,GPGI INC CLASS A,GPGI,1823144.0,True,5,True,True,True,1135.0,complete,
 TICKER:GPI,GROUP AUTOMOTIVE INC,GPI,1031203.0,True,5,True,True,True,1012.0,complete,
@@ -1142,7 +1142,7 @@ TICKER:MVBF,MVB FINANCIAL CORP,MVBF,1277902.0,True,2,False,True,True,,partial,cu
 TICKER:MVST,MICROVAST HOLDINGS,MVST,1760689.0,True,5,True,True,True,1045.0,complete,
 TICKER:MWA,MUELLER WATER PRODUCTS SERIES A,MWA,1350593.0,True,5,True,True,True,110.0,complete,
 TICKER:MXL,MAXLINEAR,MXL,1288469.0,True,5,True,True,True,1224.0,complete,
-TICKER:MYE,MYERS INDUSTRIES INC,MYE,69488.0,True,5,True,True,True,403.0,complete,
+TICKER:MYE,MYERS INDUSTRIES INC,MYE,69488.0,True,5,True,True,True,404.0,complete,
 TICKER:MYFW,FIRST WESTERN FINANCIAL INC,MYFW,1327607.0,True,3,False,True,True,,partial,current_ratio; operating_margin
 TICKER:MYGN,MYRIAD GENETICS,MYGN,899923.0,True,5,True,True,True,1397.0,complete,
 TICKER:MYRG,MYR GROUP INC,MYRG,700923.0,True,5,True,True,True,503.0,complete,
@@ -1678,25 +1678,25 @@ TICKER:TCBK,TRICO BANCSHARES,TCBK,356171.0,True,3,False,True,True,,partial,curre
 TICKER:TCBX,THIRD COAST BANCSHARES INC,TCBX,1781730.0,True,2,False,True,True,,partial,current_ratio; operating_margin; net_margin
 TICKER:TCI,TRANSCONTINENTAL REALTY INVESTORS,TCI,733590.0,True,4,False,True,True,,partial,current_ratio
 TICKER:TCMD,TACTILE SYSTEMS TECHNOLOGY,TCMD,1027838.0,True,5,True,True,True,426.0,complete,
-TICKER:TCX,TUCOWS INC,TCX,909494.0,True,4,False,False,False,,partial,roe
+TICKER:TCX,TUCOWS INC,TCX,909494.0,True,4,False,True,True,,partial,roe
 TICKER:TDAY,USA TODAY INC,TDAY,1579684.0,True,4,False,True,True,,partial,operating_margin
 TICKER:TDC,TERADATA,TDC,816761.0,True,5,True,True,True,499.0,complete,
 TICKER:TDOC,TELADOC HEALTH INC,TDOC,1477449.0,True,5,True,True,True,905.0,complete,
 TICKER:TDS,TELEPHONE AND DATA SYSTEMS,TDS,1051512.0,True,5,True,True,True,942.0,complete,
 TICKER:TDUP,THREDUP CLASS A,TDUP,1484778.0,True,5,True,True,True,1186.0,complete,
 TICKER:TDW,TIDEWATER,TDW,98222.0,True,5,True,True,True,44.0,complete,
-TICKER:TE,T1 ENERGY,TE,1992243.0,True,5,True,False,False,1307.0,complete,
-TICKER:TECX,TECTONIC THERAPEUTIC,TECX,1681087.0,True,3,False,False,False,,partial,operating_margin; net_margin
+TICKER:TE,T1 ENERGY,TE,1992243.0,True,5,True,True,True,1307.0,complete,
+TICKER:TECX,TECTONIC THERAPEUTIC,TECX,1681087.0,True,3,False,True,True,,partial,operating_margin; net_margin
 TICKER:TENB,TENABLE HOLDINGS INC,TENB,1660280.0,True,5,True,True,True,1260.0,complete,
 TICKER:TENX,TENAX THERAPEUTICS INC,TENX,34956.0,True,3,False,True,True,,partial,operating_margin; net_margin
-TICKER:TEX,TEREX,TEX,97216.0,True,5,True,False,False,712.0,complete,
+TICKER:TEX,TEREX,TEX,97216.0,True,5,True,True,True,712.0,complete,
 TICKER:TFIN,TRIUMPH FINANCIAL,TFIN,1539638.0,True,2,False,True,True,,partial,current_ratio; operating_margin; net_margin
-TICKER:TG,TREDEGAR CORP,TG,850429.0,True,3,False,False,False,,partial,operating_margin; net_margin
+TICKER:TG,TREDEGAR CORP,TG,850429.0,True,3,False,True,True,,partial,operating_margin; net_margin
 TICKER:TGTX,TG THERAPEUTICS,TGTX,1001316.0,True,5,True,True,True,6.0,complete,
 TICKER:TH,TARGET HOSPITALITY,TH,1712189.0,True,5,True,True,True,1425.0,complete,
 TICKER:THFF,FIRST FINANCIAL CORPORATION CORP,THFF,714562.0,True,2,False,True,True,,partial,current_ratio; operating_margin; net_margin
 TICKER:THRD,THIRD HARMONIC BIO INC,THRD,,False,0,False,False,False,,missing,roe; current_ratio; operating_margin; net_margin; eps_growth_pct
-TICKER:THRM,GENTHERM,THRM,903129.0,True,5,True,False,False,995.0,complete,
+TICKER:THRM,GENTHERM,THRM,903129.0,True,5,True,True,True,995.0,complete,
 TICKER:THRY,THRYV HOLDINGS INC,THRY,1556739.0,True,5,True,True,True,846.0,complete,
 TICKER:TIC,TIC SOLUTIONS INC,TIC,2032966.0,True,4,False,True,True,,partial,eps_growth_pct
 TICKER:TILE,INTERFACE,TILE,715787.0,True,5,True,True,True,286.0,complete,
@@ -1704,19 +1704,19 @@ TICKER:TIPT,TIPTREE INC,TIPT,1393726.0,True,5,True,True,True,879.0,complete,
 TICKER:TITN,TITAN MACHINERY INC,TITN,1409171.0,True,1,False,True,True,,partial,roe; operating_margin; net_margin; eps_growth_pct
 TICKER:TKNO,ALPHA TEKNOVA,TKNO,1850902.0,True,5,True,True,True,961.0,complete,
 TICKER:TLS,TELOS CORPORATION CORP,TLS,320121.0,True,5,True,True,True,1080.0,complete,
-TICKER:TLSI,TRISALUS LF SC CM A,TLSI,1826667.0,True,4,False,False,False,,partial,roe
+TICKER:TLSI,TRISALUS LF SC CM A,TLSI,1826667.0,True,4,False,True,True,,partial,roe
 TICKER:TMDX,TRANSMEDICS GROUP,TMDX,1756262.0,True,5,True,True,True,8.0,complete,
-TICKER:TMP,TOMPKINS FINANCIAL CORP,TMP,1005817.0,True,3,False,False,False,,partial,current_ratio; operating_margin
+TICKER:TMP,TOMPKINS FINANCIAL CORP,TMP,1005817.0,True,3,False,True,True,,partial,current_ratio; operating_margin
 TICKER:TNC,TENNANT,TNC,97134.0,True,5,True,True,True,863.0,complete,
 TICKER:TNDM,TANDEM DIABETES CARE,TNDM,1438133.0,True,5,True,True,True,1366.0,complete,
 TICKER:TNET,TRINET GROUPINARY,TNET,937098.0,True,4,False,True,True,,partial,operating_margin
 TICKER:TNGX,TANGO THERAPEUTICS,TNGX,1819133.0,True,5,True,True,True,1001.0,complete,
 TICKER:TNXP,TONIX PHARMACEUTICALS HOLDING,TNXP,1430306.0,True,5,True,True,True,1004.0,complete,
-TICKER:TOWN,TOWNEBANK,TOWN,,False,0,False,False,False,,missing,roe; current_ratio; operating_margin; net_margin; eps_growth_pct
-TICKER:TPB,TURNING POINT BRANDS,TPB,1290677.0,True,5,True,False,False,86.0,complete,
+TICKER:TOWN,TOWNEBANK,TOWN,,False,0,False,True,True,,missing,roe; current_ratio; operating_margin; net_margin; eps_growth_pct
+TICKER:TPB,TURNING POINT BRANDS,TPB,1290677.0,True,5,True,True,True,86.0,complete,
 TICKER:TPC,TUTOR PERINI,TPC,77543.0,True,5,True,True,True,743.0,complete,
 TICKER:TRAK,REPOSITRAK INC,TRAK,50471.0,True,5,True,True,True,89.0,complete,
-TICKER:TRAX,FIRST TRACKS BIOTHERAPEUTICS INC,TRAX,2091349.0,True,0,False,False,False,,missing,roe; current_ratio; operating_margin; net_margin; eps_growth_pct
+TICKER:TRAX,FIRST TRACKS BIOTHERAPEUTICS INC,TRAX,2091349.0,True,0,False,True,True,,missing,roe; current_ratio; operating_margin; net_margin; eps_growth_pct
 TICKER:TRC,TEJON RANCH,TRC,96869.0,True,5,True,True,True,1032.0,complete,
 TICKER:TRDA,ENTRADA THERAPEUTICS,TRDA,1689375.0,True,5,True,True,True,1348.0,complete,
 TICKER:TREE,LENDINGTREE,TREE,1434621.0,True,5,True,True,True,176.0,complete,
@@ -1730,8 +1730,8 @@ TICKER:TROX,TRONOX HOLDINGS PLC,TROX,1530804.0,True,5,True,True,True,1356.0,comp
 TICKER:TRS,TRIMAS,TRS,842633.0,True,5,True,True,True,131.0,complete,
 TICKER:TRST,TRUSTCO BANK CORP,TRST,357301.0,True,2,False,True,True,,partial,current_ratio; operating_margin; net_margin
 TICKER:TRTX,TPG RE FINANCE TRUST INC,TRTX,1630472.0,True,2,False,True,True,,partial,current_ratio; operating_margin; net_margin
-TICKER:TRUP,TRUPANION,TRUP,1371285.0,True,5,True,False,False,711.0,complete,
-TICKER:TRVI,TREVI THERAPEUTICS,TRVI,1563880.0,True,3,False,False,False,,partial,operating_margin; net_margin
+TICKER:TRUP,TRUPANION,TRUP,1371285.0,True,5,True,True,True,711.0,complete,
+TICKER:TRVI,TREVI THERAPEUTICS,TRVI,1563880.0,True,3,False,True,True,,partial,operating_margin; net_margin
 TICKER:TSBK,TIMBERLAND BANCORP INC,TSBK,1046050.0,True,2,False,True,True,,partial,current_ratio; operating_margin; net_margin
 TICKER:TSE,TRINSEO PLC Prvt,TSE,,False,0,False,False,False,,missing,roe; current_ratio; operating_margin; net_margin; eps_growth_pct
 TICKER:TSHA,TAYSHA GENE THERAPIES,TSHA,1806310.0,True,5,True,True,True,1152.0,complete,
@@ -1745,50 +1745,50 @@ TICKER:TWIN,TWIN DISC INC,TWIN,100378.0,True,5,True,True,True,297.0,complete,
 TICKER:TWST,TWIST BIOSCIENCE,TWST,1581280.0,True,5,True,True,True,1148.0,complete,
 TICKER:TXCP,TEXAS CAPITAL BANCSHARES,TXCP,1077428.0,True,2,False,True,True,,partial,current_ratio; operating_margin; net_margin
 TICKER:TXG,10X GENOMICS CLASS A,TXG,1770787.0,True,5,True,True,True,792.0,complete,
-TICKER:TXNM,TXNM ENERGY INC,TXNM,1108426.0,True,5,True,False,False,867.0,complete,
+TICKER:TXNM,TXNM ENERGY INC,TXNM,1108426.0,True,5,True,True,True,867.0,complete,
 TICKER:TYGO,TIGO ENERGY,TYGO,1855447.0,True,5,True,True,True,914.0,complete,
-TICKER:TYRA,TYRA BIOSCIENCES,TYRA,1863127.0,True,3,False,False,False,,partial,operating_margin; net_margin
+TICKER:TYRA,TYRA BIOSCIENCES,TYRA,1863127.0,True,3,False,True,True,,partial,operating_margin; net_margin
 TICKER:UA,UNDER ARMOUR INC CLASS C,UA,1336917.0,True,2,False,True,True,,partial,operating_margin; net_margin; eps_growth_pct
 TICKER:UAA,UNDER ARMOUR INC CLASS A,UAA,1336917.0,True,2,False,True,True,,partial,operating_margin; net_margin; eps_growth_pct
 TICKER:UAMY,UNITED STATES ANTIMONY CORP,UAMY,101538.0,True,5,True,True,True,1104.0,complete,
 TICKER:UBSI,UNITED BANKSHARES,UBSI,729986.0,True,2,False,True,True,,partial,current_ratio; operating_margin; net_margin
 TICKER:UCB,UNITED COMMUNITY BANKS INC,UCB,857855.0,True,3,False,True,True,,partial,current_ratio; operating_margin
 TICKER:UCTT,ULTRA CLEAN HOLDINGS INC,UCTT,1275014.0,True,5,True,True,True,1266.0,complete,
-TICKER:UE,URBAN EDGE PROPERTIES,UE,1611547.0,True,3,False,False,False,,partial,current_ratio; operating_margin
+TICKER:UE,URBAN EDGE PROPERTIES,UE,1611547.0,True,3,False,True,True,,partial,current_ratio; operating_margin
 TICKER:UEC,URANIUM ENERGY,UEC,1334933.0,True,5,True,True,True,1166.0,complete,
 TICKER:UFCS,UNITED FIRE GROUP INC,UFCS,101199.0,True,3,False,True,True,,partial,current_ratio; operating_margin
 TICKER:UFPI,UFP INDUSTRIES,UFPI,912767.0,True,5,True,True,True,634.0,complete,
 TICKER:UFPT,UFP TECHNOLOGIES INC,UFPT,914156.0,True,5,True,True,True,252.0,complete,
 TICKER:UHT,UNIVERSAL HEALTH REALTY INCOME TRU,UHT,798783.0,True,4,False,True,True,,partial,current_ratio
-TICKER:UIS,UNISYS,UIS,746838.0,True,4,False,False,False,,partial,roe
+TICKER:UIS,UNISYS,UIS,746838.0,True,4,False,True,True,,partial,roe
 TICKER:ULCC,FRONTIER GROUP HOLDINGS,ULCC,1670076.0,True,5,True,True,True,1434.0,complete,
 TICKER:ULH,UNIVERSAL LOGISTICS HOLDINGS,ULH,1308208.0,True,5,True,True,True,1394.0,complete,
 TICKER:UMAC,UNUSUAL MACHINES INC,UMAC,1956955.0,True,5,True,True,True,874.0,complete,
 TICKER:UMBF,UMB FINANCIAL,UMBF,101382.0,True,2,False,True,True,,partial,current_ratio; operating_margin; net_margin
-TICKER:UMH,UMH PROPERTIES INC,UMH,752642.0,True,3,False,False,False,,partial,current_ratio; operating_margin
-TICKER:UNCY,UNICYCIVE THERAPEUTICS INC,UNCY,1766140.0,True,3,False,False,False,,partial,operating_margin; net_margin
+TICKER:UMH,UMH PROPERTIES INC,UMH,752642.0,True,3,False,True,True,,partial,current_ratio; operating_margin
+TICKER:UNCY,UNICYCIVE THERAPEUTICS INC,UNCY,1766140.0,True,3,False,True,True,,partial,operating_margin; net_margin
 TICKER:UNF,UNIFIRST,UNF,717954.0,True,5,True,True,True,762.0,complete,
 TICKER:UNFI,UNITED NATURAL FOODS INC,UNFI,1020859.0,True,5,True,True,True,807.0,complete,
 TICKER:UNIT,UNITI GROUP INC,UNIT,2020795.0,True,5,True,True,True,155.0,complete,
 TICKER:UNTY,UNITY BANCORP INC,UNTY,920427.0,True,2,False,True,True,,partial,current_ratio; operating_margin; net_margin
-TICKER:UP,WHEELS UP EXPERIENCE CLASS A,UP,1819516.0,True,4,False,False,False,,partial,roe
+TICKER:UP,WHEELS UP EXPERIENCE CLASS A,UP,1819516.0,True,4,False,True,True,,partial,roe
 TICKER:UPB,UPSTREAM BIO,UPB,2022626.0,True,5,True,True,True,1029.0,complete,
 TICKER:UPBD,UPBOUND GROUP,UPBD,933036.0,True,4,False,True,True,,partial,current_ratio
 TICKER:UPST,UPSTART HOLDINGS,UPST,1647639.0,True,4,False,True,True,,partial,current_ratio
 TICKER:UPWK,UPWORK,UPWK,1627475.0,True,5,True,True,True,528.0,complete,
 TICKER:URBN,URBAN OUTFITTERS,URBN,912615.0,True,1,False,True,True,,partial,roe; operating_margin; net_margin; eps_growth_pct
 TICKER:URG,UR ENERGY INC,URG,1375205.0,True,5,True,True,True,1279.0,complete,
-TICKER:URGN,UROGEN PHARMA,URGN,1668243.0,True,4,False,False,False,,partial,roe
-TICKER:USAR,USA RARE EARTH CLASS A,USAR,1970622.0,True,5,True,False,False,1381.0,complete,
-TICKER:USAU,US GOLD CORP,USAU,27093.0,True,2,False,False,False,,partial,operating_margin; net_margin; eps_growth_pct
+TICKER:URGN,UROGEN PHARMA,URGN,1668243.0,True,4,False,True,True,,partial,roe
+TICKER:USAR,USA RARE EARTH CLASS A,USAR,1970622.0,True,5,True,True,True,1381.0,complete,
+TICKER:USAU,US GOLD CORP,USAU,27093.0,True,2,False,True,True,,partial,operating_margin; net_margin; eps_growth_pct
 TICKER:USCB,USCB FINANCIAL HOLDINGS INC CLASS,USCB,1901637.0,True,2,False,True,True,,partial,current_ratio; operating_margin; net_margin
-TICKER:USGO,US GOLDMINING INC,USGO,1947244.0,True,3,False,False,False,,partial,operating_margin; net_margin
+TICKER:USGO,US GOLDMINING INC,USGO,1947244.0,True,3,False,True,True,,partial,operating_margin; net_margin
 TICKER:USLM,UNITED STATES LIME AND MINERALS IN,USLM,82020.0,True,5,True,True,True,24.0,complete,
 TICKER:USNA,USANA HEALTH SCIENCES INC,USNA,896264.0,True,2,False,True,True,,partial,operating_margin; net_margin; eps_growth_pct
 TICKER:USPH,US PHYSICAL THERAPY INC,USPH,885978.0,True,5,True,True,True,896.0,complete,
 TICKER:UTI,UNIVERSAL TECHNICAL INSTITUTE,UTI,1261654.0,True,5,True,True,True,492.0,complete,
 TICKER:UTL,UNITIL CORP,UTL,755001.0,True,5,True,True,True,744.0,complete,
-TICKER:UTMD,UTAH MEDICAL PRODUCTS INC,UTMD,706698.0,True,5,True,False,False,122.0,complete,
+TICKER:UTMD,UTAH MEDICAL PRODUCTS INC,UTMD,706698.0,True,5,True,True,True,122.0,complete,
 TICKER:UTZ,UTZ BRANDS CLASS A,UTZ,1739566.0,True,5,True,True,True,1250.0,complete,
 TICKER:UVE,UNIVERSAL INSURANCE HOLDINGS INC,UVE,891166.0,True,3,False,True,True,,partial,current_ratio; operating_margin
 TICKER:UVSP,UNIVEST FINANCIAL CORP,UVSP,102212.0,True,3,False,True,True,,partial,current_ratio; operating_margin
@@ -1797,7 +1797,7 @@ TICKER:VABK,VIRGINIA NATIONAL BANKSHARES CORP,VABK,1572334.0,True,2,False,True,T
 TICKER:VAC,MARRIOTT VACATIONS WORLDWIDE,VAC,1524358.0,True,3,False,True,True,,partial,current_ratio; operating_margin
 TICKER:VAL,VALARIS LTD,VAL,314808.0,True,5,True,True,True,27.0,complete,
 TICKER:VALU,VALUE LINE INC,VALU,717720.0,True,2,False,True,True,,partial,operating_margin; net_margin; eps_growth_pct
-TICKER:VATE,INNOVATE CORP,VATE,1006837.0,True,4,False,False,False,,partial,roe
+TICKER:VATE,INNOVATE CORP,VATE,1006837.0,True,4,False,True,True,,partial,roe
 TICKER:VC,VISTEON,VC,1111335.0,True,4,False,True,True,,partial,operating_margin
 TICKER:VCEL,VERICEL,VCEL,887359.0,True,5,True,True,True,435.0,complete,
 TICKER:VCTR,VICTORY CAPITAL HOLDINGS CLASS A,VCTR,1570827.0,True,4,False,True,True,,partial,current_ratio
@@ -1806,28 +1806,28 @@ TICKER:VECO,VEECO INSTRUMENTS,VECO,103145.0,True,5,True,True,True,728.0,complete
 TICKER:VEL,VELOCITY FINANCIAL INC,VEL,1692376.0,True,2,False,True,True,,partial,current_ratio; operating_margin; net_margin
 TICKER:VELO,VELO3D INC,VELO,1825079.0,True,5,True,True,True,1134.0,complete,
 TICKER:VENU,VENU HOLDING CORP,VENU,1770501.0,True,5,True,True,True,1446.0,complete,
-TICKER:VERA,VERA THERAPEUTICS CLASS A,VERA,1831828.0,True,3,False,False,False,,partial,operating_margin; net_margin
+TICKER:VERA,VERA THERAPEUTICS CLASS A,VERA,1831828.0,True,3,False,True,True,,partial,operating_margin; net_margin
 TICKER:VERI,VERITONE INC,VERI,1615165.0,True,5,True,True,True,1456.0,complete,
 TICKER:VERX,VERTEX CLASS A,VERX,1806837.0,True,4,False,True,True,,partial,eps_growth_pct
-TICKER:VGNT,VERSIGENT PLC,VGNT,2078008.0,True,0,False,False,False,,missing,roe; current_ratio; operating_margin; net_margin; eps_growth_pct
+TICKER:VGNT,VERSIGENT PLC,VGNT,2078008.0,True,0,False,True,True,,missing,roe; current_ratio; operating_margin; net_margin; eps_growth_pct
 TICKER:VGZ,VISTA GOLD CORP,VGZ,783324.0,True,3,False,True,False,,partial,operating_margin; net_margin
 TICKER:VHI,VALHI INC,VHI,59255.0,True,5,True,True,True,1078.0,complete,
 TICKER:VIA,VIA TRANSPORTATION CLASS A,VIA,1603015.0,True,5,True,True,True,894.0,complete,
-TICKER:VIR,VIR BIOTECHNOLOGY,VIR,1706431.0,True,5,True,False,False,1147.0,complete,
-TICKER:VISN,VISTANCE NETWORKS INC,VISN,1517228.0,True,4,False,False,False,,partial,roe
+TICKER:VIR,VIR BIOTECHNOLOGY,VIR,1706431.0,True,5,True,True,True,1147.0,complete,
+TICKER:VISN,VISTANCE NETWORKS INC,VISN,1517228.0,True,4,False,True,True,,partial,roe
 TICKER:VITL,VITAL FARMS INC,VITL,1579733.0,True,5,True,True,True,333.0,complete,
 TICKER:VLGEA,VILLAGE SUPER MARKET INC CLASS A,VLGEA,103595.0,True,4,False,True,True,,partial,eps_growth_pct
 TICKER:VLY,VALLEY NATIONAL,VLY,714310.0,True,2,False,True,True,,partial,current_ratio; operating_margin; net_margin
 TICKER:VMD,VIEMED HEALTHCARE INC,VMD,1729149.0,True,5,True,True,True,672.0,complete,
 TICKER:VNDA,VANDA PHARMACEUTICALS INC,VNDA,1347178.0,True,5,True,True,True,1416.0,complete,
-TICKER:VOR,VOR BIOPHARMA,VOR,1817229.0,True,2,False,False,False,,partial,roe; operating_margin; net_margin
+TICKER:VOR,VOR BIOPHARMA,VOR,1817229.0,True,2,False,True,True,,partial,roe; operating_margin; net_margin
 TICKER:VOYG,VOYAGER TECHNOLOGIES CLASS A,VOYG,1788060.0,True,5,True,True,True,971.0,complete,
 TICKER:VPG,VISHAY PRECISION GROUP,VPG,1487952.0,True,5,True,True,True,832.0,complete,
 TICKER:VRDN,VIRIDIAN THERAPEUTICS ORS,VRDN,1590750.0,True,4,False,True,True,,partial,eps_growth_pct
 TICKER:VREX,VAREX IMAGING,VREX,1681622.0,True,5,True,True,True,1106.0,complete,
 TICKER:VRNS,VARONIS SYSTEMS,VRNS,1361113.0,True,5,True,True,True,1317.0,complete,
 TICKER:VRRM,VERRA MOBILITY CLASS A,VRRM,1682745.0,True,5,True,True,True,52.0,complete,
-TICKER:VRTS,VIRTUS INVESTMENT PARTNERS,VRTS,883237.0,True,4,False,False,False,,partial,current_ratio
+TICKER:VRTS,VIRTUS INVESTMENT PARTNERS,VRTS,883237.0,True,4,False,True,True,,partial,current_ratio
 TICKER:VSAT,VIASAT INC,VSAT,797721.0,True,2,False,True,True,,partial,operating_margin; net_margin; eps_growth_pct
 TICKER:VSEC,VSE CORP,VSEC,102752.0,True,5,True,True,True,803.0,complete,
 TICKER:VSH,VISHAY INTERTECHNOLOGY,VSH,103730.0,True,5,True,True,True,757.0,complete,
@@ -1850,16 +1850,16 @@ TICKER:WD,WALKER & DUNLOP INC,WD,1497770.0,True,3,False,True,True,,partial,curre
 TICKER:WDFC,WD-40,WDFC,105132.0,True,5,True,True,True,268.0,complete,
 TICKER:WEN,WENDYS,WEN,30697.0,True,5,True,True,True,387.0,complete,
 TICKER:WERN,WERNER ENTERPRISES,WERN,793074.0,True,5,True,True,True,1151.0,complete,
-TICKER:WEST,WESTROCK COFFEE,WEST,1806347.0,True,4,False,False,False,,partial,roe
-TICKER:WEYS,WEYCO GROUP INC,WEYS,106532.0,True,5,True,False,False,491.0,complete,
+TICKER:WEST,WESTROCK COFFEE,WEST,1806347.0,True,4,False,True,True,,partial,roe
+TICKER:WEYS,WEYCO GROUP INC,WEYS,106532.0,True,5,True,True,True,491.0,complete,
 TICKER:WGO,WINNEBAGO INDUSTRIES,WGO,107687.0,True,5,True,True,True,786.0,complete,
 TICKER:WGS,GENEDX HOLDINGS CLASS A,WGS,1818331.0,True,5,True,True,True,889.0,complete,
 TICKER:WHD,CACTUS CLASS A,WHD,1699136.0,True,4,False,True,True,,partial,eps_growth_pct
 TICKER:WHG,WESTWOOD HOLDINGS GROUP INC,WHG,1165002.0,True,4,False,True,True,,partial,current_ratio
-TICKER:WHK,WHITEHAWK MINERALS CORP CLASS A,WHK,1921603.0,True,0,False,False,False,,missing,roe; current_ratio; operating_margin; net_margin; eps_growth_pct
+TICKER:WHK,WHITEHAWK MINERALS CORP CLASS A,WHK,1921603.0,True,0,False,True,True,,missing,roe; current_ratio; operating_margin; net_margin; eps_growth_pct
 TICKER:WHWK,WHITEHAWK THERAPEUTICS,WHWK,1422142.0,True,5,True,True,True,934.0,complete,
-TICKER:WINA,WINMARK,WINA,908315.0,True,4,False,False,False,,partial,roe
-TICKER:WK,WORKIVA CLASS A,WK,1445305.0,True,4,False,False,False,,partial,roe
+TICKER:WINA,WINMARK,WINA,908315.0,True,4,False,True,True,,partial,roe
+TICKER:WK,WORKIVA CLASS A,WK,1445305.0,True,4,False,True,True,,partial,roe
 TICKER:WKC,WORLD KINECT,WKC,789460.0,True,5,True,True,True,1414.0,complete,
 TICKER:WLDN,WILLDAN GROUP,WLDN,1370450.0,True,2,False,True,True,,partial,operating_margin; net_margin; eps_growth_pct
 TICKER:WLFC,WILLIS LEASE FINANCE,WLFC,1018164.0,True,4,False,True,True,,partial,current_ratio
@@ -1868,7 +1868,7 @@ TICKER:WLY,JOHN WILEY AND SONS CLASS A,WLY,107140.0,True,2,False,True,True,,part
 TICKER:WMK,WEIS MARKETS,WMK,105418.0,True,5,True,True,False,917.0,complete,
 TICKER:WNC,WABASH NATIONAL,WNC,879526.0,True,5,True,True,True,113.0,complete,
 TICKER:WNEB,WESTERN NEW ENGLAND BANCORP INC,WNEB,1157647.0,True,2,False,True,True,,partial,current_ratio; operating_margin; net_margin
-TICKER:WOLF,WOLFSPEED INC,WOLF,895419.0,True,1,False,False,False,,partial,roe; operating_margin; net_margin; eps_growth_pct
+TICKER:WOLF,WOLFSPEED INC,WOLF,895419.0,True,1,False,True,True,,partial,roe; operating_margin; net_margin; eps_growth_pct
 TICKER:WOOF,PETCO HEALTH AND WELLNESS COMPANY,WOOF,1826470.0,True,2,False,True,True,,partial,operating_margin; net_margin; eps_growth_pct
 TICKER:WOR,WORTHINGTON ENTERPRISES,WOR,108516.0,True,2,False,True,True,,partial,operating_margin; net_margin; eps_growth_pct
 TICKER:WRBY,WARBY PARKER CLASS A,WRBY,1504776.0,True,5,True,True,True,749.0,complete,
@@ -1879,7 +1879,7 @@ TICKER:WSBF,WATERSTONE FINANCIAL INC,WSBF,1569994.0,True,2,False,True,True,,part
 TICKER:WSFS,WSFS FINANCIAL,WSFS,828944.0,True,2,False,True,True,,partial,current_ratio; operating_margin; net_margin
 TICKER:WT,WISDOMTREE,WT,880631.0,True,5,True,True,True,61.0,complete,
 TICKER:WTBA,WEST BANCORPORATION INC,WTBA,1166928.0,True,2,False,True,True,,partial,current_ratio; operating_margin; net_margin
-TICKER:WTI,W AND T OFFSHORE,WTI,1288403.0,True,4,False,False,False,,partial,roe
+TICKER:WTI,W AND T OFFSHORE,WTI,1288403.0,True,4,False,True,True,,partial,roe
 TICKER:WTTR,SELECT WATER SOLUTIONS CLASS A,WTTR,1693256.0,True,4,False,True,True,,partial,eps_growth_pct
 TICKER:WVE,WAVE LIFE SCIENCES,WVE,1631574.0,True,5,True,True,True,1319.0,complete,
 TICKER:WWW,WOLVERINE WORLD WIDE,WWW,110471.0,True,1,False,True,True,,partial,roe; operating_margin; net_margin; eps_growth_pct
@@ -1889,30 +1889,30 @@ TICKER:XERS,XERIS BIOPHARMA HOLDINGS,XERS,1867096.0,True,5,True,True,True,612.0,
 TICKER:XFOR,X4 PHARMACEUTICALS,XFOR,1501697.0,True,5,True,True,True,975.0,complete,
 TICKER:XHR,XENIA HOTELS RESORTS REIT,XHR,1616000.0,True,4,False,True,True,,partial,current_ratio
 TICKER:XMAX,XMAX INC,XMAX,1473334.0,True,5,True,True,True,826.0,complete,
-TICKER:XMTR,XOMETRY CLASS A,XMTR,1657573.0,True,4,False,False,False,,partial,eps_growth_pct
+TICKER:XMTR,XOMETRY CLASS A,XMTR,1657573.0,True,4,False,True,True,,partial,eps_growth_pct
 TICKER:XNCR,XENCOR,XNCR,1326732.0,True,5,True,True,True,929.0,complete,
 TICKER:XPEL,XPEL,XPEL,1767258.0,True,5,True,True,True,239.0,complete,
-TICKER:XPER,XPERI INC,XPER,1788999.0,True,5,True,False,False,1302.0,complete,
-TICKER:XPOF,XPONENTIAL FITNESS CLASS A,XPOF,1802156.0,True,4,False,False,False,,partial,roe
-TICKER:XPRO,EXPRO LTD,XPRO,2126198.0,True,0,False,False,False,,missing,roe; current_ratio; operating_margin; net_margin; eps_growth_pct
+TICKER:XPER,XPERI INC,XPER,1788999.0,True,5,True,True,True,1302.0,complete,
+TICKER:XPOF,XPONENTIAL FITNESS CLASS A,XPOF,1802156.0,True,4,False,True,True,,partial,roe
+TICKER:XPRO,EXPRO LTD,XPRO,2126198.0,True,0,False,True,True,,missing,roe; current_ratio; operating_margin; net_margin; eps_growth_pct
 TICKER:XRAY,DENTSPLY SIRONA,XRAY,818479.0,True,5,True,True,True,1193.0,complete,
-TICKER:XRN,CHIRON REAL ESTATE INC,XRN,1533615.0,True,3,False,False,False,,partial,current_ratio; operating_margin
+TICKER:XRN,CHIRON REAL ESTATE INC,XRN,1533615.0,True,3,False,True,True,,partial,current_ratio; operating_margin
 TICKER:XRX,XEROX HOLDINGS CORP,XRX,1770450.0,True,4,False,True,True,,partial,operating_margin
 TICKER:XZO,EXZEO GROUP INC,XZO,1873951.0,True,5,True,True,True,11.0,complete,
 TICKER:YELP,YELP,YELP,1345016.0,True,5,True,True,True,224.0,complete,
 TICKER:YEXT,YEXT,YEXT,1614178.0,True,2,False,True,True,,partial,operating_margin; net_margin; eps_growth_pct
 TICKER:YORW,YORK WATER,YORW,108985.0,True,5,True,True,True,570.0,complete,
 TICKER:YOU,CLEAR SECURE CLASS A,YOU,1856314.0,True,4,False,True,True,,partial,eps_growth_pct
-TICKER:YSS,YORK SPACE SYSTEMS INC,YSS,2086587.0,True,0,False,False,False,,missing,roe; current_ratio; operating_margin; net_margin; eps_growth_pct
-TICKER:YSWY,YESWAY INC CLASS A,YSWY,1859836.0,True,0,False,False,False,,missing,roe; current_ratio; operating_margin; net_margin; eps_growth_pct
+TICKER:YSS,YORK SPACE SYSTEMS INC,YSS,2086587.0,True,0,False,True,True,,missing,roe; current_ratio; operating_margin; net_margin; eps_growth_pct
+TICKER:YSWY,YESWAY INC CLASS A,YSWY,1859836.0,True,0,False,True,True,,missing,roe; current_ratio; operating_margin; net_margin; eps_growth_pct
 TICKER:ZBIO,ZENAS BIOPHARMA,ZBIO,1953926.0,True,5,True,True,True,1164.0,complete,
 TICKER:ZD,ZIFF DAVIS INC,ZD,1084048.0,True,5,True,True,True,909.0,complete,
 TICKER:ZETA,ZETA GLOBAL HOLDINGS CLASS A,ZETA,1851003.0,True,5,True,True,True,933.0,complete,
-TICKER:ZIP,ZIPRECRUITER INC CLASS A,ZIP,1617553.0,True,4,False,False,False,,partial,roe
+TICKER:ZIP,ZIPRECRUITER INC CLASS A,ZIP,1617553.0,True,4,False,True,True,,partial,roe
 TICKER:ZNTL,ZENTALIS PHARMACEUTICALS,ZNTL,1725160.0,True,3,False,True,True,,partial,operating_margin; net_margin
 TICKER:ZSQR,Z SQUARED INC,ZSQR,1759186.0,True,5,True,True,True,1123.0,complete,
 TICKER:ZUMZ,ZUMIEZ,ZUMZ,1318008.0,True,2,False,True,True,,partial,operating_margin; net_margin; eps_growth_pct
-TICKER:ZURA,ZURA BIO LTD CLASS A,ZURA,1855644.0,True,3,False,False,False,,partial,operating_margin; net_margin
+TICKER:ZURA,ZURA BIO LTD CLASS A,ZURA,1855644.0,True,3,False,True,True,,partial,operating_margin; net_margin
 TICKER:ZVRA,ZEVRA THERAPEUTICS,ZVRA,1434647.0,True,5,True,True,True,99.0,complete,
 TICKER:ZWS,ZURN ELKAY WATER SOLUTIONS CORP,ZWS,1439288.0,True,5,True,True,True,208.0,complete,
 TICKER:ZYME,ZYMEWORKS,ZYME,1937653.0,True,5,True,True,True,1000.0,complete,
@@ -2079,7 +2079,7 @@ TICKER_COUNTRY:CBRE|US,CBRE GROUP CLASS A,CBRE,1138118.0,True,5,True,True,True,7
 TICKER_COUNTRY:CBSH|US,COMMERCE BANCSHARES,CBSH,22356.0,True,2,False,True,True,,partial,current_ratio; operating_margin; net_margin
 TICKER_COUNTRY:CB|US,CHUBB,CB,896159.0,True,3,False,True,True,,partial,current_ratio; operating_margin
 TICKER_COUNTRY:CCC|US,CCC INTELLIGENT SOLUTIONS HOLDINGS,CCC,1818201.0,True,5,True,True,True,1071.0,complete,
-TICKER_COUNTRY:CCI|US,CROWN CASTLE INC,CCI,1051470.0,True,4,False,True,True,,partial,roe
+TICKER_COUNTRY:CCI|US,CROWN CASTLE,CCI,1051470.0,True,4,False,True,True,,partial,roe
 TICKER_COUNTRY:CCK|US,CROWN HOLDINGS INC,CCK,1219601.0,True,5,True,True,True,425.0,complete,
 TICKER_COUNTRY:CCL|US,CARNIVAL CORP LTD,CCL,815097.0,True,5,True,True,True,468.0,complete,
 TICKER_COUNTRY:CDE|US,COEUR MINING,CDE,215466.0,True,5,True,True,True,28.0,complete,
@@ -2771,18 +2771,18 @@ TICKER_COUNTRY:SYK|US,STRYKER,SYK,310764.0,True,5,True,True,True,329.0,complete,
 TICKER_COUNTRY:SYY|US,SYSCO,SYY,96021.0,True,2,False,True,True,,partial,operating_margin; net_margin; eps_growth_pct
 TICKER_COUNTRY:S|US,SENTINELONE INC CLASS A,S,1583708.0,True,2,False,True,True,,partial,operating_margin; net_margin; eps_growth_pct
 TICKER_COUNTRY:TAP|US,MOLSON COORS BREWING CLASS B,TAP,24545.0,True,5,True,True,True,1444.0,complete,
-TICKER_COUNTRY:TDG|US,TRANSDIGM GROUP,TDG,1260221.0,True,4,False,False,False,,partial,roe
+TICKER_COUNTRY:TDG|US,TRANSDIGM GROUP,TDG,1260221.0,True,4,False,True,True,,partial,roe
 TICKER_COUNTRY:TDY|US,TELEDYNE TECHNOLOGIES,TDY,1094285.0,True,5,True,True,True,444.0,complete,
 TICKER_COUNTRY:TEAM|US,ATLASSIAN CORP CLASS A,TEAM,1650372.0,True,5,True,True,True,1038.0,complete,
-TICKER_COUNTRY:TECH|US,BIO TECHNE,TECH,842023.0,True,5,True,False,False,79.0,complete,
-TICKER_COUNTRY:TEL|US,TE CONNECTIVITY PLC,TEL,1385157.0,True,5,True,False,False,125.0,complete,
+TICKER_COUNTRY:TECH|US,BIO TECHNE,TECH,842023.0,True,5,True,True,True,79.0,complete,
+TICKER_COUNTRY:TEL|US,TE CONNECTIVITY PLC,TEL,1385157.0,True,5,True,True,True,125.0,complete,
 TICKER_COUNTRY:TEM|US,TEMPUS AI CLASS A,TEM,1717115.0,True,5,True,True,True,974.0,complete,
 TICKER_COUNTRY:TER|US,TERADYNE,TER,97210.0,True,5,True,True,True,270.0,complete,
-TICKER_COUNTRY:TFC|US,TRUIST FINANCIAL,TFC,92230.0,True,2,False,False,False,,partial,current_ratio; operating_margin; net_margin
+TICKER_COUNTRY:TFC|US,TRUIST FINANCIAL,TFC,92230.0,True,2,False,True,True,,partial,current_ratio; operating_margin; net_margin
 TICKER_COUNTRY:TFSL|US,TFS FINANCIAL CORP,TFSL,1381668.0,True,2,False,True,True,,partial,current_ratio; operating_margin; net_margin
 TICKER_COUNTRY:TFX|US,TELEFLEX,TFX,96943.0,True,5,True,True,True,1245.0,complete,
 TICKER_COUNTRY:TGT|US,TARGET CORP,TGT,27419.0,True,2,False,True,True,,partial,operating_margin; net_margin; eps_growth_pct
-TICKER_COUNTRY:THC|US,TENET HEALTHCARE CORP,THC,70318.0,True,5,True,False,False,422.0,complete,
+TICKER_COUNTRY:THC|US,TENET HEALTHCARE CORP,THC,70318.0,True,5,True,True,True,421.0,complete,
 TICKER_COUNTRY:THG|US,HANOVER INSURANCE GROUP,THG,944695.0,True,4,False,True,True,,partial,current_ratio
 TICKER_COUNTRY:THO|US,THOR INDUSTRIES,THO,730263.0,True,4,False,True,True,,partial,operating_margin
 TICKER_COUNTRY:TJX|US,TJX,TJX,109198.0,True,2,False,True,True,,partial,operating_margin; net_margin; eps_growth_pct
@@ -2791,10 +2791,10 @@ TICKER_COUNTRY:TKR|US,TIMKEN,TKR,98362.0,True,5,True,True,True,595.0,complete,
 TICKER_COUNTRY:TLN|US,TALEN ENERGY,TLN,1622536.0,True,5,True,True,True,1380.0,complete,
 TICKER_COUNTRY:TMO|US,THERMO FISHER SCIENTIFIC,TMO,97745.0,True,5,True,True,True,347.0,complete,
 TICKER_COUNTRY:TMUS|US,T MOBILE US INC,TMUS,1283699.0,True,5,True,True,True,502.0,complete,
-TICKER_COUNTRY:TNL|US,TRAVEL LEISURE,TNL,1361658.0,True,3,False,False,False,,partial,roe; current_ratio
+TICKER_COUNTRY:TNL|US,TRAVEL LEISURE,TNL,1361658.0,True,3,False,True,True,,partial,roe; current_ratio
 TICKER_COUNTRY:TOL|US,TOLL BROTHERS INC,TOL,794170.0,True,4,False,True,True,,partial,current_ratio
 TICKER_COUNTRY:TOST|US,TOAST CLASS A,TOST,1650164.0,True,5,True,True,True,246.0,complete,
-TICKER_COUNTRY:TPG|US,TPG INC CLASS A,TPG,1880661.0,True,3,False,False,False,,partial,current_ratio; operating_margin
+TICKER_COUNTRY:TPG|US,TPG INC CLASS A,TPG,1880661.0,True,3,False,True,True,,partial,current_ratio; operating_margin
 TICKER_COUNTRY:TPL|US,TEXAS PACIFIC LAND,TPL,1811074.0,True,5,True,True,True,38.0,complete,
 TICKER_COUNTRY:TPR|US,TAPESTRY,TPR,1116132.0,True,2,False,True,True,,partial,operating_margin; net_margin; eps_growth_pct
 TICKER_COUNTRY:TREX|US,TREX,TREX,1069878.0,True,5,True,True,True,456.0,complete,
@@ -2808,15 +2808,15 @@ TICKER_COUNTRY:TSLA|US,TESLA INC,TSLA,1318605.0,True,5,True,True,True,895.0,comp
 TICKER_COUNTRY:TSN|US,TYSON FOODS INC CLASS A,TSN,100493.0,True,5,True,True,True,1022.0,complete,
 TICKER_COUNTRY:TTC|US,TORO,TTC,737758.0,True,5,True,True,True,592.0,complete,
 TICKER_COUNTRY:TTD|US,TRADE DESK CLASS A,TTD,1671933.0,True,5,True,True,True,276.0,complete,
-TICKER_COUNTRY:TTEK|US,TETRA TECH,TTEK,831641.0,True,5,True,False,False,332.0,complete,
+TICKER_COUNTRY:TTEK|US,TETRA TECH,TTEK,831641.0,True,5,True,True,True,332.0,complete,
 TICKER_COUNTRY:TTMI|US,TTM TECHNOLOGIES INC,TTMI,1116942.0,True,5,True,True,True,365.0,complete,
 TICKER_COUNTRY:TTWO|US,TAKE TWO INTERACTIVE SOFTWARE,TTWO,946581.0,True,2,False,True,True,,partial,operating_margin; net_margin; eps_growth_pct
 TICKER_COUNTRY:TT|US,TRANE TECHNOLOGIES PLC,TT,1466258.0,True,5,True,True,True,293.0,complete,
 TICKER_COUNTRY:TWLO|US,TWILIO CLASS A,TWLO,1447669.0,True,5,True,True,True,583.0,complete,
 TICKER_COUNTRY:TW|US,TRADEWEB MARKETS INC CLASS A,TW,1758730.0,True,4,False,True,True,,partial,current_ratio
-TICKER_COUNTRY:TXNM|US,TXNM ENERGY INC,TXNM,1108426.0,True,5,True,False,False,867.0,complete,
+TICKER_COUNTRY:TXNM|US,TXNM ENERGY INC,TXNM,1108426.0,True,5,True,True,True,867.0,complete,
 TICKER_COUNTRY:TXN|US,TEXAS INSTRUMENT,TXN,97476.0,True,5,True,True,True,56.0,complete,
-TICKER_COUNTRY:TXRH|US,TEXAS ROADHOUSE INC,TXRH,1289460.0,True,5,True,False,False,759.0,complete,
+TICKER_COUNTRY:TXRH|US,TEXAS ROADHOUSE INC,TXRH,1289460.0,True,5,True,True,True,759.0,complete,
 TICKER_COUNTRY:TXT|US,TEXTRON INC,TXT,217346.0,True,0,False,True,True,,missing,roe; current_ratio; operating_margin; net_margin; eps_growth_pct
 TICKER_COUNTRY:TYL|US,TYLER TECHNOLOGIES,TYL,860731.0,True,5,True,True,True,586.0,complete,
 TICKER_COUNTRY:T|US,AT&T,T,732717.0,True,5,True,True,True,258.0,complete,
@@ -2830,7 +2830,7 @@ TICKER_COUNTRY:UHS|US,UNIVERSAL HEALTH SERVICES CLASS B,UHS,352915.0,True,5,True
 TICKER_COUNTRY:UI|US,UBIQUITI,UI,1511737.0,True,5,True,True,True,30.0,complete,
 TICKER_COUNTRY:ULS|US,UL SOLUTIONS INC CLASS A,ULS,1901440.0,True,5,True,True,True,448.0,complete,
 TICKER_COUNTRY:ULTA|US,ULTA BEAUTY INC,ULTA,1403568.0,True,2,False,True,True,,partial,operating_margin; net_margin; eps_growth_pct
-TICKER_COUNTRY:UNH|US,UNITEDHEALTH GROUP,UNH,731766.0,True,5,True,False,False,990.0,complete,
+TICKER_COUNTRY:UNH|US,UNITEDHEALTH GROUP,UNH,731766.0,True,5,True,True,True,990.0,complete,
 TICKER_COUNTRY:UNM|US,UNUM,UNM,5513.0,True,3,False,True,True,,partial,current_ratio; operating_margin
 TICKER_COUNTRY:UNP|US,UNION PACIFIC,UNP,100885.0,True,5,True,True,True,235.0,complete,
 TICKER_COUNTRY:UPS|US,UNITED PARCEL SERVICE INC CLASS B,UPS,1090727.0,True,5,True,True,True,632.0,complete,
@@ -2838,37 +2838,37 @@ TICKER_COUNTRY:URI|US,UNITED RENTALS,URI,1067701.0,True,5,True,True,True,264.0,c
 TICKER_COUNTRY:USB|US,US BANCORP,USB,36104.0,True,3,False,True,True,,partial,current_ratio; operating_margin
 TICKER_COUNTRY:USFD|US,US FOODS HOLDING,USFD,1665918.0,True,5,True,True,True,753.0,complete,
 TICKER_COUNTRY:UTHR|US,UNITED THERAPEUTICS,UTHR,1082554.0,True,5,True,True,True,41.0,complete,
-TICKER_COUNTRY:UWMC|US,UWM HOLDINGS CLASS A,UWMC,1783398.0,True,3,False,False,False,,partial,current_ratio; operating_margin
+TICKER_COUNTRY:UWMC|US,UWM HOLDINGS CLASS A,UWMC,1783398.0,True,3,False,True,True,,partial,current_ratio; operating_margin
 TICKER_COUNTRY:U|US,UNITY SOFTWARE,U,1810806.0,True,5,True,True,True,1088.0,complete,
 TICKER_COUNTRY:VEEV|US,VEEVA SYSTEMS CLASS A,VEEV,1393052.0,True,2,False,True,True,,partial,operating_margin; net_margin; eps_growth_pct
 TICKER_COUNTRY:VFC|US,VF CORP,VFC,103379.0,True,2,False,True,True,,partial,operating_margin; net_margin; eps_growth_pct
 TICKER_COUNTRY:VIAV|US,VIAVI SOLUTIONS,VIAV,912093.0,True,2,False,True,True,,partial,operating_margin; net_margin; eps_growth_pct
 TICKER_COUNTRY:VICI|US,VICI PPTYS INC,VICI,1705696.0,True,3,False,True,True,,partial,current_ratio; operating_margin
 TICKER_COUNTRY:VICR|US,VICOR,VICR,751978.0,True,5,True,True,True,14.0,complete,
-TICKER_COUNTRY:VIK|US,VIKING HOLDINGS LTD,VIK,1745201.0,True,0,False,False,False,,missing,roe; current_ratio; operating_margin; net_margin; eps_growth_pct
+TICKER_COUNTRY:VIK|US,VIKING HOLDINGS LTD,VIK,1745201.0,True,0,False,True,True,,missing,roe; current_ratio; operating_margin; net_margin; eps_growth_pct
 TICKER_COUNTRY:VIRT|US,VIRTU FINANCIAL INC CLASS A,VIRT,1592386.0,True,3,False,True,True,,partial,current_ratio; operating_margin
 TICKER_COUNTRY:VKTX|US,VIKING THERAPEUTICS,VKTX,1607678.0,True,3,False,True,True,,partial,operating_margin; net_margin
 TICKER_COUNTRY:VLO|US,VALERO ENERGY CORP,VLO,1035002.0,True,5,True,True,True,918.0,complete,
 TICKER_COUNTRY:VLTO|US,VERALTO,VLTO,1967680.0,True,5,True,True,True,189.0,complete,
 TICKER_COUNTRY:VMC|US,VULCAN MATERIALS,VMC,1396009.0,True,5,True,True,True,197.0,complete,
 TICKER_COUNTRY:VMI|US,VALMONT INDS,VMI,102729.0,True,5,True,True,True,429.0,complete,
-TICKER_COUNTRY:VMRK|US,VIVMARK RESIDENTIAL,VMRK,906107.0,True,2,False,False,False,,partial,current_ratio; operating_margin; net_margin
+TICKER_COUNTRY:VMRK|US,VIVMARK RESIDENTIAL,VMRK,906107.0,True,2,False,True,True,,partial,current_ratio; operating_margin; net_margin
 TICKER_COUNTRY:VNOM|US,VIPER ENERGY INC CLASS A,VNOM,2074176.0,True,5,True,True,True,1101.0,complete,
 TICKER_COUNTRY:VNO|US,VORNADO REALTY TRUST REIT,VNO,899689.0,True,3,False,True,True,,partial,current_ratio; operating_margin
-TICKER_COUNTRY:VNT|US,VONTIER,VNT,1786842.0,True,5,True,False,False,404.0,complete,
+TICKER_COUNTRY:VNT|US,VONTIER,VNT,1786842.0,True,5,True,True,True,403.0,complete,
 TICKER_COUNTRY:VOYA|US,VOYA FINANCIAL,VOYA,1535929.0,True,4,False,True,True,,partial,current_ratio
 TICKER_COUNTRY:VRSK|US,VERISK ANALYTICS,VRSK,1442145.0,True,5,True,True,True,198.0,complete,
-TICKER_COUNTRY:VRSN|US,VERISIGN,VRSN,1014473.0,True,3,False,False,False,,partial,roe; eps_growth_pct
+TICKER_COUNTRY:VRSN|US,VERISIGN,VRSN,1014473.0,True,3,False,True,True,,partial,roe; eps_growth_pct
 TICKER_COUNTRY:VRTX|US,VERTEX PHARMACEUTICALS,VRTX,875320.0,True,5,True,True,True,19.0,complete,
 TICKER_COUNTRY:VRT|US,VERTIV HOLDINGS CLASS A,VRT,1674101.0,True,5,True,True,True,124.0,complete,
 TICKER_COUNTRY:VSNT|US,VERSANT MEDIA GROUP INC CLASS A,VSNT,2067876.0,True,4,False,True,True,,partial,eps_growth_pct
 TICKER_COUNTRY:VST|US,VISTRA,VST,1692819.0,True,5,True,True,True,853.0,complete,
-TICKER_COUNTRY:VTRS|US,VIATRIS,VTRS,1792044.0,True,5,True,False,False,1422.0,complete,
-TICKER_COUNTRY:VTR|US,VENTAS REIT,VTR,740260.0,True,3,False,False,False,,partial,current_ratio; operating_margin
+TICKER_COUNTRY:VTRS|US,VIATRIS,VTRS,1792044.0,True,5,True,True,True,1422.0,complete,
+TICKER_COUNTRY:VTR|US,VENTAS REIT,VTR,740260.0,True,3,False,True,True,,partial,current_ratio; operating_margin
 TICKER_COUNTRY:VVV|US,VALVOLINE,VVV,1674910.0,True,5,True,True,True,804.0,complete,
-TICKER_COUNTRY:VYLR|US,VYLOR,VYLR,2128626.0,True,0,False,False,False,,missing,roe; current_ratio; operating_margin; net_margin; eps_growth_pct
-TICKER_COUNTRY:VZ|US,VERIZON COMMUNICATIONS INC,VZ,732712.0,True,5,True,False,False,558.0,complete,
-TICKER_COUNTRY:V|US,VISA CLASS A,V,1403161.0,True,4,False,False,False,,partial,eps_growth_pct
+TICKER_COUNTRY:VYLR|US,VYLOR,VYLR,2128626.0,True,0,False,True,True,,missing,roe; current_ratio; operating_margin; net_margin; eps_growth_pct
+TICKER_COUNTRY:VZ|US,VERIZON COMMUNICATIONS INC,VZ,732712.0,True,5,True,True,True,558.0,complete,
+TICKER_COUNTRY:V|US,VISA CLASS A,V,1403161.0,True,4,False,True,True,,partial,eps_growth_pct
 TICKER_COUNTRY:WAB|US,WESTINGHOUSE AIR BRAKE TECHNOLOGIE,WAB,943452.0,True,5,True,True,True,587.0,complete,
 TICKER_COUNTRY:WAL|US,WESTERN ALLIANCE,WAL,1212545.0,True,3,False,True,True,,partial,current_ratio; operating_margin
 TICKER_COUNTRY:WAT|US,WATERS CORP,WAT,1000697.0,True,5,True,True,True,213.0,complete,
@@ -2876,14 +2876,14 @@ TICKER_COUNTRY:WCC|US,WESCO INTERNATIONAL,WCC,929008.0,True,5,True,True,True,704
 TICKER_COUNTRY:WCN|US,WASTE CONNECTIONS,WCN,1318220.0,True,5,True,True,True,450.0,complete,
 TICKER_COUNTRY:WDAY|US,WORKDAY CLASS A,WDAY,1327811.0,True,2,False,True,True,,partial,operating_margin; net_margin; eps_growth_pct
 TICKER_COUNTRY:WDC|US,WESTERN DIGITAL CORP,WDC,106040.0,True,5,True,True,True,40.0,complete,
-TICKER_COUNTRY:WEC|US,WEC ENERGY GROUP,WEC,783325.0,True,5,True,False,False,610.0,complete,
-TICKER_COUNTRY:WELL|US,WELLTOWER,WELL,766704.0,True,3,False,False,False,,partial,current_ratio; operating_margin
+TICKER_COUNTRY:WEC|US,WEC ENERGY GROUP,WEC,783325.0,True,5,True,True,True,609.0,complete,
+TICKER_COUNTRY:WELL|US,WELLTOWER,WELL,766704.0,True,3,False,True,True,,partial,current_ratio; operating_margin
 TICKER_COUNTRY:WEX|US,WEX,WEX,1309108.0,True,5,True,True,True,274.0,complete,
 TICKER_COUNTRY:WFC|US,WELLS FARGO,WFC,72971.0,True,2,False,True,True,,partial,current_ratio; operating_margin; net_margin
 TICKER_COUNTRY:WFRD|US,WEATHERFORD INTERNATIONAL CORP,WFRD,1603923.0,True,5,True,True,True,379.0,complete,
 TICKER_COUNTRY:WHR|US,WHIRLPOOL,WHR,106640.0,True,5,True,True,True,715.0,complete,
 TICKER_COUNTRY:WH|US,WYNDHAM HOTELS RESORTS,WH,1722684.0,True,5,True,True,True,467.0,complete,
-TICKER_COUNTRY:WING|US,WINGSTOP,WING,1636222.0,True,4,False,False,False,,partial,roe
+TICKER_COUNTRY:WING|US,WINGSTOP,WING,1636222.0,True,4,False,True,True,,partial,roe
 TICKER_COUNTRY:WLK|US,WESTLAKE CORP,WLK,1262823.0,True,5,True,True,True,1346.0,complete,
 TICKER_COUNTRY:WMB|US,WILLIAMS,WMB,107263.0,True,5,True,True,True,372.0,complete,
 TICKER_COUNTRY:WMS|US,ADVANCED DRAINAGE SYSTEMS INC,WMS,1604028.0,True,2,False,True,True,,partial,operating_margin; net_margin; eps_growth_pct
@@ -2901,19 +2901,19 @@ TICKER_COUNTRY:WTRG|US,ESSENTIAL UTILITIES INC,WTRG,78128.0,True,5,True,True,Tru
 TICKER_COUNTRY:WTS|US,WATTS WATER TECHNOLOGIES CLASS A,WTS,795403.0,True,5,True,True,True,196.0,complete,
 TICKER_COUNTRY:WTW|US,WILLIS TOWERS WATSON,WTW,1140536.0,True,5,True,True,True,,complete,
 TICKER_COUNTRY:WULF|US,TERAWULF,WULF,1083301.0,True,5,True,True,True,1442.0,complete,
-TICKER_COUNTRY:WU|US,WESTERN UNION,WU,1365135.0,True,4,False,False,False,,partial,current_ratio
+TICKER_COUNTRY:WU|US,WESTERN UNION,WU,1365135.0,True,4,False,True,True,,partial,current_ratio
 TICKER_COUNTRY:WWD|US,WOODWARD,WWD,108312.0,True,4,False,True,True,,partial,operating_margin
-TICKER_COUNTRY:WYNN|US,WYNN RESORTS,WYNN,1174922.0,True,4,False,False,False,,partial,roe
+TICKER_COUNTRY:WYNN|US,WYNN RESORTS,WYNN,1174922.0,True,4,False,True,True,,partial,roe
 TICKER_COUNTRY:WY|US,WEYERHAEUSER REIT,WY,106535.0,True,5,True,True,True,887.0,complete,
-TICKER_COUNTRY:W|US,WAYFAIR CLASS A,W,1616707.0,True,4,False,False,False,,partial,roe
-TICKER_COUNTRY:XEL|US,XCEL ENERGY INC,XEL,72903.0,True,3,False,False,False,,partial,operating_margin; net_margin
-TICKER_COUNTRY:XE|US,X-ENERGY INC CLASS A,XE,2088896.0,True,0,False,False,False,,missing,roe; current_ratio; operating_margin; net_margin; eps_growth_pct
-TICKER_COUNTRY:XOM|US,EXXONMOBIL HOLDINGS CORP,XOM,2115436.0,True,0,False,False,False,,missing,roe; current_ratio; operating_margin; net_margin; eps_growth_pct
+TICKER_COUNTRY:W|US,WAYFAIR CLASS A,W,1616707.0,True,4,False,True,True,,partial,roe
+TICKER_COUNTRY:XEL|US,XCEL ENERGY INC,XEL,72903.0,True,3,False,True,True,,partial,operating_margin; net_margin
+TICKER_COUNTRY:XE|US,X-ENERGY INC CLASS A,XE,2088896.0,True,0,False,True,True,,missing,roe; current_ratio; operating_margin; net_margin; eps_growth_pct
+TICKER_COUNTRY:XOM|US,EXXONMOBIL HOLDINGS CORP,XOM,2115436.0,True,0,False,True,True,,missing,roe; current_ratio; operating_margin; net_margin; eps_growth_pct
 TICKER_COUNTRY:XPO|US,XPO,XPO,1166003.0,True,5,True,True,True,820.0,complete,
 TICKER_COUNTRY:XYL|US,XYLEM INC,XYL,1524472.0,True,5,True,True,True,584.0,complete,
 TICKER_COUNTRY:XYZ|US,BLOCK CLASS A,XYZ,1512673.0,True,5,True,True,True,817.0,complete,
 TICKER_COUNTRY:YETI|US,YETI HOLDINGS,YETI,1670592.0,True,1,False,True,True,,partial,roe; operating_margin; net_margin; eps_growth_pct
-TICKER_COUNTRY:YUM|US,YUM BRANDS,YUM,1041061.0,True,4,False,False,False,,partial,roe
+TICKER_COUNTRY:YUM|US,YUM BRANDS,YUM,1041061.0,True,4,False,True,True,,partial,roe
 TICKER_COUNTRY:ZBH|US,ZIMMER BIOMET HOLDINGS,ZBH,1136869.0,True,5,True,True,True,689.0,complete,
 TICKER_COUNTRY:ZBRA|US,ZEBRA TECHNOLOGIES CORP CLASS A,ZBRA,877212.0,True,5,True,True,True,779.0,complete,
 TICKER_COUNTRY:ZG|US,ZILLOW GROUP CLASS A,ZG,1617640.0,True,5,True,True,True,684.0,complete,

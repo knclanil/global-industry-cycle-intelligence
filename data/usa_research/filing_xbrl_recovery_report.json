@@ -1,19 +1,16 @@
 {
-  "built_utc": "2026-11-24T02:03:45.716752+00:00",
+  "built_utc": "2026-11-24T23:47:18.787386+00:00",
   "eligible_queue": 1291,
   "attempted": 125,
-  "recovered_filings": 113,
-  "new_facts": 5007,
-  "skipped_cached": 125,
+  "recovered_filings": 112,
+  "new_facts": 4976,
+  "skipped_cached": 250,
   "errors": {
-    "1619762": "No recent 10-K primary HTML in submissions",
-    "2090646": "No recent 10-K primary HTML in submissions",
-    "1866364": "No recent 10-K primary HTML in submissions",
-    "2100161": "No recent 10-K primary HTML in submissions",
-    "2115119": "No recent 10-K primary HTML in submissions",
-    "2114044": "No recent 10-K primary HTML in submissions",
-    "1951089": "No recent 10-K primary HTML in submissions",
-    "2105398": "No recent 10-K primary HTML in submissions"
+    "1846832": "No recent 10-K primary HTML in submissions",
+    "2119322": "No recent 10-K primary HTML in submissions",
+    "2101698": "No recent 10-K primary HTML in submissions",
+    "2110029": "No recent 10-K primary HTML in submissions",
+    "1531193": "No recent 10-K primary HTML in submissions"
   },
   "note": "Recovery requires SEC filing access; custom tags require explicit review."
 }

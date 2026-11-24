@@ -1,0 +1,414 @@
+{
+  "cik": 1357971,
+  "checked_utc": "2026-11-24T23:49:20.231693+00:00",
+  "accession": "0001104659-25-121185",
+  "filing_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+  "facts": {
+    "AssetsCurrent": {
+      "USD": [
+        {
+          "end": "2025-09-30",
+          "val": 144923587.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:AssetsCurrent"
+        },
+        {
+          "end": "2024-09-30",
+          "val": 110426929.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:AssetsCurrent"
+        }
+      ]
+    },
+    "Assets": {
+      "USD": [
+        {
+          "end": "2025-09-30",
+          "val": 215207056.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:Assets"
+        },
+        {
+          "end": "2024-09-30",
+          "val": 158247000.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:Assets"
+        }
+      ]
+    },
+    "LiabilitiesCurrent": {
+      "USD": [
+        {
+          "end": "2025-09-30",
+          "val": 97979084.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:LiabilitiesCurrent"
+        },
+        {
+          "end": "2024-09-30",
+          "val": 74248552.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:LiabilitiesCurrent"
+        }
+      ]
+    },
+    "Liabilities": {
+      "USD": [
+        {
+          "end": "2025-09-30",
+          "val": 155971263.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:Liabilities"
+        },
+        {
+          "end": "2024-09-30",
+          "val": 99552856.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:Liabilities"
+        }
+      ]
+    },
+    "StockholdersEquity": {
+      "USD": [
+        {
+          "end": "2025-09-30",
+          "val": 59235793.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2024-09-30",
+          "val": 58694144.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2024-09-30",
+          "val": 58694144.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 60953230.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2025-03-31",
+          "val": 53686066.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2025-06-30",
+          "val": 54448040.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2025-09-30",
+          "val": 59235793.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2023-09-30",
+          "val": 34588989.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2023-12-31",
+          "val": 35637153.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2024-03-31",
+          "val": 34563881.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2024-06-30",
+          "val": 52036128.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2024-09-30",
+          "val": 58694144.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        }
+      ]
+    },
+    "RevenueFromContractWithCustomerExcludingAssessedTax": {
+      "USD": [
+        {
+          "end": "2025-09-30",
+          "val": 411001373.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2024-10-01"
+        },
+        {
+          "end": "2024-09-30",
+          "val": 351876861.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2023-10-01"
+        },
+        {
+          "end": "2025-09-30",
+          "val": 411000000.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2024-10-01"
+        },
+        {
+          "end": "2024-09-30",
+          "val": 351900000.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2023-10-01"
+        }
+      ]
+    },
+    "GrossProfit": {
+      "USD": [
+        {
+          "end": "2025-09-30",
+          "val": 38775713.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:GrossProfit",
+          "start": "2024-10-01"
+        },
+        {
+          "end": "2024-09-30",
+          "val": 49954316.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:GrossProfit",
+          "start": "2023-10-01"
+        }
+      ]
+    },
+    "OperatingIncomeLoss": {
+      "USD": [
+        {
+          "end": "2025-09-30",
+          "val": 4215473.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:OperatingIncomeLoss",
+          "start": "2024-10-01"
+        },
+        {
+          "end": "2024-09-30",
+          "val": 19835246.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:OperatingIncomeLoss",
+          "start": "2023-10-01"
+        },
+        {
+          "end": "2025-09-30",
+          "val": 4215473.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:OperatingIncomeLoss",
+          "start": "2024-10-01"
+        },
+        {
+          "end": "2024-09-30",
+          "val": 19835246.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:OperatingIncomeLoss",
+          "start": "2023-10-01"
+        }
+      ]
+    },
+    "EarningsPerShareBasic": {
+      "USD/shares": [
+        {
+          "end": "2025-09-30",
+          "val": 0.02,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2024-10-01"
+        },
+        {
+          "end": "2024-09-30",
+          "val": 1.52,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2023-10-01"
+        }
+      ]
+    },
+    "EarningsPerShareDiluted": {
+      "USD/shares": [
+        {
+          "end": "2025-09-30",
+          "val": 0.02,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2024-10-01"
+        },
+        {
+          "end": "2024-09-30",
+          "val": 1.51,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2023-10-01"
+        }
+      ]
+    },
+    "RevenueFromContractWithCustomerIncludingAssessedTax": {
+      "USD": [
+        {
+          "end": "2025-09-30",
+          "val": 411001373.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerIncludingAssessedTax",
+          "start": "2024-10-01"
+        },
+        {
+          "end": "2025-09-30",
+          "val": 411001373.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerIncludingAssessedTax",
+          "start": "2024-10-01"
+        },
+        {
+          "end": "2024-09-30",
+          "val": 351876861.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerIncludingAssessedTax",
+          "start": "2023-10-01"
+        },
+        {
+          "end": "2024-09-30",
+          "val": 351876861.0,
+          "form": "10-K",
+          "accn": "0001104659-25-121185",
+          "filed": "2025-12-15",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1357971/000110465925121185/esoa-20250930x10k.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerIncludingAssessedTax",
+          "start": "2023-10-01"
+        }
+      ]
+    }
+  },
+  "unmapped_ix_facts": 1127,
+  "status": "ok"
+}

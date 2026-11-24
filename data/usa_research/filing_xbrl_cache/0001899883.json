@@ -1,0 +1,704 @@
+{
+  "cik": 1899883,
+  "checked_utc": "2026-11-24T23:50:23.738325+00:00",
+  "accession": "0001899883-26-000015",
+  "filing_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+  "facts": {
+    "AssetsCurrent": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 484011000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:AssetsCurrent"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 219851000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:AssetsCurrent"
+        },
+        {
+          "end": "2025-12-31",
+          "val": 484011000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:AssetsCurrent"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 219851000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:AssetsCurrent"
+        }
+      ]
+    },
+    "Assets": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 5748661000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:Assets"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 2374388000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:Assets"
+        },
+        {
+          "end": "2025-12-31",
+          "val": 5748661000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:Assets"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 2374388000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:Assets"
+        }
+      ]
+    },
+    "LiabilitiesCurrent": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 409997000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:LiabilitiesCurrent"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 250794000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:LiabilitiesCurrent"
+        },
+        {
+          "end": "2025-12-31",
+          "val": 409997000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:LiabilitiesCurrent"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 250794000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:LiabilitiesCurrent"
+        }
+      ]
+    },
+    "Liabilities": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 4804678000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:Liabilities"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 1918032000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:Liabilities"
+        },
+        {
+          "end": "2025-12-31",
+          "val": 4804678000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:Liabilities"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 1918032000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:Liabilities"
+        }
+      ]
+    },
+    "StockholdersEquity": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 21324000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 202651000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        }
+      ]
+    },
+    "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": -146237000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 75138000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        },
+        {
+          "end": "2022-12-31",
+          "val": 524794000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        },
+        {
+          "end": "2023-12-31",
+          "val": 412859000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 75138000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        },
+        {
+          "end": "2025-12-31",
+          "val": -146237000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        },
+        {
+          "end": "2025-12-31",
+          "val": -146237000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 75138000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        }
+      ]
+    },
+    "RevenueFromContractWithCustomerExcludingAssessedTax": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 502520000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 331497000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": 320472000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2023-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": 502520000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 331497000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": 320472000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2023-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": 502520000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 331497000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": 320472000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2023-01-01"
+        }
+      ]
+    },
+    "ProfitLoss": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": -152054000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -266064000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": -159750000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2023-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": -152054000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -266064000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": -159750000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2023-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": -159750000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2023-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -266064000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": -152054000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": -152054000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -266064000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": -159750000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2023-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": -152054000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -266064000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": -159750000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2023-01-01"
+        }
+      ]
+    },
+    "NetIncomeLossAvailableToCommonStockholdersBasic": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": -207403000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -294459000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": -183736000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic",
+          "start": "2023-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": -207403000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -294459000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": -183736000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic",
+          "start": "2023-01-01"
+        }
+      ]
+    },
+    "OperatingExpenses": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 299587000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:OperatingExpenses",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 247674000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:OperatingExpenses",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": 253672000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:OperatingExpenses",
+          "start": "2023-01-01"
+        }
+      ]
+    },
+    "LiabilitiesNoncurrent": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 4394681000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:LiabilitiesNoncurrent"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 1667238000.0,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:LiabilitiesNoncurrent"
+        }
+      ]
+    },
+    "EarningsPerShareBasic": {
+      "USD/shares": [
+        {
+          "end": "2025-12-31",
+          "val": -2.24,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -2.72,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": -1.78,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2023-01-01"
+        }
+      ]
+    },
+    "EarningsPerShareDiluted": {
+      "USD/shares": [
+        {
+          "end": "2025-12-31",
+          "val": -2.26,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -2.72,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": -1.79,
+          "form": "10-K",
+          "accn": "0001899883-26-000015",
+          "filed": "2026-03-16",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1899883/000189988326000015/ftai-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2023-01-01"
+        }
+      ]
+    }
+  },
+  "unmapped_ix_facts": 2626,
+  "status": "ok"
+}
