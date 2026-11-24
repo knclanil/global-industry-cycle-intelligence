@@ -1,7 +1,7 @@
 ticker,observations,last_date,source,status
-NIFTYBEES.NS,806,2026-11-20,Yahoo Finance (ETF price proxy),Available
-GOLDBEES.NS,806,2026-11-20,Yahoo Finance (ETF price proxy),Available
-SILVERBEES.NS,806,2026-11-20,Yahoo Finance (ETF price proxy),Available
+NIFTYBEES.NS,807,2026-11-23,Yahoo Finance (ETF price proxy),Available
+GOLDBEES.NS,807,2026-11-23,Yahoo Finance (ETF price proxy),Available
+SILVERBEES.NS,807,2026-11-23,Yahoo Finance (ETF price proxy),Available
 LIQUIDBEES.NS,807,2026-11-23,Yahoo Finance (ETF price proxy),Available
 NIFTY_GSEC_10Y,89,2026-11-23,NSEPythonServer · NIFTY 10 YR BENCHMARK G-SEC,Insufficient history
 ^NSEI,813,2026-11-23,NSEPythonServer (Nifty 50),Available
