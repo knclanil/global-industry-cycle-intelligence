@@ -909,7 +909,7 @@ TICKER:IRWD,IRWD,2025-12-31,2026-11-23,Quote ready; validated current SEC fundam
 TICKER:ISBA,ISBA,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity"
 TICKER:ISTR,ISTR,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, free_cash_flow, debt_to_equity"
 TICKER:ITG,ITG,,2026-11-23,SEC financial period is stale or missing,False,True,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity, pe"
-TICKER:ITGR,ITGR,2025-12-31,2026-11-16,Both source types available; peer/sector scoring not validated,True,True,True,
+TICKER:ITGR,ITGR,2025-12-31,,Financials ready; fresh USD quote and valuation required,True,False,False,"price, market_cap, pe, pb"
 TICKER:ITIC,ITIC,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity"
 TICKER:ITRI,ITRI,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
 TICKER:IVR,IVR,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"revenue, operating_margin, free_cash_flow, debt_to_equity, pe"
@@ -1340,15 +1340,15 @@ TICKER:PECO,PECO,2025-12-31,2026-11-23,Both source types available; peer/sector 
 TICKER:PENG,PENG,2026-08-28,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
 TICKER:PENN,PENN,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"free_cash_flow, pe"
 TICKER:PESI,PESI,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,pe
-TICKER:PFBC,PFBC,,,SEC financial period is stale or missing,False,False,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
+TICKER:PFBC,PFBC,,2026-11-20,SEC financial period is stale or missing,False,True,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity"
 TICKER:PFIS,PFIS,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity"
 TICKER:PFS,PFS,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity"
-TICKER:PFSI,PFSI,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, operating_margin, debt_to_equity, price, market_cap, pe, pb"
+TICKER:PFSI,PFSI,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, operating_margin, debt_to_equity"
 TICKER:PGC,PGC,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity"
 TICKER:PGEN,PGEN,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
 TICKER:PGNY,PGNY,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
-TICKER:PHAT,PHAT,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
-TICKER:PHIN,PHIN,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
+TICKER:PHAT,PHAT,2025-12-31,2026-11-20,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, pe, pb"
+TICKER:PHIN,PHIN,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, free_cash_flow, debt_to_equity"
 TICKER:PHR,PHR,2026-01-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER:PI,PI,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,pe
 TICKER:PII,PII,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
@@ -1367,57 +1367,57 @@ TICKER:PLMR,PLMR,2025-12-31,2026-11-23,Both source types available; peer/sector 
 TICKER:PLOW,PLOW,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
 TICKER:PLPC,PLPC,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
 TICKER:PLSE,PLSE,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
-TICKER:PLTK,PLTK,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
+TICKER:PLTK,PLTK,2025-12-31,2026-11-20,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, pe, pb"
 TICKER:PLUG,PLUG,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
 TICKER:PLUS,PLUS,2026-03-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER:PLXS,PLXS,2026-10-03,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER:PMT,PMT,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"revenue, operating_margin, free_cash_flow, debt_to_equity, market_cap"
-TICKER:PMTS,PMTS,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
-TICKER:PNRG,PNRG,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"net_income, roe, operating_margin, free_cash_flow, price, market_cap, pe, pb"
-TICKER:PNTG,PNTG,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
-TICKER:POR,POR,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"net_income, roe, debt_to_equity, price, market_cap, pe, pb"
+TICKER:PMTS,PMTS,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, debt_to_equity, pb"
+TICKER:PNRG,PNRG,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"net_income, roe, operating_margin, free_cash_flow"
+TICKER:PNTG,PNTG,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, debt_to_equity"
+TICKER:POR,POR,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"net_income, roe, debt_to_equity"
 TICKER:POWI,POWI,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER:POWW,POWW,2026-03-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_cash_flow, free_cash_flow, debt_to_equity"
 TICKER:PPHC,PPHC,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,pe
 TICKER:PPIH,PPIH,2026-01-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
-TICKER:PPTA,PPTA,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"revenue, operating_margin, debt_to_equity, price, market_cap, pe, pb"
+TICKER:PPTA,PPTA,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"revenue, operating_margin, debt_to_equity, pe"
 TICKER:PRAA,PRAA,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER:PRAX,PRAX,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity, pe"
-TICKER:PRCH,PRCH,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
+TICKER:PRCH,PRCH,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, debt_to_equity"
 TICKER:PRCT,PRCT,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,pe
 TICKER:PRDO,PRDO,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"free_cash_flow, debt_to_equity"
 TICKER:PRG,PRG,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER:PRGO,PRGO,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,pe
 TICKER:PRGS,PRGS,2025-11-30,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
-TICKER:PRK,PRK,2025-12-31,,No verified aligned market quote/peer valuation snapshot; bank-specific assessment required,False,False,False,"roe, operating_margin, debt_to_equity, price, market_cap, pe, pb"
-TICKER:PRKS,PRKS,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
+TICKER:PRK,PRK,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, operating_margin, debt_to_equity"
+TICKER:PRKS,PRKS,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, debt_to_equity, pb"
 TICKER:PRLB,PRLB,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER:PRLD,PRLD,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
 TICKER:PRM,PRM,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
 TICKER:PRME,PRME,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
-TICKER:PROK,PROK,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
+TICKER:PROK,PROK,2025-12-31,2026-11-20,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, pe, pb"
 TICKER:PRSU,PRSU,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity"
 TICKER:PRTA,PRTA,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"free_cash_flow, debt_to_equity, pe"
-TICKER:PRTH,PRTH,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"net_income, roe, debt_to_equity, price, market_cap, pe, pb"
+TICKER:PRTH,PRTH,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"net_income, roe, debt_to_equity, pb"
 TICKER:PRVA,PRVA,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"free_cash_flow, debt_to_equity"
-TICKER:PSFE,PSFE,,,SEC financial period is stale or missing,False,False,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
+TICKER:PSFE,PSFE,,2026-11-20,SEC financial period is stale or missing,False,True,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity, pe"
 TICKER:PSIX,PSIX,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,free_cash_flow
 TICKER:PSMT,PSMT,2026-08-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
 TICKER:PSNL,PSNL,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
 TICKER:PSTL,PSTL,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"free_cash_flow, debt_to_equity"
-TICKER:PTCT,PTCT,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
+TICKER:PTCT,PTCT,2025-12-31,2026-11-20,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, pe, pb"
 TICKER:PTEN,PTEN,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,pe
 TICKER:PTGX,PTGX,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER:PTLO,PTLO,2025-12-28,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
-TICKER:PTON,PTON,2026-06-30,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
+TICKER:PTON,PTON,2026-06-30,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, free_cash_flow, debt_to_equity, pb"
 TICKER:PTRN,PTRN,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER:PUBM,PUBM,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
 TICKER:PUMP,PUMP,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
 TICKER:PURR,PURR,2026-06-30,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"free_cash_flow, debt_to_equity"
-TICKER:PVLA,PVLA,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"revenue, operating_margin, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
-TICKER:PWP,PWP,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
+TICKER:PVLA,PVLA,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"revenue, operating_margin, free_cash_flow, debt_to_equity, pe"
+TICKER:PWP,PWP,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, debt_to_equity"
 TICKER:PXED,PXED,2026-08-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
-TICKER:PZZA,PZZA,2025-12-28,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
+TICKER:PZZA,PZZA,2025-12-28,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, debt_to_equity, pb"
 TICKER:QBTS,QBTS,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,pe
 TICKER:QCRH,QCRH,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity"
 TICKER:QDEL,QDEL,2025-12-28,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,pe
@@ -1425,18 +1425,18 @@ TICKER:QLYS,QLYS,2025-12-31,2026-11-23,Both source types available; peer/sector 
 TICKER:QNST,QNST,2026-06-30,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
 TICKER:QTRX,QTRX,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
 TICKER:QTWO,QTWO,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
-TICKER:QUAD,QUAD,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"net_income, roe, debt_to_equity, price, market_cap, pe, pb"
+TICKER:QUAD,QUAD,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"net_income, roe, debt_to_equity"
 TICKER:QUBT,QUBT,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
 TICKER:QUIK,QUIK,2025-12-28,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
-TICKER:QUIT,QUIT,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"revenue, operating_margin, debt_to_equity, price, market_cap, pe, pb"
-TICKER:RAIL,RAIL,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"net_income, roe, debt_to_equity, price, market_cap, pe, pb"
-TICKER:RAPP,RAPP,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"revenue, operating_margin, debt_to_equity, price, market_cap, pe, pb"
-TICKER:RARE,RARE,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
-TICKER:RBB,RBB,2025-12-31,,No verified aligned market quote/peer valuation snapshot; bank-specific assessment required,False,False,False,"net_income, roe, operating_margin, debt_to_equity, price, market_cap, pe, pb"
+TICKER:QUIT,QUIT,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"revenue, operating_margin, debt_to_equity, pe"
+TICKER:RAIL,RAIL,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"net_income, roe, debt_to_equity, pe"
+TICKER:RAPP,RAPP,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"revenue, operating_margin, debt_to_equity, pe"
+TICKER:RARE,RARE,2025-12-31,2026-11-20,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, pe, pb"
+TICKER:RBB,RBB,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"net_income, roe, operating_margin, debt_to_equity"
 TICKER:RBBN,RBBN,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
 TICKER:RBCAA,RBCAA,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity"
 TICKER:RBKB,RBKB,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity"
-TICKER:RC,RC,2025-12-31,,No verified aligned market quote/peer valuation snapshot; bank-specific assessment required,False,False,False,"net_income, roe, operating_margin, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
+TICKER:RC,RC,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"net_income, roe, operating_margin, free_cash_flow, debt_to_equity, pe"
 TICKER:RCAT,RCAT,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_cash_flow, free_cash_flow, debt_to_equity, pe"
 TICKER:RCKT,RCKT,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity, pe"
 TICKER:RCKY,RCKY,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
@@ -1444,23 +1444,23 @@ TICKER:RCMT,RCMT,2026-01-03,2026-11-23,Both source types available; peer/sector 
 TICKER:RCUS,RCUS,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
 TICKER:RDN,RDN,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, free_cash_flow, debt_to_equity"
 TICKER:RDNT,RDNT,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"free_cash_flow, pe"
-TICKER:RDNW,RDNW,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
+TICKER:RDNW,RDNW,2025-12-31,2026-11-20,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, pe, pb"
 TICKER:RDVT,RDVT,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER:RDW,RDW,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,pe
-TICKER:RDZN,RDZN,2026-03-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
-TICKER:REA,REA,,,SEC financial period is stale or missing,False,False,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
-TICKER:REAL,REAL,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
-TICKER:REAX,REAX,,,SEC financial period is stale or missing,False,False,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
-TICKER:REF,REF,,,SEC financial period is stale or missing,False,False,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
+TICKER:RDZN,RDZN,2026-03-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, free_cash_flow, debt_to_equity, pb"
+TICKER:REA,REA,,2026-11-20,SEC financial period is stale or missing,False,True,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity, pe"
+TICKER:REAL,REAL,2025-12-31,2026-11-20,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, pe, pb"
+TICKER:REAX,REAX,,2026-11-20,SEC financial period is stale or missing,False,True,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity, pe"
+TICKER:REF,REF,,2026-11-20,SEC financial period is stale or missing,False,True,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity"
 TICKER:REFI,REFI,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"revenue, operating_margin, free_cash_flow, debt_to_equity"
 TICKER:REI,REI,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"free_cash_flow, debt_to_equity, pe"
 TICKER:RELL,RELL,2026-05-30,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"free_cash_flow, debt_to_equity"
 TICKER:RELY,RELY,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
-TICKER:RENT,RENT,2026-01-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
-TICKER:REPL,REPL,2026-03-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"revenue, operating_margin, free_cash_flow, price, market_cap, pe, pb"
+TICKER:RENT,RENT,2026-01-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, free_cash_flow, debt_to_equity, pb"
+TICKER:REPL,REPL,2026-03-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"revenue, operating_margin, free_cash_flow, pe"
 TICKER:REPX,REPX,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,free_cash_flow
 TICKER:RES,RES,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
-TICKER:REX,REX,2026-01-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"net_income, roe, operating_margin, debt_to_equity, price, market_cap, pe, pb"
+TICKER:REX,REX,2026-01-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"net_income, roe, operating_margin, debt_to_equity"
 TICKER:REZI,REZI,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
 TICKER:RFIL,RFIL,2025-10-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER:RGCO,RGCO,2025-09-30,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
@@ -1473,19 +1473,19 @@ TICKER:RHP,RHP,2025-12-31,2026-11-23,Both source types available; peer/sector sc
 TICKER:RICK,RICK,2025-09-30,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"free_cash_flow, pe"
 TICKER:RIG,RIG,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER:RIGL,RIGL,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"free_cash_flow, debt_to_equity"
-TICKER:RILY,RILY,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
+TICKER:RILY,RILY,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, free_cash_flow, debt_to_equity, pb"
 TICKER:RIOT,RIOT,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,pe
 TICKER:RJET,RJET,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER:RLAY,RLAY,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
 TICKER:RLGT,RLGT,2026-06-30,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER:RLJ,RLJ,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, free_cash_flow, debt_to_equity"
-TICKER:RLMD,RLMD,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"revenue, operating_margin, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
+TICKER:RLMD,RLMD,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"revenue, operating_margin, free_cash_flow, debt_to_equity, pe"
 TICKER:RM,RM,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity"
 TICKER:RMBI,RMBI,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity"
-TICKER:RMNI,RMNI,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
+TICKER:RMNI,RMNI,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, free_cash_flow, debt_to_equity, pb"
 TICKER:RMR,RMR,2026-09-30,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"free_cash_flow, debt_to_equity"
-TICKER:RNA,RNA,,,SEC financial period is stale or missing,False,False,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
-TICKER:RNAC,RNAC,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
+TICKER:RNA,RNA,,2026-11-20,SEC financial period is stale or missing,False,True,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity, pe"
+TICKER:RNAC,RNAC,2025-12-31,2026-11-20,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, pe, pb"
 TICKER:RNGR,RNGR,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
 TICKER:RNST,RNST,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity"
 TICKER:ROAD,ROAD,2025-09-30,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
@@ -1493,7 +1493,7 @@ TICKER:ROCK,ROCK,2025-12-31,2026-11-23,Both source types available; peer/sector 
 TICKER:ROG,ROG,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER:ROOT,ROOT,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER:RPAY,RPAY,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,pe
-TICKER:RPC,RPC,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
+TICKER:RPC,RPC,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, debt_to_equity"
 TICKER:RPD,RPD,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER:RR,RR,2025-09-30,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
 TICKER:RRBI,RRBI,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity"
@@ -1504,44 +1504,44 @@ TICKER:RUM,RUM,2025-12-31,2026-11-23,Both source types available; peer/sector sc
 TICKER:RUN,RUN,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"free_cash_flow, debt_to_equity"
 TICKER:RUSHA,RUSHA,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
 TICKER:RUSHB,RUSHB,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
-TICKER:RVLV,RVLV,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
+TICKER:RVLV,RVLV,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, debt_to_equity"
 TICKER:RWT,RWT,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"revenue, operating_margin, free_cash_flow, debt_to_equity, pe"
 TICKER:RXO,RXO,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
 TICKER:RXRX,RXRX,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
 TICKER:RXST,RXST,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
-TICKER:RXT,RXT,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
+TICKER:RXT,RXT,2025-12-31,2026-11-20,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, pe, pb"
 TICKER:RYAM,RYAM,2025-12-31,2026-11-23,Financials ready; fresh USD quote and valuation required,True,False,False,"free_cash_flow, debt_to_equity, pe, pb"
 TICKER:RYTM,RYTM,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,pe
 TICKER:RYZ,RYZ,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,pe
-TICKER:RZLT,RZLT,2026-06-30,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"revenue, operating_margin, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
-TICKER:SABR,SABR,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, operating_cash_flow, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
+TICKER:RZLT,RZLT,2026-06-30,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"revenue, operating_margin, free_cash_flow, debt_to_equity, pe"
+TICKER:SABR,SABR,2025-12-31,2026-11-20,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, operating_cash_flow, free_cash_flow, debt_to_equity, pe, pb"
 TICKER:SABS,SABS,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity, pe"
 TICKER:SAFE,SAFE,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"free_cash_flow, debt_to_equity"
 TICKER:SAFT,SAFT,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity"
 TICKER:SAH,SAH,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
 TICKER:SAM,SAM,2025-12-27,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
 TICKER:SAMG,SAMG,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
-TICKER:SANA,SANA,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"revenue, operating_margin, debt_to_equity, price, market_cap, pe, pb"
+TICKER:SANA,SANA,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"revenue, operating_margin, debt_to_equity, pe"
 TICKER:SATL,SATL,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
 TICKER:SBC,SBC,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER:SBCF,SBCF,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, free_cash_flow, debt_to_equity"
 TICKER:SBET,SBET,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
 TICKER:SBGI,SBGI,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
 TICKER:SBH,SBH,2026-09-30,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
-TICKER:SBMT,SBMT,,,SEC financial period is stale or missing,False,False,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
+TICKER:SBMT,SBMT,,2026-11-20,SEC financial period is stale or missing,False,True,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity, pe"
 TICKER:SBRA,SBRA,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, free_cash_flow, debt_to_equity"
 TICKER:SBSI,SBSI,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity"
 TICKER:SBT,SBT,,,SEC financial period is stale or missing,False,False,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
 TICKER:SCHL,SCHL,2026-05-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,free_cash_flow
 TICKER:SCL,SCL,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
 TICKER:SCSC,SCSC,2026-06-30,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,free_cash_flow
-TICKER:SCTX,SCTX,,,SEC financial period is stale or missing,False,False,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
+TICKER:SCTX,SCTX,,2026-11-20,SEC financial period is stale or missing,False,True,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity, pe"
 TICKER:SD,SD,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER:SDGR,SDGR,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
 TICKER:SDRL,SDRL,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"free_cash_flow, pe"
 TICKER:SEG,SEG,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"free_cash_flow, debt_to_equity, pe"
 TICKER:SEI,SEI,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
-TICKER:SENEA,SENEA,2025-03-31,,SEC financial period is stale or missing,False,False,False,"price, market_cap, pe, pb"
+TICKER:SENEA,SENEA,2025-03-31,2026-11-20,SEC financial period is stale or missing,False,True,False,
 TICKER:SENS,SENS,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"free_cash_flow, debt_to_equity, pe"
 TICKER:SEPN,SEPN,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
 TICKER:SERV,SERV,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
@@ -1550,52 +1550,52 @@ TICKER:SEVN,SEVN,2025-12-31,2026-11-23,Both source types available; peer/sector 
 TICKER:SEZL,SEZL,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER:SFBS,SFBS,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, free_cash_flow, debt_to_equity"
 TICKER:SFIX,SFIX,2026-08-01,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_cash_flow, free_cash_flow, debt_to_equity, pe"
-TICKER:SFL,SFL,,,SEC financial period is stale or missing,False,False,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
+TICKER:SFL,SFL,,2026-11-20,SEC financial period is stale or missing,False,True,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity"
 TICKER:SFNC,SFNC,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity"
 TICKER:SFST,SFST,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity"
 TICKER:SG,SG,2025-12-28,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER:SGC,SGC,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,operating_margin
-TICKER:SGHC,SGHC,,,SEC financial period is stale or missing,False,False,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
+TICKER:SGHC,SGHC,,2026-11-20,SEC financial period is stale or missing,False,True,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity"
 TICKER:SGHT,SGHT,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,pe
-TICKER:SGMT,SGMT,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"revenue, operating_margin, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
-TICKER:SGP,SGP,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"revenue, roe, operating_margin, debt_to_equity, price, market_cap, pe, pb"
+TICKER:SGMT,SGMT,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"revenue, operating_margin, free_cash_flow, debt_to_equity, pe"
+TICKER:SGP,SGP,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"revenue, roe, operating_margin, debt_to_equity, pe"
 TICKER:SGRY,SGRY,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
 TICKER:SHAK,SHAK,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
-TICKER:SHAZ,SHAZ,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
+TICKER:SHAZ,SHAZ,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, debt_to_equity, pe"
 TICKER:SHBI,SHBI,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity"
 TICKER:SHEN,SHEN,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,pe
-TICKER:SHIM,SHIM,2026-01-02,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
-TICKER:SHLS,SHLS,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
-TICKER:SHO,SHO,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"net_income, roe, operating_margin, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
+TICKER:SHIM,SHIM,2026-01-02,2026-11-20,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, pe, pb"
+TICKER:SHLS,SHLS,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, debt_to_equity"
+TICKER:SHO,SHO,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"net_income, roe, operating_margin, free_cash_flow, debt_to_equity"
 TICKER:SHOE,SHOE,2026-01-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
-TICKER:SHOO,SHOO,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"net_income, roe, price, market_cap, pe, pb"
+TICKER:SHOO,SHOO,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"net_income, roe"
 TICKER:SI,SI,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
 TICKER:SIBN,SIBN,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,pe
 TICKER:SIDU,SIDU,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
 TICKER:SIG,SIG,2026-01-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER:SIGA,SIGA,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"free_cash_flow, debt_to_equity"
 TICKER:SIGI,SIGI,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity"
-TICKER:SION,SION,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"revenue, operating_margin, debt_to_equity, price, market_cap, pe, pb"
+TICKER:SION,SION,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"revenue, operating_margin, debt_to_equity, pe"
 TICKER:SITC,SITC,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, free_cash_flow, debt_to_equity"
-TICKER:SKT,SKT,,,SEC financial period is stale or missing,False,False,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
+TICKER:SKT,SKT,,2026-11-20,SEC financial period is stale or missing,False,True,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity"
 TICKER:SKWD,SKWD,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity"
 TICKER:SKY,SKY,2026-03-28,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
-TICKER:SKYH,SKYH,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
+TICKER:SKYH,SKYH,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, debt_to_equity, pe"
 TICKER:SKYW,SKYW,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
 TICKER:SLAB,SLAB,2026-01-03,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
-TICKER:SLDB,SLDB,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"revenue, net_income, roe, operating_margin, debt_to_equity, price, market_cap, pe, pb"
+TICKER:SLDB,SLDB,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"revenue, net_income, roe, operating_margin, debt_to_equity, pe"
 TICKER:SLDE,SLDE,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity"
 TICKER:SLDP,SLDP,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
 TICKER:SLG,SLG,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"free_cash_flow, debt_to_equity, pe"
 TICKER:SLNH,SLNH,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
-TICKER:SLS,SLS,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"revenue, operating_margin, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
+TICKER:SLS,SLS,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"revenue, operating_margin, free_cash_flow, debt_to_equity, pe"
 TICKER:SLVM,SLVM,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,free_cash_flow
 TICKER:SM,SM,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"free_cash_flow, debt_to_equity"
 TICKER:SMA,SMA,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"free_cash_flow, debt_to_equity"
 TICKER:SMBC,SMBC,2026-06-30,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity"
-TICKER:SMBK,SMBK,2025-12-31,,No verified aligned market quote/peer valuation snapshot; bank-specific assessment required,False,False,False,"net_income, roe, operating_margin, debt_to_equity, price, market_cap, pe, pb"
+TICKER:SMBK,SMBK,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"net_income, roe, operating_margin, debt_to_equity"
 TICKER:SMC,SMC,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, pe"
-TICKER:SMHI,SMHI,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"net_income, roe, price, market_cap, pe, pb"
+TICKER:SMHI,SMHI,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"net_income, roe, pe"
 TICKER:SMID,SMID,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER:SMP,SMP,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
 TICKER:SMPL,SMPL,2026-08-29,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,pe
@@ -1603,7 +1603,7 @@ TICKER:SMR,SMR,2025-12-31,2026-11-23,Both source types available; peer/sector sc
 TICKER:SMRT,SMRT,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
 TICKER:SMTI,SMTI,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,pe
 TICKER:SND,SND,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
-TICKER:SNDA,SNDA,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, operating_margin, debt_to_equity, price, market_cap, pe, pb"
+TICKER:SNDA,SNDA,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, operating_margin, debt_to_equity, pe"
 TICKER:SNDX,SNDX,2025-12-31,2026-11-23,Financials ready; fresh USD quote and valuation required,True,False,False,"pe, pb"
 TICKER:SNEX,SNEX,2025-09-30,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity"
 TICKER:SNFCA,SNFCA,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity"
@@ -1621,45 +1621,45 @@ TICKER:SPRB,SPRB,2025-12-31,2026-11-23,Both source types available; peer/sector 
 TICKER:SPRY,SPRY,2025-12-31,2026-11-23,Financials ready; fresh USD quote and valuation required,True,False,False,"debt_to_equity, pe, pb"
 TICKER:SPSC,SPSC,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER:SPT,SPT,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
-TICKER:SPTX,SPTX,,,SEC financial period is stale or missing,False,False,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
+TICKER:SPTX,SPTX,,2026-11-20,SEC financial period is stale or missing,False,True,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity, pe"
 TICKER:SR,SR,2025-09-30,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
 TICKER:SRBK,SRBK,2026-06-30,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity"
-TICKER:SRCE,SRCE,2025-12-31,,No verified aligned market quote/peer valuation snapshot; bank-specific assessment required,False,False,False,"net_income, roe, operating_margin, debt_to_equity, price, market_cap, pe, pb"
+TICKER:SRCE,SRCE,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"net_income, roe, operating_margin, debt_to_equity"
 TICKER:SRI,SRI,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"free_cash_flow, debt_to_equity, pe"
 TICKER:SRPT,SRPT,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER:SRRK,SRRK,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, pe"
 TICKER:SRTA,SRTA,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
-TICKER:SRZN,SRZN,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
-TICKER:SSMR,SSMR,,,SEC financial period is stale or missing,False,False,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
+TICKER:SRZN,SRZN,2025-12-31,2026-11-20,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, pe, pb"
+TICKER:SSMR,SSMR,,2026-11-20,SEC financial period is stale or missing,False,True,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity, pe"
 TICKER:SSP,SSP,2025-12-31,2026-11-23,Financials ready; fresh USD quote and valuation required,True,False,False,"pe, pb"
 TICKER:SSTK,SSTK,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,pe
 TICKER:STAA,STAA,2026-01-02,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER:STBA,STBA,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity"
 TICKER:STC,STC,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, free_cash_flow, debt_to_equity"
-TICKER:STEP,STEP,2026-03-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, operating_margin, debt_to_equity, price, market_cap, pe, pb"
+TICKER:STEP,STEP,2026-03-31,2026-11-20,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, operating_margin, debt_to_equity, pe, pb"
 TICKER:STGW,STGW,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
-TICKER:STLN,STLN,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
-TICKER:STNG,STNG,,,SEC financial period is stale or missing,False,False,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
+TICKER:STLN,STLN,2025-12-31,2026-11-20,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, pe, pb"
+TICKER:STNG,STNG,,2026-11-20,SEC financial period is stale or missing,False,True,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity"
 TICKER:STOK,STOK,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
 TICKER:STRA,STRA,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
-TICKER:STRO,STRO,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
+TICKER:STRO,STRO,2025-12-31,2026-11-20,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, free_cash_flow, debt_to_equity, pe, pb"
 TICKER:STRT,STRT,2026-06-28,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER:STRW,STRW,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"free_cash_flow, debt_to_equity"
-TICKER:STRZ,STRZ,2025-03-31,,SEC financial period is stale or missing,False,False,False,"debt_to_equity, price, market_cap, pe, pb"
+TICKER:STRZ,STRZ,2025-03-31,2026-11-20,SEC financial period is stale or missing,False,True,False,"debt_to_equity, pe"
 TICKER:STTK,STTK,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
 TICKER:STUB,STUB,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,pe
 TICKER:STXS,STXS,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"free_cash_flow, debt_to_equity, pe"
-TICKER:SUJA,SUJA,,,SEC financial period is stale or missing,False,False,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
-TICKER:SUPN,SUPN,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
+TICKER:SUJA,SUJA,,2026-11-20,SEC financial period is stale or missing,False,True,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity, pe"
+TICKER:SUPN,SUPN,2025-12-31,2026-11-20,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, pe, pb"
 TICKER:SVC,SVC,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, free_cash_flow, debt_to_equity, pe"
 TICKER:SVCO,SVCO,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
-TICKER:SVIA,SVIA,,,SEC financial period is stale or missing,False,False,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
-TICKER:SVRA,SVRA,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"revenue, operating_margin, price, market_cap, pe, pb"
+TICKER:SVIA,SVIA,,2026-11-20,SEC financial period is stale or missing,False,True,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity, pe"
+TICKER:SVRA,SVRA,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"revenue, operating_margin, pe"
 TICKER:SVV,SVV,2026-01-03,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
 TICKER:SWBI,SWBI,2026-04-30,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER:SWIM,SWIM,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
-TICKER:SWMR,SWMR,,,SEC financial period is stale or missing,False,False,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
-TICKER:SWX,SWX,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"revenue, operating_margin, price, market_cap, pe, pb"
+TICKER:SWMR,SWMR,,2026-11-20,SEC financial period is stale or missing,False,True,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity, pe"
+TICKER:SWX,SWX,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"revenue, operating_margin"
 TICKER:SXC,SXC,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,pe
 TICKER:SXI,SXI,2026-06-30,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,free_cash_flow
 TICKER:SXT,SXT,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
@@ -1667,7 +1667,7 @@ TICKER:SYBT,SYBT,2025-12-31,2026-11-23,Both source types available; peer/sector 
 TICKER:SYNA,SYNA,2026-06-27,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,pe
 TICKER:SYRE,SYRE,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, free_cash_flow, debt_to_equity, pe"
 TICKER:TALO,TALO,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"free_cash_flow, pe"
-TICKER:TARA,TARA,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"revenue, operating_margin, debt_to_equity, price, market_cap, pe, pb"
+TICKER:TARA,TARA,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"revenue, operating_margin, debt_to_equity, pe"
 TICKER:TARS,TARS,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,pe
 TICKER:TAYD,TAYD,2026-05-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER:TBBK,TBBK,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity"
@@ -2612,27 +2612,27 @@ TICKER_COUNTRY:PCG|US,PCG,2025-12-31,2026-11-23,Quote ready; validated current S
 TICKER_COUNTRY:PCOR|US,PCOR,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
 TICKER_COUNTRY:PCTY|US,PCTY,2026-06-30,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER_COUNTRY:PEGA|US,PEGA,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
-TICKER_COUNTRY:PEG|US,PEG,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
+TICKER_COUNTRY:PEG|US,PEG,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, debt_to_equity"
 TICKER_COUNTRY:PEN|US,PEN,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER_COUNTRY:PEP|US,PEP,2025-12-27,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,free_cash_flow
 TICKER_COUNTRY:PFE|US,PFE,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,operating_margin
 TICKER_COUNTRY:PFGC|US,PFGC,2026-06-27,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
 TICKER_COUNTRY:PFG|US,PFG,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, free_cash_flow, debt_to_equity"
 TICKER_COUNTRY:PGR|US,PGR,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,operating_margin
-TICKER_COUNTRY:PG|US,PG,2026-06-30,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
+TICKER_COUNTRY:PG|US,PG,2026-06-30,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, debt_to_equity"
 TICKER_COUNTRY:PHM|US,PHM,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity"
-TICKER_COUNTRY:PH|US,PH,2026-06-30,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"net_income, roe, debt_to_equity, price, market_cap, pe, pb"
+TICKER_COUNTRY:PH|US,PH,2026-06-30,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"net_income, roe, debt_to_equity"
 TICKER_COUNTRY:PINS|US,PINS,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER_COUNTRY:PKG|US,PKG,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
 TICKER_COUNTRY:PLD|US,PLD,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"free_cash_flow, debt_to_equity"
-TICKER_COUNTRY:PLNT|US,PLNT,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
+TICKER_COUNTRY:PLNT|US,PLNT,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, debt_to_equity, pb"
 TICKER_COUNTRY:PLTR|US,PLTR,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER_COUNTRY:PL|US,PL,2026-01-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
-TICKER_COUNTRY:PM|US,PM,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
-TICKER_COUNTRY:PNC|US,PNC,2025-12-31,,No verified aligned market quote/peer valuation snapshot; bank-specific assessment required,False,False,False,"net_income, roe, operating_margin, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
+TICKER_COUNTRY:PM|US,PM,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, debt_to_equity, pb"
+TICKER_COUNTRY:PNC|US,PNC,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"net_income, roe, operating_margin, free_cash_flow, debt_to_equity"
 TICKER_COUNTRY:PNFP|US,PNFP,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity"
-TICKER_COUNTRY:PNR|US,PNR,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
-TICKER_COUNTRY:PNW|US,PNW,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"net_income, roe, free_cash_flow, price, market_cap, pe, pb"
+TICKER_COUNTRY:PNR|US,PNR,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, debt_to_equity"
+TICKER_COUNTRY:PNW|US,PNW,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"net_income, roe, free_cash_flow"
 TICKER_COUNTRY:PODD|US,PODD,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity"
 TICKER_COUNTRY:POOL|US,POOL,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
 TICKER_COUNTRY:POST|US,POST,2026-09-30,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,free_cash_flow
@@ -2640,9 +2640,9 @@ TICKER_COUNTRY:POWL|US,POWL,2026-09-30,2026-11-23,Both source types available; p
 TICKER_COUNTRY:PPC|US,PPC,2025-12-28,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
 TICKER_COUNTRY:PPG|US,PPG,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,operating_margin
 TICKER_COUNTRY:PPLI|US,PPLI,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_cash_flow, free_cash_flow, pe"
-TICKER_COUNTRY:PPL|US,PPL,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
+TICKER_COUNTRY:PPL|US,PPL,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, debt_to_equity"
 TICKER_COUNTRY:PRIM|US,PRIM,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
-TICKER_COUNTRY:PRI|US,PRI,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"net_income, roe, operating_margin, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
+TICKER_COUNTRY:PRI|US,PRI,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"net_income, roe, operating_margin, free_cash_flow, debt_to_equity"
 TICKER_COUNTRY:PRMB|US,PRMB,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_cash_flow, free_cash_flow"
 TICKER_COUNTRY:PRU|US,PRU,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, free_cash_flow"
 TICKER_COUNTRY:PR|US,PR,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"free_cash_flow, debt_to_equity"
@@ -2654,15 +2654,15 @@ TICKER_COUNTRY:PVH|US,PVH,2026-02-01,2026-11-23,Both source types available; pee
 TICKER_COUNTRY:PWR|US,PWR,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER_COUNTRY:PYPL|US,PYPL,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
 TICKER_COUNTRY:P|US,P,2026-02-01,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
-TICKER_COUNTRY:QCOM|US,QCOM,2026-09-27,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
-TICKER_COUNTRY:QNT|US,QNT,,,SEC financial period is stale or missing,False,False,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
-TICKER_COUNTRY:QS|US,QS,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"revenue, operating_margin, debt_to_equity, price, market_cap, pe, pb"
+TICKER_COUNTRY:QCOM|US,QCOM,2026-09-27,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, free_cash_flow, debt_to_equity"
+TICKER_COUNTRY:QNT|US,QNT,,2026-11-20,SEC financial period is stale or missing,False,True,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity, pe"
+TICKER_COUNTRY:QS|US,QS,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"revenue, operating_margin, debt_to_equity, pe"
 TICKER_COUNTRY:QXO|US,QXO,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"free_cash_flow, pe"
-TICKER_COUNTRY:Q|US,Q,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"net_income, roe, operating_margin, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
+TICKER_COUNTRY:Q|US,Q,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"net_income, roe, operating_margin, free_cash_flow, debt_to_equity"
 TICKER_COUNTRY:RAL|US,RAL,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,pe
 TICKER_COUNTRY:RBC|US,RBC,2026-03-28,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,free_cash_flow
 TICKER_COUNTRY:RBLX|US,RBLX,2025-12-31,2026-11-23,Financials ready; fresh USD quote and valuation required,True,False,False,"pe, pb"
-TICKER_COUNTRY:RBRK|US,RBRK,2026-01-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
+TICKER_COUNTRY:RBRK|US,RBRK,2026-01-31,2026-11-20,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, pe, pb"
 TICKER_COUNTRY:RCL|US,RCL,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER_COUNTRY:RDDT|US,RDDT,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER_COUNTRY:REGN|US,REGN,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,free_cash_flow
@@ -2675,15 +2675,15 @@ TICKER_COUNTRY:RGEN|US,RGEN,2025-12-31,2026-11-23,Both source types available; p
 TICKER_COUNTRY:RGLD|US,RGLD,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,free_cash_flow
 TICKER_COUNTRY:RHI|US,RHI,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER_COUNTRY:RITM|US,RITM,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, free_cash_flow, debt_to_equity"
-TICKER_COUNTRY:RIVN|US,RIVN,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
+TICKER_COUNTRY:RIVN|US,RIVN,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, debt_to_equity, pe"
 TICKER_COUNTRY:RJF|US,RJF,2025-09-30,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity"
 TICKER_COUNTRY:RKLB|US,RKLB,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,pe
-TICKER_COUNTRY:RKT|US,RKT,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"revenue, roe, operating_margin, debt_to_equity, price, market_cap, pe, pb"
+TICKER_COUNTRY:RKT|US,RKT,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"revenue, roe, operating_margin, debt_to_equity, pe"
 TICKER_COUNTRY:RLI|US,RLI,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity"
 TICKER_COUNTRY:RL|US,RL,2026-03-28,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,free_cash_flow
 TICKER_COUNTRY:RMBS|US,RMBS,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER_COUNTRY:RMD|US,RMD,2026-06-30,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
-TICKER_COUNTRY:RNG|US,RNG,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
+TICKER_COUNTRY:RNG|US,RNG,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, debt_to_equity, pb"
 TICKER_COUNTRY:RNR|US,RNR,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, free_cash_flow, debt_to_equity"
 TICKER_COUNTRY:ROIV|US,ROIV,2026-03-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
 TICKER_COUNTRY:ROK|US,ROK,2026-09-30,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,operating_margin
@@ -2691,7 +2691,7 @@ TICKER_COUNTRY:ROL|US,ROL,2025-12-31,2026-11-23,Both source types available; pee
 TICKER_COUNTRY:ROP|US,ROP,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,free_cash_flow
 TICKER_COUNTRY:ROST|US,ROST,2026-01-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
 TICKER_COUNTRY:RPM|US,RPM,2026-05-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, free_cash_flow"
-TICKER_COUNTRY:RPRX|US,RPRX,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
+TICKER_COUNTRY:RPRX|US,RPRX,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, free_cash_flow, debt_to_equity"
 TICKER_COUNTRY:RRC|US,RRC,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, free_cash_flow"
 TICKER_COUNTRY:RRX|US,RRX,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
 TICKER_COUNTRY:RSG|US,RSG,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
@@ -2702,34 +2702,34 @@ TICKER_COUNTRY:RVTY|US,RVTY,2025-12-28,2026-11-23,Both source types available; p
 TICKER_COUNTRY:RYAN|US,RYAN,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,free_cash_flow
 TICKER_COUNTRY:R|US,R,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, free_cash_flow, debt_to_equity"
 TICKER_COUNTRY:SAIA|US,SAIA,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
-TICKER_COUNTRY:SAIC|US,SAIC,2026-01-30,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"net_income, roe, price, market_cap, pe, pb"
+TICKER_COUNTRY:SAIC|US,SAIC,2026-01-30,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"net_income, roe"
 TICKER_COUNTRY:SAIL|US,SAIL,2026-01-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
-TICKER_COUNTRY:SANM|US,SANM,2026-10-03,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
+TICKER_COUNTRY:SANM|US,SANM,2026-10-03,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, debt_to_equity"
 TICKER_COUNTRY:SARO|US,SARO,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
-TICKER_COUNTRY:SBAC|US,SBAC,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
+TICKER_COUNTRY:SBAC|US,SBAC,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, debt_to_equity, pb"
 TICKER_COUNTRY:SBRA|US,SBRA,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, free_cash_flow, debt_to_equity"
-TICKER_COUNTRY:SBUX|US,SBUX,2026-09-27,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
+TICKER_COUNTRY:SBUX|US,SBUX,2026-09-27,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, debt_to_equity, pb"
 TICKER_COUNTRY:SCHW|US,SCHW,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity"
 TICKER_COUNTRY:SCI|US,SCI,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,free_cash_flow
-TICKER_COUNTRY:SEB|US,SEB,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"net_income, roe, price, market_cap, pe, pb"
+TICKER_COUNTRY:SEB|US,SEB,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"net_income, roe"
 TICKER_COUNTRY:SEIC|US,SEIC,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER_COUNTRY:SFD|US,SFD,2025-12-28,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_cash_flow, free_cash_flow, debt_to_equity"
 TICKER_COUNTRY:SFM|US,SFM,2025-12-28,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
-TICKER_COUNTRY:SF|US,SF,2025-12-31,,No verified aligned market quote/peer valuation snapshot; bank-specific assessment required,False,False,False,"roe, operating_margin, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
-TICKER_COUNTRY:SGI|US,SGI,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
+TICKER_COUNTRY:SF|US,SF,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, operating_margin, free_cash_flow, debt_to_equity"
+TICKER_COUNTRY:SGI|US,SGI,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, debt_to_equity"
 TICKER_COUNTRY:SHC|US,SHC,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,operating_margin
 TICKER_COUNTRY:SHW|US,SHW,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, free_cash_flow"
 TICKER_COUNTRY:SIRI|US,SIRI,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER_COUNTRY:SITE|US,SITE,2025-12-28,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
 TICKER_COUNTRY:SITM|US,SITM,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER_COUNTRY:SJM|US,SJM,2026-04-30,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
-TICKER_COUNTRY:SKYD|US,SKYD,2024-12-31,,SEC financial period is stale or missing,False,False,False,"debt_to_equity, price, market_cap, pe, pb"
+TICKER_COUNTRY:SKYD|US,SKYD,2024-12-31,2026-11-20,SEC financial period is stale or missing,False,True,False,"debt_to_equity, pe"
 TICKER_COUNTRY:SLB|US,SLB,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,operating_margin
 TICKER_COUNTRY:SLGN|US,SLGN,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,operating_margin
 TICKER_COUNTRY:SLM|US,SLM,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, free_cash_flow, debt_to_equity"
 TICKER_COUNTRY:SMCI|US,SMCI,2026-06-30,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
-TICKER_COUNTRY:SMG|US,SMG,2025-09-30,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
-TICKER_COUNTRY:SMMT|US,SMMT,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"revenue, operating_margin, debt_to_equity, price, market_cap, pe, pb"
+TICKER_COUNTRY:SMG|US,SMG,2025-09-30,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, debt_to_equity, pb"
+TICKER_COUNTRY:SMMT|US,SMMT,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"revenue, operating_margin, debt_to_equity, pe"
 TICKER_COUNTRY:SMTC|US,SMTC,2026-01-25,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
 TICKER_COUNTRY:SNA|US,SNA,2026-01-03,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,free_cash_flow
 TICKER_COUNTRY:SNDK|US,SNDK,2026-07-03,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
@@ -2743,9 +2743,9 @@ TICKER_COUNTRY:SOLS|US,SOLS,2025-12-31,2026-11-23,Both source types available; p
 TICKER_COUNTRY:SOLV|US,SOLV,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
 TICKER_COUNTRY:SON|US,SON,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,pe
 TICKER_COUNTRY:SO|US,SO,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
-TICKER_COUNTRY:SPCX|US,SPCX,,,SEC financial period is stale or missing,False,False,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
+TICKER_COUNTRY:SPCX|US,SPCX,,2026-11-20,SEC financial period is stale or missing,False,True,False,"revenue, net_income, roe, operating_margin, operating_cash_flow, free_cash_flow, debt_to_equity"
 TICKER_COUNTRY:SPGI|US,SPGI,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,free_cash_flow
-TICKER_COUNTRY:SPG|US,SPG,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"net_income, roe, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
+TICKER_COUNTRY:SPG|US,SPG,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"net_income, roe, free_cash_flow, debt_to_equity"
 TICKER_COUNTRY:SPXC|US,SPXC,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,free_cash_flow
 TICKER_COUNTRY:SRE|US,SRE,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, free_cash_flow, debt_to_equity"
 TICKER_COUNTRY:SSB|US,SSB,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, debt_to_equity"
@@ -2764,10 +2764,10 @@ TICKER_COUNTRY:SUI|US,SUI,2025-12-31,2026-11-23,Both source types available; pee
 TICKER_COUNTRY:SUNB|US,SUNB,2026-04-30,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,free_cash_flow
 TICKER_COUNTRY:SWKS|US,SWKS,2026-10-02,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
 TICKER_COUNTRY:SWK|US,SWK,2026-01-03,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,operating_margin
-TICKER_COUNTRY:SWX|US,SWX,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"revenue, operating_margin, price, market_cap, pe, pb"
+TICKER_COUNTRY:SWX|US,SWX,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"revenue, operating_margin"
 TICKER_COUNTRY:SW|US,SW,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"free_cash_flow, debt_to_equity"
 TICKER_COUNTRY:SYF|US,SYF,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, free_cash_flow, debt_to_equity"
-TICKER_COUNTRY:SYK|US,SYK,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, debt_to_equity, price, market_cap, pe, pb"
+TICKER_COUNTRY:SYK|US,SYK,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, debt_to_equity"
 TICKER_COUNTRY:SYY|US,SYY,2026-06-27,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"free_cash_flow, debt_to_equity"
 TICKER_COUNTRY:S|US,S,2026-01-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"debt_to_equity, pe"
 TICKER_COUNTRY:TAP|US,TAP,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,free_cash_flow
@@ -2819,7 +2819,7 @@ TICKER_COUNTRY:TXN|US,TXN,2025-12-31,2026-11-23,Both source types available; pee
 TICKER_COUNTRY:TXRH|US,TXRH,2025-12-30,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"net_income, roe, debt_to_equity, price, market_cap, pe, pb"
 TICKER_COUNTRY:TXT|US,TXT,2026-01-03,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"operating_margin, free_cash_flow, debt_to_equity"
 TICKER_COUNTRY:TYL|US,TYL,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,debt_to_equity
-TICKER_COUNTRY:T|US,T,2025-12-31,,No verified aligned market quote/peer valuation snapshot; valuation not scored,False,False,False,"roe, free_cash_flow, debt_to_equity, price, market_cap, pe, pb"
+TICKER_COUNTRY:T|US,T,2025-12-31,2026-11-20,Quote ready; validated current SEC fundamentals required,False,True,False,"roe, free_cash_flow, debt_to_equity"
 TICKER_COUNTRY:UAL|US,UAL,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,free_cash_flow
 TICKER_COUNTRY:UBER|US,UBER,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,
 TICKER_COUNTRY:UDR|US,UDR,2025-12-31,2026-11-23,Both source types available; peer/sector scoring not validated,True,True,True,"free_cash_flow, debt_to_equity"
