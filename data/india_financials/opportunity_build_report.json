@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-11-21T19:06:28+00:00",
+  "generated_utc": "2026-11-24T01:16:35+00:00",
   "companies": 328,
   "verified_membership_companies": 328,
-  "fundamental_ready": 3,
-  "valuation_ready": 2,
-  "research_ready": 2,
-  "research_scored": 0,
+  "fundamental_ready": 28,
+  "valuation_ready": 27,
+  "research_ready": 27,
+  "research_scored": 15,
   "scoring_policy": "scores only if statements and quotes fresh; peer comparison min 5 other companies; Quality 45%, Growth 20%, Valuation 35%; no market positioning score without price-rotation integration",
   "limitations": "Research scores are exploratory within-industry comparisons, not investment advice; not historical backtested, no point-in-time survivorship adjustment; financial statement scope unverified; scores may be unavailable."
 }

@@ -24,31 +24,31 @@ ISIN:INE079A01024,AMBUJACEM,Ambuja Cements Ltd.,ok,,2026-11-19T20:52:02+00:00,20
 ISIN:INE463V01026,ANANDRATHI,Anand Rathi Wealth Ltd.,ok,,2026-11-19T20:52:04+00:00,2026-11-19T20:52:04+00:00
 ISIN:INE242C01024,ANANTRAJ,Anant Raj Ltd.,ok,,2026-11-19T20:52:07+00:00,2026-11-19T20:52:07+00:00
 ISIN:INE732I01021,ANGELONE,Angel One Ltd.,ok,,2026-11-19T20:52:10+00:00,2026-11-19T20:52:10+00:00
-ISIN:INE0CZ201020,ANTHEM,Anthem Biosciences Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:33:15+00:00,
-ISIN:INE372A01015,APARINDS,Apar Industries Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:33:17+00:00,
-ISIN:INE702C01027,APLAPOLLO,APL Apollo Tubes Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:33:20+00:00,
-ISIN:INE713T01028,APOLLO,Apollo Micro Systems Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:33:22+00:00,
-ISIN:INE437A01024,APOLLOHOSP,Apollo Hospitals Enterprise Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:33:24+00:00,
-ISIN:INE208A01029,ASHOKLEY,Ashok Leyland Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:33:27+00:00,
-ISIN:INE021A01026,ASIANPAINT,Asian Paints Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:33:29+00:00,
-ISIN:INE914M01019,ASTERDM,Aster DM Quality Care Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:33:31+00:00,
-ISIN:INE006I01046,ASTRAL,Astral Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:33:34+00:00,
-ISIN:INE386C01029,ASTRAMICRO,Astra Microwave Products Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:33:36+00:00,
-ISIN:INE399L01023,ATGL,Adani Total Gas Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:33:38+00:00,
-ISIN:INE0LEZ01016,ATHERENERG,Ather Energy Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:33:40+00:00,
-ISIN:INE949L01017,AUBANK,AU Small Finance Bank Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:33:43+00:00,
-ISIN:INE406A01037,AUROPHARMA,Aurobindo Pharma Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:33:45+00:00,
-ISIN:INE699H01024,AWL,AWL Agri Business Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:33:47+00:00,
-ISIN:INE238A01034,AXISBANK,Axis Bank Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:33:50+00:00,
-ISIN:INE555B01013,AXISCADES,AXISCADES Technologies Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:33:52+00:00,
-ISIN:INE917I01010,BAJAJ-AUTO,Bajaj Auto Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:33:54+00:00,
-ISIN:INE918I01026,BAJAJFINSV,Bajaj Finserv Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:33:57+00:00,
-ISIN:INE377Y01014,BAJAJHFL,Bajaj Housing Finance Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:33:59+00:00,
-ISIN:INE296A01032,BAJFINANCE,Bajaj Finance Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:34:01+00:00,
-ISIN:INE787D01026,BALKRISIND,Balkrishna Industries Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:34:03+00:00,
-ISIN:INE545U01014,BANDHANBNK,Bandhan Bank Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:34:06+00:00,
-ISIN:INE028A01039,BANKBARODA,Bank of Baroda,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:34:08+00:00,
-ISIN:INE084A01016,BANKINDIA,Bank of India,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:34:10+00:00,
+ISIN:INE0CZ201020,ANTHEM,Anthem Biosciences Ltd.,ok,,2026-11-24T01:15:19+00:00,2026-11-24T01:15:19+00:00
+ISIN:INE372A01015,APARINDS,Apar Industries Ltd.,ok,,2026-11-24T01:15:22+00:00,2026-11-24T01:15:22+00:00
+ISIN:INE702C01027,APLAPOLLO,APL Apollo Tubes Ltd.,ok,,2026-11-24T01:15:25+00:00,2026-11-24T01:15:25+00:00
+ISIN:INE713T01028,APOLLO,Apollo Micro Systems Ltd.,ok,,2026-11-24T01:15:28+00:00,2026-11-24T01:15:28+00:00
+ISIN:INE437A01024,APOLLOHOSP,Apollo Hospitals Enterprise Ltd.,ok,,2026-11-24T01:15:31+00:00,2026-11-24T01:15:31+00:00
+ISIN:INE208A01029,ASHOKLEY,Ashok Leyland Ltd.,ok,,2026-11-24T01:15:34+00:00,2026-11-24T01:15:34+00:00
+ISIN:INE021A01026,ASIANPAINT,Asian Paints Ltd.,ok,,2026-11-24T01:15:37+00:00,2026-11-24T01:15:37+00:00
+ISIN:INE914M01019,ASTERDM,Aster DM Quality Care Ltd.,ok,,2026-11-24T01:15:40+00:00,2026-11-24T01:15:40+00:00
+ISIN:INE006I01046,ASTRAL,Astral Ltd.,ok,,2026-11-24T01:15:44+00:00,2026-11-24T01:15:44+00:00
+ISIN:INE386C01029,ASTRAMICRO,Astra Microwave Products Ltd.,ok,,2026-11-24T01:15:47+00:00,2026-11-24T01:15:47+00:00
+ISIN:INE399L01023,ATGL,Adani Total Gas Ltd.,ok,,2026-11-24T01:15:50+00:00,2026-11-24T01:15:50+00:00
+ISIN:INE0LEZ01016,ATHERENERG,Ather Energy Ltd.,ok,,2026-11-24T01:15:53+00:00,2026-11-24T01:15:53+00:00
+ISIN:INE949L01017,AUBANK,AU Small Finance Bank Ltd.,ok,,2026-11-24T01:15:56+00:00,2026-11-24T01:15:56+00:00
+ISIN:INE406A01037,AUROPHARMA,Aurobindo Pharma Ltd.,ok,,2026-11-24T01:15:59+00:00,2026-11-24T01:15:59+00:00
+ISIN:INE699H01024,AWL,AWL Agri Business Ltd.,ok,,2026-11-24T01:16:02+00:00,2026-11-24T01:16:02+00:00
+ISIN:INE238A01034,AXISBANK,Axis Bank Ltd.,ok,,2026-11-24T01:16:05+00:00,2026-11-24T01:16:05+00:00
+ISIN:INE555B01013,AXISCADES,AXISCADES Technologies Ltd.,ok,,2026-11-24T01:16:09+00:00,2026-11-24T01:16:09+00:00
+ISIN:INE917I01010,BAJAJ-AUTO,Bajaj Auto Ltd.,ok,,2026-11-24T01:16:11+00:00,2026-11-24T01:16:11+00:00
+ISIN:INE918I01026,BAJAJFINSV,Bajaj Finserv Ltd.,ok,,2026-11-24T01:16:14+00:00,2026-11-24T01:16:14+00:00
+ISIN:INE377Y01014,BAJAJHFL,Bajaj Housing Finance Ltd.,ok,,2026-11-24T01:16:18+00:00,2026-11-24T01:16:18+00:00
+ISIN:INE296A01032,BAJFINANCE,Bajaj Finance Ltd.,ok,,2026-11-24T01:16:21+00:00,2026-11-24T01:16:21+00:00
+ISIN:INE787D01026,BALKRISIND,Balkrishna Industries Ltd.,ok,,2026-11-24T01:16:24+00:00,2026-11-24T01:16:24+00:00
+ISIN:INE545U01014,BANDHANBNK,Bandhan Bank Ltd.,ok,,2026-11-24T01:16:27+00:00,2026-11-24T01:16:27+00:00
+ISIN:INE028A01039,BANKBARODA,Bank of Baroda,ok,,2026-11-24T01:16:29+00:00,2026-11-24T01:16:29+00:00
+ISIN:INE084A01016,BANKINDIA,Bank of India,ok,,2026-11-24T01:16:32+00:00,2026-11-24T01:16:32+00:00
 ISIN:INE171Z01026,BDL,Bharat Dynamics Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:34:12+00:00,
 ISIN:INE263A01024,BEL,Bharat Electronics Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:34:15+00:00,
 ISIN:INE894V01022,BELRISE,Belrise Industries Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:34:17+00:00,
