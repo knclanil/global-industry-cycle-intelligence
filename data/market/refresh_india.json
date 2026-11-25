@@ -1,11 +1,10 @@
 {
   "region": "india",
-  "refreshed_utc": "2026-11-24T22:43:47.862967+00:00",
+  "refreshed_utc": "2026-11-25T21:58:25.994509+00:00",
   "markets": {
     "India": {
       "status": "OK",
-      "changed": [],
-      "unchanged": [
+      "changed": [
         "^NIFTYBANK",
         "^CNXIT",
         "^CNXAUTO",
@@ -20,28 +19,28 @@
         "^CNXPSUBANK",
         "^NSEI"
       ],
+      "unchanged": [],
       "unavailable_this_run": [],
       "request_start": "2026-11-13",
       "latest_dates": {
-        "^NIFTYBANK": "2026-11-23",
-        "^CNXIT": "2026-11-23",
-        "^CNXAUTO": "2026-11-23",
-        "^CNXFMCG": "2026-11-23",
-        "^CNXPHARMA": "2026-11-23",
-        "^CNXMETAL": "2026-11-23",
-        "^CNXREALTY": "2026-11-23",
-        "^CNXENERGY": "2026-11-23",
-        "^CNXINFRA": "2026-11-23",
-        "^NIFTYFIN_SERVICE": "2026-11-23",
-        "^CNXMEDIA": "2026-11-23",
-        "^CNXPSUBANK": "2026-11-23",
-        "^NSEI": "2026-11-23"
+        "^NIFTYBANK": "2026-11-25",
+        "^CNXIT": "2026-11-25",
+        "^CNXAUTO": "2026-11-25",
+        "^CNXFMCG": "2026-11-25",
+        "^CNXPHARMA": "2026-11-25",
+        "^CNXMETAL": "2026-11-25",
+        "^CNXREALTY": "2026-11-25",
+        "^CNXENERGY": "2026-11-25",
+        "^CNXINFRA": "2026-11-25",
+        "^NIFTYFIN_SERVICE": "2026-11-25",
+        "^CNXMEDIA": "2026-11-25",
+        "^CNXPSUBANK": "2026-11-25",
+        "^NSEI": "2026-11-25"
       }
     },
     "IndiaFactors": {
       "status": "OK",
-      "changed": [],
-      "unchanged": [
+      "changed": [
         "NIFTY50_VALUE20",
         "NIFTY200_MOMENTUM30",
         "NIFTY200_QUALITY30",
@@ -50,16 +49,17 @@
         "NIFTY50_EQUALWEIGHT",
         "^NSEI"
       ],
+      "unchanged": [],
       "unavailable_this_run": [],
       "request_start": "2026-11-13",
       "latest_dates": {
-        "NIFTY50_VALUE20": "2026-11-23",
-        "NIFTY200_MOMENTUM30": "2026-11-23",
-        "NIFTY200_QUALITY30": "2026-11-23",
-        "NIFTY100_LOWVOL30": "2026-11-23",
-        "NIFTY_ALPHA50": "2026-11-23",
-        "NIFTY50_EQUALWEIGHT": "2026-11-23",
-        "^NSEI": "2026-11-23"
+        "NIFTY50_VALUE20": "2026-11-25",
+        "NIFTY200_MOMENTUM30": "2026-11-25",
+        "NIFTY200_QUALITY30": "2026-11-25",
+        "NIFTY100_LOWVOL30": "2026-11-25",
+        "NIFTY_ALPHA50": "2026-11-25",
+        "NIFTY50_EQUALWEIGHT": "2026-11-25",
+        "^NSEI": "2026-11-25"
       }
     },
     "IndiaAssets": {
@@ -68,21 +68,20 @@
         "NIFTYBEES.NS",
         "GOLDBEES.NS",
         "SILVERBEES.NS",
-        "LIQUIDBEES.NS"
-      ],
-      "unchanged": [
+        "LIQUIDBEES.NS",
         "NIFTY_GSEC_10Y",
         "^NSEI"
       ],
+      "unchanged": [],
       "unavailable_this_run": [],
-      "request_start": "2026-11-10",
+      "request_start": "2026-11-13",
       "latest_dates": {
-        "NIFTYBEES.NS": "2026-11-23",
-        "GOLDBEES.NS": "2026-11-23",
-        "SILVERBEES.NS": "2026-11-23",
-        "LIQUIDBEES.NS": "2026-11-23",
-        "NIFTY_GSEC_10Y": "2026-11-23",
-        "^NSEI": "2026-11-23"
+        "NIFTYBEES.NS": "2026-11-25",
+        "GOLDBEES.NS": "2026-11-25",
+        "SILVERBEES.NS": "2026-11-25",
+        "LIQUIDBEES.NS": "2026-11-25",
+        "NIFTY_GSEC_10Y": "2026-11-25",
+        "^NSEI": "2026-11-25"
       }
     }
   },
