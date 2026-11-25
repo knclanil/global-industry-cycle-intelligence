@@ -1,339 +1,339 @@
 Company,Ticker,company_key,Category,Score,Sector indices,Factor indices,Sector RS magnitude,Factor RS magnitude,Sector sources,Factor sources,Signal basis,Avg ETF % weight,Exposure,Rank
-ANALOG DEVICES,ADI,TICKER_COUNTRY:ADI|US,Lagging,12.467,1,1,10.76,14.45,Technology,Momentum,Category ETF proxy,1.03,2.06,1
-ASTERA LABS,ALAB,TICKER_COUNTRY:ALAB|US,Lagging,12.467,1,1,10.76,14.45,Technology,Momentum,Category ETF proxy,0.27,0.54,1
-CREDO TECHNOLOGY GROUP HOLDING LTD,CRDO,TICKER_COUNTRY:CRDO|US,Lagging,12.467,1,1,10.76,14.45,Technology,Momentum,Category ETF proxy,0.12,0.24,1
-DELL TECHNOLOGIES INC CLASS C,DELL,TICKER_COUNTRY:DELL|US,Lagging,12.467,1,1,10.76,14.45,Technology,Momentum,Category ETF proxy,1.03,2.06,1
-F5,FFIV,TICKER_COUNTRY:FFIV|US,Lagging,12.467,1,1,10.76,14.45,Technology,Momentum,Category ETF proxy,0.125,0.25,1
-HEWLETT PACKARD ENTERPRISE,HPE,TICKER_COUNTRY:HPE|US,Lagging,12.467,1,1,10.76,14.45,Technology,Momentum,Category ETF proxy,0.6,1.2,1
-HP INC,HPQ,TICKER_COUNTRY:HPQ|US,Lagging,12.467,1,1,10.76,14.45,Technology,Momentum,Category ETF proxy,0.155,0.31,1
-INTEL CORPORATION,INTC,TICKER_COUNTRY:INTC|US,Lagging,12.467,1,1,10.76,14.45,Technology,Momentum,Category ETF proxy,2.24,4.48,1
-CLOUDFLARE CLASS A,NET,TICKER_COUNTRY:NET|US,Lagging,12.467,1,1,10.76,14.45,Technology,Momentum,Category ETF proxy,0.55,1.1,1
-NETAPP INC,NTAP,TICKER_COUNTRY:NTAP|US,Lagging,12.467,1,1,10.76,14.45,Technology,Momentum,Category ETF proxy,0.275,0.55,1
-ON SEMICONDUCTOR CORP,ON,TICKER_COUNTRY:ON|US,Lagging,12.467,1,1,10.76,14.45,Technology,Momentum,Category ETF proxy,0.145,0.29,1
-QNITY ELECTRONICS,Q,TICKER_COUNTRY:Q|US,Lagging,12.467,1,1,10.76,14.45,Technology,Momentum,Category ETF proxy,0.155,0.31,1
-TEXAS INSTRUMENT,TXN,TICKER_COUNTRY:TXN|US,Lagging,12.467,1,1,10.76,14.45,Technology,Momentum,Category ETF proxy,1.545,3.09,1
-WESTERN DIGITAL CORP,WDC,TICKER_COUNTRY:WDC|US,Lagging,12.467,1,1,10.76,14.45,Technology,Momentum,Category ETF proxy,1.04,2.08,1
-APPLIED MATERIAL INC,AMAT,TICKER_COUNTRY:AMAT|US,Lagging,10.752,1,2,10.76,10.45,Technology,Growth · Momentum,Category ETF proxy,1.67,5.01,15
-ADVANCED MICRO DEVICES,AMD,TICKER_COUNTRY:AMD|US,Lagging,10.752,1,2,10.76,10.45,Technology,Growth · Momentum,Category ETF proxy,3.613,10.84,15
-AMPHENOL CORP CLASS A,APH,TICKER_COUNTRY:APH|US,Lagging,10.752,1,2,10.76,10.45,Technology,Growth · Momentum,Category ETF proxy,0.84,2.52,15
-COHERENT,COHR,TICKER_COUNTRY:COHR|US,Lagging,10.752,1,2,10.76,10.45,Technology,Growth · Momentum,Category ETF proxy,0.193,0.58,15
-CROWDSTRIKE HOLDINGS CLASS A,CRWD,TICKER_COUNTRY:CRWD|US,Lagging,10.752,1,2,10.76,10.45,Technology,Growth · Momentum,Category ETF proxy,1.173,3.52,15
-DATADOG INC CLASS A,DDOG,TICKER_COUNTRY:DDOG|US,Lagging,10.752,1,2,10.76,10.45,Technology,Growth · Momentum,Category ETF proxy,0.333,1.0,15
-FLEX LTD,FLEX,TICKER_COUNTRY:FLEX|US,Lagging,10.752,1,2,10.76,10.45,Technology,Growth · Momentum,Category ETF proxy,0.16,0.48,15
-FORTINET,FTNT,TICKER_COUNTRY:FTNT|US,Lagging,10.752,1,2,10.76,10.45,Technology,Growth · Momentum,Category ETF proxy,0.493,1.48,15
-CORNING,GLW,TICKER_COUNTRY:GLW|US,Lagging,10.752,1,2,10.76,10.45,Technology,Growth · Momentum,Category ETF proxy,0.427,1.28,15
-ALPHABET CLASS C,GOOG,TICKER_COUNTRY:GOOG|US,Lagging,10.752,1,2,10.76,10.45,Technology,Growth · Momentum,Category ETF proxy,2.713,8.14,15
-ALPHABET CLASS A,GOOGL,TICKER_COUNTRY:GOOGL|US,Lagging,10.752,1,2,10.76,10.45,Technology,Growth · Momentum,Category ETF proxy,3.387,10.16,15
-JABIL,JBL,TICKER_COUNTRY:JBL|US,Lagging,10.752,1,2,10.76,10.45,Technology,Growth · Momentum,Category ETF proxy,0.11,0.33,15
-KLA,KLAC,TICKER_COUNTRY:KLAC|US,Lagging,10.752,1,2,10.76,10.45,Technology,Growth · Momentum,Category ETF proxy,0.943,2.83,15
-LAM RESEARCH,LRCX,TICKER_COUNTRY:LRCX|US,Lagging,10.752,1,2,10.76,10.45,Technology,Growth · Momentum,Category ETF proxy,1.41,4.23,15
-MONOLITHIC POWER SYSTEMS INC,MPWR,TICKER_COUNTRY:MPWR|US,Lagging,10.752,1,2,10.76,10.45,Technology,Growth · Momentum,Category ETF proxy,0.303,0.91,15
-MARVELL TECHNOLOGY,MRVL,TICKER_COUNTRY:MRVL|US,Lagging,10.752,1,2,10.76,10.45,Technology,Growth · Momentum,Category ETF proxy,0.767,2.3,15
-MICRON TECHNOLOGY,MU,TICKER_COUNTRY:MU|US,Lagging,10.752,1,2,10.76,10.45,Technology,Growth · Momentum,Category ETF proxy,3.1,9.3,15
-OKTA CLASS A,OKTA,TICKER_COUNTRY:OKTA|US,Lagging,10.752,1,2,10.76,10.45,Technology,Growth · Momentum,Category ETF proxy,0.18,0.54,15
-PALO ALTO NETWORKS,PANW,TICKER_COUNTRY:PANW|US,Lagging,10.752,1,2,10.76,10.45,Technology,Growth · Momentum,Category ETF proxy,1.697,5.09,15
-SANDISK,SNDK,TICKER_COUNTRY:SNDK|US,Lagging,10.752,1,2,10.76,10.45,Technology,Growth · Momentum,Category ETF proxy,0.803,2.41,15
-TERADYNE,TER,TICKER_COUNTRY:TER|US,Lagging,10.752,1,2,10.76,10.45,Technology,Growth · Momentum,Category ETF proxy,0.2,0.6,15
-TWILIO CLASS A,TWLO,TICKER_COUNTRY:TWLO|US,Lagging,10.752,1,2,10.76,10.45,Technology,Growth · Momentum,Category ETF proxy,0.147,0.44,15
-APPLE,AAPL,TICKER_COUNTRY:AAPL|US,Lagging,8.328,1,1,10.76,6.45,Technology,Growth,Category ETF proxy,13.515,27.03,37
-AUTODESK,ADSK,TICKER_COUNTRY:ADSK|US,Lagging,8.328,1,1,10.76,6.45,Technology,Growth,Category ETF proxy,0.205,0.41,37
-APPLOVIN CLASS A,APP,TICKER_COUNTRY:APP|US,Lagging,8.328,1,1,10.76,6.45,Technology,Growth,Category ETF proxy,0.41,0.82,37
-BROADCOM INC,AVGO,TICKER_COUNTRY:AVGO|US,Lagging,8.328,1,1,10.76,6.45,Technology,Growth,Category ETF proxy,3.93,7.86,37
-CADENCE DESIGN SYSTEMS,CDNS,TICKER_COUNTRY:CDNS|US,Lagging,8.328,1,1,10.76,6.45,Technology,Growth,Category ETF proxy,0.32,0.64,37
-DOORDASH CLASS A,DASH,TICKER_COUNTRY:DASH|US,Lagging,8.328,1,1,10.76,6.45,Technology,Growth,Category ETF proxy,0.265,0.53,37
-INTERNATIONAL BUSINESS MACHINES CO,IBM,TICKER_COUNTRY:IBM|US,Lagging,8.328,1,1,10.76,6.45,Technology,Growth,Category ETF proxy,0.8,1.6,37
-INTUIT,INTU,TICKER_COUNTRY:INTU|US,Lagging,8.328,1,1,10.76,6.45,Technology,Growth,Category ETF proxy,0.275,0.55,37
-META PLATFORMS CLASS A,META,TICKER_COUNTRY:META|US,Lagging,8.328,1,1,10.76,6.45,Technology,Growth,Category ETF proxy,3.69,7.38,37
-MICROSOFT,MSFT,TICKER_COUNTRY:MSFT|US,Lagging,8.328,1,1,10.76,6.45,Technology,Growth,Category ETF proxy,12.56,25.12,37
-SERVICENOW,NOW,TICKER_COUNTRY:NOW|US,Lagging,8.328,1,1,10.76,6.45,Technology,Growth,Category ETF proxy,0.36,0.72,37
-NVIDIA,NVDA,TICKER_COUNTRY:NVDA|US,Lagging,8.328,1,1,10.76,6.45,Technology,Growth,Category ETF proxy,13.435,26.87,37
-ORACLE,ORCL,TICKER_COUNTRY:ORCL|US,Lagging,8.328,1,1,10.76,6.45,Technology,Growth,Category ETF proxy,0.745,1.49,37
-EVERPURE INC CLASS A,P,TICKER_COUNTRY:P|US,Lagging,8.328,1,1,10.76,6.45,Technology,Growth,Category ETF proxy,0.14,0.28,37
-PALANTIR TECHNOLOGIES CLASS A,PLTR,TICKER_COUNTRY:PLTR|US,Lagging,8.328,1,1,10.76,6.45,Technology,Growth,Category ETF proxy,1.57,3.14,37
-REDDIT CLASS A,RDDT,TICKER_COUNTRY:RDDT|US,Lagging,8.328,1,1,10.76,6.45,Technology,Growth,Category ETF proxy,0.045,0.09,37
-VERISIGN,VRSN,TICKER_COUNTRY:VRSN|US,Lagging,8.328,1,1,10.76,6.45,Technology,Growth,Category ETF proxy,0.115,0.23,37
-WORKDAY CLASS A,WDAY,TICKER_COUNTRY:WDAY|US,Lagging,8.328,1,1,10.76,6.45,Technology,Growth,Category ETF proxy,0.125,0.25,37
-CARDINAL HEALTH,CAH,TICKER_COUNTRY:CAH|US,Leading,12.392,1,2,19.19,7.81,Consumer Staples,Minimum Volatility · Value,Category ETF proxy,1.027,3.08,1
-COLGATE-PALMOLIVE,CL,TICKER_COUNTRY:CL|US,Leading,12.392,1,2,19.19,7.81,Consumer Staples,Minimum Volatility · Value,Category ETF proxy,1.473,4.42,1
-CENCORA,COR,TICKER_COUNTRY:COR|US,Leading,12.392,1,2,19.19,7.81,Consumer Staples,Minimum Volatility · Value,Category ETF proxy,1.43,4.29,1
-KEURIG DR PEPPER INC,KDP,TICKER_COUNTRY:KDP|US,Leading,12.392,1,2,19.19,7.81,Consumer Staples,Minimum Volatility · Value,Category ETF proxy,0.96,2.88,1
-KROGER,KR,TICKER_COUNTRY:KR|US,Leading,12.392,1,2,19.19,7.81,Consumer Staples,Minimum Volatility · Value,Category ETF proxy,0.807,2.42,1
-MCKESSON CORP,MCK,TICKER_COUNTRY:MCK|US,Leading,12.392,1,2,19.19,7.81,Consumer Staples,Minimum Volatility · Value,Category ETF proxy,2.153,6.46,1
-TYSON FOODS INC CLASS A,TSN,TICKER_COUNTRY:TSN|US,Leading,12.392,1,2,19.19,7.81,Consumer Staples,Minimum Volatility · Value,Category ETF proxy,0.333,1.0,1
-VYLOR,VYLR,TICKER_COUNTRY:VYLR|US,Leading,12.392,1,2,19.19,7.81,Consumer Staples,Minimum Volatility · Value,Category ETF proxy,0.79,2.37,1
-ARCHER DANIELS MIDLAND,ADM,TICKER_COUNTRY:ADM|US,Leading,12.197,1,1,19.19,7.75,Consumer Staples,Value,Category ETF proxy,0.76,1.52,9
-BROWN FORMAN CLASS B,BF B,TICKER_COUNTRY:BF B|US,Leading,12.197,1,1,19.19,7.75,Consumer Staples,Value,Category ETF proxy,0.095,0.19,9
-BUNGE GLOBAL SA,BG,TICKER_COUNTRY:BG|US,Leading,12.197,1,1,19.19,7.75,Consumer Staples,Value,Category ETF proxy,0.29,0.58,9
-CLOROX,CLX,TICKER_COUNTRY:CLX|US,Leading,12.197,1,1,19.19,7.75,Consumer Staples,Value,Category ETF proxy,0.295,0.59,9
-CVS HEALTH,CVS,TICKER_COUNTRY:CVS|US,Leading,12.197,1,1,19.19,7.75,Consumer Staples,Value,Category ETF proxy,1.955,3.91,9
-GENERAL MILLS INC,GIS,TICKER_COUNTRY:GIS|US,Leading,12.197,1,1,19.19,7.75,Consumer Staples,Value,Category ETF proxy,0.435,0.87,9
-HORMEL FOODS CORP,HRL,TICKER_COUNTRY:HRL|US,Leading,12.197,1,1,19.19,7.75,Consumer Staples,Value,Category ETF proxy,0.155,0.31,9
-KRAFT HEINZ,KHC,TICKER_COUNTRY:KHC|US,Leading,12.197,1,1,19.19,7.75,Consumer Staples,Value,Category ETF proxy,0.505,1.01,9
-JM SMUCKER,SJM,TICKER_COUNTRY:SJM|US,Leading,12.197,1,1,19.19,7.75,Consumer Staples,Value,Category ETF proxy,0.325,0.65,9
-MONDELEZ INTERNATIONAL CLASS A,MDLZ,TICKER_COUNTRY:MDLZ|US,Leading,11.558,1,3,19.19,6.61,Consumer Staples,Dividend Yield · Minimum Volatility · Value,Category ETF proxy,1.445,5.78,18
-PHILIP MORRIS INTERNATIONAL,PM,TICKER_COUNTRY:PM|US,Leading,11.558,1,3,19.19,6.61,Consumer Staples,Dividend Yield · Minimum Volatility · Value,Category ETF proxy,4.047,16.19,18
-AMERICAN ELECTRIC POWER INC,AEP,TICKER_COUNTRY:AEP|US,Leading,11.357,1,2,16.08,7.81,Utilities,Minimum Volatility · Value,Category ETF proxy,1.677,5.03,20
-DUKE ENERGY CORP,DUK,TICKER_COUNTRY:DUK|US,Leading,11.357,1,2,16.08,7.81,Utilities,Minimum Volatility · Value,Category ETF proxy,2.697,8.09,20
-REPUBLIC SERVICES INC,RSG,TICKER_COUNTRY:RSG|US,Leading,11.357,1,2,16.08,7.81,Utilities,Minimum Volatility · Value,Category ETF proxy,1.55,4.65,20
-WASTE MANAGEMENT INC,WM,TICKER_COUNTRY:WM|US,Leading,11.357,1,2,16.08,7.81,Utilities,Minimum Volatility · Value,Category ETF proxy,2.443,7.33,20
-CHURCH AND DWIGHT INC,CHD,TICKER_COUNTRY:CHD|US,Leading,11.19,1,3,19.19,6.18,Consumer Staples,Minimum Volatility · Quality · Value,Category ETF proxy,0.48,1.92,24
-AES,AES,TICKER_COUNTRY:AES|US,Leading,11.166,1,1,16.08,7.75,Utilities,Value,Category ETF proxy,0.355,0.71,25
-CONSTELLATION ENERGY CORP,CEG,TICKER_COUNTRY:CEG|US,Leading,11.166,1,1,16.08,7.75,Utilities,Value,Category ETF proxy,2.56,5.12,25
-CENTERPOINT ENERGY,CNP,TICKER_COUNTRY:CNP|US,Leading,11.166,1,1,16.08,7.75,Utilities,Value,Category ETF proxy,0.855,1.71,25
-EDISON INTERNATIONAL,EIX,TICKER_COUNTRY:EIX|US,Leading,11.166,1,1,16.08,7.75,Utilities,Value,Category ETF proxy,0.78,1.56,25
-EVERSOURCE ENERGY,ES,TICKER_COUNTRY:ES|US,Leading,11.166,1,1,16.08,7.75,Utilities,Value,Category ETF proxy,0.88,1.76,25
-ENTERGY CORP,ETR,TICKER_COUNTRY:ETR|US,Leading,11.166,1,1,16.08,7.75,Utilities,Value,Category ETF proxy,1.645,3.29,25
-EXELON CORP,EXC,TICKER_COUNTRY:EXC|US,Leading,11.166,1,1,16.08,7.75,Utilities,Value,Category ETF proxy,1.55,3.1,25
-NISOURCE,NI,TICKER_COUNTRY:NI|US,Leading,11.166,1,1,16.08,7.75,Utilities,Value,Category ETF proxy,0.705,1.41,25
-NRG ENERGY INC,NRG,TICKER_COUNTRY:NRG|US,Leading,11.166,1,1,16.08,7.75,Utilities,Value,Category ETF proxy,0.63,1.26,25
-PG&E CORP,PCG,TICKER_COUNTRY:PCG|US,Leading,11.166,1,1,16.08,7.75,Utilities,Value,Category ETF proxy,1.01,2.02,25
-PINNACLE WEST,PNW,TICKER_COUNTRY:PNW|US,Leading,11.166,1,1,16.08,7.75,Utilities,Value,Category ETF proxy,0.405,0.81,25
-SEMPRA,SRE,TICKER_COUNTRY:SRE|US,Leading,11.166,1,1,16.08,7.75,Utilities,Value,Category ETF proxy,1.67,3.34,25
-HERSHEY FOODS,HSY,TICKER_COUNTRY:HSY|US,Leading,10.894,1,4,19.19,5.68,Consumer Staples,Dividend Yield · Minimum Volatility · Quality · Value,Category ETF proxy,0.37,1.85,37
-COCA-COLA,KO,TICKER_COUNTRY:KO|US,Leading,10.894,1,4,19.19,5.68,Consumer Staples,Dividend Yield · Minimum Volatility · Quality · Value,Category ETF proxy,4.278,21.39,37
-PEPSICO,PEP,TICKER_COUNTRY:PEP|US,Leading,10.894,1,4,19.19,5.68,Consumer Staples,Dividend Yield · Minimum Volatility · Quality · Value,Category ETF proxy,2.66,13.3,37
-PROCTER & GAMBLE,PG,TICKER_COUNTRY:PG|US,Leading,10.894,1,4,19.19,5.68,Consumer Staples,Dividend Yield · Minimum Volatility · Quality · Value,Category ETF proxy,4.822,24.11,37
-KIMBERLY CLARK,KMB,TICKER_COUNTRY:KMB|US,Leading,10.857,1,2,19.19,5.97,Consumer Staples,Dividend Yield · Value,Category ETF proxy,1.317,3.95,41
-ALTRIA GROUP INC,MO,TICKER_COUNTRY:MO|US,Leading,10.857,1,2,19.19,5.97,Consumer Staples,Dividend Yield · Value,Category ETF proxy,2.887,8.66,41
-CONSTELLATION BRANDS CLASS A,STZ,TICKER_COUNTRY:STZ|US,Leading,10.857,1,2,19.19,5.97,Consumer Staples,Dividend Yield · Value,Category ETF proxy,0.433,1.3,41
-SYSCO,SYY,TICKER_COUNTRY:SYY|US,Leading,10.857,1,2,19.19,5.97,Consumer Staples,Dividend Yield · Value,Category ETF proxy,0.777,2.33,41
-CMS ENERGY,CMS,TICKER_COUNTRY:CMS|US,Leading,10.606,1,3,16.08,6.61,Utilities,Dividend Yield · Minimum Volatility · Value,Category ETF proxy,0.5,2.0,45
-DOMINION ENERGY,D,TICKER_COUNTRY:D|US,Leading,10.606,1,3,16.08,6.61,Utilities,Dividend Yield · Minimum Volatility · Value,Category ETF proxy,1.315,5.26,45
-NEXTERA ENERGY,NEE,TICKER_COUNTRY:NEE|US,Leading,10.606,1,3,16.08,6.61,Utilities,Dividend Yield · Minimum Volatility · Value,Category ETF proxy,3.567,14.27,45
-PPL CORP,PPL,TICKER_COUNTRY:PPL|US,Leading,10.606,1,3,16.08,6.61,Utilities,Dividend Yield · Minimum Volatility · Value,Category ETF proxy,0.552,2.21,45
-SOUTHERN,SO,TICKER_COUNTRY:SO|US,Leading,10.606,1,3,16.08,6.61,Utilities,Dividend Yield · Minimum Volatility · Value,Category ETF proxy,2.577,10.31,45
-WEC ENERGY GROUP,WEC,TICKER_COUNTRY:WEC|US,Leading,10.606,1,3,16.08,6.61,Utilities,Dividend Yield · Minimum Volatility · Value,Category ETF proxy,1.017,4.07,45
-MONSTER BEVERAGE,MNST,TICKER_COUNTRY:MNST|US,Leading,10.324,1,2,19.19,5.39,Consumer Staples,Minimum Volatility · Quality,Category ETF proxy,1.167,3.5,51
-MCCORMICK & CO NON-VOTING,MKC,TICKER_COUNTRY:MKC|US,Leading,10.271,1,2,19.19,5.34,Consumer Staples,Quality · Value,Category ETF proxy,0.2,0.6,52
-ATMOS ENERGY,ATO,TICKER_COUNTRY:ATO|US,Leading,10.27,1,3,16.08,6.18,Utilities,Minimum Volatility · Quality · Value,Category ETF proxy,0.585,2.34,53
-AMERICAN WATER WORKS,AWK,TICKER_COUNTRY:AWK|US,Leading,10.27,1,3,16.08,6.18,Utilities,Minimum Volatility · Quality · Value,Category ETF proxy,0.578,2.31,53
-CONSOLIDATED EDISON,ED,TICKER_COUNTRY:ED|US,Leading,10.27,1,3,16.08,6.18,Utilities,Minimum Volatility · Quality · Value,Category ETF proxy,1.183,4.73,53
-AMEREN,AEE,TICKER_COUNTRY:AEE|US,Leading,10.011,1,4,16.08,5.68,Utilities,Dividend Yield · Minimum Volatility · Quality · Value,Category ETF proxy,0.628,3.14,56
-XCEL ENERGY INC,XEL,TICKER_COUNTRY:XEL|US,Leading,10.011,1,4,16.08,5.68,Utilities,Dividend Yield · Minimum Volatility · Quality · Value,Category ETF proxy,1.03,5.15,56
-DTE ENERGY,DTE,TICKER_COUNTRY:DTE|US,Leading,9.952,1,2,16.08,5.97,Utilities,Dividend Yield · Value,Category ETF proxy,0.787,2.36,58
-EVERGY,EVRG,TICKER_COUNTRY:EVRG|US,Leading,9.952,1,2,16.08,5.97,Utilities,Dividend Yield · Value,Category ETF proxy,0.557,1.67,58
-FIRSTENERGY CORP,FE,TICKER_COUNTRY:FE|US,Leading,9.952,1,2,16.08,5.97,Utilities,Dividend Yield · Value,Category ETF proxy,0.743,2.23,58
-ALLIANT ENERGY CORP,LNT,TICKER_COUNTRY:LNT|US,Leading,9.952,1,2,16.08,5.97,Utilities,Dividend Yield · Value,Category ETF proxy,0.51,1.53,58
-PUBLIC SERVICE ENTERPRISE GROUP,PEG,TICKER_COUNTRY:PEG|US,Leading,9.952,1,2,16.08,5.97,Utilities,Dividend Yield · Value,Category ETF proxy,1.043,3.13,58
-BOSTON SCIENTIFIC,BSX,TICKER_COUNTRY:BSX|US,Leading,9.848,1,2,12.04,7.81,Healthcare,Minimum Volatility · Value,Category ETF proxy,0.363,1.09,63
-CIGNA,CI,TICKER_COUNTRY:CI|US,Leading,9.848,1,2,12.04,7.81,Healthcare,Minimum Volatility · Value,Category ETF proxy,0.487,1.46,63
-CENTENE CORP,CNC,TICKER_COUNTRY:CNC|US,Leading,9.848,1,2,12.04,7.81,Healthcare,Minimum Volatility · Value,Category ETF proxy,0.34,1.02,63
-ELEVANCE HEALTH INC,ELV,TICKER_COUNTRY:ELV|US,Leading,9.848,1,2,12.04,7.81,Healthcare,Minimum Volatility · Value,Category ETF proxy,0.603,1.81,63
-REGENERON PHARMACEUTICALS,REGN,TICKER_COUNTRY:REGN|US,Leading,9.848,1,2,12.04,7.81,Healthcare,Minimum Volatility · Value,Category ETF proxy,0.6,1.8,63
-UNITEDHEALTH GROUP,UNH,TICKER_COUNTRY:UNH|US,Leading,9.848,1,2,12.04,7.81,Healthcare,Minimum Volatility · Value,Category ETF proxy,1.97,5.91,63
-ALNYLAM PHARMACEUTICALS,ALNY,TICKER_COUNTRY:ALNY|US,Leading,9.733,1,1,12.04,7.87,Healthcare,Minimum Volatility,Category ETF proxy,0.335,0.67,69
-HCA HEALTHCARE,HCA,TICKER_COUNTRY:HCA|US,Leading,9.733,1,1,12.04,7.87,Healthcare,Minimum Volatility,Category ETF proxy,0.615,1.23,69
-INCYTE CORP,INCY,TICKER_COUNTRY:INCY|US,Leading,9.733,1,1,12.04,7.87,Healthcare,Minimum Volatility,Category ETF proxy,0.37,0.74,69
-NEUROCRINE BIOSCIENCES,NBIX,TICKER_COUNTRY:NBIX|US,Leading,9.733,1,1,12.04,7.87,Healthcare,Minimum Volatility,Category ETF proxy,0.345,0.69,69
-AGILENT TECHNOLOGIES INC,A,TICKER_COUNTRY:A|US,Leading,9.663,1,1,12.04,7.75,Healthcare,Value,Category ETF proxy,0.46,0.92,73
-ALIGN TECHNOLOGY,ALGN,TICKER_COUNTRY:ALGN|US,Leading,9.663,1,1,12.04,7.75,Healthcare,Value,Category ETF proxy,0.1,0.2,73
-BAXTER INTERNATIONAL,BAX,TICKER_COUNTRY:BAX|US,Leading,9.663,1,1,12.04,7.75,Healthcare,Value,Category ETF proxy,0.13,0.26,73
-BECTON DICKINSON,BDX,TICKER_COUNTRY:BDX|US,Leading,9.663,1,1,12.04,7.75,Healthcare,Value,Category ETF proxy,0.545,1.09,73
-BIOGEN,BIIB,TICKER_COUNTRY:BIIB|US,Leading,9.663,1,1,12.04,7.75,Healthcare,Value,Category ETF proxy,0.35,0.7,73
-BRISTOL MYERS SQUIBB,BMY,TICKER_COUNTRY:BMY|US,Leading,9.663,1,1,12.04,7.75,Healthcare,Value,Category ETF proxy,1.12,2.24,73
-COOPER,COO,TICKER_COUNTRY:COO|US,Leading,9.663,1,1,12.04,7.75,Healthcare,Value,Category ETF proxy,0.11,0.22,73
-CHARLES RIVER LABORATORIES INTERNA,CRL,TICKER_COUNTRY:CRL|US,Leading,9.663,1,1,12.04,7.75,Healthcare,Value,Category ETF proxy,0.145,0.29,73
-QUEST DIAGNOSTICS INC,DGX,TICKER_COUNTRY:DGX|US,Leading,9.663,1,1,12.04,7.75,Healthcare,Value,Category ETF proxy,0.27,0.54,73
-DANAHER,DHR,TICKER_COUNTRY:DHR|US,Leading,9.663,1,1,12.04,7.75,Healthcare,Value,Category ETF proxy,1.31,2.62,73
-DAVITA INC,DVA,TICKER_COUNTRY:DVA|US,Leading,9.663,1,1,12.04,7.75,Healthcare,Value,Category ETF proxy,0.05,0.1,73
-GE HEALTHCARE TECHNOLOGIES,GEHC,TICKER_COUNTRY:GEHC|US,Leading,9.663,1,1,12.04,7.75,Healthcare,Value,Category ETF proxy,0.335,0.67,73
-HENRY SCHEIN,HSIC,TICKER_COUNTRY:HSIC|US,Leading,9.663,1,1,12.04,7.75,Healthcare,Value,Category ETF proxy,0.08,0.16,73
-HUMANA,HUM,TICKER_COUNTRY:HUM|US,Leading,9.663,1,1,12.04,7.75,Healthcare,Value,Category ETF proxy,0.425,0.85,73
-ILLUMINA INC,ILMN,TICKER_COUNTRY:ILMN|US,Leading,9.663,1,1,12.04,7.75,Healthcare,Value,Category ETF proxy,0.26,0.52,73
-IQVIA HOLDINGS INC,IQV,TICKER_COUNTRY:IQV|US,Leading,9.663,1,1,12.04,7.75,Healthcare,Value,Category ETF proxy,0.38,0.76,73
-LABCORP HOLDINGS,LH,TICKER_COUNTRY:LH|US,Leading,9.663,1,1,12.04,7.75,Healthcare,Value,Category ETF proxy,0.28,0.56,73
-MODERNA,MRNA,TICKER_COUNTRY:MRNA|US,Leading,9.663,1,1,12.04,7.75,Healthcare,Value,Category ETF proxy,0.715,1.43,73
-PFIZER,PFE,TICKER_COUNTRY:PFE|US,Leading,9.663,1,1,12.04,7.75,Healthcare,Value,Category ETF proxy,1.435,2.87,73
-REVVITY,RVTY,TICKER_COUNTRY:RVTY|US,Leading,9.663,1,1,12.04,7.75,Healthcare,Value,Category ETF proxy,0.155,0.31,73
-SOLVENTUM,SOLV,TICKER_COUNTRY:SOLV|US,Leading,9.663,1,1,12.04,7.75,Healthcare,Value,Category ETF proxy,0.115,0.23,73
-STERIS,STE,TICKER_COUNTRY:STE|US,Leading,9.663,1,1,12.04,7.75,Healthcare,Value,Category ETF proxy,0.21,0.42,73
-STRYKER,SYK,TICKER_COUNTRY:SYK|US,Leading,9.663,1,1,12.04,7.75,Healthcare,Value,Category ETF proxy,0.93,1.86,73
-BIO TECHNE,TECH,TICKER_COUNTRY:TECH|US,Leading,9.663,1,1,12.04,7.75,Healthcare,Value,Category ETF proxy,0.105,0.21,73
-THERMO FISHER SCIENTIFIC,TMO,TICKER_COUNTRY:TMO|US,Leading,9.663,1,1,12.04,7.75,Healthcare,Value,Category ETF proxy,2.35,4.7,73
-UNIVERSAL HEALTH SERVICES CLASS B,UHS,TICKER_COUNTRY:UHS|US,Leading,9.663,1,1,12.04,7.75,Healthcare,Value,Category ETF proxy,0.085,0.17,73
-VEEVA SYSTEMS CLASS A,VEEV,TICKER_COUNTRY:VEEV|US,Leading,9.663,1,1,12.04,7.75,Healthcare,Value,Category ETF proxy,0.325,0.65,73
-VIATRIS,VTRS,TICKER_COUNTRY:VTRS|US,Leading,9.663,1,1,12.04,7.75,Healthcare,Value,Category ETF proxy,0.21,0.42,73
-ZIMMER BIOMET HOLDINGS,ZBH,TICKER_COUNTRY:ZBH|US,Leading,9.663,1,1,12.04,7.75,Healthcare,Value,Category ETF proxy,0.19,0.38,73
-AMAZON.COM INC,AMZN,TICKER_COUNTRY:AMZN|US,Leading,9.361,1,2,10.86,7.81,Consumer Discretionary,Minimum Volatility · Value,Category ETF proxy,6.28,18.84,102
-AUTOZONE,AZO,TICKER_COUNTRY:AZO|US,Leading,9.361,1,2,10.86,7.81,Consumer Discretionary,Minimum Volatility · Value,Category ETF proxy,0.597,1.79,102
-TAKE TWO INTERACTIVE SOFTWARE,TTWO,TICKER_COUNTRY:TTWO|US,Leading,9.361,1,2,10.86,7.81,Consumer Discretionary,Minimum Volatility · Value,Category ETF proxy,0.327,0.98,102
-YUM BRANDS,YUM,TICKER_COUNTRY:YUM|US,Leading,9.361,1,2,10.86,7.81,Consumer Discretionary,Minimum Volatility · Value,Category ETF proxy,0.607,1.82,102
-LIBERTY MEDIA SERIES C,FWONK,TICKER_COUNTRY:FWONK|US,Leading,9.244,1,1,10.86,7.87,Consumer Discretionary,Minimum Volatility,Category ETF proxy,0.46,0.92,106
-OREILLY AUTOMOTIVE INC,ORLY,TICKER_COUNTRY:ORLY|US,Leading,9.244,1,1,10.86,7.87,Consumer Discretionary,Minimum Volatility,Category ETF proxy,1.02,2.04,106
-UBER TECHNOLOGIES,UBER,TICKER_COUNTRY:UBER|US,Leading,9.244,1,1,10.86,7.87,Consumer Discretionary,Minimum Volatility,Category ETF proxy,1.105,2.21,106
-ABBVIE,ABBV,TICKER_COUNTRY:ABBV|US,Leading,9.219,1,3,12.04,6.61,Healthcare,Dividend Yield · Minimum Volatility · Value,Category ETF proxy,4.093,16.37,109
-ABBOTT LABORATORIES,ABT,TICKER_COUNTRY:ABT|US,Leading,9.219,1,3,12.04,6.61,Healthcare,Dividend Yield · Minimum Volatility · Value,Category ETF proxy,1.53,6.12,109
-AMGEN INC,AMGN,TICKER_COUNTRY:AMGN|US,Leading,9.219,1,3,12.04,6.61,Healthcare,Dividend Yield · Minimum Volatility · Value,Category ETF proxy,1.777,7.11,109
-MEDTRONIC PLC,MDT,TICKER_COUNTRY:MDT|US,Leading,9.219,1,3,12.04,6.61,Healthcare,Dividend Yield · Minimum Volatility · Value,Category ETF proxy,1.105,4.42,109
-AIRBNB CLASS A,ABNB,TICKER_COUNTRY:ABNB|US,Leading,9.178,1,1,10.86,7.75,Consumer Discretionary,Value,Category ETF proxy,0.68,1.36,113
-APTIV PLC,APTV,TICKER_COUNTRY:APTV|US,Leading,9.178,1,1,10.86,7.75,Consumer Discretionary,Value,Category ETF proxy,0.085,0.17,113
-COPART INC,CPRT,TICKER_COUNTRY:CPRT|US,Leading,9.178,1,1,10.86,7.75,Consumer Discretionary,Value,Category ETF proxy,0.275,0.55,113
-CARVANA CLASS A,CVNA,TICKER_COUNTRY:CVNA|US,Leading,9.178,1,1,10.86,7.75,Consumer Discretionary,Value,Category ETF proxy,0.44,0.88,113
-DELTA AIR LINES,DAL,TICKER_COUNTRY:DAL|US,Leading,9.178,1,1,10.86,7.75,Consumer Discretionary,Value,Category ETF proxy,0.53,1.06,113
-DOLLAR GENERAL CORP,DG,TICKER_COUNTRY:DG|US,Leading,9.178,1,1,10.86,7.75,Consumer Discretionary,Value,Category ETF proxy,0.3,0.6,113
-D R HORTON,DHI,TICKER_COUNTRY:DHI|US,Leading,9.178,1,1,10.86,7.75,Consumer Discretionary,Value,Category ETF proxy,0.375,0.75,113
-WALT DISNEY,DIS,TICKER_COUNTRY:DIS|US,Leading,9.178,1,1,10.86,7.75,Consumer Discretionary,Value,Category ETF proxy,2.14,4.28,113
-DOLLAR TREE INC,DLTR,TICKER_COUNTRY:DLTR|US,Leading,9.178,1,1,10.86,7.75,Consumer Discretionary,Value,Category ETF proxy,0.275,0.55,113
-EBAY,EBAY,TICKER_COUNTRY:EBAY|US,Leading,9.178,1,1,10.86,7.75,Consumer Discretionary,Value,Category ETF proxy,0.425,0.85,113
-ESTEE LAUDER INC CLASS A,EL,TICKER_COUNTRY:EL|US,Leading,9.178,1,1,10.86,7.75,Consumer Discretionary,Value,Category ETF proxy,0.265,0.53,113
-FORD MOTOR CO,F,TICKER_COUNTRY:F|US,Leading,9.178,1,1,10.86,7.75,Consumer Discretionary,Value,Category ETF proxy,0.465,0.93,113
-FOX CLASS B,FOX,TICKER_COUNTRY:FOX|US,Leading,9.178,1,1,10.86,7.75,Consumer Discretionary,Value,Category ETF proxy,0.07,0.14,113
-FOX CLASS A,FOXA,TICKER_COUNTRY:FOXA|US,Leading,9.178,1,1,10.86,7.75,Consumer Discretionary,Value,Category ETF proxy,0.185,0.37,113
-GENERAL MOTORS,GM,TICKER_COUNTRY:GM|US,Leading,9.178,1,1,10.86,7.75,Consumer Discretionary,Value,Category ETF proxy,0.73,1.46,113
-GENUINE PARTS,GPC,TICKER_COUNTRY:GPC|US,Leading,9.178,1,1,10.86,7.75,Consumer Discretionary,Value,Category ETF proxy,0.17,0.34,113
-LENNAR A CLASS A,LEN,TICKER_COUNTRY:LEN|US,Leading,9.178,1,1,10.86,7.75,Consumer Discretionary,Value,Category ETF proxy,0.165,0.33,113
-LOWES COMPANIES INC,LOW,TICKER_COUNTRY:LOW|US,Leading,9.178,1,1,10.86,7.75,Consumer Discretionary,Value,Category ETF proxy,1.3,2.6,113
-LULULEMON ATHLETICA,LULU,TICKER_COUNTRY:LULU|US,Leading,9.178,1,1,10.86,7.75,Consumer Discretionary,Value,Category ETF proxy,0.11,0.22,113
-SOUTHWEST AIRLINES,LUV,TICKER_COUNTRY:LUV|US,Leading,9.178,1,1,10.86,7.75,Consumer Discretionary,Value,Category ETF proxy,0.22,0.44,113
-LIVE NATION ENTERTAINMENT,LYV,TICKER_COUNTRY:LYV|US,Leading,9.178,1,1,10.86,7.75,Consumer Discretionary,Value,Category ETF proxy,0.27,0.54,113
-MGM RESORTS INTERNATIONAL,MGM,TICKER_COUNTRY:MGM|US,Leading,9.178,1,1,10.86,7.75,Consumer Discretionary,Value,Category ETF proxy,0.065,0.13,113
-NORWEGIAN CRUISE LINE HOLDINGS,NCLH,TICKER_COUNTRY:NCLH|US,Leading,9.178,1,1,10.86,7.75,Consumer Discretionary,Value,Category ETF proxy,0.07,0.14,113
-NIKE CLASS B,NKE,TICKER_COUNTRY:NKE|US,Leading,9.178,1,1,10.86,7.75,Consumer Discretionary,Value,Category ETF proxy,0.41,0.82,113
-NEWS CLASS B,NWS,TICKER_COUNTRY:NWS|US,Leading,9.178,1,1,10.86,7.75,Consumer Discretionary,Value,Category ETF proxy,0.035,0.07,113
-NEWS CLASS A,NWSA,TICKER_COUNTRY:NWSA|US,Leading,9.178,1,1,10.86,7.75,Consumer Discretionary,Value,Category ETF proxy,0.095,0.19,113
-TARGET CORP,TGT,TICKER_COUNTRY:TGT|US,Leading,9.178,1,1,10.86,7.75,Consumer Discretionary,Value,Category ETF proxy,0.785,1.57,113
-TESLA INC,TSLA,TICKER_COUNTRY:TSLA|US,Leading,9.178,1,1,10.86,7.75,Consumer Discretionary,Value,Category ETF proxy,4.665,9.33,113
-UNITED AIRLINES HOLDINGS,UAL,TICKER_COUNTRY:UAL|US,Leading,9.178,1,1,10.86,7.75,Consumer Discretionary,Value,Category ETF proxy,0.36,0.72,113
-INGREDION INC,INGR,TICKER_COUNTRY:INGR|US,Leading,8.973,1,1,19.19,4.2,Consumer Staples,Dividend Yield,Category ETF proxy,0.165,0.33,142
-REYNOLDS CONSUMER PRODUCTS INC,REYN,TICKER_COUNTRY:REYN|US,Leading,8.973,1,1,19.19,4.2,Consumer Staples,Dividend Yield,Category ETF proxy,0.045,0.09,142
-GILEAD SCIENCES,GILD,TICKER_COUNTRY:GILD|US,Leading,8.928,1,3,12.04,6.18,Healthcare,Minimum Volatility · Quality · Value,Category ETF proxy,1.333,5.33,144
-JOHNSON & JOHNSON,JNJ,TICKER_COUNTRY:JNJ|US,Leading,8.928,1,3,12.04,6.18,Healthcare,Minimum Volatility · Quality · Value,Category ETF proxy,3.593,14.37,144
-MERCK & CO INC,MRK,TICKER_COUNTRY:MRK|US,Leading,8.928,1,3,12.04,6.18,Healthcare,Minimum Volatility · Quality · Value,Category ETF proxy,2.21,8.84,144
-VERTEX PHARMACEUTICALS,VRTX,TICKER_COUNTRY:VRTX|US,Leading,8.928,1,3,12.04,6.18,Healthcare,Minimum Volatility · Quality · Value,Category ETF proxy,1.105,4.42,144
-HOME DEPOT,HD,TICKER_COUNTRY:HD|US,Leading,8.771,1,3,10.86,6.61,Consumer Discretionary,Dividend Yield · Minimum Volatility · Value,Category ETF proxy,2.598,10.39,148
-MCDONALDS CORP,MCD,TICKER_COUNTRY:MCD|US,Leading,8.771,1,3,10.86,6.61,Consumer Discretionary,Dividend Yield · Minimum Volatility · Value,Category ETF proxy,1.933,7.73,148
-COSTCO WHOLESALE CORP,COST,TICKER_COUNTRY:COST|US,Leading,8.494,1,3,10.86,6.18,Consumer Discretionary,Minimum Volatility · Quality · Value,Category ETF proxy,2.0,8.0,150
-TJX,TJX,TICKER_COUNTRY:TJX|US,Leading,8.494,1,3,10.86,6.18,Consumer Discretionary,Minimum Volatility · Quality · Value,Category ETF proxy,1.857,7.43,150
-WALMART,WMT,TICKER_COUNTRY:WMT|US,Leading,8.494,1,3,10.86,6.18,Consumer Discretionary,Minimum Volatility · Quality · Value,Category ETF proxy,2.125,8.5,150
-IDACORP,IDA,TICKER_COUNTRY:IDA|US,Leading,8.214,1,1,16.08,4.2,Utilities,Dividend Yield,Category ETF proxy,0.305,0.61,153
-NATIONAL FUEL GAS,NFG,TICKER_COUNTRY:NFG|US,Leading,8.214,1,1,16.08,4.2,Utilities,Dividend Yield,Category ETF proxy,0.26,0.52,153
-OGE ENERGY,OGE,TICKER_COUNTRY:OGE|US,Leading,8.214,1,1,16.08,4.2,Utilities,Dividend Yield,Category ETF proxy,0.43,0.86,153
-ESSENTIAL UTILITIES INC,WTRG,TICKER_COUNTRY:WTRG|US,Leading,8.214,1,1,16.08,4.2,Utilities,Dividend Yield,Category ETF proxy,0.505,1.01,153
-ELI LILLY,LLY,TICKER_COUNTRY:LLY|US,Leading,8.21,1,2,12.04,5.39,Healthcare,Minimum Volatility · Quality,Category ETF proxy,7.24,21.72,157
-UNITED THERAPEUTICS,UTHR,TICKER_COUNTRY:UTHR|US,Leading,8.21,1,2,12.04,5.39,Healthcare,Minimum Volatility · Quality,Category ETF proxy,0.287,0.86,157
-DOMINOS PIZZA,DPZ,TICKER_COUNTRY:DPZ|US,Leading,8.206,1,2,10.86,5.97,Consumer Discretionary,Dividend Yield · Value,Category ETF proxy,0.123,0.37,159
-DARDEN RESTAURANTS INC,DRI,TICKER_COUNTRY:DRI|US,Leading,8.206,1,2,10.86,5.97,Consumer Discretionary,Dividend Yield · Value,Category ETF proxy,0.313,0.94,159
-HASBRO,HAS,TICKER_COUNTRY:HAS|US,Leading,8.206,1,2,10.86,5.97,Consumer Discretionary,Dividend Yield · Value,Category ETF proxy,0.18,0.54,159
-STARBUCKS CORP,SBUX,TICKER_COUNTRY:SBUX|US,Leading,8.206,1,2,10.86,5.97,Consumer Discretionary,Dividend Yield · Value,Category ETF proxy,1.31,3.93,159
-TRACTOR SUPPLY,TSCO,TICKER_COUNTRY:TSCO|US,Leading,8.206,1,2,10.86,5.97,Consumer Discretionary,Dividend Yield · Value,Category ETF proxy,0.22,0.66,159
-DEXCOM INC,DXCM,TICKER_COUNTRY:DXCM|US,Leading,8.168,1,2,12.04,5.34,Healthcare,Quality · Value,Category ETF proxy,0.21,0.63,164
-EDWARDS LIFESCIENCES,EW,TICKER_COUNTRY:EW|US,Leading,8.168,1,2,12.04,5.34,Healthcare,Quality · Value,Category ETF proxy,0.397,1.19,164
-RESMED,RMD,TICKER_COUNTRY:RMD|US,Leading,8.168,1,2,12.04,5.34,Healthcare,Quality · Value,Category ETF proxy,0.233,0.7,164
-WATERS CORP,WAT,TICKER_COUNTRY:WAT|US,Leading,8.168,1,2,12.04,5.34,Healthcare,Quality · Value,Category ETF proxy,0.327,0.98,164
-WEST PHARMACEUTICAL SERVICES,WST,TICKER_COUNTRY:WST|US,Leading,8.168,1,2,12.04,5.34,Healthcare,Quality · Value,Category ETF proxy,0.2,0.6,164
-ZOETIS INC CLASS A,ZTS,TICKER_COUNTRY:ZTS|US,Leading,8.168,1,2,12.04,5.34,Healthcare,Quality · Value,Category ETF proxy,0.253,0.76,164
-NETFLIX,NFLX,TICKER_COUNTRY:NFLX|US,Leading,7.805,1,2,10.86,5.39,Consumer Discretionary,Minimum Volatility · Quality,Category ETF proxy,1.713,5.14,170
-ROLLINS INC,ROL,TICKER_COUNTRY:ROL|US,Leading,7.805,1,2,10.86,5.39,Consumer Discretionary,Minimum Volatility · Quality,Category ETF proxy,0.183,0.55,170
-BEST BUY,BBY,TICKER_COUNTRY:BBY|US,Leading,7.765,1,2,10.86,5.34,Consumer Discretionary,Quality · Value,Category ETF proxy,0.263,0.79,172
-CHIPOTLE MEXICAN GRILL,CMG,TICKER_COUNTRY:CMG|US,Leading,7.765,1,2,10.86,5.34,Consumer Discretionary,Quality · Value,Category ETF proxy,0.637,1.91,172
-DECKERS OUTDOOR,DECK,TICKER_COUNTRY:DECK|US,Leading,7.765,1,2,10.86,5.34,Consumer Discretionary,Quality · Value,Category ETF proxy,0.177,0.53,172
-GARMIN,GRMN,TICKER_COUNTRY:GRMN|US,Leading,7.765,1,2,10.86,5.34,Consumer Discretionary,Quality · Value,Category ETF proxy,0.61,1.83,172
-NVR,NVR,TICKER_COUNTRY:NVR|US,Leading,7.765,1,2,10.86,5.34,Consumer Discretionary,Quality · Value,Category ETF proxy,0.207,0.62,172
-OMNICOM GROUP INC,OMC,TICKER_COUNTRY:OMC|US,Leading,7.765,1,2,10.86,5.34,Consumer Discretionary,Quality · Value,Category ETF proxy,0.197,0.59,172
-PULTEGROUP,PHM,TICKER_COUNTRY:PHM|US,Leading,7.765,1,2,10.86,5.34,Consumer Discretionary,Quality · Value,Category ETF proxy,0.303,0.91,172
-ROSS STORES INC,ROST,TICKER_COUNTRY:ROST|US,Leading,7.765,1,2,10.86,5.34,Consumer Discretionary,Quality · Value,Category ETF proxy,0.89,2.67,172
-WILLIAMS SONOMA INC,WSM,TICKER_COUNTRY:WSM|US,Leading,7.765,1,2,10.86,5.34,Consumer Discretionary,Quality · Value,Category ETF proxy,0.387,1.16,172
-REALTY INCOME REIT,O,TICKER_COUNTRY:O|US,Leading,7.149,1,2,6.27,7.81,Real Estate,Minimum Volatility · Value,Category ETF proxy,1.697,5.09,181
-VENTAS REIT,VTR,TICKER_COUNTRY:VTR|US,Leading,7.149,1,2,6.27,7.81,Real Estate,Minimum Volatility · Value,Category ETF proxy,1.227,3.68,181
-WEYERHAEUSER REIT,WY,TICKER_COUNTRY:WY|US,Leading,7.149,1,2,6.27,7.81,Real Estate,Minimum Volatility · Value,Category ETF proxy,0.42,1.26,181
-SUN COMMUNITIES REIT INC,SUI,TICKER_COUNTRY:SUI|US,Leading,7.024,1,1,6.27,7.87,Real Estate,Minimum Volatility,Category ETF proxy,0.64,1.28,184
-WELLTOWER,WELL,TICKER_COUNTRY:WELL|US,Leading,7.024,1,1,6.27,7.87,Real Estate,Minimum Volatility,Category ETF proxy,5.96,11.92,184
-AMERICAN TOWER REIT,AMT,TICKER_COUNTRY:AMT|US,Leading,6.974,1,1,6.27,7.75,Real Estate,Value,Category ETF proxy,2.535,5.07,186
-ALEXANDRIA REAL ESTATE EQUITIES RE,ARE,TICKER_COUNTRY:ARE|US,Leading,6.974,1,1,6.27,7.75,Real Estate,Value,Category ETF proxy,0.26,0.52,186
-BXP,BXP,TICKER_COUNTRY:BXP|US,Leading,6.974,1,1,6.27,7.75,Real Estate,Value,Category ETF proxy,0.395,0.79,186
-CROWN CASTLE,CCI,TICKER_COUNTRY:CCI|US,Leading,6.974,1,1,6.27,7.75,Real Estate,Value,Category ETF proxy,1.395,2.79,186
-CAMDEN PROPERTY TRUST REIT,CPT,TICKER_COUNTRY:CPT|US,Leading,6.974,1,1,6.27,7.75,Real Estate,Value,Category ETF proxy,0.385,0.77,186
-COSTAR GROUP,CSGP,TICKER_COUNTRY:CSGP|US,Leading,6.974,1,1,6.27,7.75,Real Estate,Value,Category ETF proxy,0.495,0.99,186
-DIGITAL REALTY TRUST REIT,DLR,TICKER_COUNTRY:DLR|US,Leading,6.974,1,1,6.27,7.75,Real Estate,Value,Category ETF proxy,2.205,4.41,186
-HEALTHPEAK PROPERTIES INC,DOC,TICKER_COUNTRY:DOC|US,Leading,6.974,1,1,6.27,7.75,Real Estate,Value,Category ETF proxy,0.56,1.12,186
-EQUINIX REIT,EQIX,TICKER_COUNTRY:EQIX|US,Leading,6.974,1,1,6.27,7.75,Real Estate,Value,Category ETF proxy,2.43,4.86,186
-ESSEX PROPERTY TRUST REIT,ESS,TICKER_COUNTRY:ESS|US,Leading,6.974,1,1,6.27,7.75,Real Estate,Value,Category ETF proxy,0.705,1.41,186
-EXTRA SPACE STORAGE REIT,EXR,TICKER_COUNTRY:EXR|US,Leading,6.974,1,1,6.27,7.75,Real Estate,Value,Category ETF proxy,1.34,2.68,186
-FEDERAL REALTY INVESTMENT TRUST RE,FRT,TICKER_COUNTRY:FRT|US,Leading,6.974,1,1,6.27,7.75,Real Estate,Value,Category ETF proxy,0.355,0.71,186
-HOST HOTELS & RESORTS REIT,HST,TICKER_COUNTRY:HST|US,Leading,6.974,1,1,6.27,7.75,Real Estate,Value,Category ETF proxy,0.685,1.37,186
-INVITATION HOMES,INVH,TICKER_COUNTRY:INVH|US,Leading,6.974,1,1,6.27,7.75,Real Estate,Value,Category ETF proxy,0.58,1.16,186
-IRON MOUNTAIN INC,IRM,TICKER_COUNTRY:IRM|US,Leading,6.974,1,1,6.27,7.75,Real Estate,Value,Category ETF proxy,1.29,2.58,186
-KIMCO REALTY REIT CORP,KIM,TICKER_COUNTRY:KIM|US,Leading,6.974,1,1,6.27,7.75,Real Estate,Value,Category ETF proxy,0.69,1.38,186
-MID AMERICA APARTMENT COMMUNITIES,MAA,TICKER_COUNTRY:MAA|US,Leading,6.974,1,1,6.27,7.75,Real Estate,Value,Category ETF proxy,0.525,1.05,186
-REGENCY CENTERS REIT CORP,REG,TICKER_COUNTRY:REG|US,Leading,6.974,1,1,6.27,7.75,Real Estate,Value,Category ETF proxy,0.495,0.99,186
-SBA COMMUNICATIONS REIT CORP CLASS,SBAC,TICKER_COUNTRY:SBAC|US,Leading,6.974,1,1,6.27,7.75,Real Estate,Value,Category ETF proxy,0.73,1.46,186
-SIMON PROPERTY GROUP REIT INC,SPG,TICKER_COUNTRY:SPG|US,Leading,6.974,1,1,6.27,7.75,Real Estate,Value,Category ETF proxy,2.57,5.14,186
-UDR REIT,UDR,TICKER_COUNTRY:UDR|US,Leading,6.974,1,1,6.27,7.75,Real Estate,Value,Category ETF proxy,0.425,0.85,186
-VICI PPTYS INC,VICI,TICKER_COUNTRY:VICI|US,Leading,6.974,1,1,6.27,7.75,Real Estate,Value,Category ETF proxy,1.075,2.15,186
-LAS VEGAS SANDS,LVS,TICKER_COUNTRY:LVS|US,Leading,6.751,1,1,10.86,4.2,Consumer Discretionary,Dividend Yield,Category ETF proxy,0.165,0.33,208
-ARTHUR J GALLAGHER,AJG,TICKER_COUNTRY:AJG|US,Leading,6.368,1,2,4.95,7.81,Financials,Minimum Volatility · Value,Category ETF proxy,0.577,1.73,209
-ALLSTATE CORP,ALL,TICKER_COUNTRY:ALL|US,Leading,6.368,1,2,4.95,7.81,Financials,Minimum Volatility · Value,Category ETF proxy,0.633,1.9,209
-AON PLC CLASS A,AON,TICKER_COUNTRY:AON|US,Leading,6.368,1,2,4.95,7.81,Financials,Minimum Volatility · Value,Category ETF proxy,0.593,1.78,209
-BANK OF NEW YORK MELLON CORP,BNY,TICKER_COUNTRY:BNY|US,Leading,6.368,1,2,4.95,7.81,Financials,Minimum Volatility · Value,Category ETF proxy,0.873,2.62,209
-FAIR ISAAC,FICO,TICKER_COUNTRY:FICO|US,Leading,6.368,1,2,4.95,7.81,Financials,Minimum Volatility · Value,Category ETF proxy,0.15,0.45,209
-INTERCONTINENTAL EXCHANGE INC,ICE,TICKER_COUNTRY:ICE|US,Leading,6.368,1,2,4.95,7.81,Financials,Minimum Volatility · Value,Category ETF proxy,0.723,2.17,209
-LOEWS,L,TICKER_COUNTRY:L|US,Leading,6.368,1,2,4.95,7.81,Financials,Minimum Volatility · Value,Category ETF proxy,0.237,0.71,209
-CIRCLE INTERNET GROUP INC CLASS A,CRCL,TICKER_COUNTRY:CRCL|US,Leading,6.241,1,1,4.95,7.87,Financials,Minimum Volatility,Category ETF proxy,0.09,0.18,216
-FIRST CITIZENS BANCSHARES CLASS A,FCNCA,TICKER_COUNTRY:FCNCA|US,Leading,6.241,1,1,4.95,7.87,Financials,Minimum Volatility,Category ETF proxy,0.375,0.75,216
-AMERICAN INTERNATIONAL GROUP,AIG,TICKER_COUNTRY:AIG|US,Leading,6.196,1,1,4.95,7.75,Financials,Value,Category ETF proxy,0.415,0.83,218
-ASSURANT INC,AIZ,TICKER_COUNTRY:AIZ|US,Leading,6.196,1,1,4.95,7.75,Financials,Value,Category ETF proxy,0.15,0.3,218
-APOLLO GLOBAL MANAGEMENT,APO,TICKER_COUNTRY:APO|US,Leading,6.196,1,1,4.95,7.75,Financials,Value,Category ETF proxy,0.435,0.87,218
-ARES MANAGEMENT CLASS A,ARES,TICKER_COUNTRY:ARES|US,Leading,6.196,1,1,4.95,7.75,Financials,Value,Category ETF proxy,0.255,0.51,218
-BANK OF AMERICA,BAC,TICKER_COUNTRY:BAC|US,Leading,6.196,1,1,4.95,7.75,Financials,Value,Category ETF proxy,2.77,5.54,218
-FRANKLIN TEMPLETON,BEN,TICKER_COUNTRY:BEN|US,Leading,6.196,1,1,4.95,7.75,Financials,Value,Category ETF proxy,0.085,0.17,218
-BROWN & BROWN INC,BRO,TICKER_COUNTRY:BRO|US,Leading,6.196,1,1,4.95,7.75,Financials,Value,Category ETF proxy,0.205,0.41,218
-CITIGROUP,C,TICKER_COUNTRY:C|US,Leading,6.196,1,1,4.95,7.75,Financials,Value,Category ETF proxy,1.855,3.71,218
-CITIZENS FINANCIAL GROUP INC,CFG,TICKER_COUNTRY:CFG|US,Leading,6.196,1,1,4.95,7.75,Financials,Value,Category ETF proxy,0.25,0.5,218
-CINCINNATI FINANCIAL,CINF,TICKER_COUNTRY:CINF|US,Leading,6.196,1,1,4.95,7.75,Financials,Value,Category ETF proxy,0.25,0.5,218
-COINBASE GLOBAL CLASS A,COIN,TICKER_COUNTRY:COIN|US,Leading,6.196,1,1,4.95,7.75,Financials,Value,Category ETF proxy,0.23,0.46,218
-EVEREST GROUP,EG,TICKER_COUNTRY:EG|US,Leading,6.196,1,1,4.95,7.75,Financials,Value,Category ETF proxy,0.155,0.31,218
-FACTSET RESEARCH SYSTEMS,FDS,TICKER_COUNTRY:FDS|US,Leading,6.196,1,1,4.95,7.75,Financials,Value,Category ETF proxy,0.11,0.22,218
-FIFTH THIRD BANCORP,FITB,TICKER_COUNTRY:FITB|US,Leading,6.196,1,1,4.95,7.75,Financials,Value,Category ETF proxy,0.445,0.89,218
-GLOBE LIFE,GL,TICKER_COUNTRY:GL|US,Leading,6.196,1,1,4.95,7.75,Financials,Value,Category ETF proxy,0.115,0.23,218
-GOLDMAN SACHS GROUP,GS,TICKER_COUNTRY:GS|US,Leading,6.196,1,1,4.95,7.75,Financials,Value,Category ETF proxy,1.99,3.98,218
-HUNTINGTON BANCSHARES INC,HBAN,TICKER_COUNTRY:HBAN|US,Leading,6.196,1,1,4.95,7.75,Financials,Value,Category ETF proxy,0.285,0.57,218
-INVESCO LTD,IVZ,TICKER_COUNTRY:IVZ|US,Leading,6.196,1,1,4.95,7.75,Financials,Value,Category ETF proxy,0.1,0.2,218
-JPMORGAN CHASE & CO,JPM,TICKER_COUNTRY:JPM|US,Leading,6.196,1,1,4.95,7.75,Financials,Value,Category ETF proxy,5.455,10.91,218
-KEYCORP,KEY,TICKER_COUNTRY:KEY|US,Leading,6.196,1,1,4.95,7.75,Financials,Value,Category ETF proxy,0.175,0.35,218
-KKR AND CO INC,KKR,TICKER_COUNTRY:KKR|US,Leading,6.196,1,1,4.95,7.75,Financials,Value,Category ETF proxy,0.555,1.11,218
-METLIFE,MET,TICKER_COUNTRY:MET|US,Leading,6.196,1,1,4.95,7.75,Financials,Value,Category ETF proxy,0.515,1.03,218
-MORGAN STANLEY,MS,TICKER_COUNTRY:MS|US,Leading,6.196,1,1,4.95,7.75,Financials,Value,Category ETF proxy,1.68,3.36,218
-MSCI,MSCI,TICKER_COUNTRY:MSCI|US,Leading,6.196,1,1,4.95,7.75,Financials,Value,Category ETF proxy,0.39,0.78,218
-NASDAQ INC,NDAQ,TICKER_COUNTRY:NDAQ|US,Leading,6.196,1,1,4.95,7.75,Financials,Value,Category ETF proxy,0.45,0.9,218
-NORTHERN TRUST,NTRS,TICKER_COUNTRY:NTRS|US,Leading,6.196,1,1,4.95,7.75,Financials,Value,Category ETF proxy,0.29,0.58,218
-PRINCIPAL FINANCIAL GROUP INC,PFG,TICKER_COUNTRY:PFG|US,Leading,6.196,1,1,4.95,7.75,Financials,Value,Category ETF proxy,0.22,0.44,218
-PRUDENTIAL FINANCIAL INC,PRU,TICKER_COUNTRY:PRU|US,Leading,6.196,1,1,4.95,7.75,Financials,Value,Category ETF proxy,0.4,0.8,218
-STATE STREET,STT,TICKER_COUNTRY:STT|US,Leading,6.196,1,1,4.95,7.75,Financials,Value,Category ETF proxy,0.42,0.84,218
-TRUIST FINANCIAL,TFC,TICKER_COUNTRY:TFC|US,Leading,6.196,1,1,4.95,7.75,Financials,Value,Category ETF proxy,0.555,1.11,218
-US BANCORP,USB,TICKER_COUNTRY:USB|US,Leading,6.196,1,1,4.95,7.75,Financials,Value,Category ETF proxy,0.865,1.73,218
-WELLS FARGO,WFC,TICKER_COUNTRY:WFC|US,Leading,6.196,1,1,4.95,7.75,Financials,Value,Category ETF proxy,2.305,4.61,218
-CBRE GROUP CLASS A,CBRE,TICKER_COUNTRY:CBRE|US,Leading,5.936,1,2,6.27,5.34,Real Estate,Quality · Value,Category ETF proxy,1.07,3.21,250
-PROLOGIS REIT,PLD,TICKER_COUNTRY:PLD|US,Leading,5.936,1,2,6.27,5.34,Real Estate,Quality · Value,Category ETF proxy,3.247,9.74,250
-PUBLIC STORAGE REIT,PSA,TICKER_COUNTRY:PSA|US,Leading,5.936,1,2,6.27,5.34,Real Estate,Quality · Value,Category ETF proxy,1.607,4.82,250
-VIVMARK RESIDENTIAL,VMRK,TICKER_COUNTRY:VMRK|US,Leading,5.936,1,2,6.27,5.34,Real Estate,Quality · Value,Category ETF proxy,1.323,3.97,250
-IDEXX LABORATORIES,IDXX,TICKER_COUNTRY:IDXX|US,Leading,5.932,1,1,12.04,2.92,Healthcare,Quality,Category ETF proxy,0.59,1.18,254
-ARCH CAPITAL GROUP,ACGL,TICKER_COUNTRY:ACGL|US,Leading,5.832,1,3,4.95,6.18,Financials,Minimum Volatility · Quality · Value,Category ETF proxy,0.217,0.87,255
-CHUBB,CB,TICKER_COUNTRY:CB|US,Leading,5.832,1,3,4.95,6.18,Financials,Minimum Volatility · Quality · Value,Category ETF proxy,1.12,4.48,255
-CBOE GLOBAL MARKETS,CBOE,TICKER_COUNTRY:CBOE|US,Leading,5.832,1,3,4.95,6.18,Financials,Minimum Volatility · Quality · Value,Category ETF proxy,0.375,1.5,255
-CME GROUP CLASS A,CME,TICKER_COUNTRY:CME|US,Leading,5.832,1,3,4.95,6.18,Financials,Minimum Volatility · Quality · Value,Category ETF proxy,0.808,3.23,255
-HARTFORD INSURANCE GROUP,HIG,TICKER_COUNTRY:HIG|US,Leading,5.832,1,3,4.95,6.18,Financials,Minimum Volatility · Quality · Value,Category ETF proxy,0.245,0.98,255
-MARSH,MRSH,TICKER_COUNTRY:MRSH|US,Leading,5.832,1,3,4.95,6.18,Financials,Minimum Volatility · Quality · Value,Category ETF proxy,0.805,3.22,255
-PROGRESSIVE,PGR,TICKER_COUNTRY:PGR|US,Leading,5.832,1,3,4.95,6.18,Financials,Minimum Volatility · Quality · Value,Category ETF proxy,0.88,3.52,255
-TRAVELERS COMPANIES,TRV,TICKER_COUNTRY:TRV|US,Leading,5.832,1,3,4.95,6.18,Financials,Minimum Volatility · Quality · Value,Category ETF proxy,0.678,2.71,255
-WILLIS TOWERS WATSON,WTW,TICKER_COUNTRY:WTW|US,Leading,5.832,1,3,4.95,6.18,Financials,Minimum Volatility · Quality · Value,Category ETF proxy,0.268,1.07,255
-ULTA BEAUTY INC,ULTA,TICKER_COUNTRY:ULTA|US,Leading,5.634,1,1,10.86,2.92,Consumer Discretionary,Quality,Category ETF proxy,0.535,1.07,264
-BROADRIDGE FINANCIAL SOLUTIONS INC,BR,TICKER_COUNTRY:BR|US,Leading,5.589,1,2,4.95,5.97,Financials,Dividend Yield · Value,Category ETF proxy,0.213,0.64,265
-BLACKSTONE,BX,TICKER_COUNTRY:BX|US,Leading,5.589,1,2,4.95,5.97,Financials,Dividend Yield · Value,Category ETF proxy,1.113,3.34,265
-M&T BANK,MTB,TICKER_COUNTRY:MTB|US,Leading,5.589,1,2,4.95,5.97,Financials,Dividend Yield · Value,Category ETF proxy,0.327,0.98,265
-PNC FINANCIAL SERVICES GROUP,PNC,TICKER_COUNTRY:PNC|US,Leading,5.589,1,2,4.95,5.97,Financials,Dividend Yield · Value,Category ETF proxy,1.037,3.11,265
-BERKSHIRE HATHAWAY INC CLASS B,BRK B,TICKER_COUNTRY:BRK B|US,Leading,5.318,1,2,4.95,5.39,Financials,Minimum Volatility · Quality,Category ETF proxy,5.35,16.05,269
-TRADEWEB MARKETS INC CLASS A,TW,TICKER_COUNTRY:TW|US,Leading,5.318,1,2,4.95,5.39,Financials,Minimum Volatility · Quality,Category ETF proxy,0.15,0.45,269
-AFLAC,AFL,TICKER_COUNTRY:AFL|US,Leading,5.291,1,2,4.95,5.34,Financials,Quality · Value,Category ETF proxy,0.42,1.26,271
-AMERIPRISE FINANCE INC,AMP,TICKER_COUNTRY:AMP|US,Leading,5.291,1,2,4.95,5.34,Financials,Quality · Value,Category ETF proxy,0.357,1.07,271
-BLACKROCK,BLK,TICKER_COUNTRY:BLK|US,Leading,5.291,1,2,4.95,5.34,Financials,Quality · Value,Category ETF proxy,1.287,3.86,271
-MOODYS CORP,MCO,TICKER_COUNTRY:MCO|US,Leading,5.291,1,2,4.95,5.34,Financials,Quality · Value,Category ETF proxy,0.533,1.6,271
-REGIONS FINANCIAL,RF,TICKER_COUNTRY:RF|US,Leading,5.291,1,2,4.95,5.34,Financials,Quality · Value,Category ETF proxy,0.173,0.52,271
-RAYMOND JAMES,RJF,TICKER_COUNTRY:RJF|US,Leading,5.291,1,2,4.95,5.34,Financials,Quality · Value,Category ETF proxy,0.207,0.62,271
-CHARLES SCHWAB,SCHW,TICKER_COUNTRY:SCHW|US,Leading,5.291,1,2,4.95,5.34,Financials,Quality · Value,Category ETF proxy,1.12,3.36,271
-S&P GLOBAL,SPGI,TICKER_COUNTRY:SPGI|US,Leading,5.291,1,2,4.95,5.34,Financials,Quality · Value,Category ETF proxy,0.93,2.79,271
-WR BERKLEY,WRB,TICKER_COUNTRY:WRB|US,Leading,5.291,1,2,4.95,5.34,Financials,Quality · Value,Category ETF proxy,0.12,0.36,271
-T ROWE PRICE GROUP,TROW,TICKER_COUNTRY:TROW|US,Leading,5.254,1,3,4.95,4.96,Financials,Dividend Yield · Quality · Value,Category ETF proxy,0.258,1.03,280
-AMERICAN FINANCIAL GROUP,AFG,TICKER_COUNTRY:AFG|US,Leading,4.558,1,1,4.95,4.2,Financials,Dividend Yield,Category ETF proxy,0.155,0.31,281
-CULLEN FROST BANKERS,CFR,TICKER_COUNTRY:CFR|US,Leading,4.558,1,1,4.95,4.2,Financials,Dividend Yield,Category ETF proxy,0.13,0.26,281
-CARLYLE GROUP INC,CG,TICKER_COUNTRY:CG|US,Leading,4.558,1,1,4.95,4.2,Financials,Dividend Yield,Category ETF proxy,0.14,0.28,281
-PROSPERITY BANCSHARES,PB,TICKER_COUNTRY:PB|US,Leading,4.558,1,1,4.95,4.2,Financials,Dividend Yield,Category ETF proxy,0.135,0.27,281
+ANALOG DEVICES,ADI,TICKER_COUNTRY:ADI|US,Lagging,15.866,1,1,14.42,17.45,Technology,Momentum,Category ETF proxy,0.88,1.76,1
+ASTERA LABS,ALAB,TICKER_COUNTRY:ALAB|US,Lagging,15.866,1,1,14.42,17.45,Technology,Momentum,Category ETF proxy,0.24,0.48,1
+CREDO TECHNOLOGY GROUP HOLDING LTD,CRDO,TICKER_COUNTRY:CRDO|US,Lagging,15.866,1,1,14.42,17.45,Technology,Momentum,Category ETF proxy,0.105,0.21,1
+DELL TECHNOLOGIES INC CLASS C,DELL,TICKER_COUNTRY:DELL|US,Lagging,15.866,1,1,14.42,17.45,Technology,Momentum,Category ETF proxy,0.935,1.87,1
+F5,FFIV,TICKER_COUNTRY:FFIV|US,Lagging,15.866,1,1,14.42,17.45,Technology,Momentum,Category ETF proxy,0.125,0.25,1
+HEWLETT PACKARD ENTERPRISE,HPE,TICKER_COUNTRY:HPE|US,Lagging,15.866,1,1,14.42,17.45,Technology,Momentum,Category ETF proxy,0.52,1.04,1
+HP INC,HPQ,TICKER_COUNTRY:HPQ|US,Lagging,15.866,1,1,14.42,17.45,Technology,Momentum,Category ETF proxy,0.155,0.31,1
+INTEL CORPORATION,INTC,TICKER_COUNTRY:INTC|US,Lagging,15.866,1,1,14.42,17.45,Technology,Momentum,Category ETF proxy,2.12,4.24,1
+CLOUDFLARE CLASS A,NET,TICKER_COUNTRY:NET|US,Lagging,15.866,1,1,14.42,17.45,Technology,Momentum,Category ETF proxy,0.56,1.12,1
+NETAPP INC,NTAP,TICKER_COUNTRY:NTAP|US,Lagging,15.866,1,1,14.42,17.45,Technology,Momentum,Category ETF proxy,0.27,0.54,1
+ON SEMICONDUCTOR CORP,ON,TICKER_COUNTRY:ON|US,Lagging,15.866,1,1,14.42,17.45,Technology,Momentum,Category ETF proxy,0.135,0.27,1
+QNITY ELECTRONICS,Q,TICKER_COUNTRY:Q|US,Lagging,15.866,1,1,14.42,17.45,Technology,Momentum,Category ETF proxy,0.15,0.3,1
+TEXAS INSTRUMENT,TXN,TICKER_COUNTRY:TXN|US,Lagging,15.866,1,1,14.42,17.45,Technology,Momentum,Category ETF proxy,1.415,2.83,1
+WESTERN DIGITAL CORP,WDC,TICKER_COUNTRY:WDC|US,Lagging,15.866,1,1,14.42,17.45,Technology,Momentum,Category ETF proxy,0.99,1.98,1
+APPLIED MATERIAL INC,AMAT,TICKER_COUNTRY:AMAT|US,Lagging,13.469,1,2,14.42,12.3,Technology,Growth · Momentum,Category ETF proxy,1.6,4.8,15
+ADVANCED MICRO DEVICES,AMD,TICKER_COUNTRY:AMD|US,Lagging,13.469,1,2,14.42,12.3,Technology,Growth · Momentum,Category ETF proxy,3.39,10.17,15
+AMPHENOL CORP CLASS A,APH,TICKER_COUNTRY:APH|US,Lagging,13.469,1,2,14.42,12.3,Technology,Growth · Momentum,Category ETF proxy,0.823,2.47,15
+COHERENT,COHR,TICKER_COUNTRY:COHR|US,Lagging,13.469,1,2,14.42,12.3,Technology,Growth · Momentum,Category ETF proxy,0.183,0.55,15
+CROWDSTRIKE HOLDINGS CLASS A,CRWD,TICKER_COUNTRY:CRWD|US,Lagging,13.469,1,2,14.42,12.3,Technology,Growth · Momentum,Category ETF proxy,1.213,3.64,15
+DATADOG INC CLASS A,DDOG,TICKER_COUNTRY:DDOG|US,Lagging,13.469,1,2,14.42,12.3,Technology,Growth · Momentum,Category ETF proxy,0.337,1.01,15
+FLEX LTD,FLEX,TICKER_COUNTRY:FLEX|US,Lagging,13.469,1,2,14.42,12.3,Technology,Growth · Momentum,Category ETF proxy,0.15,0.45,15
+FORTINET,FTNT,TICKER_COUNTRY:FTNT|US,Lagging,13.469,1,2,14.42,12.3,Technology,Growth · Momentum,Category ETF proxy,0.513,1.54,15
+CORNING,GLW,TICKER_COUNTRY:GLW|US,Lagging,13.469,1,2,14.42,12.3,Technology,Growth · Momentum,Category ETF proxy,0.41,1.23,15
+ALPHABET CLASS C,GOOG,TICKER_COUNTRY:GOOG|US,Lagging,13.469,1,2,14.42,12.3,Technology,Growth · Momentum,Category ETF proxy,2.747,8.24,15
+ALPHABET CLASS A,GOOGL,TICKER_COUNTRY:GOOGL|US,Lagging,13.469,1,2,14.42,12.3,Technology,Growth · Momentum,Category ETF proxy,3.43,10.29,15
+JABIL,JBL,TICKER_COUNTRY:JBL|US,Lagging,13.469,1,2,14.42,12.3,Technology,Growth · Momentum,Category ETF proxy,0.107,0.32,15
+KLA,KLAC,TICKER_COUNTRY:KLAC|US,Lagging,13.469,1,2,14.42,12.3,Technology,Growth · Momentum,Category ETF proxy,0.887,2.66,15
+LAM RESEARCH,LRCX,TICKER_COUNTRY:LRCX|US,Lagging,13.469,1,2,14.42,12.3,Technology,Growth · Momentum,Category ETF proxy,1.353,4.06,15
+MONOLITHIC POWER SYSTEMS INC,MPWR,TICKER_COUNTRY:MPWR|US,Lagging,13.469,1,2,14.42,12.3,Technology,Growth · Momentum,Category ETF proxy,0.28,0.84,15
+MARVELL TECHNOLOGY,MRVL,TICKER_COUNTRY:MRVL|US,Lagging,13.469,1,2,14.42,12.3,Technology,Growth · Momentum,Category ETF proxy,0.72,2.16,15
+MICRON TECHNOLOGY,MU,TICKER_COUNTRY:MU|US,Lagging,13.469,1,2,14.42,12.3,Technology,Growth · Momentum,Category ETF proxy,2.833,8.5,15
+OKTA CLASS A,OKTA,TICKER_COUNTRY:OKTA|US,Lagging,13.469,1,2,14.42,12.3,Technology,Growth · Momentum,Category ETF proxy,0.177,0.53,15
+PALO ALTO NETWORKS,PANW,TICKER_COUNTRY:PANW|US,Lagging,13.469,1,2,14.42,12.3,Technology,Growth · Momentum,Category ETF proxy,1.747,5.24,15
+SANDISK,SNDK,TICKER_COUNTRY:SNDK|US,Lagging,13.469,1,2,14.42,12.3,Technology,Growth · Momentum,Category ETF proxy,0.74,2.22,15
+TERADYNE,TER,TICKER_COUNTRY:TER|US,Lagging,13.469,1,2,14.42,12.3,Technology,Growth · Momentum,Category ETF proxy,0.19,0.57,15
+TWILIO CLASS A,TWLO,TICKER_COUNTRY:TWLO|US,Lagging,13.469,1,2,14.42,12.3,Technology,Growth · Momentum,Category ETF proxy,0.147,0.44,15
+APPLE,AAPL,TICKER_COUNTRY:AAPL|US,Lagging,10.154,1,1,14.42,7.15,Technology,Growth,Category ETF proxy,14.04,28.08,37
+AUTODESK,ADSK,TICKER_COUNTRY:ADSK|US,Lagging,10.154,1,1,14.42,7.15,Technology,Growth,Category ETF proxy,0.21,0.42,37
+APPLOVIN CLASS A,APP,TICKER_COUNTRY:APP|US,Lagging,10.154,1,1,14.42,7.15,Technology,Growth,Category ETF proxy,0.43,0.86,37
+BROADCOM INC,AVGO,TICKER_COUNTRY:AVGO|US,Lagging,10.154,1,1,14.42,7.15,Technology,Growth,Category ETF proxy,3.855,7.71,37
+CADENCE DESIGN SYSTEMS,CDNS,TICKER_COUNTRY:CDNS|US,Lagging,10.154,1,1,14.42,7.15,Technology,Growth,Category ETF proxy,0.32,0.64,37
+DOORDASH CLASS A,DASH,TICKER_COUNTRY:DASH|US,Lagging,10.154,1,1,14.42,7.15,Technology,Growth,Category ETF proxy,0.27,0.54,37
+INTERNATIONAL BUSINESS MACHINES CO,IBM,TICKER_COUNTRY:IBM|US,Lagging,10.154,1,1,14.42,7.15,Technology,Growth,Category ETF proxy,0.83,1.66,37
+INTUIT,INTU,TICKER_COUNTRY:INTU|US,Lagging,10.154,1,1,14.42,7.15,Technology,Growth,Category ETF proxy,0.285,0.57,37
+META PLATFORMS CLASS A,META,TICKER_COUNTRY:META|US,Lagging,10.154,1,1,14.42,7.15,Technology,Growth,Category ETF proxy,3.715,7.43,37
+MICROSOFT,MSFT,TICKER_COUNTRY:MSFT|US,Lagging,10.154,1,1,14.42,7.15,Technology,Growth,Category ETF proxy,12.93,25.86,37
+SERVICENOW,NOW,TICKER_COUNTRY:NOW|US,Lagging,10.154,1,1,14.42,7.15,Technology,Growth,Category ETF proxy,0.365,0.73,37
+NVIDIA,NVDA,TICKER_COUNTRY:NVDA|US,Lagging,10.154,1,1,14.42,7.15,Technology,Growth,Category ETF proxy,12.92,25.84,37
+ORACLE,ORCL,TICKER_COUNTRY:ORCL|US,Lagging,10.154,1,1,14.42,7.15,Technology,Growth,Category ETF proxy,0.74,1.48,37
+EVERPURE INC CLASS A,P,TICKER_COUNTRY:P|US,Lagging,10.154,1,1,14.42,7.15,Technology,Growth,Category ETF proxy,0.13,0.26,37
+PALANTIR TECHNOLOGIES CLASS A,PLTR,TICKER_COUNTRY:PLTR|US,Lagging,10.154,1,1,14.42,7.15,Technology,Growth,Category ETF proxy,1.625,3.25,37
+REDDIT CLASS A,RDDT,TICKER_COUNTRY:RDDT|US,Lagging,10.154,1,1,14.42,7.15,Technology,Growth,Category ETF proxy,0.05,0.1,37
+VERISIGN,VRSN,TICKER_COUNTRY:VRSN|US,Lagging,10.154,1,1,14.42,7.15,Technology,Growth,Category ETF proxy,0.115,0.23,37
+WORKDAY CLASS A,WDAY,TICKER_COUNTRY:WDAY|US,Lagging,10.154,1,1,14.42,7.15,Technology,Growth,Category ETF proxy,0.13,0.26,37
+CARDINAL HEALTH,CAH,TICKER_COUNTRY:CAH|US,Leading,13.936,1,2,21.88,8.69,Consumer Staples,Minimum Volatility · Value,Category ETF proxy,1.05,3.15,1
+COLGATE-PALMOLIVE,CL,TICKER_COUNTRY:CL|US,Leading,13.936,1,2,21.88,8.69,Consumer Staples,Minimum Volatility · Value,Category ETF proxy,1.48,4.44,1
+CENCORA,COR,TICKER_COUNTRY:COR|US,Leading,13.936,1,2,21.88,8.69,Consumer Staples,Minimum Volatility · Value,Category ETF proxy,1.46,4.38,1
+KEURIG DR PEPPER INC,KDP,TICKER_COUNTRY:KDP|US,Leading,13.936,1,2,21.88,8.69,Consumer Staples,Minimum Volatility · Value,Category ETF proxy,0.96,2.88,1
+KROGER,KR,TICKER_COUNTRY:KR|US,Leading,13.936,1,2,21.88,8.69,Consumer Staples,Minimum Volatility · Value,Category ETF proxy,0.83,2.49,1
+MCKESSON CORP,MCK,TICKER_COUNTRY:MCK|US,Leading,13.936,1,2,21.88,8.69,Consumer Staples,Minimum Volatility · Value,Category ETF proxy,2.193,6.58,1
+TYSON FOODS INC CLASS A,TSN,TICKER_COUNTRY:TSN|US,Leading,13.936,1,2,21.88,8.69,Consumer Staples,Minimum Volatility · Value,Category ETF proxy,0.33,0.99,1
+VYLOR,VYLR,TICKER_COUNTRY:VYLR|US,Leading,13.936,1,2,21.88,8.69,Consumer Staples,Minimum Volatility · Value,Category ETF proxy,0.787,2.36,1
+ARCHER DANIELS MIDLAND,ADM,TICKER_COUNTRY:ADM|US,Leading,13.649,1,1,21.88,8.52,Consumer Staples,Value,Category ETF proxy,0.72,1.44,9
+BROWN FORMAN CLASS B,BF B,TICKER_COUNTRY:BF B|US,Leading,13.649,1,1,21.88,8.52,Consumer Staples,Value,Category ETF proxy,0.095,0.19,9
+BUNGE GLOBAL SA,BG,TICKER_COUNTRY:BG|US,Leading,13.649,1,1,21.88,8.52,Consumer Staples,Value,Category ETF proxy,0.26,0.52,9
+CLOROX,CLX,TICKER_COUNTRY:CLX|US,Leading,13.649,1,1,21.88,8.52,Consumer Staples,Value,Category ETF proxy,0.295,0.59,9
+CVS HEALTH,CVS,TICKER_COUNTRY:CVS|US,Leading,13.649,1,1,21.88,8.52,Consumer Staples,Value,Category ETF proxy,1.96,3.92,9
+GENERAL MILLS INC,GIS,TICKER_COUNTRY:GIS|US,Leading,13.649,1,1,21.88,8.52,Consumer Staples,Value,Category ETF proxy,0.44,0.88,9
+HORMEL FOODS CORP,HRL,TICKER_COUNTRY:HRL|US,Leading,13.649,1,1,21.88,8.52,Consumer Staples,Value,Category ETF proxy,0.155,0.31,9
+KRAFT HEINZ,KHC,TICKER_COUNTRY:KHC|US,Leading,13.649,1,1,21.88,8.52,Consumer Staples,Value,Category ETF proxy,0.505,1.01,9
+JM SMUCKER,SJM,TICKER_COUNTRY:SJM|US,Leading,13.649,1,1,21.88,8.52,Consumer Staples,Value,Category ETF proxy,0.32,0.64,9
+MONDELEZ INTERNATIONAL CLASS A,MDLZ,TICKER_COUNTRY:MDLZ|US,Leading,12.997,1,3,21.88,7.37,Consumer Staples,Dividend Yield · Minimum Volatility · Value,Category ETF proxy,1.445,5.78,18
+PHILIP MORRIS INTERNATIONAL,PM,TICKER_COUNTRY:PM|US,Leading,12.997,1,3,21.88,7.37,Consumer Staples,Dividend Yield · Minimum Volatility · Value,Category ETF proxy,4.027,16.11,18
+CHURCH AND DWIGHT INC,CHD,TICKER_COUNTRY:CHD|US,Leading,12.856,1,3,21.88,7.21,Consumer Staples,Minimum Volatility · Quality · Value,Category ETF proxy,0.48,1.92,20
+BOSTON SCIENTIFIC,BSX,TICKER_COUNTRY:BSX|US,Leading,12.598,1,2,17.84,8.69,Healthcare,Minimum Volatility · Value,Category ETF proxy,0.37,1.11,21
+CIGNA,CI,TICKER_COUNTRY:CI|US,Leading,12.598,1,2,17.84,8.69,Healthcare,Minimum Volatility · Value,Category ETF proxy,0.483,1.45,21
+CENTENE CORP,CNC,TICKER_COUNTRY:CNC|US,Leading,12.598,1,2,17.84,8.69,Healthcare,Minimum Volatility · Value,Category ETF proxy,0.34,1.02,21
+ELEVANCE HEALTH INC,ELV,TICKER_COUNTRY:ELV|US,Leading,12.598,1,2,17.84,8.69,Healthcare,Minimum Volatility · Value,Category ETF proxy,0.603,1.81,21
+REGENERON PHARMACEUTICALS,REGN,TICKER_COUNTRY:REGN|US,Leading,12.598,1,2,17.84,8.69,Healthcare,Minimum Volatility · Value,Category ETF proxy,0.613,1.84,21
+UNITEDHEALTH GROUP,UNH,TICKER_COUNTRY:UNH|US,Leading,12.598,1,2,17.84,8.69,Healthcare,Minimum Volatility · Value,Category ETF proxy,1.953,5.86,21
+ALNYLAM PHARMACEUTICALS,ALNY,TICKER_COUNTRY:ALNY|US,Leading,12.571,1,1,17.84,8.86,Healthcare,Minimum Volatility,Category ETF proxy,0.345,0.69,27
+HCA HEALTHCARE,HCA,TICKER_COUNTRY:HCA|US,Leading,12.571,1,1,17.84,8.86,Healthcare,Minimum Volatility,Category ETF proxy,0.6,1.2,27
+INCYTE CORP,INCY,TICKER_COUNTRY:INCY|US,Leading,12.571,1,1,17.84,8.86,Healthcare,Minimum Volatility,Category ETF proxy,0.38,0.76,27
+NEUROCRINE BIOSCIENCES,NBIX,TICKER_COUNTRY:NBIX|US,Leading,12.571,1,1,17.84,8.86,Healthcare,Minimum Volatility,Category ETF proxy,0.355,0.71,27
+HERSHEY FOODS,HSY,TICKER_COUNTRY:HSY|US,Leading,12.454,1,4,21.88,6.59,Consumer Staples,Dividend Yield · Minimum Volatility · Quality · Value,Category ETF proxy,0.374,1.87,31
+COCA-COLA,KO,TICKER_COUNTRY:KO|US,Leading,12.454,1,4,21.88,6.59,Consumer Staples,Dividend Yield · Minimum Volatility · Quality · Value,Category ETF proxy,4.3,21.5,31
+PEPSICO,PEP,TICKER_COUNTRY:PEP|US,Leading,12.454,1,4,21.88,6.59,Consumer Staples,Dividend Yield · Minimum Volatility · Quality · Value,Category ETF proxy,2.67,13.35,31
+PROCTER & GAMBLE,PG,TICKER_COUNTRY:PG|US,Leading,12.454,1,4,21.88,6.59,Consumer Staples,Dividend Yield · Minimum Volatility · Quality · Value,Category ETF proxy,4.844,24.22,31
+AGILENT TECHNOLOGIES INC,A,TICKER_COUNTRY:A|US,Leading,12.324,1,1,17.84,8.52,Healthcare,Value,Category ETF proxy,0.46,0.92,35
+ALIGN TECHNOLOGY,ALGN,TICKER_COUNTRY:ALGN|US,Leading,12.324,1,1,17.84,8.52,Healthcare,Value,Category ETF proxy,0.1,0.2,35
+BAXTER INTERNATIONAL,BAX,TICKER_COUNTRY:BAX|US,Leading,12.324,1,1,17.84,8.52,Healthcare,Value,Category ETF proxy,0.125,0.25,35
+BECTON DICKINSON,BDX,TICKER_COUNTRY:BDX|US,Leading,12.324,1,1,17.84,8.52,Healthcare,Value,Category ETF proxy,0.54,1.08,35
+BIOGEN,BIIB,TICKER_COUNTRY:BIIB|US,Leading,12.324,1,1,17.84,8.52,Healthcare,Value,Category ETF proxy,0.355,0.71,35
+BRISTOL MYERS SQUIBB,BMY,TICKER_COUNTRY:BMY|US,Leading,12.324,1,1,17.84,8.52,Healthcare,Value,Category ETF proxy,1.13,2.26,35
+COOPER,COO,TICKER_COUNTRY:COO|US,Leading,12.324,1,1,17.84,8.52,Healthcare,Value,Category ETF proxy,0.105,0.21,35
+CHARLES RIVER LABORATORIES INTERNA,CRL,TICKER_COUNTRY:CRL|US,Leading,12.324,1,1,17.84,8.52,Healthcare,Value,Category ETF proxy,0.14,0.28,35
+QUEST DIAGNOSTICS INC,DGX,TICKER_COUNTRY:DGX|US,Leading,12.324,1,1,17.84,8.52,Healthcare,Value,Category ETF proxy,0.265,0.53,35
+DANAHER,DHR,TICKER_COUNTRY:DHR|US,Leading,12.324,1,1,17.84,8.52,Healthcare,Value,Category ETF proxy,1.295,2.59,35
+DAVITA INC,DVA,TICKER_COUNTRY:DVA|US,Leading,12.324,1,1,17.84,8.52,Healthcare,Value,Category ETF proxy,0.05,0.1,35
+GE HEALTHCARE TECHNOLOGIES,GEHC,TICKER_COUNTRY:GEHC|US,Leading,12.324,1,1,17.84,8.52,Healthcare,Value,Category ETF proxy,0.34,0.68,35
+HENRY SCHEIN,HSIC,TICKER_COUNTRY:HSIC|US,Leading,12.324,1,1,17.84,8.52,Healthcare,Value,Category ETF proxy,0.08,0.16,35
+HUMANA,HUM,TICKER_COUNTRY:HUM|US,Leading,12.324,1,1,17.84,8.52,Healthcare,Value,Category ETF proxy,0.43,0.86,35
+ILLUMINA INC,ILMN,TICKER_COUNTRY:ILMN|US,Leading,12.324,1,1,17.84,8.52,Healthcare,Value,Category ETF proxy,0.25,0.5,35
+IQVIA HOLDINGS INC,IQV,TICKER_COUNTRY:IQV|US,Leading,12.324,1,1,17.84,8.52,Healthcare,Value,Category ETF proxy,0.37,0.74,35
+LABCORP HOLDINGS,LH,TICKER_COUNTRY:LH|US,Leading,12.324,1,1,17.84,8.52,Healthcare,Value,Category ETF proxy,0.275,0.55,35
+MODERNA,MRNA,TICKER_COUNTRY:MRNA|US,Leading,12.324,1,1,17.84,8.52,Healthcare,Value,Category ETF proxy,0.74,1.48,35
+PFIZER,PFE,TICKER_COUNTRY:PFE|US,Leading,12.324,1,1,17.84,8.52,Healthcare,Value,Category ETF proxy,1.45,2.9,35
+REVVITY,RVTY,TICKER_COUNTRY:RVTY|US,Leading,12.324,1,1,17.84,8.52,Healthcare,Value,Category ETF proxy,0.155,0.31,35
+SOLVENTUM,SOLV,TICKER_COUNTRY:SOLV|US,Leading,12.324,1,1,17.84,8.52,Healthcare,Value,Category ETF proxy,0.115,0.23,35
+STERIS,STE,TICKER_COUNTRY:STE|US,Leading,12.324,1,1,17.84,8.52,Healthcare,Value,Category ETF proxy,0.205,0.41,35
+STRYKER,SYK,TICKER_COUNTRY:SYK|US,Leading,12.324,1,1,17.84,8.52,Healthcare,Value,Category ETF proxy,0.925,1.85,35
+BIO TECHNE,TECH,TICKER_COUNTRY:TECH|US,Leading,12.324,1,1,17.84,8.52,Healthcare,Value,Category ETF proxy,0.105,0.21,35
+THERMO FISHER SCIENTIFIC,TMO,TICKER_COUNTRY:TMO|US,Leading,12.324,1,1,17.84,8.52,Healthcare,Value,Category ETF proxy,2.315,4.63,35
+UNIVERSAL HEALTH SERVICES CLASS B,UHS,TICKER_COUNTRY:UHS|US,Leading,12.324,1,1,17.84,8.52,Healthcare,Value,Category ETF proxy,0.085,0.17,35
+VEEVA SYSTEMS CLASS A,VEEV,TICKER_COUNTRY:VEEV|US,Leading,12.324,1,1,17.84,8.52,Healthcare,Value,Category ETF proxy,0.32,0.64,35
+VIATRIS,VTRS,TICKER_COUNTRY:VTRS|US,Leading,12.324,1,1,17.84,8.52,Healthcare,Value,Category ETF proxy,0.21,0.42,35
+ZIMMER BIOMET HOLDINGS,ZBH,TICKER_COUNTRY:ZBH|US,Leading,12.324,1,1,17.84,8.52,Healthcare,Value,Category ETF proxy,0.19,0.38,35
+KIMBERLY CLARK,KMB,TICKER_COUNTRY:KMB|US,Leading,12.187,1,2,21.88,6.62,Consumer Staples,Dividend Yield · Value,Category ETF proxy,1.313,3.94,64
+ALTRIA GROUP INC,MO,TICKER_COUNTRY:MO|US,Leading,12.187,1,2,21.88,6.62,Consumer Staples,Dividend Yield · Value,Category ETF proxy,2.883,8.65,64
+CONSTELLATION BRANDS CLASS A,STZ,TICKER_COUNTRY:STZ|US,Leading,12.187,1,2,21.88,6.62,Consumer Staples,Dividend Yield · Value,Category ETF proxy,0.427,1.28,64
+SYSCO,SYY,TICKER_COUNTRY:SYY|US,Leading,12.187,1,2,21.88,6.62,Consumer Staples,Dividend Yield · Value,Category ETF proxy,0.77,2.31,64
+MONSTER BEVERAGE,MNST,TICKER_COUNTRY:MNST|US,Leading,12.121,1,2,21.88,6.55,Consumer Staples,Minimum Volatility · Quality,Category ETF proxy,1.147,3.44,68
+MCCORMICK & CO NON-VOTING,MKC,TICKER_COUNTRY:MKC|US,Leading,11.963,1,2,21.88,6.38,Consumer Staples,Quality · Value,Category ETF proxy,0.203,0.61,69
+AMERICAN ELECTRIC POWER INC,AEP,TICKER_COUNTRY:AEP|US,Leading,11.943,1,2,16.01,8.69,Utilities,Minimum Volatility · Value,Category ETF proxy,1.673,5.02,70
+DUKE ENERGY CORP,DUK,TICKER_COUNTRY:DUK|US,Leading,11.943,1,2,16.01,8.69,Utilities,Minimum Volatility · Value,Category ETF proxy,2.72,8.16,70
+REPUBLIC SERVICES INC,RSG,TICKER_COUNTRY:RSG|US,Leading,11.943,1,2,16.01,8.69,Utilities,Minimum Volatility · Value,Category ETF proxy,1.573,4.72,70
+WASTE MANAGEMENT INC,WM,TICKER_COUNTRY:WM|US,Leading,11.943,1,2,16.01,8.69,Utilities,Minimum Volatility · Value,Category ETF proxy,2.473,7.42,70
+ABBVIE,ABBV,TICKER_COUNTRY:ABBV|US,Leading,11.764,1,3,17.84,7.37,Healthcare,Dividend Yield · Minimum Volatility · Value,Category ETF proxy,4.172,16.69,74
+ABBOTT LABORATORIES,ABT,TICKER_COUNTRY:ABT|US,Leading,11.764,1,3,17.84,7.37,Healthcare,Dividend Yield · Minimum Volatility · Value,Category ETF proxy,1.53,6.12,74
+AMGEN INC,AMGN,TICKER_COUNTRY:AMGN|US,Leading,11.764,1,3,17.84,7.37,Healthcare,Dividend Yield · Minimum Volatility · Value,Category ETF proxy,1.835,7.34,74
+MEDTRONIC PLC,MDT,TICKER_COUNTRY:MDT|US,Leading,11.764,1,3,17.84,7.37,Healthcare,Dividend Yield · Minimum Volatility · Value,Category ETF proxy,1.032,4.13,74
+AES,AES,TICKER_COUNTRY:AES|US,Leading,11.676,1,1,16.01,8.52,Utilities,Value,Category ETF proxy,0.35,0.7,78
+CONSTELLATION ENERGY CORP,CEG,TICKER_COUNTRY:CEG|US,Leading,11.676,1,1,16.01,8.52,Utilities,Value,Category ETF proxy,2.485,4.97,78
+CENTERPOINT ENERGY,CNP,TICKER_COUNTRY:CNP|US,Leading,11.676,1,1,16.01,8.52,Utilities,Value,Category ETF proxy,0.865,1.73,78
+EDISON INTERNATIONAL,EIX,TICKER_COUNTRY:EIX|US,Leading,11.676,1,1,16.01,8.52,Utilities,Value,Category ETF proxy,0.775,1.55,78
+EVERSOURCE ENERGY,ES,TICKER_COUNTRY:ES|US,Leading,11.676,1,1,16.01,8.52,Utilities,Value,Category ETF proxy,0.895,1.79,78
+ENTERGY CORP,ETR,TICKER_COUNTRY:ETR|US,Leading,11.676,1,1,16.01,8.52,Utilities,Value,Category ETF proxy,1.62,3.24,78
+EXELON CORP,EXC,TICKER_COUNTRY:EXC|US,Leading,11.676,1,1,16.01,8.52,Utilities,Value,Category ETF proxy,1.55,3.1,78
+NISOURCE,NI,TICKER_COUNTRY:NI|US,Leading,11.676,1,1,16.01,8.52,Utilities,Value,Category ETF proxy,0.705,1.41,78
+NRG ENERGY INC,NRG,TICKER_COUNTRY:NRG|US,Leading,11.676,1,1,16.01,8.52,Utilities,Value,Category ETF proxy,0.585,1.17,78
+PG&E CORP,PCG,TICKER_COUNTRY:PCG|US,Leading,11.676,1,1,16.01,8.52,Utilities,Value,Category ETF proxy,1.02,2.04,78
+PINNACLE WEST,PNW,TICKER_COUNTRY:PNW|US,Leading,11.676,1,1,16.01,8.52,Utilities,Value,Category ETF proxy,0.405,0.81,78
+SEMPRA,SRE,TICKER_COUNTRY:SRE|US,Leading,11.676,1,1,16.01,8.52,Utilities,Value,Category ETF proxy,1.685,3.37,78
+GILEAD SCIENCES,GILD,TICKER_COUNTRY:GILD|US,Leading,11.636,1,3,17.84,7.21,Healthcare,Minimum Volatility · Quality · Value,Category ETF proxy,1.365,5.46,90
+JOHNSON & JOHNSON,JNJ,TICKER_COUNTRY:JNJ|US,Leading,11.636,1,3,17.84,7.21,Healthcare,Minimum Volatility · Quality · Value,Category ETF proxy,3.602,14.41,90
+MERCK & CO INC,MRK,TICKER_COUNTRY:MRK|US,Leading,11.636,1,3,17.84,7.21,Healthcare,Minimum Volatility · Quality · Value,Category ETF proxy,2.263,9.05,90
+VERTEX PHARMACEUTICALS,VRTX,TICKER_COUNTRY:VRTX|US,Leading,11.636,1,3,17.84,7.21,Healthcare,Minimum Volatility · Quality · Value,Category ETF proxy,1.14,4.56,90
+CMS ENERGY,CMS,TICKER_COUNTRY:CMS|US,Leading,11.161,1,3,16.01,7.37,Utilities,Dividend Yield · Minimum Volatility · Value,Category ETF proxy,0.5,2.0,94
+DOMINION ENERGY,D,TICKER_COUNTRY:D|US,Leading,11.161,1,3,16.01,7.37,Utilities,Dividend Yield · Minimum Volatility · Value,Category ETF proxy,1.317,5.27,94
+NEXTERA ENERGY,NEE,TICKER_COUNTRY:NEE|US,Leading,11.161,1,3,16.01,7.37,Utilities,Dividend Yield · Minimum Volatility · Value,Category ETF proxy,3.572,14.29,94
+PPL CORP,PPL,TICKER_COUNTRY:PPL|US,Leading,11.161,1,3,16.01,7.37,Utilities,Dividend Yield · Minimum Volatility · Value,Category ETF proxy,0.547,2.19,94
+SOUTHERN,SO,TICKER_COUNTRY:SO|US,Leading,11.161,1,3,16.01,7.37,Utilities,Dividend Yield · Minimum Volatility · Value,Category ETF proxy,2.59,10.36,94
+WEC ENERGY GROUP,WEC,TICKER_COUNTRY:WEC|US,Leading,11.161,1,3,16.01,7.37,Utilities,Dividend Yield · Minimum Volatility · Value,Category ETF proxy,1.018,4.07,94
+AMAZON.COM INC,AMZN,TICKER_COUNTRY:AMZN|US,Leading,11.101,1,2,13.8,8.69,Consumer Discretionary,Minimum Volatility · Value,Category ETF proxy,6.137,18.41,100
+AUTOZONE,AZO,TICKER_COUNTRY:AZO|US,Leading,11.101,1,2,13.8,8.69,Consumer Discretionary,Minimum Volatility · Value,Category ETF proxy,0.603,1.81,100
+TAKE TWO INTERACTIVE SOFTWARE,TTWO,TICKER_COUNTRY:TTWO|US,Leading,11.101,1,2,13.8,8.69,Consumer Discretionary,Minimum Volatility · Value,Category ETF proxy,0.337,1.01,100
+YUM BRANDS,YUM,TICKER_COUNTRY:YUM|US,Leading,11.101,1,2,13.8,8.69,Consumer Discretionary,Minimum Volatility · Value,Category ETF proxy,0.607,1.82,100
+LIBERTY MEDIA SERIES C,FWONK,TICKER_COUNTRY:FWONK|US,Leading,11.059,1,1,13.8,8.86,Consumer Discretionary,Minimum Volatility,Category ETF proxy,0.46,0.92,104
+OREILLY AUTOMOTIVE INC,ORLY,TICKER_COUNTRY:ORLY|US,Leading,11.059,1,1,13.8,8.86,Consumer Discretionary,Minimum Volatility,Category ETF proxy,1.03,2.06,104
+UBER TECHNOLOGIES,UBER,TICKER_COUNTRY:UBER|US,Leading,11.059,1,1,13.8,8.86,Consumer Discretionary,Minimum Volatility,Category ETF proxy,1.1,2.2,104
+ATMOS ENERGY,ATO,TICKER_COUNTRY:ATO|US,Leading,11.04,1,3,16.01,7.21,Utilities,Minimum Volatility · Quality · Value,Category ETF proxy,0.59,2.36,107
+AMERICAN WATER WORKS,AWK,TICKER_COUNTRY:AWK|US,Leading,11.04,1,3,16.01,7.21,Utilities,Minimum Volatility · Quality · Value,Category ETF proxy,0.585,2.34,107
+CONSOLIDATED EDISON,ED,TICKER_COUNTRY:ED|US,Leading,11.04,1,3,16.01,7.21,Utilities,Minimum Volatility · Quality · Value,Category ETF proxy,1.19,4.76,107
+ELI LILLY,LLY,TICKER_COUNTRY:LLY|US,Leading,10.959,1,2,17.84,6.55,Healthcare,Minimum Volatility · Quality,Category ETF proxy,7.293,21.88,110
+UNITED THERAPEUTICS,UTHR,TICKER_COUNTRY:UTHR|US,Leading,10.959,1,2,17.84,6.55,Healthcare,Minimum Volatility · Quality,Category ETF proxy,0.293,0.88,110
+AIRBNB CLASS A,ABNB,TICKER_COUNTRY:ABNB|US,Leading,10.842,1,1,13.8,8.52,Consumer Discretionary,Value,Category ETF proxy,0.67,1.34,112
+APTIV PLC,APTV,TICKER_COUNTRY:APTV|US,Leading,10.842,1,1,13.8,8.52,Consumer Discretionary,Value,Category ETF proxy,0.08,0.16,112
+COPART INC,CPRT,TICKER_COUNTRY:CPRT|US,Leading,10.842,1,1,13.8,8.52,Consumer Discretionary,Value,Category ETF proxy,0.275,0.55,112
+CARVANA CLASS A,CVNA,TICKER_COUNTRY:CVNA|US,Leading,10.842,1,1,13.8,8.52,Consumer Discretionary,Value,Category ETF proxy,0.425,0.85,112
+DELTA AIR LINES,DAL,TICKER_COUNTRY:DAL|US,Leading,10.842,1,1,13.8,8.52,Consumer Discretionary,Value,Category ETF proxy,0.525,1.05,112
+DOLLAR GENERAL CORP,DG,TICKER_COUNTRY:DG|US,Leading,10.842,1,1,13.8,8.52,Consumer Discretionary,Value,Category ETF proxy,0.305,0.61,112
+D R HORTON,DHI,TICKER_COUNTRY:DHI|US,Leading,10.842,1,1,13.8,8.52,Consumer Discretionary,Value,Category ETF proxy,0.385,0.77,112
+WALT DISNEY,DIS,TICKER_COUNTRY:DIS|US,Leading,10.842,1,1,13.8,8.52,Consumer Discretionary,Value,Category ETF proxy,2.155,4.31,112
+DOLLAR TREE INC,DLTR,TICKER_COUNTRY:DLTR|US,Leading,10.842,1,1,13.8,8.52,Consumer Discretionary,Value,Category ETF proxy,0.3,0.6,112
+EBAY,EBAY,TICKER_COUNTRY:EBAY|US,Leading,10.842,1,1,13.8,8.52,Consumer Discretionary,Value,Category ETF proxy,0.405,0.81,112
+ESTEE LAUDER INC CLASS A,EL,TICKER_COUNTRY:EL|US,Leading,10.842,1,1,13.8,8.52,Consumer Discretionary,Value,Category ETF proxy,0.27,0.54,112
+FORD MOTOR CO,F,TICKER_COUNTRY:F|US,Leading,10.842,1,1,13.8,8.52,Consumer Discretionary,Value,Category ETF proxy,0.475,0.95,112
+FOX CLASS B,FOX,TICKER_COUNTRY:FOX|US,Leading,10.842,1,1,13.8,8.52,Consumer Discretionary,Value,Category ETF proxy,0.07,0.14,112
+FOX CLASS A,FOXA,TICKER_COUNTRY:FOXA|US,Leading,10.842,1,1,13.8,8.52,Consumer Discretionary,Value,Category ETF proxy,0.19,0.38,112
+GENERAL MOTORS,GM,TICKER_COUNTRY:GM|US,Leading,10.842,1,1,13.8,8.52,Consumer Discretionary,Value,Category ETF proxy,0.73,1.46,112
+GENUINE PARTS,GPC,TICKER_COUNTRY:GPC|US,Leading,10.842,1,1,13.8,8.52,Consumer Discretionary,Value,Category ETF proxy,0.17,0.34,112
+LENNAR A CLASS A,LEN,TICKER_COUNTRY:LEN|US,Leading,10.842,1,1,13.8,8.52,Consumer Discretionary,Value,Category ETF proxy,0.17,0.34,112
+LOWES COMPANIES INC,LOW,TICKER_COUNTRY:LOW|US,Leading,10.842,1,1,13.8,8.52,Consumer Discretionary,Value,Category ETF proxy,1.31,2.62,112
+LULULEMON ATHLETICA,LULU,TICKER_COUNTRY:LULU|US,Leading,10.842,1,1,13.8,8.52,Consumer Discretionary,Value,Category ETF proxy,0.11,0.22,112
+SOUTHWEST AIRLINES,LUV,TICKER_COUNTRY:LUV|US,Leading,10.842,1,1,13.8,8.52,Consumer Discretionary,Value,Category ETF proxy,0.22,0.44,112
+LIVE NATION ENTERTAINMENT,LYV,TICKER_COUNTRY:LYV|US,Leading,10.842,1,1,13.8,8.52,Consumer Discretionary,Value,Category ETF proxy,0.275,0.55,112
+MGM RESORTS INTERNATIONAL,MGM,TICKER_COUNTRY:MGM|US,Leading,10.842,1,1,13.8,8.52,Consumer Discretionary,Value,Category ETF proxy,0.065,0.13,112
+NORWEGIAN CRUISE LINE HOLDINGS,NCLH,TICKER_COUNTRY:NCLH|US,Leading,10.842,1,1,13.8,8.52,Consumer Discretionary,Value,Category ETF proxy,0.07,0.14,112
+NIKE CLASS B,NKE,TICKER_COUNTRY:NKE|US,Leading,10.842,1,1,13.8,8.52,Consumer Discretionary,Value,Category ETF proxy,0.425,0.85,112
+NEWS CLASS B,NWS,TICKER_COUNTRY:NWS|US,Leading,10.842,1,1,13.8,8.52,Consumer Discretionary,Value,Category ETF proxy,0.035,0.07,112
+NEWS CLASS A,NWSA,TICKER_COUNTRY:NWSA|US,Leading,10.842,1,1,13.8,8.52,Consumer Discretionary,Value,Category ETF proxy,0.095,0.19,112
+TARGET CORP,TGT,TICKER_COUNTRY:TGT|US,Leading,10.842,1,1,13.8,8.52,Consumer Discretionary,Value,Category ETF proxy,0.81,1.62,112
+TESLA INC,TSLA,TICKER_COUNTRY:TSLA|US,Leading,10.842,1,1,13.8,8.52,Consumer Discretionary,Value,Category ETF proxy,4.605,9.21,112
+UNITED AIRLINES HOLDINGS,UAL,TICKER_COUNTRY:UAL|US,Leading,10.842,1,1,13.8,8.52,Consumer Discretionary,Value,Category ETF proxy,0.355,0.71,112
+DEXCOM INC,DXCM,TICKER_COUNTRY:DXCM|US,Leading,10.816,1,2,17.84,6.38,Healthcare,Quality · Value,Category ETF proxy,0.21,0.63,141
+EDWARDS LIFESCIENCES,EW,TICKER_COUNTRY:EW|US,Leading,10.816,1,2,17.84,6.38,Healthcare,Quality · Value,Category ETF proxy,0.393,1.18,141
+RESMED,RMD,TICKER_COUNTRY:RMD|US,Leading,10.816,1,2,17.84,6.38,Healthcare,Quality · Value,Category ETF proxy,0.23,0.69,141
+WATERS CORP,WAT,TICKER_COUNTRY:WAT|US,Leading,10.816,1,2,17.84,6.38,Healthcare,Quality · Value,Category ETF proxy,0.323,0.97,141
+WEST PHARMACEUTICAL SERVICES,WST,TICKER_COUNTRY:WST|US,Leading,10.816,1,2,17.84,6.38,Healthcare,Quality · Value,Category ETF proxy,0.193,0.58,141
+ZOETIS INC CLASS A,ZTS,TICKER_COUNTRY:ZTS|US,Leading,10.816,1,2,17.84,6.38,Healthcare,Quality · Value,Category ETF proxy,0.257,0.77,141
+AMEREN,AEE,TICKER_COUNTRY:AEE|US,Leading,10.719,1,4,16.01,6.59,Utilities,Dividend Yield · Minimum Volatility · Quality · Value,Category ETF proxy,0.628,3.14,147
+XCEL ENERGY INC,XEL,TICKER_COUNTRY:XEL|US,Leading,10.719,1,4,16.01,6.59,Utilities,Dividend Yield · Minimum Volatility · Quality · Value,Category ETF proxy,1.028,5.14,147
+DTE ENERGY,DTE,TICKER_COUNTRY:DTE|US,Leading,10.447,1,2,16.01,6.62,Utilities,Dividend Yield · Value,Category ETF proxy,0.79,2.37,149
+EVERGY,EVRG,TICKER_COUNTRY:EVRG|US,Leading,10.447,1,2,16.01,6.62,Utilities,Dividend Yield · Value,Category ETF proxy,0.553,1.66,149
+FIRSTENERGY CORP,FE,TICKER_COUNTRY:FE|US,Leading,10.447,1,2,16.01,6.62,Utilities,Dividend Yield · Value,Category ETF proxy,0.737,2.21,149
+ALLIANT ENERGY CORP,LNT,TICKER_COUNTRY:LNT|US,Leading,10.447,1,2,16.01,6.62,Utilities,Dividend Yield · Value,Category ETF proxy,0.503,1.51,149
+PUBLIC SERVICE ENTERPRISE GROUP,PEG,TICKER_COUNTRY:PEG|US,Leading,10.447,1,2,16.01,6.62,Utilities,Dividend Yield · Value,Category ETF proxy,1.043,3.13,149
+HOME DEPOT,HD,TICKER_COUNTRY:HD|US,Leading,10.386,1,3,13.8,7.37,Consumer Discretionary,Dividend Yield · Minimum Volatility · Value,Category ETF proxy,2.62,10.48,154
+MCDONALDS CORP,MCD,TICKER_COUNTRY:MCD|US,Leading,10.386,1,3,13.8,7.37,Consumer Discretionary,Dividend Yield · Minimum Volatility · Value,Category ETF proxy,1.938,7.75,154
+COSTCO WHOLESALE CORP,COST,TICKER_COUNTRY:COST|US,Leading,10.273,1,3,13.8,7.21,Consumer Discretionary,Minimum Volatility · Quality · Value,Category ETF proxy,1.983,7.93,156
+TJX,TJX,TICKER_COUNTRY:TJX|US,Leading,10.273,1,3,13.8,7.21,Consumer Discretionary,Minimum Volatility · Quality · Value,Category ETF proxy,1.907,7.63,156
+WALMART,WMT,TICKER_COUNTRY:WMT|US,Leading,10.273,1,3,13.8,7.21,Consumer Discretionary,Minimum Volatility · Quality · Value,Category ETF proxy,2.152,8.61,156
+INGREDION INC,INGR,TICKER_COUNTRY:INGR|US,Leading,10.173,1,1,21.88,4.73,Consumer Staples,Dividend Yield,Category ETF proxy,0.165,0.33,159
+REYNOLDS CONSUMER PRODUCTS INC,REYN,TICKER_COUNTRY:REYN|US,Leading,10.173,1,1,21.88,4.73,Consumer Staples,Dividend Yield,Category ETF proxy,0.045,0.09,159
+DOMINOS PIZZA,DPZ,TICKER_COUNTRY:DPZ|US,Leading,9.712,1,2,13.8,6.62,Consumer Discretionary,Dividend Yield · Value,Category ETF proxy,0.12,0.36,161
+DARDEN RESTAURANTS INC,DRI,TICKER_COUNTRY:DRI|US,Leading,9.712,1,2,13.8,6.62,Consumer Discretionary,Dividend Yield · Value,Category ETF proxy,0.32,0.96,161
+HASBRO,HAS,TICKER_COUNTRY:HAS|US,Leading,9.712,1,2,13.8,6.62,Consumer Discretionary,Dividend Yield · Value,Category ETF proxy,0.18,0.54,161
+STARBUCKS CORP,SBUX,TICKER_COUNTRY:SBUX|US,Leading,9.712,1,2,13.8,6.62,Consumer Discretionary,Dividend Yield · Value,Category ETF proxy,1.297,3.89,161
+TRACTOR SUPPLY,TSCO,TICKER_COUNTRY:TSCO|US,Leading,9.712,1,2,13.8,6.62,Consumer Discretionary,Dividend Yield · Value,Category ETF proxy,0.227,0.68,161
+NETFLIX,NFLX,TICKER_COUNTRY:NFLX|US,Leading,9.659,1,2,13.8,6.55,Consumer Discretionary,Minimum Volatility · Quality,Category ETF proxy,1.72,5.16,166
+ROLLINS INC,ROL,TICKER_COUNTRY:ROL|US,Leading,9.659,1,2,13.8,6.55,Consumer Discretionary,Minimum Volatility · Quality,Category ETF proxy,0.183,0.55,166
+BEST BUY,BBY,TICKER_COUNTRY:BBY|US,Leading,9.534,1,2,13.8,6.38,Consumer Discretionary,Quality · Value,Category ETF proxy,0.27,0.81,168
+CHIPOTLE MEXICAN GRILL,CMG,TICKER_COUNTRY:CMG|US,Leading,9.534,1,2,13.8,6.38,Consumer Discretionary,Quality · Value,Category ETF proxy,0.65,1.95,168
+DECKERS OUTDOOR,DECK,TICKER_COUNTRY:DECK|US,Leading,9.534,1,2,13.8,6.38,Consumer Discretionary,Quality · Value,Category ETF proxy,0.177,0.53,168
+GARMIN,GRMN,TICKER_COUNTRY:GRMN|US,Leading,9.534,1,2,13.8,6.38,Consumer Discretionary,Quality · Value,Category ETF proxy,0.61,1.83,168
+NVR,NVR,TICKER_COUNTRY:NVR|US,Leading,9.534,1,2,13.8,6.38,Consumer Discretionary,Quality · Value,Category ETF proxy,0.213,0.64,168
+OMNICOM GROUP INC,OMC,TICKER_COUNTRY:OMC|US,Leading,9.534,1,2,13.8,6.38,Consumer Discretionary,Quality · Value,Category ETF proxy,0.197,0.59,168
+PULTEGROUP,PHM,TICKER_COUNTRY:PHM|US,Leading,9.534,1,2,13.8,6.38,Consumer Discretionary,Quality · Value,Category ETF proxy,0.31,0.93,168
+ROSS STORES INC,ROST,TICKER_COUNTRY:ROST|US,Leading,9.534,1,2,13.8,6.38,Consumer Discretionary,Quality · Value,Category ETF proxy,0.923,2.77,168
+WILLIAMS SONOMA INC,WSM,TICKER_COUNTRY:WSM|US,Leading,9.534,1,2,13.8,6.38,Consumer Discretionary,Quality · Value,Category ETF proxy,0.387,1.16,168
+REALTY INCOME REIT,O,TICKER_COUNTRY:O|US,Leading,9.092,1,2,9.2,8.69,Real Estate,Minimum Volatility · Value,Category ETF proxy,1.707,5.12,177
+VENTAS REIT,VTR,TICKER_COUNTRY:VTR|US,Leading,9.092,1,2,9.2,8.69,Real Estate,Minimum Volatility · Value,Category ETF proxy,1.213,3.64,177
+WEYERHAEUSER REIT,WY,TICKER_COUNTRY:WY|US,Leading,9.092,1,2,9.2,8.69,Real Estate,Minimum Volatility · Value,Category ETF proxy,0.423,1.27,177
+SUN COMMUNITIES REIT INC,SUI,TICKER_COUNTRY:SUI|US,Leading,9.03,1,1,9.2,8.86,Real Estate,Minimum Volatility,Category ETF proxy,0.645,1.29,180
+WELLTOWER,WELL,TICKER_COUNTRY:WELL|US,Leading,9.03,1,1,9.2,8.86,Real Estate,Minimum Volatility,Category ETF proxy,5.985,11.97,180
+AMERICAN TOWER REIT,AMT,TICKER_COUNTRY:AMT|US,Leading,8.853,1,1,9.2,8.52,Real Estate,Value,Category ETF proxy,2.555,5.11,182
+ALEXANDRIA REAL ESTATE EQUITIES RE,ARE,TICKER_COUNTRY:ARE|US,Leading,8.853,1,1,9.2,8.52,Real Estate,Value,Category ETF proxy,0.26,0.52,182
+BXP,BXP,TICKER_COUNTRY:BXP|US,Leading,8.853,1,1,9.2,8.52,Real Estate,Value,Category ETF proxy,0.395,0.79,182
+CROWN CASTLE,CCI,TICKER_COUNTRY:CCI|US,Leading,8.853,1,1,9.2,8.52,Real Estate,Value,Category ETF proxy,1.4,2.8,182
+CAMDEN PROPERTY TRUST REIT,CPT,TICKER_COUNTRY:CPT|US,Leading,8.853,1,1,9.2,8.52,Real Estate,Value,Category ETF proxy,0.39,0.78,182
+COSTAR GROUP,CSGP,TICKER_COUNTRY:CSGP|US,Leading,8.853,1,1,9.2,8.52,Real Estate,Value,Category ETF proxy,0.525,1.05,182
+DIGITAL REALTY TRUST REIT,DLR,TICKER_COUNTRY:DLR|US,Leading,8.853,1,1,9.2,8.52,Real Estate,Value,Category ETF proxy,2.145,4.29,182
+HEALTHPEAK PROPERTIES INC,DOC,TICKER_COUNTRY:DOC|US,Leading,8.853,1,1,9.2,8.52,Real Estate,Value,Category ETF proxy,0.56,1.12,182
+EQUINIX REIT,EQIX,TICKER_COUNTRY:EQIX|US,Leading,8.853,1,1,9.2,8.52,Real Estate,Value,Category ETF proxy,2.36,4.72,182
+ESSEX PROPERTY TRUST REIT,ESS,TICKER_COUNTRY:ESS|US,Leading,8.853,1,1,9.2,8.52,Real Estate,Value,Category ETF proxy,0.705,1.41,182
+EXTRA SPACE STORAGE REIT,EXR,TICKER_COUNTRY:EXR|US,Leading,8.853,1,1,9.2,8.52,Real Estate,Value,Category ETF proxy,1.335,2.67,182
+FEDERAL REALTY INVESTMENT TRUST RE,FRT,TICKER_COUNTRY:FRT|US,Leading,8.853,1,1,9.2,8.52,Real Estate,Value,Category ETF proxy,0.36,0.72,182
+HOST HOTELS & RESORTS REIT,HST,TICKER_COUNTRY:HST|US,Leading,8.853,1,1,9.2,8.52,Real Estate,Value,Category ETF proxy,0.68,1.36,182
+INVITATION HOMES,INVH,TICKER_COUNTRY:INVH|US,Leading,8.853,1,1,9.2,8.52,Real Estate,Value,Category ETF proxy,0.585,1.17,182
+IRON MOUNTAIN INC,IRM,TICKER_COUNTRY:IRM|US,Leading,8.853,1,1,9.2,8.52,Real Estate,Value,Category ETF proxy,1.26,2.52,182
+KIMCO REALTY REIT CORP,KIM,TICKER_COUNTRY:KIM|US,Leading,8.853,1,1,9.2,8.52,Real Estate,Value,Category ETF proxy,0.69,1.38,182
+MID AMERICA APARTMENT COMMUNITIES,MAA,TICKER_COUNTRY:MAA|US,Leading,8.853,1,1,9.2,8.52,Real Estate,Value,Category ETF proxy,0.53,1.06,182
+REGENCY CENTERS REIT CORP,REG,TICKER_COUNTRY:REG|US,Leading,8.853,1,1,9.2,8.52,Real Estate,Value,Category ETF proxy,0.495,0.99,182
+SBA COMMUNICATIONS REIT CORP CLASS,SBAC,TICKER_COUNTRY:SBAC|US,Leading,8.853,1,1,9.2,8.52,Real Estate,Value,Category ETF proxy,0.73,1.46,182
+SIMON PROPERTY GROUP REIT INC,SPG,TICKER_COUNTRY:SPG|US,Leading,8.853,1,1,9.2,8.52,Real Estate,Value,Category ETF proxy,2.565,5.13,182
+UDR REIT,UDR,TICKER_COUNTRY:UDR|US,Leading,8.853,1,1,9.2,8.52,Real Estate,Value,Category ETF proxy,0.425,0.85,182
+VICI PPTYS INC,VICI,TICKER_COUNTRY:VICI|US,Leading,8.853,1,1,9.2,8.52,Real Estate,Value,Category ETF proxy,1.085,2.17,182
+IDACORP,IDA,TICKER_COUNTRY:IDA|US,Leading,8.702,1,1,16.01,4.73,Utilities,Dividend Yield,Category ETF proxy,0.305,0.61,204
+NATIONAL FUEL GAS,NFG,TICKER_COUNTRY:NFG|US,Leading,8.702,1,1,16.01,4.73,Utilities,Dividend Yield,Category ETF proxy,0.26,0.52,204
+OGE ENERGY,OGE,TICKER_COUNTRY:OGE|US,Leading,8.702,1,1,16.01,4.73,Utilities,Dividend Yield,Category ETF proxy,0.42,0.84,204
+ESSENTIAL UTILITIES INC,WTRG,TICKER_COUNTRY:WTRG|US,Leading,8.702,1,1,16.01,4.73,Utilities,Dividend Yield,Category ETF proxy,0.51,1.02,204
+IDEXX LABORATORIES,IDXX,TICKER_COUNTRY:IDXX|US,Leading,8.698,1,1,17.84,4.24,Healthcare,Quality,Category ETF proxy,0.6,1.2,208
+LAS VEGAS SANDS,LVS,TICKER_COUNTRY:LVS|US,Leading,8.081,1,1,13.8,4.73,Consumer Discretionary,Dividend Yield,Category ETF proxy,0.165,0.33,209
+CBRE GROUP CLASS A,CBRE,TICKER_COUNTRY:CBRE|US,Leading,7.812,1,2,9.2,6.38,Real Estate,Quality · Value,Category ETF proxy,1.093,3.28,210
+PROLOGIS REIT,PLD,TICKER_COUNTRY:PLD|US,Leading,7.812,1,2,9.2,6.38,Real Estate,Quality · Value,Category ETF proxy,3.267,9.8,210
+PUBLIC STORAGE REIT,PSA,TICKER_COUNTRY:PSA|US,Leading,7.812,1,2,9.2,6.38,Real Estate,Quality · Value,Category ETF proxy,1.593,4.78,210
+VIVMARK RESIDENTIAL,VMRK,TICKER_COUNTRY:VMRK|US,Leading,7.812,1,2,9.2,6.38,Real Estate,Quality · Value,Category ETF proxy,1.337,4.01,210
+ARTHUR J GALLAGHER,AJG,TICKER_COUNTRY:AJG|US,Leading,7.804,1,2,6.74,8.69,Financials,Minimum Volatility · Value,Category ETF proxy,0.597,1.79,214
+ALLSTATE CORP,ALL,TICKER_COUNTRY:ALL|US,Leading,7.804,1,2,6.74,8.69,Financials,Minimum Volatility · Value,Category ETF proxy,0.64,1.92,214
+AON PLC CLASS A,AON,TICKER_COUNTRY:AON|US,Leading,7.804,1,2,6.74,8.69,Financials,Minimum Volatility · Value,Category ETF proxy,0.607,1.82,214
+BANK OF NEW YORK MELLON CORP,BNY,TICKER_COUNTRY:BNY|US,Leading,7.804,1,2,6.74,8.69,Financials,Minimum Volatility · Value,Category ETF proxy,0.867,2.6,214
+FAIR ISAAC,FICO,TICKER_COUNTRY:FICO|US,Leading,7.804,1,2,6.74,8.69,Financials,Minimum Volatility · Value,Category ETF proxy,0.147,0.44,214
+INTERCONTINENTAL EXCHANGE INC,ICE,TICKER_COUNTRY:ICE|US,Leading,7.804,1,2,6.74,8.69,Financials,Minimum Volatility · Value,Category ETF proxy,0.727,2.18,214
+LOEWS,L,TICKER_COUNTRY:L|US,Leading,7.804,1,2,6.74,8.69,Financials,Minimum Volatility · Value,Category ETF proxy,0.233,0.7,214
+CIRCLE INTERNET GROUP INC CLASS A,CRCL,TICKER_COUNTRY:CRCL|US,Leading,7.73,1,1,6.74,8.86,Financials,Minimum Volatility,Category ETF proxy,0.085,0.17,221
+FIRST CITIZENS BANCSHARES CLASS A,FCNCA,TICKER_COUNTRY:FCNCA|US,Leading,7.73,1,1,6.74,8.86,Financials,Minimum Volatility,Category ETF proxy,0.375,0.75,221
+ULTA BEAUTY INC,ULTA,TICKER_COUNTRY:ULTA|US,Leading,7.652,1,1,13.8,4.24,Consumer Discretionary,Quality,Category ETF proxy,0.54,1.08,223
+AMERICAN INTERNATIONAL GROUP,AIG,TICKER_COUNTRY:AIG|US,Leading,7.578,1,1,6.74,8.52,Financials,Value,Category ETF proxy,0.415,0.83,224
+ASSURANT INC,AIZ,TICKER_COUNTRY:AIZ|US,Leading,7.578,1,1,6.74,8.52,Financials,Value,Category ETF proxy,0.155,0.31,224
+APOLLO GLOBAL MANAGEMENT,APO,TICKER_COUNTRY:APO|US,Leading,7.578,1,1,6.74,8.52,Financials,Value,Category ETF proxy,0.445,0.89,224
+ARES MANAGEMENT CLASS A,ARES,TICKER_COUNTRY:ARES|US,Leading,7.578,1,1,6.74,8.52,Financials,Value,Category ETF proxy,0.255,0.51,224
+BANK OF AMERICA,BAC,TICKER_COUNTRY:BAC|US,Leading,7.578,1,1,6.74,8.52,Financials,Value,Category ETF proxy,2.78,5.56,224
+FRANKLIN TEMPLETON,BEN,TICKER_COUNTRY:BEN|US,Leading,7.578,1,1,6.74,8.52,Financials,Value,Category ETF proxy,0.085,0.17,224
+BROWN & BROWN INC,BRO,TICKER_COUNTRY:BRO|US,Leading,7.578,1,1,6.74,8.52,Financials,Value,Category ETF proxy,0.21,0.42,224
+CITIGROUP,C,TICKER_COUNTRY:C|US,Leading,7.578,1,1,6.74,8.52,Financials,Value,Category ETF proxy,1.835,3.67,224
+CITIZENS FINANCIAL GROUP INC,CFG,TICKER_COUNTRY:CFG|US,Leading,7.578,1,1,6.74,8.52,Financials,Value,Category ETF proxy,0.25,0.5,224
+CINCINNATI FINANCIAL,CINF,TICKER_COUNTRY:CINF|US,Leading,7.578,1,1,6.74,8.52,Financials,Value,Category ETF proxy,0.25,0.5,224
+COINBASE GLOBAL CLASS A,COIN,TICKER_COUNTRY:COIN|US,Leading,7.578,1,1,6.74,8.52,Financials,Value,Category ETF proxy,0.22,0.44,224
+EVEREST GROUP,EG,TICKER_COUNTRY:EG|US,Leading,7.578,1,1,6.74,8.52,Financials,Value,Category ETF proxy,0.155,0.31,224
+FACTSET RESEARCH SYSTEMS,FDS,TICKER_COUNTRY:FDS|US,Leading,7.578,1,1,6.74,8.52,Financials,Value,Category ETF proxy,0.11,0.22,224
+FIFTH THIRD BANCORP,FITB,TICKER_COUNTRY:FITB|US,Leading,7.578,1,1,6.74,8.52,Financials,Value,Category ETF proxy,0.445,0.89,224
+GLOBE LIFE,GL,TICKER_COUNTRY:GL|US,Leading,7.578,1,1,6.74,8.52,Financials,Value,Category ETF proxy,0.115,0.23,224
+GOLDMAN SACHS GROUP,GS,TICKER_COUNTRY:GS|US,Leading,7.578,1,1,6.74,8.52,Financials,Value,Category ETF proxy,1.94,3.88,224
+HUNTINGTON BANCSHARES INC,HBAN,TICKER_COUNTRY:HBAN|US,Leading,7.578,1,1,6.74,8.52,Financials,Value,Category ETF proxy,0.285,0.57,224
+INVESCO LTD,IVZ,TICKER_COUNTRY:IVZ|US,Leading,7.578,1,1,6.74,8.52,Financials,Value,Category ETF proxy,0.1,0.2,224
+JPMORGAN CHASE & CO,JPM,TICKER_COUNTRY:JPM|US,Leading,7.578,1,1,6.74,8.52,Financials,Value,Category ETF proxy,5.43,10.86,224
+KEYCORP,KEY,TICKER_COUNTRY:KEY|US,Leading,7.578,1,1,6.74,8.52,Financials,Value,Category ETF proxy,0.175,0.35,224
+KKR AND CO INC,KKR,TICKER_COUNTRY:KKR|US,Leading,7.578,1,1,6.74,8.52,Financials,Value,Category ETF proxy,0.555,1.11,224
+METLIFE,MET,TICKER_COUNTRY:MET|US,Leading,7.578,1,1,6.74,8.52,Financials,Value,Category ETF proxy,0.515,1.03,224
+MORGAN STANLEY,MS,TICKER_COUNTRY:MS|US,Leading,7.578,1,1,6.74,8.52,Financials,Value,Category ETF proxy,1.635,3.27,224
+MSCI,MSCI,TICKER_COUNTRY:MSCI|US,Leading,7.578,1,1,6.74,8.52,Financials,Value,Category ETF proxy,0.39,0.78,224
+NASDAQ INC,NDAQ,TICKER_COUNTRY:NDAQ|US,Leading,7.578,1,1,6.74,8.52,Financials,Value,Category ETF proxy,0.455,0.91,224
+NORTHERN TRUST,NTRS,TICKER_COUNTRY:NTRS|US,Leading,7.578,1,1,6.74,8.52,Financials,Value,Category ETF proxy,0.29,0.58,224
+PRINCIPAL FINANCIAL GROUP INC,PFG,TICKER_COUNTRY:PFG|US,Leading,7.578,1,1,6.74,8.52,Financials,Value,Category ETF proxy,0.22,0.44,224
+PRUDENTIAL FINANCIAL INC,PRU,TICKER_COUNTRY:PRU|US,Leading,7.578,1,1,6.74,8.52,Financials,Value,Category ETF proxy,0.4,0.8,224
+STATE STREET,STT,TICKER_COUNTRY:STT|US,Leading,7.578,1,1,6.74,8.52,Financials,Value,Category ETF proxy,0.415,0.83,224
+TRUIST FINANCIAL,TFC,TICKER_COUNTRY:TFC|US,Leading,7.578,1,1,6.74,8.52,Financials,Value,Category ETF proxy,0.555,1.11,224
+US BANCORP,USB,TICKER_COUNTRY:USB|US,Leading,7.578,1,1,6.74,8.52,Financials,Value,Category ETF proxy,0.87,1.74,224
+WELLS FARGO,WFC,TICKER_COUNTRY:WFC|US,Leading,7.578,1,1,6.74,8.52,Financials,Value,Category ETF proxy,2.325,4.65,224
+ARCH CAPITAL GROUP,ACGL,TICKER_COUNTRY:ACGL|US,Leading,7.271,1,3,6.74,7.21,Financials,Minimum Volatility · Quality · Value,Category ETF proxy,0.217,0.87,256
+CHUBB,CB,TICKER_COUNTRY:CB|US,Leading,7.271,1,3,6.74,7.21,Financials,Minimum Volatility · Quality · Value,Category ETF proxy,1.135,4.54,256
+CBOE GLOBAL MARKETS,CBOE,TICKER_COUNTRY:CBOE|US,Leading,7.271,1,3,6.74,7.21,Financials,Minimum Volatility · Quality · Value,Category ETF proxy,0.38,1.52,256
+CME GROUP CLASS A,CME,TICKER_COUNTRY:CME|US,Leading,7.271,1,3,6.74,7.21,Financials,Minimum Volatility · Quality · Value,Category ETF proxy,0.815,3.26,256
+HARTFORD INSURANCE GROUP,HIG,TICKER_COUNTRY:HIG|US,Leading,7.271,1,3,6.74,7.21,Financials,Minimum Volatility · Quality · Value,Category ETF proxy,0.245,0.98,256
+MARSH,MRSH,TICKER_COUNTRY:MRSH|US,Leading,7.271,1,3,6.74,7.21,Financials,Minimum Volatility · Quality · Value,Category ETF proxy,0.822,3.29,256
+PROGRESSIVE,PGR,TICKER_COUNTRY:PGR|US,Leading,7.271,1,3,6.74,7.21,Financials,Minimum Volatility · Quality · Value,Category ETF proxy,0.898,3.59,256
+TRAVELERS COMPANIES,TRV,TICKER_COUNTRY:TRV|US,Leading,7.271,1,3,6.74,7.21,Financials,Minimum Volatility · Quality · Value,Category ETF proxy,0.685,2.74,256
+WILLIS TOWERS WATSON,WTW,TICKER_COUNTRY:WTW|US,Leading,7.271,1,3,6.74,7.21,Financials,Minimum Volatility · Quality · Value,Category ETF proxy,0.278,1.11,256
+BROADRIDGE FINANCIAL SOLUTIONS INC,BR,TICKER_COUNTRY:BR|US,Leading,6.833,1,2,6.74,6.62,Financials,Dividend Yield · Value,Category ETF proxy,0.217,0.65,265
+BLACKSTONE,BX,TICKER_COUNTRY:BX|US,Leading,6.833,1,2,6.74,6.62,Financials,Dividend Yield · Value,Category ETF proxy,1.133,3.4,265
+M&T BANK,MTB,TICKER_COUNTRY:MTB|US,Leading,6.833,1,2,6.74,6.62,Financials,Dividend Yield · Value,Category ETF proxy,0.327,0.98,265
+PNC FINANCIAL SERVICES GROUP,PNC,TICKER_COUNTRY:PNC|US,Leading,6.833,1,2,6.74,6.62,Financials,Dividend Yield · Value,Category ETF proxy,1.037,3.11,265
+BERKSHIRE HATHAWAY INC CLASS B,BRK B,TICKER_COUNTRY:BRK B|US,Leading,6.796,1,2,6.74,6.55,Financials,Minimum Volatility · Quality,Category ETF proxy,5.37,16.11,269
+TRADEWEB MARKETS INC CLASS A,TW,TICKER_COUNTRY:TW|US,Leading,6.796,1,2,6.74,6.55,Financials,Minimum Volatility · Quality,Category ETF proxy,0.15,0.45,269
+AFLAC,AFL,TICKER_COUNTRY:AFL|US,Leading,6.708,1,2,6.74,6.38,Financials,Quality · Value,Category ETF proxy,0.42,1.26,271
+AMERIPRISE FINANCE INC,AMP,TICKER_COUNTRY:AMP|US,Leading,6.708,1,2,6.74,6.38,Financials,Quality · Value,Category ETF proxy,0.357,1.07,271
+BLACKROCK,BLK,TICKER_COUNTRY:BLK|US,Leading,6.708,1,2,6.74,6.38,Financials,Quality · Value,Category ETF proxy,1.28,3.84,271
+MOODYS CORP,MCO,TICKER_COUNTRY:MCO|US,Leading,6.708,1,2,6.74,6.38,Financials,Quality · Value,Category ETF proxy,0.537,1.61,271
+REGIONS FINANCIAL,RF,TICKER_COUNTRY:RF|US,Leading,6.708,1,2,6.74,6.38,Financials,Quality · Value,Category ETF proxy,0.173,0.52,271
+RAYMOND JAMES,RJF,TICKER_COUNTRY:RJF|US,Leading,6.708,1,2,6.74,6.38,Financials,Quality · Value,Category ETF proxy,0.207,0.62,271
+CHARLES SCHWAB,SCHW,TICKER_COUNTRY:SCHW|US,Leading,6.708,1,2,6.74,6.38,Financials,Quality · Value,Category ETF proxy,1.13,3.39,271
+S&P GLOBAL,SPGI,TICKER_COUNTRY:SPGI|US,Leading,6.708,1,2,6.74,6.38,Financials,Quality · Value,Category ETF proxy,0.933,2.8,271
+WR BERKLEY,WRB,TICKER_COUNTRY:WRB|US,Leading,6.708,1,2,6.74,6.38,Financials,Quality · Value,Category ETF proxy,0.12,0.36,271
+T ROWE PRICE GROUP,TROW,TICKER_COUNTRY:TROW|US,Leading,6.57,1,3,6.74,5.83,Financials,Dividend Yield · Quality · Value,Category ETF proxy,0.255,1.02,280
+AMERICAN FINANCIAL GROUP,AFG,TICKER_COUNTRY:AFG|US,Leading,5.648,1,1,6.74,4.73,Financials,Dividend Yield,Category ETF proxy,0.155,0.31,281
+CULLEN FROST BANKERS,CFR,TICKER_COUNTRY:CFR|US,Leading,5.648,1,1,6.74,4.73,Financials,Dividend Yield,Category ETF proxy,0.125,0.25,281
+CARLYLE GROUP INC,CG,TICKER_COUNTRY:CG|US,Leading,5.648,1,1,6.74,4.73,Financials,Dividend Yield,Category ETF proxy,0.14,0.28,281
+PROSPERITY BANCSHARES,PB,TICKER_COUNTRY:PB|US,Leading,5.648,1,1,6.74,4.73,Financials,Dividend Yield,Category ETF proxy,0.135,0.27,281

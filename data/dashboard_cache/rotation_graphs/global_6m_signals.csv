@@ -1,16 +1,16 @@
 region,kind,source_id,label,relative_strength,rs_momentum,quadrant,as_of,source
-Global,sector,IXN,Technology,-8.248,-24.555,Lagging,2026-11-23,Repository market history
-Global,sector,IXG,Financials,9.281,4.905,Leading,2026-11-23,Repository market history
-Global,sector,IXJ,Healthcare,23.986,26.095,Leading,2026-11-23,Repository market history
-Global,sector,IXC,Energy,6.582,3.452,Leading,2026-11-23,Repository market history
-Global,sector,KXI,Consumer Staples,12.609,25.575,Leading,2026-11-23,Repository market history
-Global,sector,RXI,Consumer Discretionary,2.267,12.636,Leading,2026-11-23,Repository market history
-Global,sector,EXI,Industrials,-2.676,4.426,Improving,2026-11-23,Repository market history
-Global,sector,MXI,Materials,-5.436,0.304,Improving,2026-11-23,Repository market history
-Global,sector,JXI,Utilities,1.98,15.769,Leading,2026-11-23,Repository market history
-Global,sector,IXP,Communication Services,-8.869,1.62,Improving,2026-11-23,Repository market history
-Global,factor,IWFG,Growth,-5.629,-4.076,Lagging,2026-11-23,Repository market history
-Global,factor,IMTM,Momentum,-6.824,-1.694,Lagging,2026-11-23,Repository market history
-Global,factor,IQLT,Quality,3.399,5.557,Leading,2026-11-23,Repository market history
-Global,factor,ACWV,Minimum Volatility,10.742,16.271,Leading,2026-11-23,Repository market history
-Global,factor,IDV,Dividend Yield,-2.35,2.039,Improving,2026-11-23,Repository market history
+Global,sector,IXN,Technology,-10.594,-26.19,Lagging,2026-11-24,Repository market history
+Global,sector,IXG,Financials,11.464,7.775,Leading,2026-11-24,Repository market history
+Global,sector,IXJ,Healthcare,27.781,30.095,Leading,2026-11-24,Repository market history
+Global,sector,IXC,Energy,9.768,5.582,Leading,2026-11-24,Repository market history
+Global,sector,KXI,Consumer Staples,13.521,25.205,Leading,2026-11-24,Repository market history
+Global,sector,RXI,Consumer Discretionary,1.807,12.45,Leading,2026-11-24,Repository market history
+Global,sector,EXI,Industrials,-2.78,3.381,Improving,2026-11-24,Repository market history
+Global,sector,MXI,Materials,-5.736,0.125,Improving,2026-11-24,Repository market history
+Global,sector,JXI,Utilities,3.89,17.633,Leading,2026-11-24,Repository market history
+Global,sector,IXP,Communication Services,-8.917,1.635,Improving,2026-11-24,Repository market history
+Global,factor,IWFG,Growth,-7.223,-6.019,Lagging,2026-11-24,Repository market history
+Global,factor,IMTM,Momentum,-5.536,0.352,Improving,2026-11-24,Repository market history
+Global,factor,IQLT,Quality,4.489,6.921,Leading,2026-11-24,Repository market history
+Global,factor,ACWV,Minimum Volatility,12.179,17.034,Leading,2026-11-24,Repository market history
+Global,factor,IDV,Dividend Yield,-0.326,4.834,Improving,2026-11-24,Repository market history

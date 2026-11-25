@@ -1,1 +1,3 @@
-
+Company,Ticker,company_key,Category,Score,Sector indices,Factor indices,Sector RS magnitude,Factor RS magnitude,Sector sources,Factor sources,Signal basis,Avg ETF % weight,Exposure,Rank
+ARISTA NETWORKS,ANET,TICKER_COUNTRY:ANET|US,Leading,6.148,1,1,10.48,3.61,Communication Services,Quality,Category ETF proxy,6.395,12.79,1
+MOTOROLA SOLUTIONS INC,MSI,TICKER_COUNTRY:MSI|US,Leading,6.148,1,1,10.48,3.61,Communication Services,Quality,Category ETF proxy,2.61,5.22,1

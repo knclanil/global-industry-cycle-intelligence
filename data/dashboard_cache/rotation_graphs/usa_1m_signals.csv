@@ -1,19 +1,19 @@
 region,kind,source_id,label,relative_strength,rs_momentum,quadrant,as_of,source
-USA,sector,XLC,Communication Services,3.312,2.704,Leading,2026-11-23,Repository market history
-USA,sector,XLY,Consumer Discretionary,8.78,-2.138,Weakening,2026-11-23,Repository market history
-USA,sector,XLP,Consumer Staples,7.744,-4.943,Weakening,2026-11-23,Repository market history
-USA,sector,XLE,Energy,-9.14,-7.588,Lagging,2026-11-23,Repository market history
-USA,sector,XLF,Financials,4.746,-4.853,Weakening,2026-11-23,Repository market history
-USA,sector,XLV,Healthcare,5.299,-8.749,Weakening,2026-11-23,Repository market history
-USA,sector,XLI,Industrials,3.843,0.624,Leading,2026-11-23,Repository market history
-USA,sector,XLB,Materials,2.325,-8.458,Weakening,2026-11-23,Repository market history
-USA,sector,XLRE,Real Estate,6.032,-4.938,Weakening,2026-11-23,Repository market history
-USA,sector,XLK,Technology,-6.756,4.324,Improving,2026-11-23,Repository market history
-USA,sector,XLU,Utilities,7.096,-2.288,Weakening,2026-11-23,Repository market history
-USA,factor,IVE,Value,3.003,-3.676,Weakening,2026-11-23,Repository market history
-USA,factor,IVW,Growth,-2.516,2.713,Improving,2026-11-23,Repository market history
-USA,factor,MTUM,Momentum,-7.03,6.509,Improving,2026-11-23,Repository market history
-USA,factor,QUAL,Quality,1.732,-0.358,Weakening,2026-11-23,Repository market history
-USA,factor,USMV,Minimum Volatility,2.539,-3.4,Weakening,2026-11-23,Repository market history
-USA,factor,IWM,Small Cap,1.397,-3.365,Weakening,2026-11-23,Repository market history
-USA,factor,VYM,Dividend Yield,2.194,-3.831,Weakening,2026-11-23,Repository market history
+USA,sector,XLC,Communication Services,7.097,6.775,Leading,2026-11-24,Repository market history
+USA,sector,XLY,Consumer Discretionary,9.706,-2.166,Weakening,2026-11-24,Repository market history
+USA,sector,XLP,Consumer Staples,11.227,-0.668,Weakening,2026-11-24,Repository market history
+USA,sector,XLE,Energy,-7.57,-5.355,Lagging,2026-11-24,Repository market history
+USA,sector,XLF,Financials,6.653,-3.212,Weakening,2026-11-24,Repository market history
+USA,sector,XLV,Healthcare,9.713,-4.234,Weakening,2026-11-24,Repository market history
+USA,sector,XLI,Industrials,3.07,-0.43,Weakening,2026-11-24,Repository market history
+USA,sector,XLB,Materials,3.974,-6.94,Weakening,2026-11-24,Repository market history
+USA,sector,XLRE,Real Estate,8.124,-2.218,Weakening,2026-11-24,Repository market history
+USA,sector,XLK,Technology,-10.223,0.524,Improving,2026-11-24,Repository market history
+USA,sector,XLU,Utilities,8.609,-0.383,Weakening,2026-11-24,Repository market history
+USA,factor,IVE,Value,4.467,-2.263,Weakening,2026-11-24,Repository market history
+USA,factor,IVW,Growth,-3.854,1.443,Improving,2026-11-24,Repository market history
+USA,factor,MTUM,Momentum,-10.508,1.596,Improving,2026-11-24,Repository market history
+USA,factor,QUAL,Quality,3.0,1.211,Leading,2026-11-24,Repository market history
+USA,factor,USMV,Minimum Volatility,3.99,-2.322,Weakening,2026-11-24,Repository market history
+USA,factor,IWM,Small Cap,2.695,-2.063,Weakening,2026-11-24,Repository market history
+USA,factor,VYM,Dividend Yield,3.145,-3.356,Weakening,2026-11-24,Repository market history
