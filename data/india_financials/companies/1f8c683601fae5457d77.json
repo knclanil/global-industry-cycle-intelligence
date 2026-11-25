@@ -1,0 +1,339 @@
+{
+  "schema_version": 1,
+  "company_key": "ISIN:INE271C01023",
+  "symbol": "DLF",
+  "company_name": "DLF Limited",
+  "isin": "INE271C01023",
+  "industry": "Realty",
+  "sector": "Real Estate",
+  "yahoo_ticker": "DLF.NS",
+  "currency": "INR",
+  "quote": {
+    "price": 795.0,
+    "market_cap": 1967872671744.0,
+    "shares_outstanding": 2475311706.0,
+    "currency": "INR",
+    "asof_utc": "2026-11-25T22:49:03+00:00",
+    "provenance": "yahoo_finance_quote_snapshot"
+  },
+  "statements": {
+    "annual": {
+      "income": {
+        "2026-03-31": {
+          "weighted_average_shares": 2475311706.0,
+          "net_income": 44146750000.0,
+          "diluted_eps": 17.83,
+          "ebitda": 32577043000.0,
+          "operating_income": 12839186000.0,
+          "income_tax_expense": 3099660000.0,
+          "interest_expense": 1834763000.0,
+          "revenue": 78376577000.0,
+          "gross_profit": 29890926000.0
+        },
+        "2025-03-31": {
+          "weighted_average_shares": 2475311706.0,
+          "net_income": 43676215000.0,
+          "diluted_eps": 17.64,
+          "ebitda": 27859786000.0,
+          "operating_income": 21147957000.0,
+          "income_tax_expense": -4338851000.0,
+          "interest_expense": 3746925000.0,
+          "revenue": 79466005000.0,
+          "gross_profit": 38150192000.0
+        },
+        "2024-03-31": {
+          "weighted_average_shares": 2475311706.0,
+          "net_income": 27271051000.0,
+          "diluted_eps": 11.02,
+          "ebitda": 26289282000.0,
+          "operating_income": 18326441000.0,
+          "income_tax_expense": 5201297000.0,
+          "interest_expense": 3304363000.0,
+          "revenue": 62492095000.0,
+          "gross_profit": 34554530000.0
+        },
+        "2023-03-31": {
+          "weighted_average_shares": 2475311706.0,
+          "net_income": 20358252000.0,
+          "diluted_eps": 8.22,
+          "ebitda": 20153099000.0,
+          "operating_income": 16543683000.0,
+          "income_tax_expense": 4015017000.0,
+          "interest_expense": 3642578000.0,
+          "revenue": 56819715000.0,
+          "gross_profit": 32480080000.0
+        }
+      },
+      "balance": {
+        "2026-03-31": {
+          "total_assets": 748747730000.0,
+          "inventory": 247174750000.0,
+          "total_liabilities": 294014031000.0,
+          "other_intangibles": 1204105000.0,
+          "equity": 454733699000.0,
+          "cash": 2991145000.0,
+          "long_term_debt": 0.0,
+          "total_debt": 3058932000.0,
+          "current_liabilities": 256009970000.0,
+          "current_assets": 394735482000.0,
+          "shares_statement": 2475311706.0,
+          "current_debt": 449476000.0,
+          "goodwill": 9442534000.0
+        },
+        "2025-03-31": {
+          "total_assets": 694753744000.0,
+          "inventory": 246214848000.0,
+          "total_liabilities": 269251543000.0,
+          "other_intangibles": 1387782000.0,
+          "equity": 425502201000.0,
+          "cash": 3138063000.0,
+          "long_term_debt": 16720678000.0,
+          "total_debt": 41027332000.0,
+          "current_liabilities": 222329987000.0,
+          "current_assets": 412052931000.0,
+          "shares_statement": 2475311706.0,
+          "current_debt": 21819583000.0,
+          "goodwill": 9442534000.0
+        },
+        "2024-03-31": {
+          "total_assets": 602623970000.0,
+          "inventory": 211541318000.0,
+          "total_liabilities": 208307805000.0,
+          "other_intangibles": 1389566000.0,
+          "equity": 394308144000.0,
+          "cash": 7675310000.0,
+          "long_term_debt": 24389866000.0,
+          "total_debt": 48338600000.0,
+          "current_liabilities": 141410501000.0,
+          "current_assets": 325567346000.0,
+          "shares_statement": 2475311706.0,
+          "current_debt": 21597253000.0,
+          "goodwill": 9442534000.0
+        },
+        "2023-03-31": {
+          "total_assets": 539279908000.0,
+          "inventory": 193612250000.0,
+          "total_liabilities": 162360928000.0,
+          "other_intangibles": 1416453000.0,
+          "equity": 376875344000.0,
+          "cash": 1655247000.0,
+          "long_term_debt": 10496592000.0,
+          "total_debt": 33339953000.0,
+          "current_liabilities": 111847622000.0,
+          "current_assets": 257706924000.0,
+          "shares_statement": 2475311706.0,
+          "current_debt": 20534259000.0,
+          "goodwill": 9442534000.0
+        }
+      },
+      "cashflow": {
+        "2026-03-31": {
+          "free_cash_flow": 62181902000.0,
+          "operating_cash_flow": 63473849000.0,
+          "capital_expenditure": -1291947000.0,
+          "dividends_paid": -14804710000.0
+        },
+        "2025-03-31": {
+          "free_cash_flow": 51392062000.0,
+          "operating_cash_flow": 52352225000.0,
+          "capital_expenditure": -960163000.0,
+          "dividends_paid": -12335942000.0
+        },
+        "2024-03-31": {
+          "free_cash_flow": 24232871000.0,
+          "operating_cash_flow": 25388076000.0,
+          "capital_expenditure": -1155205000.0,
+          "dividends_paid": -9868546000.0
+        },
+        "2023-03-31": {
+          "free_cash_flow": 23115205000.0,
+          "operating_cash_flow": 23752640000.0,
+          "capital_expenditure": -637435000.0,
+          "dividends_paid": -7428431000.0
+        }
+      }
+    },
+    "quarterly": {
+      "income": {
+        "2026-09-30": {
+          "weighted_average_shares": 2478761905.0,
+          "net_income": 13013500000.0,
+          "diluted_eps": 5.25,
+          "ebitda": 10597400000.0,
+          "operating_income": -151800000.0,
+          "income_tax_expense": 2012500000.0,
+          "interest_expense": 182200000.0,
+          "revenue": 12605800000.0,
+          "gross_profit": 5104000000.0
+        },
+        "2026-06-30": {
+          "weighted_average_shares": 2473208723.0,
+          "net_income": 7939000000.0,
+          "diluted_eps": 3.21,
+          "ebitda": 4755200000.0,
+          "operating_income": 1151600000.0,
+          "income_tax_expense": 1146900000.0,
+          "interest_expense": 176200000.0,
+          "revenue": 12803400000.0,
+          "gross_profit": 5660000000.0
+        },
+        "2026-03-31": {
+          "weighted_average_shares": 2477656250.0,
+          "net_income": 12685600000.0,
+          "diluted_eps": 5.12,
+          "ebitda": 7184100000.0,
+          "operating_income": 3625200000.0,
+          "income_tax_expense": -921100000.0,
+          "interest_expense": 210900000.0,
+          "revenue": 18140600000.0,
+          "gross_profit": 10073200000.0
+        },
+        "2025-12-31": {
+          "weighted_average_shares": 2476049383.0,
+          "net_income": 12033600000.0,
+          "diluted_eps": 4.86,
+          "ebitda": 7890400000.0,
+          "operating_income": 3597200000.0,
+          "income_tax_expense": -74200000.0,
+          "interest_expense": 362900000.0,
+          "revenue": 20202200000.0,
+          "gross_profit": 8617200000.0
+        },
+        "2025-06-30": {
+          "weighted_average_shares": 2476201299.0,
+          "net_income": 7626700000.0,
+          "diluted_eps": 3.08,
+          "ebitda": 6283400000.0,
+          "operating_income": 3296900000.0,
+          "income_tax_expense": 1331800000.0,
+          "interest_expense": 785700000.0,
+          "revenue": 27167000000.0,
+          "gross_profit": 7683700000.0
+        }
+      },
+      "balance": {
+        "2026-09-30": {
+          "total_assets": 781039700000.0,
+          "inventory": 254529800000.0,
+          "total_liabilities": 325165600000.0,
+          "other_intangibles": 1111100000.0,
+          "equity": 455874100000.0,
+          "cash": 9920300000.0,
+          "long_term_debt": 2575900000.0,
+          "total_debt": 3143900000.0,
+          "current_liabilities": 286483200000.0,
+          "current_assets": 457315600000.0,
+          "shares_statement": 2475311706.0,
+          "current_debt": 449500000.0,
+          "goodwill": 9442500000.0
+        },
+        "2026-03-31": {
+          "total_assets": 748747730000.0,
+          "inventory": 247174750000.0,
+          "total_liabilities": 294014031000.0,
+          "other_intangibles": 1204105000.0,
+          "equity": 454733699000.0,
+          "cash": 2991145000.0,
+          "long_term_debt": 0.0,
+          "total_debt": 3058932000.0,
+          "current_liabilities": 256009970000.0,
+          "current_assets": 394735482000.0,
+          "shares_statement": 2475311706.0,
+          "current_debt": 449476000.0,
+          "goodwill": 9442534000.0
+        },
+        "2025-03-31": {
+          "total_assets": 694753744000.0,
+          "inventory": 246214848000.0,
+          "total_liabilities": 269251543000.0,
+          "other_intangibles": 1387782000.0,
+          "equity": 425502201000.0,
+          "cash": 3138063000.0,
+          "long_term_debt": 16720678000.0,
+          "total_debt": 41027332000.0,
+          "current_liabilities": 222329987000.0,
+          "current_assets": 412052931000.0,
+          "shares_statement": 2475311706.0,
+          "current_debt": 21819583000.0,
+          "goodwill": 9442534000.0
+        }
+      },
+      "cashflow": {}
+    }
+  },
+  "retrieved_utc": "2026-11-25T22:49:03+00:00",
+  "source_urls": {
+    "yahoo": "https://finance.yahoo.com/quote/DLF.NS/financials/",
+    "screener_consolidated_reference": "https://www.screener.in/company/DLF/consolidated/",
+    "nse_membership": "https://www.niftyindices.com/"
+  },
+  "source_notes": [],
+  "coverage": {
+    "annual": {
+      "core_periods": {
+        "income": [
+          "2026-03-31",
+          "2025-03-31",
+          "2024-03-31",
+          "2023-03-31"
+        ],
+        "balance": [
+          "2026-03-31",
+          "2025-03-31",
+          "2024-03-31",
+          "2023-03-31"
+        ],
+        "cashflow": [
+          "2026-03-31",
+          "2025-03-31",
+          "2024-03-31",
+          "2023-03-31"
+        ]
+      },
+      "income_periods": 4,
+      "balance_periods": 4,
+      "cashflow_periods": 4,
+      "income_metric_rows": 36,
+      "balance_metric_rows": 52,
+      "cashflow_metric_rows": 16,
+      "best_periods": [
+        "2026-03-31",
+        "2025-03-31",
+        "2024-03-31",
+        "2023-03-31"
+      ]
+    },
+    "quarterly": {
+      "core_periods": {
+        "income": [
+          "2026-09-30",
+          "2026-06-30",
+          "2026-03-31",
+          "2025-12-31",
+          "2025-06-30"
+        ],
+        "balance": [
+          "2026-09-30",
+          "2026-03-31",
+          "2025-03-31"
+        ],
+        "cashflow": []
+      },
+      "income_periods": 5,
+      "balance_periods": 3,
+      "cashflow_periods": 0,
+      "income_metric_rows": 45,
+      "balance_metric_rows": 39,
+      "cashflow_metric_rows": 0,
+      "best_periods": [
+        "2026-09-30",
+        "2026-06-30",
+        "2026-03-31",
+        "2025-12-31",
+        "2025-06-30",
+        "2025-03-31"
+      ]
+    }
+  },
+  "statement_scope": "Yahoo Finance provider; consolidated/standalone scope NOT independently verified"
+}

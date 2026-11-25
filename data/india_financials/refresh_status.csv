@@ -74,31 +74,31 @@ ISIN:INE320B01020,CENTUM,Centum Electronics Ltd.,ok,,2026-11-24T23:19:08+00:00,2
 ISIN:INE486A01021,CESC,CESC Ltd.,ok,,2026-11-24T23:19:11+00:00,2026-11-24T23:19:11+00:00
 ISIN:INE180C01042,CGCL,Capri Global Capital Ltd.,ok,,2026-11-24T23:19:14+00:00,2026-11-24T23:19:14+00:00
 ISIN:INE067A01029,CGPOWER,CG Power and Industrial Solutions Ltd.,ok,,2026-11-24T23:19:17+00:00,2026-11-24T23:19:17+00:00
-ISIN:INE085A01013,CHAMBLFERT,Chambal Fertilizers & Chemicals Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:35:10+00:00,
-ISIN:INE178A01016,CHENNPETRO,Chennai Petroleum Corporation Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:35:13+00:00,
-ISIN:INE102B01014,CHOICEIN,Choice International Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:35:15+00:00,
-ISIN:INE121A01024,CHOLAFIN,Cholamandalam Investment and Finance Company Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:35:17+00:00,
-ISIN:INE149A01033,CHOLAHLDNG,Cholamandalam Financial Holdings Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:35:20+00:00,
-ISIN:INE059A01026,CIPLA,Cipla Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:35:22+00:00,
-ISIN:INE522F01014,COALINDIA,Coal India Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:35:24+00:00,
-ISIN:INE704P01025,COCHINSHIP,Cochin Shipyard Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:35:26+00:00,
-ISIN:INE591G01025,COFORGE,Coforge Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:35:29+00:00,
-ISIN:INE259A01022,COLPAL,Colgate Palmolive (India) Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:35:31+00:00,
-ISIN:INE169A01031,COROMANDEL,Coromandel International Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:35:33+00:00,
-ISIN:INE00LO01017,CRAFTSMAN,Craftsman Automation Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:35:35+00:00,
-ISIN:INE299U01018,CROMPTON,Crompton Greaves Consumer Electricals Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:35:37+00:00,
-ISIN:INE298A01020,CUMMINSIND,Cummins India Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:35:40+00:00,
-ISIN:INE509F01029,CUPID,Cupid Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:35:42+00:00,
-ISIN:INE136B01020,CYIENT,Cyient Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:35:45+00:00,
-ISIN:INE016A01026,DABUR,Dabur India Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:35:47+00:00,
-ISIN:INE0IX101010,DATAPATTNS,Data Patterns (India) Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:35:49+00:00,
-ISIN:INE950I01011,DBCORP,D.B.Corp Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:35:51+00:00,
-ISIN:INE361B01024,DIVISLAB,Divi's Laboratories Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:35:54+00:00,
-ISIN:INE935N01020,DIXON,Dixon Technologies (India) Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:35:56+00:00,
-ISIN:INE271C01023,DLF,DLF Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:35:58+00:00,
-ISIN:INE192R01011,DMART,Avenue Supermarts Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:36:01+00:00,
-ISIN:INE321T01012,DOMS,DOMS Industries Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:36:03+00:00,
-ISIN:INE089A01031,DRREDDY,Dr. Reddy's Laboratories Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:36:05+00:00,
+ISIN:INE085A01013,CHAMBLFERT,Chambal Fertilizers & Chemicals Ltd.,ok,,2026-11-25T22:47:52+00:00,2026-11-25T22:47:52+00:00
+ISIN:INE178A01016,CHENNPETRO,Chennai Petroleum Corporation Ltd.,ok,,2026-11-25T22:47:55+00:00,2026-11-25T22:47:55+00:00
+ISIN:INE102B01014,CHOICEIN,Choice International Ltd.,ok,,2026-11-25T22:47:59+00:00,2026-11-25T22:47:59+00:00
+ISIN:INE121A01024,CHOLAFIN,Cholamandalam Investment and Finance Company Ltd.,ok,,2026-11-25T22:48:02+00:00,2026-11-25T22:48:02+00:00
+ISIN:INE149A01033,CHOLAHLDNG,Cholamandalam Financial Holdings Ltd.,ok,,2026-11-25T22:48:06+00:00,2026-11-25T22:48:06+00:00
+ISIN:INE059A01026,CIPLA,Cipla Ltd.,ok,,2026-11-25T22:48:09+00:00,2026-11-25T22:48:09+00:00
+ISIN:INE522F01014,COALINDIA,Coal India Ltd.,ok,,2026-11-25T22:48:12+00:00,2026-11-25T22:48:12+00:00
+ISIN:INE704P01025,COCHINSHIP,Cochin Shipyard Ltd.,ok,,2026-11-25T22:48:15+00:00,2026-11-25T22:48:15+00:00
+ISIN:INE591G01025,COFORGE,Coforge Ltd.,ok,,2026-11-25T22:48:19+00:00,2026-11-25T22:48:19+00:00
+ISIN:INE259A01022,COLPAL,Colgate Palmolive (India) Ltd.,ok,,2026-11-25T22:48:22+00:00,2026-11-25T22:48:22+00:00
+ISIN:INE169A01031,COROMANDEL,Coromandel International Ltd.,ok,,2026-11-25T22:48:26+00:00,2026-11-25T22:48:26+00:00
+ISIN:INE00LO01017,CRAFTSMAN,Craftsman Automation Ltd.,ok,,2026-11-25T22:48:29+00:00,2026-11-25T22:48:29+00:00
+ISIN:INE299U01018,CROMPTON,Crompton Greaves Consumer Electricals Ltd.,ok,,2026-11-25T22:48:33+00:00,2026-11-25T22:48:33+00:00
+ISIN:INE298A01020,CUMMINSIND,Cummins India Ltd.,ok,,2026-11-25T22:48:36+00:00,2026-11-25T22:48:36+00:00
+ISIN:INE509F01029,CUPID,Cupid Ltd.,ok,,2026-11-25T22:48:39+00:00,2026-11-25T22:48:39+00:00
+ISIN:INE136B01020,CYIENT,Cyient Ltd.,ok,,2026-11-25T22:48:43+00:00,2026-11-25T22:48:43+00:00
+ISIN:INE016A01026,DABUR,Dabur India Ltd.,ok,,2026-11-25T22:48:46+00:00,2026-11-25T22:48:46+00:00
+ISIN:INE0IX101010,DATAPATTNS,Data Patterns (India) Ltd.,ok,,2026-11-25T22:48:50+00:00,2026-11-25T22:48:50+00:00
+ISIN:INE950I01011,DBCORP,D.B.Corp Ltd.,ok,,2026-11-25T22:48:53+00:00,2026-11-25T22:48:53+00:00
+ISIN:INE361B01024,DIVISLAB,Divi's Laboratories Ltd.,ok,,2026-11-25T22:48:56+00:00,2026-11-25T22:48:56+00:00
+ISIN:INE935N01020,DIXON,Dixon Technologies (India) Ltd.,ok,,2026-11-25T22:49:00+00:00,2026-11-25T22:49:00+00:00
+ISIN:INE271C01023,DLF,DLF Ltd.,ok,,2026-11-25T22:49:03+00:00,2026-11-25T22:49:03+00:00
+ISIN:INE192R01011,DMART,Avenue Supermarts Ltd.,ok,,2026-11-25T22:49:06+00:00,2026-11-25T22:49:06+00:00
+ISIN:INE321T01012,DOMS,DOMS Industries Ltd.,ok,,2026-11-25T22:49:10+00:00,2026-11-25T22:49:10+00:00
+ISIN:INE089A01031,DRREDDY,Dr. Reddy's Laboratories Ltd.,ok,,2026-11-25T22:49:16+00:00,2026-11-25T22:49:16+00:00
 ISIN:INE221B01012,DYNAMATECH,Dynamatic Technologies Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:36:08+00:00,
 ISIN:INE738I01010,ECLERX,eClerx Services Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:36:10+00:00,
 ISIN:INE066A01021,EICHERMOT,Eicher Motors Ltd.,failed,"RuntimeError: Yahoo returned no core income, balance-sheet or cash-flow metrics (even if ancillary rows exist). ",2026-11-20T21:36:12+00:00,
