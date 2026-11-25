@@ -1,21 +1,21 @@
 ETF,Country,Quadrant,Relative strength (%),RS momentum (pp),As of
-SPY,United States,Leading,2.1604,0.7927,2026-11-24
-INDA,India,Leading,15.1412,22.1902,2026-11-24
-EWJ,Japan,Lagging,-1.3909,-2.6629,2026-11-24
-MCHI,China,Lagging,-8.1221,-3.8425,2026-11-24
-EWU,United Kingdom,Leading,1.9668,3.4412,2026-11-24
-EWG,Germany,Improving,-1.8019,1.5104,2026-11-24
-EWQ,France,Improving,-2.584,7.9563,2026-11-24
-EWL,Switzerland,Leading,7.5305,14.3983,2026-11-24
-EWC,Canada,Improving,-1.5619,0.2895,2026-11-24
-EWA,Australia,Improving,-1.6895,0.7438,2026-11-24
-EWY,South Korea,Lagging,-20.7736,-14.6838,2026-11-24
-EWT,Taiwan,Lagging,-13.683,-23.2678,2026-11-24
-EWZ,Brazil,Lagging,-10.9078,-28.9755,2026-11-24
-EWW,Mexico,Leading,0.6863,5.7068,2026-11-24
-EZA,South Africa,Lagging,-11.5546,-9.7501,2026-11-24
-EIDO,Indonesia,Lagging,-7.8089,-2.2738,2026-11-24
-THD,Thailand,Improving,-3.9341,0.2035,2026-11-24
-EWM,Malaysia,Improving,-4.2329,2.586,2026-11-24
-KSA,Saudi Arabia,Improving,-4.2067,1.3738,2026-11-24
-UAE,United Arab Emirates,Leading,20.4096,22.4023,2026-11-24
+SPY,United States,Leading,1.694,0.4028,2026-11-25
+INDA,India,Leading,17.2289,22.1795,2026-11-25
+EWJ,Japan,Lagging,-0.6403,-2.6726,2026-11-25
+MCHI,China,Lagging,-7.6966,-2.0851,2026-11-25
+EWU,United Kingdom,Leading,3.5086,5.3766,2026-11-25
+EWG,Germany,Improving,-1.8751,0.8062,2026-11-25
+EWQ,France,Improving,-0.251,10.0003,2026-11-25
+EWL,Switzerland,Leading,9.7415,17.0682,2026-11-25
+EWC,Canada,Improving,-0.2717,1.0089,2026-11-25
+EWA,Australia,Improving,-0.79,1.2849,2026-11-25
+EWY,South Korea,Lagging,-22.5868,-17.7128,2026-11-25
+EWT,Taiwan,Lagging,-16.1266,-24.6462,2026-11-25
+EWZ,Brazil,Lagging,-7.9497,-25.0742,2026-11-25
+EWW,Mexico,Leading,3.7385,8.5069,2026-11-25
+EZA,South Africa,Lagging,-9.9686,-8.8879,2026-11-25
+EIDO,Indonesia,Lagging,-9.3362,-4.9149,2026-11-25
+THD,Thailand,Lagging,-4.5212,-0.963,2026-11-25
+EWM,Malaysia,Improving,-2.7452,2.292,2026-11-25
+KSA,Saudi Arabia,Improving,-3.022,2.0795,2026-11-25
+UAE,United Arab Emirates,Leading,23.123,24.1767,2026-11-25

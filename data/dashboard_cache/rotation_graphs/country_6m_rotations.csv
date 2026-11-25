@@ -1,21 +1,21 @@
 ETF,Country,Quadrant,Relative strength (%),RS momentum (pp),As of
-SPY,United States,Weakening,1.7758,-0.2113,2026-11-24
-INDA,India,Leading,14.8504,28.2641,2026-11-24
-EWJ,Japan,Improving,-0.2073,4.5186,2026-11-24
-MCHI,China,Improving,-10.5563,5.5281,2026-11-24
-EWU,United Kingdom,Leading,4.1524,10.6647,2026-11-24
-EWG,Germany,Improving,-1.0891,5.3428,2026-11-24
-EWQ,France,Improving,-1.116,7.1923,2026-11-24
-EWL,Switzerland,Leading,8.4147,15.9518,2026-11-24
-EWC,Canada,Leading,2.8318,3.1797,2026-11-24
-EWA,Australia,Leading,1.1343,8.0848,2026-11-24
-EWY,South Korea,Lagging,-30.3122,-40.7762,2026-11-24
-EWT,Taiwan,Lagging,-13.187,-39.9138,2026-11-24
-EWZ,Brazil,Improving,-13.3963,2.9978,2026-11-24
-EWW,Mexico,Improving,-3.0607,7.1558,2026-11-24
-EZA,South Africa,Improving,-8.4826,7.7537,2026-11-24
-EIDO,Indonesia,Improving,-11.6111,24.2299,2026-11-24
-THD,Thailand,Improving,-3.8161,3.3272,2026-11-24
-EWM,Malaysia,Improving,-5.0745,4.3848,2026-11-24
-KSA,Saudi Arabia,Lagging,-3.5193,-0.5468,2026-11-24
-UAE,United Arab Emirates,Leading,23.5225,39.2312,2026-11-24
+SPY,United States,Weakening,1.4109,-0.931,2026-11-25
+INDA,India,Leading,16.0757,30.3528,2026-11-25
+EWJ,Japan,Leading,0.533,5.7126,2026-11-25
+MCHI,China,Improving,-9.7071,5.3848,2026-11-25
+EWU,United Kingdom,Leading,5.7397,13.3965,2026-11-25
+EWG,Germany,Improving,-0.1304,7.0008,2026-11-25
+EWQ,France,Improving,-0.3084,10.7955,2026-11-25
+EWL,Switzerland,Leading,10.1958,18.903,2026-11-25
+EWC,Canada,Leading,3.6558,5.764,2026-11-25
+EWA,Australia,Leading,1.7788,9.59,2026-11-25
+EWY,South Korea,Lagging,-33.5082,-43.7073,2026-11-25
+EWT,Taiwan,Lagging,-13.3424,-43.1757,2026-11-25
+EWZ,Brazil,Improving,-10.4247,5.5549,2026-11-25
+EWW,Mexico,Leading,0.3168,11.9828,2026-11-25
+EZA,South Africa,Improving,-8.069,9.5289,2026-11-25
+EIDO,Indonesia,Improving,-12.0379,22.4555,2026-11-25
+THD,Thailand,Improving,-5.2219,2.9777,2026-11-25
+EWM,Malaysia,Improving,-3.2374,6.4424,2026-11-25
+KSA,Saudi Arabia,Lagging,-2.7006,-0.4933,2026-11-25
+UAE,United Arab Emirates,Leading,23.5618,38.0569,2026-11-25
