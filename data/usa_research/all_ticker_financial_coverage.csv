@@ -633,7 +633,7 @@ TICKER:FCFS,FIRSTCASH HOLDINGS INC,FCFS,840489.0,True,5,True,True,True,70.0,comp
 TICKER:FCPT,FOUR CORNERS PROPERTY INC TRUST,FCPT,1650132.0,True,3,False,True,True,,partial,current_ratio; operating_margin
 TICKER:FDBC,FIDELITY D AND D BANCORP INC,FDBC,1098151.0,True,2,False,True,True,,partial,current_ratio; operating_margin; net_margin
 TICKER:FDMT,4D MOLECULAR THERAPEUTICS INC,FDMT,1650648.0,True,5,True,True,True,1030.0,complete,
-TICKER:FEIM,FREQUENCY ELECTRONICS INC,FEIM,39020.0,True,2,False,True,True,,partial,operating_margin; net_margin; eps_growth_pct
+TICKER:FEIM,FREQUENCY ELECTRONICS INC,FEIM,39020.0,True,3,False,True,True,,partial,operating_margin; eps_growth_pct
 TICKER:FELE,FRANKLIN ELECTRIC,FELE,38725.0,True,5,True,True,True,531.0,complete,
 TICKER:FENC,FENNEC PHARMACEUTICALS,FENC,1211583.0,True,5,True,True,True,1240.0,complete,
 TICKER:FET,FORUM ENERGY TECHNOLOGIES INC,FET,1401257.0,True,5,True,True,True,764.0,complete,

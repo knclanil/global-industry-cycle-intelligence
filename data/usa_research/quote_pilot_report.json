@@ -1,9 +1,9 @@
 {
-  "built_utc": "2026-11-24T23:41:20.686683+00:00",
+  "built_utc": "2026-11-25T23:22:06.098704+00:00",
   "verified_issuers": 2931,
   "verified_tickers": 2921,
-  "selected": 88,
-  "fetched": 78,
+  "selected": 10,
+  "fetched": 0,
   "failed": 10,
   "failures": {
     "ADRO": "Yahoo returned no recent price history",
@@ -17,7 +17,7 @@
     "THRD": "Yahoo returned no recent price history",
     "TSE": "Yahoo returned no recent price history"
   },
-  "prices_before": 2831,
+  "prices_before": 2909,
   "fundamental_ready_candidates": 2281,
   "selected_fundamental_ready": 0,
   "invalid_quote_identifiers_skipped": [

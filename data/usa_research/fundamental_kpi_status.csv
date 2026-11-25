@@ -867,7 +867,7 @@ TICKER:IIPR,IIPR,Incomplete,Missing: current_ratio,current_ratio,1677576.0,2025-
 TICKER:IKT,IKT,Incomplete,"Missing: operating_margin, net_margin","operating_margin,net_margin",1750149.0,2025-12-31
 TICKER:ILPT,ILPT,Incomplete,"Missing: current_ratio, operating_margin, net_margin","current_ratio,operating_margin,net_margin",1717307.0,2025-12-31
 TICKER:IMAX,IMAX,Incomplete,Missing: current_ratio,current_ratio,921582.0,2025-12-31
-TICKER:IMKTA,IMKTA,Incomplete,Missing: eps_growth_pct,eps_growth_pct,50493.0,2025-09-27
+TICKER:IMKTA,IMKTA,Incomplete,Missing: eps_growth_pct,eps_growth_pct,50493.0,2026-09-26
 TICKER:IMMR,IMMR,Incomplete,"Missing: operating_margin, net_margin, eps_growth_pct","operating_margin,net_margin,eps_growth_pct",1058811.0,2026-04-30
 TICKER:IMMX,IMMX,Incomplete,"Missing: operating_margin, net_margin","operating_margin,net_margin",1873835.0,2025-12-31
 TICKER:IMNM,IMNM,Complete,Ranked,,1472012.0,2025-12-31

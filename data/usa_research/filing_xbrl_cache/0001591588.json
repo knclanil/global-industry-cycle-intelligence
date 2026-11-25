@@ -1,0 +1,592 @@
+{
+  "cik": 1591588,
+  "checked_utc": "2026-11-25T23:27:17.345870+00:00",
+  "accession": "0001193125-26-386799",
+  "filing_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+  "facts": {
+    "AssetsCurrent": {
+      "USD": [
+        {
+          "end": "2026-06-30",
+          "val": 3604351000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:AssetsCurrent"
+        },
+        {
+          "end": "2025-06-30",
+          "val": 1743495000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:AssetsCurrent"
+        }
+      ]
+    },
+    "Assets": {
+      "USD": [
+        {
+          "end": "2026-06-30",
+          "val": 4136919000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:Assets"
+        },
+        {
+          "end": "2025-06-30",
+          "val": 2215431000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:Assets"
+        },
+        {
+          "end": "2026-06-30",
+          "val": 4136919000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:Assets"
+        },
+        {
+          "end": "2025-06-30",
+          "val": 2215431000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:Assets"
+        },
+        {
+          "end": "2026-06-30",
+          "val": 4136919000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:Assets"
+        },
+        {
+          "end": "2025-06-30",
+          "val": 2215431000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:Assets"
+        }
+      ]
+    },
+    "LiabilitiesCurrent": {
+      "USD": [
+        {
+          "end": "2026-06-30",
+          "val": 3146769000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:LiabilitiesCurrent"
+        },
+        {
+          "end": "2025-06-30",
+          "val": 1114128000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:LiabilitiesCurrent"
+        }
+      ]
+    },
+    "Liabilities": {
+      "USD": [
+        {
+          "end": "2026-06-30",
+          "val": 3198553000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:Liabilities"
+        },
+        {
+          "end": "2025-06-30",
+          "val": 1512760000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:Liabilities"
+        }
+      ]
+    },
+    "StockholdersEquity": {
+      "USD": [
+        {
+          "end": "2026-06-30",
+          "val": 875713000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2025-06-30",
+          "val": 649516000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        }
+      ]
+    },
+    "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest": {
+      "USD": [
+        {
+          "end": "2026-06-30",
+          "val": 938366000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        },
+        {
+          "end": "2025-06-30",
+          "val": 702671000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        },
+        {
+          "end": "2023-06-30",
+          "val": 600393000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        },
+        {
+          "end": "2024-06-30",
+          "val": 661856000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        },
+        {
+          "end": "2025-06-30",
+          "val": 702671000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        },
+        {
+          "end": "2026-06-30",
+          "val": 938366000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        }
+      ]
+    },
+    "Revenues": {
+      "USD": [
+        {
+          "end": "2026-06-30",
+          "val": 25513409000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:Revenues",
+          "start": "2025-07-01"
+        },
+        {
+          "end": "2025-06-30",
+          "val": 10978614000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:Revenues",
+          "start": "2024-07-01"
+        },
+        {
+          "end": "2024-06-30",
+          "val": 9699039000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:Revenues",
+          "start": "2023-07-01"
+        },
+        {
+          "end": "2026-06-30",
+          "val": 25513409000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:Revenues",
+          "start": "2025-07-01"
+        },
+        {
+          "end": "2025-06-30",
+          "val": 10978614000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:Revenues",
+          "start": "2024-07-01"
+        },
+        {
+          "end": "2024-06-30",
+          "val": 9699039000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:Revenues",
+          "start": "2023-07-01"
+        },
+        {
+          "end": "2026-06-30",
+          "val": 25513409000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:Revenues",
+          "start": "2025-07-01"
+        },
+        {
+          "end": "2025-06-30",
+          "val": 10978614000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:Revenues",
+          "start": "2024-07-01"
+        },
+        {
+          "end": "2024-06-30",
+          "val": 9699039000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:Revenues",
+          "start": "2023-07-01"
+        }
+      ]
+    },
+    "GrossProfit": {
+      "USD": [
+        {
+          "end": "2026-06-30",
+          "val": 453144000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:GrossProfit",
+          "start": "2025-07-01"
+        },
+        {
+          "end": "2025-06-30",
+          "val": 210916000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:GrossProfit",
+          "start": "2024-07-01"
+        },
+        {
+          "end": "2024-06-30",
+          "val": 173255000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:GrossProfit",
+          "start": "2023-07-01"
+        },
+        {
+          "end": "2026-06-30",
+          "val": 453144000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:GrossProfit",
+          "start": "2025-07-01"
+        },
+        {
+          "end": "2025-06-30",
+          "val": 210916000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:GrossProfit",
+          "start": "2024-07-01"
+        },
+        {
+          "end": "2024-06-30",
+          "val": 173255000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:GrossProfit",
+          "start": "2023-07-01"
+        }
+      ]
+    },
+    "ProfitLoss": {
+      "USD": [
+        {
+          "end": "2026-06-30",
+          "val": 88615000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2025-07-01"
+        },
+        {
+          "end": "2025-06-30",
+          "val": 15844000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2024-07-01"
+        },
+        {
+          "end": "2024-06-30",
+          "val": 69033000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2023-07-01"
+        },
+        {
+          "end": "2024-06-30",
+          "val": 69033000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2023-07-01"
+        },
+        {
+          "end": "2025-06-30",
+          "val": 15844000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2024-07-01"
+        },
+        {
+          "end": "2026-06-30",
+          "val": 88615000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2025-07-01"
+        },
+        {
+          "end": "2026-06-30",
+          "val": 88615000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2025-07-01"
+        },
+        {
+          "end": "2025-06-30",
+          "val": 15844000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2024-07-01"
+        },
+        {
+          "end": "2024-06-30",
+          "val": 69033000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2023-07-01"
+        }
+      ]
+    },
+    "NetIncomeLoss": {
+      "USD": [
+        {
+          "end": "2026-06-30",
+          "val": 82341000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2025-07-01"
+        },
+        {
+          "end": "2025-06-30",
+          "val": 17320000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2024-07-01"
+        },
+        {
+          "end": "2024-06-30",
+          "val": 68546000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2023-07-01"
+        }
+      ]
+    },
+    "EarningsPerShareBasic": {
+      "USD/shares": [
+        {
+          "end": "2026-06-30",
+          "val": 3.11,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2025-07-01"
+        },
+        {
+          "end": "2025-06-30",
+          "val": 0.73,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2024-07-01"
+        },
+        {
+          "end": "2024-06-30",
+          "val": 2.97,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2023-07-01"
+        }
+      ]
+    },
+    "EarningsPerShareDiluted": {
+      "USD/shares": [
+        {
+          "end": "2026-06-30",
+          "val": 3.02,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2025-07-01"
+        },
+        {
+          "end": "2025-06-30",
+          "val": 0.71,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2024-07-01"
+        },
+        {
+          "end": "2024-06-30",
+          "val": 2.84,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2023-07-01"
+        }
+      ]
+    },
+    "RevenueFromContractWithCustomerExcludingAssessedTax": {
+      "USD": [
+        {
+          "end": "2026-06-30",
+          "val": 618000000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2025-07-01"
+        },
+        {
+          "end": "2025-06-30",
+          "val": 176900000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-386799",
+          "filed": "2026-09-10",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1591588/000119312526386799/gold-20260630.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2024-07-01"
+        }
+      ]
+    }
+  },
+  "unmapped_ix_facts": 1892,
+  "status": "ok"
+}

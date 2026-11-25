@@ -1,0 +1,497 @@
+{
+  "cik": 1497645,
+  "checked_utc": "2026-11-25T23:29:22.771634+00:00",
+  "accession": "0001497645-26-000015",
+  "filing_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+  "facts": {
+    "Assets": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 2776030000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:Assets"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 2896230000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:Assets"
+        }
+      ]
+    },
+    "Liabilities": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 1502059000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:Liabilities"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 1511184000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:Liabilities"
+        }
+      ]
+    },
+    "StockholdersEquity": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 862155000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 909545000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        }
+      ]
+    },
+    "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 1223752000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 1334827000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        },
+        {
+          "end": "2022-12-31",
+          "val": 1407950000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        },
+        {
+          "end": "2023-12-31",
+          "val": 1346477000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 1334827000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 1334827000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        },
+        {
+          "end": "2025-12-31",
+          "val": 1223752000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        }
+      ]
+    },
+    "Revenues": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 729472000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:Revenues",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 731783000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:Revenues",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": 736127000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:Revenues",
+          "start": "2023-01-01"
+        }
+      ]
+    },
+    "OperatingIncomeLoss": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 65685000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:OperatingIncomeLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 103490000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:OperatingIncomeLoss",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": 58787000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:OperatingIncomeLoss",
+          "start": "2023-01-01"
+        }
+      ]
+    },
+    "EarningsPerShareBasic": {
+      "USD/shares": [
+        {
+          "end": "2025-12-31",
+          "val": -0.22,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 0.23,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": -0.27,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2023-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": -0.22,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 0.23,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": -0.27,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2023-01-01"
+        }
+      ]
+    },
+    "EarningsPerShareDiluted": {
+      "USD/shares": [
+        {
+          "end": "2025-12-31",
+          "val": -0.22,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 0.22,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": -0.27,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2023-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": -0.22,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 0.22,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": -0.27,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2023-01-01"
+        }
+      ]
+    },
+    "ProfitLoss": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": -11677000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 38891000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": -28116000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2023-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": -28116000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2023-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 38891000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": -11677000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": -11677000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 38891000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": -28116000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2023-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": -11677000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 38891000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": -28116000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2023-01-01"
+        }
+      ]
+    },
+    "NetIncomeLossAvailableToCommonStockholdersBasic": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": -23954000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 24833000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": -27990000.0,
+          "form": "10-K",
+          "accn": "0001497645-26-000015",
+          "filed": "2026-02-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1497645/000149764526000015/inn-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic",
+          "start": "2023-01-01"
+        }
+      ]
+    }
+  },
+  "unmapped_ix_facts": 2373,
+  "status": "ok"
+}
