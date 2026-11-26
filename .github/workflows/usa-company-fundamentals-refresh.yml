@@ -6,10 +6,6 @@ name: USA Company Fundamentals, Quotes and Ranking Refresh
         description: 'Max new/stale SEC CompanyFacts downloads'
         required: false
         default: '250'
-      filing_limit:
-        description: 'Max SEC annual filings to inspect per run (0 = entire queue)'
-        required: false
-        default: '125'
       quotes_limit:
         description: 'Max stale equity quote downloads'
         required: false
@@ -38,21 +34,13 @@ jobs:
       - name: Dependencies
         run: |
           python -m pip install -r requirements.txt
-          python -m pip install yfinance pyarrow requests pandas beautifulsoup4
+          python -m pip install yfinance pyarrow requests pandas
       - name: Test USA financial autopilot
         run: python -m unittest discover -s tests -p 'test_usa_financial_autopilot.py' -v
       - name: Test USA fundamental rankings
         run: python -m unittest discover -s tests -p 'test_usa_fundamental_rankings.py' -v
-      - name: Test SEC KPI recovery
-        run: python -m unittest discover -s tests -p 'test_usa_kpi_recovery.py' -v
-      - name: Test USA recovery follow-up
-        run: python -m unittest discover -s tests -p 'test_usa_recovery_followup.py' -v
       - name: Test USA ranking integration
         run: python -m unittest discover -s tests -p 'test_usa_complete_ranking_integration.py' -v
-      - name: Test comprehensive SEC recovery
-        run: python -m unittest discover -s tests -p 'test_usa_comprehensive_recovery.py' -v
-      - name: Test filing-level XBRL recovery
-        run: python -m unittest discover -s tests -p 'test_usa_filing_xbrl_recovery.py' -v
       - name: Refresh SEC CompanyFacts for verified issuers
         env:
           SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
@@ -73,13 +61,6 @@ jobs:
           python scripts/unified_fundamental_coverage.py
           python scripts/build_usa_fundamental_rankings.py
           python scripts/usa_all_ticker_coverage.py
-      - name: Recover missing KPIs from annual inline XBRL filings
-        env:
-          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
-          FILING_LIMIT: ${{ inputs.filing_limit || '125' }}
-        run: |
-          python scripts/usa_filing_xbrl_recovery.py --limit "$FILING_LIMIT" --pause 0.3
-          python scripts/build_usa_fundamental_rankings.py
       - name: Enforce identity and output integrity
         run: |
           python - <<'PY'
@@ -141,7 +122,7 @@ jobs:
         if: always()
         shell: bash
         run: |
-          for f in data/usa_research/collection_report.json data/usa_research/quote_pilot_report.json data/usa_research/completion_report.json data/usa_research/all_ticker_financial_coverage.json data/usa_research/fundamental_ranking_report.json data/usa_research/filing_xbrl_recovery_report.json; do
+          for f in data/usa_research/collection_report.json data/usa_research/quote_pilot_report.json data/usa_research/completion_report.json data/usa_research/all_ticker_financial_coverage.json; do
             if [ -f "$f" ]; then
               echo "### $f" >> "$GITHUB_STEP_SUMMARY"
               echo '```json' >> "$GITHUB_STEP_SUMMARY"

@@ -1,9 +1,9 @@
 company_key,symbol,company_name,industry,isin,sector_indices,factor_indices,factor_families,index_memberships,financial_status,financial_asof,revenue,net_income,roe,operating_margin,net_margin,pe,financial_asof
-ISIN:INE002A01018,RELIANCE,Reliance Industries Ltd.,Oil Gas & Consumable Fuels,INE002A01018,Nifty Energy | Nifty India Manufacturing | Nifty Infrastructure | Nifty Oil & Gas,Nifty Low Volatility 50 | Nifty100 Low Volatility 30 | Nifty50 Equal Weight | Nifty50 Value 20,Equal Weight | Low Volatility | Value,8,Available,,10572190000000.0,807750000000.0,0.08934991095428249,0.11480781181571652,0.0764032806826211,23.07756743173061,2026-03-31
+ISIN:INE002A01018,RELIANCE,Reliance Industries Ltd.,Oil Gas & Consumable Fuels,INE002A01018,Nifty Energy | Nifty India Manufacturing | Nifty Infrastructure | Nifty Oil & Gas,Nifty Low Volatility 50 | Nifty100 Low Volatility 30 | Nifty50 Equal Weight | Nifty50 Value 20,Equal Weight | Low Volatility | Value,8,Not available,,,,,,,,
 ISIN:INE002S01010,MGL,Mahanagar Gas Ltd.,Oil Gas & Consumable Fuels,INE002S01010,Nifty Energy | Nifty Oil & Gas,,,2,Not available,,,,,,,,
 ISIN:INE003A01024,SIEMENS,Siemens Ltd.,Capital Goods,INE003A01024,Nifty Energy | Nifty India Manufacturing,,,2,Not available,,,,,,,,
-ISIN:INE006I01046,ASTRAL,Astral Ltd.,Capital Goods,INE006I01046,Nifty India Manufacturing,,,1,Available,,65536000000.0,5366000000.0,0.13223588555656868,0.1175384521484375,0.081878662109375,61.3420130195293,2026-03-31
-ISIN:INE009A01021,INFY,Infosys Ltd.,Information Technology,INE009A01021,Nifty IT,Nifty Dividend Opportunities 50 | Nifty100 Quality 30 | Nifty200 Quality 30 | Nifty50 Equal Weight | Nifty50 Value 20 | Nifty500 Quality 50,Dividend | Equal Weight | Quality | Value,7,Available,,20158000000.0,3313000000.0,0.33854486000408746,0.20284750471276913,0.16435162218474056,,2026-03-31
+ISIN:INE006I01046,ASTRAL,Astral Ltd.,Capital Goods,INE006I01046,Nifty India Manufacturing,,,1,Not available,,,,,,,,
+ISIN:INE009A01021,INFY,Infosys Ltd.,Information Technology,INE009A01021,Nifty IT,Nifty Dividend Opportunities 50 | Nifty100 Quality 30 | Nifty200 Quality 30 | Nifty50 Equal Weight | Nifty50 Value 20 | Nifty500 Quality 50,Dividend | Equal Weight | Quality | Value,7,Not available,,,,,,,,
 ISIN:INE00FF01025,ACUTAAS,Acutaas Chemicals Ltd.,Healthcare,INE00FF01025,,Nifty Alpha Index | Nifty500 Growth 50 | Nifty500 Momentum 50,Alpha | Growth | Momentum,3,Not available,,,,,,,,2026-03-31
 ISIN:INE00LO01017,CRAFTSMAN,Craftsman Automation Ltd.,Automobile and Auto Components,INE00LO01017,,Nifty500 Growth 50 | Nifty500 Momentum 50,Growth | Momentum,2,Not available,,,,,,,,
 ISIN:INE010B01027,ZYDUSLIFE,Zydus Lifesciences Ltd.,Healthcare,INE010B01027,Nifty India Manufacturing | Nifty Pharma,Nifty Low Volatility 50 | Nifty100 Quality 30 | Nifty500 Low Volatility 50,Low Volatility | Quality,5,Not available,,,,,,,,
@@ -16,11 +16,11 @@ ISIN:INE018E01016,SBICARD,SBI Cards and Payment Services Ltd.,Financial Services
 ISIN:INE019A01038,JSWSTEEL,JSW Steel Ltd.,Metals & Mining,INE019A01038,Nifty India Manufacturing | Nifty Metal,Nifty Low Volatility 50 | Nifty50 Equal Weight,Equal Weight | Low Volatility,4,Not available,,,,,,,,
 ISIN:INE019C01026,HSCL,Himadri Speciality Chemical Ltd.,Chemicals,INE019C01026,Nifty India Manufacturing,,,1,Not available,,,,,,,,
 ISIN:INE020B01018,RECLTD,REC Ltd.,Financial Services,INE020B01018,Nifty Financial Services,Nifty Dividend Opportunities 50 | Nifty200 Value 30 | Nifty500 Value 50,Dividend | Value,4,Not available,,,,,,,,
-ISIN:INE021A01026,ASIANPAINT,Asian Paints Ltd.,Consumer Durables,INE021A01026,,Nifty Low Volatility 50 | Nifty100 Low Volatility 30 | Nifty100 Quality 30 | Nifty200 Quality 30 | Nifty50 Equal Weight | Nifty500 Low Volatility 50,Equal Weight | Low Volatility | Quality,6,Available,,355409000000.0,43253500000.0,0.20238784292605277,0.15776724843771542,0.12170063222934703,57.202394147639104,2026-03-31
+ISIN:INE021A01026,ASIANPAINT,Asian Paints Ltd.,Consumer Durables,INE021A01026,,Nifty Low Volatility 50 | Nifty100 Low Volatility 30 | Nifty100 Quality 30 | Nifty200 Quality 30 | Nifty50 Equal Weight | Nifty500 Low Volatility 50,Equal Weight | Low Volatility | Quality,6,Not available,,,,,,,,
 ISIN:INE022Q01020,IEX,Indian Energy Exchange Ltd.,Financial Services,INE022Q01020,,Nifty500 Quality 50,Quality,1,Not available,,,,,,,,
 ISIN:INE027H01010,MAXHEALTH,Max Healthcare Institute Ltd.,Healthcare,INE027H01010,Nifty Infrastructure,Nifty50 Equal Weight,Equal Weight,2,Not available,,,,,,,,
-ISIN:INE028A01039,BANKBARODA,Bank of Baroda,Financial Services,INE028A01039,Nifty Bank | Nifty PSU Bank,Nifty Dividend Opportunities 50 | Nifty200 Value 30 | Nifty500 Value 50,Dividend | Value,5,Available,,748702056000.0,198464251000.0,0.11965185884423564,,0.265077742754322,7.18030224075039,2026-03-31
-ISIN:INE029A01011,BPCL,Bharat Petroleum Corporation Ltd.,Oil Gas & Consumable Fuels,INE029A01011,Nifty Energy | Nifty India Manufacturing | Nifty Infrastructure | Nifty Oil & Gas,Nifty Dividend Opportunities 50 | Nifty200 Value 30 | Nifty500 Value 50,Dividend | Value,7,Available,,4503026700000.0,258434500000.0,0.2579952373089578,0.0834286858658866,0.0573912875089104,5.047941808563399,2026-03-31
+ISIN:INE028A01039,BANKBARODA,Bank of Baroda,Financial Services,INE028A01039,Nifty Bank | Nifty PSU Bank,Nifty Dividend Opportunities 50 | Nifty200 Value 30 | Nifty500 Value 50,Dividend | Value,5,Not available,,,,,,,,
+ISIN:INE029A01011,BPCL,Bharat Petroleum Corporation Ltd.,Oil Gas & Consumable Fuels,INE029A01011,Nifty Energy | Nifty India Manufacturing | Nifty Infrastructure | Nifty Oil & Gas,Nifty Dividend Opportunities 50 | Nifty200 Value 30 | Nifty500 Value 50,Dividend | Value,7,Not available,,,,,,,,
 ISIN:INE030A01027,HINDUNILVR,Hindustan Unilever Ltd.,Fast Moving Consumer Goods,INE030A01027,Nifty FMCG,Nifty Dividend Opportunities 50 | Nifty Low Volatility 50 | Nifty100 Low Volatility 30 | Nifty100 Quality 30 | Nifty200 Quality 30 | Nifty50 Equal Weight,Dividend | Equal Weight | Low Volatility | Quality,7,Not available,,,,,,,,
 ISIN:INE031A01017,HUDCO,Housing & Urban Development Corporation Ltd.,Financial Services,INE031A01017,,Nifty Dividend Opportunities 50,Dividend,1,Not available,,,,,,,,
 ISIN:INE031B01049,AJANTPHARM,Ajanta Pharmaceuticals Ltd.,Healthcare,INE031B01049,Nifty Pharma,,,1,Not available,,,,,,,,2026-03-31
@@ -44,14 +44,14 @@ ISIN:INE062A01020,SBIN,State Bank of India,Financial Services,INE062A01020,Nifty
 ISIN:INE066A01021,EICHERMOT,Eicher Motors Ltd.,Automobile and Auto Components,INE066A01021,Nifty Auto | Nifty India Manufacturing,Nifty Alpha Index | Nifty100 Quality 30 | Nifty50 Equal Weight | Nifty500 Low Volatility 50,Alpha | Equal Weight | Low Volatility | Quality,6,Not available,,,,,,,,
 ISIN:INE066F01020,HAL,Hindustan Aeronautics Ltd.,Capital Goods,INE066F01020,Nifty India Defence | Nifty India Manufacturing,Nifty100 Quality 30 | Nifty200 Quality 30,Quality,4,Not available,,,,,,,,
 ISIN:INE066P01011,INOXWIND,Inox Wind Ltd.,Capital Goods,INE066P01011,Nifty Energy,,,1,Not available,,,,,,,,
-ISIN:INE067A01029,CGPOWER,CG Power and Industrial Solutions Ltd.,Capital Goods,INE067A01029,Nifty Energy | Nifty India Manufacturing | Nifty Infrastructure,Nifty200 Momentum 30 | Nifty500 Momentum 50 | Nifty500 Quality 50,Momentum | Quality,6,Available,,122796800000.0,12062700000.0,0.15134220272806656,0.11769280632720071,0.09823301584406108,102.54215304798963,2026-03-31
+ISIN:INE067A01029,CGPOWER,CG Power and Industrial Solutions Ltd.,Capital Goods,INE067A01029,Nifty Energy | Nifty India Manufacturing | Nifty Infrastructure,Nifty200 Momentum 30 | Nifty500 Momentum 50 | Nifty500 Quality 50,Momentum | Quality,6,Not available,,,,,,,,
 ISIN:INE068V01023,GLAND,Gland Pharma Ltd.,Healthcare,INE068V01023,Nifty Pharma,,,1,Not available,,,,,,,,
 ISIN:INE073K01018,SONACOMS,Sona BLW Precision Forgings Ltd.,Automobile and Auto Components,INE073K01018,Nifty Auto | Nifty India Manufacturing,,,2,Not available,,,,,,,,
 ISIN:INE075A01022,WIPRO,Wipro Ltd.,Information Technology,INE075A01022,Nifty IT,Nifty Dividend Opportunities 50 | Nifty Low Volatility 50 | Nifty100 Low Volatility 30 | Nifty100 Quality 30 | Nifty500 Low Volatility 50,Dividend | Low Volatility | Quality,6,Not available,,,,,,,,
 ISIN:INE079A01024,AMBUJACEM,Ambuja Cements Ltd.,Construction Materials,INE079A01024,,Nifty500 Low Volatility 50,Low Volatility,1,Not available,,,,,,,,2026-03-31
 ISIN:INE07Y701011,POWERINDIA,Hitachi Energy India Ltd.,Capital Goods,INE07Y701011,Nifty Energy | Nifty India Manufacturing,Nifty Alpha Index | Nifty200 Alpha 30 | Nifty200 Momentum 30 | Nifty500 Growth 50 | Nifty500 Momentum 50,Alpha | Growth | Momentum,7,Not available,,,,,,,,
 ISIN:INE081A01020,TATASTEEL,Tata Steel Ltd.,Metals & Mining,INE081A01020,Nifty India Manufacturing | Nifty Metal,Nifty Dividend Opportunities 50 | Nifty200 Momentum 30 | Nifty200 Value 30 | Nifty50 Equal Weight | Nifty50 Value 20,Dividend | Equal Weight | Momentum | Value,7,Not available,,,,,,,,
-ISIN:INE084A01016,BANKINDIA,Bank of India,Financial Services,INE084A01016,Nifty PSU Bank,Nifty Alpha Index | Nifty Dividend Opportunities 50 | Nifty200 Value 30 | Nifty500 Value 50,Alpha | Dividend | Value,5,Available,,325981955000.0,103062992000.0,0.11456720597440874,,0.31616164765930066,7.023409893992932,2026-03-31
+ISIN:INE084A01016,BANKINDIA,Bank of India,Financial Services,INE084A01016,Nifty PSU Bank,Nifty Alpha Index | Nifty Dividend Opportunities 50 | Nifty200 Value 30 | Nifty500 Value 50,Alpha | Dividend | Value,5,Not available,,,,,,,,
 ISIN:INE085A01013,CHAMBLFERT,Chambal Fertilizers & Chemicals Ltd.,Chemicals,INE085A01013,,Nifty500 Value 50,Value,1,Not available,,,,,,,,
 ISIN:INE089A01031,DRREDDY,Dr. Reddy's Laboratories Ltd.,Healthcare,INE089A01031,Nifty India Manufacturing | Nifty Pharma,Nifty Low Volatility 50 | Nifty100 Low Volatility 30 | Nifty100 Quality 30 | Nifty50 Equal Weight | Nifty50 Value 20 | Nifty500 Low Volatility 50,Equal Weight | Low Volatility | Quality | Value,8,Not available,,,,,,,,
 ISIN:INE089C01029,STLTECH,Sterlite Technologies Ltd.,Telecommunication,INE089C01029,,Nifty Alpha Index,Alpha,1,Not available,,,,,,,,
@@ -63,7 +63,7 @@ ISIN:INE094A01015,HINDPETRO,Hindustan Petroleum Corporation Ltd.,Oil Gas & Consu
 ISIN:INE095A01012,INDUSINDBK,IndusInd Bank Ltd.,Financial Services,INE095A01012,Nifty Bank,Nifty200 Value 30 | Nifty500 Value 50,Value,3,Not available,,,,,,,,
 ISIN:INE099Z01011,MIDHANI,Mishra Dhatu Nigam Ltd.,Capital Goods,INE099Z01011,Nifty India Defence,,,1,Not available,,,,,,,,
 ISIN:INE0BS701011,PREMIERENE,Premier Energies Ltd.,Capital Goods,INE0BS701011,,Nifty500 Growth 50,Growth,1,Not available,,,,,,,,
-ISIN:INE0CZ201020,ANTHEM,Anthem Biosciences Ltd.,Healthcare,INE0CZ201020,Nifty India Manufacturing,,,1,Available,,21243330000.0,5917920000.0,0.1945074405524901,0.3319903235509687,0.2785777935945071,91.78811121764143,2026-03-31
+ISIN:INE0CZ201020,ANTHEM,Anthem Biosciences Ltd.,Healthcare,INE0CZ201020,Nifty India Manufacturing,,,1,Not available,,,,,,,,
 ISIN:INE0DK501011,PPLPHARMA,Piramal Pharma Ltd.,Healthcare,INE0DK501011,Nifty Pharma,,,1,Not available,,,,,,,,
 ISIN:INE0DYJ01015,SYRMA,Syrma SGS Technology Ltd.,Capital Goods,INE0DYJ01015,,Nifty500 Growth 50 | Nifty500 Momentum 50,Growth | Momentum,2,Not available,,,,,,,,
 ISIN:INE0FS801015,MSUMI,Motherson Sumi Wiring India Ltd.,Automobile and Auto Components,INE0FS801015,,Nifty500 Quality 50,Quality,1,Not available,,,,,,,,
@@ -71,7 +71,7 @@ ISIN:INE0INX01018,AEGISVOPAK,Aegis Vopak Terminals Ltd.,Oil Gas & Consumable Fue
 ISIN:INE0IX101010,DATAPATTNS,Data Patterns (India) Ltd.,Capital Goods,INE0IX101010,Nifty India Defence,,,1,Not available,,,,,,,,
 ISIN:INE0J1Y01017,LICI,Life Insurance Corporation of India,Financial Services,INE0J1Y01017,,Nifty500 Low Volatility 50,Low Volatility,1,Not available,,,,,,,,
 ISIN:INE0J5401028,HONASA,Honasa Consumer Ltd.,Fast Moving Consumer Goods,INE0J5401028,,Nifty500 Growth 50 | Nifty500 Momentum 50,Growth | Momentum,2,Not available,,,,,,,,
-ISIN:INE0LEZ01016,ATHERENERG,Ather Energy Ltd.,Automobile and Auto Components,INE0LEZ01016,,Nifty Alpha Index | Nifty500 Momentum 50,Alpha | Momentum,2,Available,,36625200000.0,-5171700000.0,-0.2010277420383032,-0.1565779845570809,-0.14120605484748205,,2026-03-31
+ISIN:INE0LEZ01016,ATHERENERG,Ather Energy Ltd.,Automobile and Auto Components,INE0LEZ01016,,Nifty Alpha Index | Nifty500 Momentum 50,Alpha | Momentum,2,Not available,,,,,,,,
 ISIN:INE0NT901020,NETWEB,Netweb Technologies India Ltd.,Information Technology,INE0NT901020,,Nifty500 Growth 50 | Nifty500 Momentum 50,Growth | Momentum,2,Not available,,,,,,,,
 ISIN:INE0ONG01011,NTPCGREEN,NTPC Green Energy Ltd.,Power,INE0ONG01011,Nifty Energy,,,1,Not available,,,,,,,,
 ISIN:INE0U3I01011,UNIMECH,Unimech Aerospace and Manufacturing Ltd.,Capital Goods,INE0U3I01011,Nifty India Defence,,,1,Not available,,,,,,,,
@@ -85,7 +85,7 @@ ISIN:INE114A01011,SAIL,Steel Authority of India Ltd.,Metals & Mining,INE114A0101
 ISIN:INE115A01026,LICHSGFIN,LIC Housing Finance Ltd.,Financial Services,INE115A01026,Nifty Financial Services,Nifty200 Value 30 | Nifty500 Value 50,Value,3,Not available,,,,,,,,
 ISIN:INE115Q01022,IKS,Inventurus Knowledge Solutions Ltd.,Information Technology,INE115Q01022,,Nifty500 Growth 50,Growth,1,Not available,,,,,,,,
 ISIN:INE117A01022,ABB,ABB India Ltd.,Capital Goods,INE117A01022,Nifty Energy | Nifty India Manufacturing,Nifty100 Quality 30 | Nifty200 Momentum 30 | Nifty500 Momentum 50 | Nifty500 Quality 50,Momentum | Quality,6,Not available,,,,,,,,2025-12-31
-ISIN:INE118H01025,BSE,BSE Ltd.,Financial Services,INE118H01025,Nifty Financial Services,Nifty Alpha Index | Nifty200 Alpha 30 | Nifty200 Momentum 30 | Nifty50 Equal Weight | Nifty500 Growth 50 | Nifty500 Momentum 50 | Nifty500 Quality 50,Alpha | Equal Weight | Growth | Momentum | Quality,8,Available,,44854400000.0,24969800000.0,0.3741909573041251,0.6585931369051865,0.5566856317328958,61.98647087939284,2026-03-31
+ISIN:INE118H01025,BSE,BSE Ltd.,Financial Services,INE118H01025,Nifty Financial Services,Nifty Alpha Index | Nifty200 Alpha 30 | Nifty200 Momentum 30 | Nifty50 Equal Weight | Nifty500 Growth 50 | Nifty500 Momentum 50 | Nifty500 Quality 50,Alpha | Equal Weight | Growth | Momentum | Quality,8,Not available,,,,,,,,
 ISIN:INE121A01024,CHOLAFIN,Cholamandalam Investment and Finance Company Ltd.,Financial Services,INE121A01024,Nifty Financial Services,,,1,Not available,,,,,,,,
 ISIN:INE121E01018,JSWENERGY,JSW Energy Ltd.,Power,INE121E01018,Nifty Energy,,,1,Not available,,,,,,,,
 ISIN:INE121J01017,INDUSTOWER,Indus Towers Ltd.,Telecommunication,INE121J01017,Nifty Infrastructure,,,1,Not available,,,,,,,,
@@ -102,19 +102,19 @@ ISIN:INE146L01010,KIRLOSENG,Kirloskar Oil Eng Ltd.,Capital Goods,INE146L01010,,N
 ISIN:INE149A01033,CHOLAHLDNG,Cholamandalam Financial Holdings Ltd.,Financial Services,INE149A01033,,Nifty500 Value 50,Value,1,Not available,,,,,,,,
 ISIN:INE152A01029,THERMAX,Thermax Ltd.,Capital Goods,INE152A01029,Nifty Energy,Nifty500 Momentum 50,Momentum,2,Not available,,,,,,,,
 ISIN:INE152M01016,TRITURBINE,Triveni Turbine Ltd.,Capital Goods,INE152M01016,,Nifty500 Quality 50,Quality,1,Not available,,,,,,,,
-ISIN:INE153T01027,BLS,BLS International Services Ltd.,Consumer Services,INE153T01027,,Nifty500 Growth 50 | Nifty500 Quality 50,Growth | Quality,2,Available,,29982151000.0,6867119000.0,0.27875859384212764,0.252059433627694,0.22904023797358636,13.247596153846153,2026-03-31
+ISIN:INE153T01027,BLS,BLS International Services Ltd.,Consumer Services,INE153T01027,,Nifty500 Growth 50 | Nifty500 Quality 50,Growth | Quality,2,Not available,,,,,,,,
 ISIN:INE154A01025,ITC,ITC Ltd.,Fast Moving Consumer Goods,INE154A01025,Nifty FMCG,Nifty Dividend Opportunities 50 | Nifty Low Volatility 50 | Nifty100 Low Volatility 30 | Nifty100 Quality 30 | Nifty200 Quality 30 | Nifty200 Value 30 | Nifty50 Equal Weight | Nifty50 Value 20,Dividend | Equal Weight | Low Volatility | Quality | Value,9,Not available,,,,,,,,
 ISIN:INE155A01022,TMPV,Tata Motors Passenger Vehicles Ltd.,Automobile and Auto Components,INE155A01022,Nifty Auto | Nifty India Manufacturing,Nifty200 Value 30 | Nifty50 Equal Weight | Nifty50 Value 20 | Nifty500 Value 50,Equal Weight | Value,6,Not available,,,,,,,,
 ISIN:INE158A01026,HEROMOTOCO,Hero MotoCorp Ltd.,Automobile and Auto Components,INE158A01026,Nifty Auto,Nifty Dividend Opportunities 50 | Nifty Low Volatility 50 | Nifty200 Quality 30,Dividend | Low Volatility | Quality,4,Not available,,,,,,,,
 ISIN:INE160A01022,PNB,Punjab National Bank,Financial Services,INE160A01022,Nifty Bank | Nifty PSU Bank,Nifty Dividend Opportunities 50 | Nifty200 Value 30 | Nifty500 Value 50,Dividend | Value,5,Not available,,,,,,,,
 ISIN:INE169A01031,COROMANDEL,Coromandel International Ltd.,Chemicals,INE169A01031,Nifty India Manufacturing,,,1,Not available,,,,,,,,
 ISIN:INE171A01029,FEDERALBNK,Federal Bank Ltd.,Financial Services,INE171A01029,Nifty Bank,Nifty Alpha Index | Nifty200 Alpha 30 | Nifty200 Momentum 30 | Nifty200 Value 30 | Nifty500 Low Volatility 50 | Nifty500 Momentum 50 | Nifty500 Value 50,Alpha | Low Volatility | Momentum | Value,8,Not available,,,,,,,,
-ISIN:INE171Z01026,BDL,Bharat Dynamics Ltd.,Capital Goods,INE171Z01026,Nifty India Defence,,,1,Available,,24153596000.0,4203376000.0,0.09911356821187081,0.06154027748083556,0.1740269233616394,88.92763731473408,2026-03-31
-ISIN:INE172A01027,CASTROLIND,Castrol India Ltd.,Oil Gas & Consumable Fuels,INE172A01027,Nifty Energy | Nifty Oil & Gas,Nifty500 Low Volatility 50 | Nifty500 Quality 50 | Nifty500 Value 50,Low Volatility | Quality | Value,5,Available,,57003200000.0,9499300000.0,0.499884228805978,0.2191262946641592,0.16664503045443063,19.828125,2025-12-31
+ISIN:INE171Z01026,BDL,Bharat Dynamics Ltd.,Capital Goods,INE171Z01026,Nifty India Defence,,,1,Not available,,,,,,,,
+ISIN:INE172A01027,CASTROLIND,Castrol India Ltd.,Oil Gas & Consumable Fuels,INE172A01027,Nifty Energy | Nifty Oil & Gas,Nifty500 Low Volatility 50 | Nifty500 Quality 50 | Nifty500 Value 50,Low Volatility | Quality | Value,5,Not available,,,,,,,,
 ISIN:INE176B01034,HAVELLS,Havells India Ltd.,Consumer Durables,INE176B01034,Nifty India Manufacturing,Nifty Low Volatility 50 | Nifty200 Quality 30 | Nifty500 Low Volatility 50,Low Volatility | Quality,4,Not available,,,,,,,,
 ISIN:INE178A01016,CHENNPETRO,Chennai Petroleum Corporation Ltd.,Oil Gas & Consumable Fuels,INE178A01016,Nifty Oil & Gas,,,1,Not available,,,,,,,,
 ISIN:INE180A01020,MFSL,Max Financial Services Ltd.,Financial Services,INE180A01020,Nifty Financial Services,Nifty500 Low Volatility 50,Low Volatility,2,Not available,,,,,,,,
-ISIN:INE180C01042,CGCL,Capri Global Capital Ltd.,Financial Services,INE180C01042,,Nifty500 Growth 50,Growth,1,Available,,47100680000.0,9491520000.0,0.1317629812257409,0.3063692498707025,0.20151556198339388,22.985177865612652,2026-03-31
+ISIN:INE180C01042,CGCL,Capri Global Capital Ltd.,Financial Services,INE180C01042,,Nifty500 Growth 50,Growth,1,Not available,,,,,,,,
 ISIN:INE191B01025,WELCORP,Welspun Corp Ltd.,Capital Goods,INE191B01025,Nifty India Manufacturing,Nifty Alpha Index | Nifty500 Growth 50 | Nifty500 Momentum 50,Alpha | Growth | Momentum,4,Not available,,,,,,,,
 ISIN:INE191H01014,PVRINOX,PVR INOX Ltd.,Media Entertainment & Publication,INE191H01014,Nifty Media,,,1,Not available,,,,,,,,
 ISIN:INE192A01025,TATACONSUM,Tata Consumer Products Ltd.,Fast Moving Consumer Goods,INE192A01025,Nifty FMCG,Nifty Low Volatility 50 | Nifty50 Equal Weight,Equal Weight | Low Volatility,3,Not available,,,,,,,,
@@ -129,20 +129,20 @@ ISIN:INE200M01039,VBL,Varun Beverages Ltd.,Fast Moving Consumer Goods,INE200M010
 ISIN:INE203G01027,IGL,Indraprastha Gas Ltd.,Oil Gas & Consumable Fuels,INE203G01027,Nifty Energy | Nifty Oil & Gas,Nifty500 Value 50,Value,3,Not available,,,,,,,,
 ISIN:INE205A01025,VEDL,Vedanta Ltd.,Metals & Mining,INE205A01025,Nifty India Manufacturing | Nifty Metal,Nifty Alpha Index | Nifty Dividend Opportunities 50 | Nifty200 Alpha 30 | Nifty200 Momentum 30 | Nifty200 Value 30 | Nifty500 Value 50,Alpha | Dividend | Momentum | Value,8,Not available,,,,,,,,
 ISIN:INE206F01022,AIIL,Authum Investment & Infrastructure Ltd.,Financial Services,INE206F01022,,Nifty500 Growth 50,Growth,1,Not available,,,,,,,,2026-03-31
-ISIN:INE208A01029,ASHOKLEY,Ashok Leyland Ltd.,Capital Goods,INE208A01029,Nifty Auto | Nifty India Manufacturing | Nifty Infrastructure,Nifty Alpha Index | Nifty Dividend Opportunities 50 | Nifty200 Alpha 30,Alpha | Dividend,6,Available,,560760300000.0,34710300000.0,0.24372318172913468,0.19618649893724646,0.061898640114145025,26.852791878172585,2026-03-31
+ISIN:INE208A01029,ASHOKLEY,Ashok Leyland Ltd.,Capital Goods,INE208A01029,Nifty Auto | Nifty India Manufacturing | Nifty Infrastructure,Nifty Alpha Index | Nifty Dividend Opportunities 50 | Nifty200 Alpha 30,Alpha | Dividend,6,Not available,,,,,,,,
 ISIN:INE208C01025,AEGISLOG,Aegis Logistics Ltd.,Oil Gas & Consumable Fuels,INE208C01025,Nifty Energy | Nifty Oil & Gas,,,2,Not available,,,,,,,,2026-03-31
 ISIN:INE209L01016,JWL,Jupiter Wagons Ltd.,Capital Goods,INE209L01016,,Nifty500 Growth 50,Growth,1,Not available,,,,,,,,
 ISIN:INE211B01039,PHOENIXLTD,Phoenix Mills Ltd.,Realty,INE211B01039,Nifty Realty,Nifty500 Growth 50,Growth,2,Not available,,,,,,,,
 ISIN:INE212H01026,AIAENG,AIA Engineering Ltd.,Capital Goods,INE212H01026,Nifty India Manufacturing,,,1,Not available,,,,,,,,2026-03-31
 ISIN:INE213A01029,ONGC,Oil & Natural Gas Corporation Ltd.,Oil Gas & Consumable Fuels,INE213A01029,Nifty Energy | Nifty Infrastructure | Nifty Oil & Gas,Nifty Dividend Opportunities 50 | Nifty Low Volatility 50 | Nifty200 Value 30 | Nifty50 Equal Weight | Nifty50 Value 20 | Nifty500 Low Volatility 50 | Nifty500 Value 50,Dividend | Equal Weight | Low Volatility | Value,10,Not available,,,,,,,,
 ISIN:INE214T01019,LTM,LTM Ltd.,Information Technology,INE214T01019,Nifty IT,Nifty100 Quality 30 | Nifty200 Quality 30 | Nifty500 Quality 50,Quality,4,Not available,,,,,,,,
-ISIN:INE216A01030,BRITANNIA,Britannia Industries Ltd.,Fast Moving Consumer Goods,INE216A01030,Nifty FMCG,Nifty Dividend Opportunities 50 | Nifty Low Volatility 50 | Nifty100 Low Volatility 30 | Nifty100 Quality 30 | Nifty200 Quality 30 | Nifty500 Low Volatility 50 | Nifty500 Quality 50,Dividend | Low Volatility | Quality,8,Available,,188582100000.0,25334900000.0,0.49612459268078707,0.17011370644403684,0.13434413976724197,45.92793306712302,2026-03-31
+ISIN:INE216A01030,BRITANNIA,Britannia Industries Ltd.,Fast Moving Consumer Goods,INE216A01030,Nifty FMCG,Nifty Dividend Opportunities 50 | Nifty Low Volatility 50 | Nifty100 Low Volatility 30 | Nifty100 Quality 30 | Nifty200 Quality 30 | Nifty500 Low Volatility 50 | Nifty500 Quality 50,Dividend | Low Volatility | Quality,8,Not available,,,,,,,,
 ISIN:INE220G01021,JSL,Jindal Stainless Ltd.,Metals & Mining,INE220G01021,Nifty Metal,,,1,Not available,,,,,,,,
 ISIN:INE221B01012,DYNAMATECH,Dynamatic Technologies Ltd.,Capital Goods,INE221B01012,Nifty India Defence,,,1,Not available,,,,,,,,
 ISIN:INE226A01021,VOLTAS,Voltas Ltd.,Consumer Durables,INE226A01021,Nifty India Manufacturing,,,1,Not available,,,,,,,,
 ISIN:INE235A01022,FINCABLES,Finolex Cables Ltd.,Capital Goods,INE235A01022,,Nifty500 Momentum 50,Momentum,1,Not available,,,,,,,,
 ISIN:INE237A01036,KOTAKBANK,Kotak Mahindra Bank Ltd.,Financial Services,INE237A01036,Nifty Bank | Nifty Financial Services,Nifty Low Volatility 50 | Nifty100 Low Volatility 30 | Nifty50 Equal Weight | Nifty50 Value 20,Equal Weight | Low Volatility | Value,6,Not available,,,,,,,,
-ISIN:INE238A01034,AXISBANK,Axis Bank Ltd.,Financial Services,INE238A01034,Nifty Bank | Nifty Financial Services,Nifty Low Volatility 50 | Nifty50 Equal Weight | Nifty50 Value 20,Equal Weight | Low Volatility | Value,5,Available,,880673100000.0,263848500000.0,0.12270005838574913,,0.29959868196269424,16.437026515151512,2026-03-31
+ISIN:INE238A01034,AXISBANK,Axis Bank Ltd.,Financial Services,INE238A01034,Nifty Bank | Nifty Financial Services,Nifty Low Volatility 50 | Nifty50 Equal Weight | Nifty50 Value 20,Equal Weight | Low Volatility | Value,5,Not available,,,,,,,,
 ISIN:INE239A01024,NESTLEIND,Nestle India Ltd.,Fast Moving Consumer Goods,INE239A01024,Nifty FMCG,Nifty Low Volatility 50 | Nifty100 Low Volatility 30 | Nifty100 Quality 30 | Nifty200 Quality 30 | Nifty50 Equal Weight,Equal Weight | Low Volatility | Quality,6,Not available,,,,,,,,
 ISIN:INE242A01010,IOC,Indian Oil Corporation Ltd.,Oil Gas & Consumable Fuels,INE242A01010,Nifty Energy | Nifty India Manufacturing | Nifty Infrastructure | Nifty Oil & Gas,Nifty Dividend Opportunities 50 | Nifty200 Value 30 | Nifty500 Low Volatility 50 | Nifty500 Value 50,Dividend | Low Volatility | Value,8,Not available,,,,,,,,
 ISIN:INE242C01024,ANANTRAJ,Anant Raj Ltd.,Realty,INE242C01024,Nifty Realty,Nifty500 Growth 50,Growth,2,Not available,,,,,,,,2026-03-31
@@ -150,28 +150,28 @@ ISIN:INE245A01021,TATAPOWER,Tata Power Co. Ltd.,Power,INE245A01021,Nifty Energy 
 ISIN:INE249Z01020,MAZDOCK,Mazagoan Dock Shipbuilders Ltd.,Capital Goods,INE249Z01020,Nifty India Defence | Nifty India Manufacturing,Nifty100 Quality 30 | Nifty200 Quality 30 | Nifty500 Quality 50,Quality,5,Not available,,,,,,,,
 ISIN:INE251B01027,ZENTEC,Zen Technologies Ltd.,Capital Goods,INE251B01027,Nifty India Defence,Nifty500 Growth 50 | Nifty500 Quality 50,Growth | Quality,3,Not available,,,,,,,,
 ISIN:INE256A01028,ZEEL,Zee Entertainment Enterprises Ltd.,Media Entertainment & Publication,INE256A01028,Nifty Media,Nifty500 Value 50,Value,2,Not available,,,,,,,,
-ISIN:INE257A01026,BHEL,Bharat Heavy Electricals Ltd.,Capital Goods,INE257A01026,Nifty Energy,Nifty Alpha Index | Nifty200 Alpha 30 | Nifty200 Momentum 30 | Nifty500 Momentum 50,Alpha | Momentum,5,Available,,323598300000.0,16002600000.0,0.06120334529026899,0.049531780605769564,0.049452052127591524,90.36956521739131,2026-03-31
-ISIN:INE258A01024,BEML,BEML Ltd.,Capital Goods,INE258A01024,Nifty India Defence,,,1,Available,,41542172000.0,1415716000.0,0.04825527471025092,0.053048309558778005,0.034079007712933256,118.13996476568653,2026-03-31
+ISIN:INE257A01026,BHEL,Bharat Heavy Electricals Ltd.,Capital Goods,INE257A01026,Nifty Energy,Nifty Alpha Index | Nifty200 Alpha 30 | Nifty200 Momentum 30 | Nifty500 Momentum 50,Alpha | Momentum,5,Not available,,,,,,,,
+ISIN:INE258A01024,BEML,BEML Ltd.,Capital Goods,INE258A01024,Nifty India Defence,,,1,Not available,,,,,,,,
 ISIN:INE259A01022,COLPAL,Colgate Palmolive (India) Ltd.,Fast Moving Consumer Goods,INE259A01022,Nifty FMCG,Nifty Dividend Opportunities 50 | Nifty200 Quality 30 | Nifty500 Low Volatility 50 | Nifty500 Quality 50,Dividend | Low Volatility | Quality,5,Not available,,,,,,,,
 ISIN:INE260B01028,GODFRYPHLP,Godfrey Phillips India Ltd.,Fast Moving Consumer Goods,INE260B01028,Nifty FMCG,,,1,Not available,,,,,,,,
 ISIN:INE260D01016,OLECTRA,Olectra Greentech Ltd.,Automobile and Auto Components,INE260D01016,,Nifty500 Growth 50,Growth,1,Not available,,,,,,,,
 ISIN:INE262H01021,PERSISTENT,Persistent Systems Ltd.,Information Technology,INE262H01021,Nifty IT,Nifty200 Quality 30 | Nifty500 Quality 50,Quality,3,Not available,,,,,,,,
-ISIN:INE263A01024,BEL,Bharat Electronics Ltd.,Capital Goods,INE263A01024,Nifty India Defence | Nifty India Manufacturing,Nifty100 Quality 30 | Nifty200 Quality 30 | Nifty50 Equal Weight | Nifty500 Quality 50,Equal Weight | Quality,6,Available,,267964700000.0,60620000000.0,0.25270642241992036,0.2907968848135594,0.2262238272429167,47.74427020506635,2026-03-31
+ISIN:INE263A01024,BEL,Bharat Electronics Ltd.,Capital Goods,INE263A01024,Nifty India Defence | Nifty India Manufacturing,Nifty100 Quality 30 | Nifty200 Quality 30 | Nifty50 Equal Weight | Nifty500 Quality 50,Equal Weight | Quality,6,Not available,,,,,,,,
 ISIN:INE267A01025,HINDZINC,Hindustan Zinc Ltd.,Metals & Mining,INE267A01025,Nifty India Manufacturing | Nifty Metal,Nifty Dividend Opportunities 50 | Nifty100 Quality 30 | Nifty200 Quality 30,Dividend | Quality,5,Not available,,,,,,,,
 ISIN:INE269A01021,SONATSOFTW,Sonata Software Ltd.,Information Technology,INE269A01021,,Nifty500 Quality 50,Quality,1,Not available,,,,,,,,
 ISIN:INE271C01023,DLF,DLF Ltd.,Realty,INE271C01023,Nifty Infrastructure | Nifty Realty,,,2,Not available,,,,,,,,
 ISIN:INE274J01014,OIL,Oil India Ltd.,Oil Gas & Consumable Fuels,INE274J01014,Nifty Energy | Nifty Oil & Gas,Nifty Dividend Opportunities 50 | Nifty200 Value 30 | Nifty500 Value 50,Dividend | Value,5,Not available,,,,,,,,
 ISIN:INE280A01028,TITAN,Titan Company Ltd.,Consumer Durables,INE280A01028,,Nifty Low Volatility 50 | Nifty100 Low Volatility 30 | Nifty50 Equal Weight,Equal Weight | Low Volatility,3,Not available,,,,,,,,
 ISIN:INE281B01032,LLOYDSME,Lloyds Metals And Energy Ltd.,Metals & Mining,INE281B01032,Nifty Metal,Nifty500 Growth 50,Growth,2,Not available,,,,,,,,
-ISIN:INE296A01032,BAJFINANCE,Bajaj Finance Ltd.,Financial Services,INE296A01032,Nifty Financial Services,Nifty50 Equal Weight,Equal Weight,2,Available,,496654500000.0,190173900000.0,0.16682064459852375,,0.38290984980504555,35.906260242543425,2026-03-31
+ISIN:INE296A01032,BAJFINANCE,Bajaj Finance Ltd.,Financial Services,INE296A01032,Nifty Financial Services,Nifty50 Equal Weight,Equal Weight,2,Not available,,,,,,,,
 ISIN:INE298A01020,CUMMINSIND,Cummins India Ltd.,Capital Goods,INE298A01020,Nifty India Manufacturing | Nifty Infrastructure,Nifty Alpha Index | Nifty Dividend Opportunities 50 | Nifty200 Alpha 30 | Nifty200 Momentum 30 | Nifty200 Quality 30 | Nifty500 Growth 50 | Nifty500 Momentum 50,Alpha | Dividend | Growth | Momentum | Quality,9,Not available,,,,,,,,
 ISIN:INE298J01013,NAM-INDIA,Nippon Life India Asset Management Ltd.,Financial Services,INE298J01013,,Nifty500 Quality 50,Quality,1,Not available,,,,,,,,
 ISIN:INE299U01018,CROMPTON,Crompton Greaves Consumer Electricals Ltd.,Consumer Durables,INE299U01018,Nifty India Manufacturing,,,1,Not available,,,,,,,,
 ISIN:INE318A01026,PIDILITIND,Pidilite Industries Ltd.,Chemicals,INE318A01026,Nifty India Manufacturing,Nifty Low Volatility 50 | Nifty100 Low Volatility 30 | Nifty100 Quality 30 | Nifty200 Quality 30 | Nifty500 Low Volatility 50,Low Volatility | Quality,6,Not available,,,,,,,,
-ISIN:INE320B01020,CENTUM,Centum Electronics Ltd.,Capital Goods,INE320B01020,Nifty India Defence,,,1,Available,,9503180000.0,-466540000.0,-0.135934267649544,0.1338993894675256,-0.04909304043488601,,2026-03-31
+ISIN:INE320B01020,CENTUM,Centum Electronics Ltd.,Capital Goods,INE320B01020,Nifty India Defence,,,1,Not available,,,,,,,,
 ISIN:INE321T01012,DOMS,DOMS Industries Ltd.,Fast Moving Consumer Goods,INE321T01012,,Nifty500 Growth 50,Growth,1,Not available,,,,,,,,
 ISIN:INE322A01010,GILLETTE,Gillette India Ltd.,Fast Moving Consumer Goods,INE322A01010,,Nifty500 Quality 50,Quality,1,Not available,,,,,,,,
-ISIN:INE323A01026,BOSCHLTD,Bosch Ltd.,Automobile and Auto Components,INE323A01026,Nifty Auto | Nifty India Manufacturing,Nifty100 Quality 30,Quality,3,Available,,195947000000.0,27732000000.0,0.18680785708511843,0.11420435117659367,0.14152806626281597,51.899986174184015,2026-03-31
+ISIN:INE323A01026,BOSCHLTD,Bosch Ltd.,Automobile and Auto Components,INE323A01026,Nifty Auto | Nifty India Manufacturing,Nifty100 Quality 30,Quality,3,Not available,,,,,,,,
 ISIN:INE326A01037,LUPIN,Lupin Ltd.,Healthcare,INE326A01037,Nifty India Manufacturing | Nifty Pharma,Nifty Low Volatility 50 | Nifty500 Low Volatility 50,Low Volatility,4,Not available,,,,,,,,
 ISIN:INE335Y01020,IRCTC,Indian Railway Catering And Tourism Corporation Ltd.,Consumer Services,INE335Y01020,,Nifty500 Low Volatility 50 | Nifty500 Quality 50,Low Volatility | Quality,2,Not available,,,,,,,,
 ISIN:INE338I01027,MOTILALOFS,Motilal Oswal Financial Services Ltd.,Financial Services,INE338I01027,,Nifty500 Quality 50,Quality,1,Not available,,,,,,,,
@@ -184,38 +184,38 @@ ISIN:INE361B01024,DIVISLAB,Divi's Laboratories Ltd.,Healthcare,INE361B01024,Nift
 ISIN:INE364U01010,ADANIGREEN,Adani Green Energy Ltd.,Power,INE364U01010,Nifty Energy | Nifty Infrastructure,Nifty200 Alpha 30 | Nifty200 Momentum 30,Alpha | Momentum,4,Not available,,,,,,,,2026-03-31
 ISIN:INE367G01038,PFOCUS,Prime Focus Ltd.,Media Entertainment & Publication,INE367G01038,Nifty Media,,,1,Not available,,,,,,,,
 ISIN:INE371P01015,AMBER,Amber Enterprises India Ltd.,Consumer Durables,INE371P01015,Nifty India Manufacturing,Nifty500 Growth 50,Growth,2,Not available,,,,,,,,2026-03-31
-ISIN:INE372A01015,APARINDS,Apar Industries Ltd.,Capital Goods,INE372A01015,,Nifty Alpha Index | Nifty500 Momentum 50,Alpha | Momentum,2,Available,,228102300000.0,9769300000.0,0.18113502108139978,0.07770767765165015,0.04282859050522507,58.4160454676496,2026-03-31
-ISIN:INE376G01013,BIOCON,Biocon Ltd.,Healthcare,INE376G01013,Nifty Pharma,,,1,Available,,167799000000.0,3856000000.0,0.011330579046656363,0.10262874033814266,0.02297987473107706,126.48936170212767,2026-03-31
+ISIN:INE372A01015,APARINDS,Apar Industries Ltd.,Capital Goods,INE372A01015,,Nifty Alpha Index | Nifty500 Momentum 50,Alpha | Momentum,2,Not available,,,,,,,,
+ISIN:INE376G01013,BIOCON,Biocon Ltd.,Healthcare,INE376G01013,Nifty Pharma,,,1,Not available,,,,,,,,
 ISIN:INE377N01017,WAAREEENER,Waaree Energies Ltd.,Capital Goods,INE377N01017,,Nifty500 Growth 50,Growth,1,Not available,,,,,,,,
-ISIN:INE377Y01014,BAJAJHFL,Bajaj Housing Finance Ltd.,Financial Services,INE377Y01014,,Nifty500 Low Volatility 50,Low Volatility,1,Available,,108387000000.0,25603400000.0,0.11367774596308894,0.30038842296585383,0.23622205615064537,26.162866449511398,2026-03-31
+ISIN:INE377Y01014,BAJAJHFL,Bajaj Housing Finance Ltd.,Financial Services,INE377Y01014,,Nifty500 Low Volatility 50,Low Volatility,1,Not available,,,,,,,,
 ISIN:INE382Z01011,GRSE,Garden Reach Shipbuilders & Engineers Ltd.,Capital Goods,INE382Z01011,Nifty India Defence,Nifty500 Growth 50 | Nifty500 Quality 50,Growth | Quality,3,Not available,,,,,,,,
-ISIN:INE386C01029,ASTRAMICRO,Astra Microwave Products Ltd.,Capital Goods,INE386C01029,Nifty India Defence,,,1,Available,,11628016000.0,1929708000.0,0.14679372254618084,0.24977218813596402,0.16595333202155896,80.0838677849038,2026-03-31
+ISIN:INE386C01029,ASTRAMICRO,Astra Microwave Products Ltd.,Capital Goods,INE386C01029,Nifty India Defence,,,1,Not available,,,,,,,,
 ISIN:INE388Y01029,NYKAA,FSN E-Commerce Ventures Ltd.,Consumer Services,INE388Y01029,,Nifty Alpha Index | Nifty200 Alpha 30 | Nifty500 Growth 50,Alpha | Growth,3,Not available,,,,,,,,
-ISIN:INE397D01024,BHARTIARTL,Bharti Airtel Ltd.,Telecommunication,INE397D01024,Nifty Infrastructure,Nifty Low Volatility 50 | Nifty100 Low Volatility 30 | Nifty50 Equal Weight | Nifty500 Low Volatility 50,Equal Weight | Low Volatility,5,Available,,2109728000000.0,266952000000.0,0.1790943842808705,0.32149689438638535,0.12653384701724582,47.971602434077084,2026-03-31
-ISIN:INE399L01023,ATGL,Adani Total Gas Ltd.,Oil Gas & Consumable Fuels,INE399L01023,Nifty Energy | Nifty Oil & Gas,,,2,Available,,58560100000.0,6557200000.0,0.13478840900261263,0.16304787730895268,0.11197385250366718,92.35738255033557,2026-03-31
+ISIN:INE397D01024,BHARTIARTL,Bharti Airtel Ltd.,Telecommunication,INE397D01024,Nifty Infrastructure,Nifty Low Volatility 50 | Nifty100 Low Volatility 30 | Nifty50 Equal Weight | Nifty500 Low Volatility 50,Equal Weight | Low Volatility,5,Not available,,,,,,,,
+ISIN:INE399L01023,ATGL,Adani Total Gas Ltd.,Oil Gas & Consumable Fuels,INE399L01023,Nifty Energy | Nifty Oil & Gas,,,2,Not available,,,,,,,,
 ISIN:INE404A01024,ABSLAMC,Aditya Birla Sun Life AMC Ltd.,Financial Services,INE404A01024,,Nifty500 Momentum 50 | Nifty500 Quality 50,Momentum | Quality,2,Not available,,,,,,,,2026-03-31
 ISIN:INE405E01023,UNOMINDA,UNO Minda Ltd.,Automobile and Auto Components,INE405E01023,Nifty Auto | Nifty India Manufacturing,,,2,Not available,,,,,,,,
-ISIN:INE406A01037,AUROPHARMA,Aurobindo Pharma Ltd.,Healthcare,INE406A01037,Nifty India Manufacturing | Nifty Pharma,Nifty200 Alpha 30,Alpha,3,Available,,333847400000.0,35047500000.0,0.09249565265813992,0.15554621662472135,0.10498059892034504,29.772953264832612,2026-03-31
+ISIN:INE406A01037,AUROPHARMA,Aurobindo Pharma Ltd.,Healthcare,INE406A01037,Nifty India Manufacturing | Nifty Pharma,Nifty200 Alpha 30,Alpha,3,Not available,,,,,,,,
 ISIN:INE414G01012,MUTHOOTFIN,Muthoot Finance Ltd.,Financial Services,INE414G01012,Nifty Financial Services,Nifty500 Growth 50,Growth,2,Not available,,,,,,,,
 ISIN:INE418L01047,NAZARA,Nazara Technologies Ltd.,Media Entertainment & Publication,INE418L01047,Nifty Media,,,1,Not available,,,,,,,,
 ISIN:INE419M01035,TDPOWERSYS,TD Power Systems Ltd.,Capital Goods,INE419M01035,Nifty Energy,Nifty Alpha Index,Alpha,2,Not available,,,,,,,,
 ISIN:INE423A01024,ADANIENT,Adani Enterprises Ltd.,Metals & Mining,INE423A01024,Nifty Metal,Nifty50 Equal Weight,Equal Weight,2,Not available,,,,,,,,2026-03-31
 ISIN:INE424H01027,SUNTV,Sun TV Network Ltd.,Media Entertainment & Publication,INE424H01027,Nifty Media,,,1,Not available,,,,,,,,
-ISIN:INE437A01024,APOLLOHOSP,Apollo Hospitals Enterprise Ltd.,Healthcare,INE437A01024,Nifty Infrastructure,Nifty Low Volatility 50 | Nifty100 Low Volatility 30 | Nifty50 Equal Weight | Nifty500 Low Volatility 50,Equal Weight | Low Volatility,5,Available,,249106000000.0,19417000000.0,0.2048185145726311,0.11654476407633699,0.0779467375334195,68.60085964132207,2026-03-31
+ISIN:INE437A01024,APOLLOHOSP,Apollo Hospitals Enterprise Ltd.,Healthcare,INE437A01024,Nifty Infrastructure,Nifty Low Volatility 50 | Nifty100 Low Volatility 30 | Nifty50 Equal Weight | Nifty500 Low Volatility 50,Equal Weight | Low Volatility,5,Not available,,,,,,,,
 ISIN:INE451A01017,FORCEMOT,Force Motors Ltd.,Automobile and Auto Components,INE451A01017,,Nifty500 Growth 50 | Nifty500 Quality 50,Growth | Quality,2,Not available,,,,,,,,
 ISIN:INE455K01017,POLYCAB,Polycab India Ltd.,Capital Goods,INE455K01017,Nifty India Manufacturing,Nifty Alpha Index | Nifty200 Alpha 30 | Nifty200 Momentum 30 | Nifty200 Quality 30 | Nifty500 Growth 50 | Nifty500 Momentum 50,Alpha | Growth | Momentum | Quality,7,Not available,,,,,,,,
 ISIN:INE457A01014,MAHABANK,Bank of Maharashtra,Financial Services,INE457A01014,Nifty PSU Bank,Nifty Dividend Opportunities 50 | Nifty200 Alpha 30 | Nifty500 Momentum 50 | Nifty500 Value 50,Alpha | Dividend | Momentum | Value,5,Not available,,,,,,,,
 ISIN:INE457L01029,PGEL,PG Electroplast Ltd.,Consumer Durables,INE457L01029,,Nifty500 Growth 50,Growth,1,Not available,,,,,,,,
 ISIN:INE463V01026,ANANDRATHI,Anand Rathi Wealth Ltd.,Financial Services,INE463V01026,,Nifty500 Growth 50 | Nifty500 Momentum 50 | Nifty500 Quality 50,Growth | Momentum | Quality,3,Not available,,,,,,,,2026-03-31
-ISIN:INE465A01025,BHARATFORG,Bharat Forge Ltd.,Automobile and Auto Components,INE465A01025,Nifty Auto | Nifty India Defence | Nifty India Manufacturing | Nifty Infrastructure,Nifty Alpha Index | Nifty200 Alpha 30 | Nifty200 Momentum 30 | Nifty500 Momentum 50,Alpha | Momentum,8,Available,,162238060000.0,10796610000.0,0.11270136035674917,0.1206459815902631,0.06654794812018833,76.2621789193977,2026-03-31
-ISIN:INE467B01029,TCS,Tata Consultancy Services Ltd.,Information Technology,INE467B01029,Nifty IT,Nifty Dividend Opportunities 50 | Nifty Low Volatility 50 | Nifty100 Low Volatility 30 | Nifty100 Quality 30 | Nifty200 Quality 30 | Nifty50 Equal Weight | Nifty50 Value 20 | Nifty500 Low Volatility 50 | Nifty500 Quality 50,Dividend | Equal Weight | Low Volatility | Quality | Value,10,Available,,2670210000000.0,492100000000.0,0.45887728459530025,0.2509989850985503,0.1842926211796076,17.470774207778838,2026-03-31
-ISIN:INE472A01039,BLUESTARCO,Blue Star Ltd.,Consumer Durables,INE472A01039,Nifty India Manufacturing,,,1,Available,,122500200000.0,5276800000.0,0.15377921573415965,0.06449785388105489,0.04307584803943177,69.59454191033139,2026-03-31
+ISIN:INE465A01025,BHARATFORG,Bharat Forge Ltd.,Automobile and Auto Components,INE465A01025,Nifty Auto | Nifty India Defence | Nifty India Manufacturing | Nifty Infrastructure,Nifty Alpha Index | Nifty200 Alpha 30 | Nifty200 Momentum 30 | Nifty500 Momentum 50,Alpha | Momentum,8,Not available,,,,,,,,
+ISIN:INE467B01029,TCS,Tata Consultancy Services Ltd.,Information Technology,INE467B01029,Nifty IT,Nifty Dividend Opportunities 50 | Nifty Low Volatility 50 | Nifty100 Low Volatility 30 | Nifty100 Quality 30 | Nifty200 Quality 30 | Nifty50 Equal Weight | Nifty50 Value 20 | Nifty500 Low Volatility 50 | Nifty500 Quality 50,Dividend | Equal Weight | Low Volatility | Quality | Value,10,Not available,,,,,,,,
+ISIN:INE472A01039,BLUESTARCO,Blue Star Ltd.,Consumer Durables,INE472A01039,Nifty India Manufacturing,,,1,Not available,,,,,,,,
 ISIN:INE473A01011,LINDEINDIA,Linde India Ltd.,Chemicals,INE473A01011,Nifty India Manufacturing,,,1,Not available,,,,,,,,
-ISIN:INE476A01022,CANBK,Canara Bank,Financial Services,INE476A01022,Nifty Bank | Nifty PSU Bank,Nifty Alpha Index | Nifty Dividend Opportunities 50 | Nifty200 Value 30 | Nifty500 Value 50,Alpha | Dividend | Value,6,Available,,641752896000.0,197059095000.0,0.16741828570199635,,0.30706381884406797,6.155085135757018,2026-03-31
+ISIN:INE476A01022,CANBK,Canara Bank,Financial Services,INE476A01022,Nifty Bank | Nifty PSU Bank,Nifty Alpha Index | Nifty Dividend Opportunities 50 | Nifty200 Value 30 | Nifty500 Value 50,Alpha | Dividend | Value,6,Not available,,,,,,,,
 ISIN:INE481G01011,ULTRACEMCO,UltraTech Cement Ltd.,Construction Materials,INE481G01011,Nifty Infrastructure,Nifty Low Volatility 50 | Nifty100 Low Volatility 30 | Nifty50 Equal Weight | Nifty500 Low Volatility 50,Equal Weight | Low Volatility,5,Not available,,,,,,,,
-ISIN:INE483A01010,CENTRALBK,Central Bank of India,Financial Services,INE483A01010,Nifty PSU Bank,,,1,Available,,206607924000.0,45237874000.0,0.11599115850457489,,0.21895517424588226,6.68,2026-03-31
+ISIN:INE483A01010,CENTRALBK,Central Bank of India,Financial Services,INE483A01010,Nifty PSU Bank,,,1,Not available,,,,,,,,
 ISIN:INE484J01027,GODREJPROP,Godrej Properties Ltd.,Realty,INE484J01027,Nifty Realty,,,1,Not available,,,,,,,,
-ISIN:INE486A01021,CESC,CESC Ltd.,Power,INE486A01021,Nifty Energy,Nifty500 Value 50,Value,2,Available,,185703400000.0,15419900000.0,0.12306050753610835,0.13150109260250487,0.08303509790343096,10.828030954428202,2026-03-31
+ISIN:INE486A01021,CESC,CESC Ltd.,Power,INE486A01021,Nifty Energy,Nifty500 Value 50,Value,2,Not available,,,,,,,,
 ISIN:INE494B01023,TVSMOTOR,TVS Motor Company Ltd.,Automobile and Auto Components,INE494B01023,Nifty Auto | Nifty India Manufacturing,Nifty Alpha Index | Nifty500 Low Volatility 50,Alpha | Low Volatility,4,Not available,,,,,,,,
 ISIN:INE498L01015,LTF,L&T Finance Ltd.,Financial Services,INE498L01015,,Nifty Alpha Index | Nifty200 Alpha 30 | Nifty200 Momentum 30,Alpha | Momentum,3,Not available,,,,,,,,
 ISIN:INE509F01029,CUPID,Cupid Ltd.,Fast Moving Consumer Goods,INE509F01029,,Nifty Alpha Index,Alpha,1,Not available,,,,,,,,
@@ -225,10 +225,10 @@ ISIN:INE528G01035,YESBANK,Yes Bank Ltd.,Financial Services,INE528G01035,Nifty Ba
 ISIN:INE530B01024,IIFL,IIFL Finance Ltd.,Financial Services,INE530B01024,,Nifty Alpha Index,Alpha,1,Not available,,,,,,,,
 ISIN:INE531E01026,HINDCOPPER,Hindustan Copper Ltd.,Metals & Mining,INE531E01026,Nifty India Manufacturing | Nifty Metal,Nifty Alpha Index | Nifty500 Momentum 50,Alpha | Momentum,4,Not available,,,,,,,,
 ISIN:INE540L01014,ALKEM,Alkem Laboratories Ltd.,Healthcare,INE540L01014,Nifty India Manufacturing | Nifty Pharma,,,2,Not available,,,,,,,,2026-03-31
-ISIN:INE545U01014,BANDHANBNK,Bandhan Bank Ltd.,Financial Services,INE545U01014,,Nifty500 Value 50,Value,1,Available,,135640247000.0,12235627000.0,0.04784233167329015,,0.0902064635727182,22.714097496706195,2026-03-31
+ISIN:INE545U01014,BANDHANBNK,Bandhan Bank Ltd.,Financial Services,INE545U01014,,Nifty500 Value 50,Value,1,Not available,,,,,,,,
 ISIN:INE548A01028,HFCL,HFCL Ltd.,Telecommunication,INE548A01028,,Nifty Alpha Index | Nifty500 Momentum 50,Alpha | Momentum,2,Not available,,,,,,,,
 ISIN:INE548C01032,EMAMILTD,Emami Ltd.,Fast Moving Consumer Goods,INE548C01032,,Nifty500 Quality 50,Quality,1,Not available,,,,,,,,
-ISIN:INE555B01013,AXISCADES,AXISCADES Technologies Ltd.,Capital Goods,INE555B01013,Nifty India Defence,,,1,Available,,11572110000.0,719182000.0,0.0988506129454935,0.12093455731063739,0.062147871045124876,110.88532382650031,2026-03-31
+ISIN:INE555B01013,AXISCADES,AXISCADES Technologies Ltd.,Capital Goods,INE555B01013,Nifty India Defence,,,1,Not available,,,,,,,,
 ISIN:INE562A01011,INDIANB,Indian Bank,Financial Services,INE562A01011,Nifty PSU Bank,Nifty Alpha Index | Nifty Dividend Opportunities 50 | Nifty200 Alpha 30 | Nifty200 Value 30 | Nifty500 Value 50,Alpha | Dividend | Value,6,Not available,,,,,,,,
 ISIN:INE565A01014,IOB,Indian Overseas Bank,Financial Services,INE565A01014,Nifty PSU Bank,,,1,Not available,,,,,,,,
 ISIN:INE570L01029,SAILIFE,Sai Life Sciences Ltd.,Healthcare,INE570L01029,Nifty Pharma,Nifty500 Growth 50 | Nifty500 Momentum 50,Growth | Momentum,3,Not available,,,,,,,,
@@ -239,7 +239,7 @@ ISIN:INE585B01010,MARUTI,Maruti Suzuki India Ltd.,Automobile and Auto Components
 ISIN:INE589A01014,NLCINDIA,NLC India Ltd.,Power,INE589A01014,Nifty Energy,Nifty500 Momentum 50,Momentum,2,Not available,,,,,,,,
 ISIN:INE591G01025,COFORGE,Coforge Ltd.,Information Technology,INE591G01025,Nifty IT,,,1,Not available,,,,,,,,
 ISIN:INE596F01018,PTCIL,PTC Industries Ltd.,Capital Goods,INE596F01018,,Nifty500 Growth 50,Growth,1,Not available,,,,,,,,
-ISIN:INE596I01020,CAMS,Computer Age Management Services Ltd.,Financial Services,INE596I01020,,Nifty500 Quality 50,Quality,1,Available,,15162490000.0,4760057000.0,0.3603045021022305,0.3906918322782076,0.31393636533313457,37.74960794563513,2026-03-31
+ISIN:INE596I01020,CAMS,Computer Age Management Services Ltd.,Financial Services,INE596I01020,,Nifty500 Quality 50,Quality,1,Not available,,,,,,,,
 ISIN:INE603J01030,PIIND,PI Industries Ltd.,Chemicals,INE603J01030,Nifty India Manufacturing,Nifty500 Low Volatility 50,Low Volatility,2,Not available,,,,,,,,
 ISIN:INE608A01012,PSB,Punjab & Sind Bank,Financial Services,INE608A01012,Nifty PSU Bank,,,1,Not available,,,,,,,,
 ISIN:INE614G01033,RPOWER,Reliance Power Ltd.,Power,INE614G01033,Nifty Energy,Nifty500 Value 50,Value,2,Not available,,,,,,,,
@@ -257,14 +257,14 @@ ISIN:INE670K01029,LODHA,Lodha Developers Ltd.,Realty,INE670K01029,Nifty Realty,,
 ISIN:INE671H01015,SOBHA,Sobha Ltd.,Realty,INE671H01015,Nifty Realty,,,1,Not available,,,,,,,,
 ISIN:INE674K01013,ABCAPITAL,Aditya Birla Capital Ltd.,Financial Services,INE674K01013,,Nifty Alpha Index | Nifty200 Alpha 30 | Nifty200 Momentum 30 | Nifty500 Momentum 50,Alpha | Momentum,4,Not available,,,,,,,,2026-03-31
 ISIN:INE685A01028,TORNTPHARM,Torrent Pharmaceuticals Ltd.,Healthcare,INE685A01028,Nifty India Manufacturing | Nifty Pharma,Nifty Low Volatility 50 | Nifty100 Low Volatility 30 | Nifty200 Momentum 30 | Nifty500 Low Volatility 50 | Nifty500 Momentum 50,Low Volatility | Momentum,7,Not available,,,,,,,,
-ISIN:INE686A01026,CEMPRO,Cemindia Projects Ltd.,Construction,INE686A01026,,Nifty500 Growth 50,Growth,1,Available,,100605800000.0,5977300000.0,0.2490977587744522,0.08531714871309606,0.059413075588087366,41.35671169876401,2026-03-31
+ISIN:INE686A01026,CEMPRO,Cemindia Projects Ltd.,Construction,INE686A01026,,Nifty500 Growth 50,Growth,1,Not available,,,,,,,,
 ISIN:INE686F01025,UBL,United Breweries Ltd.,Fast Moving Consumer Goods,INE686F01025,Nifty FMCG,,,1,Not available,,,,,,,,
 ISIN:INE691A01018,UCOBANK,UCO Bank,Financial Services,INE691A01018,Nifty PSU Bank,,,1,Not available,,,,,,,,
 ISIN:INE692A01016,UNIONBANK,Union Bank of India,Financial Services,INE692A01016,Nifty Bank | Nifty PSU Bank,Nifty Alpha Index | Nifty Dividend Opportunities 50 | Nifty200 Alpha 30 | Nifty200 Value 30 | Nifty500 Value 50,Alpha | Dividend | Value,7,Not available,,,,,,,,
-ISIN:INE699H01024,AWL,AWL Agri Business Ltd.,Fast Moving Consumer Goods,INE699H01024,,Nifty500 Value 50,Value,1,Available,,746190300000.0,10420500000.0,0.09980633519527389,0.025053796598535252,0.013964936290380618,20.84472049689441,2026-03-31
-ISIN:INE702C01027,APLAPOLLO,APL Apollo Tubes Ltd.,Capital Goods,INE702C01027,Nifty India Manufacturing | Nifty Metal,,,2,Available,,223853600000.0,12030800000.0,0.2271449420658431,0.07087980715967936,0.053744054149676396,38.53253345639132,2026-03-31
+ISIN:INE699H01024,AWL,AWL Agri Business Ltd.,Fast Moving Consumer Goods,INE699H01024,,Nifty500 Value 50,Value,1,Not available,,,,,,,,
+ISIN:INE702C01027,APLAPOLLO,APL Apollo Tubes Ltd.,Capital Goods,INE702C01027,Nifty India Manufacturing | Nifty Metal,,,2,Not available,,,,,,,,
 ISIN:INE704P01025,COCHINSHIP,Cochin Shipyard Ltd.,Capital Goods,INE704P01025,Nifty India Defence | Nifty India Manufacturing,,,2,Not available,,,,,,,,
-ISIN:INE713T01028,APOLLO,Apollo Micro Systems Ltd.,Capital Goods,INE713T01028,Nifty India Defence,,,1,Available,,9043238000.0,1129204000.0,0.08599561235063817,0.2245191379459437,0.124867221232041,128.5045317220544,2026-03-31
+ISIN:INE713T01028,APOLLO,Apollo Micro Systems Ltd.,Capital Goods,INE713T01028,Nifty India Defence,,,1,Not available,,,,,,,,
 ISIN:INE716B01029,TIPSMUSIC,Tips Music Ltd.,Media Entertainment & Publication,INE716B01029,Nifty Media,,,1,Not available,,,,,,,,
 ISIN:INE721A01047,SHRIRAMFIN,Shriram Finance Ltd.,Financial Services,INE721A01047,Nifty Financial Services,Nifty Alpha Index | Nifty Dividend Opportunities 50 | Nifty200 Alpha 30 | Nifty200 Momentum 30 | Nifty50 Equal Weight | Nifty500 Momentum 50,Alpha | Dividend | Equal Weight | Momentum,7,Not available,,,,,,,,
 ISIN:INE725A01030,NAVA,Nava Ltd.,Power,INE725A01030,Nifty Energy,,,1,Not available,,,,,,,,
@@ -272,7 +272,7 @@ ISIN:INE726G01019,ICICILIFE,ICICI Life Insurance Ltd.,Financial Services,INE726G
 ISIN:INE731H01025,ACE,Action Construction Equipment Ltd.,Capital Goods,INE731H01025,,Nifty500 Quality 50,Quality,1,Not available,,,,,,,,2026-03-31
 ISIN:INE732I01021,ANGELONE,Angel One Ltd.,Financial Services,INE732I01021,,Nifty Dividend Opportunities 50,Dividend,1,Not available,,,,,,,,2026-03-31
 ISIN:INE733E01010,NTPC,NTPC Ltd.,Power,INE733E01010,Nifty Energy | Nifty Infrastructure,Nifty Dividend Opportunities 50 | Nifty Low Volatility 50 | Nifty100 Low Volatility 30 | Nifty200 Momentum 30 | Nifty200 Value 30 | Nifty50 Equal Weight | Nifty50 Value 20 | Nifty500 Low Volatility 50 | Nifty500 Value 50,Dividend | Equal Weight | Low Volatility | Momentum | Value,11,Not available,,,,,,,,
-ISIN:INE736A01011,CDSL,Central Depository Services (India) Ltd.,Financial Services,INE736A01011,,Nifty500 Quality 50,Quality,1,Available,,11449187000.0,4561318000.0,0.23274613381842119,0.4557592604610266,0.3983966721829244,63.93217231897342,2026-03-31
+ISIN:INE736A01011,CDSL,Central Depository Services (India) Ltd.,Financial Services,INE736A01011,,Nifty500 Quality 50,Quality,1,Not available,,,,,,,,
 ISIN:INE738I01010,ECLERX,eClerx Services Ltd.,Services,INE738I01010,,Nifty500 Quality 50,Quality,1,Not available,,,,,,,,
 ISIN:INE742F01042,ADANIPORTS,Adani Ports and Special Economic Zone Ltd.,Services,INE742F01042,Nifty Infrastructure,Nifty50 Equal Weight,Equal Weight,2,Not available,,,,,,,,2026-03-31
 ISIN:INE745G01043,MCX,Multi Commodity Exchange of India Ltd.,Financial Services,INE745G01043,,Nifty Alpha Index | Nifty200 Alpha 30 | Nifty200 Momentum 30 | Nifty500 Growth 50 | Nifty500 Momentum 50,Alpha | Growth | Momentum,5,Not available,,,,,,,,
@@ -285,8 +285,8 @@ ISIN:INE765G01017,ICICIGI,ICICI Lombard General Insurance Company Ltd.,Financial
 ISIN:INE774D01024,M&MFIN,Mahindra & Mahindra Financial Services Ltd.,Financial Services,INE774D01024,,Nifty Dividend Opportunities 50,Dividend,1,Not available,,,,,,,,
 ISIN:INE775A01035,MOTHERSON,Samvardhana Motherson International Ltd.,Automobile and Auto Components,INE775A01035,Nifty Auto | Nifty India Manufacturing | Nifty Infrastructure,Nifty200 Alpha 30 | Nifty200 Momentum 30,Alpha | Momentum,5,Not available,,,,,,,,
 ISIN:INE777K01022,RRKABEL,R R Kabel Ltd.,Capital Goods,INE777K01022,,Nifty500 Momentum 50,Momentum,1,Not available,,,,,,,,
-ISIN:INE787D01026,BALKRISIND,Balkrishna Industries Ltd.,Automobile and Auto Components,INE787D01026,Nifty India Manufacturing,,,1,Available,,107296100000.0,12431000000.0,0.11347029608527022,0.16922423089003236,0.1158569603182222,36.47433903576983,2026-03-31
-ISIN:INE791I01019,BRIGADE,Brigade Enterprises Ltd.,Realty,INE791I01019,Nifty Realty,,,1,Available,,56600800000.0,6443900000.0,0.09448228942761377,0.19894065101553335,0.11384821415951718,29.454361311558426,2026-03-31
+ISIN:INE787D01026,BALKRISIND,Balkrishna Industries Ltd.,Automobile and Auto Components,INE787D01026,Nifty India Manufacturing,,,1,Not available,,,,,,,,
+ISIN:INE791I01019,BRIGADE,Brigade Enterprises Ltd.,Realty,INE791I01019,Nifty Realty,,,1,Not available,,,,,,,,
 ISIN:INE795G01014,HDFCLIFE,HDFC Life Insurance Company Ltd.,Financial Services,INE795G01014,Nifty Financial Services,Nifty Low Volatility 50 | Nifty100 Low Volatility 30 | Nifty50 Equal Weight | Nifty500 Low Volatility 50,Equal Weight | Low Volatility,5,Not available,,,,,,,,
 ISIN:INE811K01011,PRESTIGE,Prestige Estates Projects Ltd.,Realty,INE811K01011,Nifty Realty,,,1,Not available,,,,,,,,
 ISIN:INE813H01021,TORNTPOWER,Torrent Power Ltd.,Power,INE813H01021,Nifty Energy,,,1,Not available,,,,,,,,
@@ -304,10 +304,10 @@ ISIN:INE878B01027,KEI,KEI Industries Ltd.,Capital Goods,INE878B01027,Nifty India
 ISIN:INE881D01027,OFSS,Oracle Financial Services Software Ltd.,Information Technology,INE881D01027,Nifty IT,Nifty Dividend Opportunities 50 | Nifty200 Quality 30 | Nifty500 Quality 50,Dividend | Quality,4,Not available,,,,,,,,
 ISIN:INE883A01011,MRF,MRF Ltd.,Automobile and Auto Components,INE883A01011,Nifty India Manufacturing,Nifty500 Low Volatility 50,Low Volatility,2,Not available,,,,,,,,
 ISIN:INE891D01026,REDINGTON,Redington Ltd.,Services,INE891D01026,,Nifty Dividend Opportunities 50 | Nifty500 Value 50,Dividend | Value,2,Not available,,,,,,,,
-ISIN:INE894V01022,BELRISE,Belrise Industries Ltd.,Automobile and Auto Components,INE894V01022,,Nifty500 Growth 50 | Nifty500 Momentum 50,Growth | Momentum,2,Available,,93358360000.0,4968600000.0,0.09506946044263954,0.0849222287109585,0.05322072924160193,40.902061855670105,2026-03-31
-ISIN:INE914M01019,ASTERDM,Aster DM Quality Care Ltd.,Healthcare,INE914M01019,,Nifty500 Value 50,Value,1,Available,,45777200000.0,3881400000.0,0.0848233993172868,0.14217776535043647,0.08478893422926698,105.0997340425532,2026-03-31
-ISIN:INE917I01010,BAJAJ-AUTO,Bajaj Auto Ltd.,Automobile and Auto Components,INE917I01010,Nifty Auto | Nifty India Manufacturing,Nifty Dividend Opportunities 50 | Nifty Low Volatility 50 | Nifty100 Low Volatility 30 | Nifty100 Quality 30 | Nifty200 Quality 30 | Nifty50 Equal Weight | Nifty500 Low Volatility 50 | Nifty500 Quality 50,Dividend | Equal Weight | Low Volatility | Quality,10,Available,,603864300000.0,107442100000.0,0.27668450676877493,0.21292333393446178,0.17792424556311742,27.687304890738815,2026-03-31
-ISIN:INE918I01026,BAJAJFINSV,Bajaj Finserv Ltd.,Financial Services,INE918I01026,Nifty Financial Services,Nifty Low Volatility 50 | Nifty100 Low Volatility 30 | Nifty50 Equal Weight | Nifty50 Value 20,Equal Weight | Low Volatility | Value,5,Available,,1371476300000.0,98009700000.0,0.12579042796213877,,0.07146291919153105,30.821311475409836,2026-03-31
+ISIN:INE894V01022,BELRISE,Belrise Industries Ltd.,Automobile and Auto Components,INE894V01022,,Nifty500 Growth 50 | Nifty500 Momentum 50,Growth | Momentum,2,Not available,,,,,,,,
+ISIN:INE914M01019,ASTERDM,Aster DM Quality Care Ltd.,Healthcare,INE914M01019,,Nifty500 Value 50,Value,1,Not available,,,,,,,,
+ISIN:INE917I01010,BAJAJ-AUTO,Bajaj Auto Ltd.,Automobile and Auto Components,INE917I01010,Nifty Auto | Nifty India Manufacturing,Nifty Dividend Opportunities 50 | Nifty Low Volatility 50 | Nifty100 Low Volatility 30 | Nifty100 Quality 30 | Nifty200 Quality 30 | Nifty50 Equal Weight | Nifty500 Low Volatility 50 | Nifty500 Quality 50,Dividend | Equal Weight | Low Volatility | Quality,10,Not available,,,,,,,,
+ISIN:INE918I01026,BAJAJFINSV,Bajaj Finserv Ltd.,Financial Services,INE918I01026,Nifty Financial Services,Nifty Low Volatility 50 | Nifty100 Low Volatility 30 | Nifty50 Equal Weight | Nifty50 Value 20,Equal Weight | Low Volatility | Value,5,Not available,,,,,,,,
 ISIN:INE918Z01012,KAYNES,Kaynes Technology India Ltd.,Capital Goods,INE918Z01012,Nifty India Manufacturing,Nifty500 Growth 50,Growth,2,Not available,,,,,,,,
 ISIN:INE930H01031,KPRMILL,K.P.R. Mill Ltd.,Textiles,INE930H01031,Nifty India Manufacturing,,,1,Not available,,,,,,,,
 ISIN:INE931S01010,ADANIENSOL,Adani Energy Solutions Ltd.,Power,INE931S01010,Nifty Energy,Nifty Alpha Index | Nifty200 Alpha 30 | Nifty200 Momentum 30 | Nifty500 Momentum 50,Alpha | Momentum,5,Not available,,,,,,,,2026-03-31
@@ -319,7 +319,7 @@ ISIN:INE943D01017,MPSLTD,MPS Ltd.,Media Entertainment & Publication,INE943D01017
 ISIN:INE944F01028,RADICO,Radico Khaitan Ltd,Fast Moving Consumer Goods,INE944F01028,Nifty FMCG,Nifty Alpha Index,Alpha,2,Not available,,,,,,,,
 ISIN:INE947N01017,AEQUS,Aequs Ltd.,Capital Goods,INE947N01017,Nifty India Defence,,,1,Not available,,,,,,,,2026-03-31
 ISIN:INE947Q01028,LAURUSLABS,Laurus Labs Ltd.,Healthcare,INE947Q01028,Nifty India Manufacturing | Nifty Pharma,Nifty Alpha Index | Nifty200 Alpha 30 | Nifty200 Momentum 30 | Nifty500 Momentum 50,Alpha | Momentum,6,Not available,,,,,,,,
-ISIN:INE949L01017,AUBANK,AU Small Finance Bank Ltd.,Financial Services,INE949L01017,Nifty Bank,Nifty Alpha Index | Nifty200 Alpha 30 | Nifty500 Growth 50,Alpha | Growth,4,Available,,120969752000.0,26412543000.0,0.13223778460303595,,0.21834006074510262,28.091973721793774,2026-03-31
+ISIN:INE949L01017,AUBANK,AU Small Finance Bank Ltd.,Financial Services,INE949L01017,Nifty Bank,Nifty Alpha Index | Nifty200 Alpha 30 | Nifty500 Growth 50,Alpha | Growth,4,Not available,,,,,,,,
 ISIN:INE950I01011,DBCORP,D.B.Corp Ltd.,Media Entertainment & Publication,INE950I01011,Nifty Media,,,1,Not available,,,,,,,,
 ISIN:INE974X01010,TIINDIA,Tube Investments of India Ltd.,Automobile and Auto Components,INE974X01010,Nifty Auto | Nifty India Manufacturing,,,2,Not available,,,,,,,,
 ISIN:INE976G01028,RBLBANK,RBL Bank Ltd.,Financial Services,INE976G01028,,Nifty Alpha Index | Nifty500 Momentum 50 | Nifty500 Value 50,Alpha | Momentum | Value,3,Not available,,,,,,,,

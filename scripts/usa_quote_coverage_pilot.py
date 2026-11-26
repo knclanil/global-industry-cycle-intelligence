@@ -44,8 +44,7 @@ def quote_recent(row, today=None, days=40):
 
 def quote_from_yahoo(ticker):
     import yfinance as yf
-    yahoo_ticker=re.sub(r'([A-Z0-9]) ([A-Z0-9]{1,3})$',r'\1-\2',ticker.upper())
-    t=yf.Ticker(yahoo_ticker)
+    t=yf.Ticker(ticker)
     history=t.history(period='7d',auto_adjust=False)
     if history.empty or 'Close' not in history:
         raise ValueError('Yahoo returned no recent price history')
@@ -62,7 +61,7 @@ def quote_from_yahoo(ticker):
     try:
         info=t.get_info() or {}
         returned=str(info.get('symbol') or '').upper().replace('.','-')
-        if returned and returned != yahoo_ticker.replace('.','-'):
+        if returned and returned != ticker.upper().replace('.','-'):
             raise ValueError(f'Ticker mismatch: requested {ticker}, received {returned}')
         currency=str(info.get('currency') or '').upper()
         market_cap=positive(info.get('marketCap'))
@@ -89,8 +88,7 @@ SYMBOL = re.compile(r"^[A-Z][A-Z0-9]{0,8}(?:[.-][A-Z0-9]{1,3})?$")
 
 def valid_quote_ticker(symbol):
     t = str(symbol or '').strip().upper()
-    canonical=re.sub(r'([A-Z0-9]) ([A-Z0-9]{1,3})$',r'\1-\2',t)
-    return bool(SYMBOL.fullmatch(canonical)) and canonical not in {'NAN', 'NONE', 'NULL', 'NA'}
+    return bool(SYMBOL.fullmatch(t)) and t not in {'NAN', 'NONE', 'NULL', 'NA'}
 
 
 def ready_tickers(financial, membership=None):

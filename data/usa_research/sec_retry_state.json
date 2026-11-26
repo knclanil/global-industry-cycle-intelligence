@@ -1,1 +1,1 @@
-{"OZK": {"last_failure": "2026-11-25T23:19:54+00:00", "reason": "SEC fetch failed https://data.sec.gov/api/xbrl/companyfacts/CIK0001569650.json: 404 Client Error: Not Found for url: https://data.sec.gov/api/xbrl/com"}, "PFBC": {"last_failure": "2026-11-25T23:20:08+00:00", "reason": "SEC fetch failed https://data.sec.gov/api/xbrl/companyfacts/CIK0001492165.json: 404 Client Error: Not Found for url: https://data.sec.gov/api/xbrl/com"}}
+{}

@@ -1,31 +1,31 @@
 region,kind,source_id,label,relative_strength,rs_momentum,quadrant,as_of,source,index_name
-India,sector,^NIFTYBANK,Banking,8.334,7.972,Leading,2026-11-23,Repository market history,
-India,sector,^CNXIT,Information Technology,3.078,4.314,Leading,2026-11-23,Repository market history,
-India,sector,^CNXAUTO,Automobiles,2.465,-7.577,Weakening,2026-11-23,Repository market history,
-India,sector,^CNXFMCG,FMCG,-10.039,-8.08,Lagging,2026-11-23,Repository market history,
-India,sector,^CNXPHARMA,Pharmaceuticals,7.714,-16.889,Weakening,2026-11-23,Repository market history,
-India,sector,^CNXMETAL,Metals,-16.671,-33.356,Lagging,2026-11-23,Repository market history,
-India,sector,^CNXREALTY,Real Estate,13.801,-1.578,Weakening,2026-11-23,Repository market history,
-India,sector,^CNXENERGY,Energy,-14.762,-26.091,Lagging,2026-11-23,Repository market history,
-India,sector,^CNXINFRA,Infrastructure,-4.723,-7.43,Lagging,2026-11-23,Repository market history,
-India,sector,^NIFTYFIN_SERVICE,Financial Services,3.178,4.93,Leading,2026-11-23,Repository market history,
-India,sector,^CNXMEDIA,Media,19.072,1.294,Leading,2026-11-23,Repository market history,
-India,sector,^CNXPSUBANK,Public Sector Banks,11.724,13.615,Leading,2026-11-23,Repository market history,
-India,factor,NIFTY50_VALUE20,Value (Nifty50 Value 20),-3.252,0.449,Improving,2026-11-23,Repository market history,
-India,factor,NIFTY200_MOMENTUM30,Momentum (Nifty200 Momentum 30),-8.328,-12.589,Lagging,2026-11-23,Repository market history,
-India,factor,NIFTY200_QUALITY30,Quality (Nifty200 Quality 30),-8.592,-15.325,Lagging,2026-11-23,Repository market history,
-India,factor,NIFTY100_LOWVOL30,Low Volatility (Nifty100 Low Volatility 30),-2.356,-6.087,Lagging,2026-11-23,Repository market history,
-India,factor,NIFTY_ALPHA50,Alpha (Nifty Alpha 50),-4.862,-23.419,Lagging,2026-11-23,Repository market history,
-India,factor,NIFTY50_EQUALWEIGHT,Equal Weight (Nifty50 Equal Weight),-2.999,-8.004,Lagging,2026-11-23,Repository market history,
-India,sector,NSE_INDEX:nifty_oil_gas,Nifty Oil & Gas,-6.97,-4.966,Lagging,2026-11-23,NSE index historical close,NIFTY OIL & GAS
-India,sector,NSE_INDEX:nifty_india_defence,Nifty India Defence,-9.103,-39.029,Lagging,2026-11-23,NSE index historical close,NIFTY INDIA DEFENCE
-India,sector,NSE_INDEX:nifty_india_manufacturing,Nifty India Manufacturing,-5.982,-17.626,Lagging,2026-11-23,NSE index historical close,NIFTY INDIA MANUFACTURING
-India,factor,NSE_INDEX:nifty500_low_volatility_50,Low Volatility,-3.721,-7.101,Lagging,2026-11-23,NSE index historical close,NIFTY500 LOW VOLATILITY 50
-India,factor,NSE_INDEX:nifty500_momentum_50,Momentum,-5.095,-15.829,Lagging,2026-11-23,NSE index historical close,NIFTY500 MOMENTUM 50
-India,factor,NSE_INDEX:nifty500_quality_50,Quality,-10.488,-23.301,Lagging,2026-11-23,NSE index historical close,NIFTY500 QUALITY 50
-India,factor,NSE_INDEX:nifty500_value_50,Value,-12.237,-15.554,Lagging,2026-11-23,NSE index historical close,NIFTY500 VALUE 50
-India,factor,NSE_INDEX:nifty200_value_30,Value,-10.726,-11.292,Lagging,2026-11-23,NSE index historical close,NIFTY200 VALUE 30
-India,factor,NSE_INDEX:nifty200_alpha_30,Alpha,-4.344,-15.914,Lagging,2026-11-23,NSE index historical close,NIFTY200 ALPHA 30
-India,factor,NSE_INDEX:nifty_low_volatility_50,Low Volatility,-4.057,-7.284,Lagging,2026-11-23,NSE index historical close,NIFTY LOW VOLATILITY 50
-India,factor,NSE_INDEX:nifty_dividend_opportunities_50,Dividend,-7.022,-5.398,Lagging,2026-11-23,NSE index historical close,NIFTY DIVIDEND OPPORTUNITIES 50
-India,factor,NSE_INDEX:nifty100_quality_30,Quality,-3.586,-10.847,Lagging,2026-11-23,NSE index historical close,NIFTY100 QUALITY 30
+India,sector,^NIFTYBANK,Banking,10.891,10.476,Leading,2026-11-20,Repository market history,
+India,sector,^CNXIT,Information Technology,-1.046,0.299,Improving,2026-11-20,Repository market history,
+India,sector,^CNXAUTO,Automobiles,1.566,-7.522,Weakening,2026-11-20,Repository market history,
+India,sector,^CNXFMCG,FMCG,-11.469,-10.308,Lagging,2026-11-20,Repository market history,
+India,sector,^CNXPHARMA,Pharmaceuticals,4.56,-20.545,Weakening,2026-11-20,Repository market history,
+India,sector,^CNXMETAL,Metals,-14.856,-30.483,Lagging,2026-11-20,Repository market history,
+India,sector,^CNXREALTY,Real Estate,11.058,-4.822,Weakening,2026-11-20,Repository market history,
+India,sector,^CNXENERGY,Energy,-15.047,-27.35,Lagging,2026-11-20,Repository market history,
+India,sector,^CNXINFRA,Infrastructure,-5.306,-8.292,Lagging,2026-11-20,Repository market history,
+India,sector,^NIFTYFIN_SERVICE,Financial Services,4.884,6.955,Leading,2026-11-20,Repository market history,
+India,sector,^CNXMEDIA,Media,15.384,-1.127,Weakening,2026-11-20,Repository market history,
+India,sector,^CNXPSUBANK,Public Sector Banks,13.405,14.596,Leading,2026-11-20,Repository market history,
+India,factor,NIFTY50_VALUE20,Value (Nifty50 Value 20),-3.085,0.832,Improving,2026-11-20,Repository market history,
+India,factor,NIFTY200_MOMENTUM30,Momentum (Nifty200 Momentum 30),-8.622,-12.08,Lagging,2026-11-20,Repository market history,
+India,factor,NIFTY200_QUALITY30,Quality (Nifty200 Quality 30),-10.175,-17.291,Lagging,2026-11-20,Repository market history,
+India,factor,NIFTY100_LOWVOL30,Low Volatility (Nifty100 Low Volatility 30),-2.905,-6.832,Lagging,2026-11-20,Repository market history,
+India,factor,NIFTY_ALPHA50,Alpha (Nifty Alpha 50),-5.779,-23.18,Lagging,2026-11-20,Repository market history,
+India,factor,NIFTY50_EQUALWEIGHT,Equal Weight (Nifty50 Equal Weight),-3.666,-8.641,Lagging,2026-11-20,Repository market history,
+India,sector,NSE_INDEX:nifty_oil_gas,Nifty Oil & Gas,-7.013,-5.121,Lagging,2026-11-20,NSE index historical close,NIFTY OIL & GAS
+India,sector,NSE_INDEX:nifty_india_defence,Nifty India Defence,-9.934,-38.847,Lagging,2026-11-20,NSE index historical close,NIFTY INDIA DEFENCE
+India,sector,NSE_INDEX:nifty_india_manufacturing,Nifty India Manufacturing,-6.482,-17.95,Lagging,2026-11-20,NSE index historical close,NIFTY INDIA MANUFACTURING
+India,factor,NSE_INDEX:nifty500_low_volatility_50,Low Volatility,-4.794,-8.077,Lagging,2026-11-20,NSE index historical close,NIFTY500 LOW VOLATILITY 50
+India,factor,NSE_INDEX:nifty500_momentum_50,Momentum,-6.21,-15.991,Lagging,2026-11-20,NSE index historical close,NIFTY500 MOMENTUM 50
+India,factor,NSE_INDEX:nifty500_quality_50,Quality,-11.956,-24.73,Lagging,2026-11-20,NSE index historical close,NIFTY500 QUALITY 50
+India,factor,NSE_INDEX:nifty500_value_50,Value,-12.24,-15.442,Lagging,2026-11-20,NSE index historical close,NIFTY500 VALUE 50
+India,factor,NSE_INDEX:nifty200_value_30,Value,-10.017,-10.897,Lagging,2026-11-20,NSE index historical close,NIFTY200 VALUE 30
+India,factor,NSE_INDEX:nifty200_alpha_30,Alpha,-5.182,-15.646,Lagging,2026-11-20,NSE index historical close,NIFTY200 ALPHA 30
+India,factor,NSE_INDEX:nifty_low_volatility_50,Low Volatility,-4.706,-8.044,Lagging,2026-11-20,NSE index historical close,NIFTY LOW VOLATILITY 50
+India,factor,NSE_INDEX:nifty_dividend_opportunities_50,Dividend,-8.062,-6.813,Lagging,2026-11-20,NSE index historical close,NIFTY DIVIDEND OPPORTUNITIES 50
+India,factor,NSE_INDEX:nifty100_quality_30,Quality,-5.229,-12.491,Lagging,2026-11-20,NSE index historical close,NIFTY100 QUALITY 30

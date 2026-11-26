@@ -1,36 +1,17 @@
 {
-  "built_utc": "2026-11-25T23:32:11.991491+00:00",
+  "built_utc": "2026-11-22T23:24:58.618257+00:00",
   "verified_companies": 2931,
-  "ranked": 1462,
-  "unranked": 1469,
+  "ranked": 364,
+  "unranked": 2567,
   "metric_coverage": {
-    "roe": 2597,
-    "current_ratio": 2200,
-    "operating_margin": 1796,
-    "net_margin": 2187,
-    "eps_growth_pct": 2420,
-    "market_cap": 2907
+    "roe": 804,
+    "current_ratio": 685,
+    "operating_margin": 633,
+    "net_margin": 778,
+    "eps_growth_pct": 586,
+    "market_cap": 422
   },
-  "status_counts": {
-    "Complete": 1462,
-    "Incomplete": 1330,
-    "Ineligible": 139
-  },
-  "missing_metric_counts": {
-    "roe": 334,
-    "current_ratio": 731,
-    "operating_margin": 1135,
-    "net_margin": 744,
-    "eps_growth_pct": 511
-  },
-  "gap_count_by_metric": {
-    "roe": 334,
-    "current_ratio": 731,
-    "operating_margin": 1135,
-    "net_margin": 744,
-    "eps_growth_pct": 511
-  },
-  "sec_mapping_failures": 26,
+  "sec_mapping_failures": 2049,
   "sample_failures": [
     {
       "ticker": "2200964D",
@@ -41,100 +22,116 @@
       "reason": "Not uniquely mapped to SEC CIK"
     },
     {
-      "ticker": "CRD A",
+      "ticker": "BH A",
+      "reason": "Not uniquely mapped to SEC CIK"
+    },
+    {
+      "ticker": "CAKE",
       "reason": "SEC CompanyFacts not cached for verified CIK"
     },
     {
-      "ticker": "FRBA",
-      "reason": "Not uniquely mapped to SEC CIK"
-    },
-    {
-      "ticker": "GTXI",
-      "reason": "Not uniquely mapped to SEC CIK"
-    },
-    {
-      "ticker": "HIFS",
-      "reason": "Not uniquely mapped to SEC CIK"
-    },
-    {
-      "ticker": "INH",
-      "reason": "Not uniquely mapped to SEC CIK"
-    },
-    {
-      "ticker": "MOG A",
+      "ticker": "CAL",
       "reason": "SEC CompanyFacts not cached for verified CIK"
     },
     {
-      "ticker": "NBN",
-      "reason": "Not uniquely mapped to SEC CIK"
-    },
-    {
-      "ticker": "P5N994",
-      "reason": "Not uniquely mapped to SEC CIK"
-    },
-    {
-      "ticker": "PDLI",
-      "reason": "Not uniquely mapped to SEC CIK"
-    },
-    {
-      "ticker": "PFBC",
+      "ticker": "CALM",
       "reason": "SEC CompanyFacts not cached for verified CIK"
     },
     {
-      "ticker": "SBT",
-      "reason": "Not uniquely mapped to SEC CIK"
-    },
-    {
-      "ticker": "THRD",
-      "reason": "Not uniquely mapped to SEC CIK"
-    },
-    {
-      "ticker": "TOWN",
-      "reason": "Not uniquely mapped to SEC CIK"
-    },
-    {
-      "ticker": "TSE",
-      "reason": "Not uniquely mapped to SEC CIK"
-    },
-    {
-      "ticker": "HOLX",
-      "reason": "Not uniquely mapped to SEC CIK"
-    },
-    {
-      "ticker": "OZK",
+      "ticker": "CALX",
       "reason": "SEC CompanyFacts not cached for verified CIK"
     },
     {
-      "ticker": "-",
-      "reason": "Not uniquely mapped to SEC CIK"
+      "ticker": "CALY",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
     },
     {
-      "ticker": "ADRO",
-      "reason": "Not uniquely mapped to SEC CIK"
+      "ticker": "CAMP",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
     },
     {
-      "ticker": "-",
-      "reason": "Not uniquely mapped to SEC CIK"
+      "ticker": "CAPR",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
     },
     {
-      "ticker": "ADRO",
-      "reason": "Not uniquely mapped to SEC CIK"
+      "ticker": "CARE",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
     },
     {
-      "ticker": "-",
-      "reason": "Not uniquely mapped to SEC CIK"
+      "ticker": "CARG",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
     },
     {
-      "ticker": "-",
-      "reason": "Not uniquely mapped to SEC CIK"
+      "ticker": "CARL",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
     },
     {
-      "ticker": "-",
-      "reason": "Not uniquely mapped to SEC CIK"
+      "ticker": "CARS",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
     },
     {
-      "ticker": "-",
-      "reason": "Not uniquely mapped to SEC CIK"
+      "ticker": "CASH",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "CASK",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "CASS",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "CATX",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "CATY",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "CBAN",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "CBFV",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "CBIO",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "CBK",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "CBL",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "CBLL",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "CBNA",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "CBNK",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "CBRL",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "CBT",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
+    },
+    {
+      "ticker": "CBU",
+      "reason": "SEC CompanyFacts not cached for verified CIK"
     }
   ],
   "method": "5 SEC annual metric ranks (lower sum better); USD market cap used solely on ties; no web-page scraping",

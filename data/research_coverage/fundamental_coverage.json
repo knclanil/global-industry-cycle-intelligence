@@ -1,52 +1,52 @@
 {
-  "built_utc": "2026-11-25T23:24:12+00:00",
+  "built_utc": "2026-11-22T23:24:21+00:00",
   "markets": {
     "India": {
       "status": "available",
       "companies": 328,
       "metrics": {
-        "revenue": 78,
-        "net_income": 78,
-        "revenue_yoy": 78,
-        "roe": 78,
-        "operating_margin": 68,
-        "operating_cash_flow": 78,
-        "free_cash_flow": 78,
-        "debt_to_equity": 78,
-        "price": 103,
-        "market_cap": 102,
-        "pe": 74,
-        "pb": 77,
-        "research_score": 60
+        "revenue": 3,
+        "net_income": 3,
+        "revenue_yoy": 3,
+        "roe": 3,
+        "operating_margin": 3,
+        "operating_cash_flow": 3,
+        "free_cash_flow": 3,
+        "debt_to_equity": 3,
+        "price": 28,
+        "market_cap": 27,
+        "pe": 2,
+        "pb": 2,
+        "research_score": 0
       },
       "readiness": {
-        "fundamental_ready": 78,
-        "valuation_ready": 77,
-        "research_ready": 77
+        "fundamental_ready": 3,
+        "valuation_ready": 2,
+        "research_ready": 2
       }
     },
     "USA": {
       "status": "available",
       "companies": 2931,
       "metrics": {
-        "revenue": 2678,
-        "net_income": 2681,
-        "revenue_yoy": 2641,
-        "roe": 2398,
-        "operating_margin": 2028,
-        "operating_cash_flow": 2762,
-        "free_cash_flow": 2021,
-        "debt_to_equity": 1044,
-        "price": 2912,
-        "market_cap": 2906,
-        "pe": 2009,
-        "pb": 2722,
+        "revenue": 829,
+        "net_income": 801,
+        "revenue_yoy": 822,
+        "roe": 719,
+        "operating_margin": 629,
+        "operating_cash_flow": 839,
+        "free_cash_flow": 588,
+        "debt_to_equity": 365,
+        "price": 423,
+        "market_cap": 422,
+        "pe": 308,
+        "pb": 416,
         "research_score": 0
       },
       "readiness": {
-        "fundamental_ready": 2283,
-        "valuation_ready": 2808,
-        "research_ready": 2259
+        "fundamental_ready": 692,
+        "valuation_ready": 418,
+        "research_ready": 409
       }
     }
   },

@@ -1,29 +1,28 @@
 {
-  "built_utc": "2026-11-25T23:22:06.098704+00:00",
+  "built_utc": "2026-11-22T23:17:59.886923+00:00",
   "verified_issuers": 2931,
   "verified_tickers": 2921,
-  "selected": 10,
-  "fetched": 0,
-  "failed": 10,
-  "failures": {
-    "ADRO": "Yahoo returned no recent price history",
-    "AKE": "Yahoo returned no recent price history",
-    "GTXI": "Yahoo returned no recent price history",
-    "HOLX": "Yahoo returned no recent price history",
-    "INH": "Yahoo returned no recent price history",
-    "P5N994": "Yahoo returned no recent price history",
-    "PDLI": "Yahoo returned no recent price history",
-    "SBT": "Yahoo returned no recent price history",
-    "THRD": "Yahoo returned no recent price history",
-    "TSE": "Yahoo returned no recent price history"
-  },
-  "prices_before": 2909,
-  "fundamental_ready_candidates": 2281,
-  "selected_fundamental_ready": 0,
+  "selected": 250,
+  "fetched": 250,
+  "failed": 0,
+  "failures": {},
+  "prices_before": 173,
+  "fundamental_ready_candidates": 691,
+  "selected_fundamental_ready": 250,
   "invalid_quote_identifiers_skipped": [
     "-",
-    "2200964D"
+    "2200964D",
+    "BF A",
+    "BF B",
+    "BH A",
+    "BRK B",
+    "CRD A",
+    "GEF B",
+    "HEI A",
+    "LEN B",
+    "MOG A",
+    "UHAL B"
   ],
-  "prices_after": 2909,
-  "valuations_after": 2805
+  "prices_after": 423,
+  "valuations_after": 418
 }

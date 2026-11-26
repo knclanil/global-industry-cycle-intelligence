@@ -1,21 +1,23 @@
-# USA all-ticker SEC backfill — based on uploaded repository (2026-11-22)
+# USA verified-ticker financial coverage — full pipeline
 
-This patch contains ONE full replacement workflow: `.github/workflows/usa-company-fundamentals-refresh.yml`.
-
-## Verified findings from uploaded source and data
-- 2,931 verified company records / 2,921 unique tickers.
-- 2,899 mapped SEC ticker identifiers; 882 CompanyFacts cached at snapshot time.
-- 364 fully ranked; 2,567 unranked.
-- Previous workflow defaulted to 125 SEC downloads and 125 Yahoo quote attempts per run despite dispatch form showing 250.
-- This workflow sets SEC `--limit 0` to fetch **all missing** SEC CompanyFacts in one run, while keeping previously cached records (stale-days 3650). Requests are rate paced and retry on transient errors.
-- Yahoo quote requests are bounded at 300 per run by default, because attempting ~2,900 Yahoo quote requests in one job can trigger throttling; rerun or rely on weekday schedule to expand quote coverage.
-- Financial companies and companies with incomplete/incomparable filings remain unranked by design. This patch does not fabricate their financial values.
+This package updates the existing USA collection, reconstruction, ranking and reporting pipeline. It **does not contain collected live SEC or Yahoo data**. Live data is fetched by GitHub Actions after you commit/push this package.
 
 ## Install
-Copy `.github/workflows/usa-company-fundamentals-refresh.yml` into the repository at the same path; commit and push. Run **a NEW** GitHub Actions execution on `main` named `USA Company Fundamentals, Quotes and Ranking Refresh`. Leave `sec_limit=0` and `quotes_limit=300`.
+Copy the `.github`, `scripts`, and `tests` folders into the root of your existing GitHub Desktop repository (merge and replace matching files). Commit and push. No installer is needed. Do not replace app.py or the Knowledge Graph.
 
-## Confirm
-After run, inspect `data/usa_research/collection_report.json`, `all_ticker_financial_coverage.json`, `fundamental_ranking_report.json`, and `fundamental_rankings.csv`. SEC failures or Yahoo throttling may require reruns. The live run is not executed by this package.
+Run **Actions → USA Company Fundamentals, Quotes and Ranking Refresh → Run workflow** on `main` with SEC limit 250 and quotes limit 250. The workflow also runs on weekdays. Set GitHub Actions secret `SEC_USER_AGENT` with a real contact email. The first run will NOT cover all ~2,921 tickers; new/stale data is collected in successive runs, and coverage depends on source availability. Avoid concurrent duplicate runs. Each run is bounded to avoid provider overload and GitHub Actions timeouts. Existing cached data is retained.
 
-## Scope
-No dashboard navigation, knowledge graph, India code, or ranking formula changes. Workflow uses existing repository scripts as inspected from the uploaded ZIP.
+## Published outputs
+- `data/usa_research/all_ticker_financial_coverage.csv` — every verified company record, its ticker, available KPI count, missing fields, SEC/quote status and rank.
+- `data/usa_research/all_ticker_financial_coverage.json` — full-universe progress counters and unmapped ticker list.
+- `data/usa_research/fundamental_rankings.csv` — values and ranks for the full verified issuer universe; missing metrics remain blank/unranked.
+- `data/usa_research/fundamental_field_evidence.csv` — SEC concept and filing evidence.
+- `data/usa_research/collection_report.json`, `quote_pilot_report.json`, `fundamental_ranking_report.json` — diagnostics.
+
+## Important limitations
+- The SEC official CompanyFacts API is the primary source for U.S. listed issuers; not all companies have comparable US-GAAP tags or SEC CompanyFacts.
+- Yahoo via `yfinance` is an unofficial supplementary market data feed; quote failures, symbol mismatches, and rate limiting are possible.
+- Financial-sector companies may not be eligible for the general five-KPI ranking.
+- Market capitalization breaks ties ONLY; it does not increase fundamental scores.
+- No StockAnalysis/Finviz scraping and no Alpha Vantage.
+- This package was tested offline (12 tests and syntax/YAML parse); no live provider requests or deployed GitHub Actions runs were performed here.
