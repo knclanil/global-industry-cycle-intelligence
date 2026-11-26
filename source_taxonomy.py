@@ -88,22 +88,3 @@ def classify_source(name: str, *, slug: str = '', category: str = '', family: st
     if category_norm:
         return TaxonomyResult(category_norm, '', 'unmapped', 'Unsupported source category')
     return TaxonomyResult('', '', 'unmapped', 'Missing source category; avoid guessing')
-
-
-def build_india_taxonomy():
-    """Return one row per official NSE constituent source in existing repository."""
-    import pandas as pd
-    from india_constituents import INDIA_INDICES
-    rows = []
-    for definition in INDIA_INDICES:
-        result = classify_source(definition.name, slug=definition.slug,
-                                 category=definition.category, family=definition.family)
-        rows.append({
-            'region': 'India', 'source_id': definition.slug,
-            'source_name': definition.name, 'original_category': definition.category,
-            'kind': result.kind, 'family': result.family,
-            'mapping_status': result.status, 'mapping_note': result.note,
-            'rotation': '', 'rotation_status': 'requires matching validated price series',
-            'constituents_file': definition.filename,
-        })
-    return pd.DataFrame(rows)
