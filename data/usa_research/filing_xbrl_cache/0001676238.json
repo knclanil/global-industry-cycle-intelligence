@@ -1,0 +1,708 @@
+{
+  "cik": 1676238,
+  "checked_utc": "2026-11-24T02:04:18.049757+00:00",
+  "accession": "0001676238-26-000013",
+  "filing_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+  "facts": {
+    "AssetsCurrent": {
+      "USD": [
+        {
+          "end": "2026-01-31",
+          "val": 567926000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:AssetsCurrent"
+        },
+        {
+          "end": "2025-01-31",
+          "val": 644026000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:AssetsCurrent"
+        }
+      ]
+    },
+    "Assets": {
+      "USD": [
+        {
+          "end": "2026-01-31",
+          "val": 1113757000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:Assets"
+        },
+        {
+          "end": "2025-01-31",
+          "val": 870998000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:Assets"
+        }
+      ]
+    },
+    "LiabilitiesCurrent": {
+      "USD": [
+        {
+          "end": "2026-01-31",
+          "val": 420414000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:LiabilitiesCurrent"
+        },
+        {
+          "end": "2025-01-31",
+          "val": 324477000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:LiabilitiesCurrent"
+        }
+      ]
+    },
+    "Liabilities": {
+      "USD": [
+        {
+          "end": "2026-01-31",
+          "val": 489601000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:Liabilities"
+        },
+        {
+          "end": "2025-01-31",
+          "val": 396249000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:Liabilities"
+        }
+      ]
+    },
+    "StockholdersEquity": {
+      "USD": [
+        {
+          "end": "2026-01-31",
+          "val": 623767000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2025-01-31",
+          "val": 474861000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2023-01-31",
+          "val": 445303000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2024-01-31",
+          "val": 444233000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2025-01-31",
+          "val": 474861000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2026-01-31",
+          "val": 623767000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        }
+      ]
+    },
+    "RevenueFromContractWithCustomerExcludingAssessedTax": {
+      "USD": [
+        {
+          "end": "2026-01-31",
+          "val": 738182000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2025-02-01"
+        },
+        {
+          "end": "2025-01-31",
+          "val": 593410000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2024-02-01"
+        },
+        {
+          "end": "2024-01-31",
+          "val": 471800000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2023-02-01"
+        },
+        {
+          "end": "2026-01-31",
+          "val": 738182000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2025-02-01"
+        },
+        {
+          "end": "2025-01-31",
+          "val": 593410000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2024-02-01"
+        },
+        {
+          "end": "2024-01-31",
+          "val": 471800000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2023-02-01"
+        },
+        {
+          "end": "2026-01-31",
+          "val": 738182000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2025-02-01"
+        },
+        {
+          "end": "2025-01-31",
+          "val": 593410000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2024-02-01"
+        },
+        {
+          "end": "2024-01-31",
+          "val": 471800000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2023-02-01"
+        }
+      ]
+    },
+    "GrossProfit": {
+      "USD": [
+        {
+          "end": "2026-01-31",
+          "val": 495657000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:GrossProfit",
+          "start": "2025-02-01"
+        },
+        {
+          "end": "2025-01-31",
+          "val": 410219000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:GrossProfit",
+          "start": "2024-02-01"
+        },
+        {
+          "end": "2024-01-31",
+          "val": 324273000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:GrossProfit",
+          "start": "2023-02-01"
+        }
+      ]
+    },
+    "OperatingExpenses": {
+      "USD": [
+        {
+          "end": "2026-01-31",
+          "val": 640414000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:OperatingExpenses",
+          "start": "2025-02-01"
+        },
+        {
+          "end": "2025-01-31",
+          "val": 532378000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:OperatingExpenses",
+          "start": "2024-02-01"
+        },
+        {
+          "end": "2024-01-31",
+          "val": 468965000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:OperatingExpenses",
+          "start": "2023-02-01"
+        }
+      ]
+    },
+    "OperatingIncomeLoss": {
+      "USD": [
+        {
+          "end": "2026-01-31",
+          "val": -144757000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:OperatingIncomeLoss",
+          "start": "2025-02-01"
+        },
+        {
+          "end": "2025-01-31",
+          "val": -122159000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:OperatingIncomeLoss",
+          "start": "2024-02-01"
+        },
+        {
+          "end": "2024-01-31",
+          "val": -144692000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:OperatingIncomeLoss",
+          "start": "2023-02-01"
+        }
+      ]
+    },
+    "ProfitLoss": {
+      "USD": [
+        {
+          "end": "2026-01-31",
+          "val": -130786000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2025-02-01"
+        },
+        {
+          "end": "2025-01-31",
+          "val": -104047000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2024-02-01"
+        },
+        {
+          "end": "2024-01-31",
+          "val": -130429000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2023-02-01"
+        },
+        {
+          "end": "2026-01-31",
+          "val": -130786000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2025-02-01"
+        },
+        {
+          "end": "2025-01-31",
+          "val": -104047000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2024-02-01"
+        },
+        {
+          "end": "2024-01-31",
+          "val": -130429000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2023-02-01"
+        },
+        {
+          "end": "2026-01-31",
+          "val": -130786000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2025-02-01"
+        },
+        {
+          "end": "2025-01-31",
+          "val": -104047000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2024-02-01"
+        },
+        {
+          "end": "2024-01-31",
+          "val": -130429000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2023-02-01"
+        }
+      ]
+    },
+    "NetIncomeLoss": {
+      "USD": [
+        {
+          "end": "2026-01-31",
+          "val": -131287000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2025-02-01"
+        },
+        {
+          "end": "2025-01-31",
+          "val": -103743000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2024-02-01"
+        },
+        {
+          "end": "2024-01-31",
+          "val": -129166000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2023-02-01"
+        },
+        {
+          "end": "2024-01-31",
+          "val": -129166000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2023-02-01"
+        },
+        {
+          "end": "2025-01-31",
+          "val": -103743000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2024-02-01"
+        },
+        {
+          "end": "2026-01-31",
+          "val": -131287000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2025-02-01"
+        },
+        {
+          "end": "2026-01-31",
+          "val": -131287000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2025-02-01"
+        },
+        {
+          "end": "2025-01-31",
+          "val": -103743000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2024-02-01"
+        },
+        {
+          "end": "2024-01-31",
+          "val": -129166000.0,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2023-02-01"
+        }
+      ]
+    },
+    "EarningsPerShareDiluted": {
+      "USD/shares": [
+        {
+          "end": "2026-01-31",
+          "val": -1.22,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2025-02-01"
+        },
+        {
+          "end": "2025-01-31",
+          "val": -1.02,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2024-02-01"
+        },
+        {
+          "end": "2025-01-31",
+          "val": -1.02,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2024-02-01"
+        },
+        {
+          "end": "2024-01-31",
+          "val": -1.32,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2023-02-01"
+        },
+        {
+          "end": "2024-01-31",
+          "val": -1.32,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2023-02-01"
+        },
+        {
+          "end": "2026-01-31",
+          "val": -1.22,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2025-02-01"
+        },
+        {
+          "end": "2025-01-31",
+          "val": -1.02,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2024-02-01"
+        },
+        {
+          "end": "2024-01-31",
+          "val": -1.32,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2023-02-01"
+        }
+      ]
+    },
+    "EarningsPerShareBasic": {
+      "USD/shares": [
+        {
+          "end": "2026-01-31",
+          "val": -1.22,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2025-02-01"
+        },
+        {
+          "end": "2025-01-31",
+          "val": -1.02,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2024-02-01"
+        },
+        {
+          "end": "2025-01-31",
+          "val": -1.02,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2024-02-01"
+        },
+        {
+          "end": "2024-01-31",
+          "val": -1.32,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2023-02-01"
+        },
+        {
+          "end": "2024-01-31",
+          "val": -1.32,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2023-02-01"
+        },
+        {
+          "end": "2026-01-31",
+          "val": -1.22,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2025-02-01"
+        },
+        {
+          "end": "2025-01-31",
+          "val": -1.02,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2024-02-01"
+        },
+        {
+          "end": "2024-01-31",
+          "val": -1.32,
+          "form": "10-K",
+          "accn": "0001676238-26-000013",
+          "filed": "2026-03-25",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000167623826000013/brze-20260131.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2023-02-01"
+        }
+      ]
+    }
+  },
+  "unmapped_ix_facts": 1015,
+  "status": "ok"
+}

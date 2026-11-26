@@ -1,10 +1,10 @@
 {
-  "built_utc": "2026-11-23T17:18:08.987347+00:00",
+  "built_utc": "2026-11-25T23:22:06.098704+00:00",
   "verified_issuers": 2931,
   "verified_tickers": 2921,
-  "selected": 250,
-  "fetched": 243,
-  "failed": 7,
+  "selected": 10,
+  "fetched": 0,
+  "failed": 10,
   "failures": {
     "ADRO": "Yahoo returned no recent price history",
     "AKE": "Yahoo returned no recent price history",
@@ -12,15 +12,18 @@
     "HOLX": "Yahoo returned no recent price history",
     "INH": "Yahoo returned no recent price history",
     "P5N994": "Yahoo returned no recent price history",
-    "PDLI": "Yahoo returned no recent price history"
+    "PDLI": "Yahoo returned no recent price history",
+    "SBT": "Yahoo returned no recent price history",
+    "THRD": "Yahoo returned no recent price history",
+    "TSE": "Yahoo returned no recent price history"
   },
-  "prices_before": 2471,
+  "prices_before": 2909,
   "fundamental_ready_candidates": 2281,
   "selected_fundamental_ready": 0,
   "invalid_quote_identifiers_skipped": [
     "-",
     "2200964D"
   ],
-  "prices_after": 2714,
-  "valuations_after": 2635
+  "prices_after": 2909,
+  "valuations_after": 2805
 }

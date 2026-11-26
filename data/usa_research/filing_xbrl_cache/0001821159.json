@@ -1,0 +1,483 @@
+{
+  "cik": 1821159,
+  "checked_utc": "2026-11-24T23:49:26.894131+00:00",
+  "accession": "0001104659-26-024827",
+  "filing_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+  "facts": {
+    "AssetsCurrent": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 296480000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:AssetsCurrent"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 205375000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:AssetsCurrent"
+        }
+      ]
+    },
+    "Assets": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 964830000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:Assets"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 803761000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:Assets"
+        }
+      ]
+    },
+    "LiabilitiesCurrent": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 135322000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:LiabilitiesCurrent"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 111410000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:LiabilitiesCurrent"
+        }
+      ]
+    },
+    "Liabilities": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 578886000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:Liabilities"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 360030000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:Liabilities"
+        }
+      ]
+    },
+    "StockholdersEquity": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": -116904000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -256109000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2023-12-31",
+          "val": -160589000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -256109000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2025-12-31",
+          "val": -116904000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        }
+      ]
+    },
+    "RevenueFromContractWithCustomerExcludingAssessedTax": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 384086000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 256825000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2024-01-01"
+        }
+      ]
+    },
+    "GrossProfit": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 80777000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:GrossProfit",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 29367000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:GrossProfit",
+          "start": "2024-01-01"
+        }
+      ]
+    },
+    "OperatingExpenses": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 191440000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:OperatingExpenses",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 160937000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:OperatingExpenses",
+          "start": "2024-01-01"
+        }
+      ]
+    },
+    "OperatingIncomeLoss": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": -110663000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:OperatingIncomeLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -131570000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:OperatingIncomeLoss",
+          "start": "2024-01-01"
+        }
+      ]
+    },
+    "ProfitLoss": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": -95438000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -126701000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": -95438000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -126701000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": -95438000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -126701000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2024-01-01"
+        }
+      ]
+    },
+    "NetIncomeLoss": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": -41574000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -44334000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -44334000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": -41574000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": -41574000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -44334000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2024-01-01"
+        }
+      ]
+    },
+    "EarningsPerShareBasic": {
+      "USD/shares": [
+        {
+          "end": "2025-12-31",
+          "val": -0.31,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -0.41,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": -0.31,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -0.41,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2024-01-01"
+        }
+      ]
+    },
+    "EarningsPerShareDiluted": {
+      "USD/shares": [
+        {
+          "end": "2025-12-31",
+          "val": -0.31,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -0.41,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": -0.31,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -0.41,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2024-01-01"
+        }
+      ]
+    },
+    "NetIncomeLossAvailableToCommonStockholdersBasic": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": -41351000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -44037000.0,
+          "form": "10-K",
+          "accn": "0001104659-26-024827",
+          "filed": "2026-03-09",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1821159/000110465926024827/evgo-20251231x10k.htm",
+          "original_concept": "us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic",
+          "start": "2024-01-01"
+        }
+      ]
+    }
+  },
+  "unmapped_ix_facts": 940,
+  "status": "ok"
+}

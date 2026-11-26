@@ -1,0 +1,337 @@
+{
+  "schema_version": 1,
+  "company_key": "ISIN:INE914M01019",
+  "symbol": "ASTERDM",
+  "company_name": "Aster DM Quality Care Limited",
+  "isin": "INE914M01019",
+  "industry": "Healthcare",
+  "sector": "Healthcare",
+  "yahoo_ticker": "ASTERDM.NS",
+  "currency": "INR",
+  "quote": {
+    "price": 790.35,
+    "market_cap": 688136781824.0,
+    "shares_outstanding": 870673545.0,
+    "currency": "INR",
+    "asof_utc": "2026-11-24T01:15:40+00:00",
+    "provenance": "yahoo_finance_quote_snapshot"
+  },
+  "statements": {
+    "annual": {
+      "income": {
+        "2026-03-31": {
+          "gross_profit": 35289300000.0,
+          "net_income": 3881400000.0,
+          "ebitda": 9545400000.0,
+          "weighted_average_shares": 515400000.0,
+          "revenue": 45777200000.0,
+          "diluted_eps": 7.52,
+          "income_tax_expense": 1425900000.0,
+          "interest_expense": 985300000.0,
+          "operating_income": 6508500000.0
+        },
+        "2025-03-31": {
+          "gross_profit": 31454600000.0,
+          "net_income": 53778300000.0,
+          "ebitda": 8333100000.0,
+          "weighted_average_shares": 498600000.0,
+          "revenue": 40837900000.0,
+          "diluted_eps": 107.85,
+          "income_tax_expense": 1343700000.0,
+          "interest_expense": 1075700000.0,
+          "operating_income": 5269100000.0
+        },
+        "2024-03-31": {
+          "gross_profit": 27222700000.0,
+          "net_income": 1292800000.0,
+          "ebitda": 13550300000.0,
+          "weighted_average_shares": 498000000.0,
+          "revenue": 36381900000.0,
+          "diluted_eps": 2.6,
+          "income_tax_expense": 565100000.0,
+          "interest_expense": 1060900000.0,
+          "operating_income": 3669800000.0
+        },
+        "2023-03-31": {
+          "gross_profit": 21676800000.0,
+          "net_income": 4249100000.0,
+          "ebitda": 10610500000.0,
+          "weighted_average_shares": 497900000.0,
+          "revenue": 29518000000.0,
+          "diluted_eps": 8.53,
+          "income_tax_expense": 358700000.0,
+          "interest_expense": 851500000.0,
+          "operating_income": 2657500000.0
+        }
+      },
+      "balance": {
+        "2026-03-31": {
+          "total_liabilities": 32782600000.0,
+          "cash": 2280700000.0,
+          "inventory": 911600000.0,
+          "shares_statement": 516939399.0,
+          "total_assets": 81119600000.0,
+          "other_intangibles": 262700000.0,
+          "equity": 45758600000.0,
+          "current_debt": 1427400000.0,
+          "total_debt": 22196600000.0,
+          "goodwill": 2641200000.0,
+          "current_assets": 19477900000.0,
+          "current_liabilities": 9791600000.0,
+          "long_term_debt": 5584400000.0
+        },
+        "2025-03-31": {
+          "total_liabilities": 29549300000.0,
+          "cash": 1645900000.0,
+          "inventory": 923500000.0,
+          "shares_statement": 498205149.0,
+          "total_assets": 66063800000.0,
+          "other_intangibles": 303200000.0,
+          "equity": 34280700000.0,
+          "current_debt": 1584700000.0,
+          "total_debt": 20177700000.0,
+          "goodwill": 2641200000.0,
+          "current_assets": 19014700000.0,
+          "current_liabilities": 8792100000.0,
+          "long_term_debt": 4837100000.0
+        },
+        "2024-03-31": {
+          "total_liabilities": 129612000000.0,
+          "cash": 822300000.0,
+          "inventory": 1105200000.0,
+          "shares_statement": 497772993.0,
+          "total_assets": 179913100000.0,
+          "other_intangibles": 313800000.0,
+          "equity": 45597900000.0,
+          "current_debt": 2232400000.0,
+          "total_debt": 13837500000.0,
+          "goodwill": 2641200000.0,
+          "current_assets": 141653000000.0,
+          "current_liabilities": 112882600000.0,
+          "long_term_debt": 4460800000.0
+        },
+        "2023-03-31": {
+          "total_liabilities": 100207400000.0,
+          "cash": 3785300000.0,
+          "inventory": 13056200000.0,
+          "shares_statement": 497369674.0,
+          "total_assets": 148812000000.0,
+          "other_intangibles": 3680800000.0,
+          "equity": 44480700000.0,
+          "current_debt": 9751800000.0,
+          "total_debt": 57003000000.0,
+          "goodwill": 11596700000.0,
+          "current_assets": 49215600000.0,
+          "current_liabilities": 46552800000.0,
+          "long_term_debt": 13123000000.0
+        }
+      },
+      "cashflow": {
+        "2026-03-31": {
+          "dividends_paid": -518700000.0,
+          "capital_expenditure": -4775200000.0,
+          "free_cash_flow": 1784000000.0,
+          "operating_cash_flow": 6559200000.0
+        },
+        "2025-03-31": {
+          "dividends_paid": -61732400000.0,
+          "capital_expenditure": -3567300000.0,
+          "free_cash_flow": 683200000.0,
+          "operating_cash_flow": 4250500000.0
+        },
+        "2024-03-31": {
+          "capital_expenditure": -8055800000.0,
+          "free_cash_flow": -6477700000.0,
+          "operating_cash_flow": 1578100000.0
+        },
+        "2023-03-31": {
+          "capital_expenditure": -8478800000.0,
+          "free_cash_flow": 9861000000.0,
+          "operating_cash_flow": 18339800000.0
+        }
+      }
+    },
+    "quarterly": {
+      "income": {
+        "2026-09-30": {
+          "gross_profit": 22164600000.0,
+          "net_income": 2620200000.0,
+          "ebitda": 6879900000.0,
+          "weighted_average_shares": 821379310.0,
+          "revenue": 28292000000.0,
+          "diluted_eps": 3.19,
+          "income_tax_expense": 969700000.0,
+          "interest_expense": 1189800000.0,
+          "operating_income": 5137500000.0
+        },
+        "2026-06-30": {
+          "gross_profit": 10189100000.0,
+          "net_income": 160600000.0,
+          "ebitda": 1785800000.0,
+          "weighted_average_shares": 871672439.0,
+          "revenue": 13106800000.0,
+          "diluted_eps": 0.31,
+          "income_tax_expense": 488000000.0,
+          "interest_expense": 312100000.0,
+          "operating_income": 1950300000.0
+        },
+        "2026-03-31": {
+          "gross_profit": 9192200000.0,
+          "net_income": 1401700000.0,
+          "ebitda": 2605800000.0,
+          "weighted_average_shares": 517232472.0,
+          "revenue": 11823800000.0,
+          "diluted_eps": 2.71,
+          "income_tax_expense": 97700000.0,
+          "interest_expense": 299900000.0,
+          "operating_income": 1653400000.0
+        },
+        "2025-12-31": {
+          "gross_profit": 9182800000.0,
+          "net_income": 524500000.0,
+          "ebitda": 2021800000.0,
+          "weighted_average_shares": 514215686.0,
+          "revenue": 11857600000.0,
+          "diluted_eps": 1.02,
+          "income_tax_expense": 444000000.0,
+          "interest_expense": 314600000.0,
+          "operating_income": 1435800000.0
+        },
+        "2025-06-30": {
+          "gross_profit": 8307300000.0,
+          "net_income": 855200000.0,
+          "ebitda": 2304300000.0,
+          "weighted_average_shares": 512095808.0,
+          "revenue": 10778700000.0,
+          "diluted_eps": 1.67,
+          "income_tax_expense": 428800000.0,
+          "interest_expense": 307700000.0,
+          "operating_income": 1441400000.0
+        }
+      },
+      "balance": {
+        "2026-09-30": {
+          "total_liabilities": 82933000000.0,
+          "cash": 7761500000.0,
+          "inventory": 2175900000.0,
+          "shares_statement": 870673545.0,
+          "total_assets": 175227900000.0,
+          "other_intangibles": 9829000000.0,
+          "equity": 77904100000.0,
+          "current_debt": 5488600000.0,
+          "total_debt": 59403900000.0,
+          "goodwill": 27211000000.0,
+          "current_assets": 36204700000.0,
+          "current_liabilities": 21315700000.0,
+          "long_term_debt": 34101600000.0
+        },
+        "2026-03-31": {
+          "total_liabilities": 32782600000.0,
+          "cash": 2280700000.0,
+          "inventory": 911600000.0,
+          "shares_statement": 516939399.0,
+          "total_assets": 81119600000.0,
+          "other_intangibles": 262700000.0,
+          "equity": 45758600000.0,
+          "current_debt": 1427400000.0,
+          "total_debt": 22196600000.0,
+          "goodwill": 2641200000.0,
+          "current_assets": 19477900000.0,
+          "current_liabilities": 9791600000.0,
+          "long_term_debt": 5584400000.0
+        },
+        "2025-03-31": {
+          "total_liabilities": 29549300000.0,
+          "cash": 1645900000.0,
+          "inventory": 923500000.0,
+          "shares_statement": 498205149.0,
+          "total_assets": 66063800000.0,
+          "other_intangibles": 303200000.0,
+          "equity": 34280700000.0,
+          "current_debt": 1584700000.0,
+          "total_debt": 20177700000.0,
+          "goodwill": 2641200000.0,
+          "current_assets": 19014700000.0,
+          "current_liabilities": 8792100000.0,
+          "long_term_debt": 4837100000.0
+        }
+      },
+      "cashflow": {}
+    }
+  },
+  "retrieved_utc": "2026-11-24T01:15:40+00:00",
+  "source_urls": {
+    "yahoo": "https://finance.yahoo.com/quote/ASTERDM.NS/financials/",
+    "screener_consolidated_reference": "https://www.screener.in/company/ASTERDM/consolidated/",
+    "nse_membership": "https://www.niftyindices.com/"
+  },
+  "source_notes": [],
+  "coverage": {
+    "annual": {
+      "core_periods": {
+        "income": [
+          "2026-03-31",
+          "2025-03-31",
+          "2024-03-31",
+          "2023-03-31"
+        ],
+        "balance": [
+          "2026-03-31",
+          "2025-03-31",
+          "2024-03-31",
+          "2023-03-31"
+        ],
+        "cashflow": [
+          "2026-03-31",
+          "2025-03-31",
+          "2024-03-31",
+          "2023-03-31"
+        ]
+      },
+      "income_periods": 4,
+      "balance_periods": 4,
+      "cashflow_periods": 4,
+      "income_metric_rows": 36,
+      "balance_metric_rows": 52,
+      "cashflow_metric_rows": 14,
+      "best_periods": [
+        "2026-03-31",
+        "2025-03-31",
+        "2024-03-31",
+        "2023-03-31"
+      ]
+    },
+    "quarterly": {
+      "core_periods": {
+        "income": [
+          "2026-09-30",
+          "2026-06-30",
+          "2026-03-31",
+          "2025-12-31",
+          "2025-06-30"
+        ],
+        "balance": [
+          "2026-09-30",
+          "2026-03-31",
+          "2025-03-31"
+        ],
+        "cashflow": []
+      },
+      "income_periods": 5,
+      "balance_periods": 3,
+      "cashflow_periods": 0,
+      "income_metric_rows": 45,
+      "balance_metric_rows": 39,
+      "cashflow_metric_rows": 0,
+      "best_periods": [
+        "2026-09-30",
+        "2026-06-30",
+        "2026-03-31",
+        "2025-12-31",
+        "2025-06-30",
+        "2025-03-31"
+      ]
+    }
+  },
+  "statement_scope": "Yahoo Finance provider; consolidated/standalone scope NOT independently verified"
+}

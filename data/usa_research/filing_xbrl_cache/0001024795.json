@@ -1,0 +1,601 @@
+{
+  "cik": 1024795,
+  "checked_utc": "2026-11-25T23:28:15.369329+00:00",
+  "accession": "0001193125-26-087747",
+  "filing_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+  "facts": {
+    "AssetsCurrent": {
+      "USD": [
+        {
+          "end": "2026-01-03",
+          "val": 414900000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:AssetsCurrent"
+        },
+        {
+          "end": "2024-12-28",
+          "val": 384200000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:AssetsCurrent"
+        }
+      ]
+    },
+    "Assets": {
+      "USD": [
+        {
+          "end": "2026-01-03",
+          "val": 1514500000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:Assets"
+        },
+        {
+          "end": "2024-12-28",
+          "val": 1505400000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:Assets"
+        },
+        {
+          "end": "2026-01-03",
+          "val": 1514500000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:Assets"
+        },
+        {
+          "end": "2024-12-28",
+          "val": 1505400000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:Assets"
+        },
+        {
+          "end": "2023-12-30",
+          "val": 1590400000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:Assets"
+        }
+      ]
+    },
+    "LiabilitiesCurrent": {
+      "USD": [
+        {
+          "end": "2026-01-03",
+          "val": 143200000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:LiabilitiesCurrent"
+        },
+        {
+          "end": "2024-12-28",
+          "val": 138600000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:LiabilitiesCurrent"
+        }
+      ]
+    },
+    "Liabilities": {
+      "USD": [
+        {
+          "end": "2026-01-03",
+          "val": 583000000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:Liabilities"
+        },
+        {
+          "end": "2024-12-28",
+          "val": 641000000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:Liabilities"
+        }
+      ]
+    },
+    "StockholdersEquity": {
+      "USD": [
+        {
+          "end": "2026-01-03",
+          "val": 931500000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2024-12-28",
+          "val": 864400000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2022-12-31",
+          "val": 794900000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2023-12-30",
+          "val": 854600000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2024-12-28",
+          "val": 864400000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2026-01-03",
+          "val": 931500000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        }
+      ]
+    },
+    "RevenueFromContractWithCustomerExcludingAssessedTax": {
+      "USD": [
+        {
+          "end": "2026-01-03",
+          "val": 839000000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2024-12-29"
+        },
+        {
+          "end": "2024-12-28",
+          "val": 805900000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2023-12-31"
+        },
+        {
+          "end": "2023-12-30",
+          "val": 835600000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2023-01-01"
+        },
+        {
+          "end": "2026-01-03",
+          "val": 839000000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2024-12-29"
+        },
+        {
+          "end": "2024-12-28",
+          "val": 805900000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2023-12-31"
+        },
+        {
+          "end": "2023-12-30",
+          "val": 835600000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "start": "2023-01-01"
+        }
+      ]
+    },
+    "GrossProfit": {
+      "USD": [
+        {
+          "end": "2026-01-03",
+          "val": 271200000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:GrossProfit",
+          "start": "2024-12-29"
+        },
+        {
+          "end": "2024-12-28",
+          "val": 252300000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:GrossProfit",
+          "start": "2023-12-31"
+        },
+        {
+          "end": "2023-12-30",
+          "val": 261700000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:GrossProfit",
+          "start": "2023-01-01"
+        }
+      ]
+    },
+    "OperatingIncomeLoss": {
+      "USD": [
+        {
+          "end": "2026-01-03",
+          "val": 66000000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:OperatingIncomeLoss",
+          "start": "2024-12-29"
+        },
+        {
+          "end": "2024-12-28",
+          "val": 81800000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:OperatingIncomeLoss",
+          "start": "2023-12-31"
+        },
+        {
+          "end": "2023-12-30",
+          "val": 79900000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:OperatingIncomeLoss",
+          "start": "2023-01-01"
+        }
+      ]
+    },
+    "NetIncomeLoss": {
+      "USD": [
+        {
+          "end": "2026-01-03",
+          "val": 48400000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2024-12-29"
+        },
+        {
+          "end": "2024-12-28",
+          "val": 39000000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2023-12-31"
+        },
+        {
+          "end": "2023-12-30",
+          "val": 37500000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2023-01-01"
+        },
+        {
+          "end": "2026-01-03",
+          "val": 48400000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2024-12-29"
+        },
+        {
+          "end": "2024-12-28",
+          "val": 39000000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2023-12-31"
+        },
+        {
+          "end": "2023-12-30",
+          "val": 37500000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2023-01-01"
+        },
+        {
+          "end": "2023-12-30",
+          "val": 37500000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2023-01-01"
+        },
+        {
+          "end": "2024-12-28",
+          "val": 39000000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2023-12-31"
+        },
+        {
+          "end": "2026-01-03",
+          "val": 48400000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2024-12-29"
+        },
+        {
+          "end": "2026-01-03",
+          "val": 48400000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2024-12-29"
+        },
+        {
+          "end": "2024-12-28",
+          "val": 39000000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2023-12-31"
+        },
+        {
+          "end": "2023-12-30",
+          "val": 37500000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2023-01-01"
+        }
+      ]
+    },
+    "EarningsPerShareBasic": {
+      "USD/shares": [
+        {
+          "end": "2026-01-03",
+          "val": 1.46,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2024-12-29"
+        },
+        {
+          "end": "2024-12-28",
+          "val": 1.17,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2023-12-31"
+        },
+        {
+          "end": "2023-12-30",
+          "val": 1.14,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2023-01-01"
+        },
+        {
+          "end": "2026-01-03",
+          "val": 1.46,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2024-12-29"
+        },
+        {
+          "end": "2024-12-28",
+          "val": 1.17,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2023-12-31"
+        },
+        {
+          "end": "2023-12-30",
+          "val": 1.14,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2023-01-01"
+        }
+      ]
+    },
+    "EarningsPerShareDiluted": {
+      "USD/shares": [
+        {
+          "end": "2026-01-03",
+          "val": 1.45,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2024-12-29"
+        },
+        {
+          "end": "2024-12-28",
+          "val": 1.17,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2023-12-31"
+        },
+        {
+          "end": "2023-12-30",
+          "val": 1.14,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2023-01-01"
+        },
+        {
+          "end": "2026-01-03",
+          "val": 1.45,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2024-12-29"
+        },
+        {
+          "end": "2024-12-28",
+          "val": 1.17,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2023-12-31"
+        },
+        {
+          "end": "2023-12-30",
+          "val": 1.14,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2023-01-01"
+        }
+      ]
+    },
+    "ProfitLoss": {
+      "USD": [
+        {
+          "end": "2026-01-03",
+          "val": 48400000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2024-12-29"
+        },
+        {
+          "end": "2024-12-28",
+          "val": 39000000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2023-12-31"
+        },
+        {
+          "end": "2023-12-30",
+          "val": 37500000.0,
+          "form": "10-K",
+          "accn": "0001193125-26-087747",
+          "filed": "2026-03-03",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1024795/000119312526087747/hlio-20260103.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2023-01-01"
+        }
+      ]
+    }
+  },
+  "unmapped_ix_facts": 1123,
+  "status": "ok"
+}

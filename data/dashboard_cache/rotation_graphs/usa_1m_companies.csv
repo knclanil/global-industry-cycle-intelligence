@@ -1,22 +1,3 @@
 Company,Ticker,company_key,Category,Score,Sector indices,Factor indices,Sector RS magnitude,Factor RS magnitude,Sector sources,Factor sources,Signal basis,Avg ETF % weight,Exposure,Rank
-ARISTA NETWORKS,ANET,TICKER_COUNTRY:ANET|US,Leading,3.653,1,1,5.49,2.43,Communication Services,Quality,Category ETF proxy,7.06,14.12,1
-MOTOROLA SOLUTIONS INC,MSI,TICKER_COUNTRY:MSI|US,Leading,3.653,1,1,5.49,2.43,Communication Services,Quality,Category ETF proxy,2.525,5.05,1
-ACCENTURE PLC CLASS A,ACN,TICKER_COUNTRY:ACN|US,Leading,3.475,1,1,4.96,2.43,Industrials,Quality,Category ETF proxy,1.32,2.64,3
-AUTOMATIC DATA PROCESSING INC,ADP,TICKER_COUNTRY:ADP|US,Leading,3.475,1,1,4.96,2.43,Industrials,Quality,Category ETF proxy,1.46,2.92,3
-CINTAS,CTAS,TICKER_COUNTRY:CTAS|US,Leading,3.475,1,1,4.96,2.43,Industrials,Quality,Category ETF proxy,0.83,1.66,3
-EMCOR GROUP,EME,TICKER_COUNTRY:EME|US,Leading,3.475,1,1,4.96,2.43,Industrials,Quality,Category ETF proxy,0.305,0.61,3
-EXPEDITORS INTERNATIONAL OF WASHIN,EXPD,TICKER_COUNTRY:EXPD|US,Leading,3.475,1,1,4.96,2.43,Industrials,Quality,Category ETF proxy,0.275,0.55,3
-COMFORT SYSTEMS USA,FIX,TICKER_COUNTRY:FIX|US,Leading,3.475,1,1,4.96,2.43,Industrials,Quality,Category ETF proxy,0.45,0.9,3
-WW GRAINGER INC,GWW,TICKER_COUNTRY:GWW|US,Leading,3.475,1,1,4.96,2.43,Industrials,Quality,Category ETF proxy,0.685,1.37,3
-HOWMET AEROSPACE,HWM,TICKER_COUNTRY:HWM|US,Leading,3.475,1,1,4.96,2.43,Industrials,Quality,Category ETF proxy,0.885,1.77,3
-ILLINOIS TOOL INC,ITW,TICKER_COUNTRY:ITW|US,Leading,3.475,1,1,4.96,2.43,Industrials,Quality,Category ETF proxy,0.89,1.78,3
-LENNOX INTERNATIONAL,LII,TICKER_COUNTRY:LII|US,Leading,3.475,1,1,4.96,2.43,Industrials,Quality,Category ETF proxy,0.13,0.26,3
-LOCKHEED MARTIN,LMT,TICKER_COUNTRY:LMT|US,Leading,3.475,1,1,4.96,2.43,Industrials,Quality,Category ETF proxy,1.225,2.45,3
-MASTERCARD CLASS A,MA,TICKER_COUNTRY:MA|US,Leading,3.475,1,1,4.96,2.43,Industrials,Quality,Category ETF proxy,4.515,9.03,3
-3M,MMM,TICKER_COUNTRY:MMM|US,Leading,3.475,1,1,4.96,2.43,Industrials,Quality,Category ETF proxy,1.07,2.14,3
-OLD DOMINION FREIGHT LINE,ODFL,TICKER_COUNTRY:ODFL|US,Leading,3.475,1,1,4.96,2.43,Industrials,Quality,Category ETF proxy,0.33,0.66,3
-PAYCHEX,PAYX,TICKER_COUNTRY:PAYX|US,Leading,3.475,1,1,4.96,2.43,Industrials,Quality,Category ETF proxy,0.375,0.75,3
-PAYPAL HOLDINGS,PYPL,TICKER_COUNTRY:PYPL|US,Leading,3.475,1,1,4.96,2.43,Industrials,Quality,Category ETF proxy,0.385,0.77,3
-SHERWIN WILLIAMS,SHW,TICKER_COUNTRY:SHW|US,Leading,3.475,1,1,4.96,2.43,Industrials,Quality,Category ETF proxy,0.68,1.36,3
-TRANE TECHNOLOGIES PLC,TT,TICKER_COUNTRY:TT|US,Leading,3.475,1,1,4.96,2.43,Industrials,Quality,Category ETF proxy,0.925,1.85,3
-VISA CLASS A,V,TICKER_COUNTRY:V|US,Leading,3.475,1,1,4.96,2.43,Industrials,Quality,Category ETF proxy,6.145,12.29,3
+ARISTA NETWORKS,ANET,TICKER_COUNTRY:ANET|US,Leading,6.148,1,1,10.48,3.61,Communication Services,Quality,Category ETF proxy,6.395,12.79,1
+MOTOROLA SOLUTIONS INC,MSI,TICKER_COUNTRY:MSI|US,Leading,6.148,1,1,10.48,3.61,Communication Services,Quality,Category ETF proxy,2.61,5.22,1

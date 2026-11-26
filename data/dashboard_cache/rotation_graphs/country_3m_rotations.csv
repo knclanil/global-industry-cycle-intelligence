@@ -1,21 +1,21 @@
 ETF,Country,Quadrant,Relative strength (%),RS momentum (pp),As of
-SPY,United States,Leading,1.8164,0.4048,2026-11-20
-INDA,India,Leading,19.8218,28.6283,2026-11-20
-EWJ,Japan,Lagging,-1.1401,-2.7106,2026-11-20
-MCHI,China,Lagging,-6.3778,-1.7698,2026-11-20
-EWU,United Kingdom,Leading,1.9887,4.0927,2026-11-20
-EWG,Germany,Improving,-0.787,2.4838,2026-11-20
-EWQ,France,Improving,-2.4827,6.988,2026-11-20
-EWL,Switzerland,Leading,7.8122,14.9032,2026-11-20
-EWC,Canada,Improving,-0.7591,1.1166,2026-11-20
-EWA,Australia,Improving,-0.5667,1.5168,2026-11-20
-EWY,South Korea,Lagging,-19.9442,-14.7361,2026-11-20
-EWT,Taiwan,Lagging,-18.7232,-24.047,2026-11-20
-EWZ,Brazil,Lagging,-9.5406,-26.5113,2026-11-20
-EWW,Mexico,Leading,5.0025,10.7126,2026-11-20
-EZA,South Africa,Lagging,-11.2028,-8.0887,2026-11-20
-EIDO,Indonesia,Lagging,-10.4185,-7.5991,2026-11-20
-THD,Thailand,Improving,-1.8206,1.3235,2026-11-20
-EWM,Malaysia,Improving,-1.2849,3.813,2026-11-20
-KSA,Saudi Arabia,Leading,0.0259,4.4193,2026-11-20
-UAE,United Arab Emirates,Leading,18.1819,20.364,2026-11-20
+SPY,United States,Leading,1.694,0.4028,2026-11-25
+INDA,India,Leading,17.2289,22.1795,2026-11-25
+EWJ,Japan,Lagging,-0.6403,-2.6726,2026-11-25
+MCHI,China,Lagging,-7.6966,-2.0851,2026-11-25
+EWU,United Kingdom,Leading,3.5086,5.3766,2026-11-25
+EWG,Germany,Improving,-1.8751,0.8062,2026-11-25
+EWQ,France,Improving,-0.251,10.0003,2026-11-25
+EWL,Switzerland,Leading,9.7415,17.0682,2026-11-25
+EWC,Canada,Improving,-0.2717,1.0089,2026-11-25
+EWA,Australia,Improving,-0.79,1.2849,2026-11-25
+EWY,South Korea,Lagging,-22.5868,-17.7128,2026-11-25
+EWT,Taiwan,Lagging,-16.1266,-24.6462,2026-11-25
+EWZ,Brazil,Lagging,-7.9497,-25.0742,2026-11-25
+EWW,Mexico,Leading,3.7385,8.5069,2026-11-25
+EZA,South Africa,Lagging,-9.9686,-8.8879,2026-11-25
+EIDO,Indonesia,Lagging,-9.3362,-4.9149,2026-11-25
+THD,Thailand,Lagging,-4.5212,-0.963,2026-11-25
+EWM,Malaysia,Improving,-2.7452,2.292,2026-11-25
+KSA,Saudi Arabia,Improving,-3.022,2.0795,2026-11-25
+UAE,United Arab Emirates,Leading,23.123,24.1767,2026-11-25

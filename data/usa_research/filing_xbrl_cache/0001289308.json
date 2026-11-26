@@ -1,0 +1,536 @@
+{
+  "cik": 1289308,
+  "checked_utc": "2026-11-24T23:49:00.814314+00:00",
+  "accession": "0001628280-26-036900",
+  "filing_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+  "facts": {
+    "AssetsCurrent": {
+      "USD": [
+        {
+          "end": "2026-03-31",
+          "val": 2141810000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:AssetsCurrent"
+        },
+        {
+          "end": "2025-03-31",
+          "val": 2089814000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:AssetsCurrent"
+        }
+      ]
+    },
+    "Assets": {
+      "USD": [
+        {
+          "end": "2026-03-31",
+          "val": 4003324000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:Assets"
+        },
+        {
+          "end": "2025-03-31",
+          "val": 3971248000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:Assets"
+        }
+      ]
+    },
+    "LiabilitiesCurrent": {
+      "USD": [
+        {
+          "end": "2026-03-31",
+          "val": 804038000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:LiabilitiesCurrent"
+        },
+        {
+          "end": "2025-03-31",
+          "val": 775068000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:LiabilitiesCurrent"
+        }
+      ]
+    },
+    "Liabilities": {
+      "USD": [
+        {
+          "end": "2026-03-31",
+          "val": 2094452000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:Liabilities"
+        },
+        {
+          "end": "2025-03-31",
+          "val": 2051760000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:Liabilities"
+        }
+      ]
+    },
+    "StockholdersEquity": {
+      "USD": [
+        {
+          "end": "2026-03-31",
+          "val": 1905284000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2025-03-31",
+          "val": 1916078000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        }
+      ]
+    },
+    "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest": {
+      "USD": [
+        {
+          "end": "2026-03-31",
+          "val": 1908872000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        },
+        {
+          "end": "2025-03-31",
+          "val": 1919488000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        },
+        {
+          "end": "2023-03-31",
+          "val": 1603881000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        },
+        {
+          "end": "2024-03-31",
+          "val": 1757072000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        },
+        {
+          "end": "2025-03-31",
+          "val": 1919488000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        },
+        {
+          "end": "2026-03-31",
+          "val": 1908872000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        }
+      ]
+    },
+    "RevenueFromContractWithCustomerIncludingAssessedTax": {
+      "USD": [
+        {
+          "end": "2026-03-31",
+          "val": 3751376000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerIncludingAssessedTax",
+          "start": "2025-04-01"
+        },
+        {
+          "end": "2025-03-31",
+          "val": 3617579000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerIncludingAssessedTax",
+          "start": "2024-04-01"
+        },
+        {
+          "end": "2024-03-31",
+          "val": 3581871000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:RevenueFromContractWithCustomerIncludingAssessedTax",
+          "start": "2023-04-01"
+        }
+      ]
+    },
+    "GrossProfit": {
+      "USD": [
+        {
+          "end": "2026-03-31",
+          "val": 1097562000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:GrossProfit",
+          "start": "2025-04-01"
+        },
+        {
+          "end": "2025-03-31",
+          "val": 1092404000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:GrossProfit",
+          "start": "2024-04-01"
+        },
+        {
+          "end": "2024-03-31",
+          "val": 982891000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:GrossProfit",
+          "start": "2023-04-01"
+        }
+      ]
+    },
+    "OperatingIncomeLoss": {
+      "USD": [
+        {
+          "end": "2026-03-31",
+          "val": 426460000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:OperatingIncomeLoss",
+          "start": "2025-04-01"
+        },
+        {
+          "end": "2025-03-31",
+          "val": 464686000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:OperatingIncomeLoss",
+          "start": "2024-04-01"
+        },
+        {
+          "end": "2024-03-31",
+          "val": 351570000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:OperatingIncomeLoss",
+          "start": "2023-04-01"
+        }
+      ]
+    },
+    "NetIncomeLoss": {
+      "USD": [
+        {
+          "end": "2026-03-31",
+          "val": 293557000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2025-04-01"
+        },
+        {
+          "end": "2025-03-31",
+          "val": 363735000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2024-04-01"
+        },
+        {
+          "end": "2024-03-31",
+          "val": 269096000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2023-04-01"
+        },
+        {
+          "end": "2026-03-31",
+          "val": 293557000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2025-04-01"
+        },
+        {
+          "end": "2025-03-31",
+          "val": 363735000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2024-04-01"
+        },
+        {
+          "end": "2024-03-31",
+          "val": 269096000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2023-04-01"
+        }
+      ]
+    },
+    "EarningsPerShareBasic": {
+      "USD/shares": [
+        {
+          "end": "2026-03-31",
+          "val": 7.84,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2025-04-01"
+        },
+        {
+          "end": "2025-03-31",
+          "val": 9.15,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2024-04-01"
+        },
+        {
+          "end": "2024-03-31",
+          "val": 6.62,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2023-04-01"
+        },
+        {
+          "end": "2026-03-31",
+          "val": 7.84,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2025-04-01"
+        },
+        {
+          "end": "2025-03-31",
+          "val": 9.15,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2024-04-01"
+        },
+        {
+          "end": "2024-03-31",
+          "val": 6.62,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2023-04-01"
+        }
+      ]
+    },
+    "EarningsPerShareDiluted": {
+      "USD/shares": [
+        {
+          "end": "2026-03-31",
+          "val": 7.7,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2025-04-01"
+        },
+        {
+          "end": "2025-03-31",
+          "val": 8.99,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2024-04-01"
+        },
+        {
+          "end": "2024-03-31",
+          "val": 6.5,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2023-04-01"
+        },
+        {
+          "end": "2026-03-31",
+          "val": 7.7,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2025-04-01"
+        },
+        {
+          "end": "2025-03-31",
+          "val": 8.99,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2024-04-01"
+        },
+        {
+          "end": "2024-03-31",
+          "val": 6.5,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2023-04-01"
+        }
+      ]
+    },
+    "ProfitLoss": {
+      "USD": [
+        {
+          "end": "2026-03-31",
+          "val": 293557000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2025-04-01"
+        },
+        {
+          "end": "2025-03-31",
+          "val": 363735000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2024-04-01"
+        },
+        {
+          "end": "2024-03-31",
+          "val": 269096000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2023-04-01"
+        },
+        {
+          "end": "2026-03-31",
+          "val": 293557000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2025-04-01"
+        },
+        {
+          "end": "2025-03-31",
+          "val": 363735000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2024-04-01"
+        },
+        {
+          "end": "2024-03-31",
+          "val": 269096000.0,
+          "form": "10-K",
+          "accn": "0001628280-26-036900",
+          "filed": "2026-05-20",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026036900/ens-20260331.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2023-04-01"
+        }
+      ]
+    }
+  },
+  "unmapped_ix_facts": 2014,
+  "status": "ok"
+}

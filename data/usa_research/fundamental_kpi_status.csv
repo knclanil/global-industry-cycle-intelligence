@@ -633,7 +633,7 @@ TICKER:FCFS,FCFS,Complete,Ranked,,840489.0,2025-12-31
 TICKER:FCPT,FCPT,Incomplete,"Missing: current_ratio, operating_margin","current_ratio,operating_margin",1650132.0,2025-12-31
 TICKER:FDBC,FDBC,Incomplete,"Missing: current_ratio, operating_margin, net_margin","current_ratio,operating_margin,net_margin",1098151.0,2025-12-31
 TICKER:FDMT,FDMT,Complete,Ranked,,1650648.0,2025-12-31
-TICKER:FEIM,FEIM,Incomplete,"Missing: operating_margin, net_margin, eps_growth_pct","operating_margin,net_margin,eps_growth_pct",39020.0,2026-04-30
+TICKER:FEIM,FEIM,Incomplete,"Missing: operating_margin, eps_growth_pct","operating_margin,eps_growth_pct",39020.0,2026-04-30
 TICKER:FELE,FELE,Complete,Ranked,,38725.0,2025-12-31
 TICKER:FENC,FENC,Complete,Ranked,,1211583.0,2025-12-31
 TICKER:FET,FET,Complete,Ranked,,1401257.0,2025-12-31
@@ -653,7 +653,7 @@ TICKER:FIZZ,FIZZ,Incomplete,"Missing: operating_margin, net_margin, eps_growth_p
 TICKER:FJET,FJET,Incomplete,"Missing: operating_margin, net_margin","operating_margin,net_margin",1947016.0,2025-12-31
 TICKER:FLG,FLG,Incomplete,"Missing: current_ratio, operating_margin, net_margin","current_ratio,operating_margin,net_margin",910073.0,2025-12-31
 TICKER:FLGT,FLGT,Incomplete,Missing: eps_growth_pct,eps_growth_pct,1674930.0,2025-12-31
-TICKER:FLNC,FLNC,Incomplete,Missing: operating_margin,operating_margin,1868941.0,2025-09-30
+TICKER:FLNC,FLNC,Incomplete,Missing: operating_margin,operating_margin,1868941.0,2026-09-30
 TICKER:FLO,FLO,Incomplete,"Missing: operating_margin, net_margin, eps_growth_pct","operating_margin,net_margin,eps_growth_pct",1128928.0,2026-01-03
 TICKER:FLOC,FLOC,Incomplete,Missing: eps_growth_pct,eps_growth_pct,2035149.0,2025-12-31
 TICKER:FLR,FLR,Complete,Ranked,,1124198.0,2025-12-31
@@ -867,7 +867,7 @@ TICKER:IIPR,IIPR,Incomplete,Missing: current_ratio,current_ratio,1677576.0,2025-
 TICKER:IKT,IKT,Incomplete,"Missing: operating_margin, net_margin","operating_margin,net_margin",1750149.0,2025-12-31
 TICKER:ILPT,ILPT,Incomplete,"Missing: current_ratio, operating_margin, net_margin","current_ratio,operating_margin,net_margin",1717307.0,2025-12-31
 TICKER:IMAX,IMAX,Incomplete,Missing: current_ratio,current_ratio,921582.0,2025-12-31
-TICKER:IMKTA,IMKTA,Incomplete,Missing: eps_growth_pct,eps_growth_pct,50493.0,2025-09-27
+TICKER:IMKTA,IMKTA,Incomplete,Missing: eps_growth_pct,eps_growth_pct,50493.0,2026-09-26
 TICKER:IMMR,IMMR,Incomplete,"Missing: operating_margin, net_margin, eps_growth_pct","operating_margin,net_margin,eps_growth_pct",1058811.0,2026-04-30
 TICKER:IMMX,IMMX,Incomplete,"Missing: operating_margin, net_margin","operating_margin,net_margin",1873835.0,2025-12-31
 TICKER:IMNM,IMNM,Complete,Ranked,,1472012.0,2025-12-31

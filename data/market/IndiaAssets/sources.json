@@ -2,7 +2,7 @@
   "GOLDBEES.NS": "Yahoo Finance (ETF price proxy)",
   "LIQUIDBEES.NS": "Yahoo Finance (ETF price proxy)",
   "NIFTYBEES.NS": "Yahoo Finance (ETF price proxy)",
-  "NIFTY_GSEC_10Y": "Yahoo Finance \u00b7 SETF10GILT.NS (ETF fallback)",
+  "NIFTY_GSEC_10Y": "NSEPythonServer \u00b7 NIFTY 10 YR BENCHMARK G-SEC",
   "SILVERBEES.NS": "Yahoo Finance (ETF price proxy)",
   "^NSEI": "NSEPythonServer (Nifty 50)"
 }

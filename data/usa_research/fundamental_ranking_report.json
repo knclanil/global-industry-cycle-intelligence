@@ -1,5 +1,5 @@
 {
-  "built_utc": "2026-11-23T17:32:07.577472+00:00",
+  "built_utc": "2026-11-25T23:32:11.991491+00:00",
   "verified_companies": 2931,
   "ranked": 1462,
   "unranked": 1469,
@@ -7,9 +7,9 @@
     "roe": 2597,
     "current_ratio": 2200,
     "operating_margin": 1796,
-    "net_margin": 2186,
+    "net_margin": 2187,
     "eps_growth_pct": 2420,
-    "market_cap": 2710
+    "market_cap": 2907
   },
   "status_counts": {
     "Complete": 1462,
@@ -20,14 +20,14 @@
     "roe": 334,
     "current_ratio": 731,
     "operating_margin": 1135,
-    "net_margin": 745,
+    "net_margin": 744,
     "eps_growth_pct": 511
   },
   "gap_count_by_metric": {
     "roe": 334,
     "current_ratio": 731,
     "operating_margin": 1135,
-    "net_margin": 745,
+    "net_margin": 744,
     "eps_growth_pct": 511
   },
   "sec_mapping_failures": 26,

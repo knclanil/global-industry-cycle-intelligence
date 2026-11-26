@@ -1,0 +1,488 @@
+{
+  "cik": 1828105,
+  "checked_utc": "2026-11-25T23:28:08.916268+00:00",
+  "accession": "0001828105-26-000008",
+  "filing_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+  "facts": {
+    "Assets": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 1905500000.0,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:Assets"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 1543400000.0,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:Assets"
+        }
+      ]
+    },
+    "Liabilities": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 1469400000.0,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:Liabilities"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 1178200000.0,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:Liabilities"
+        }
+      ]
+    },
+    "StockholdersEquity": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 436100000.0,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 362100000.0,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquity"
+        }
+      ]
+    },
+    "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 436100000.0,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 365200000.0,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        },
+        {
+          "end": "2022-12-31",
+          "val": 593500000.0,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        },
+        {
+          "end": "2023-12-31",
+          "val": 384700000.0,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 365200000.0,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        },
+        {
+          "end": "2025-12-31",
+          "val": 436100000.0,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+        }
+      ]
+    },
+    "Revenues": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 468600000.0,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:Revenues",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 372100000.0,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:Revenues",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": 209700000.0,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:Revenues",
+          "start": "2023-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": 468600000.0,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:Revenues",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": 372100000.0,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:Revenues",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": 209700000.0,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:Revenues",
+          "start": "2023-01-01"
+        }
+      ]
+    },
+    "ProfitLoss": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 62600000.0,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -28600000.0,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": -263000000.0,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2023-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": -263000000.0,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2023-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -28600000.0,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": 62600000.0,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": 62600000.0,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -28600000.0,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": -263000000.0,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:ProfitLoss",
+          "start": "2023-01-01"
+        }
+      ]
+    },
+    "NetIncomeLoss": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 57700000.0,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -40500000.0,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": -273100000.0,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLoss",
+          "start": "2023-01-01"
+        }
+      ]
+    },
+    "EarningsPerShareBasic": {
+      "USD/shares": [
+        {
+          "end": "2025-12-31",
+          "val": 2.28,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -1.64,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": -11.58,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2023-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": 2.28,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -1.64,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": -11.58,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareBasic",
+          "start": "2023-01-01"
+        }
+      ]
+    },
+    "EarningsPerShareDiluted": {
+      "USD/shares": [
+        {
+          "end": "2025-12-31",
+          "val": 2.22,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -1.64,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": -11.58,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2023-01-01"
+        },
+        {
+          "end": "2025-12-31",
+          "val": 2.22,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -1.64,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": -11.58,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:EarningsPerShareDiluted",
+          "start": "2023-01-01"
+        }
+      ]
+    },
+    "NetIncomeLossAvailableToCommonStockholdersBasic": {
+      "USD": [
+        {
+          "end": "2025-12-31",
+          "val": 57700000.0,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic",
+          "start": "2025-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "val": -40500000.0,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic",
+          "start": "2024-01-01"
+        },
+        {
+          "end": "2023-12-31",
+          "val": -273100000.0,
+          "form": "10-K",
+          "accn": "0001828105-26-000008",
+          "filed": "2026-03-05",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1828105/000182810526000008/hippo-20251231.htm",
+          "original_concept": "us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic",
+          "start": "2023-01-01"
+        }
+      ]
+    }
+  },
+  "unmapped_ix_facts": 1618,
+  "status": "ok"
+}
