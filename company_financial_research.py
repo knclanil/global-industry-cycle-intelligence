@@ -24,3 +24,5 @@ def render_company_financial_research():
         return
     from financial_research_ui import render_financial_research
     render_financial_research(st.session_state.research_loaded)
+    from maketdata_ui import render_maketdata
+    render_maketdata()
