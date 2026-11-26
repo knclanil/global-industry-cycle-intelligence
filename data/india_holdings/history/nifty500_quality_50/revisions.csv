@@ -1,2 +1,0 @@
-index_slug,index_name,category,factor_family,parent_universe,revision_id,observed_utc,previous_observed_utc,snapshot_path,constituent_count,source_type,source_url,revision_type,added,removed,weight_changed,symbol_changed
-nifty500_quality_50,Nifty500 Quality 50,Factor,Quality,Nifty 500,9d64cac49a4227e2e589,2026-11-19T20:23:29.965159+00:00,,history/nifty500_quality_50/9d64cac49a4227e2e589.csv,50,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_nifty500Quality50_list.csv,baseline,0,0,0,0

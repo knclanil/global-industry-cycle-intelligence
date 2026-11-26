@@ -1,2 +1,0 @@
-index_slug,index_name,category,factor_family,parent_universe,revision_id,observed_utc,previous_observed_utc,snapshot_path,constituent_count,source_type,source_url,revision_type,added,removed,weight_changed,symbol_changed
-nifty_india_manufacturing,Nifty India Manufacturing,Thematic,,Not specified,43535c7fe8fb811fce51,2026-11-19T20:23:26.716349+00:00,,history/nifty_india_manufacturing/43535c7fe8fb811fce51.csv,77,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_niftyindiamanufacturing_list.csv,baseline,0,0,0,0

@@ -1,6 +1,0 @@
-{
-  "portfolio_id": "239710",
-  "timestamp_utc": "2026-11-21T08:35:19.183394+00:00",
-  "error": "Conflicting companies for identical ticker and country: [('ADRO', 'US')]",
-  "attempts": []
-}

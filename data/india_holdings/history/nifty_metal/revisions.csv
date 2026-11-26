@@ -1,2 +1,0 @@
-index_slug,index_name,category,factor_family,parent_universe,revision_id,observed_utc,previous_observed_utc,snapshot_path,constituent_count,source_type,source_url,revision_type,added,removed,weight_changed,symbol_changed
-nifty_metal,Nifty Metal,Sector,,Not specified,876a3a504a3589db2488,2026-11-19T20:23:21.317158+00:00,,history/nifty_metal/876a3a504a3589db2488.csv,15,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_niftymetallist.csv,baseline,0,0,0,0

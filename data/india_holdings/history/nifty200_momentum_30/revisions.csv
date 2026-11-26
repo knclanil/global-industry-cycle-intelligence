@@ -1,2 +1,0 @@
-index_slug,index_name,category,factor_family,parent_universe,revision_id,observed_utc,previous_observed_utc,snapshot_path,constituent_count,source_type,source_url,revision_type,added,removed,weight_changed,symbol_changed
-nifty200_momentum_30,Nifty200 Momentum 30,Factor,Momentum,Nifty 200,0c631487a9c0659d6d3a,2026-11-19T20:23:32.098903+00:00,,history/nifty200_momentum_30/0c631487a9c0659d6d3a.csv,30,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_nifty200Momentum30_list.csv,baseline,0,0,0,0

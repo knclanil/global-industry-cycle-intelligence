@@ -1,2 +1,0 @@
-index_slug,index_name,category,factor_family,parent_universe,revision_id,observed_utc,previous_observed_utc,snapshot_path,constituent_count,source_type,source_url,revision_type,added,removed,weight_changed,symbol_changed
-nifty50_equal_weight,Nifty50 Equal Weight,Strategy,Equal Weight,Nifty 50,811ec9770b004ab917a7,2026-11-19T20:23:43.058434+00:00,,history/nifty50_equal_weight/811ec9770b004ab917a7.csv,50,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_Nifty50EqualWeight.csv,baseline,0,0,0,0

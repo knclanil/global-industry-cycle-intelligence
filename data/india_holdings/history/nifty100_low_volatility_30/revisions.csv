@@ -1,2 +1,0 @@
-index_slug,index_name,category,factor_family,parent_universe,revision_id,observed_utc,previous_observed_utc,snapshot_path,constituent_count,source_type,source_url,revision_type,added,removed,weight_changed,symbol_changed
-nifty100_low_volatility_30,Nifty100 Low Volatility 30,Factor,Low Volatility,Nifty 100,51e0dab8bcfe216152d1,2026-11-19T20:23:36.406806+00:00,,history/nifty100_low_volatility_30/51e0dab8bcfe216152d1.csv,30,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_Nifty100LowVolatility30list.csv,baseline,0,0,0,0

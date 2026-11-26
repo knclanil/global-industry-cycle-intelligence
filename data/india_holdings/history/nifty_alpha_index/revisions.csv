@@ -1,2 +1,0 @@
-index_slug,index_name,category,factor_family,parent_universe,revision_id,observed_utc,previous_observed_utc,snapshot_path,constituent_count,source_type,source_url,revision_type,added,removed,weight_changed,symbol_changed
-nifty_alpha_index,Nifty Alpha Index,Factor,Alpha,Not specified,9ae70df56d4894e94ab9,2026-11-19T20:23:37.481014+00:00,,history/nifty_alpha_index/9ae70df56d4894e94ab9.csv,50,direct_nse,https://www.niftyindices.com/IndexConstituent/ind_nifty_Alpha_Index.csv,baseline,0,0,0,0
