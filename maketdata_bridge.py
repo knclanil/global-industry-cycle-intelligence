@@ -30,7 +30,7 @@ def connection():
 def fetch(tickers, annual=6, quarterly=20, db=None):
     """Batch query only the verified MaketData collection names; no writes."""
     db = db if db is not None else connection()
-    requested = sorted({str(t).strip().upper().replace('-', '.') for t in tickers if t})
+    requested = sorted({str(t).strip().upper() for t in tickers if t})
     if not requested:
         return {}
     query = {'ticker': {'$in': requested}}

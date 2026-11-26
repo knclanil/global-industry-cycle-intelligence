@@ -7,7 +7,8 @@ def render_maketdata():
     st.divider()
     st.subheader('MaketData · MongoDB Fundamental Analysis')
     st.caption('Read-only Atlas data · Independent fundamental scores · Missing values remain N/A')
-    initial=st.session_state.get('research_loaded') or st.session_state.get('research_ticker') or 'AAPL'
+    initial=st.session_state.get('selected_stocks') or st.session_state.get('selected_tickers') or st.session_state.get('research_loaded') or st.session_state.get('research_ticker') or 'AAPL'
+    if isinstance(initial, (list,tuple,set)): initial=', '.join(map(str,initial))
     raw=st.text_input('US stock tickers for comparison',value=str(initial),help='Comma-separated; existing research ticker is prefilled',key='maketdata_tickers')
     tickers=[s.strip().upper() for s in raw.split(',') if s.strip()][:30]
     if not st.button('Fetch MaketData fundamentals',key='maketdata_fetch'):return
